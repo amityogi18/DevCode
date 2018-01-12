@@ -1,0 +1,89 @@
+.company-infomation
+  form
+    .video-iframe-sec.admin-info
+      img(id="countdown-img", ng-if="vr.countdownStarted", src="../../../public/img/countdown.gif")
+      iframe#welcome-video-iframe(ng-if='!vr.recordingOn', ng-src='{{vr.trustSrc(vr.videoUrl)}}',frameborder='0', allowfullscreen='', style='border:1px solid #ddd' controls)
+      video#videoRecorderElement.wel-video-dimension(ng-show='vr.recordingOn',ng-src='{{vr.trustSrc(vr.videoUrl)}}',frameborder='0', allowfullscreen='', controls)
+    ul.nav.nav-tabs.welcome-tabs
+      li.active(uib-tooltip="Record Welcome Video")
+        a(data-toggle='tab', href='#home')
+          i.fa.fa-video-camera.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Upload Video")
+        a(data-toggle='tab', data-target='#semo')
+          i.fa.fa-arrow-up.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Upload Video From YouTube")
+        a(data-toggle='tab', href='#menu2')
+          i.fa.fa-youtube.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Welcome video list")
+        a(data-toggle='tab', href='#menu3')
+          i.fa.fa-list-ol.edit-icon(aria-hidden='true')
+    .tab-content
+      #home.tab-pane.fade.in.active
+        .form-group.row.admin-bottom
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='record', ng-click='vr.onRecordClicked()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='RECORD')
+                //i.fa.fa-video-camera
+              span.hidden-md.hidden-lg
+                i.fa.fa-video-camera.fa-lg
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='stop', ng-click='vr.onStopClicked()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='STOP')
+                //i.fa.fa-stop-circle-o
+              span.hidden-md.hidden-lg
+                i.fa.fa-stop-circle-o.fa-lg
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='upload', aria-hidden='true', ng-click='vr.upload()', ng-disabled='vr.showUploadBtn || vr.hideBtn')
+              span.hidden-xs.hidden-sm
+                span(data-translate='UPLOAD')
+                //i.fa.fa-upload
+              span.hidden-md.hidden-lg
+                i.fa.fa-upload.fa-lg
+          //.col-sm-12.col-xs-12.col-md-4
+            //button.btn.btn-primary.video-btn(ng-click='vr.onPauseClicked()') Pause
+      #semo.tab-pane.fade
+        .form-group.row.browse-section
+          .col-sm-2.col-xs-12.col-md-2
+            label Browse
+          .col-sm-5.col-xs-12.col-md-5
+            .browse-btn
+              input(type='file', file-modal='vr.videoFile' file-modal-url='vr.videoUrl' callback='vr.uploadBrowsedVideo()')
+          .col-sm-3.col-sm-offset-1.col-md-3.col-md-offset-1.col-xs-12
+            md-button.md-raised.md-primary.cipher-margin(aria-label='uploadFile', aria-hidden='true', ng-click='vr.upload()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='UPLOAD')
+              span.hidden-md.hidden-lg
+                i.fa.fa-upload.fa-lg
+      #menu2.tab-pane.fade
+        .form-group.row.welcom-exit-video
+          label.col-sm-12.col-xs-12.col-md-3.col-form-label
+            i.v-icon
+              img(src='../../../public/img/v-icon.png', alt='')
+          .col-sm-12.col-xs-12.col-md-5
+            md-input-container.md-block.cipher-margin(flex-gt-sm='')
+             label
+             input(type='text', ng-model='vr.youTubeLink',placeholder='Paste Url Here...')
+          .col-sm-12.col-xs-12.col-md-4
+            md-button.md-raised.md-primary.cipher-margin(ng-hide='vr.showUploadBtn',aria-label='uploadyoutube',aria-hidden='true', ng-click='vr.uploadYoutubeLink()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='UPLOAD')
+              span.hidden-md.hidden-lg
+                i.fa.fa-upload.fa-lg
+      #menu3.tab-pane.fade
+        h4 Welcome Video List
+        .form-body
+          p.title Choose From Existing Video :
+          form
+            .fields-sec.preview-sec
+              .row
+                .col-sm-12
+                  .col-sm-10
+                    //md-input-container.md-block(flex-gt-sm='')
+                      label(data-translate="TIME-ZONE-HEADING")
+                      md-select(ng-model='vr.welcomeVideo', ng-change="vr.welcomeVideoUpdated(vr.welcomeVideo)")
+                        md-option(ng-repeat='welcomeVideo in vr.welcomeVideoList',ng-value='welcomeVideo.fileId') {{welcomeVideo.name}}
+                    select.form-control( ng-options='welcomeVideo as welcomeVideo.name for welcomeVideo in vr.welcomeVideoList track by welcomeVideo.fileId', ng-model='vr.welcomeVideo', ng-change="vr.welcomeVideoUpdated(vr.welcomeVideo)")
+                      option(selected='selected', value='') Select
+

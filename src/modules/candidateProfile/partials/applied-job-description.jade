@@ -1,0 +1,553 @@
+// inner heading start
+#payment-public-job-apply.applied-job-description-container
+  // header
+  header.main-header
+    .header-top
+          nav.navbar.navbar-inverse.navbar-fixed-top.header-page
+            .container
+              .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                a(href='https://www.jottp.com/')
+                  span.app-logo
+              #myNavbar.collapse.navbar-collapse.main-header-page
+                ul.nav.navbar-nav.navbar-right
+                  li.hidden-xs.visible-sm.visible-md.visible-lg
+                    .input-group
+                      form.form-search
+                        input#txtFreeConference(type='text', name='s', placeholder='Enter Code')
+                        button.join(type='submit', onclick='joinFreeConference(); return false;') Join
+                  li.request-demo-li
+                    a(href='request-demo.html') Request Demo
+                  li
+                    a(href='candidate.html') Candidate
+                  li.visible-xs.hidden-sm.hidden-md.hidden-lg
+                    a(href='about-us.html') Company
+                  li.visible-xs.hidden-sm.hidden-md.hidden-lg
+                    a(href='features.html') Features
+                  li.visible-xs.hidden-sm.hidden-md.hidden-lg
+                    a(href='pricing-interview.html') Pricing
+                  li.visible-xs.hidden-sm.hidden-md.hidden-lg
+                    a(href='contact-us.html') Contact Us
+                  li
+                    a(href='https://app.jottp.com/app/#/user-login') Sign In
+                  li.hidden-xs.hidden-sm.visible-md.visible-lg
+                    .toggle-menu
+                      a.toggle-icon(href='javascript:void(0)')
+                        img.inactive-icon(src='../../../public/img/menu-icon.png', alt='')
+                        img.active-icon(src='../../../public/img/menu-icon2.png', alt='')
+                      ul.nav-area
+                        li
+                          a(href='about-us.html') Company
+                        li
+                          a(href='features.html') Features
+                        li
+                          a(href='pricing-interview.html') Pricing
+                        li
+                          a(href='contact-us.html') Contact
+                        li
+                          a(href='blog.html') Blog
+                        li
+                          a(href='team.html') Team
+        .header-top.code-field-sec
+        .visible-xs.hidden-sm.hidden-md.hidden-lg
+          ul.nav.navbar-nav.navbar-right
+            li
+              .input-group
+                form.form-search
+                  input#txtFreeConference(type='text', name='s', placeholder='Enter Code')
+                  button.join(type='submit', onclick='joinFreeConference(); return false;') Join
+      // 
+       
+  .tab-area-module(style='margin-top: 65px;')
+    .container
+
+  .applied-jd-main
+    .inner-heading
+      .container
+        h3 Job Details
+    // inner heading end
+    // Inner Content start
+    .inner-content.listing.detail
+      .container
+        // Detail page start
+        .inner-wrap
+          .row(id='job-detail')
+            .col-md-12
+              .listWrpService.jobdetail
+                .row
+                  .col-md-3.col-sm-3.col-xs-3
+                    .listImg
+                      img(src='../../../public/img/jobble.jpg', alt='')
+                  .col-md-9.col-sm-9.col-xs-9
+                    h3 {{jobDescriptionCtrl.jobDescription.jobTitle}}
+                    p {{jobDescriptionCtrl.jobDescription.companyName}}
+                    ul.featureInfo
+                      li
+                        i.fa.fa-map-marker(aria-hidden='true')
+                        |  {{jobDescriptionCtrl.jobDescription.jobLocation}}  
+                      li
+                        i.fa.fa-calendar(aria-hidden='true')
+                        |  {{jobDescriptionCtrl.jobDescription.jobExpiryDate}}
+                    .time-btn {{jobDescriptionCtrl.jobDescription.jobType}}
+                    .click-btn
+                      a(ng-click='jobDescriptionCtrl.showApplyForm()' id='apply-btn') 
+                        span(ng-show='!jobDescriptionCtrl.isShowApplyForm') Apply Now
+                        span(ng-show='jobDescriptionCtrl.isShowApplyForm') Hide Form
+                h2 Description
+                p(ng-bind-html='jobDescriptionCtrl.jobDescription.jobDescription')
+                a(ng-hide='jobDescriptionCtrl.jobDescription.isOnDemandJob' href='{{jobDescriptionCtrl.jobDescription.jobDetailURL}}' target='_blank') View Details
+                h2 Education Requirements
+                p
+                  | minimum qualification required for {{jobDescriptionCtrl.jobDescription.jobTitle}}
+                ul.featureLinks
+                  li  
+                  li {{jobDescriptionCtrl.jobDescription.qualification}}.
+                h2 Specification
+                p
+                  | Working knowledge in {{jobDescriptionCtrl.jobDescription.jobTitle}} having the following Skills in these tools and technologies
+                ul.featureLinks
+                  li {{jobDescriptionCtrl.jobDescription.primarySkill}}.
+                  li {{jobDescriptionCtrl.jobDescription.secondarySkill}}.
+                  li {{jobDescriptionCtrl.jobDescription.tertiarySkill}}.
+  
+                h2 Rewards and Benefits
+                ul.featureLinks.benefits
+                  li {{jobDescriptionCtrl.jobDescription.salary}}  {{jobDescriptionCtrl.jobDescription.currencyType}}
+                        
+                .clearfix
+            
+          #apply-form.row(ng-show='jobDescriptionCtrl.isShowApplyForm')
+            .col-md-12
+                  .listWrpService.jobdetail
+                    .row
+                      h3.style-font
+                        i.fa.fa-pencil-square(aria-hidden='true' style="color:#0080ff;") 
+                        span     Apply Now
+                        i.fa.fa-times.pull-right(title='Click Here To Close This Section' aria-hidden='true' ng-click='jobDescriptionCtrl.hideApplyForm()' style="color:red;" id='close-frm-btn')
+                      hr
+                      md-content(ng-if="!isLoggedIn || user.userType == 2")
+                        md-tabs(md-dynamic-height='', md-border-bottom='')
+                          md-tab(label='Login To Apply')
+                            md-content.md-padding
+                                form(role='form', name='jobDescriptionCtrl.candidateLoginForm')
+                                  //- login form. 
+                                  .form-group.row(ng-if='!isLoggedIn' ng-hide='jobDescriptionCtrl.isLinkedinDetailsFound')
+                                    .col-sm-6
+                                      md-input-container.md-block(flex='100')
+                                        label Email
+                                        input(type='email', name='email', data-ng-model='jobDescriptionCtrl.loginData.username', ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i", required )
+                                        div(ng-messages='jobDescriptionCtrl.candidateLoginForm.email.$error', ng-if='jobDescriptionCtrl.candidateLoginForm.$error || jobDescriptionCtrl.candidateLoginForm.email.$touched')
+                                          div(ng-message='required')
+                                              | Please Enter 
+                                              b Email Address
+                                          div(ng-message='pattern') Must be a valid Email address
+                                    .col-sm-6
+                                      md-input-container.md-block(flex='100')
+                                        label Password
+                                        input(type='password', name='pwd', data-ng-model='jobDescriptionCtrl.loginData.password',minlength="6", maxlength="15", ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,15}$/", required)
+                                        div(ng-messages='jobDescriptionCtrl.candidateLoginForm.pwd.$error', ng-if='jobDescriptionCtrl.candidateLoginForm.$error || jobDescriptionCtrl.candidateLoginForm.pwd.$touched')
+                                          div(ng-message='required')
+                                              | Please Enter 
+                                              b Password                 
+                                          div(ng-message='pattern') Password Should Contain Atleast 6 And Maximum 15 Characters That Contains At Least One Lowercase And One Uppercase Character And One Special Character And One Number    
+                                  
+                                  //- Already applied.
+                                  .form-group-row(ng-if='jobDescriptionCtrl.loginAdditionalData.isApplied && isLoggedIn')     
+                                    .col-sm-12
+                                        h5.already-applied-job You have applied for this job.                          
+                                        hr
+                                        md-button.md-raised.savedata-btn.pull-right(type='submit' data-ng-click='jobDescriptionCtrl.goBack()' ng-disabled="jobDescriptionCtrl.isClicked") Go Back
+                                
+                                  //- Applying for job using ondemand login cred.
+                                  .form-group.row(ng-if='isLoggedIn' ng-hide='jobDescriptionCtrl.isLinkedinDetailsFound')
+                                    .col-sm-12
+                                      md-card
+                                        md-card-header
+                                          md-card-avatar
+                                            img.img-circle.candidate-img-section(ng-src='{{user.logo.logo != "" && user.logo.logo || jobDescriptionCtrl.loginAdditionalData.candidateLogo}}', alt='User Image')
+                                          md-card-header-text
+                                            span.md-title {{user.fullName}}
+                                            span.md-subhead {{user.email}}
+                                        md-card-actions(layout='row', layout-align='end center')
+                                          md-button.md-raised.md-primary(type='submit', ng-show='isLoggedIn', data-ng-click='jobDescriptionCtrl.goToProfile()') Go To Your Profile 
+                                          md-button.md-raised.canceldata-btn(type='submit', ng-show='isLoggedIn', data-ng-click='jobDescriptionCtrl.logout()') Logout
+                                  
+                                  //- Applying for job using ondemand login cred. 
+                                  .form-group.row(ng-if='jobDescriptionCtrl.additionalSection' ng-hide='jobDescriptionCtrl.isLinkedinDetailsFound')
+                                    md-card
+                                      #demo(style="margin-top:40px;")
+                                        .form-group.row                            
+                                          //- check for coverLetter when applying using login
+                                          .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 1 ")
+                                            md-input-container.md-block(flex='100')
+                                              label Cover Letter
+                                              textarea(ng-model='jobDescriptionCtrl.loginAdditionalData.coverLetter', maxlength='1000', rows='5',  required style="max-height:100px !important;" ng-change="jobDescriptionCtrl.isLoginCoverLaterBlank()")
+                                              span.error-msg(data-ng-if='jobDescriptionCtrl.loginFormValidation.coverLetterRequired') Please Enter Cover Letter
+                                          .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 2 ")
+                                            md-input-container.md-block(flex='100')
+                                              label Cover Letter
+                                              textarea(ng-model='jobDescriptionCtrl.loginAdditionalData.coverLetter', maxlength='1000', rows='5' style="max-height:100px !important;")
+                                          
+                                          //- check for phoneNumber when applying using login
+                                          .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.phoneNumber === 1 ")
+                                            md-input-container.md-block(flex='100')
+                                              label Contact Number
+                                              input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.loginAdditionalData.contactNumber', onkeypress='return event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeLoginPhoneNumber(jobDescriptionCtrl.loginAdditionalData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeLoginPhoneNumber(jobDescriptionCtrl.loginAdditionalData.contactNumber)", required)
+                                              span.error-msg(data-ng-if='jobDescriptionCtrl.loginFormValidation.phoneNumberRequired') Please Enter Valid Phone Number
+                                          .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.phoneNumber === 2 ")
+                                            md-input-container.md-block(flex='100')
+                                              label Contact Number
+                                              input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.loginAdditionalData.contactNumber', onkeypress='return event.charCode >= 48 && event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeLoginPhoneNumber(jobDescriptionCtrl.loginAdditionalData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeLoginPhoneNumber(jobDescriptionCtrl.loginAdditionalData.contactNumber)")
+                                              span.error-msg(data-ng-if='jobDescriptionCtrl.loginFormValidation.phoneNumberRequired') Please Enter Valid Phone Number
+                                        .form-group.row                            
+                                          .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 1 ")
+                                            .col-md-7
+                                              label CV/Resume
+                                              input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.candidateResume', ngf-select='jobDescriptionCtrl.uploadLoginResumeFile($files); jobDescriptionCtrl.isLoginResumeFileAdded($files)', accept=".doc,.docx", ngf-max-size='2MB', ngf-model-invalid='errorFile', required)
+                                              span.error-msg(data-ng-if='jobDescriptionCtrl.loginFormValidation.resumeRequired') Please Select A Resume To Upload.
+                                            .col-md-5(data-ng-show = "jobDescriptionCtrl.loginAdditionalData.resume && !jobDescriptionCtrl.candidateResume" ) 
+                                              a(href='{{jobDescriptionCtrl.loginAdditionalData.resume}}', download='download', title='Click here to download resume')
+                                                i.fa.fa-download.fa-2x.download-section(aria-hidden='true',uib-tooltip="You can download your previous resume from here or you can upload your new resume" , tooltip-placement="top")
+                                              small &nbsp;&nbsp;{{user.fullName}}_Resume   
+                                          .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 2 ")
+                                              label CV/Resume
+                                              input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.candidateResume', ngf-select='jobDescriptionCtrl.uploadLoginResumeFile($files); jobDescriptionCtrl.isLoginResumeFileAdded($files)', accept=".doc", ngf-max-size='2MB', ngf-model-invalid='errorFile')                    
+                                  
+                                  //- Applying for job using ondemand login cred. 
+                                  .form-group-row(ng-if='jobDescriptionCtrl.loginAdditionalData.isApplyLimitExceeded && isLoggedIn' ng-hide='jobDescriptionCtrl.isLinkedinDetailsFound || ng-if="jobDescriptionCtrl.loginAdditionalData.isApplied')
+                                      md-card
+                                          .modal-body
+                                            md-dialog-content
+                                              .md-dialog-content
+                                                h4 Only 5 jobs are allowed in a day
+                                                p
+                                                  | If you wish to apply for more number of jobs, You have to pay 
+                                                  span(style='color:blue;font-weight: bold;')  $1 
+                                                  |  for each job you apply.
+                                                hr(data-ng-if='jobDescriptionCtrl.cardDetails.status') 
+                                                p(data-ng-if='jobDescriptionCtrl.cardDetails.status') 
+                                                  span You will be charged from the card ending with : 
+                                                  span(style="font-size:11px;color:gray;") XXXX XXXX XXXX {{jobDescriptionCtrl.cardDetails.cardLast4digit}}
+                                                  br
+                                                  | To update the card details click here : 
+                                                  md-button.md-primary.md-raised(ng-click="jobDescriptionCtrl.updateCardDetails()") Update Card Details  
+                                          .modal-footer
+                                            md-dialog-actions
+                                                //md-button.md-raised(ng-click="jobDescriptionCtrl.appliyManually()") Apply Manually
+                                                md-button.md-primary.md-raised(data-ng-if='jobDescriptionCtrl.cardDetails.status' ng-click="jobDescriptionCtrl.goToPayment()") Proceed To Payment
+                                                md-button.md-primary.md-raised(data-ng-if='!jobDescriptionCtrl.cardDetails.status' ng-click="jobDescriptionCtrl.updateCardDetails()") Proceed To Payment
+
+                                  //- Applying for job using linkedin 
+                                  .form-group.row(ng-if='jobDescriptionCtrl.isLinkedinDetailsFound')
+                                    .col-sm-12
+                                      md-card
+                                        md-card-header
+                                          md-card-avatar(style='height: 90px; width: 90px;')
+                                            //-i.fa.fa-user.md-user-avatar(aria-hidden='true' style="font-size: 35px; border: 1px solid; padding: 5px 10px; color:#1a75ff;")
+                                            img.md-user-avatar(ng-src='{{jobDescriptionCtrl.userDetails.pictureUrl}}', alt='User Image' style='height: 90px; width: 90px;')
+                                          md-card-header-text(style="margin-left:10px;")
+                                            span.md-title {{jobDescriptionCtrl.userDetails.firstName}} {{jobDescriptionCtrl.userDetails.lastName}}
+                                            span.md-subhead 
+                                              i.fa.fa-envelope(aria-hidden='true')
+                                              span    {{jobDescriptionCtrl.userDetails.email}}
+                                            span.md-subhead 
+                                              i.fa.fa-briefcase(aria-hidden='true')
+                                              span    {{jobDescriptionCtrl.userDetails.designation}}
+                                            span.md-subhead 
+                                              i.fa.fa-industry(aria-hidden='true')
+                                              span    {{jobDescriptionCtrl.userDetails.functionalArea}}
+                                        hr
+                                        md-card-actions(layout='row', layout-align='start center' style="border-top: 1px dotted rgba(128, 128, 128, 0.75); padding-top: 10px;")                            
+                                          span.md-subhead(style='font-size: 12px; letter-spacing: 0px; text-align: justify; line-height: 20px; color: #5a5858;') {{jobDescriptionCtrl.userDetails.summary}}
+                                        md-card-actions(layout='row', layout-align='start center' style="border-top: 1px dotted rgba(128, 128, 128, 0.75); padding-top: 10px;")                            
+                                          i.fa.fa-globe(aria-hidden='true')
+                                          span.md-subhead(style='font-size: 12px; letter-spacing: 0px; text-align: justify; line-height: 20px; color: #5a5858; margin-left:5px;')  {{jobDescriptionCtrl.userDetails.location}}
+                                      md-card
+                                        #demo(style="margin-top:40px;")
+                                          .form-group.row                            
+                                            //- check for coverLetter when applying using linkedin login
+                                            .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 1 ")
+                                              md-input-container.md-block(flex='100')
+                                                label Cover Letter
+                                                textarea(ng-model='jobDescriptionCtrl.linkedinAdditionalData.coverLetter', maxlength='1000', rows='5',  required style="max-height:100px !important;" ng-change="jobDescriptionCtrl.isLinkedinCoverLaterBlank()")
+                                                span.error-msg(data-ng-if='jobDescriptionCtrl.linkedinFormValidation.coverLetterRequired') Please Enter Cover Letter
+                                            .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 2 ")
+                                              md-input-container.md-block(flex='100')
+                                                label Cover Letter
+                                                textarea(ng-model='jobDescriptionCtrl.linkedinAdditionalData.coverLetter', maxlength='1000', rows='5' style="max-height:100px !important;")
+                                            
+                                            //- check for phoneNumber when applying using linkedin login
+                                            .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.phoneNumber === 1 ")
+                                              md-input-container.md-block(flex='100')
+                                                label Contact Number
+                                                input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.linkedinAdditionalData.contactNumber', onkeypress='return event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeLinkedinPhoneNumber(jobDescriptionCtrl.linkedinAdditionalData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeLinkedinPhoneNumber(jobDescriptionCtrl.linkedinAdditionalData.contactNumber)", required)
+                                                span.error-msg(data-ng-if='jobDescriptionCtrl.linkedinFormValidation.phoneNumberRequired') Please Enter Valid Phone Number
+                                            .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.phoneNumber === 2 ")
+                                              md-input-container.md-block(flex='100')
+                                                label Contact Number
+                                                input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.linkedinAdditionalData.contactNumber', onkeypress='return event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeLinkedinPhoneNumber(jobDescriptionCtrl.linkedinAdditionalData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeLinkedinPhoneNumber(jobDescriptionCtrl.linkedinAdditionalData.contactNumber)")
+                                                span.error-msg(data-ng-if='jobDescriptionCtrl.linkedinFormValidation.phoneNumberRequired') Please Enter Valid Phone Number
+                                          
+                                          //- check for resume when applying using linkedin login
+                                          .form-group.row                            
+                                            .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 1 ")
+                                              .col-md-7
+                                                label CV/Resume
+                                                input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.linkedinAdditionalData.resume', ngf-select='jobDescriptionCtrl.uploadLinkedinResumeFile($files); jobDescriptionCtrl.isLinkedinResumeFileAdded($files)', accept=".doc,.docx", ngf-max-size='2MB', ngf-model-invalid='errorFile', required)
+                                                span.error-msg(data-ng-if='jobDescriptionCtrl.linkedinFormValidation.resumeRequired') Please Select A Resume To Upload.
+                                              //- .col-md-5(data-ng-show = "jobDescriptionCtrl.linkedinAdditionalData.resume") 
+                                              //-   a(href='{{jobDescriptionCtrl.linkedinAdditionalData.resume}}', download='download', title='Click here to download resume')
+                                              //-     i.fa.fa-download.fa-2x.download-section(aria-hidden='true',uib-tooltip="You can download your previous resume from here or you can upload your new resume" , tooltip-placement="top")
+                                              //-     small  &nbsp;&nbsp;{{jobDescriptionCtrl.linkedinAdditionalData.resume.name}}   
+                                            .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 2 ")
+                                                label CV/Resume
+                                                input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.linkedinAdditionalData.resume', ngf-select='jobDescriptionCtrl.uploadLinkedinResumeFile($files); jobDescriptionCtrl.isLinkedinResumeFileAdded($files)', accept=".doc", ngf-max-size='2MB', ngf-model-invalid='errorFile')                    
+                                      md-card    
+                                        md-card-actions
+                                          button.btn.btn-danger(ng-if='jobDescriptionCtrl.isLinkedinDetailsFound' data-ng-click='jobDescriptionCtrl.signoutLinkedIn()' style='padding: 5px 12px 4px 12px;') 
+                                            i.fa.fa-linkedin-square(aria-hidden='true' style=' font-size: 16px; color:white;') 
+                                            span(style="line-height: 0px; top: 0px; position: relative; margin-left: 5px; font-size: 15px; color: white;") Cancel   
+                                          button.btn.btn-success.pull-right(ng-if='jobDescriptionCtrl.isLinkedinDetailsFound' data-ng-click='jobDescriptionCtrl.loginUsingLinkedIn()' style='padding: 5px 12px 4px 12px;' ng-disabled='jobDescriptionCtrl.loginAdditionalData.isApplied') 
+                                            i.fa.fa-linkedin-square(aria-hidden='true' style=' font-size: 16px; color:white;') 
+                                            span(style="line-height: 0px; top: 0px; position: relative; margin-left: 5px; font-size: 15px; color: white;") Continue Applying                          
+                                  
+                                  .form-group.row(style="margin-top: -30px;" ng-hide="jobDescriptionCtrl.loginAdditionalData.isApplied")            
+                                      hr
+                                      button.btn.btn-primary(ng-if='!jobDescriptionCtrl.isLinkedinDetailsFound' linked-in='', type='button' style="background-color: #0077b5; padding: 5px 12px 3px 12px;")
+                                        i.fa.fa-linkedin-square(aria-hidden='true' style=' font-size: 16px;color:white;') 
+                                        span(style="line-height: 0px; top: -2.5px; position: relative; margin-left: 3px; font-size: 12px; color: white; padding: 5px;")   Apply With LinkedIn
+                                      md-button.md-raised.savedata-btn.pull-right(type='submit', ng-if='!jobDescriptionCtrl.additionalSection && !isLoggedIn', ng-hide='jobDescriptionCtrl.isLinkedinDetailsFound' data-ng-click='jobDescriptionCtrl.loginToApplyForJob()' ng-disabled="jobDescriptionCtrl.isClicked")
+                                        span(data-ng-if="!jobDescriptionCtrl.isClicked") Login 
+                                        span(data-ng-if="jobDescriptionCtrl.isClicked" style="padding:5px 10px;") Logging in...
+                                      md-button.md-raised.savedata-btn.pull-right(type='submit', ng-show='!jobDescriptionCtrl.isLinkedinDetailsFound' ng-if='jobDescriptionCtrl.additionalSection || isLoggedIn', data-ng-click='jobDescriptionCtrl.updateCandidateDetails()' ng-disabled="jobDescriptionCtrl.isClicked || jobDescriptionCtrl.loginAdditionalData.isApplyLimitExceeded") 
+                                        span(data-ng-if="!jobDescriptionCtrl.isClicked") Apply
+                                        span(data-ng-if="jobDescriptionCtrl.isClicked" style="padding:5px 10px;") Applying...
+                          md-tab(label='Register To Apply')
+                            md-content.md-padding
+                              form(role='form', name='jobDescriptionCtrl.candidateSignupForm' novalidate)
+                                .form-group.row
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex='100')
+                                      label First Name
+                                      input(type='text', name='firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25',ng-blur='jobDescriptionCtrl.removeInvalidFirstName(jobDescriptionCtrl.registerData.firstName)',data-ng-model='jobDescriptionCtrl.registerData.firstName',required)
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.firstName.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.firstName.$dirty && jobDescriptionCtrl.candidateSignupForm.firstName.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.firstName.$error.required') Please Enter First Name
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex='100')
+                                      label Last Name
+                                      input(type='text', name='lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25', ng-blur='jobDescriptionCtrl.removeInvalidLastName(jobDescriptionCtrl.registerData.lastName)', data-ng-model='jobDescriptionCtrl.registerData.lastName',required)
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.lastName.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.lastName.$dirty && jobDescriptionCtrl.candidateSignupForm.lastName.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.lastName.$error.required') Please Enter Last Name
+                                .form-group.row
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex='100')
+                                      label Email
+                                      input(type='text', name='email',maxlength='50', data-ng-model='jobDescriptionCtrl.registerData.email', data-ng-blur='jobDescriptionCtrl.isInvalidEmail(jobDescriptionCtrl.registerData.email)', data-ng-keyup="jobDescriptionCtrl.isInvalidEmail(candidateSignupCtrl.registerData.email)",  required)
+                                      span.error-msg(data-ng-if='jobDescriptionCtrl.errormessage !== ""') {{jobDescriptionCtrl.errormessage}}
+                                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.registerPhoneNumber === 1 ")
+                                    md-input-container.md-block(flex='100')
+                                      label Contact Number
+                                      input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.registerData.contactNumber', onkeypress='return event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeRegisterPhoneNumber(jobDescriptionCtrl.registerData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeRegisterPhoneNumber(jobDescriptionCtrl.registerData.contactNumber)", required)
+                                      span.error-msg(data-ng-if='jobDescriptionCtrl.errmsgcon !== ""') {{jobDescriptionCtrl.errmsgcon}}
+                                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.registerPhoneNumber === 2 ")
+                                    md-input-container.md-block(flex='100')
+                                      label Contact Number
+                                      input(type='text', name='contactNumber', data-ng-model='jobDescriptionCtrl.registerData.contactNumber', onkeypress='return event.charCode <= 57', maxlength='14', data-ng-blur='jobDescriptionCtrl.analyzeRegisterPhoneNumber(jobDescriptionCtrl.registerData.contactNumber)', data-ng-keyup="jobDescriptionCtrl.analyzeRegisterPhoneNumber(jobDescriptionCtrl.registerData.contactNumber)")
+                                .form-group.row
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex='100')
+                                      label Password
+                                      input(type='password', name='password', data-ng-model='jobDescriptionCtrl.registerData.password', minlength="6", maxlength="15", data-ng-blur='jobDescriptionCtrl.analyzePassword(jobDescriptionCtrl.registerData.password)', data-ng-keypress="jobDescriptionCtrl.analyzePassword(jobDescriptionCtrl.password)", data-ng-keyup="jobDescriptionCtrl.analyzePassword(jobDescriptionCtrl.registerData.password)",ng-change="jobDescriptionCtrl.checkPasswordEquality()",required)
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.password.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.password.$dirty && jobDescriptionCtrl.candidateSignupForm.password.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.password.$error.required') Please Enter Password.
+                                        span.error-msg(data-ng-if='!jobDescriptionCtrl.isPasswordRight') Password should contain minimum 6 and maximum 15 characters, one lowercase, one uppercase character, one number and one special character.
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex='100')
+                                      label Confirm Password
+                                      input(type='password', maxlength="15", name="confirmPassword", data-ng-model="jobDescriptionCtrl.confirmPassword", data-ng-blur="jobDescriptionCtrl.confirmPasswords(jobDescriptionCtrl.confirmPassword)",ng-change="jobDescriptionCtrl.checkPasswordEquality()", required)
+                                      span.error-msg {{jobDescriptionCtrl.confirmPasswordMessage}}
+                                .form-group.row
+                                  .col-xs-12.col-sm-12.col-md-12
+                                    md-content.geo-section(flex='100')
+                                      place-autocomplete(data-ng-model='jobDescriptionCtrl.geoAddress', on-clear='jobDescriptionCtrl.clearSuggestions(clearFn)' ,search-type='1')
+                                .form-group.row
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex="100")
+                                      label Functional Area
+                                      md-select(data-ng-model='jobDescriptionCtrl.registerData.departmentId', data-ng-change='jobDescriptionCtrl.getDesignation(jobDescriptionCtrl.registerData.departmentId)', name='departmentList', md-on-close="jobDescriptionCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', required)
+                                        md-select-header.demo-select-header
+                                          input.demo-header-searchbox.md-text(ng-model='jobDescriptionCtrl.searchDepartment', type='search', placeholder='Search Functional Area', ng-keydown="$event.stopPropagation()")
+                                        md-optgroup(label='Department')
+                                        md-option(ng-value='department.id', ng-repeat='department in jobDescriptionCtrl.departmentList | filter: jobDescriptionCtrl.searchDepartment') {{department.name}}
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.departmentList.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.departmentList.$dirty && jobDescriptionCtrl.candidateSignupForm.departmentList.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.departmentList.$error.required') Please Select Functional Area
+                                  .col-xs-12.col-sm-6.col-md-6
+                                    md-input-container.md-block(flex="100")
+                                      label Role
+                                      md-select(data-ng-model='jobDescriptionCtrl.registerData.designationId', ng-disabled='jobDescriptionCtrl.isDesignationDisabled', name='designation', md-on-close="jobDescriptionCtrl.clearSearchDesignation()", data-md-container-class='selectdemoSelectHeader', required)
+                                        md-select-header.demo-select-header
+                                          input.demo-header-searchbox.md-text(ng-model='jobDescriptionCtrl.searchRole', type='search', placeholder='Search Role', ng-keydown="$event.stopPropagation()")
+                                        md-optgroup(label='Department')
+                                        md-option(ng-value='designation.id', ng-repeat='designation in jobDescriptionCtrl.designationList | filter: jobDescriptionCtrl.searchRole') {{designation.candidateDesignation}}
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.designation.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.designation.$dirty && jobDescriptionCtrl.candidateSignupForm.designation.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.designation.$error.required') Please Select Designation
+                                .form-group.row
+                                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 1 ")
+                                  
+                                      label CV/Resume
+                                      input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.registerAdditionalData.resume', ngf-select='jobDescriptionCtrl.uploadRegisterResumeFile($files); jobDescriptionCtrl.isRegisterResumeFileAdded($files)', accept=".doc,.docx", ngf-max-size='2MB', ngf-model-invalid='errorFile', required)
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.resume.$touched || jobDescriptionCtrl.resumeRequired != ""')
+                                          span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.resume.$dirty && jobDescriptionCtrl.candidateSignupForm.resume.$invalid')
+                                          span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.resume.$error.required || jobDescriptionCtrl.resumeRequired != ""') Please Select Resume  
+                                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobDescriptionCtrl.formDetailsList.resume === 2 ")
+                                    
+                                      label CV/Resume
+                                      input(type='file', name='resume', data-ng-model='jobDescriptionCtrl.registerAdditionalData.resume', ngf-select='jobDescriptionCtrl.uploadRegisterResumeFile($files); jobDescriptionCtrl.isRegisterResumeFileAdded($files)', accept=".doc", ngf-max-size='2MB', ngf-model-invalid='errorFile')                      
+                                .form-group.row
+                                  .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 1 ")
+                                    md-input-container.md-block(flex='100')
+                                      label Cover Letter
+                                      textarea(ng-model='jobDescriptionCtrl.registerAdditionalData.coverLetter', maxlength='1000', rows='5', name='coverLetter',  required style="max-height:100px !important;")
+                                      span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.coverLetter.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.coverLetter.$dirty && jobDescriptionCtrl.candidateSignupForm.coverLetter.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.coverLetter.$error.required') Please Enter Cover Letter
+                                  .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobDescriptionCtrl.formDetailsList.coverLetter === 2 ")
+                                    md-input-container.md-block(flex='100')
+                                      label Cover Letter
+                                      textarea(ng-model='jobDescriptionCtrl.registerAdditionalData.coverLetter', maxlength='1000', rows='5', name='coverLetter' style="max-height:100px !important;")                        
+                                .form-group.row
+                                    span.col-sm-1.col-form-label
+                                      |  CAPTCHA
+                                    .col-sm-6.col-xs-12
+                                      .g-recaptcha.captcha-field(id='g-recaptcha', data-sitekey='{{jobDescriptionCtrl.SITEKEY}}')
+                                .form-group.row
+                                  span.col-sm-12.col-xs-12.col-md-12
+                                    input#squaredTwo.icheckbox_square-blue(type='checkbox', name='agree', data-ng-model='jobDescriptionCtrl.isAgree',  required='required')
+                                    label.lbl-head.text-of-agreement(for='squaredTwo')
+                                        span.agree-ondemand
+                                          | By clicking on this box you agree with OnDemand
+                                        a.privacy-policy-link(data-toggle="modal", data-target="#termsConditionModalCandidate") Terms & Conditions
+                                  .row
+                                    .col-md-10.col-sm-10.col-xs-12
+                                      span.error-message.term-condition(data-ng-show='jobDescriptionCtrl.candidateSignupForm.$submitted || jobDescriptionCtrl.candidateSignupForm.agree.$touched')
+                                        span(data-ng-show='jobDescriptionCtrl.candidateSignupForm.agree.$dirty && jobDescriptionCtrl.candidateSignupForm.agree.$invalid')
+                                        span.error-msg(data-ng-show='jobDescriptionCtrl.candidateSignupForm.agree.$error.required') Please Click To Agree To The Terms And Conditions
+                                .form-group.row
+                                  span.col-sm-offset-1.col-sm-3
+                                  .col-sm-6.col-xs-6
+                                    md-button.md-raised.md-primary.candidate-submit-btn(data-ng-click='jobDescriptionCtrl.registerToApplyForJob()' style='text-align: center !important;' ng-disabled='jobDescriptionCtrl.isClicked') 
+                                      span(ng-if='!jobDescriptionCtrl.isClicked') Submit
+                                      span(ng-if='jobDescriptionCtrl.isClicked') 
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                        i.fa.fa-cog.fa-spin
+                                        span &nbsp; Saving & Applying...
+                                        span(ng-if='jobDescriptionCtrl.isApplying')
+                                    label.error-lbl {{jobDescriptionCtrl.errorLblTxt}}
+                                .col-sm-offset-1.col-sm-11
+                                    span.mandatory-star-note
+                                    b Note :
+                                    span.note-mandatory
+                                    |  Fields marked with asterisk (
+                                    span.red-star  *
+                                    span.note-mandatory
+                                    |   ) are mandatory.
+                            
+                      md-content(ng-if="isLoggedIn && user.userType != 2")
+                          div(style="border:1px solid red; padding:10px; border-radius:3px;border: 1px solid red; padding: 10px; border-radius: 3px; background-color: rgba(255, 0, 0, 0.14);")
+                            span You need to login from candidate's id to apply for this job.
+                          hr
+                          md-button.md-raised.savedata-btn.pull-right(type='submit' data-ng-click='jobDescriptionCtrl.goBack()' ng-disabled="jobDescriptionCtrl.isClicked") Go Back
+        // Detail page end
+    // Inner Content end
+  
+  // footer
+  footer.main-footer
+    .container.footer-upper-sec
+      .row
+        .col-sm-6
+          .row
+            .col-sm-12
+              .col-sm-12.footer-logo
+                a(href='https://www.jottp.com')
+                  img(src='../../../public/img/f-logo1.png', alt='')
+              .col-sm-12
+                p(style='text-align: justify;color: white;padding-right: 15%;')
+                  | Video and OnDemand interviewing is about connecting with people in a more authentic way.We believe it's important to deliver a superior experience that creates a smile from every person who interacts with our technology and our team members.We think you�ll  smile too when you learn how easy it is to engage candidates in a high-quality hiring experience that can happen faster and at a lower cost than your current process.
+          .row
+            .col-sm-12
+              .col-xs-12.col-sm-5
+                p.footer-title Connect With Us
+              .col-xs-12.col-sm-6
+                .social-icons
+                  p
+                    a(href='https://www.facebook.com/pg/jottpinc/about/?ref=page_internal')
+                      img(src='../../../public/img/fb1.png', style='width: 25px;height: 25px;', alt='')
+                    a(href='https://twitter.com/JottpInc')
+                      img(src='../../../public/img/rt1.png', style='width: 25px;height: 25px;', alt='')
+                    a(href='https://www.linkedin.com/in/jottp-inc-442b82139')
+                      img(src='../../../public/img/in1.png', style='width: 25px;height: 25px;', alt='')
+                    a(href='https://plus.google.com/107902440160147933241')
+                      img(src='../../../public/img/gplus1.png', style='width: 25px;height: 25px;', alt='')
+                    a(href='https://www.youtube.com/channel/UC8Y5sCdVemsPdC-XfKlJVzw')
+                      img(src='../../../public/img/youtube.png', style='width: 25px;height: 25px;', alt='')
+        .col-sm-3.footer-nav-pad
+          ul.footer-nav
+            li.footer-title Company
+          ul.footer-nav
+            li
+              a(href='about-us.html') About Us
+            li
+              a(href='contact-us.html') Contact Us
+            li
+              a(href='features.html') How it works
+            li
+              a(href='#geen-box-area') Why Us
+            li
+              a(href='pricing-interview.html#faqs-question') FAQs
+            li
+              a(href='blog.html') Blog
+            li
+              a(href='team.html') Team
+            li
+              a(href='careerpage-jottp.html') Careers
+        .col-sm-3.footer-nav-pad
+          ul.footer-nav
+            li.footer-title Product
+          ul.footer-nav
+            li
+              a(href='pricing-interview.html') Pricing
+            li
+              a(href='features.html') Features
+            li
+              a(href='features.html#section1') OnDemand
+            li
+              a(href='features.html#section3') Live
+            li
+              a(href='features.html#section4') Conference
+            li
+              a(href='certificate-verification.html') Certificate Verification
+            li
+              a(href='careerpage.html') Job Search
+    .copyright-bar
+      .container
+        .row
+          .col-xs-12.col-sm-6
+            p(style='color: white;font-size: 14px;') © Copyright 2017, All Rights Reserved.
+          .col-xs-12.col-sm-3
+            p.privacy-link(style='color: white;font-size: 14px;')
+              a(href='privacy-policy.html') Privacy & Security Policy
+          .col-xs-12.col-sm-3
+            p.term-link(style='color: white;font-size: 14px;')
+              a(href='terms-condition.html') Terms Of Use
+
+//- dialog box ends    
+#payment-public-job-apply-iframe                   
+

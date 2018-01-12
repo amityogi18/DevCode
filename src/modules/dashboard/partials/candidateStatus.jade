@@ -1,0 +1,36 @@
+.candidate-status-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                div.candidate-status-heading
+                  i.fa.fa-user.candidate-status-icon(aria-hidden='true')
+                  span Candidate Status
+                  //a.link-to-analytics.hidden-xs(data-ui-sref="app.analytics") Analytics        
+                .pie-height.hidden-xs.hidden-sm
+                  .col-md-9.col-sm-6.pie-dec-chart_01.chart-0
+                    canvas#pie.chart.chart-pie.chart-xs(chart-colors='candidateStatusCtrl.colors', chart-data='candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.data', chart-labels='candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.labels', chart-options='candidateStatusCtrl.options')
+                  .col-md-3.col-sm-4.pull-right.managing.labl-box
+                    ul.col-sm-9.managing
+                      li(ng-repeat='row in candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.labels')
+                        i.fa.fa-square(aria-hidden='true', ng-class="{'label_1':row == 'Completed','label_2':row == 'On Hold','label_3':row == 'New Candidate','label_4': row=='In Review','label_5':row == 'Hired','label_6': row=='Rejected','label_7':row == 'Inprogress','label_8': row=='Archived'}")
+                        span
+                          strong {{row}}
+                    ul.col-sm-3.managing
+                      li(ng-repeat='x in candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.data track by $index')
+                        span
+                          strong {{x}} 
+                .hidden-md.hidden-lg
+                    .col-xs-8.col-sm-6.no-mrgn
+                      canvas#pie.chart.chart-pie.chart-xs(chart-colors='candidateStatusCtrl.colors', chart-data='candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.data', chart-labels='candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.labels', chart-options='candidateStatusCtrl.options', width= '233',height='133')
+                    .col-xs-3.col-sm-4.no-mrgn
+                      ul
+                        li(ng-repeat='row in candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.labels', style='font-size:12px')
+                          i.fa.fa-square(aria-hidden='true', ng-class="{'label_1':row == 'Completed','label_2':row == 'On Hold','label_3':row == 'New Candidate','label_4': row=='In Review','label_5':row == 'Hired','label_6': row=='Rejected','label_7':row == 'Inprogress','label_8': row=='Archived'}")
+                          span
+                            |{{row}}
+                    .col-xs-1.col-sm-2.no-mrgn
+                      ul
+                        li(ng-repeat='x in candidateStatusCtrl.candidateStatusReportData.candidateStatusReport.data track by $index',style='font-size:12px')
+                          span
+                            strong {{x}} 

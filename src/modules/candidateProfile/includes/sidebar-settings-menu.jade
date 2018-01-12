@@ -1,0 +1,115 @@
+script.
+  function openNav() {
+   
+      //- document.getElementById("sideBarNav").style.width = "165px";
+    document.getElementById("sideBarNav").style.width = "100%";
+    document.getElementById("fixed-top").style.width = "0";
+  }
+  function closeNav() {
+      document.getElementById("sideBarNav").style.width = "0";
+      document.getElementById("fixed-top").style.width = "0";
+  }
+  function showNav() {
+    document.getElementById("fixed-top").style.display = "block";
+    document.getElementById("fixed-iconMenu").style.display = "none";
+  }
+  function hideNav() {
+    document.getElementById("fixed-top").style.display = "none";
+    document.getElementById("fixed-iconMenu").style.display = "block";
+  }
+.sideMenuSection
+    .col-md-1.pull-right.hidden-lg.hidden-md.hidden-sm
+      i#open-icon.fa.fa-ellipsis-v.fa-2x(onclick='openNav()') 
+    .navigation-container
+      #fixed-iconMenu.nav-side-menu.navbar-fixed-top.icon-menu
+        .menu-list.hidden-xs
+           ul#menu-content.menu-content
+                li.menu-color(onclick="showNav()")
+                    md-button(aria-label='Open menu', uib-tooltip='Open Menu', tooltip-placement='bottom')
+                      md-icon(md-font-set='fa') &#xf233
+                li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.general-settings', uib-tooltip='General')
+                      md-button(aria-label='General')
+                        md-icon(md-font-set='fa') &#xf108
+                li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.notifications', uib-tooltip='Notifications')
+                      md-button(aria-label='Notifications')
+                        md-icon(md-font-set='fa') &#xf0a2
+                li(ui-sref-active="active", hidden)
+                    a(data-ui-sref='settings.email-template-settings', uib-tooltip='Email Template', data-ng-show='user.userRoles == 1  || user.userRoles == 2')
+                      md-button(aria-label='Email Template')
+                         md-icon(md-font-set='fa') &#xf128            
+                li(ui-sref-active="active", hidden)
+                    a(data-ui-sref='candidateProfile.theme-settings', uib-tooltip='Theme')
+                      md-button(aria-label='Theme')
+                        md-icon(md-font-set='fa') &#xf2b2
+                li(ui-sref-active="active", data-ng-hide='user.userRoles == 7')
+                    a(data-ui-sref='candidateProfile.issue-ticketing', uib-tooltip='Issue Ticketing')
+                      md-button(aria-label='Issue Ticketing')
+                        md-icon(md-font-set='fa') &#xf145            
+      #fixed-top.nav-side-menu.navbar-fixed-top
+        .menu-list.menu-list-item.hidden-xs
+           ul#menu-content.menu-content
+                li.close-list-menu.sideBarMenuIcon
+                  a(onclick='hideNav()')
+                    md-button(aria-label='Close Menu')
+                      md-icon(md-font-set='fa') &#xf00d
+                    span.text-of-sidebar Close Menu
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='candidateProfile.general-settings')
+                    md-button(aria-label='General')
+                      md-icon(md-font-set='fa') &#xf108
+                    span.text-of-sidebar(data-translate='GENERAL')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='candidateProfile.notifications')
+                    md-button(aria-label='Notifications')
+                        md-icon(md-font-set='fa') &#xf0a2
+                    span.text-of-sidebar(data-translate='NOTIFICATIONS')
+                li.sideBarMenuIcon(ui-sref-active="active", hidden)
+                  a(data-ui-sref='settings.email-template-settings', data-ng-show='user.userRoles == 1  || user.userRoles == 2')
+                    md-button(aria-label='Email Template')
+                        md-icon(md-font-set='fa') &#xf128
+                    span.text-of-sidebar(data-translate='EMAIL-TEMPLATE')            
+                li.sideBarMenuIcon(ui-sref-active="active", hidden)
+                  a(data-ui-sref='candidateProfile.theme-settings')
+                    md-button(aria-label='Theme')
+                        md-icon(md-font-set='fa') &#xf2b2
+                    span.text-of-sidebar(data-translate='THEME')
+                li.sideBarMenuIcon(ui-sref-active="active", data-ng-hide='user.userRoles == 7' )
+                  a(data-ui-sref='candidateProfile.issue-ticketing')
+                    md-button(aria-label='Issue Ticketing')
+                        md-icon(md-font-set='fa') &#xf145
+                    span.text-of-sidebar(data-translate='ISSUE-TICKETING')
+    #sideBarNav.MySideBarNav.hidden-lg.hidden-md.hidden-sm
+      .menu-list
+          ul#user.sub-menu
+            li.close-list-menu
+                a(onclick='closeNav()')
+                  md-button(aria-label='Close Menu')
+                    md-icon(md-font-set='fa') &#xf00d
+                  span.text-of-sidebar Close Menu
+            li(ui-sref-active="active")
+              a(data-ui-sref='candidateProfile.general-settings', onclick='closeNav()')
+                md-button(aria-label='General')
+                  md-icon(md-font-set='fa') &#xf108
+                span.text-of-sidebar(data-translate='GENERAL')
+            li(ui-sref-active="active")
+              a(data-ui-sref='candidateProfile.notifications', onclick='closeNav()')
+                md-button(aria-label='Notifications')
+                    md-icon(md-font-set='fa') &#xf0a2
+                span.text-of-sidebar(data-translate='NOTIFICATIONS')
+            li(ui-sref-active="active", hidden)
+              a(data-ui-sref='settings.email-template-settings', onclick='closeNav()', data-ng-show='user.userRoles == 1  || user.userRoles == 2')
+                md-button(aria-label='Email Template')
+                    md-icon(md-font-set='fa') &#xf128
+                span.text-of-sidebar(data-translate='EMAIL-TEMPLATE')            
+            li(ui-sref-active="active", hidden)
+              a(data-ui-sref='candidateProfile.theme-settings', onclick='closeNav()')
+                md-button(aria-label='Theme')
+                    md-icon(md-font-set='fa') &#xf2b2
+                span.text-of-sidebar(data-translate='THEME')
+            li(ui-sref-active="active", data-ng-hide='user.userRoles == 7' )
+              a(data-ui-sref='candidateProfile.issue-ticketing', onclick='closeNav()')
+                md-button(aria-label='Issue Ticketing')
+                    md-icon(md-font-set='fa') &#xf145
+                span.text-of-sidebar(data-translate='ISSUE-TICKETING')           

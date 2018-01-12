@@ -1,0 +1,37 @@
+.content-wrapper.multi-apply-container
+  .row
+    .col-md-12
+      .video-intro-heading
+        span.video-intro-1(data-translate='MULTI-APPLY')
+  .panel.panel-default.multiple-apply-panel
+    .header-text
+      span.header-note| Select multiple options to post your resume to multiple job portals.
+    .panel-body
+      .col-md-12.select-all-lebel
+        .alert.alert-warning(data-ng-if='!multipleApplyCtrl.isProfileAdded', data-translate='') Create Atleast One Profile To Share it on Multiple Job Portals.
+        input.option-checkbox#cbSelectAll(type='checkbox', data-ng-click='multipleApplyCtrl.selectAllPortals($event)' ,  data-ng-if='multipleApplyCtrl.isProfileAdded')
+        span(data-ng-if='multipleApplyCtrl.isProfileAdded',data-translate='SELECT-ALL-CHECKBOX')
+        label.selectAll(for='cbSelectAll')
+      .col-md-12.check-box-position
+        .check-box-list(data-ng-if='multipleApplyCtrl.isProfileAdded')
+            .selectPortal( data-ng-repeat='portal in multipleApplyCtrl.portalList track by portal.id',ng-class="{'times':portal.name==='timesJob','naukri':portal.name==='naukri.com','shine':portal.name==='shine.com'}")
+              input.option-checkbox(type='checkbox', value='{{portal.id}}', id='{{portal.id}}', ng-model="portal.selected", data-ng-click='multipleApplyCtrl.addPortals($event,portal.id)', data-ng-disabled='!multipleApplyCtrl.isProfileAdded')
+              label(for='portal.name')
+    .panel-footer
+      .text-left You have selected {{multipleApplyCtrl.selectedPortals.length}}
+      .text-right
+        md-button.md-raised.savedata-btn(aria-label='save',data-ng-click='multipleApplyCtrl.shareProfilePortals()', data-ng-disabled='multipleApplyCtrl.selectedPortals.length === 0') Save
+        md-button.md-raised.canceldata-btn(aria-label='cancel', data-ng-disabled='multipleApplyCtrl.selectedPortals.length === 0', data-toggle='modal', data-target='#cancelUpload',data-translate='CANCEL')   
+        #cancelUpload.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content.content-of-modal
+                .modal-header Warning
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title
+                .modal-body.discard-msg
+                  p.cancel-upload(data-translate='DISCARD-MSG')
+                .modal-footer
+                  md-button.md-raised.savedata-btn.modal-btn-pos(aria-label='save',type='button',data-ng-click='multipleApplyCtrl.removeAllPortals()', data-dismiss='modal',data-translate='YES')
+                  md-button.md-raised.canceldata-btn(aria-label='cancel',type='button',data-dismiss='modal',data-translate='NO')
+      .clear-both
+

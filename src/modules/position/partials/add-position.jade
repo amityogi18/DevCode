@@ -1,0 +1,412 @@
+include position-navbar
+#add-position-page.add-position-page(ng-cloak)
+  .col-md-12.col-sm-12.col-xs-12.add-position-content 
+      form(role='form', name='newPositionCtrl.addPositionForm', novalidate='novalidate', flex-gt-xs='')   
+          #information.default-form
+            .col-md-12.col-sm-12.col-xs-12.help-box(ng-show="!newPositionCtrl.hideHelpBox", ng-class="{'fade': newPositionCtrl.hideHelpBox}")
+                .alert.alert-warning Fill out the form with the entire requirement for the profile you are hiring along with benefits of working with {{user.companyName}}
+                   br
+                   .cross-icon 
+                      i.fa.fa-times-circle.fa-lg(ng-click='newPositionCtrl.hideHelpBox = true')
+            .col-md-12.col-sm-12.col-xs-12.space_inbox 
+                .field-container                  
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-12.col-sm-12.col-xs-12
+                      h4.create-header Position Title                    
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox                      
+                      .input-group-position
+                        md-input-container.md-block(flex="100") 
+                          label Position Code
+                          input(tooltip-placement='top-right',uib-tooltip='Add a unique position code ',type='text', name='positionCode', ng-model='newPositionCtrl.position.code',ng-disabled='newPositionCtrl.PositionCount.interviewCount', required='required', maxlength='30',minlength="8", tabindex="1", ng-pattern="/^(?=.*[a-zA-Z0-9])([a-zA-Z0-9\._-]){8,30}$/", ng-trim="false")
+                          div(ng-messages='newPositionCtrl.addPositionForm.positionCode.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.positionCode.$touched')
+                            div(ng-message='required')
+                              | Please Enter 
+                              b Position Code
+                            div(ng-message='minlength') Length should be between 8 to 30 characters long
+                            div(ng-message='pattern') Invalid characters ( _ - . are allowed)
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")
+                          label.position-expiry Position Expiry Date
+                          md-datepicker(ng-model='newPositionCtrl.position.additionalOptions.positionExpiryDate', name='positionExpiryDate', md-min-date='newPositionCtrl.dateOptions.minDate',md-max-date='newPositionCtrl.dateOptions.maxDate', md-hide-icons = 'triangle', required='required')
+                          div(ng-messages='newPositionCtrl.addPositionForm.positionExpiryDate.$error', ng-if='newPositionCtrl.addPositionForm.$error')
+                            div(ng-message='required')
+                              | Please Enter 
+                              b Expiry Date
+                            div(ng-message='mindate') Expiry Date should not be less than current date
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      md-input-container.md-block(flex-gt-sm='')
+                        label Position Title
+                        input(type='text', name='positionName', ng-model='newPositionCtrl.position.name', required='required', maxlength='30', tabindex="2")
+                        div(ng-messages='newPositionCtrl.addPositionForm.positionName.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.positionName.$touched')
+                            div(ng-message='required')
+                              | Please Enter 
+                              b Position Title
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")  
+                          label Recruiter Name
+                          md-select(ng-model='newPositionCtrl.position.recruiterId', name='recruiterName', title='Choose Recruiter',  tabindex="3")
+                            md-option(ng-repeat='recruiter in newPositionCtrl.recruiters', value='{{recruiter.id}}')
+                             | {{recruiter.name}}
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                        label.position-location-label Position Share
+                        input.option-input.radio(type='radio',ng-value='newPositionCtrl.positionShareStatusPublic', ng-model="newPositionCtrl.position.jobShareStatus")
+                        span.public-share Public
+                        input.option-input.radio(type='radio', ng-value='newPositionCtrl.positionShareStatusPrivate', ng-model="newPositionCtrl.position.jobShareStatus")
+                        span.public-share Private           
+                .col-md-12.col-sm-12.col-xs-12.field-container             
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    h4.create-header Description and Requirements
+                  .col-md-12.col-sm-12.col-xs-12.spacing.space_inbox
+                    .input-group
+                      md-input-container.md-block(flex="100")
+                        label  Description
+                        div(name='description',required='required', text-angular='', ta-toolbar="[['bold','italics','underline','ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull']]", placeholder='Description', ng-model='newPositionCtrl.position.additionalOptions.description', tabindex="16",ta-min-text="100", ta-max-text="10000",style='width:100%;height:100px;')
+                        div(ng-messages='newPositionCtrl.addPositionForm.description.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.description.$touched')
+                          div(ng-message='required')
+                            | Describe 
+                            b Position 
+                            | with atleast 100 characters 
+                          div(ng-message='taMaxText') Max allowed character limit is 10000
+                          div(ng-message='taMinText') Minimum 100 character required
+                .col-md-12.col-sm-12.col-xs-12.field-container
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    h4.create-header Location            
+                  .col-md-8.col-sm-8.col-xs-12.space_inbox.location-autocomplete                    
+                      md-content.geo-section(flex='100')
+                        place-autocomplete(data-ng-model='newPositionCtrl.geoAddress', on-address='newPositionCtrl.setAddressValue(addressFn)',md-input-maxlength="250", md-input-minlength ="5" search-type='1')
+                  .col-md-4.col-sm-4.col-xs-12
+                      label.position-location-label Remote Location
+                      input.option-input.radio(type='radio',value='yes',name='remoteLocation', ng-model="newPositionCtrl.position.remoteLocation")
+                      span.public-share Yes
+                      input.option-input.radio(type='radio',value='no',name='remoteLocation',ng-model="newPositionCtrl.position.remoteLocation")
+                      span.public-share No      
+                .col-md-12.col-sm-12.col-xs-12.field-container.space_inbox
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    h4.create-header Department and Skills
+                  .col-md-6.col-sm-6.col-xs-12.space_inbox
+                      md-input-container.md-block(flex="100")
+                        label  Department
+                        md-select(ng-model='newPositionCtrl.position.departmentId', name='department',md-on-close="newPositionCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader',required='required')
+                          md-select-header.demo-select-header
+                            input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchDepartment', type='search', placeholder='Search for a department..',ng-keydown="$event.stopPropagation()")
+                          md-optgroup(label='Department')
+                          md-option(ng-repeat='department in newPositionCtrl.departmentList | filter: newPositionCtrl.searchDepartment', data-ng-click='newPositionCtrl.getSkillSet(department.id,1)', value='{{department.id}}')
+                            | {{department.name}}
+                        div(ng-messages='newPositionCtrl.addPositionForm.department.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.department.$touched')
+                            div(ng-message='required')
+                              | Please Select  
+                              b Department                            
+                      md-input-container.md-block.other-skill-input(flex="100")
+                        label Other Skills
+                        input(type='text', ng-model='newPositionCtrl.position.additionalOptions.otherSkills', maxlength='80', tabindex="15")    
+                  .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                    .input-group-position
+                      md-input-container.md-block(flex="100")
+                        label Skills
+                        input#skill.input__field(tooltip-placement='left',uib-tooltip='Click here to add skill set',readonly, type='text',title='Choose Skills', ng-blur='newPositionCtrl.fetchRecommendedQs()', ng-click='newPositionCtrl.openTextBox()', value='{{newPositionCtrl.primarySkill.skillsetName}} {{(newPositionCtrl.secondarySkill.skillsetName !== "" ? ", "+newPositionCtrl.secondarySkill.skillsetName : "")}} {{(newPositionCtrl.tertiarySkill.skillsetName !== "" ? ", "+newPositionCtrl.tertiarySkill.skillsetName : "")}}', tabindex="6",required)
+                        i.fa.fa-caret-down.downward-aero(aria-hidden='true')
+                        div(ng-messages='newPositionCtrl.addPositionForm.primarySkill.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.primarySkill.$touched')
+                            div(ng-message='required')
+                              | Please Select  
+                              b Primary Skill
+                      #skillContent.choose-skill(ng-show='newPositionCtrl.showSkillCollapse')
+                        form.skill-form
+                          .form-group.secondary
+                            
+                              md-select#skill-form.skill-field(ng-model='newPositionCtrl.position.primarySkillsetId', placeholder='Primary Skill', name='primarySkill',md-on-close="newPositionCtrl.clearPrimarySkill()", data-md-container-class='selectdemoSelectHeader')
+                                md-select-header.demo-select-header
+                                  input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchPrimarySkill',placeholder='Search...',type='search',ng-keydown="$event.stopPropagation()")
+                                md-option(ng-repeat='skill in newPositionCtrl.skillsetList | filter:newPositionCtrl.searchPrimarySkill track by skill.id', ng-click="newPositionCtrl.setPrimarySkill(skill.skillsetName, '1', skill.id)", ng-value='{{skill.id}}') {{skill.skillsetName}}
+                            span.error-msg(data-ng-show='newPositionCtrl.addPositionForm.$submitted || newPositionCtrl.addPositionForm.primarySkill.$touched')
+                              span(data-ng-show='newPositionCtrl.addPositionForm.primarySkill.$dirty && newPositionCtrl.addPositionForm.primarySkill.$invalid')
+                              span.error-msg(data-ng-show='newPositionCtrl.addPositionForm.primarySkill.$error.required') Please Select Primary Skill
+                          .form-group.secondary-row
+                              
+                                md-select#skill-form1.skill-field(ng-model='newPositionCtrl.position.secondarySkillsId', placeholder='Secondary Skill',md-on-close="newPositionCtrl.clearSecondarySkill()", data-md-container-class='selectdemoSelectHeader')
+                                  md-select-header.demo-select-header
+                                    input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchSecondarySkill',placeholder='Search...', type='search',ng-keydown="$event.stopPropagation()")
+                                  md-option(ng-repeat='skill in newPositionCtrl.skillsetList | filter:newPositionCtrl.searchSecondarySkill track by skill.id', ng-click="newPositionCtrl.setPrimarySkill(skill.skillsetName, '2', skill.id)", ng-value='skill.id') {{skill.skillsetName}}
+                          .form-group
+                             
+                                md-select#skill-form2.skill-field(ng-model='newPositionCtrl.position.tertiarySkillsId', append-to-body='true', title='Choose Skill', placeholder='Tertiary Skill',md-on-close="newPositionCtrl.clearTertiarySkill()", data-md-container-class='selectdemoSelectHeader',)
+                                  md-select-header.demo-select-header
+                                    input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchTertiarySkill',placeholder='Search...', type='search',ng-keydown="$event.stopPropagation()")
+                                  md-option(ng-repeat='skill in newPositionCtrl.skillsetList | filter:newPositionCtrl.searchTertiarySkill track by skill.id', ng-click="newPositionCtrl.setPrimarySkill(skill.skillsetName, '3', skill.id)", ng-value='{{skill.id}}') {{skill.skillsetName}}
+                  
+                    
+                .field-container
+                  .col-md-12.col-sm-12.col-xs-12
+                    .col-md-12.col-sm-12.col-xs-12.space_inbox
+                      h4.create-header Employement details
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")
+                          label  Employment Type
+                          md-select(data-ng-model='newPositionCtrl.position.jobType', name='employment', required='required')
+                            md-option(ng-repeat='employee in newPositionCtrl.employmentTypeList', value='{{employee.name}}')
+                              | {{employee.name}}
+                          div(ng-messages='newPositionCtrl.addPositionForm.employment.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.employment.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Employment Type
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")
+                          label Education
+                          md-select(ng-model='newPositionCtrl.position.requiredQualification')
+                            md-option(value='Under Graduate') Under Graduate
+                            md-option(value='Graduate') Graduate
+                            md-option(value='Post Graduate') Post Graduate
+                            md-option(value='Doctorate') Doctorate
+                  //.col-md-12.col-sm-12.col-xs-12
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      md-input-container.md-block(flex="100")
+                       label Salary Range
+                       md-select(data-ng-model='newPositionCtrl.position.salary', name='salary', required='required')
+                          md-option(ng-repeat='salary in newPositionCtrl.salaryList', value='{{salary.name}}')
+                           | {{salary.name}}
+                       div(ng-messages='newPositionCtrl.addPositionForm.salary.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.salary.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Salary Range
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")
+                          label  Currency
+                          md-select(data-ng-model='newPositionCtrl.position.currencyType', name='currency',md-on-close="newPositionCtrl.clearSearchCurrency()", data-md-container-class='selectdemoSelectHeader', required='required')
+                            md-select-header.demo-select-header
+                              input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchCurrency', type='search', placeholder='Search for a currency..',ng-keydown="$event.stopPropagation()")
+                            md-option(ng-repeat='currency in newPositionCtrl.currencyList | filter:newPositionCtrl.searchCurrency', ng-value='currency.name')
+                              | {{currency.name}}
+                          div(ng-messages='newPositionCtrl.addPositionForm.currency.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.currency.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Currency
+                  .col-md-12.col-sm-12.col-xs-12.spacing.space_inbox
+                    .col-md-6.col-sm-12.col-xs-12.spacing.space_inbox.alignment
+                      .col-md-6.col-sm-6.col-xs-6
+                        md-input-container.md-block(flex="100")
+                          label Experience (From)
+                          md-select(ng-model='newPositionCtrl.position.additionalOptions.experienceFrom', ng-change="newPositionCtrl.selectExperience(newPositionCtrl.position.additionalOptions.experienceFrom)", name='experienceFrom', required)
+                            md-option(value=0)  0 yr
+                            md-option(value=1)  1 yr
+                            md-option(value=2)  2 yr
+                            md-option(value=3)  3 yr
+                            md-option(value=4)  4 yr
+                            md-option(value=5)  5 yr
+                            md-option(value=6)  6 yr
+                            md-option(value=7)  7 yr
+                            md-option(value=8)  8 yr
+                            md-option(value=9)  9 yr
+                            md-option(value=10) 10 yr
+                          div(ng-messages='newPositionCtrl.addPositionForm.experienceFrom.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.experienceFrom.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Experience (From)
+                      .col-md-6.col-sm-6.col-xs-6
+                        md-input-container.md-block(ng-disabled='newPositionCtrl.position.additionalOptions.experienceFrom == ""')
+                          label (To)
+                          md-select(ng-model='newPositionCtrl.position.additionalOptions.experienceTo', name='experienceTo', required)
+                            md-option(ng-value='row', ng-repeat='row in newPositionCtrl.toExperience'){{row}} yr
+                          div(ng-messages='newPositionCtrl.addPositionForm.experienceTo.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.experienceTo.$touched')
+                            div(ng-message='required')
+                              | Please Enter 
+                              b Experience (To)
+                    .col-md-6.col-sm-12.col-xs-12.spacing.space_inbox.alignment
+                      //.col-md-6.col-sm-6.col-xs-12
+                        label.position-location-label Position Share
+                        input.option-input.radio(type='radio',ng-value='newPositionCtrl.positionShareStatusPublic', ng-model="newPositionCtrl.position.jobShareStatus")
+                        span.public-share Public
+                        input.option-input.radio(type='radio', ng-value='newPositionCtrl.positionShareStatusPrivate', ng-model="newPositionCtrl.position.jobShareStatus")
+                        span.public-share Private
+                      //.col-md-6.col-sm-6.col-xs-12
+                        label.position-location-label Remote Location
+                        input.option-input.radio(type='radio',value='yes',name='remoteLocation', ng-model="newPositionCtrl.position.remoteLocation")
+                        span.public-share Yes
+                        input.option-input.radio(type='radio',value='no',name='remoteLocation',ng-model="newPositionCtrl.position.remoteLocation")
+                        span.public-share No
+                .field-container                  
+                  .col-md-12.col-sm-12.col-xs-12
+                    .col-md-12.col-sm-12.col-xs-12.space_inbox
+                      h4.create-header Annual Salary
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      md-input-container.md-block(flex="100")
+                       label Salary Range
+                       md-select(data-ng-model='newPositionCtrl.position.salary', name='salary', required='required')
+                          md-option(ng-repeat='salary in newPositionCtrl.salaryList', value='{{salary.name}}')
+                           | {{salary.name}}
+                       div(ng-messages='newPositionCtrl.addPositionForm.salary.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.salary.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Salary Range
+                    .col-md-6.col-sm-6.col-xs-12.spacing.space_inbox
+                      .input-group-position
+                        md-input-container.md-block(flex="100")
+                          label  Currency
+                          md-select(data-ng-model='newPositionCtrl.position.currencyType', name='currency',md-on-close="newPositionCtrl.clearSearchCurrency()", data-md-container-class='selectdemoSelectHeader', required='required')
+                            md-select-header.demo-select-header
+                              input.demo-header-searchbox.md-text(ng-model='newPositionCtrl.searchCurrency', type='search', placeholder='Search for a currency..',ng-keydown="$event.stopPropagation()")
+                            md-option(ng-repeat='currency in newPositionCtrl.currencyList | filter:newPositionCtrl.searchCurrency', ng-value='currency.name')
+                              | {{currency.name}}
+                          div(ng-messages='newPositionCtrl.addPositionForm.currency.$error', ng-if='newPositionCtrl.addPositionForm.$error || newPositionCtrl.addPositionForm.currency.$touched')
+                            div(ng-message='required')
+                              | Please Select 
+                              b Currency        
+                .field-container
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-8.col-sm-8.col-xs-12.spacing.space_inbox
+                        .margin-additional-option
+                          md-input-container.md-block(flex="100")
+                            label.add-option  Add Custom Field 1
+                            input.input__field(type='text',uib-tooltip="Add Custom Field 1", ng-model='newPositionCtrl.customOptions.custom1.value', tabindex="17", maxlength='100')
+                    .col-md-4.col-sm-4.col-xs-12
+                      .col-md-2.col-sm-2.col-xs-6.hidden-xs
+                        a.btn-plus(ng-click='newPositionCtrl.addCustomField(newPositionCtrl.noOfCustomFields)', ng-if='newPositionCtrl.showAddMore')
+                          i.fa.fa-plus-circle.fa-2x
+                      .col-md-2.col-sm-2.col-xs-6.hidden-xs
+                        span.btn-minus(ng-click='newPositionCtrl.deleteCustomField(newPositionCtrl.noOfCustomFields)', ng-if='newPositionCtrl.showRemoveField') -
+                      .col-md-2.col-sm-2.col-xs-6.visible-xs
+                        a.btn-plus(ng-click='newPositionCtrl.addCustomField(newPositionCtrl.noOfCustomFields)', ng-if='newPositionCtrl.showAddMore')
+                          i.fa.fa-plus-circle.fa-2x
+                      .col-md-2.col-sm-2.col-xs-6.visible-xs
+                        span.btn-minus(ng-click='newPositionCtrl.deleteCustomField(newPositionCtrl.noOfCustomFields)', ng-if='newPositionCtrl.showRemoveField') -
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-8.col-sm-8.col-xs-12.spacing.space_inbox(ng-show='newPositionCtrl.customFieldIsShown.custom2')
+                      .margin-additional-option
+                        md-input-container.md-block(flex="100")
+                          label.add-option Add Custom Field 2
+                          input.input__field(type='text', ng-model='newPositionCtrl.customOptions.custom2.value', tabindex="18", maxlength='100')
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-8.col-sm-8.col-xs-12.spacing.space_inbox(ng-show='newPositionCtrl.customFieldIsShown.custom3')
+                      .margin-additional-option
+                        md-input-container.md-block(flex="100")
+                          label.add-option Add Custom Field 3
+                          input.input__field(type='text', ng-model='newPositionCtrl.customOptions.custom3.value', tabindex="19", maxlength='100')
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-8.col-sm-8.col-xs-12.spacing.space_inbox(ng-show='newPositionCtrl.customFieldIsShown.custom4')
+                      .margin-additional-option
+                        md-input-container.md-block(flex="100")
+                          label.add-option Add Custom Field 4
+                          input.input__field(type='text', ng-model='newPositionCtrl.customOptions.custom4.value', tabindex="20", maxlength='100')
+                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                    .col-md-8.col-sm-8.col-xs-12.spacing.space_inbox(ng-show='newPositionCtrl.customFieldIsShown.custom5')
+                      .margin-additional-option
+                        md-input-container.md-block(flex="100")
+                          label.add-option Add Custom Field 5
+                          input.input__field(type='text', ng-model='newPositionCtrl.customOptions.custom5.value', tabindex="21", maxlength='100')
+                .insightRating-contain
+                  .field-second-container
+                    .col-md-12.col-sm-12.col-xs-12(ng-cloak='')
+                      md-content
+                        md-tabs(md-dynamic-height='', md-border-bottom='')
+                          md-tab(label='Insight Rating')
+                            md-content.md-padding
+                              h4 Mandatory
+                              .col-md-12.col-sm-12.col-xs-12.input-fields.space_inbox.top-margin
+                                .col-md-5.col-sm-6.col-xs-12.application-label
+                                  .col-md-2  
+                                    md-checkbox.md-primary(type='checkbox', aria-label='Checkbox 1',ng-checked='newPositionCtrl.position.insightCriteria.criterias[0].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('INSIGHT',0)")
+                                  .col-md-10
+                                    md-input-container.md-block(flex="100")
+                                      label Criteria 1
+                                      input.input__field(type='text', ng-model='newPositionCtrl.position.insightCriteria.criterias[0].criteria', maxlength='60')
+                                .col-md-5.col-sm-6.col-xs-12.application-label
+                                  .col-md-2
+                                    md-checkbox.md-primary(type='checkbox', aria-label='Checkbox 2', ng-checked='newPositionCtrl.position.insightCriteria.criterias[1].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('INSIGHT',1)")
+                                  .col-md-10
+                                    md-input-container.md-block(flex="100")
+                                     label Criteria 2
+                                     input.input__field(type='text', ng-model='newPositionCtrl.position.insightCriteria.criterias[1].criteria',maxlength='60')
+                              .col-md-12.col-sm-12.col-xs-12.input-fields.space_inbox.top-margin
+                                .col-md-5.col-sm-6.col-xs-12
+                                  .col-md-2
+                                    md-checkbox.md-primary(type='checkbox',aria-label='Checkbox 3', ng-checked='newPositionCtrl.position.insightCriteria.criterias[2].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('INSIGHT',2)")
+                                  .col-md-10
+                                    md-input-container.md-block(flex="100")
+                                     label Criteria 3
+                                     input.input__field(type='text', ng-model='newPositionCtrl.position.insightCriteria.criterias[2].criteria',maxlength='60')
+                                .col-md-5.col-sm-6.col-xs-12
+                                  .col-md-2
+                                    md-checkbox.md-primary(type='checkbox',aria-label='Checkbox 4', ng-checked='newPositionCtrl.position.insightCriteria.criterias[3].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('INSIGHT',3)")
+                                  .col-md-10
+                                    md-input-container.md-block(flex="100")
+                                     label Criteria 4
+                                     input.input__field(type='text', ng-model='newPositionCtrl.position.insightCriteria.criterias[3].criteria',maxlength='60')
+                                .col-md-12.col-sm-12.col-xs-12.space_inbox
+                                  p.mandatory-note
+                                    b *Note:
+                                    |  Clicking on 'mandatory' checkbox will push interviewer to rate candidate against these ratings.
+                          md-tab(label='Advance Criteria')
+                            md-content.md-padding
+                              .max-wrapper.space_inbox
+                                h4 Mandatory
+                                .col-md-12.col-sm-12.col-xs-12.panel-default.insights-rating-wrapper_1.space_inbox
+                                  .col-md-5.col-sm-6.col-xs-12.application-label
+                                    .col-md-2
+                                      md-checkbox.md-primary(type='checkbox',aria-label='Checkbox 5', ng-checked='newPositionCtrl.position.advanceCriteria.criterias[0].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('ADVANCE',0)")
+                                    .col-md-10
+                                      md-input-container.md-block(flex="100")
+                                        label Criteria 1
+                                        input.input__field(type='text', ng-model='newPositionCtrl.position.advanceCriteria.criterias[0].criteria',maxlength='60')
+                                  .col-md-5.col-sm-6.col-xs-12.application-label
+                                    .col-md-2
+                                      md-checkbox.md-primary(type='checkbox',aria-label='Checkbox 6', ng-checked='newPositionCtrl.position.advanceCriteria.criterias[1].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('ADVANCE',1)")
+                                    .col-md-10
+                                      md-input-container.md-block(flex="100")
+                                        label Criteria 2
+                                        input.input__field(type='text', ng-model='newPositionCtrl.position.advanceCriteria.criterias[1].criteria', maxlength='60')
+                                .col-md-12.col-sm-12.col-xs-12.input-fields.space_inbox.top-margin
+                                    .col-md-5.col-sm-6.col-xs-12
+                                      .col-md-2
+                                        md-checkbox.md-primary(type='checkbox',aria-lable='Checkbox 7', ng-checked='newPositionCtrl.position.advanceCriteria.criterias[2].isMandatory', ng-click="newPositionCtrl.toggleCriteriaMandatory('ADVANCE',2)")
+                                      .col-md-10
+                                        md-input-container.md-block(flex="100")
+                                          label Criteria 3
+                                          input.input__field(type='text', ng-model='newPositionCtrl.position.advanceCriteria.criterias[2].criteria',maxlength='60')
+                                  .col-md-12.col-sm-12.col-xs-12.space_inbox
+                                    p.mandatory-note
+                                      b *Note:
+                                      |  Clicking on 'mandatory' checkbox will push candidate to enter advance criteria.
+                          md-tab(label='Automation Option')
+                            md-content.md-padding
+                              .max-wrapper.space_inbox
+                                .col-md-12
+                                  .col-md-8
+                                    
+                                    .row
+                                      .col-md-6.col-md-offset-1.col-xs-10.col-xs-offset-2
+                                        div.automation-option-list
+                                          md-checkbox.md-primary(aria-label="autocheckallbox1" ng-model="newPositionCtrl.isAutomationCheckedAll" ng-change="newPositionCtrl.setAutomationChecked()" ng-disabled='!newPositionCtrl.position.defaultInterviewAllowed')
+                                                |    Select All
+                                    
+                                    .row
+                                      .col-md-6.col-md-offset-1.col-xs-10.col-xs-offset-2
+                                        div.automation-option-list
+                                          md-checkbox.md-primary(type='checkbox', ng-true-value="true", ng-false-value="false", id="cd_Resume" , ng-model="newPositionCtrl.position.isResumeParse", aria-label="autocheckbox1" ng-change="newPositionCtrl.checkIfAllChecked()")
+                                                |    Resume Parsing
+                                    
+                                    .row(ng-repeat ="automationOpt in newPositionCtrl.automationOption")
+                                      .col-md-1.col-sm-2.col-xs-2
+                                        md-button.md-mini.md-fab.md-primary(aria-label="up", type="button", ng-click='newPositionCtrl.moveUp($index)', ng-if="$index == 1", tooltip-placement='top',uib-tooltip='Move up ')
+                                          i.fa.fa-arrow-up(area-hidden="true")
+                                        md-button.md-mini.md-fab.md-warn(aria-label="down", type="button", ng-click='newPositionCtrl.moveDown($index)', ng-if="$index == 0", tooltip-placement='top', uib-tooltip='Move Down ')
+                                          i.fa.fa-arrow-down(area-hidden="true")    
+
+                                      .col-md-6.col-sm-2.col-xs-10
+                                        div.automation-option-list
+                                          md-checkbox.md-primary(ng-model="newPositionCtrl.models[automationOpt.type]", ng-true-value="true", ng-false-value="false", aria-label="autocheckbox" ng-change="newPositionCtrl.checkIfAllChecked()", ng-disabled='!newPositionCtrl.position.defaultInterviewAllowed')
+                                              |   {{automationOpt.name}} 
+                                        
+                                  
+                                  .col-md-4
+                                    .count-box(data-ng-show="!newPositionCtrl.PositionCount.liveSetting || !newPositionCtrl.PositionCount.ondemandSetting")
+                                      p  Please go to position automation settings to create automated position
+                                      h3.text-center OR 
+                                      p If you already saved your automation settings then you can update the settings from the following link
+                                      a(data-ui-sref="settings.position-automation") Click here.
+
+                                      

@@ -1,0 +1,119 @@
+#job-openings-container.content-wrapper.job-openings-container
+  .row
+    .col-md-12
+      .job-openings-heading
+        span.header-data(data-translate='JOB-OPENINGS')
+  .panel.panel-default
+    .panel-body
+      h3.first-panel-header Careers At onDemand
+      form.form-inline
+        div(layout-gt-sm='row', flex-offset='25')
+          md-input-container.md-block(flex-gt-sm='35')
+            label job title, keywords or company name
+            input(ng-model='jobOpeningsCtrl.globalSearch' ng-change="jobOpeningsCtrl.updateFilter()")
+          div(flex='25')                                 
+            place-autocomplete(ng-model='jobOpeningsCtrl.location' on-clear='jobOpeningsCtrl.clearSuggestions(clearFn)', md-input-maxlength="250" , md-input-minlength ="5" , search-type='1' )
+          div(flex='25')  
+            md-button.md-raised.md-primary(aria-label='Search',ng-click='jobOpeningsCtrl.searchFilter()') Search
+          div(flex='15')
+            md-button.md-raised.md-primary(aria-label='Search',ng-click='jobOpeningsCtrl.resetFilter()') RESET
+      .col-md-12.onDemand-job
+        a(href='javascript:void(0)') View All Jobs At onDemand
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-md-12.col-sm-12.col-xs-12.payment-error(ng-if="jobOpeningsCtrl.isPaymentError")
+            .alert.alert-danger
+             center
+                 p Transaction Failed !! 
+                 p {{jobOpeningsCtrl.paymentError}}
+      .row
+        .col-md-3.col-sm-4.col-xs-12
+          .panel.panel-default
+            .panel-heading Refine Search
+            .panel-body
+              .row.pad-row
+                h5.search-category 
+                  i.fa.fa-building
+                  | COMPANY
+                md-input-container.md-block(flex="100")
+                  label Company
+                  input(ng-model='jobOpeningsCtrl.company')
+                .companyList-area    
+                  ul(ng-repeat='companyNames in jobOpeningsCtrl.companyList | filter:jobOpeningsCtrl.company | limitTo: 10 track by $index')
+                      li
+                        span
+                          md-checkbox.md-primary(aria-label='Checkbox 1' ng-model="jobOpeningsCtrl.filteredList[companyNames.company]" ng-change="jobOpeningsCtrl.onFilterApplied(companyNames.company, 'company')")
+                        span {{companyNames.company}}
+              .row.pad-row
+                h5.search-category
+                  i.fa.fa-briefcase
+                  |JOB TITLE
+                md-input-container.md-block(flex="100")
+                  label Job title
+                  input(ng-model='jobOpeningsCtrl.jobTitle') 
+                .companyList-area  
+                  ul(ng-repeat='jobName in jobOpeningsCtrl.allJobList | filter:jobOpeningsCtrl.jobTitle |  limitTo: 10 track by $index')
+                      li 
+                        span
+                          md-checkbox.md-primary(aria-label='Checkbox 1' ng-model="jobOpeningsCtrl.filteredList[jobName.jobtitle]" ng-change="jobOpeningsCtrl.onFilterApplied(jobName.jobtitle, 'jobtitle')")
+                        span {{jobName.jobtitle}}
+              .row.pad-row
+                h5.search-category
+                  i.fa.fa-language
+                  |CATEGORY
+                md-input-container.md-block(flex="100")
+                  label Skill
+                  input(ng-model='jobOpeningsCtrl.skill')
+                .companyList-area
+                  ul(ng-repeat ='skillsetName in jobOpeningsCtrl.skillSetList  | filter:jobOpeningsCtrl.skill | limitTo: 10')
+                    div(ng-repeat='sname in skillsetName track by $index')
+                      li 
+                        span
+                          md-checkbox.md-primary(aria-label='Checkbox 1' ng-model="jobOpeningsCtrl.filteredList[sname]" ng-change="jobOpeningsCtrl.onFilterApplied(sname, 'primaryskill')")
+                        span {{sname}}
+        .col-md-9.col-sm-7.col-xs-12
+          .panel.panel-default
+            .panel-body
+              .col-md-12.col-sm-12.col-xs-12
+                p.text-label(ng-hide='jobOpeningsCtrl.jobList.length < 1') Showing 
+                  span
+                    strong 1-{{jobOpeningsCtrl.jobList.length}}
+                    |  of  
+                    strong
+                     {{jobOpeningsCtrl.jobListCount}} 
+                    | records 
+              .row
+                table.table.table-first(ng-table='jobOpeningsCtrl.tableParams',ng-table-columns-binding="jobOpeningsCtrl.cols")
+                  tr(ng-repeat='jobs in $data')
+                    td(data='jobs')
+                      md-card.job-card
+                        .row
+                          .col-md-8.col-xs-12
+                            md-card-title
+                              md-card-title-text
+                                span.md-headline 
+                                  span {{jobs.jobtitle}} 
+                                  span(data-ng-if="jobs.isOnDemandJob" style="color:green;") (JTTP)
+                                span.md-subhead  
+                                  i.fa.fa-building(area-hidden="true")
+                                  span
+                                    |{{jobs.company}}
+                                span.md-subhead
+                                  i.fa.fa-map-marker(area-hidden="true")                  
+                                  span
+                                    |{{jobs.location}}
+                                span.md-subhead                                    
+                                  i.fa.fa-calendar(area-hidden="true")
+                                  span Posted :
+                                    |{{jobs.jobcreationdate}}
+                          .col-md-4.col-xs-12
+                            .apply-btn-section                                     
+                              md-card-actions(layout='row', layout-align='end center')
+                                  md-button.md-raised.md-primary(aria-label='Search',ng-click='jobOpeningsCtrl.getCandidateJobAppliedInfo(jobs)') Apply Now
+                        .col-md-12.col-xs-12.job-footer                                                    
+                            a(ng-href="{{jobs.jobdetailurl}}", target="_blank") View Full Job Description&nbsp;&nbsp;
+                            button.btn.btn-xs.btn-primary(data-ng-click='jobOpeningsCtrl.saveJobAsFavorite(jobs)')  
+                              i.fa.fa-bookmark.save-icon(area-hidden='true')&nbsp;&nbsp;
+                              | Save This Job                              
+#payment-candidate-profile-iframe                       

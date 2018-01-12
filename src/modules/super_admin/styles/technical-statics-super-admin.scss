@@ -1,0 +1,33 @@
+.technical-statics-super-admin {
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+
+  .technical-statics-search {
+     margin-bottom : 15px;
+  }
+  
+  .technical-statics{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .technical-statics-heading{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+    }
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+    }
+
+}

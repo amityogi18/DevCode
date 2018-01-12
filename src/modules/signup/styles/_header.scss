@@ -1,0 +1,81 @@
+.signup-navigation-bar {
+  .sign-up-bar {
+    background-color: $blue;
+    border: 0;
+    font-size: $font-size-medium !important;
+    line-height: $line-height !important;
+    letter-spacing: 2px;
+    padding: 8px 0;
+    position: relative;
+    .navbar-header {
+      .navbar-brand {
+        font-family: $font-family;
+        font-size: $font-size-2xlarge;
+      }
+    }
+  }
+
+  .navbar-brand {
+    color: $white !important;
+    font-family: $font-family;
+    font-size: $font-size-large;
+  }
+
+  .sign-up-nav {
+    li {
+      a:hover, &.active a {
+        color: $curiousBlue !important;
+        background-color: $white !important;
+        cursor: pointer;
+      }
+      a {
+        color: $white !important;
+        font-family: $font-family;
+        font-size: $font-size-large;
+      }
+    }
+  }
+
+  .signup-nav-btn-section {
+    margin-right: -50px;
+
+    li {
+      .signup-globe-icon {
+        color: $white;
+        margin-top: 11px;
+        margin-left: -12px;
+      }
+      .signup-nav-btn {
+        background-color: $lightRed !important;
+        border-radius: $global-radius;
+        color: $white;
+        margin-top: 9px;
+        font-family: $font-family;
+        padding: 7px;
+        width: 98px;
+      }
+      .signup-nav-btn:hover {
+        opacity: 0.9;
+      }
+      a:hover, &.active a {
+        cursor: pointer;
+        color: $white;
+      }
+
+      .globe-icon-dropdown {
+        background-color: $white;
+        margin-top: 20px;
+
+        a:hover, &.active a {
+          color: $white !important;
+          background-color: $curiousBlue !important;
+        }
+        a {
+          color: $curiousBlue !important;
+          font-family: $font-family;
+          font-size: $font-size-normal;
+        }
+      }
+    }
+  }
+}

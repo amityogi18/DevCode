@@ -1,0 +1,871 @@
+.content-wrapper.view-position
+  .col-md-12.col-sm-12.col-xs-12(data-ng-if='!viewPositionCtrl.hideView') 
+    .row
+      h1.col-md-6.col-sm-12.col-xs-12.panel-title {{viewPositionCtrl.position.name}} (View)
+      .col-md-6.col-sm-12.col-xs-12
+        .pull-right.hidden-xs
+          md-button.md-raised.md-primary(aria-label='ACTIVATE',type='button', data-toggle='modal', data-target='#activateViewModal', data-ng-if='viewPositionCtrl.position.statusId !== 1', data-ng-hide="viewPositionCtrl.position.statusId === 3") Activate
+          md-button.md-raised.md-warn(aria-label='EDIT',type='button', data-ui-sref='app.update-position({ positionId: viewPositionCtrl.positionId })',data-ng-if='user.userRoles !== 3', data-ng-hide="viewPositionCtrl.position.statusId === 3") Edit
+          md-button.md-raised.md-primary(aria-label='BACK',type='button', data-ui-sref='app.position') Back
+        .pull-right.act-back-btn.visible-xs
+          a.edit-back.btn-green(type='button', data-toggle='modal', data-target='#activateViewModal', data-ng-if='viewPositionCtrl.position.statusId !== 1')
+            i.fa.fa-check.fa-2x.popbtn_cross(data-toggle='tooltip', data-placement='top', title='cancel', aria-hidden='true')
+          a.edit-back.btn-primary(type='button', data-ui-sref='app.update-position({ positionId: viewPositionCtrl.positionId })',data-ng-if='user.userRoles !== 3')
+            i.fa.fa-pencil-square-o.fa-2x.popbtn_cross(data-toggle='tooltip', data-placement='top', title='cancel', aria-hidden='true')
+          a.btn-green(type='button', data-ui-sref='app.position') 
+            i.fa.fa-arrow-left.fa-2x.popbtn_cross(data-toggle='tooltip', data-placement='top', title='cancel', aria-hidden='true')
+    #activateViewModal.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content.content-of-modal
+          .modal-header
+            | Activate Position
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title
+          .modal-body.body-of-cp-modal
+            p.discard-msg Are you sure you want to Activate the Position ?
+          .modal-footer.footer-of-cp-modal
+            md-button.md-raised.md-primary(aria-label='ACTIVATE',type='button', data-dismiss='modal', data-ng-click="viewPositionCtrl.activatePosition()") Activate
+            md-button.md-raised.canceldata-btn(aria-label='cancel',type='button', data-dismiss='modal', data-translate='CANCEL') Cancel
+    .panel-body
+      div(ng-cloak='')
+        md-content
+          md-tabs(md-dynamic-height='', md-border-bottom='')
+            md-tab(label=' Position ')
+              md-content.md-padding        
+                .main-body-wrapper
+                  .default-form
+                    .col-md-12.col-sm-12.col-xs-12.spacing-off.position-detail-section
+                      .col-md-12.col-sm-12.col-xs-12
+                        h4
+                          i.fa.fa-briefcase(area-hidden='true')
+                          |Position Details
+                      .first-form.input-section
+                        .col-md-6.col-sm-6.col-xs-12.spacing-off
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Position Code :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p {{viewPositionCtrl.position.code}}
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Position Title :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p {{viewPositionCtrl.position.name}}
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Recruiter Name :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p {{viewPositionCtrl.position.recruiterName}}
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Department :
+                          .col-md-8.col-sm-8.col-xs-6.departmen
+                            p {{viewPositionCtrl.departmentNameId.name}}
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Location :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p {{viewPositionCtrl.position.additionalOptions.address}}
+                              //span(ng-if='viewPositionCtrl.position.additionalOptions.country == null && viewPositionCtrl.position.additionalOptions.state == null && viewPositionCtrl.position.additionalOptions.city == null ') N/A
+                              //span(ng-if='viewPositionCtrl.position.additionalOptions.country !== null && viewPositionCtrl.position.additionalOptions.state !== null && viewPositionCtrl.position.additionalOptions.city !== null ')
+                                | {{viewPositionCtrl.countrySetName.countryName}}, {{viewPositionCtrl.stateSetName.stateName}}, {{viewPositionCtrl.citySetName.cityName}}
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Experience(years) :
+                          .col-md-8.col-sm-8.col-xs-6 
+                            p
+                              span(ng-if='viewPositionCtrl.position.additionalOptions.experienceFrom == 0 && viewPositionCtrl.position.additionalOptions.experienceTo == 0') N/A
+                              span(ng-if='viewPositionCtrl.position.additionalOptions.experienceFrom !== 0 && viewPositionCtrl.position.additionalOptions.experienceTo !== 0')
+                              | {{viewPositionCtrl.position.additionalOptions.experienceFrom}} To {{viewPositionCtrl.position.additionalOptions.experienceTo}}      
+                        .col-md-6.col-sm-6.col-xs-12.spacing-off
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Primary Skill :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p(ng-if='viewPositionCtrl.primarySkillName.skillsetName') {{viewPositionCtrl.primarySkillName.skillsetName}}
+                            p(ng-if='!viewPositionCtrl.primarySkillName.skillsetName') N/A
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Secondary Skill :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p(ng-if='viewPositionCtrl.secondrySkillName.skillsetName') {{viewPositionCtrl.secondrySkillName.skillsetName}}
+                            p(ng-if='!viewPositionCtrl.secondrySkillName.skillsetName') N/A
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Tertiary Skill :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p(ng-if='viewPositionCtrl.tertiarySkillName.skillsetName') {{viewPositionCtrl.tertiarySkillName.skillsetName}}
+                            p(ng-if='!viewPositionCtrl.tertiarySkillName.skillsetName') N/A
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Position Expiry Date :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p(ng-if="viewPositionCtrl.position.additionalOptions.positionExpiryDate == '0000-00-00 00:00:00' || viewPositionCtrl.position.additionalOptions.positionExpiryDate === null") N/A
+                            p(ng-if="viewPositionCtrl.position.additionalOptions.positionExpiryDate !== '0000-00-00 00:00:00' && viewPositionCtrl.position.additionalOptions.positionExpiryDate !== null") {{viewPositionCtrl.position.additionalOptions.positionExpiryDate | date : "MM-dd-yyyy"}} 
+                          label.col-md-4.col-sm-4.col-xs-6.space-right Other Skills :
+                          .col-md-8.col-sm-8.col-xs-6
+                            p
+                              span(ng-if='viewPositionCtrl.position.additionalOptions.otherSkills == ""') N/A
+                              span(ng-if='viewPositionCtrl.position.additionalOptions.otherSkills !== ""') {{viewPositionCtrl.position.additionalOptions.otherSkills}}
+                .main-body-wrapper
+                  .default-form
+                    .col-md-12.col-sm-12.col-xs-12.description-detail-section
+                      .col-md-12.col-sm-12.col-xs-12
+                        h4
+                          i.fa.fa-file-text(area-hidden='true')
+                          |Description
+                    .col-md-12.col-sm-12.col-xs-12
+                      label.col-md-12.col-sm-12.col-xs-12
+                        .side-spacing Description :
+                      .side-spacing
+                        P.col-md-12.col-sm-12.col-xs-12.view-additional-option
+                .main-body-wrapper
+                  .default-form
+                    .col-md-12.col-sm-12.col-xs-12.employee-detail-section
+                      .col-md-12.col-sm-12.col-xs-12
+                        h4
+                          i.fa.fa-info-circle(area-hidden='true')
+                          |Employement details and Benefits
+                    .col-md-12.col-sm-12.col-xs-12
+                      .col-md-6.col-sm-6.col-xs-12
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Employment Type                      
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.jobType') {{viewPositionCtrl.position.jobType}}
+                          p(ng-if='!viewPositionCtrl.position.jobType') N/A
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Currency                     
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.currencyType') {{viewPositionCtrl.position.currencyType}}
+                          p(ng-if='viewPositionCtrl.position.currencyType == null') N/A
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Salary                      
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.salary') {{viewPositionCtrl.position.salary}}
+                          p(ng-if='viewPositionCtrl.position.salary == null') N/A
+                      .col-md-6.col-sm-6.col-xs-12
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Education                 
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.requiredQualification') {{viewPositionCtrl.position.requiredQualification}}
+                          p(ng-if='viewPositionCtrl.position.requiredQualification == null') N/A
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Position Share                 
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.jobShareStatus')
+                            span(data-ng-if='viewPositionCtrl.position.jobShareStatus == 24') Public
+                            span(data-ng-if='viewPositionCtrl.position.jobShareStatus == 25') Private
+                          p(ng-if='!viewPositionCtrl.position.jobShareStatus')
+                            span N/A
+                        label.col-md-4.col-sm-4.col-xs-6.space-right Remote Location                      
+                        .col-md-8.col-sm-8.col-xs-6 
+                          p(ng-if='viewPositionCtrl.position.remoteLocation')
+                            |{{viewPositionCtrl.position.remoteLocation}}
+                          p(ng-if='!viewPositionCtrl.position.remoteLocation')
+                            | N/A
+                .row.main-bodyclr.application-form-section
+                  .col-md-4.col-sm-4.col-xs-12
+                    h4
+                      i.fa.fa-anchor
+                      | Custom Option
+                    div.alert.alert-info(ng-show='viewPositionCtrl.position.additionalOptions.customOptions[0].customOption ===""')
+                      p No custom option added yet! 
+                    table.table.table-bordered(ng-hide='viewPositionCtrl.position.additionalOptions.customOptions[0].customOption ===""')
+                      thead
+                        tr
+                          th.common-header(colspan="2") Custom Field
+                      tbody
+                        tr(ng-if='data.customOption !== ""', ng-repeat='data in viewPositionCtrl.position.additionalOptions.customOptions')
+                          td
+                            strong Custom Field {{$index + 1}}
+                          td               
+                            span(ng-if='data.customOption !== ""') {{data.customOption}}
+
+
+                  .col-md-4.col-sm-4.col-xs-12
+                    h4
+                      i.fa.fa-star(area-hidden='true')
+                      |Insight Rating
+                    div.alert.alert-info(ng-show='viewPositionCtrl.position.insightCriteria.criterias[0].criteria === ""')
+                      p No insight criteria added yet!  
+                    table.table.table-bordered(ng-hide='viewPositionCtrl.position.insightCriteria.criterias[0].criteria === ""')
+                      thead
+                        tr
+                          th Criteria
+                          th Is Mandatory
+                      tbody
+                        tr(ng-if='data.criteria !== ""', ng-repeat='data in viewPositionCtrl.position.insightCriteria.criterias')
+                          td                
+                            span(ng-if='data.criteria !== ""') {{data.criteria}}
+                          td
+                            span(ng-if='data.isMandatory == 0') No
+                            span(ng-if='data.isMandatory !== 0') Yes
+
+                  .col-md-4.col-sm-4.col-xs-12
+                    h4
+                      i.fa.fa-paper-plane-o(area-hidden='true')
+                      |Advance Criteria
+                    div.alert.alert-info(ng-show='viewPositionCtrl.position.advanceCriteria.criterias[0].criteria === ""')
+                       p No advance criteria added yet!   
+                    table.table.table-bordered(ng-hide='viewPositionCtrl.position.advanceCriteria.criterias[0].criteria === ""')
+                      thead
+                        tr
+                          th Criteria
+                          th Is Mandatory
+                      tbody
+                        tr(ng-if='data.criteria !== ""', ng-repeat='data in viewPositionCtrl.position.advanceCriteria.criterias')
+                          td                
+                            span(ng-if='data.criteria !== ""') {{data.criteria}}
+                          td
+                            span(ng-if='data.isMandatory == 0') No
+                            span(ng-if='data.isMandatory !== 0') Yes           
+
+                .row.main-bodyclr.application-form-section 
+                  h4 
+                    i.fa.fa-rocket
+                    |Application Form
+                  .col-md-12.col-sm-12.col-xs-12        
+                    .col-md-4.col-sm-4.col-xs-6.field-heading
+                      p Email
+                      p Phone Number
+                      p Photo
+                      p Cover Letter
+                      p CV/Resume
+                    .col-md-8.col-sm-8.col-xs-6
+                      p
+                        span.label.label-primary(data-ng-if='viewPositionCtrl.applicationFormData.email == 1') Required
+                        span.label.label-warning(data-ng-if='viewPositionCtrl.applicationFormData.email == 2') Optional
+                        span.label.label-danger(data-ng-if='viewPositionCtrl.applicationFormData.email == 3') Off
+                        span.label.label-info(data-ng-if='viewPositionCtrl.applicationFormData.email == 0') N/A
+                      p  
+                        span.label.label-primary(data-ng-if='viewPositionCtrl.applicationFormData.phoneNumber == 1') Required
+                        span.label.label-warning(data-ng-if='viewPositionCtrl.applicationFormData.phoneNumber == 2') Optional
+                        span.label.label-danger(data-ng-if='viewPositionCtrl.applicationFormData.phoneNumber == 3') Off
+                        span.label.label-info(data-ng-if='viewPositionCtrl.applicationFormData.phoneNumber == 0') N/A
+                      p  
+                        span.label.label-primary(data-ng-if='viewPositionCtrl.applicationFormData.photo == 1') Required
+                        span.label.label-warning(data-ng-if='viewPositionCtrl.applicationFormData.photo == 2') Optional
+                        span.label.label-danger(data-ng-if='viewPositionCtrl.applicationFormData.photo == 3') Off
+                        span.label.label-info(data-ng-if='viewPositionCtrl.applicationFormData.photo == 0') N/A            
+                      p  
+                        span.label.label-primary(data-ng-if='viewPositionCtrl.applicationFormData.coverLetter == 1') Required
+                        span.label.label-warning(data-ng-if='viewPositionCtrl.applicationFormData.coverLetter == 2') Optional
+                        span.label.label-danger(data-ng-if='viewPositionCtrl.applicationFormData.coverLetter == 3') Off
+                        span.label.label-info(data-ng-if='viewPositionCtrl.applicationFormData.coverLetter == 0') N/A    
+                      p  
+                        span.label.label-primary(data-ng-if='viewPositionCtrl.applicationFormData.resume == 1') Required
+                        span.label.label-warning(data-ng-if='viewPositionCtrl.applicationFormData.resume == 2') Optional
+                        span.label.label-danger(data-ng-if='viewPositionCtrl.applicationFormData.resume == 3') Off
+                        span.label.label-info(data-ng-if='viewPositionCtrl.applicationFormData.resume == 0') N/A            
+                .row.main-bodyclr.portal-section
+                  h4
+                    i.fa.fa-shopping-bag(area-hidden='true')
+                    |Portal Information
+                  .col-md-6.col-sm-6.col-xs-12  
+                    table.table(data-ng-if="viewPositionCtrl.jobPortalsData.length > 1")
+                      thead
+                        tr 
+                          th Portal Name
+                          th Status
+                          th Comment
+                      tbody
+                        tr(ng-repeat='portals in viewPositionCtrl.jobPortalsData')
+                          td {{portals.portalName}}
+                          td {{portals.status}}
+                          td
+                            span(ng-if="portals.comment === null") N/A
+                            span(ng-if="!portals.comment === null") {{portals.comment}}
+                  .col-md-12.col-sm-6.col-xs-12(data-ng-if="viewPositionCtrl.jobPortalsData.length < 1")
+                      div.alert.alert-info
+                        center No portals added for this position!
+            md-tab(label=' Interviews ')
+              md-content.md-padding
+                .main-body-wrapper
+                  .default-tab-module.interview-tabs(data-ng-show='viewPositionCtrl.isInterviewSectionShow')
+                    ul.nav.nav-tabs
+                      li(ng-repeat='interviewData in viewPositionCtrl.interviewAccordians', data-ng-click='viewPositionCtrl.fetchInterviewDetails(interviewData)')
+                        a(data-toggle='tab', href='#interviewData') {{interviewData.name}}
+                      li(id='li_interviewAccordian',data-ng-if="viewPositionCtrl.isLiveNow", data-ng-click='viewPositionCtrl.showLiveNow()')
+                        a(data-toggle='tab', href='#interviewData') Live Now
+                    .tab-content
+                      #interviewData.tab-pane.fade.active.in
+                        .max-wrapper2.panel-default
+                          .interview-upper-form.col-md-12.col-sm-12.col-xs-12.spacing-off
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off
+                              label.col-md-5.col-sm-5.col-xs-6.space-right Interview Type :
+                              .col-md-7.col-sm-7.col-xs-6
+                                div(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 1') Live
+                                div(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 2') On Site
+                                div(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 3') On Demand
+                                div(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 4') Live Now
+                                div(data-ng-if='!viewPositionCtrl.selectedInterviewTypeId') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off
+                              label.col-md-4.col-sm-4.col-xs-6.space-right Interview Name :
+                              .col-md-8.col-sm-8.col-xs-6
+                                div {{viewPositionCtrl.interview.name}}
+                                div(ng-if='!viewPositionCtrl.interview.name') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="!viewPositionCtrl.liveNowClicked && viewPositionCtrl.selectedInterviewTypeId !== 2 && viewPositionCtrl.selectedInterviewTypeId !== 1 && viewPositionCtrl.selectedInterviewTypeId !== 4")
+                              label.col-md-5.col-sm-5.col-xs-6.space-right  Interview Expiry Date :
+                              .col-md-7.col-sm-7.col-xs-6
+                                div {{viewPositionCtrl.interview.interviewExpiryDate}}
+                                div(ng-if='!viewPositionCtrl.interview.interviewExpiryDate') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="viewPositionCtrl.selectedInterviewTypeId === 2")
+                              label.col-md-4.col-sm-4.col-xs-6.space-right Start Date :
+                              .col-md-8.col-sm-8.col-xs-6
+                                div {{viewPositionCtrl.interview.fromDate}}
+                                div(ng-if='!viewPositionCtrl.interview.fromDate') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="viewPositionCtrl.selectedInterviewTypeId === 2")
+                              label.col-md-4.col-sm-4.col-xs-6.space-right End Date :
+                              .col-md-8.col-sm-8.col-xs-6
+                                div {{viewPositionCtrl.interview.toDate}}
+                                div(ng-if='!viewPositionCtrl.interview.toDate') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="viewPositionCtrl.selectedInterviewTypeId === 2")
+                              label.col-md-4.col-sm-4.col-xs-6.space-right Start Time(Local Time) :
+                              .col-md-8.col-sm-8.col-xs-6
+                                div {{viewPositionCtrl.interview.fromTime}}
+                                div(ng-if='!viewPositionCtrl.interview.fromTime') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="viewPositionCtrl.selectedInterviewTypeId === 2")
+                              label.col-md-4.col-sm-4.col-xs-6.space-right End Time(Local Time) :
+                              .col-md-8.col-sm-8.col-xs-6
+                                div {{viewPositionCtrl.interview.toTime}}
+                                div(ng-if='!viewPositionCtrl.interview.toTime') N/A
+                            .col-md-6.col-sm-6.col-xs-12.spacing-off(data-ng-show="!viewPositionCtrl.liveNowClicked && viewPositionCtrl.interview.enableShareLink == 1 && viewPositionCtrl.selectedInterviewTypeId == 3")
+                              label.col-md-4.col-sm-4.col-xs-6.space-right Sharable Link :
+                              .col-md-8.col-sm-8.col-xs-6
+                                .chk-box.sharable-link                        
+                                  a(href='{{viewPositionCtrl.interview.interviewUrl}}', target='_blank') {{viewPositionCtrl.interview.interviewUrl}}
+                                p.social-icon
+                                  .col-md-12.col-sm-12.col-xs-12.share-url-icon
+                                    .col-md-2.col-sm-3.col-xs-3(ng-if='viewPositionCtrl.isFacebookAvailible')
+                                      a.fb-share-button(socialshare='', socialshare-provider='facebook', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{viewPositionCtrl.interview.interviewUrl}}')
+                                          i.fa.fa-facebook-square.fa-2x(aria-hidden='true') 
+                                    .col-md-2.col-sm-3.col-xs-3.share-twitter-icon(ng-if='viewPositionCtrl.isTwitterAvailible')  
+                                      a.twitter-share-button(socialshare='', socialshare-provider='twitter', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{viewPositionCtrl.interview.interviewUrl}}')
+                                          i.fa.fa-twitter-square.fa-2x(aria-hidden='true') 
+                                    .col-md-2.col-sm-3.col-xs-3(ng-if='viewPositionCtrl.isLinkedinAvailible')   
+                                      a.g-plusone(socialshare='', socialshare-provider='linkedin', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{viewPositionCtrl.interview.interviewUrl}}')
+                                          i.fa.fa-linkedin-square.fa-2x(aria-hidden='true')
+                                    .col-md-2.col-sm-3.col-xs-3(ng-if='viewPositionCtrl.isGooglePlusAvailible')   
+                                      a.g-plusone(socialshare='', socialshare-provider='google', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{viewPositionCtrl.interview.interviewUrl}}')
+                                          i.fa.fa-google-plus.fa-2x(aria-hidden='true')      
+                                //-   script(type='IN/Share', data-url='http://www.blackfishweb.com', data-counter='right').
+                      .col-md-12.col-sm-12.col-xs-12.accordion-row
+                        #accordion.panel-group
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 3')
+                            .panel-heading
+                              h4.panel-title
+                                a(data-toggle='collapse', data-parent='#accordion', href='#one') Interview Settings
+                            #one.panel-collapse.collapse.in
+                              .panel-body
+                                .row
+                                  .col-lg-4.col-md-6.col-sm-4.col-xs-12
+                                    .interview-form
+                                      header Welcome Video
+                                      .video-sec.welcome-video-section
+                                          div(data-ng-show="!viewPositionCtrl.isYoutubeWelcomeVideo")
+                                            video#welcomeVideo.meet-video.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-box(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                                        iframe.ifram-box(data-ng-if="viewPositionCtrl.isYoutubeWelcomeVideo", ng-src='{{viewPositionCtrl.trustSrc(viewPositionCtrl.welcomeVideofile)}}', frameborder='0', allowfullscreen='')
+                                  .col-lg-4.col-md-6.col-sm-4.col-xs-12
+                                    .interview-form
+                                      header Exit Video
+                                      .video-sec.exit-video-section
+                                          div(data-ng-show="!viewPositionCtrl.isYoutubeExitVideo")
+                                             video#exitVideo.meet-video.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-box(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                                        iframe.ifram-box(data-ng-if="viewPositionCtrl.isYoutubeExitVideo", ng-src='{{viewPositionCtrl.trustSrc(viewPositionCtrl.exitVideofile)}}', frameborder='0', allowfullscreen='')
+                                  .col-lg-4.col-md-6.col-sm-4.col-xs-12.createPosition
+                                    .interview-form
+                                      header Advance
+                                      .form-body
+                                        .col-md-12.col-sm-12.col-xs-12
+                                          .title Response Limit: &nbsp &nbsp{{viewPositionCtrl.interviewSetting.responseLimit}} Mins
+                                        .col-md-12.col-sm-12.col-xs-12
+                                          .title
+                                            | Retries Per Question: &nbsp &nbsp{{viewPositionCtrl.interviewSetting.retryPerQuestion}} Retry
+                                        .col-md-12.col-sm-12.col-xs-12
+                                          .title Redirect To Website :
+                                          .url-box {{viewPositionCtrl.interviewSetting.redirectUrl}}
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 1 || viewPositionCtrl.selectedInterviewTypeId == 2 || viewPositionCtrl.selectedInterviewTypeId == 3')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#two', data-ng-if="viewPositionCtrl.selectedInterviewTypeId === 3") Candidates / Evaluators
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#two', data-ng-if="viewPositionCtrl.selectedInterviewTypeId !== 3") Candidates / Interviewer / Evaluators
+                            #two.panel-collapse.collapse
+                              .panel-body
+                                .table-row
+                                  .tabination-area
+                                    ul.nav.nav-tabs
+                                      li.active
+                                        a(data-toggle='tab', href='#candidates01') Candidates
+                                      li(data-ng-if="viewPositionCtrl.selectedInterviewTypeId !== 3")
+                                        a(data-toggle='tab', href='#interviewer01') Interviewer
+                                      li
+                                        a(data-toggle='tab', href='#evaluators01') Evaluators
+                                    .tab-content.inner-candidate-form
+                                      #candidates01.tab-pane.fade.in.active
+                                        .interviewer-tab-content
+                                          .col-md-12.col-sm-12.col-xs-12(data-ng-show='viewPositionCtrl.linkedCandidateCount > 0')
+                                            .col-sm-4.col-md-4.col-xs-6.showMe
+                                              select(class="selectpicker" ng-model="viewPositionCtrl.test" ng-change="viewPositionCtrl.toggle()")
+                                                option(ng-model="col.show" value="{{$index}}" ng-repeat="col in viewPositionCtrl.cols.slice(1,viewPositionCtrl.cols.length) track by $index") {{col.title()}}
+                                            .table-responsive.second-table
+                                              table.table.table-first(ng-table='viewPositionCtrl.tableParams', ng-table-columns-binding="viewPositionCtrl.cols")
+                                                tr(ng-repeat='candidate in $data')                                      
+                                                  td(ng-if="true" class='col-sm-2' title="'Email'",  sortable="'email'", ng-data='candidate.email', class-name='table-accordian') {{candidate.email}}  
+                                                  td.cust-name(ng-if="true" class='col-sm-2' title="'Name'", sortable="'firstName'", ng-data='candidate.firstName', class-name='table-accordian') {{candidate.firstName}}                   
+                                                  td(ng-if="true" class='col-sm-2' title="'Department'", sortable="'departmentName'", ng-data='candidate.departmentName', class-name='table-accordian') {{candidate.departmentName}}
+                                                  td(ng-if="true" class='col-sm-2' title="'Skills'",  sortable="'skillsetName'", ng-data='candidate.skillsetName', class-name='table-accordian')                                    
+                                                    span {{candidate.skillsetName}}               
+                                                  td(ng-if="true" class='col-sm-2' data-title="'Location'") {{candidate.country}}, {{candidate.state}}, {{candidate.city}}
+                                                  td(ng-if="true" class='col-sm-2' title="'Contact Number'", sortable="'contactNumber'", ng-data='candidate.contactNumber', class-name='table-accordian') {{candidate.contactNumber}}
+                                                  td(ng-if="true" class='col-sm-2' title="'Experience'", sortable="'totalYrOfExp'", ng-data='candidate.totalYrOfExp', class-name='table-accordian')
+                                                    span(ng-if="candidate.totalYrOfExp && candidate.totalYrOfExp !== null && candidate.totalYrOfExp !== ''") {{candidate.totalYrOfExp}} Year 
+                                                    span(ng-if="candidate.totalMonthsOfExp && candidate.totalMonthsOfExp !== null && candidate.totalMonthsOfExp !== ''") {{candidate.totalMonthsOfExp}} Month
+                                          .col-md-12.col-sm-12.col-xs-12(data-ng-show='viewPositionCtrl.linkedCandidateCount == 0')
+                                            .col-md-12.col-sm-12.col-xs-12.no-data-text
+                                              .alert.alert-info
+                                                | No Data Found
+                                      #interviewer01.tab-pane.fade(data-ng-if="viewPositionCtrl.selectedInterviewTypeId !== 3")
+                                        .interviewer-tab-content
+                                          .row(data-ng-show='viewPositionCtrl.totalLinkedInterviewers > 0')
+                                            .col-md-12.col-sm-12.col-xs-12
+                                                .col-sm-4.col-md-4.col-xs-6.showMe
+                                                  select(class="selectpicker" ng-model="viewPositionCtrl.test" ng-change="viewPositionCtrl.toggle()")
+                                                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in viewPositionCtrl.cols.slice(1,viewPositionCtrl.cols.length) track by $index") {{col.title()}}
+                                                .table-responsive.second-table
+                                                  table.table.table-first(ng-table='viewPositionCtrl.linkedInterviewertableParams', ng-table-columns-binding="viewPositionCtrl.cols")
+                                                    tr(ng-repeat='interviewer in $data')
+                                                      td(ng-if="true" class='col-sm-2' data-title="'Host'", sortable="'host'", ng-data='interviewer.host')
+                                                        span(data-ng-if="interviewer.host") Yes
+                                                        span(data-ng-if="!interviewer.host") No
+                                                      td(ng-if="true" class='col-sm-2' data-title="'Email'",  sortable="'email'", ng-data='interviewer.email') {{interviewer.email}}
+                                                      td(ng-if="true" class='col-sm-2' data-title="'Name'",  sortable="'Name'", ng-data='interviewer.name') {{interviewer.name}}
+                                                      td(ng-if="true" class='col-sm-2' data-title="'Department'", sortable="'departmentName'", ng-data='interviewer.departmentName') {{interviewer.departmentName}}
+                                                      td(ng-if="true" class='col-sm-2' data-title="'skillsets'", sortable='skillsets', ng-data='interviewer.skillsets')
+                                                        span(data-ng-repeat='skill in interviewer.skillsets')
+                                                          span {{skill.name}}
+                                                          span(ng-if="($index + 1) < interviewer.skillsets.length") ,
+                                          .col-md-12.col-sm-12.col-xs-12(data-ng-show='viewPositionCtrl.totalLinkedInterviewers == 0')
+                                            .col-md-12.col-sm-12.col-xs-12.no-data-text
+                                             .alert.alert-info
+                                                | No Data Found
+                                      #evaluators01.tab-pane.fade
+                                        .interviewer-tab-content
+                                          .row(data-ng-show='viewPositionCtrl.totalLinkedEvaluators > 0')
+                                            .col-md-12.col-sm-12.col-xs-12
+                                              .col-sm-4.col-md-4.col-xs-6.showMe
+                                                select(class="selectpicker" ng-model="viewPositionCtrl.test" ng-change="viewPositionCtrl.toggle()")
+                                                  option(ng-model="col.show" value="{{$index}}" ng-repeat="col in viewPositionCtrl.cols.slice(1,viewPositionCtrl.cols.length) track by $index") {{col.title()}}
+                                              .table-responsive.second-table
+                                                table.table.table-first(ng-table='viewPositionCtrl.linkedEvaluatortableParams', ng-table-columns-binding="viewPositionCtrl.cols")
+                                                  tr(ng-repeat='evaluator in $data')
+                                                    td(ng-if="true" class='col-sm-2' data-title="'Email'",  sortable="'email'", ng-data='evaluator.email') {{evaluator.email}}
+                                                    td(ng-if="true" class='col-sm-2' data-title="'First Name'",  sortable="'firstName'", ng-data='evaluator.firstName') {{evaluator.firstName}}
+                                                    td(ng-if="true" class='col-sm-2' data-title="'Last Name'",  sortable="'lastName'", ng-data='evaluator.lastName') {{evaluator.lastName}}
+                                                    td(ng-if="true" class='col-sm-2' data-title="'Department'",  sortable="'departmentName'", ng-data='evaluator.departmentName') {{evaluator.departmentName}}
+                                                    td(ng-if="true" class='col-sm-2' data-title="'Skillsets'", sortable="'skillsets.name'", ng-data='evaluator.skillsets')
+                                                      span(data-ng-repeat='skill in evaluator.skillsets')
+                                                        span {{skill.name}}
+                                                        span(ng-if="($index + 1) < evaluator.skillsets.length") ,
+                                          .col-md-12.col-sm-12.col-xs-12(ng-show='viewPositionCtrl.totalLinkedEvaluators == 0')
+                                            .col-md-12.col-sm-12.col-xs-12.no-data-text
+                                              .alert.alert-info
+                                                | No Data Found
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 3')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#three') Audio / Video Interview
+                                #three.panel-collapse.collapse
+                                  .panel-body
+                                    .audio-table-sec
+                                      .table-responsive
+                                        table.table(data-ng-if="viewPositionCtrl.audioVideoQuestions.length > 0")
+                                          tbody
+                                            tr(ng-repeat='q in viewPositionCtrl.audioVideoQuestions')
+                                              td.col-md-8.col-sm-8.col-xs-12
+                                                i.fa.fa-file-audio-o.fa-lg(data-ng-if="q.questionType === 'AUDIO' || q.questionType === 5")
+                                                i.fa.fa-file-video-o.fa-lg(data-ng-if="q.questionType === 'VIDEO' || q.questionType === 1")
+                                                i.fa.fa-list-ol.fa-lg(data-ng-if="q.questionType === 'MCQ' || q.questionType === 4")
+                                                i.fa.fa-list-ul.fa-lg(data-ng-if="q.questionType === 'MSQ' || q.questionType === 3")
+                                                i.fa.fa-file-code-o.fa-lg(data-ng-if="q.questionType === 'TEXT' || q.questionType === 2")
+                                                | {{q.question}}
+                                              td 
+                                                span(data-ng-if="q.responseType == 1") VIDEO
+                                                span(data-ng-if="q.responseType == 5") AUDIO
+                                                span(data-ng-if="q.responseType == 2") TEXT
+                                                span(data-ng-if="q.responseType == 3") MSQ
+                                                span(data-ng-if="q.responseType == 4") MCQ
+
+                                              td {{q.skill}}
+                                        .row
+                                          .col-xs-12.col-md-12.col-sm-12(data-ng-if="viewPositionCtrl.audioVideoQuestions.length < 1")
+                                            .alert.alert-info
+                                              center No Data Found
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 3')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#four') Written / Objective Interview
+                                #four.panel-collapse.collapse
+                                  .panel-body
+                                    .audio-table-sec
+                                      .table-responsive
+                                        table.table
+                                          tbody
+                                            tr(ng-repeat='q in viewPositionCtrl.writtenQuestions')
+                                              td.col-md-8.col-sm-8.col-xs-12
+                                                i.fa.fa-file-audio-o.fa-lg(data-ng-if="q.questionType === 'AUDIO' || q.questionType === 5")
+                                                i.fa.fa-file-video-o.fa-lg(data-ng-if="q.questionType === 'VIDEO' || q.questionType === 1")
+                                                i.fa.fa-list-ol.fa-lg(data-ng-if="q.questionType === 'MCQ' || q.questionType === 4")
+                                                i.fa.fa-list-ul.fa-lg(data-ng-if="q.questionType === 'MSQ' || q.questionType === 3")
+                                                i.fa.fa-file-code-o.fa-lg(data-ng-if="q.questionType === 'TEXT' || q.questionType === 2")
+                                                .question-box {{q.question}}
+                                              td 
+                                                span(data-ng-if="q.responseType == 1") VIDEO
+                                                span(data-ng-if="q.responseType == 5") AUDIO
+                                                span(data-ng-if="q.responseType == 2") TEXT
+                                                span(data-ng-if="q.responseType == 3") MSQ
+                                                span(data-ng-if="q.responseType == 4") MCQ
+                                              td
+                                                span {{q.skill}}
+                                            tr(data-ng-if="viewPositionCtrl.writtenQuestions.length < 1")
+                                              td 
+                                                span No Questions Found
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 1')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#six') Questions List
+                            #six.panel-collapse.collapse
+                              .panel-body
+                                .audio-table-sec
+                                  .table-responsive
+                                    table.table
+                                      tbody
+                                        tr(ng-repeat='q in viewPositionCtrl.defaultQuestions')
+                                          td {{q.question}} 
+                                        tr(data-ng-if="viewPositionCtrl.defaultQuestions.length < 1")
+                                          td No Questions Found
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.selectedInterviewTypeId == 1')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#five') Schedule
+                            #five.panel-collapse.collapse
+                              .panel-body
+                                .col-md-3.col-sm-3.col-xs-12
+                                  form
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.fromDate !== ""')
+                                      label(for='pwd')
+                                        strong Start Date:
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.fromDate}}
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.toDate !== ""')
+                                      label(for='pwd')
+                                        strong End Date:
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.toDate}}
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.fromTime !== ""')
+                                      label(for='pwd')
+                                        strong Start Time(Local Time):
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.fromTime}}
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.toTime !== ""')
+                                      label(for='pwd')
+                                        strong End Time(Local Time):
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.toTime}}
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.interviewDuration !== ""')
+                                      label(for='pwd')
+                                        strong Interview Duration:
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.interviewDuration}}mins
+                                    .form-group(data-ng-if='viewPositionCtrl.scheduleInterviewData.intervalTime !== ""')
+                                      label(for='pwd')
+                                        strong Interval:
+                                        | &nbsp{{viewPositionCtrl.scheduleInterviewData.intervalTime}}mins
+                                .col-md-9.col-sm-9.col-xs-12.calender
+                                  .calender-sec
+                                    h2.text-center {{viewPositionCtrl.calendarTitle}}
+                                    .row
+                                      .col-md-6.col-sm-6.col-xs-6.text-center
+                                        .btn-group
+                                          button.btn.btn-primary(mwl-date-modifier='', date='viewPositionCtrl.viewDate', decrement='viewPositionCtrl.calendarView') Previous
+                                          button.btn.btn-default(mwl-date-modifier='', date='viewPositionCtrl.viewDate', set-to-today='') Today
+                                          button.btn.btn-primary(mwl-date-modifier='', date='viewPositionCtrl.viewDate', increment='viewPositionCtrl.calendarView') Next
+                                      br.visible-xs.visible-sm
+                                      .col-md-6.col-sm-6.col-xs-6.text-center
+                                        .btn-group
+                                          label.btn.btn-primary(ng-model='viewPositionCtrl.calendarView', uib-btn-radio="'year'") Year
+                                          label.btn.btn-primary(ng-model='viewPositionCtrl.calendarView', uib-btn-radio="'month'") Month
+                                          label.btn.btn-primary(ng-model='viewPositionCtrl.calendarView', uib-btn-radio="'week'") Week
+                                          label.btn.btn-primary(ng-model='viewPositionCtrl.calendarView', uib-btn-radio="'day'") Day
+                                    br
+                                    mwl-calendar(events='viewPositionCtrl.events', view='viewPositionCtrl.calendarView', view-title='viewPositionCtrl.calendarTitle', view-date='viewPositionCtrl.viewDate', on-event-click='viewPositionCtrl.eventClicked(calendarEvent)', on-event-times-changed='viewPositionCtrl.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd', cell-is-open='viewPositionCtrl.isCellOpen', day-view-start='06:00', day-view-end='22:59', day-view-split='30', cell-modifier='viewPositionCtrl.modifyCell(calendarCell)')
+                          .panel.panel-default(data-ng-if='viewPositionCtrl.liveNowClicked')
+                            .panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#liveNow') Live Now
+                            #liveNow.panel-collapse.collapse
+                              .panel-body
+                                .interviewer-tab-content
+                                  .row
+                                    .col-md-12.col-sm-12.col-xs-12
+                                      .col-sm-4.col-md-4.col-xs-6.showMe
+                                        select(class="selectpicker" ng-model="viewPositionCtrl.test" ng-change="viewPositionCtrl.toggle()")
+                                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in viewPositionCtrl.cols.slice(1,viewPositionCtrl.cols.length) track by $index") {{col.title()}}
+                                      .main-table-area
+                                        .table-responsive.third-table
+                                          table.table(ng-table='viewPositionCtrl.liveNowCandidatetableParams', ng-table-columns-binding="viewPositionCtrl.cols")
+                                            tr(ng-repeat='candidate in $data', ng-class="{'newStatus':candidate.candidateStatus==='NEW','inProgress':candidate.candidateStatus==='INPROGRESS','completed':candidate.candidateStatus==='COMPLETED','inReviewStatsus':candidate.candidateStatus==='INREVIEW','hiredStatus':candidate.candidateStatus==='HIRED','onhold':candidate.candidateStatus==='ON HOLD','rejected':candidate.candidateStatus==='REJECTED','grey':candidate.candidateStatus==='ARCHIVED'}")
+                                                td(ng-if="true" class='col-sm-2' title="'Interview'",sortable="'interviewName'", ng-data='candidate.interviewName', class-name='table-accordian') {{candidate.interviewName}} 
+                                                td.cust-name(ng-if="true" class='col-sm-2' title="'Name'", sortable="'fullName'", ng-data='candidate.fullName', class-name='table-accordian')
+                                                  | {{candidate.fullName}}
+                                                  .hover-sec
+                                                    img(ng-src='{{candidate.imageUrl}}', alt='')
+                                                td(ng-if="true" class='col-sm-2' title="'Primary Skills'",  sortable="'primarySkill'", ng-data='candidate.primarySkill', class-name='table-accordian')
+                                                  span(ng-if='candidate.primarySkill !== null') {{candidate.primarySkill}}
+                                                  span(ng-if='candidate.primarySkill == null') N/A
+                                                td(ng-if="true" class='col-sm-2' title="'Candidate Status'",  sortable="'candidateStatusName'", ng-data='candidate.candidateStatusName', class-name='table-accordian') {{candidate.candidateStatusName}}                                  
+                                                td(ng-if="true" class='col-sm-2' title="'Interview Status'",  sortable="'interviewStatusName'", ng-data='candidate.interviewStatusName', class-name='table-accordian') {{candidate.interviewStatusName}}                                                                  
+                                                td(ng-if="true" class='col-sm-2' title="'OverAll Rating'", data='candidate.overallRating', class-name='table-accordian')
+                                                  span.all-star(uib-rating='', ng-model='candidate.overallRating', max='5', read-only='true', aria-labelledby='default-rating')
+                                                td(ng-if="true" class='col-sm-2' title="'Test Score'",  sortable="'score'", ng-data='candidate.score', class-name='table-accordian') {{candidate.score}}
+                                                td(ng-if="true" class='col-sm-2' title="'Yes'",  sortable="'yes'", ng-data='candidate.yes', class-name='table-accordian') {{candidate.yes}}
+                                                td(ng-if="true" class='col-sm-2' title="'No'",  sortable="'no'", ng-data='candidate.no', class-name='table-accordian') {{candidate.no}}
+                                                td(ng-if="true" class='col-sm-2' title="'May be'",  sortable="'maybe'", ng-data='candidate.maybe', class-name='table-accordian') {{candidate.maybe}}
+                                                td(ng-if="true" class='col-sm-2' title="'Link'",  ng-data='candidate.interviewLink', class-name='table-accordian')
+                                                    a(href="{{candidate.interviewLink}}") Link
+            md-tab(label=' Applied ')
+              md-content.md-padding
+                .main-body-wrapper.applied-job-container(style="margin-top:15px;")
+                  .col-md-12.col-sm-12.col-xs-12(data-ng-show="viewPositionCtrl.PositionCount.appliedCandidateCount === 0 ")
+                    .alert.alert-info(style="margin-top: 20px;")
+                      span No candidate applied for this position   
+                  .col-md-4.col-sm-4.col-xs-12.candidate-list(data-ng-show="viewPositionCtrl.PositionCount.appliedCandidateCount !== 0 ")                   
+                    table.table.table-first(ng-table='viewPositionCtrl.getAllAppliedCandidatesTableParams')
+                      tr(ng-repeat='candidate in $data', ng-click='viewPositionCtrl.candidateAppliedDetailsById(candidate.candidateId, candidate.appliedJobStatus, candidate.appliedJobId)')
+                        td.col-md-12.col-sm-12.col-xs-12( data='candidate')
+                          .col-md-2.col-sm-2.col-xs-3.candidate-img
+                            img.img-circle(ng-src="{{candidate.candidateProfilePicUrl?candidate.candidateProfilePicUrl:'./img/user.png'}}", alt='')
+                          .col-md-9.col-sm-9.col-xs-7
+                            .title {{candidate.candidateName}}
+                               .applied-icon.pull-right(data-ng-hide='candidate.appliedJobStatus === "Active" || candidate.appliedJobStatus === "INITIATED"')
+                                  i.fa.fa-check-circle.shortlist-icon(data-ng-hide='candidate.appliedJobStatus === "rejected"')
+                                  i.fa.fa-times-circle.reject-icon(data-ng-hide='candidate.appliedJobStatus === "approved"')
+                            .designation
+                              i.fa.fa-briefcase(aria-idden='true')
+                              | {{candidate.designation}}
+                            .location
+                              i.fa.fa-map-marker(aria-hidden='true')
+                              | {{candidate.country}}, {{candidate.state}} , {{candidate.city}}
+                            .location
+                              .col-sm-12.all-star
+                                span(aria-hidden='true', uib-rating='', ng-model='candidate.candidateResumeRating', max='5', read-only='true', aria-labelledby='default-rating')
+                                span.resume-rating (Resume ratings)
+                      tr(data-ng-if='viewPositionCtrl.appliedCandidatesList.length > 0 && viewPositionCtrl.appliedCandidatesCount > 10')
+                        td.show-text(ng-if="true" class='col-sm-2' data-ng-click='viewPositionCtrl.showMoreData()') Show More
+                  .col-md-8.col-sm-8.col-xs-12.candidate-detail-section(data-ng-if="viewPositionCtrl.PositionCount.appliedCandidateCount > 0 ")
+                    ul.list-group                      
+                      li.list-group-item.candidate-img-section
+                        .col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4.col-xs-5.col-xs-offset-4
+                          img.img-circle(ng-src="{{viewPositionCtrl.candidateData.profilePicUrl}}", alt='')
+                        .col-md-12.col-sm-12.col-sm-12.applied-candidate-title
+                          h3 {{viewPositionCtrl.candidateData.candidateInfo.firstName}} {{viewPositionCtrl.candidateData.candidateInfo.lastName}}
+                          p
+                            i.fa.fa-briefcase(aria-hidden='true')
+                            | {{viewPositionCtrl.candidateData.candidateInfo.designationName}}
+                      li.list-group-item.candidate-profile-header(data-toggle='collapse', href='#candidate-info')
+                        | Candidate Profile
+                        span.pull-right
+                          i.fa.fa-chevron-circle-down(aria-hidden='true')      
+                      #candidate-info.panel-collapse.collapse
+                        .col-md-12.col-sm-12.col-xs-12.candidate-profile-section
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-user(aria-hidden='true')
+                              |  About Me
+                            p(ng-if='!viewPositionCtrl.candidateData.candidateInfo.aboutMe == ""') {{viewPositionCtrl.candidateData.candidateInfo.aboutMe}}
+                            p.text-center(ng-if='viewPositionCtrl.candidateData.candidateInfo.aboutMe == ""') Not Disclosed
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-briefcase(aria-hidden='true')
+                              |  Work Experience
+                            div.experience-section
+                              table.table
+                                tr
+                                  th Company Name
+                                  th Start Date
+                                  th End Date
+                                  th Job title
+                                tr(ng-repeat='experienceData in viewPositionCtrl.candidateData.candidateExperiences')
+                                  td {{experienceData.companyName}}
+                                  td {{experienceData.startDate}}
+                                  td {{experienceData.endDate}}
+                                  td {{experienceData.jobTitle}}
+                              .row(ng-show='viewPositionCtrl.candidateData.candidateExperiences.length < 1')
+                                p.text-center Not Disclosed !!!
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-briefcase(aria-hidden='true')
+                              |  Portfolio
+                            md-card(ng-repeat="portfolioData in viewPositionCtrl.candidateData.candidatePortfolios")
+                              md-card-title
+                                md-card-title-text
+                                  label {{portfolioData.title}}
+                                  p {{portfolioData.description}}
+                                  a(title="_blank") {{portfolioData.url}}
+                            md-card(ng-show="viewPositionCtrl.candidateData.candidatePortfolios.length < 1")
+                              md-card-title
+                                md-card-title-text
+                                  p.text-center Not Disclosed !!!
+                                                        
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-university(aria-hidden='true')
+                              |  Education
+                            div.education-section
+                              table.table
+                                tr
+                                  th Qualification
+                                  th Specialization
+                                  th University
+                                  th Location
+                                tr(ng-repeat='educationData in viewPositionCtrl.candidateData.candidateEducation')
+                                  td {{educationData.qualification}}
+                                  td {{educationData.specialization}}
+                                  td {{educationData.university}}
+                                  td {{educationData.country}} | {{educationData.state}} |{{educationData.city}}
+                              .row(ng-show="viewPositionCtrl.candidateData.candidateEducation.length < 1")
+                                p.text-center Not Disclosed !!!
+                          .row.candidate-contact-area
+                            h4
+                              i.fa.fa-envelope(aria-hidden='true')
+                              |  Contact
+                            table.table
+                              tr
+                                th Email
+                                th Address
+                                th Phone
+                              tr
+                                td
+                                  span(ng-if='viewPositionCtrl.candidateData.contactInfo.email == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.candidateData.contactInfo.email == ""') {{viewPositionCtrl.candidateData.contactInfo.email}}
+                                td
+                                  span(ng-if='viewPositionCtrl.candidateData.contactInfo.address == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.candidateData.contactInfo.address == ""') {{viewPositionCtrl.candidateData.contactInfo.address}}
+                                td
+                                  span(ng-if='viewPositionCtrl.candidateData.contactInfo.phone == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.candidateData.contactInfo.phone == ""') {{viewPositionCtrl.candidateData.contactInfo.phone}}
+                       //div(data-ng-hide='viewPositionCtrl.candidateData.appliedStatus  === "approved"') 
+                    .col-md-12(data-ng-hide='viewPositionCtrl.candStatus === "approved"')  
+                      .row.candidate-comment-header
+                         label
+                           | Comment
+                      .row.comment-section
+                        .chat-section
+                          ul.chat-area(data-ng-hide='viewPositionCtrl.commentData.comment ==="" || viewPositionCtrl.commentData.comment === null ')
+                            li.right.clearfix              
+                              span.chat-img.pull-right
+                                img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME', alt='User Avatar')
+                                strong.pull-left.primary-font {{viewPositionCtrl.commentData.commentedBy}}   
+                              .chat-body.clearfix
+                                .header
+                                  .row
+                                    .col-md-10.col-sm-10.col-xs-10
+                                      p
+                                        small.text-muted
+                                          i.fa.fa-clock-o
+                                          | {{viewPositionCtrl.commentData.commentDate}}
+                                        {{viewPositionCtrl.commentData.comment}} 
+                               
+                          ul.chat-area(data-ng-show='viewPositionCtrl.commentData.comment ==="" || viewPositionCtrl.commentData.comment === null ', style='color:red')
+                            li.right.clearfix
+                              .chat-body.clearfix
+                                .alert.alert-info                 
+                                  p no comment added yet!!!!!!!!!!!        
+                                
+            md-tab(label=' Hired ')
+              md-content.md-padding
+                .main-body-wrapper.applied-job-container(style="margin-top:15px;")
+                  .col-md-12.col-sm-12.col-xs-12(data-ng-if="viewPositionCtrl.PositionCount.hiredCandidateCount == 0 ")
+                    div.alert.alert-info(style="margin-top: 20px;")
+                      span No candidate hired for this position!    
+                  .col-md-4.col-sm-4.col-xs-12.candidate-list(data-ng-if="viewPositionCtrl.PositionCount.hiredCandidateCount > 0 ")
+                    
+                    table.table.table-first(ng-table='viewPositionCtrl.hiredCandidatetableParams')
+                      tr(ng-repeat='Hirecandidate in $data' , ng-click='viewPositionCtrl.candidateHiredDetailsById(Hirecandidate.id)')
+                        td.col-md-12.col-sm-12.col-xs-12( data='Hirecandidate')
+                          .col-md-2.col-sm-2.col-xs-3.candidate-img
+                            img.img-circle(ng-src="{{Hirecandidate.candidateProfilePicUrl?Hirecandidate.candidateProfilePicUrl:'./img/user.png'}}", alt='')
+                          .col-md-9.col-sm-9.col-xs-7
+                            .title {{Hirecandidate.firstName}} {{Hirecandidate.lastName}}               
+                            .designation
+                              i.fa.fa-briefcase(aria-idden='true')
+                              | {{Hirecandidate.jobName}}
+                            .location
+                              i.fa.fa-map-marker(aria-hidden='true')
+                              | {{Hirecandidate.country}}, {{Hirecandidate.state}} , {{Hirecandidate.city}}
+                      tr(data-ng-if='viewPositionCtrl.hiredCandidatesList.length > 0 && viewPositionCtrl.hiredCandidatesCount > 10')
+                        td.show-text(ng-if="true" class='col-sm-2' data-ng-click='viewPositionCtrl.showMoreData()') Show More            
+                       
+                  .col-md-8.col-sm-8.col-xs-12(data-ng-if="viewPositionCtrl.PositionCount.hiredCandidateCount > 0 ")
+                    ul.list-group
+                      li.list-group-item.candidate-info-header       
+                      li.list-group-item.candidate-img-section
+                        .col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4.col-xs-5.col-xs-offset-4
+                          img.img-circle(ng-src="{{viewPositionCtrl.hiredCandidateData.profilePicUrl}}", alt='')
+                        .col-md-12.col-sm-12.col-sm-12.applied-candidate-title
+                          h3 {{viewPositionCtrl.hiredCandidateData.candidateInfo.firstName}} {{viewPositionCtrl.hiredCandidateData.candidateInfo.lastName}}
+                          p
+                            i.fa.fa-briefcase(aria-hidden='true')
+                            | {{viewPositionCtrl.hiredCandidateData.candidateInfo.designationName}}
+                      li.list-group-item.candidate-profile-header(data-toggle='collapse', href='#hired-candidate-info')
+                        | Candidate Profile
+                        span.pull-right
+                          i.fa.fa-chevron-circle-down(aria-hidden='true')      
+                      #hired-candidate-info.panel-collapse.collapse
+                        .col-md-12.col-sm-12.col-xs-12.candidate-profile-section
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-user(aria-hidden='true')
+                              |  About Me            
+                            p(ng-if='!viewPositionCtrl.hiredCandidateData.candidateInfo.aboutMe == ""') {{viewPositionCtrl.hiredCandidateData.candidateInfo.aboutMe}}
+                            p.text-center(ng-if='viewPositionCtrl.candidateData.candidateInfo.aboutMe == ""') Not Disclosed
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-briefcase(aria-hidden='true')
+                              |  Work Experience
+                            div.experience-section
+                              table.table
+                                tr
+                                  th Company Name
+                                  th Start Date
+                                  th End Date
+                                  th Job title
+                                tr(ng-repeat='experienceData in viewPositionCtrl.hiredCandidateData.candidateExperiences')
+                                  td {{experienceData.companyName}}
+                                  td {{experienceData.startDate}}
+                                  td {{experienceData.endDate}}
+                                  td {{experienceData.jobTitle}}
+                              .row(ng-show='viewPositionCtrl.hiredCandidateData.candidateExperiences.length < 1')
+                                p.text-center Not Disclosed !!!  
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-briefcase(aria-hidden='true')
+                              |  Portfolio
+                            md-card(ng-repeat="portfolioData in viewPositionCtrl.hiredCandidateData.candidatePortfolios")
+                              md-card-title
+                                md-card-title-text
+                                  span.md-headline {{portfolioData.title}}
+                                  p {{portfolioData.description}}
+                                  a(title="_blank") {{portfolioData.url}}
+                            md-card(ng-show="viewPositionCtrl.hiredCandidateData.candidatePortfolios.length < 1")
+                              md-card-title
+                                md-card-title-text
+                                  p.text-center Not Disclosed !!!                              
+                          .row.candidate-profile-area
+                            h4
+                              i.fa.fa-university(aria-hidden='true')
+                              |  Education
+                            div.education-section
+                              table.table
+                                tr
+                                  th Qualification
+                                  th Specialization
+                                  th University
+                                  th Location
+                                tr(ng-repeat='educationData in viewPositionCtrl.hiredCandidateData.candidateEducation')
+                                  td {{educationData.qualification}}
+                                  td {{educationData.specialization}}
+                                  td {{educationData.university}}
+                                  td {{educationData.country}} | {{educationData.state}} |{{educationData.city}}
+                              .row(ng-show="viewPositionCtrl.hiredCandidateData.candidateEducation.length < 1")
+                                p.text-center Not Disclosed !!!    
+                          .row.candidate-contact-area
+                            h4
+                              i.fa.fa-envelope(aria-hidden='true')
+                              |  Contact
+                            table.table
+                              tr
+                                th Email
+                                th Address
+                                th Phone
+                              tr
+                                td
+                                  span(ng-if='viewPositionCtrl.hiredCandidateData.contactInfo.email == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.hiredCandidateData.contactInfo.email == ""') {{viewPositionCtrl.candidateData.contactInfo.email}}
+                                td
+                                  span(ng-if='viewPositionCtrl.hiredCandidateData.contactInfo.address == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.hiredCandidateData.contactInfo.address == ""') {{viewPositionCtrl.candidateData.contactInfo.address}}
+                                td
+                                  span(ng-if='viewPositionCtrl.hiredCandidateData.contactInfo.phone == ""') N/A
+                                  span(ng-if='!viewPositionCtrl.hiredCandidateData.contactInfo.phone == ""') {{viewPositionCtrl.candidateData.contactInfo.phone}}
+                            .row(ng-show="viewPositionCtrl.hiredCandidateData.contactInfo.length < 1")
+                                p.text-center Not Disclosed !!!                                        

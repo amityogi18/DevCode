@@ -1,0 +1,100 @@
+.col-md-12.col-sm-12.col-xs-12.calender-candidate
+    header.main-header(data-ng-if='!isLoggedIn')
+      .col-md-8.col-sm-8.col-xs-8
+      .col-md-4.col-sm-4.col-xs-4
+        .user-login
+          a.small-logo(data-ui-sref='app.user-login')
+            img(src='../../../public/img/small-logo.png', alt='')
+    .panel.panel-default
+        .panel-body
+            .row.candidate-info(ng-if="!candidateScheduleInterviewController.InvalidEmailError && !candidateScheduleInterviewController.isScheduleAvailable && candidateScheduleInterviewController.isScheduled")
+              .col-md-6.col-sm-6.col-xs-12.col-md-offset-3.col-sm-offset-3.candidate-title.margin-top-100
+                div(layout='row', layout-padding='', layout-wrap='', layout-fill='', style='padding-bottom: 32px;', ng-cloak='')
+                    md-whiteframe.md-whiteframe-6dp(flex-sm='45', flex-gt-sm='35', flex-gt-md='100', layout='row')
+                        .col-md-10.col-sm-10.col-xs-10.margin-30
+                            .candidate-name Hi {{candidateScheduleInterviewController.candidateName}}
+                            span You have successfully booked the slot({{candidateScheduleInterviewController.candidateSlotData.startsAt | date : 'EEEE MMMM d, yyyy h:mm a'}} - {{candidateScheduleInterviewController.candidateSlotData.endsAt | date : 'EEEE MMMM d, yyyy h:mm a'}}).
+                            span You will recieve an email shortly with further instructions.
+            .row.candidate-info(ng-if="!candidateScheduleInterviewController.InvalidEmailError && candidateScheduleInterviewController.isScheduleAvailable && !candidateScheduleInterviewController.isScheduled")
+              .col-md-12.col-sm-12.col-xs-12.candidate-title
+                div(layout='row', layout-padding='', layout-wrap='', layout-fill='', style='padding-bottom: 32px;', ng-cloak='')
+                    md-whiteframe.md-whiteframe-6dp(flex-sm='100', flex-gt-sm='100', flex-gt-md='100', layout='row')
+                        .col-md-12.col-sm-12.col-xs-12
+                            .col-md-12.col-sm-12.col-xs-12
+                                .candidate-name  Hi {{candidateScheduleInterviewController.candidateName}}
+                            .col-md-12.col-sm-12.col-xs-12
+                                strong {{candidateScheduleInterviewController.searchFilter.companyName}}
+                                |  has sent you the invite for Live Interview 
+                                strong {{candidateScheduleInterviewController.searchFilter.interviewName}}.
+                                |  The interview is for the  Position 
+                                strong {{candidateScheduleInterviewController.searchFilter.positionName}}({{candidateScheduleInterviewController.searchFilter.positionCode}})
+                                |  from 
+                                strong {{candidateScheduleInterviewController.searchFilter.fromDate | date : 'EEEE MMMM d, yyyy'}}
+                                |  To 
+                                strong {{candidateScheduleInterviewController.searchFilter.toDate | date : 'EEEE MMMM d, yyyy'}}
+                                |  for the duration of 
+                                strong {{candidateScheduleInterviewController.searchFilter.duration}}
+                            .col-md-12.col-sm-12.col-xs-12
+                                h5(ng-if="candidateScheduleInterviewController.searchFilter.positionDescription !== ''")
+                                  .position-description
+                                    h1.description Position description
+                                    p.jobdescripbtionHtml
+                            .col-md-12.col-sm-12.col-xs-12
+                                span.description Skills Required:
+                                |   {{candidateScheduleInterviewController.searchFilter.primarySkillsetName}}&nbsp;, {{candidateScheduleInterviewController.searchFilter.secondarySkillsName}}&nbsp;, {{candidateScheduleInterviewController.searchFilter.tertiarySkillsName}}
+                            .col-md-12.col-sm-12.col-xs-12
+                                .slot-booking 
+                                   | **Please select from the below slots and schedule your Live Interview for the Position.
+            .calender(ng-if="!candidateScheduleInterviewController.InvalidEmailError && candidateScheduleInterviewController.isScheduleAvailable && !candidateScheduleInterviewController.isScheduled")
+                .col-xs-12.col-sm-12.col-md-12.calender-section
+                  .calender-sec
+                    h2.text-center {{ candidateScheduleInterviewController.calendarTitle }}
+                    .row
+                      .col-md-6.text-center
+                        .btn-group
+                          button.btn.btn-primary(mwl-date-modifier='', date='candidateScheduleInterviewController.viewDate', decrement='candidateScheduleInterviewController.calendarView') Previous
+                          button.btn.btn-default(mwl-date-modifier='', date='candidateScheduleInterviewController.viewDate', set-to-today='') Today
+                          button.btn.btn-primary(mwl-date-modifier='', date='candidateScheduleInterviewController.viewDate', increment='candidateScheduleInterviewController.calendarView') Next
+                      br.visible-xs.visible-sm
+                      .col-md-6.text-center
+                        .btn-group
+                          label.btn.btn-primary(ng-model='candidateScheduleInterviewController.calendarView', uib-btn-radio="'year'") Year
+                          label.btn.btn-primary(ng-model='candidateScheduleInterviewController.calendarView', uib-btn-radio="'month'") Month
+                          label.btn.btn-primary(ng-model='candidateScheduleInterviewController.calendarView', uib-btn-radio="'week'") Week
+                          label.btn.btn-primary(ng-model='candidateScheduleInterviewController.calendarView', uib-btn-radio="'day'") Day
+                    br
+                    mwl-calendar(events='candidateScheduleInterviewController.events', view='candidateScheduleInterviewController.calendarView', view-title='candidateScheduleInterviewController.calendarTitle', view-date='candidateScheduleInterviewController.viewDate', on-event-click='candidateScheduleInterviewController.eventClicked(calendarEvent,calendarCell.events)', on-event-times-changed='candidateScheduleInterviewController.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd', cell-is-open='candidateScheduleInterviewController.isCellOpen', day-view-start='06:00', day-view-end='22:59', day-view-split='30', cell-modifier='candidateScheduleInterviewController.modifyCell(calendarCell)', on-timespan-click='candidateScheduleInterviewController.dateClicked(calendarCell.events)')
+                    br
+                  .save-cancel-btns
+                    .col-sm-2
+                        span.color-box
+                          i.fa.fa-square.square-box-1(aria-hidden='true')
+                        span.slot-box Booked
+                    .col-sm-2
+                        span.color-box
+                          i.fa.fa-square.square-box-2(aria-hidden='true')
+                        span.slot-box Your Slot
+                    .col-sm-2
+                        span.color-box
+                          i.fa.fa-square.square-box-3(aria-hidden='true')
+                        span.slot-box Free Slot
+                    a.btn-green.green-box(ng-show='!candidateScheduleInterviewController.isReschedule', ng-click='candidateScheduleInterviewController.bookInterview(candidateScheduleInterviewController.events)') Book Interview 
+                    a.btn-green.green-box(ng-show='candidateScheduleInterviewController.isReschedule', ng-click='candidateScheduleInterviewController.bookInterview(candidateScheduleInterviewController.events)') Re-Book Interview 
+                    a.btn-blue(ng-show='candidateScheduleInterviewController.isReschedule', ng-click='candidateScheduleInterviewController.cancelBooking()') Cancel Booking
+            #emailId.modal.fade(role='dialog')
+              .modal-dialog.modal-sm
+                .modal-content.email-model
+                  .modal-header
+                    h4.modal-title Enter Email Id
+                  .modal-body
+                    .row
+                      .col-sm-12
+                        .col-sm-4.control-label Email Id
+                        .col-sm-8
+                          input.form-control(type='text', ng-model='candidateScheduleInterviewController.candidateEmailId', placeholder='Email Id', name='email')
+                      .col-sm-12.alert.alert-danger(ng-if='candidateScheduleInterviewController.InvalidEmailError')
+                        | Entered email id does not match with invited email id.
+                        br
+                        | Please enter valid invited email id to book the interview slots.
+                    .modal-footer
+                      button.btn.btn-primary(type='button', data-ng-click='candidateScheduleInterviewController.showSchedulePage()') SUBMIT    

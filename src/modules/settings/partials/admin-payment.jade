@@ -1,0 +1,8 @@
+.payment-plan
+  .row
+    .video-intro-heading.payment-heading
+      span.video-intro-1(data-translate='PAYMENT') PAYMENT
+    .col-sm-12.top-box
+      .payment-box
+        payment-modal(owner-info="AdminPaymentCtrl.getOwnerInfo()", plan-checkout="AdminPaymentCtrl.paymentCallback(token)",three-d-source="AdminPaymentCtrl.threeDCallback(token, type)", data-key="pk_test_e6WXfIMfVeKkNUs7GWEsngqi", type="product")        
+ng-include terms-conditions.jade

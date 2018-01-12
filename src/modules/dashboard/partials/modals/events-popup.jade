@@ -1,0 +1,34 @@
+.modal-content
+  .modal-header.bg-primary
+      button.close(type='button',ng-click='close()') ×
+      h4.modal-title Interview Information
+  .modal-body
+    .row    
+      table.table
+        tbody
+        tr
+          td Candidate Name
+          td {{eventsPopupCtrl.eventData.candidateName}}
+        tr
+          td Interview Code
+          td {{eventsPopupCtrl.eventData.interviewCode}}  
+        tr
+          td Interview Type
+          td {{eventsPopupCtrl.eventData.interviewType}}
+        tr
+          td Position Name
+          td {{eventsPopupCtrl.eventData.positionName}} 
+        tr
+          td Position Code
+          td {{eventsPopupCtrl.eventData.positionCode}} 
+        tr
+          td From Date
+          td {{eventsPopupCtrl.eventData.localFromDateTime}}
+          tr
+          td To Date
+          td {{eventsPopupCtrl.eventData.localToDateTime}}
+        tr
+          td Interview Link
+          td
+               a(href='{{eventsPopupCtrl.eventData.interviewLink}}', target="_blank") {{eventsPopupCtrl.eventData.interviewLink}}	  
+

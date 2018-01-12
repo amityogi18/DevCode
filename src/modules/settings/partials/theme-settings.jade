@@ -1,0 +1,15 @@
+.content-wrapper.theme-setting
+   .video-intro-heading
+        span.video-intro-1 Themes
+   .panel-body
+      .row.theme-margin
+        form
+          .form-group
+            label.control-label.col-sm-4.col-md-2( data-translate='SELECT-THEME')
+            .col-sm-5.col-md-4
+              //select#exampleSelect1.form-control(ng-model='ThemeSettingsCtrl.id', ng-change='ThemeSettingsCtrl.addTheme()', ng-options='k as v.name for (k,v) in ThemeSettingsCtrl.themes')
+              ui-select.theme-area(data-ng-model='ThemeSettingsCtrl.theme', data-ng-change='ThemeSettingsCtrl.addTheme()', name='theme' required)
+                ui-select-match(placeholder='Select Theme')
+                  span(ng-bind='$select.selected.name')
+                ui-select-choices(repeat='theme in ThemeSettingsCtrl.themes | filter: $select.search')
+                  span(ng-bind='theme.name')

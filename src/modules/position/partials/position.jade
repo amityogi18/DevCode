@@ -1,0 +1,378 @@
+.position-container(ng-cloak)
+  .content-wrapper
+    .col-md-12.col-sm-12.col-xs-12.position-box
+        .col-md-7.col-sm-4.col-xs-12.panel-title Positions
+        .col-md-5.col-sm-8.col-xs-12.btn-area-box(ng-class="{'margin-to-searchbox':user.userRoles == 3}")
+          .col-md-8.col-sm-7.col-xs-12
+            md-input-container.md-block.position-search-continer(flex="100")
+              label.position-search-lebel Search...
+              input(type='text', ng-model='positionCtrl.searchFilter.search')
+            md-icon.position-search(md-font-set='fa') &#xf002
+          .col-md-4.col-sm-5.hidden-xs
+            md-button.md-raised.md-primary.btn.btn-createposition(aria-label='addImage', data-ui-sref='app.create-position({positionId : "new"})', data-ng-if='user.userRoles !== 3') Create Position          
+        .col-md-12.col-sm-12.col-xs-12.color-bar-sec
+          .col-md-6.col-sm-6.col-xs-12.color-box
+            .multiple-btn(data-ng-if='user.userRoles !== 3')
+              ul(data-ng-if='positionCtrl.positionList.length >0')
+                //li
+                  a(type='button', data-ng-click='positionCtrl.showDeleteModal()',uib-tooltip='If there is no interview linked to the position, then only this position is deleted')
+                    i.fa.fa-trash.danger(aria-hidden='true')
+                    | Delete
+                //li
+                  a(type='button', data-ng-click='positionCtrl.showCloseModal()',uib-tooltip='Close Position')
+                    i.fa.fa-times-circle.danger(aria-hidden='true')
+                    | Close
+                //li
+                  a(type='button', data-ng-click='positionCtrl.showArchieveModal()', uib-tooltip='Archive Position')
+                    i.fa.fa-archive(aria-hidden='true')
+                    | Archive
+                li.visible-xs
+                  a(type='button', data-ui-sref='app.create-position({positionId : "new"})', data-ng-if='user.userRoles !== 3')
+                    i.fa.fa-plus-square(aria-hidden='true')
+                    | Create
+          #deleteModal.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  | Warning
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title
+                .modal-body
+                  p.discard-msg Are You Sure, You Want To Delete The Position?
+                .modal-footer
+                  div
+                    md-button.md-raised.md-primary(type='button', data-dismiss='modal', data-ng-click='positionCtrl.closeArchieve(4)', data-translate='OK')
+                    md-button.md-raised.canceldata-btn.bottom-box(type='button', data-dismiss='modal', data-translate='CANCEL')
+          #closeModal.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  | Warning
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title
+                .modal-body
+                  p.discard-msg Are You Sure, You Want To Close The Position?
+                .modal-footer
+                  div
+                    md-button.md-raised.md-primary(type='button', data-dismiss='modal', data-ng-click='positionCtrl.closeArchieve(3)', data-translate='OK')
+                    md-button.md-raised.canceldata-btn.bottom-box(type='button', data-dismiss='modal', data-translate='CANCEL')                  
+          #archiveModal.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  | Warning
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title
+                .modal-body
+                  p.discard-msg Are You Sure, You Want To Archive The Position?
+                .modal-footer
+                 div
+                    md-button.md-raised.md-primary(type='button', data-dismiss='modal', data-ng-click='positionCtrl.closeArchieve(5)', data-translate='OK')
+                    md-button.md-raised.canceldata-btn.bottom-box(type='button', data-dismiss='modal', data-translate='CANCEL')          
+          #closedModal.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  | Warning
+                  button.close(type='button', data-dismiss='modal') ×
+                  h4.modal-title
+                .modal-body
+                  p.discard-msg Position status cannot be changed once it is made 
+                    strong &nbsp;{{positionCtrl.positionStatusMsg}}&nbsp;
+                  |Are you sure you still want to go ahead?
+                .modal-footer
+                  div
+                    md-button.md-raised.md-primary(type='button', data-dismiss='modal', data-ng-click='positionCtrl.changePositionStatusMessage()', data-translate='OK')
+                    md-button.md-raised.canceldata-btn.bottom-box(type='button', data-dismiss='modal', data-translate='CANCEL', ng-click="positionCtrl.closePositionModel()")                         
+          //.col-md-6.col-sm-6.col-xs-12.position-box
+            .multiple-color-box
+              ul
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.ACTIVE}}
+                  .tool-tip
+                    p
+                      i
+                      | Active
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.ONHOLD}}
+                  .tool-tip
+                    p
+                      i
+                      | On-Hold
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.FILLED}}
+                  .tool-tip
+                    p
+                      i
+                      | Filled
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.INACTIVE}}
+                  .tool-tip
+                    p
+                      i
+                      | Inactive
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.ARCHIVED}}
+                  .tool-tip
+                    p
+                      i
+                      | Archived
+                li
+                  span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                  | {{positionCtrl.positionStatusCount.CLOSED}}
+                  .tool-tip
+                    p
+                      i
+                      | Closed
+
+      .col-md-12.col-xs-12.col-sm-12.col-lg-12.status-card-container
+        md-card          
+          .status-container
+            .col-md-2.col-xs-4
+              .active-status-section
+                  h3                  
+                    md-icon(md-font-set='fa') &#xf26c
+                    strong.green-text
+                      span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                      | &nbsp;{{positionCtrl.positionStatusCount.ACTIVE}}
+                  label Active
+            .col-md-2.col-xs-4              
+                .onhold-status-section
+                  h3                    
+                    md-icon(md-font-set='fa') &#xf256 
+                    strong.yellow-text
+                      span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                    | &nbsp;{{positionCtrl.positionStatusCount.ONHOLD}}
+                  label On Hold
+            .col-md-2.col-xs-4              
+                .filled-status-section
+                  h3                   
+                    md-icon(md-font-set='fa') &#xf240 
+                    strong.blue-text
+                      span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                    | &nbsp; {{positionCtrl.positionStatusCount.FILLED}}
+                  label Filled
+            .col-md-2.col-xs-4              
+                .inactive-status-section
+                  h3                    
+                    md-icon(md-font-set='fa') &#xf165 
+                    strong.pink-text
+                      span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                    | &nbsp;{{positionCtrl.positionStatusCount.INACTIVE}}
+                  label Inative
+            .col-md-2.col-xs-4              
+                .archived-status-section
+                  h3                    
+                    md-icon(md-font-set='fa') &#xf187 
+                    strong.red-text
+                       span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                     | &nbsp;{{positionCtrl.positionStatusCount.ARCHIVED}}
+                  label Archived
+            .col-md-2.col-xs-4              
+                .closed-status-section
+                  h3                    
+                    md-icon(md-font-set='fa') &#xf057
+                    strong.red-text
+                        span(data-ng-if='!positionCtrl.positionStatusCount.ACTIVE')
+                      | &nbsp;{{positionCtrl.positionStatusCount.CLOSED}}
+                  label Closed
+      .col-md-12.col-sm-12.col-xs-12
+        .col-md-12.col-sm-12.col-xs-12
+          p.text-label(ng-hide='positionCtrl.positionList.length < 1') Showing 
+            span
+              strong 1-{{positionCtrl.positionList.length}}
+              |  of  
+              strong
+                {{positionCtrl.positionTotalCount}}   
+              |  records
+      .col-md-12.col-sm-12.col-xs-12.position-table-container
+        table.md-card-table(ng-table='positionCtrl.tableParams', ng-table-columns-binding="positionCtrl.cols", ng-cloak='')
+          tr(ng-repeat-start='position in $data', id="{{'position-row'+$index}}")
+            td(data='position')
+              md-card.position-card(ng-class="{'blue':position.status==='ACTIVE','yellow':position.status==='ON HOLD','red':position.status==='CLOSED','grey':position.status==='ARCHIVED','green':position.status==='FILLED','cancel':position.status==='COMPLETED','inactive':position.status==='INACTIVE','expired':position.status==='EXPIRED'}")
+                .col-md-12.col-sm-12.col-xs-12
+                  .col-md-3.col-sm-3.col-xs-10.position-header
+                    a(data-ui-sref='app.view-position({ positionId: position.id })')
+                      label 
+                        strong {{position.positionName}}
+                        span   ({{position.positionCode}})
+                    p
+                      small {{position.departmentName}}
+                  .col-md-1.col-xs-1.col-sm-1
+                    .dropdown.position-action-dropdown
+                      i.fa.fa-cog.dropdown-toggle(data-toggle='dropdown', aria-hidden='true')
+                      ul.dropdown-menu
+                        li(data-ng-hide='position.status === "CLOSED"')
+                          a(data-ui-sref='app.update-position({ positionId: position.id })',data-ng-if='user.userRoles !== 3')
+                                i.fa.fa-pencil-square-o  Edit
+                        li
+                          a(data-ui-sref='app.view-position({ positionId: position.id })')
+                                i.fa.fa-eye  View      
+                        li
+                          a.eye-box(data-ng-click='positionCtrl.compareCandidates(position.id)',data-ng-if='user.userRoles !== 3')
+                                i.fa.fa-users  All Candidates
+                        li
+                          a.delete-section(type='button', data-ng-click='positionCtrl.showDeleteModal(position)',uib-tooltip='If there is no interview linked to the position, then only this position is deleted')
+                              i.fa.fa-trash.danger(aria-hidden='true')   Delete          
+                  .col-md-6.col-sm-12.col-xs-12.status-widget              
+                    .col-md-2.col-sm-2.col-xs-2.first-section
+                      .response-section
+                        strong.new-count {{position.responses.new}}
+                      p New  
+                    .col-md-2.col-sm-2.col-xs-2.second-section
+                      .response-section
+                        strong.applied-count {{position.responses.applied}}
+                      p Applied  
+                    .col-md-2.col-sm-2.col-xs-2.third-section
+                      .response-section
+                        strong.completed-count {{position.responses.completed}}
+                      p Completed   
+                    .col-md-2.col-sm-2.col-xs-2.fourth-section
+                      .response-section
+                        strong.shortlisted-count {{position.responses.shortlisted}}
+                      p Shortlisted
+                    .col-md-2.col-sm-2.col-xs-2.fifth-section
+                      .response-section
+                        strong.hired-count {{position.responses.hired}}
+                      p Hired                    
+                  .col-md-2.col-sm-2.col-xs-12.position-action
+                    .status-box
+                      ui-select.status-area(ng-disabled='user.userRoles == 3 || position.status==="FILLED" || position.status==="CLOSED"', data-ng-model='position.status', data-ng-change='positionCtrl.changePositionStatus(position.id, position.status)')
+                        ui-select-match(placeholder='Select status')
+                          span(ng-bind='$select.selected.statusName')
+                        ui-select-choices(repeat='pstatus.statusName as pstatus in positionCtrl.positionStatusList | filter: $select.search')
+                          span(ng-bind='pstatus.statusName')
+                  //.col-md-1.col-xs-4.col-sm-1
+                    .row
+                      .col-md-6.col-xs-6.col-sm-6                        
+                        .dropdown.position-action-dropdown
+                            i.fa.fa-cog.dropdown-toggle(data-toggle='dropdown', aria-hidden='true')
+                            ul.dropdown-menu
+                              li(data-ng-hide='position.status === "CLOSED"')
+                                a(data-ui-sref='app.update-position({ positionId: position.id })',data-ng-if='user.userRoles !== 3')
+                                      i.fa.fa-pencil-square-o  Edit
+                              li
+                                a(data-ui-sref='app.view-position({ positionId: position.id })')
+                                      i.fa.fa-eye  View      
+                              li
+                                a.eye-box(data-ng-click='positionCtrl.compareCandidates(position.id)',data-ng-if='user.userRoles !== 3')
+                                      i.fa.fa-users  All Candidates
+                      .col-md-6.col-xs-6.col-sm-6
+                        .delete-section
+                          a(type='button', data-ng-click='positionCtrl.showDeleteModal(position)',uib-tooltip='If there is no interview linked to the position, then only this position is deleted')
+                            i.fa.fa-trash.danger(aria-hidden='true') 
+                       
+                .col-md-12.col-xs-12
+                  p
+                    small  
+                      span(ng-bind="position.description | removeHtmlTagsFilter | limitTo:350")
+                      span(ng-if='position.description.length>350') ... 
+                  p
+                    small  Recruiter :  
+                      strong &nbsp;{{position.recruiterName}}
+                  p
+                    small Portals :&nbsp;
+                      span(ng-repeat ="portals in position.Portals")
+                        strong {{ portals.portalName }} ,&nbsp;
+                      span(ng-if ="position.Portals.length < 1")
+                        strong N/A    
+                .col-md-12.col-xs-12.publish-section
+                  .pull-left(data-ng-if="!$root.mobile")
+                      i.fa.fa-chevron-circle-down.fa-lg.clickable(aria-hidden='true', data-rowid="{{'position-row'+$index}}", data-toggle='collapse', data-target='#accordion_{{$index}}', id='positionTab-{{position.id}}', ng-click='positionCtrl.changeIcon($event)', tooltip-placement='top', uib-tooltip='Click here to view all interviews and candidates')
+                  
+                       
+          tr.collapse(ng-repeat-end='ng-repeat-end', id='accordion_{{$index}}')
+              td(colspan='12')
+                asm-candidate-accordion(asm-candidate-accordion-data='{{position}}', pid='position.id')
+        .row(data-ng-show="positionCtrl.positionList.length < 1 ")
+          .col-lg-12.col-md-12.col-sm-12.col-sm-12
+            .alert.alert-warning
+              center 
+                p 
+                  strong No Position created yet!!  
+                  span Let's create a new position and Get Started.                                                   
+      //.main-table-area
+        .table-responsive
+          table.table.table-first(ng-table='positionCtrl.tableParams', ng-table-columns-binding="positionCtrl.cols", ng-cloak='')
+            tr(ng-repeat-start='position in $data', id="{{'position-row'+$index}}", ng-class="{'blue':position.status==='ACTIVE','yellow':position.status==='ON HOLD','red':position.status==='CLOSED','grey':position.status==='ARCHIVED','green':position.status==='FILLED','cancel':position.status==='COMPLETED','inactive':position.status==='INACTIVE'}")
+              td(ng-if="true")
+                a.trigger-dwn
+                  i.fa.fa-chevron-circle-down.clickable(tooltip-placement='right', uib-tooltip='Click here to view all interviews and candidates', aria-hidden='true', data-rowid="{{'position-row'+$index}}", data-toggle='collapse', data-target='#accordion_{{$index}}', id='positionTab-{{position.id}}', ng-click='positionCtrl.changeIcon($event)')
+              td(ng-if="true", title="'Action'")
+                input.option-checkbox(type='checkbox', data-ng-click='positionCtrl.addSelectedPositionId($event, position.id)',data-ng-if='user.userRoles !== 3')
+              td(ng-if="true")
+                .dropdown
+                  i.fa.fa-cog.dropdown-toggle(data-toggle='dropdown', aria-hidden='true')
+                  ul.dropdown-menu
+                    li(data-ng-hide='position.status === "CLOSED"')
+                      a(data-ui-sref='app.update-position({ positionId: position.id })',data-ng-if='user.userRoles !== 3')
+                            i.fa.fa-pencil-square-o  Edit
+                    li
+                      a(data-ui-sref='app.view-position({ positionId: position.id })')
+                            i.fa.fa-eye  View
+                    li
+                      a.eye-box(data-ng-click='positionCtrl.compareCandidates(position.id)',data-ng-if='user.userRoles !== 3')
+                            i.fa.fa-users  All Candidates
+              td(ng-if="true" title="'Position Code'", sortable="'positionCode'", ng-data='position.positionCode', class-name='table-accordian') {{position.positionCode}}
+              td(ng-if="true" title="'Position Name'", sortable="'positionName'", ng-data='position.positionName', class-name='table-accordian') {{position.positionName}}
+              td(ng-if="true" title="'Department'", sortable="'departmentName'", ng-data='position.departmentName', class-name='table-accordian') {{position.departmentName}}
+              td(ng-if="true" title="'Recruiter'", sortable="'recruiterName'", ng-data='position.recruiterName', class-name='table-accordian') {{position.recruiterName}}             
+              td.portal-pointer(ng-if="true" data-title="'Portals'")
+                span(style="float:none",ng-repeat ="portals in position.Portals| limitTo:2", ng-if="true" class='' data-title="'Portals'", sortable="'Portals'", ng-data='portals.portalName',tooltip-placement='top', uib-tooltip='{{portals.status}}') {{portals.portalName}},      
+                .dropdown.display-dropdown    
+                  span(ng-if ="position.Portals.length>2", data-toggle="dropdown", data-hover="dropdown") ...
+                  ul.dropdown-menu
+                    li(ng-repeat ="portals in position.Portals", ng-data='portals.portalName') {{portals.portalName}}                        
+              td(ng-if="true" title="'Responses'",  data='position.responses', class-name='table-accordian')
+                .number
+                  ul
+                    li
+                      span.hired-box {{position.responses.new}}
+                      .tool-tip
+                        p
+                          i
+                          | New
+                    li
+                      span.hired-box.completed-status {{position.responses.applied}}
+                      .tool-tip
+                        p
+                          i
+                          | Applied
+                    li
+                      span.hired-box.sky {{position.responses.completed}}
+                      .tool-tip
+                        p
+                          i
+                          | Completed
+                    li
+                      span.hired-box.shortlisted-status {{position.responses.shortlisted}}
+                      .tool-tip
+                        p
+                          i
+                          | Shortlisted 
+                    li
+                      span.hired-box.green {{position.responses.hired}}
+                      .tool-tip
+                        p
+                          i
+                          | Hired
+              td(ng-if="true" title="'Status'", sortable="'status'", ng-data='position.status', class-name='table-accordian')
+                .status-box
+                  ui-select.status-area(ng-disabled='user.userRoles == 3 || position.status==="FILLED" || position.status==="CLOSED"', data-ng-model='position.status', data-ng-change='positionCtrl.changePositionStatus(position.id, position.status)')
+                    ui-select-match(placeholder='Select status')
+                      span(ng-bind='$select.selected.statusName')
+                    ui-select-choices(repeat='pstatus.statusName as pstatus in positionCtrl.positionStatusList | filter: $select.search')
+                      span(ng-bind='pstatus.statusName')
+            tr.collapse(ng-repeat-end='ng-repeat-end', id='accordion_{{$index}}')
+              td(colspan='12')
+                asm-candidate-accordion(asm-candidate-accordion-data='{{position}}', pid='position.id')
+        .row(data-ng-show="positionCtrl.positionList.length < 1 ")
+          center 
+            p  No Position created yet!! Let's create a new position and Get Started. 
+            
+

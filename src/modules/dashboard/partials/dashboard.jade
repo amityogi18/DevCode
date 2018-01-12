@@ -1,0 +1,77 @@
+.content-wrapper.dashboard-page(ng-cloak, ng-if="!$root.mobile")
+  .default-tab-module.interview-tabs
+    .tab-content
+      .row.no-position(data-ng-if="dashboardCtrl.latestPositionList.length < 1")
+        .initial-section(data-ng-hide='user.userRoles == 3')
+          .col-xs-12.col-sm-12.col-md-12.initial-section-pos
+            .col-md-12.col-sm-12.col-xs-12
+              .initial-content-section
+                md-button.md-raised.savedata-btn.create-pos-btn(data-ui-sref='app.create-position({positionId : "new"})',ng-show='user.userRoles !== 3', data-translate="CREATE-NEW-POSITION")
+                p Create a position.Advertise it to 100+ job boards in one click.Get great candidates.
+      .col-sm-12.col-md-12.col-xs-12(data-ng-if="dashboardCtrl.latestPositionList.length > 0 || user.userRoles == 3")
+        h3.dashboard-heading(data-translate="DASHBOARD")
+      .panel-group(data-ng-if="dashboardCtrl.latestPositionList.length > 0")
+        .col-sm-12.col-md-12.col-xs-12.no-space(data-ng-if='user.userRoles == 2 || user.userRoles == 1 || user.userRoles == 6')
+            quick-stastics
+        .col-sm-6.col-xs-12.no-space(ng-class='{"col-md-7":user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6, "col-md-6": user.userRoles == 3 || user.userRoles == 4}')
+            dashborad-notification
+        .col-md-5.col-sm-6.col-xs-12.no-space(ng-if='user.userRoles == 1 || user.userRoles == 2  || user.userRoles == 6')
+            candidate-status
+        .col-sm-6.col-xs-12.no-space(ng-class='{"col-md-7":user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6, "col-md-6": user.userRoles == 3 || user.userRoles == 4}', ng-if='user.userRoles == 1 || user.userRoles == 2  || user.userRoles == 6 || user.userRoles == 3 || user.userRoles == 4')
+             favorite-candidates 
+        .col-md-5.col-sm-6.col-xs-12.no-space(ng-if='user.userRoles == 1 || user.userRoles == 2  || user.userRoles == 6')            
+             invitation-tracking
+        .col-sm-12.col-md-12.col-xs-12.no-space
+            Events
+        .col-md-12.col-sm-12.col-xs-12.no-space(ng-if='user.userRoles == 4')
+            Evaluator-dashboard
+        .col-md-12.col-sm-12.col-xs-12.no-space(ng-if='user.userRoles == 1 || user.userRoles == 2  || user.userRoles == 3 || user.userRoles == 6')
+            position-dashboard
+.dashboard-clear
+
+div(ng-show ="dashboardCtrl.showIntroOverlay")
+  include introduction
+
+
+.container(ng-if="$root.mobile")
+  div
+    .row.dashboard-subheader-1
+      .col-xs-12
+        p Welcome To Ondemand
+        p
+          span.left-span Last Viewed:
+          span.right-span 08:00 AM
+    //- .row.dashboard-subheader-2
+    //-   .col-xs-12
+    //-     p My Dashboard
+    .row
+      .col-xs-6.border-home
+        div.icons-of-dashboard
+          i.fa.fa-desktop(aria-hidden='true')
+        a(data-ui-sref='app.dashboard') Dashboard
+      .col-xs-6.border-home
+        div.icons-of-dashboard
+          i.fa.fa-briefcase(aria-hidden='true')
+        a(data-ui-sref='app.position') Positions
+    .row
+      .col-xs-6.border-home
+        div.icons-of-dashboard
+          i.fa.fa-users(aria-hidden='true')
+        a(data-ui-sref='app.candidate-review') Candidates
+      .col-xs-6.border-home
+          div.icons-of-dashboard
+            i.fa.fa-bar-chart(aria-hidden='true')
+          a(data-ui-sref='app.analytics') Analytics
+    .row
+      .col-xs-6.border-home
+        div.icons-of-dashboard
+          i.fa.fa-star(aria-hidden='true')
+        a(data-ui-sref='app.candidate-review') Review
+      .col-xs-6.border-home
+        div.icons-of-dashboard
+          i.fa.fa-headphones(aria-hidden='true')
+        a(data-ui-sref='conference.conference-home') Conference
+  
+
+
+  

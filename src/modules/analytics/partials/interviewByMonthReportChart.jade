@@ -1,0 +1,12 @@
+div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card
+        md-card-actions
+            .candidate-status-heading
+                i.fa.fa-calendar.canidate-status-icon(aria-hidden='true')
+                span(data-translate='INTERVIEW-BY-MONTH')
+            #base-chart.panel-body
+                .chart-0
+                  .col-xs-12.col-sm-12.col-md-12.pull-left.no-marg
+                    canvas#base.barchart.chart-horizontal-bar(chart-colors='interviewByMonthCtrl.colors', chart-series='interviewByMonthCtrl.series', chart-data='interviewByMonthCtrl.interviewByMonthReport.data', chart-labels='interviewByMonthCtrl.interviewByMonthReport.labels')
+                  .pull-right.interviews No Of Interviews

@@ -1,0 +1,32 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion3', href='#item11') Questions List
+  #item11.panel-collapse.collapse
+    .panel-body
+      // 
+      .row.mg-b-10
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='questionsListAccordionCtrl.openNewQuestion($event,"new")') Add Question
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='questionsListAccordionCtrl.openQuestionBank($event,"bank")') From Question Bank
+        .down-btns
+      .audio-table-sec
+        .table-responsive
+          table.table
+            tbody
+              tr(ng-repeat='q in questionsListAccordionCtrl.defaultQuestions track by $index')
+                td {{q.question}}
+                td.trash-box
+                  a(href='javascript:void(0)', ng-click='questionsListAccordionCtrl.removeQuestion($index)')
+                    i.fa.fa-trash
+      .row.mg-b-10.bottom-actions
+        .form-group
+          .save-cancel-btns
+            //a.btn-green(ng-click='questionsListAccordionCtrl.saveRecQuestions()', href='javascript:void(0)', ng-show='questionsListAccordionCtrl.recommonded') SAVE
+            //a.btn-green(ng-click='questionsListAccordionCtrl.updateQuestions()', href='javascript:void(0)', ng-show='!questionsListAccordionCtrl.recommonded') UPDATE
+            //a.btn-blue(type='button') CANCEL
+      .no-qstn-sec(ng-if="questionsListAccordionCtrl.defaultQuestions.length < 0") No Question Have Been Added Yet
+      
+script#questionbank-popup(type='text/ng-template')
+  include question-bank

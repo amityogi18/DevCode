@@ -1,0 +1,18 @@
+.dashboard-notification-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                .notification-heading 
+                  i.fa.fa-bell.notification-icon(aria-hidden='true')
+                  | Notifications
+                  md-button.md-raised.savedata-btn.link-to-favourite.pull-right(ng-hide="dashboradNotificationCtrl.notificationList.length < 7", data-ng-click='dashboradNotificationCtrl.showAllNotifications();') View All
+                div
+                    div(ng-class="{'list-notify': dashboradNotificationCtrl.fullHeight , 'notification-list': !dashboradNotificationCtrl.fullHeight}", ng-hide="dashboradNotificationCtrl.notificationList.length < 1")
+                      ul(ng-repeat='notification in dashboradNotificationCtrl.notificationList',  ng-cloak='')
+                        li.notification-message {{notification.message}}
+                    .col-md-12.col-sm-12.col-xs-12.notification-no-message(ng-show="dashboradNotificationCtrl.notificationList.length < 1")
+                      .p 
+                        i.fa.fa-exclamation-circle.notification-icon-msg(aria-hidden='true')
+                        | You do not have any notification yet  
+

@@ -1,0 +1,12 @@
+.share
+  .col-md-12
+    .col-md-3
+      .fb-share-button(data-href='{{ShareUrlCtrl.url}}', data-layout='button_count')
+    .col-md-3.twitter-icon(style="margin-left: 20px;")
+      a.twitter-share-button(href='https://twitter.com/share' data-size='small', data-text='Interview', data-url='interview', data-hashtags='jottp,itech', data-via='twitterdev', data-related='twitterapi,twitter')
+        link(rel="canonical" href="{{ShareUrlctrl.url}}") 
+        | Tweet  
+    .col-md-3    
+      .g-plusone(data-href='{{ShareUrlCtrl.url}}', data-size='small(none)',data-annotation="none", data-recommendations ='false', data-width='200')
+    .col-md-3   
+    script(type='IN/Share', data-url='{{ShareUrlCtrl.url}', data-counter='right')

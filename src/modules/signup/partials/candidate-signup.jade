@@ -1,0 +1,204 @@
+script(src='https://www.google.com/recaptcha/api.js?hl=en')
+.candidate-profile-signup
+  .landing-page
+    .content-bg-wrap
+      .content-bg
+    .nav.navbar.navbar-default.singup-navebar.navbar-fixed-top.hidden-lg.hidden-sm.hidden-md
+    .header-spacer--standard
+    .container
+      .row.display-flex
+        .col-xl-6.col-lg-4.col-md-4.col-sm-12.col-xs-12
+          .landing-content
+            .user-login
+              a.small-logo1(data-ui-sref='app.user-login')
+                img(src='../../../public/img/bigoda-logo.png', alt='')
+            h1 Welcome to OnDemand
+            h4 Register with us and get your dream job today,
+            p
+              |  Register yourself, It’s free of cost and easy as never before, Showcase your skills in introduction video and share it with thousands of recruiters, 
+              |  Search your dream job out of millions of opportunities posted daily,
+              |  Take certification test against your skills to enrich your profile, Get free job assistance and resume suggestions to increase your chances to get hired.
+                
+        .col-xl-5.col-lg-8.col-md-8.col-sm-12.col-xs-12.second-section  
+          .col-md-12.col-sm-10.col-xs-12.registration-login-form
+            .panel.panel-default1.candidate-heading1
+              .panel-heading.login-heading1
+                | Register
+                span.already-user
+                  a.login-link(data-ui-sref='app.candidate-login') Already a candidate? Login
+              .sep-dev    
+              .panel-body1
+                form(role='form', name='candidateSignupCtrl.candidateSignupForm' novalidate)
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')
+                    md-input-container.md-block(flex-gt-sm='')
+                      label First Name
+                      input(type='text', name='firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='20',ng-blur='candidateSignupCtrl.removeInvalidFirstName(candidateSignupCtrl.firstName)',data-ng-model='candidateSignupCtrl.firstName',required)
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.firstName.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.firstName.$touched')
+                        div(ng-message='required')
+                            | Please Enter 
+                            b First Name 
+                      //span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.firstName.$touched')
+                        span(data-ng-show='candidateSignupCtrl.candidateSignupForm.firstName.$dirty && candidateSignupCtrl.candidateSignupForm.firstName.$invalid')
+                        span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.firstName.$error.required') Please Enter First Name
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Last Name
+                      input(type='text', name='lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='20',ng-blur='candidateSignupCtrl.removeInvalidLastName(candidateSignupCtrl.lastName)', data-ng-model='candidateSignupCtrl.lastName',required)
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.lastName.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.lastName.$touched')
+                        div(ng-message='required')
+                            | Please Enter 
+                            b Last Name  
+                      //span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.lastName.$touched')
+                        span(data-ng-show='candidateSignupCtrl.candidateSignupForm.lastName.$dirty && candidateSignupCtrl.candidateSignupForm.lastName.$invalid')
+                        span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.lastName.$error.required') Please Enter Last Name
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')      
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Email
+                      input(type='text', name='email', maxlength='50', data-ng-model='candidateSignupCtrl.email', ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i", required )
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.email.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.email.$touched')
+                        div(ng-message='required')
+                            | Please Enter 
+                            b Email Address
+                        div(ng-message='pattern') Must be a valid Email address
+
+                      //span.error-msg(data-ng-if='candidateSignupCtrl.candidateSignupCtrl.errormessage !== ""') {{candidateSignupCtrl.errormessage}} 
+                    md-input-container.md-block(flex-gt-sm='')
+                        input(type='text',ng-model='candidateSignupCtrl.contactNumber', data-ng-blur='candidateSignupCtrl.analyzePhoneNumber(candidateSignupCtrl.contactNumber)', data-ng-keypress="candidateSignupCtrl.analyzePhoneNumber(candidateSignupCtrl.contactNumber)", data-ng-keyup="candidateSignupCtrl.analyzePhoneNumber(candidateSignupCtrl.contactNumber)", onkeypress='return event.charCode >= 48 && event.charCode <= 57', name='contactNumber', placeholder='Contact No', minlength='10', maxlength="14", required)
+                        span.error-msg(data-ng-if='candidateSignupCtrl.errmsgcon !== ""') {{candidateSignupCtrl.errmsgcon}}
+                      //label Contact Number
+                      //input(type='text', name='contactNumber', data-ng-model='candidateSignupCtrl.contactNumber',onkeypress='return event.charCode <= 57',minlength="10",ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" , maxlength='14',required)
+                      //div(ng-messages='candidateSignupCtrl.candidateSignupForm.contactNumber.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.contactNumber.$touched')
+                        div(ng-message='required')
+                            | Please Enter 
+                            b Contact Number
+                        div(ng-message='pattern') Must be a valid 14 digit phone number   
+                      //span.error-msg(data-ng-if='candidateSignupCtrl.errmsgcon !== ""') {{candidateSignupCtrl.errmsgcon}}
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Password
+                      input(type='password', name='password', data-ng-model='candidateSignupCtrl.password', minlength="6", maxlength="15", ng-pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,15}$/",  ng-change="candidateSignupCtrl.checkPasswordEquality()",required)
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.password.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.password.$touched')
+                        div(ng-message='required')
+                            | Please Enter 
+                            b Password                 
+                        div(ng-message='pattern') Password Should Contain Atleast 6 And Maximum 15 Characters That Contains At Least One Lowercase And One Uppercase Character And One Special Character And One Number    
+
+                      //span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.password.$touched')
+                        span(data-ng-show='candidateSignupCtrl.candidateSignupForm.password.$dirty && candidateSignupCtrl.candidateSignupForm.password.$invalid')
+                        span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.password.$error.required') Please Enter Password.
+                        span.error-msg(data-ng-if='!candidateSignupCtrl.isPasswordRight') Password Should Contain Atleast 6 And Maximum 15 Characters That Contains At Least One Lowercase And One Uppercase Character And One Special Character And One Number.           
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Confirm Passoword
+                      input(type='password',maxlength="15", name="confirmPassword", data-ng-model="candidateSignupCtrl.confirmPassword", data-ng-blur="candidateSignupCtrl.confirmPasswords(candidateSignupCtrl.confirmPassword)",ng-change="candidateSignupCtrl.checkPasswordEquality()", required)
+                      span.error-msg {{candidateSignupCtrl.message}}
+                  //div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                    label Gender :                   
+                    md-radio-group(ng-model='candidateSignupCtrl.selectedGender.gender')
+                      md-radio-button.md-primary(value='Male') Male
+                      md-radio-button(value='Female')  Female     
+                    
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                    md-content.geo-section(flex='100')
+                      place-autocomplete(data-ng-model='candidateSignupCtrl.geoAddress',search-type='1')
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')  
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Functional Area
+                      md-select(data-ng-model='candidateSignupCtrl.departmentId', data-ng-change='candidateSignupCtrl.getDesignation(candidateSignupCtrl.departmentId,1)',data-md-container-class='selectdemoSelectHeader' ,md-on-close="candidateSignupCtrl.clearSearchDepartment()",name='departmentList',required)
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='candidateSignupCtrl.searchDepartment', type='search', placeholder='Search for a functional area..',ng-keydown="$event.stopPropagation()")
+                        md-option(ng-repeat='department in candidateSignupCtrl.departmentList|filter:candidateSignupCtrl.searchDepartment', value='{{department.id}}') {{department.name}}
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.departmentList.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.departmentList.$touched')
+                        div(ng-message='required')
+                            | Please Select 
+                            b Functional Area 
+                      //span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.departmentList.$touched')
+                        span(data-ng-show='candidateSignupCtrl.candidateSignupForm.departmentList.$dirty && candidateSignupCtrl.candidateSignupForm.departmentList.$invalid')
+                        span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.departmentList.$error.required') Please Select Functional Area
+                    md-input-container.md-block(flex-gt-sm='')
+                      label Role
+                      md-select(data-ng-model='candidateSignupCtrl.designationId', ng-disabled='candidateSignupCtrl.isDesignationDisabled',data-md-container-class='selectdemoSelectHeader', name='designation',md-on-close="candidateSignupCtrl.clearSearchSkill()", required)
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='candidateSignupCtrl.searchSkill', type='search', placeholder='Search skill..',ng-keydown="$event.stopPropagation()")
+                        md-option(ng-repeat='designation in candidateSignupCtrl.designationList|filter:candidateSignupCtrl.searchSkill', value='{{designation.id}}') {{designation.candidateDesignation}}
+                      div(ng-messages='candidateSignupCtrl.candidateSignupForm.designation.$error', ng-if='candidateSignupCtrl.candidateSignupForm.$error || candidateSignupCtrl.candidateSignupForm.designation.$touched')
+                        div(ng-message='required')
+                          | Please Select 
+                          b Designation
+                      //span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.designation.$touched')
+                        span(data-ng-show='candidateSignupCtrl.candidateSignupForm.designation.$dirty && candidateSignupCtrl.candidateSignupForm.designation.$invalid')
+                        span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.designation.$error.required') Please Select Designation
+                  div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')
+                    label CAPTCHA
+                    .col-sm-6.col-xs-12
+                      .g-recaptcha.captcha-field(data-sitekey='{{candidateSignupCtrl.SITEKEY}}')
+                  div(layout-margin='', flex-gt-sm='')             
+                    md-checkbox.md-primary(aria-label='agree' name='agree', data-ng-model='candidateSignupCtrl.isAgree',  required='required')               
+                    span.agree-ondemand
+                      | By clicking on this box you agree with OnDemand
+                      a.terms-condition-link(href='javascript:void(0)',data-toggle="modal", data-target="#termsConditionModalCandidate") Terms & Conditions
+                      | &
+                      a.privacy-policy-link(href='javascript:void(0)',data-toggle="modal", data-target="#privacyPolicy") Privacy Policy
+                      .col-md-12                     
+                        span.error-message(data-ng-show='candidateSignupCtrl.candidateSignupForm.$submitted || candidateSignupCtrl.candidateSignupForm.agree.$touched')
+                          span(data-ng-show='candidateSignupCtrl.candidateSignupForm.agree.$dirty && candidateSignupCtrl.candidateSignupForm.agree.$invalid')
+                          span.error-msg(data-ng-show='candidateSignupCtrl.candidateSignupForm.agree.$error.required') Please Click To Agree To The Terms And Conditions
+                  .form-group.row
+                    .sep-dev
+                    .col-sm-12.col-xs-12.col-md-12.candidate-center
+                      md-button.md-raised.md-primary.candidate-submit-btn.md-signup(data-ng-click='candidateSignupCtrl.doCandidateSignup()') Submit
+                      label.error-lbl {{candidateSignupCtrl.errorLblTxt}}
+              #termsConditionModalCandidate.modal.fade(role='dialog')
+                .modal-dialog.modal-lg
+                  .modal-content
+                    .modal-header.header-modal-tc
+                      button.close(type='button', data-dismiss='modal') ×
+                      h3.modal-title Terms & Conditions
+                    .modal-body.content-justify
+                      p
+                        | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                      p
+                        | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+                      p The use of this website is sub  ject to the following terms of use:
+                      ul
+                        li
+                          | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                        li
+                          | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+                        li
+                          | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                        li
+                          | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+                        li
+                          | This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+                        li
+                          | All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.
+                        li
+                          | Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+                        li
+                          | From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+                        li
+                          | Your use of this website and any dispute arising out of such use of the website is subject to the laws of India, USA, England, Northern Ireland, Scotland and Wales.
+                    .modal-footer
+                      md-button.md-raised.md-primary(type='button',data-dismiss='modal') OK
+              #privacyPolicy.modal.fade(role='dialog')
+                .modal-dialog
+                  .modal-content
+                    .modal-header.header-modal-tc
+                      button.close(type='button', data-dismiss='modal') ×
+                      h3.modal-title Privacy Policy
+                    .modal-body
+                      p
+                        | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                      p
+                        | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+                      p The use of this website is sub  ject to the following terms of use:
+                      ul
+                        li
+                          | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                        li
+                          | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+                        li
+                          | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                        li
+                          | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+                    .modal-footer
+                      md-button.md-raised.md-primary(type='button',data-dismiss='modal') OK

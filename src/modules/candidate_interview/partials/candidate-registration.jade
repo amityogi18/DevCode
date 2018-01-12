@@ -1,0 +1,96 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .col-md-12
+      .candidate-view-steps.step
+          ul.step-tab
+            li.active
+              figure.step-icons
+                span
+                  img(src='../../../public/img/icon1.png', alt='')
+              .step-name(data-translate="WELCOME")
+            li
+              figure.step-icons
+                span
+                  img(src='../../../public/img/icon2.png', alt='')
+              .step-name(data-translate="YOUR-PROFILE")
+            li
+              figure.step-icons
+                span
+                  img(src='../../../public/img/icon3.png', alt='')
+              .step-name(data-translate="PREPARE")
+            li
+              figure.step-icons
+                span
+                  img.img-icon(src='../../../public/img/icon4.png', alt='')
+              .step-name(data-translate="INTERVIEW")
+          .step-body
+            ul
+              li.loginli
+                .whte-bg
+                  .user-all-details
+                    p.title Hie! {{user.fullName}}
+                    p.sub-title
+                      span project Manager :
+                      |  Live Phone Interview
+                    p.date
+                      span Dec 5, 2016
+                      span 2:00pm
+                    p.sub-title
+                      span project Manager :
+                      |  Live Phone Interview
+                    p.sub-title
+                      span(data-translate="AUDIO-CONNECTION")
+                    ol
+                      li(data-translate="CALL")
+                      li(data-translate="ACCESS-CODE")
+                      li(data-translate="ATTENDEES-ID")
+                    p(data-translate="INTERVIEWD-BY")
+                    a(href='') www.clientwebsite.com
+              li.loginli
+                .whte-bg
+                  .user-all-details
+                    p.title Introduction
+                    p(data-translate="CALL-CONTENT")
+                    .watch-sec
+                      p.hdng(data-translate="WATCH-VEDIO")
+                      a(href='#') http//:watchvideo.com
+                    .watch-sec
+                      p.hdng(data-translate="PRACTICES")
+                      a(href='#') http//:bestvideo.com
+                    .btn-sec
+                      a.btn-next(data-ui-sref='ci.profile', data-translate="NEXT")
+              li.loginli(data-ng-if='!isLoggedIn')
+                .whte-bg
+                  .user-all-details
+                    p.title Register Now
+                    .rgstr-form
+                      form
+                        .input-fld
+                          label(data-translate="FIRST-NAME")
+                            sup *
+                          input.form-control(type='text',placeholder='First Name')
+                        .input-fld
+                          label(data-translate="LAST-NAME")
+                            sup *
+                          input.form-control(type='text',placeholder='Last Name')
+                        .input-fld
+                          label(data-translate="EMAIL")
+                            sup *
+                          input.form-control(type='text', placeholder='Email Address')
+                        .input-fld
+                          label(data-translate="PASSWORD")
+                            sup *
+                          input.form-control(type='text', placeholder='*****')
+                        .input-fld
+                          label(data-translate="CONFIRM-PASSWORD")
+                            sup *
+                          input.form-control(type='text',, placeholder='*****')
+                        p.trms-cndtn
+                          sapn(data-translate="AGREE")
+                          a(href='#' ,data-translate="TERAM-CONDITION")
+                        p.alrdy-rgstr
+                          span(data-translate="ALREDY-REGISTERED")
+                          a(data-ui-sref='ci.login', data-translate="CLICK-HERE")
+                          |  To Login
+                        .btn-sec
+                          a.btn-next(data-ui-sref='ci.profile', data-translate="NEXT")

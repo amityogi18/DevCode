@@ -1,0 +1,19 @@
+.company-profile.dial-in-section
+  .video-intro-heading.welcome-video
+     span.video-intro-1(data-translate="DIAL-IN-TITLE")
+  .panel-body
+      ul.list-group
+        li.list-group-item(data-translate="TOLL-FREE-NUMBER")
+        li.list-group-item
+          form(role='form')
+            .form-group
+              md-input-container.md-block(flex-gt-sm='')
+                label(data-translate="TIME-ZONE-HEADING")
+                md-select(data-ng-model='dialInCtrl.timeZoneId', name='functionalArea' required)
+                  md-option(ng-repeat='zone in dialInCtrl.timeZoneList',ng-value='zone.timeZoneId') {{zone.timeZoneName}}
+              //ui-select(data-ng-model='dialInCtrl.timeZoneId', name='functionalArea' required)
+                  ui-select-match(placeholder='Select Time Zone')
+                    span(ng-bind='$select.selected.timeZoneName')
+                  ui-select-choices(repeat='zone in dialInCtrl.timeZoneList | filter: $select.search')
+                    span(ng-bind='zone.timeZoneName')
+

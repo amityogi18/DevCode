@@ -1,0 +1,104 @@
+script(type='text/javascript', src='https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit', async='', defer='')
+script.
+  var recaptcha1;
+  var recaptcha2;
+  var myCallBack = function() {
+
+    recaptcha1 = grecaptcha.render('recaptcha1', {
+      'sitekey' : '6LcLSw8UAAAAAOHfseEkWtJjs6-cJfndNJOaOv6i', // Local Recaptcha Key
+      //'sitekey' : '6LcPmxEUAAAAANMnCuTQMDkGhHeccaeAOhnLFNUW', // Production Recaptcha Key
+      'theme' : 'light'
+    });
+
+    recaptcha2 = grecaptcha.render('recaptcha2', {
+      'sitekey' : '6LcLSw8UAAAAAOHfseEkWtJjs6-cJfndNJOaOv6i', // Local Recaptcha Key
+      //'sitekey' : '6LcPmxEUAAAAANMnCuTQMDkGhHeccaeAOhnLFNUW', // Production Recaptcha Key
+      'theme' : 'light'
+    });
+  };
+
+.login-page-container
+  .row
+    .col-md-6.col-sm-6.col-xs-12
+      //.image-div(id='loginpage-image')
+      .image-container
+        img.canimg(src='../../../public/img/webrtcBg5.jpg',alt='user',id='canImg')
+        .text-div-can(id='cantext')
+          ul.featureList
+            li Record Your Video Introduction.
+            li Create Your Profile & Distribute On Top 10 Portals for Free.
+            li Take Certifications Against Your Skills.
+            li Millions Of Jobs From Top Jobs Boards.
+        img.usrimg(src='../../../public/img/webrtcBg.jpg',alt='oda-logo',id='userimg')
+        .text-div-user(id='usertext')
+          ul.featureList
+            li Post Jobs And Distribute To Multiple Job Boards.
+            li Take onDemand Test & Live Interviews.
+            li Get Access To Thousands Of Candidates For Free.
+            li Live Video Calls For Your Business Meetings For Free.
+            li Get 30 Days Free Trial.
+          md-button.md-raised.savedata-btn(data-ui-sref='signup.company-signup' role='button') Get Free Trial
+    .col-md-offset-1.col-md-4.col-sm-offset-1.col-sm-4.col-xs-12.second-section
+      .oda-image-header
+        img(src='../../../public/img/bigoda-logo.png',alt='oda-logo')
+      ul.nav.nav-tabs.signin-tabs
+        li.active
+          a(data-toggle='tab', href='#companylogin',ng-click='loginCtrl.clearFormValue();loginCtrl.showUserImage()') Company Sign In
+        li
+          a(data-toggle='tab', href='#candidatelogin',ng-click='loginCtrl.clearFormValue();loginCtrl.showCandidateImage()') Candidate Sign In
+      .tab-content.login-panel-tab
+        #companylogin.tab-pane.fade.in.active
+          .loginbox.login-panel
+            form.css-form(role='form', name='loginCtrl.form',  method='post', novalidate)
+              md-input-container.md-block(flex="100")
+                label User Email
+                input(type='text', name='email',maxlength='50',  value='', data-ng-model='loginCtrl.email',data-ng-blur='loginCtrl.isInvalidEmailUser(loginCtrl.email)', data-ng-keyup="loginCtrl.isInvalidEmailUser(loginCtrl.email)",required)
+                span.error-msg(data-ng-if='loginCtrl.errormessageUser !== ""') {{loginCtrl.errormessageUser}}
+              md-input-container.md-block(flex="100")
+                label Password
+                input( data-ng-model='loginCtrl.password', required='', type='password', name='password')
+                span(data-ng-show='loginCtrl.form.$submitted || loginCtrl.form.password.$touched')
+                  span.error-msg(data-ng-show='loginCtrl.form.password.$error.required') Please Enter Password.
+              .input-group.second-text-box(ng-show='loginCtrl.showRecaptchaForCompany')
+                #recaptcha1.g-recaptcha.recaptca-dimension
+              div(flex-gt-sm='50')
+                md-checkbox.md-primary(aria-label='Remember Me', name='remember', data-ng-model='loginCtrl.isRemember')
+                  |  Remember Me
+              .form-group
+                md-button.md-raised.savedata-btn.btn-block.submit-button(data-ng-click='loginCtrl.doLogin(1)',,onkeydown='if(event.keyCode==13){this.form.submit();return false;}')
+                  |   Login To Your Account
+                label.error-lbl {{loginCtrl.errorLblTxt}}
+              .form-group.bottom-link
+                a(data-ui-sref='signup.company-signup')
+                  | Register
+                span.pipe-char |
+                a(data-ui-sref="app.forget-password({userType:1})") Forgot Password?
+        #candidatelogin.tab-pane.fade
+          .loginbox.login-panel
+            form.css-form(role='form', name='loginCtrl.candidateForm' novalidate)
+              md-input-container.md-block(flex="100")
+                label Candidate Email
+                input(type='text', name='email',maxlength='50', value='', data-ng-model='loginCtrl.email', data-ng-blur='loginCtrl.isInvalidEmail(loginCtrl.email)',  data-ng-keyup="loginCtrl.isInvalidEmail(loginCtrl.email)",required)
+                span.error-msg(data-ng-if='loginCtrl.errormessage !== ""') {{loginCtrl.errormessage}}
+              md-input-container.md-block(flex="100")
+                label Password
+                input( data-ng-model='loginCtrl.password', required='', type='password', name='password')
+                span(data-ng-show='loginCtrl.candidateForm.$submitted || loginCtrl.candidateForm.password.$touched')
+                  span.error-msg(data-ng-show='loginCtrl.candidateForm.password.$error.required') Please Enter Password
+              .input-group.second-text-box(ng-show='loginCtrl.showRecaptchaForCandidate')
+                #recaptcha2.g-recaptcha.recaptca-dimension(data-sitekey='{{loginCtrl.SITEKEY}}')
+              div(flex-gt-sm='50')
+                md-checkbox.md-primary(aria-label='Remember Me', name='remember', data-ng-model='loginCtrl.isRemember')
+                  |  Remember Me
+              .form-group
+                md-button.md-raised.savedata-btn.btn-block.submit-button(data-ng-click='loginCtrl.doLogin(2)',onkeydown='if(event.keyCode==13){this.candidateForm.submit();return false;}')
+                  |   Login To Your Account
+                label.error-lbl {{loginCtrl.errorLblTxt}}
+              .form-group.bottom-link
+                a(data-ui-sref='signup.candidate-signup')
+                  | Register
+                span.pipe-char |
+                a(data-ui-sref="app.forget-password({userType:2})") Forgot Password?
+                  //| Not A Candidate?
+                  //a(data-ui-sref='app.user-login')
+                    //|   Login As Company

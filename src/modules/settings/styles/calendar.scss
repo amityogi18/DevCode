@@ -1,0 +1,42 @@
+.cardCalendar {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    display: inline-block;
+    margin:50px;
+    background : #f3eeee;
+}
+
+.cardCalendar:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.containerCalendar {
+    padding: 2px 16px;
+}
+
+.calimage{
+    border: 1px solid #ccc;
+    padding-left: 70px;
+    padding-right: 50px;
+}
+
+.calendar-radio-radio{
+    margin-left: 100px;
+    margin-top: 5px;
+}
+
+.calendar-button{
+    display: block;
+    margin-left: 45%;
+}
+
+.calendar-button-gmail {
+    color: rgba(255,255,255,0.87)!important;
+}
+
+.calendar-button-outlook {
+    color: rgba(255,255,255,0.87)!important;
+    background-color: rgb(0, 109, 195)!important;
+}
+

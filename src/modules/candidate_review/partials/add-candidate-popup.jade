@@ -1,0 +1,111 @@
+.candidate-review
+  .modal-content.add-candidate-popup
+    .modal-header.bg-primary.add-candidate-header
+      button.close(type='button', ng-click='close()') ×
+      h3.modal-title.add-candidate-title(data-translate='ADD-CANDIDATE')
+    .modal-body
+      form.form-horizontal(name='addCandidatePopupCtrl.candidateForm', role='form', novalidate)
+        div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='')
+          md-input-container.md-block(flex="30", flex-xs="100", flex-md="25")
+            input(type='text', name='firstName', placeholder='First Name', maxlength='25', ng-model='addCandidatePopupCtrl.firstName', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required='required')
+            span.error-msg-cmn(data-ng-show='addCandidatePopupCtrl.candidateForm.$submitted || addCandidatePopupCtrl.candidateForm.firstName.$touched')
+              span(data-ng-show='addCandidatePopupCtrl.candidateForm.firstName.$dirty && addCandidatePopupCtrl.candidateForm.firstName.$invalid')
+              span.error-msg-cmn(data-ng-show='addCandidatePopupCtrl.candidateForm.firstName.$error.required') Please Enter First Name
+          md-input-container.md-block(flex="30", flex-xs="100", flex-md="25")
+            input(type='text', name='lastName', placeholder='Last Name', maxlength='25', ng-model='addCandidatePopupCtrl.lastName', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required='required')
+            span.error-msg-cmn(data-ng-show='addCandidatePopupCtrl.candidateForm.$submitted || addCandidatePopupCtrl.candidateForm.lastName.$touched')
+              span(data-ng-show='addCandidatePopupCtrl.candidateForm.lastName.$dirty && addCandidatePopupCtrl.candidateForm.lastName.$invalid')
+              span.error-msg-cmn(data-ng-show='addCandidatePopupCtrl.candidateForm.lastName.$error.required') Please Enter Last Name 
+          md-input-container.md-block(flex="100")
+            input(type='text', name='email', maxlength='50', placeholder='Email Address', ng-model='addCandidatePopupCtrl.email', ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i", required)
+            div(ng-messages='addCandidatePopupCtrl.candidateForm.email.$error', ng-if='addCandidatePopupCtrl.candidateForm.$error || addCandidatePopupCtrl.candidateForm.email.$touched')
+                div(ng-message='required')
+                  | Please Enter 
+                  b Email Address
+                div(ng-message='pattern') Must be a valid Email address 
+        div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='')
+          md-input-container.md-block(flex="30", flex-xs="100", flex-md="25")
+            input(type='number', name='(years)',min='0', placeholder='Experence(years)', ng-model='addCandidatePopupCtrl.totalYears', data-ng-blur="addCandidatePopupCtrl.analyzeYearExp(addCandidatePopupCtrl.totalYears)", data-ng-keypress= "addCandidatePopupCtrl.analyzeYearExp(addCandidatePopupCtrl.totalYears)", data-ng-keyup = "addCandidatePopupCtrl.analyzeYearExp(addCandidatePopupCtrl.totalYears)", maxlength='2', required='required')
+            span.error-msg(data-ng-if='addCandidatePopupCtrl.yearErrormessage !== ""') {{addCandidatePopupCtrl.yearErrormessage}}.
+          md-input-container.md-block(flex="30", flex-xs="100", flex-md="25")
+            input(type='number', name='(months)',min='0', placeholder='Experence(Month)', ng-model='addCandidatePopupCtrl.totalMonths',data-ng-blur="addCandidatePopupCtrl.analyzeMonthExp(addCandidatePopupCtrl.totalMonths)", data-ng-keypress= "addCandidatePopupCtrl.analyzeMonthExp(addCandidatePopupCtrl.totalMonths)", data-ng-keyup = "addCandidatePopupCtrl.analyzeMonthExp(addCandidatePopupCtrl.totalMonths)", maxlength='2', required='required')
+            span.error-msg(data-ng-if='addCandidatePopupCtrl.monthErrormessage !== ""') {{addCandidatePopupCtrl.monthErrormessage}}.
+          md-input-container.md-block(flex="40", flex-xs="100", flex-md="50")
+            input(type='text',ng-model='addCandidatePopupCtrl.contactNumber', data-ng-blur='addCandidatePopupCtrl.analyzePhoneNumber(addCandidatePopupCtrl.contactNumber)', data-ng-keypress="addCandidatePopupCtrl.analyzePhoneNumber(addCandidatePopupCtrl.contactNumber)", data-ng-keyup="addCandidatePopupCtrl.analyzePhoneNumber(addCandidatePopupCtrl.contactNumber)", onkeypress='return event.charCode >= 48 && event.charCode <= 57', name='contactNumber', placeholder='Contact No', minlength='10', maxlength="14", required)
+            span.error-msg(data-ng-if='addCandidatePopupCtrl.errmsgcon !== ""') {{addCandidatePopupCtrl.errmsgcon}}
+            //div(ng-messages='addCandidatePopupCtrl.candidateForm.contactNumber.$error', ng-if='addCandidatePopupCtrl.candidateForm.$error || addCandidatePopupCtrl.candidateForm.contactNumber.$touched')
+                div(ng-message='required')
+                  | Please Enter 
+                  b Contact Number
+                div(ng-message='pattern') Must be a valid phone number
+        div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='')
+          md-input-container.md-block(flex="30", flex-xs="100",flex-gt-sm='',flex-offset-xs="0")
+            label Department
+            md-select(data-ng-model='addCandidatePopupCtrl.departmentId', md-on-close="addCandidatePopupCtrl.clearSearchDeptTerm()", data-ng-change='addCandidatePopupCtrl.getSkillSet(addCandidatePopupCtrl.departmentId, true)', placeholder='Select Department', name='department', data-md-container-class='selectdemoSelectHeader', required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='addCandidatePopupCtrl.searchDepartment', type='search', placeholder='Search for a department..')
+              md-optgroup(label='department')
+              md-option(ng-value='{{department.id}}', ng-repeat='department in addCandidatePopupCtrl.departmentList | filter:addCandidatePopupCtrl.searchDepartment') {{department.name}}
+            span.error-msg(data-ng-show='addCandidatePopupCtrl.evalatorForm.$submitted || addCandidatePopupCtrl.evalatorForm.department.$touched')
+              span(data-ng-show='addCandidatePopupCtrl.evalatorForm.department.$dirty && addCandidatePopupCtrl.evalatorForm.department.$invalid')
+              span.error-msg(data-ng-show='addCandidatePopupCtrl.evalatorForm.department.$error.required') Please Select Functional Area         
+          md-input-container.md-block(flex="70", flex-xs="100",flex-gt-sm='',flex-offset-xs="0")
+            label Skills
+            md-select(data-ng-model='addCandidatePopupCtrl.skillsetId', md-on-close="addCandidatePopupCtrl.clearSearchSkillTerm()", placeholder='Select skills', multiple='', name='skills', data-md-container-class='selectdemoSelectHeader', required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='addCandidatePopupCtrl.searchSkill', type='search', placeholder='Search for a skills..')
+              md-optgroup(label='skill')
+              md-option(ng-value='{{skill.id}}', ng-repeat='skill in addCandidatePopupCtrl.skillsetList | filter:addCandidatePopupCtrl.searchSkill') {{skill.skillsetName | limitTo:25}}
+            span.error-msg(data-ng-show='addCandidatePopupCtrl.evalatorForm.$submitted || addCandidatePopupCtrl.evalatorForm.skills.$touched')
+              span(data-ng-show='addCandidatePopupCtrl.evalatorForm.skills.$dirty && addCandidatePopupCtrl.evalatorForm.skills.$invalid')
+              span.error-msg(data-ng-show='addCandidatePopupCtrl.evalatorForm.skills.$error.required') Please Select Skill   
+        div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='') 
+            md-content.geo-section(flex-lg="100", flex-offset-lg="0", flex-sm="100",flex-offset-sm='0', flex-xs='100')
+                place-autocomplete(data-ng-model='addCandidatePopupCtrl.geoAddress',on-address='newPositionCtrl.setAddressValue(addressFn)',search-type='1')
+        div.position-btn
+          md-input-container.link-btn
+            md-button.md-raised.md-primary.btn-candidate-list(data-toggle='collapse', data-target='#position')
+              span(data-translate='POSITION-INTERVIEW')
+              i.caretdown.fa.fa-caret-down(aria-hidden='true')
+          .add-candidate-position
+            #position.collapse
+              div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='')
+                md-input-container.md-block(flex="40", flex-xs="100",flex-gt-sm='',flex-offset-xs="0")
+                  label Position
+                  md-select(data-ng-model='addCandidatePopupCtrl.positionId', md-on-close="addCandidatePopupCtrl.clearSearchPositionTerm()", data-ng-change='addCandidatePopupCtrl.getInterviewsList(addCandidatePopupCtrl.positionId, true)', placeholder='Select Position', name='position', data-md-container-class='selectdemoSelectHeader', required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='addCandidatePopupCtrl.searchPosition', type='search', placeholder='Search position..')
+                    md-optgroup(label='position')
+                    md-option(ng-value='{{position.id}}', ng-repeat='position in addCandidatePopupCtrl.positionList | filter:addCandidatePopupCtrl.searchPosition') {{position.positionName}}
+                md-input-container.md-block(flex="60", flex-xs="100",flex-gt-sm='',flex-offset-xs="0")
+                  label Interview
+                  md-select(data-ng-model='addCandidatePopupCtrl.interviewId', md-on-close="addCandidatePopupCtrl.clearSearchInterviewTerm()", placeholder='Select Interview', name='Interviews', data-md-container-class='selectdemoSelectHeader', required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='addCandidatePopupCtrl.searchInterview', type='search', placeholder='Search interview..')
+                    md-optgroup(label='interview')
+                    md-option(ng-value='{{interview.id}}', ng-repeat='interview in addCandidatePopupCtrl.interviewList | filter:addCandidatePopupCtrl.searchInterview') {{interview.name}}
+        .link-section.hidden-sm.hidden-md.hidden-lg(layout='row')
+          md-input-container.link-btn.pull-left(flex='100', flex-sm='100')
+            md-button.md-primary
+              a(href='https://jottp.com/templates/candidate_template.xls', download='download') Download Candidate Template
+        .import-btn.hidden-sm.hidden-md.hidden-lg(layout='row')
+          md-input-container.pull-left.link-btn(flex='100', flex-sm='100')
+            md-button.md-raised.md-primary.btn-candidate-list
+              a(data-ng-click='addCandidatePopupCtrl.openCandidateUpload()', data-translate='IMPORT-CANDIADTE-LIST')
+              input#candidatefilectrl.hidden(type='file', ngf-max-size='512KB' ngf-select='addCandidatePopupCtrl.uploadCandidateFile($files); addCandidatePopupCtrl.isFileAdded($files)', accept='.xls,.xlsx', fileread='fileread', griddata='addCandidatePopupCtrl.candidateList', ngtableparams='addCandidatePopupCtrl.candidateTableParams', data-ng-model='addCandidatePopupCtrl.importCandidateFile')
+    .modal-footer.col-sm-12.col-xs-12
+      .col-sm-12.col-xs-12.link-section.hidden-xs
+        md-input-container.link-btn.pull-left
+          md-button.md-primary
+            a(href='https://jottp.com/templates/candidate_template.xls', download='download') Download Candidate Template
+      .col-sm-9.col-xs-12.import-btn.hidden-xs
+        md-input-container.pull-left.link-btn
+          md-button.md-raised.md-primary.btn-candidate-list
+            a(data-ng-click='addCandidatePopupCtrl.openCandidateUpload()', data-translate='IMPORT-CANDIADTE-LIST')
+            input#candidatefilectrl.hidden(type='file', ngf-select='addCandidatePopupCtrl.uploadCandidateFile($files); addCandidatePopupCtrl.isFileAdded($files)', accept='.xls,.xlsx', fileread='fileread', griddata='addCandidatePopupCtrl.candidateList', ngtableparams='addCandidatePopupCtrl.candidateTableParams', data-ng-model='addCandidatePopupCtrl.importCandidateFile')
+      .col-sm-3.col-xs-12.save-section
+        div.pull-right(layout='row')
+          md-input-container.md-block(flex='40',flex-sm='50', flex-xs='50')
+            md-button.md-primary.save-bottom-btn(data-ng-click='addCandidatePopupCtrl.addCandidate()') Save
+          md-input-container.md-block(flex='40',flex-sm='50', flex-xs='50')
+            md-button.cancel-bottom-btn(ng-click='close()', data-translate='CLOSE')

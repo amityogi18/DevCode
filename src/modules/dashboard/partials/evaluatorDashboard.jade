@@ -1,0 +1,45 @@
+.dashboard-evaluator-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                div.position-heading
+                    i.fa.fa-list.position-icon(aria-hidden='true')
+                    span(data-translate= "CANDIDATE-LIST")
+                    .dashboard-btn-position
+                      md-button.md-raised.savedata-btn(ng-hide="evaluatorDashboardCtrl.candidateStatusList.length < 1", data-ui-sref='app.candidate-review', data-translate="VIEW-ALL")
+                      //i.fa.fa-eye.fa-lg.link-to-candidate(aria-hidden='true', data-ui-sref='app.candidate-review', title='View All')
+                .col-sm-4.col-md-4.col-xs-6.showMe
+                  select(class="selectpicker" ng-model="evaluatorDashboardCtrl.test" ng-change="evaluatorDashboardCtrl.toggle()")
+                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in evaluatorDashboardCtrl.cols.slice(1,evaluatorDashboardCtrl.cols.length) track by $index") {{col.title()}}   
+                .table-responsive.candidate-table
+                  .row.evaluator-data(data-ng-show="evaluatorDashboardCtrl.candidateStatusList.length > 0")
+                    table.table.table-first(ng-table='evaluatorDashboardCtrl.candidateTableParams', ng-table-columns-binding="evaluatorDashboardCtrl.cols")
+                      thead.evaluator-head
+                        tr
+                          th Actions
+                          th.padding-star Position Code
+                          th Position Name
+                          th Candidate Name
+                          th Interview Name
+                          th Functional Area
+                          th Status
+                          th Rating
+                      tbody
+                        tr(ng-repeat='candidate in $data')
+                          td.padding-box(ng-if="true" title="'Actions'")
+                            .action-icons
+                              a(data-ui-sref="app.candidate-review({positionId:candidate.positionId, interviewId:candidate.interviewId,candidateName:candidate.candidateFirstName+' '+candidate.candidateLastName })")
+                                i.fa.fa-eye(aria-hidden='true')
+                          td.padding-code(ng-if="true" class='col-sm-2' title="'Position Code'", ng-data='candidate.positionCode') {{candidate.positionCode}}
+                          td.padding-code(ng-if="true" class='col-sm-2' title="'Position Name'", ng-data='candidate.positionName') {{candidate.positionName}}
+                          td.padding-code(ng-if="true" class='col-sm-2' title="'Candidate Name'", ng-data='candidate.candidateFirstName') {{candidate.candidateFirstName}} {{candidate.candidateLastName}}
+                          td(ng-if="true" class='col-sm-2' title="'Interview Type'", ng-data='candidate.interviewName') {{candidate.interviewName}}
+                          td(ng-if="true" class='col-sm-2' title="'Functional Area'", ng-data='candidate.functionalArea') {{candidate.functionalArea}}
+                          td(ng-if="true" title="'Status'", ng-data='candidate.status') {{candidate.status}}
+                          td(ng-if="true" class='col-sm-2' title="'Rating'") 
+                            .action-icons
+                              span(aria-hidden='true',uib-rating='', ng-model='candidate.rating', max='5', read-only='true', aria-labelledby='default-rating')
+                  .col-md-12.col-sm-12.col-xs-12(data-ng-show="evaluatorDashboardCtrl.candidateStatusList.length == 0")
+                    center 
+                      p  No Candidate For this position !!!              

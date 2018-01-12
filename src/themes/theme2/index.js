@@ -1,0 +1,1 @@
+import "../../style/application.theme2.scss";

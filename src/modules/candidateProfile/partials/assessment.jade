@@ -1,0 +1,61 @@
+.container-fluid
+  .row(ng-show='assessmentController.showQuestionPaper')
+    .col-md-7
+      div
+        .assessment-header
+          h4 Mock Test
+        .section-header
+          span.sections {{assessmentController.timer}}
+          .section-title Practice questions
+        .question-container
+          .question
+            h4 Question No: {{assessmentController.activeQuestionNumber }}
+            audio-response-question(question='assessmentController.activeQuestion', number-of-questions='{{::assessmentController.questions.length}}', ng-if="assessmentController.activeQuestion.questionType === 'AUDIO'")
+            video-response-question(question='assessmentController.activeQuestion', number-of-questions='{{::assessmentController.questions.length}}', ng-if="assessmentController.activeQuestion.questionType === 'VIDEO'")
+            text-response-question(disable-previous-button='assessmentController.disablePreviousButton', question='assessmentController.activeQuestion', number-of-questions='{{::assessmentController.questions.length}}', ng-if="assessmentController.activeQuestion.questionType === 'TEXT'")
+            multiple-choice-question(disable-previous-button='assessmentController.disablePreviousButton', question='assessmentController.activeQuestion', number-of-questions='{{::assessmentController.questions.length}}', ng-if="assessmentController.activeQuestion.questionType === 'MCQ'")
+            candidate-multiple-question(disable-previous-button='assessmentController.disablePreviousButton', question='assessmentController.activeQuestion', number-of-questions='{{::assessmentController.questions.length}}', ng-if="assessmentController.activeQuestion.questionType === 'MSQ'")
+          .question-footer
+            //input.btn.btn-default.mark-review-btn(type='button', ng-hide="assessmentController.activeQuestion.responseType === 'video' || assessmentController.activeQuestion.responseType === 'audio'", value='Mark for Review & Next', ng-click='assessmentController.markReviewAndGetNextQuestion()')
+            input.btn.btn-default.clear-reponse-btn(type='button', ng-hide="assessmentController.activeQuestion.questionType === 'VIDEO' || assessmentController.activeQuestion.questionType === 'AUDIO'", value='Clear Response', ng-click='assessmentController.clearResponse()')
+            input.btn.btn-default.previous-btn(type='button', value='Previous', ng-hide='assessmentController.activeQuestion.isFirstQuestion', ng-click='assessmentController.getPreviousQuestion()')
+            input.btn.btn-default.save-and-next-btn(type='button', value='Save & Next', ng-hide='assessmentController.activeQuestion.isLastQuestion', ng-click='assessmentController.saveAndGetNextQuestion()')
+            input.btn.btn-default.save-and-next-btn(type='button', value='Submit', ng-show='assessmentController.activeQuestion.isLastQuestion', ng-click='assessmentController.submitInterview()')
+      div(ng-show='assessmentController.showInsructions')
+        h2  Here comes the instructions
+      div(ng-show='assessmentController.showProfile')
+        h2  Here comes the profile
+    .col-md-4(style="margin-top: 100px;")
+        iframe(target="_parent" class="youtube-player" type="text/html" width="400" height="300" ng-src="{{assessmentController.trustSrc(assessmentController.activeQuestion.videoUrl)}}" allowfullscreen frameborder="0")
+    //.col-md-3
+      .candidate-profile
+        .candidate-picture
+        .candidate-name-container
+          span Candidate: John
+      .question-palette
+        div You are viewing Interview Question Palette:
+        .question-numbers
+          button.btn(ng-click='assessmentController.goToQuestion(question)', ng-class="{'btn-default': question.status === undefined,'btn-success': question.status === 'Answered', 'btn-danger': question.status === 'Not Answered', 'btn-primary': question.status === 'Marked'}", type='button', data-ng-repeat='question in assessmentController.questions') {{question.questionId}}
+        .legend-container
+          span Legend:
+          div
+            span.legend-answered
+              button.btn.btn-success(type='button')
+              |  Answered
+            span.legend-not-answered
+              button.btn.btn-danger(type='button')
+              |  Not Answered
+          div
+            span.legend-marked(ng-hide="assessmentController.activeQuestion.responseType === 'video' || assessmentController.activeQuestion.responseType === 'audio'")
+              button.btn.btn-primary(type='button')
+              |  Marked
+            span.legend-not-visited
+              button.btn.btn-default(type='button')
+              |  Not Visited
+        .palette-footer
+          div
+            button.btn.btn-default(type='button', ng-click='assessmentController.submitInterview()') Submit
+  .row(ng-hide='assessmentController.showQuestionPaper')
+     div(style="border:1px solid gray; width:50%; text-align:center; border-radius:3px; margin:0 auto; margin-top:30px; padding:20px;")
+       h4 No question available in question bank.
+       a.btn.btn-primary(data-ui-sref='candidateProfile.practice-video') Go Back

@@ -1,0 +1,39 @@
+#popover-content-meeting(style='width:400px !important;')
+  .form-group
+        .row
+           br
+           .col-md-4.col-xs-4.col-xs-12
+             label Participant Link
+           .col-md-6.col-sm-6.col-xs-11
+             input#CopyMeetingLink(type='text' disable='', value='{{ConferenceWebrtcCtrl.participantMeetingLink}}',style='width: 125%;margin-left: -27px;')
+           .col-md-2.col-sm-2.col-xs-12.copy-btn-webrtc.black
+             button.btn.btn-default.meetingbtn(ng-click='ConferenceWebrtcCtrl.copyfun2()')  Copy
+        .row
+             hr
+             p(style='margin:-10px 10px -10px 25px !important;')
+               i.fa.fa-unlock-alt(aria-hidden='true')
+               span(style='margin-left:10px;padding-bottom: 20px !important;') Anyone with the link can join
+
+style(type='text/css').
+  .popover{
+    max-width:450px !important;
+    top: 40px !important;
+    z-index:999999 !important;
+  }
+  .popover-inner {
+    width: 446px;
+  }
+  .popover-content {
+    width: 400px;
+  }
+  .popover-content {
+      width: 400px;
+  }
+  @media only screen and(max-width:467px){
+    .popover-inner {
+      width: 220px !important;
+    }
+    .copy-btn-webrtc{
+      margin-top:10px;
+    }
+  }

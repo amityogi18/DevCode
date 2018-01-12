@@ -1,0 +1,21 @@
+#popover-content-meeting(style='width:400px !important;')
+  .form-group(style='overflow-y: scroll; height: 170px; width: 385px;')
+      table.call-table(cellpadding='4', cellspacing='4', style="width: 90%;")
+        tr(ng-repeat='question in ConferenceWebrtcCtrl.recommendedQuestion')
+          td
+            span Q.{{$index+1}}   {{question.question}}
+            hr(style="margin-top:10px !important;margin-bottom:10px !important;")
+
+style(type='text/css').
+  .popover{
+    max-width:403px !important;
+  }
+  .popover-inner {
+    width: 400px;
+  }
+  .popover-content {
+    width: 400px;
+  }
+  .popover-content {
+      width: 400px;
+  }

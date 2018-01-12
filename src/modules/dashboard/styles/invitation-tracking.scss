@@ -1,0 +1,147 @@
+.invitation-tracking-section {
+    md-content{
+        padding:0px;
+        background: transparent;
+        md-card{
+             width:100%;
+             box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+             min-height: 450px;
+             max-height: 450px;
+        }
+    }
+    .note-text{
+        font-size:12px;
+        color:#7a7d84;
+    }
+  @media only screen and(max-width:500px){
+      .funnel-chart { 
+        width: 250px !important;  
+        .trapezoid_01 {
+          width: 250px !important;
+          margin-left: 0px !important;
+        }
+        .trapezoid_02 {
+          width: 220px !important;
+          margin-left: 15px !important;
+        }
+
+        .trapezoid_03 {
+          width: 190px !important;
+          margin-left: 30px !important;
+        }
+
+        .trapezoid_04 {
+          width: 160px !important;
+          margin-left: 45px !important;
+        }
+        .trapezoid_05 {
+          width: 130px !important;
+          margin-left: 60px !important;
+        }
+
+        .trapezoid_06 {
+          width: 100px !important;
+          margin-left: 75px !important;
+        }
+        .funel-border{
+          border-left: 15px solid transparent !important;
+          border-right: 15px solid transparent !important;          
+        }
+      }
+    }
+  .invitation-tracking-heading{
+        font-size: 16px;
+        padding: 15px;
+        color: #676a6c;
+        font-weight: 700;
+        border-bottom: 1px solid #ebedf2;
+    }
+  .panel-body{
+    min-height:260px !important;
+  }
+  .note-text{
+    font-size:11px;
+    margin-left: 5px;
+  }
+  
+  .invitation-trac-icon{
+    margin-right: 5px;
+  }
+  
+  .funnel-chart { 
+    margin-top: 25px;
+    margin-bottom: 20px;
+    width: 280px;
+    text-align: center;
+    padding-bottom:10px;
+    min-height: 315px;
+    .funel-border{
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;          
+    }
+    .trapezoid_01 {
+      border-top: 45px solid #d57171;
+      height: 0px;
+      width: 280px;
+      margin-left: 0px;
+        &:hover{
+                      border-top: 45px solid #d57171;
+                  }
+    }
+    .trapezoid_02 {
+      border-top: 45px solid #626773;
+      height: 0;
+      width: 240px;
+      margin-left: 20px;
+      &:hover{
+            border-top: 45px solid #626773;
+        }
+    }
+  
+    .trapezoid_03 {
+      border-top: 45px solid #e2ab3b;
+      height: 0;
+      width: 200px;
+      margin-left: 40px;
+      &:hover{
+                      border-top: 45px solid #e2ab3b;
+                  }
+    }
+
+    .trapezoid_04 {
+      border-top: 45px solid #458bc4;
+      height: 0;
+      width: 160px;
+      margin-left: 60px;
+      &:hover{
+              border-top: 45px solid #458bc4;
+          }
+    }
+    .trapezoid_05 {
+      border-top: 45px solid #d0d6cb;
+      height: 0;
+      width: 120px;
+      margin-left: 80px;
+      &:hover{
+            border-top: 45px solid #d0d6cb;
+        }
+    }
+  
+    .trapezoid_06 {
+      border-top: 45px solid #4fc55b;
+      height: 0px;
+      width: 80px;
+      margin-left: 100px;
+        &:hover{
+              border-top: 45px solid #4fc55b;
+          }
+    }
+
+    .text-box {
+      font-size: 12px;
+      color: white;
+      margin-top: -30px;
+      text-align: center;
+    }
+  }
+}

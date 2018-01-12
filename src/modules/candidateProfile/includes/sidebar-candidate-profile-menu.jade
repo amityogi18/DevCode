@@ -1,0 +1,185 @@
+script.
+  function openNav() {  
+    //- document.getElementById("sideBarNav").style.width = "205px";
+    document.getElementById("sideBarNav").style.width = "100%";
+    document.getElementById("fixed-top").style.width = "0";
+  }
+  function closeNav() {
+    document.getElementById("sideBarNav").style.width = "0";
+    document.getElementById("fixed-top").style.width = "0";
+  }
+  function showNav() {
+    document.getElementById("fixed-top").style.display = "block";
+    document.getElementById("fixed-iconMenu").style.display = "none";
+  }
+  function hideNav() {
+    document.getElementById("fixed-top").style.display = "none";
+    document.getElementById("fixed-iconMenu").style.display = "block";
+  }
+.sideMenuSection
+    .col-md-1.pull-right.hidden-lg.hidden-md.hidden-sm
+      i#open-icon.fa.fa-ellipsis-v.fa-2x(onclick='openNav()') 
+    .navigation-container
+        #fixed-iconMenu.nav-side-menu.navbar-fixed-top.icon-menu
+            .menu-list.hidden-xs
+              ul#menu-content.menu-content
+                  li.menu-color(onclick="showNav()")
+                    md-button(aria-label='share', uib-tooltip='Open Menu', tooltip-placement='bottom')
+                      md-icon(md-font-set='fa') &#xf233
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.home', uib-tooltip='Video Intro')
+                      md-button(aria-label='Video Intro')
+                        md-icon(md-font-set='fa') &#xf26c
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.view-profile', uib-tooltip='Profile')
+                      md-button(aria-label='Profile')
+                        md-icon(md-font-set='fa') &#xf007 
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.certification', uib-tooltip='Certification')
+                      md-button(aria-label='Certification')
+                        md-icon(md-font-set='fa') &#xf0a3
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.practice-video', uib-tooltip='Practice Video Question')
+                      md-button(aria-label='practice video question')
+                        md-icon(md-font-set='fa') &#xf109 
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.interview-request', uib-tooltip='Interview Request')
+                      md-button(aria-label='interview request')
+                        md-icon(md-font-set='fa') &#xf016 
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.multi-apply', uib-tooltip='Multiapply')
+                      md-button(aria-label='Multiapply')
+                        md-icon(md-font-set='fa') &#xf1e0
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.cover-letter', uib-tooltip='Cover Letter')
+                      md-button(aria-label='Cover Letter')
+                        md-icon(md-font-set='fa') &#xf0c6
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.job-openings', uib-tooltip='Job Openings')
+                      md-button(aria-label='Job Openings')
+                        md-icon(md-font-set='fa') &#xf0ae 
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.applied-job-list', uib-tooltip='Job Apply')
+                      md-button(aria-label='Applied Job')
+                        md-icon(md-font-set='fa') &#xf046
+                  li(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.mail-box', uib-tooltip='Mail Box')
+                      md-button(aria-label='Mail Box')
+                        md-icon(md-font-set='fa') &#xf0e0    
+        #fixed-top.nav-side-menu.navbar-fixed-top
+            .menu-list.menu-list-item.hidden-xs
+              ul#menu-content.menu-content
+                  li.close-list-menu.sideBarMenuIcon
+                    a(onclick='hideNav()')
+                      md-button(aria-label='Close Menu')
+                        md-icon(md-font-set='fa') &#xf00d
+                      span.text-of-sidebar Close Menu
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.home')
+                      md-button(aria-label='Video Intro')
+                        md-icon(md-font-set='fa') &#xf26c
+                      span.text-of-sidebar(data-translate='VIDEO-INTRO')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.view-profile')
+                      md-button(aria-label='Profile')
+                        md-icon(md-font-set='fa') &#xf007
+                      span.text-of-sidebar(data-translate='PROFILE')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.certification')
+                      md-button(aria-label='Certification')
+                        md-icon(md-font-set='fa') &#xf0a3
+                      span.text-of-sidebar(data-translate='CERTIFICATION')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.practice-video' )
+                      md-button(aria-label='practice video question')
+                        md-icon(md-font-set='fa') &#xf109
+                      span.text-of-sidebar(data-translate='PRACTICE-VIDEO-QUESTION')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.interview-request')
+                      md-button(aria-label='interview request')
+                        md-icon(md-font-set='fa') &#xf016
+                      span.text-of-sidebar(data-translate='INTERVIEW-REQUEST')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.multi-apply')
+                      md-button(aria-label='Multiapply')
+                        md-icon(md-font-set='fa') &#xf1e0
+                      span.text-of-sidebar(data-translate='MULTI-APPLY')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.cover-letter')
+                      md-button(aria-label='Cover Letter')
+                        md-icon(md-font-set='fa') &#xf0c6
+                      span.text-of-sidebar(data-translate='COVER-LETTER')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.job-openings')
+                      md-button(aria-label='Job Openings')
+                        md-icon(md-font-set='fa') &#xf0ae
+                      span.text-of-sidebar(data-translate='JOB-OPENINGS')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.applied-job-list')
+                      md-button(aria-label='Applied Job')
+                        md-icon(md-font-set='fa') &#xf046
+                      span.text-of-sidebar(data-translate='Applied Job')
+                  li.sideBarMenuIcon(ui-sref-active="active")
+                    a(data-ui-sref='candidateProfile.mail-box')
+                      md-button(aria-label='Mail Box')
+                        md-icon(md-font-set='fa') &#xf0e0
+                      span.text-of-sidebar Mail Box     
+    #sideBarNav.MySideBarNav.hidden-lg.hidden-md.hidden-sm
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') &times;
+      .menu-list
+        ul#user.sub-menu
+          li.close-list-menu
+            a(onclick='closeNav()')
+              md-button(aria-label='Close Menu')
+                md-icon(md-font-set='fa') &#xf00d
+              span.text-of-sidebar Close Menu
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.home', onclick='closeNav()')
+              md-button(aria-label='Video Intro')
+                md-icon(md-font-set='fa') &#xf26c
+              span.text-of-sidebar(data-translate='VIDEO-INTRO')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.view-profile', onclick='closeNav()')
+              md-button(aria-label='Profile')
+                md-icon(md-font-set='fa') &#xf007
+              span.text-of-sidebar(data-translate='PROFILE')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.certification', onclick='closeNav()')
+              md-button(aria-label='Certification')
+                md-icon(md-font-set='fa') &#xf0a3
+              span.text-of-sidebar(data-translate='CERTIFICATION')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.practice-video' , onclick='closeNav()')
+              md-button(aria-label='practice video question')
+                md-icon(md-font-set='fa') &#xf109
+              span.text-of-sidebar(data-translate='PRACTICE-VIDEO-QUESTION')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.interview-request', onclick='closeNav()')
+              md-button(aria-label='interview request')
+                md-icon(md-font-set='fa') &#xf016
+              span.text-of-sidebar(data-translate='INTERVIEW-REQUEST')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.multi-apply', onclick='closeNav()')
+              md-button(aria-label='Multiapply')
+                md-icon(md-font-set='fa') &#xf1e0
+              span.text-of-sidebar(data-translate='MULTI-APPLY')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.cover-letter', onclick='closeNav()')
+              md-button(aria-label='Cover Letter')
+                md-icon(md-font-set='fa') &#xf0c6
+              span.text-of-sidebar(data-translate='COVER-LETTER')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.job-openings', onclick='closeNav()')
+              md-button(aria-label='Job Openings')
+                md-icon(md-font-set='fa') &#xf0ae
+              span.text-of-sidebar(data-translate='JOB-OPENINGS')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.applied-job-list', onclick='closeNav()')
+              md-button(aria-label='Applied Job')
+                md-icon(md-font-set='fa') &#xf046
+              span.text-of-sidebar(data-translate='Applied Job')
+          li(ui-sref-active="active")
+            a(data-ui-sref='candidateProfile.mail-box', onclick='closeNav()')
+              md-button(aria-label='Mail Box')
+                md-icon(md-font-set='fa') &#xf0e0
+              span.text-of-sidebar Mail Box     

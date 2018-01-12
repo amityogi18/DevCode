@@ -1,0 +1,28 @@
+.contact-popup-container
+    .modal-header
+        button.close(type='button', data-ng-click='close()') ×
+        h4.modal-title(data-ng-if='!conferenceContactCtrl.isEdit') Add New Contact
+        h4.modal-title(data-ng-if='conferenceContactCtrl.isEdit') Update Contact
+    .modal-body
+        form(role='form', name='conferenceContactCtrl.clientForm', novalidate='novalidate')
+          .form-group.row
+              .col-md-6.col-sm-6.col-xs-12 
+                md-input-container.md-block(flex="100")           
+                  label Name           
+                  input(type='text', name='name', maxlength='50', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='conferenceContactCtrl.name' required)
+                  span.error-msg(data-ng-show='conferenceContactCtrl.clientForm.$submitted || conferenceContactCtrl.clientForm.name.$touched')
+                    span(data-ng-show='conferenceContactCtrl.clientForm.name.$dirty && conferenceContactCtrl.clientForm.name.$invalid')
+                    span.error-msg(data-ng-show='conferenceContactCtrl.clientForm.name.$error.required') Please Enter Name
+              .col-md-6.col-sm-6.col-xs-12  
+                md-input-container.md-block(flex="100")           
+                  label Email           
+                  input(type='text', name='email', maxlength='50', data-ng-model='conferenceContactCtrl.email', data-ng-blur='conferenceContactCtrl.isInvalidEmail(conferenceContactCtrl.email)', data-ng-keypress="conferenceContactCtrl.isInvalidEmail(conferenceContactCtrl.email)", data-ng-keyup="conferenceContactCtrl.isInvalidEmail(conferenceContactCtrl.email)", data-ng-disabled='conferenceContactCtrl.isEdit' required)
+                  span.error-msg(data-ng-if='conferenceContactCtrl.errormessage !== ""') {{conferenceContactCtrl.errormessage}}
+    .modal-footers
+        .form-group.row
+            label.col-form-label
+            .col-md-offset-8.col-md-2.col-sm-offset-8.col-sm-2.col-xs-6
+                md-button.md-raised.md-primary(type='button', data-ng-click='conferenceContactCtrl.addContact()', data-ng-if='!conferenceContactCtrl.isEdit') Add
+                md-button.md-raised.md-primary(type='button', data-ng-click='conferenceContactCtrl.updateContact()', data-ng-if='conferenceContactCtrl.isEdit') Update
+            .col-md-2.col-sm-2.col-xs-6
+                md-button.md-raised.canceldata-btn(type='button', data-ng-click='close()') Cancel

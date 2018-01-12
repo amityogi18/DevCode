@@ -1,0 +1,33 @@
+.content-wrapper.social-media-integration
+  .row
+    .col-md-12.col-xs-12.col-sm-12
+      .social-mdeia
+        span.social-mdeia-heading Social Media Integration
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Social Media Integration
+    .panel-body
+        .row.btn-positions
+          .col-xs-12.col-sm-6.col-md-8
+          .col-xs-12.col-sm-3.col-md-2
+              md-button.md-raised.md-primary(aria-label="save", data-ng-click='socialMediaCtrl.updateSocialMedia()', ng-disabled="!socialMediaCtrl.selectedSocialId.length", on-close="socialMediaCtrl.onClose()") Mark Active
+          .col-xs-12.col-sm-3.col-md-2
+              md-button.md-raised.md-primary(aria-label="save", data-ng-click='socialMediaCtrl.markInActiveSocialMedia()', ng-disabled="!socialMediaCtrl.selectedSocialId.length", on-close="socialMediaCtrl.onClose()") Mark InActive
+        .row
+          .col-sm-4.col-md-4.col-xs-12.showMe
+            select.form-control(class="selectpicker" ng-model="socialMediaCtrl.test1" ng-change="socialMediaCtrl.toggle(socialMediaCtrl.test1)")
+              option(ng-model="col.show" value="{{$index}}" ng-repeat="col in socialMediaCtrl.cols.slice(1,socialMediaCtrl.cols.length) track by $index") {{col.title()}}
+          .main-table-area
+            .table-responsive
+              table.table.table-condensed.table-bordered.table-striped.table-responsive.active-clients-table(ng-table='socialMediaCtrl.socialTableParams',  ng-table-columns-binding="socialMediaCtrl.cols")
+                tr(ng-repeat-start='social in $data')
+                  td(class='col-sm-1')
+                    input(type='checkbox', data-ng-click='socialMediaCtrl.addSocialId($event, social.id)')
+                  td(ng-if="true" class='col-sm-1' title="'Social Id'",sortable="'id'", ng-data='social.id') {{social.id}}
+                  td(ng-if="true" class='col-sm-2' title="'Name'", sortable="'name'", ng-data='social.name') {{social.name}}
+                  td(ng-if="true" class='col-sm-2' title="'Description'", sortable="'description'", ng-data='social.description') {{social.description }}
+                  td(ng-if="true" class='col-sm-2' title="'Status'", sortable="'statusId'", ng-data='social.statusId')
+                    div(data-ng-if='social.statusId === 2')
+                        span InActive
+                    div(data-ng-if='social.statusId === 1')
+                        span Active
+                tr(ng-repeat-end)

@@ -1,0 +1,179 @@
+.content-wrapperm.company-info-page
+ .container
+  .col-md-12.col-sm-12.col-xs-12.company-info-bottom
+    h3.panel-title1(data-translate="COMPANY-ACCOUNT")
+    form(name='companyInfoCtrl.companyInfoForm',novalidate)
+      .main-body-wrapper
+        md-content.default-form
+          .col-md-12.col-sm-12.col-xs-12.upper-form-wrapper
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="FIRST-NAME")
+                  input(type='text', name="firstName",onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25',ng-blur='companyInfoCtrl.removeInvalidFirstNameCi(companyInfoCtrl.companyInfo.firstName)', data-ng-model="companyInfoCtrl.companyInfo.firstName",required='')
+                  span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.firstName.$touched')
+                    span(data-ng-show='companyInfoCtrl.companyInfoForm.firstName.$dirty && companyInfoCtrl.companyInfoForm.firstName.$invalid')
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.firstName.$error.required') First Name Is Required
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="LAST-NAME")
+                  input(type='text',name="lastName",onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25',ng-blur='companyInfoCtrl.removeInvalidLastNameCi(companyInfoCtrl.companyInfo.lastName)' data-ng-model="companyInfoCtrl.companyInfo.lastName",required='')
+                  span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.lastName.$touched')
+                    span(data-ng-show='companyInfoCtrl.companyInfoForm.lastName.$dirty && companyInfoCtrl.companyInfoForm.lastName.$invalid')
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.lastName.$error.required',data-translate="LAST-NAME-EROOR")
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="JOB-TITLE")
+                  input(type='text',name="jobTitle" ,maxlength='25', data-ng-model="companyInfoCtrl.companyInfo.jobTitle",required='')
+                  span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.jobTitle.$touched')
+                    span(data-ng-show='companyInfoCtrl.companyInfoForm.jobTitle.$dirty && companyInfoForm.jobTitle.$invalid')
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.jobTitle.$error.required',data-translate="JOB-ERROR")
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="CONTACT-NUMBER")
+                  input(type='text',name="companyContactNo",onkeypress='return event.charCode <= 57', data-ng-model="companyInfoCtrl.companyInfo.companyContactNo",maxlength='14',data-ng-blur='companyInfoCtrl.analyzePhoneNumber(companyInfoCtrl.companyInfo.companyContactNo)', data-ng-keyup="companyInfoCtrl.analyzePhoneNumber(companyInfoCtrl.companyInfo.companyContactNo)",required)
+                  span.error-message(data-ng-if='companyInfoCtrl.errmsgcon !== ""') {{companyInfoCtrl.errmsgcon}}
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="COMPANY-NAME")
+                  input(type='text',name="companyName",maxlength='50', data-ng-model="companyInfoCtrl.companyInfo.companyName",required='')
+                  span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.companyName.$touched')
+                    span(data-ng-show='companyInfoCtrl.companyInfoForm.companyName.$dirty && companyInfoCtrl.companyInfoForm.companyName.$invalid')
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.companyName.$error.required',data-translate="COMPANY-ERROR")
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="COMPANY-SIZE")
+                  md-select(data-ng-model="companyInfoCtrl.companyInfo.companySize",name='companySize',data-md-container-class='selectdemoSelectHeader',md-on-close="companyInfoCtrl.clearSearchSize()",required)
+                    md-option(value='500', style="font-weight:bold") under 500 employees
+                    md-option(value='1000', style="font-weight:bold") under 501-1000 employees
+                    md-option(value='2500', style="font-weight:bold") under 1001-2500 employees
+                    md-option(value='5000', style="font-weight:bold") under 2501-5000 employees
+                    md-option(value='5001', style="font-weight:bold") more than 5001 employees
+                  span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.companySize.$touched')
+                    span(data-ng-show='companyInfoCtrl.companyInfoForm.companySize.$dirty && companyInfoCtrl.companyInfoForm.companySize.$invalid')
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.companySize.$error.required',data-translate="COMPANY-SIZE-ERROR")
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label(data-translate="COMPANY-WEBSITE")
+                  input(type='text',name="companyWebsite", data-ng-model="companyInfoCtrl.companyInfo.companyWebsite",maxlength='50',data-ng-blur='companyInfoCtrl.analyzeUrl(companyInfoCtrl.companyInfo.companyWebsite)', data-ng-keyup="companyInfoCtrl.analyzeUrl(companyInfoCtrl.companyInfo.companyWebsite)",required)
+                  span.error-message(data-ng-if='companyInfoCtrl.errormessageurl !== ""') {{companyInfoCtrl.errormessageurl}}
+              .col-md-6.col-sm-6.col-xs-12
+                md-content.geo-section(flex='100')
+                  place-autocomplete(data-ng-model='companyInfoCtrl.geoAddress', search-type='1')
+            .row
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  label.companylogo(data-translate="COMPANY-LOGO")
+                  input(type="file", name="file", ngf-max-size="512KB", ngf-select="companyInfoCtrl.uploadFile($files); companyInfoCtrl.isFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile" required)
+                  i(ng-show="companyInfoCtrl.companyInfoForm.file.$error.maxSize")
+                    | File too large
+                  //span(ng-show="companyInfoCtrl.companyInfoForm.file.$invalid && !companyInfoCtrl.companyInfoForm.file.$touched") File Is Required
+              .col-md-6.col-sm-6.col-xs-12
+                md-input-container.md-block(flex="100")
+                  .col-md-2.col-sm-2.col-xs-12
+                    label(data-translate="COMPANY-URL")
+                  .col-md-4.col-sm-4.col-xs-12.url-company-field
+                    select#ddlUrlType.form-control(data-ng-model='companyInfoCtrl.candidateUrlData.urlType', ng-options='urlType as urlType.name for urlType in companyInfoCtrl.customUrlList track by urlType.urlTypeId',name='urlList',data-ng-click='companyInfoCtrl.analyzeOtherCompany(companyInfoCtrl.candidateUrlData.urlType)')
+                      option(selected='selected', value='') Select
+                    span.error-message(data-ng-if='companyInfoCtrl.errorMessageOtherCompanyUrl !== ""') {{companyInfoCtrl.errorMessageOtherCompanyUrl}}
+                  .col-md-5.col-sm-5.col-xs-12.url-field
+                    md-input-container.md-block(flex="100",style='margin-top:2px')
+                      input.url-input(type='text', name='companyUrl', placeholder='Other Company Url', ng-model='companyInfoCtrl.candidateUrlData.url',maxlength='50',data-ng-blur='companyInfoCtrl.analyzeCompanyUrl(companyInfoCtrl.candidateUrlData.url)', data-ng-keyup="companyInfoCtrl.analyzeCompanyUrl(companyInfoCtrl.candidateUrlData.url)",style='color:black')
+                      span.error-message(data-ng-if='companyInfoCtrl.errormessagecompurl !== ""') {{companyInfoCtrl.errormessagecompurl}}
+                  .col-md-1.col-sm-1.col-xs-12
+                    span
+                      i.fa.fa-plus-circle.fa-lg.add-url-plus.add-url-btn(data-ng-click='companyInfoCtrl.addCandidateUrl()', ng-if='companyInfoCtrl.showAddMore')
+                .col-md-2.col-sm-2.col-xs-12
+                  .col-md-offset-2.col-md-6.col-sm-offset-2.col-sm-6.col-xs-offset-2.col-xs-6.url-table
+                    table.table.table-responsive
+                      tr(ng-repeat='urlData in companyInfoCtrl.candidateUrls')
+                        td(data-ng-if='urlData.urlTypeId === 1') Facebook
+                        td(data-ng-if='urlData.urlTypeId === 2') Twitter
+                        td(data-ng-if='urlData.urlTypeId === 3') LinkedIn
+                        td(data-ng-if='urlData.urlTypeId === 4') Other
+                        td {{urlData.url}}
+                        td
+                          i.fa.fa-trash(aria-hidden='true', ng-click='companyInfoCtrl.deleteCandidateUrl($index)')
+            .row
+              .col-md-12.col-sm-12.col-xs-12
+                  md-checkbox.md-primary(data-ng-model="companyInfoCtrl.companyInfo.isAgree",name='agree',required)
+                  span.agree-check-box(data-translate="AGREE-CHECK-BOX")
+                  a.terms-condition-link(href='javascript:void(0)',data-toggle="modal", data-target="#termsConditionModal") Terms & Conditions
+                  | &
+                  a.privacy-policy-link(href='javascript:void(0)',data-toggle="modal", data-target="#privacyPolicy") Privacy Policy
+                  .row
+                    span.error-message(data-ng-show='companyInfoCtrl.companyInfoForm.$submitted || companyInfoCtrl.companyInfoForm.agree.$touched')
+                      span(data-ng-show='companyInfoCtrl.companyInfoForm.agree.$dirty && companyInfoCtrl.companyInfoForm.agree.$invalid')
+                      span.error-message.shift-left(data-ng-show='companyInfoCtrl.companyInfoForm.agree.$error.required',data-translate='TERM-ERROR')
+            .col-md-12.col-sm-12.col-xs-12
+              .save-mid-btns.col-md-offset-5.col-md-7.col-sm-offset-5.col-sm-7.col-xs-offset-5.col-xs-7
+                md-button.md-raised.savedata-btn.saveCompInfo-btn(data-ng-click="companyInfoCtrl.saveCompanyInfo()",data-translate="CONTINUE")
+            .col-md-12.col-sm-12.col-xs-12    
+              span.mandatory-star-note
+               b Note:
+              span.note-mandatory
+               |  Fields Marks With Asterisk (
+              span.red-star  *
+              span.note-mandatory
+               |   ) Are Mandatory.             
+    #termsConditionModal.modal.fade(role='dialog')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header.header-modal-tc
+            button.close(type='button', data-dismiss='modal') ×
+            h3.modal-title Terms & Conditions
+          .modal-body.content-justify
+            p
+              | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+            p
+              | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+            p The use of this website is sub  ject to the following terms of use:
+            ul
+              li
+                | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+              li
+                | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+              li
+                | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+              li
+                | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+              li
+                | This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+              li
+                | All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.
+              li
+                | Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+              li
+                | From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+              li
+                | Your use of this website and any dispute arising out of such use of the website is subject to the laws of India, USA, England, Northern Ireland, Scotland and Wales.
+          .modal-footer
+            md-button.md-raised.md-primary(type='button',data-dismiss='modal') OK
+    #privacyPolicy.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header.header-modal-tc
+            button.close(type='button', data-dismiss='modal') ×
+            h3.modal-title Privacy Policy
+          .modal-body
+            p
+              | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+            p
+              | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+            p The use of this website is sub  ject to the following terms of use:
+            ul
+              li
+                | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+              li
+                | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+              li
+                | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+              li
+                | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+          .modal-footer
+            md-button.md-raised.md-primary(type='button',data-dismiss='modal') OK
+
+

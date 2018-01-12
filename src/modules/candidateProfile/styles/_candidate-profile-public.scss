@@ -1,0 +1,657 @@
+.candidate-profile-public{
+     .alert-error-message{
+        color : red;
+      }
+  
+  .certification-heading {
+    text-align: center;
+    color:$white;
+  }
+
+  .intro-certificate {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+  }
+
+  .profile-of-candidate,.skills  {
+    color: $blue;
+    margin-top:10px;
+  }
+
+  .profile {
+    line-height: 30px;
+  }
+
+  .candidate-designation {
+    margin-left: 15px;
+  }
+
+  .profile-of-candidate,.work-experience  {
+    color:$blue;
+  }
+
+  .profile-container,.certification-panel {
+    margin-top: 30px;
+  }
+
+  .intro-video{
+    width:100%;
+    height:200px;
+  }
+  .image-of-candidate{
+    margin-top:35px;
+    width:70px;
+    height:80px;
+  }
+  .medal-image{
+    width:30px;
+    height:40px;
+  }
+
+  
+}
+.profile-container, .app-content{
+    height: 100%;
+}
+.profile-public{
+    
+     .alert-error-message{
+        color : red;
+      }
+
+     .candidate-details-heading{
+       margin-top: 38px;
+   } 
+   .about-me-heading{
+       margin-top: -38px;
+   }
+  .length-content{
+    word-wrap: break-word!important;
+  }
+
+   .cover-letter-content{
+       text-align: justify;
+
+   }
+   .details-content{
+       border: 1px solid #ddd;
+    margin-top: 25px;
+   }
+
+    .container{
+        padding-bottom: 50px;
+    }
+    height: 100%;
+    .logo {
+        left: 80px;
+        position: absolute;
+        top: 10px;
+    }
+    .slider-area {
+            max-height: 350px;
+    }
+    .slider-area,
+    .single-slider,
+    .slider-area-table {
+        height: 100%;
+    }
+    .slider-area-table {
+        display: table;
+        width: 100%;
+    }
+    .slider-area-cell {
+        display: table-cell;
+        vertical-align: middle;
+        color: #fff;
+    }
+    .single-slider {
+        position: relative;
+        overflow: hidden;
+    }
+    .fullwidth-bg {
+        background: url("#{$imgPath}/webrtcBg5.jpg");
+        background-size: cover;
+        background-position: center center;
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    .fullwidth-bg.slide-bg-dark {
+        background: url("#{$imgPath}/webrtcBg3.jpg");
+        background-size: cover;
+        background-position: center center;
+    }
+    @-webkit-keyframes zoomEffect {
+        0% {
+            -webkit-transform: scale(1, 1) translate(0, 0);
+        }
+        25% {
+            -webkit-transform: scale(1.3, 1.3) translate(50px, 50px);
+        }
+        50% {
+            -webkit-transform: scale(1, 1) translate(0, 0);
+        }
+        75% {
+            -webkit-transform: scale(1.3, 1.3) translate(-50px, -50px);
+        }
+        100% {
+            -webkit-transform: scale(1, 1) translate(0, 0);
+        }
+    }
+    @keyframes zoomEffect {
+        0% {
+            transform: scale(1, 1) translate(0, 0);
+        }
+        25% {
+            transform: scale(1.3, 1.3) translate(50px, 50px);
+        }
+        50% {
+            transform: scale(1, 1) translate(0, 0);
+        }
+        75% {
+            transform: scale(1.3, 1.3) translate(-50px, -50px);
+        }
+        100% {
+            transform: scale(1, 1) translate(0, 0);
+        }
+    }
+    .fullwidth-bg.slide-bg-dark  {
+        animation: 50s ease 0s normal none infinite running zoomEffect;
+        transform: scale(1, 1) translate(0px, 0px);
+        transition:0.3s;
+        height: 100%;
+        left: 0;
+        margin-bottom: -25px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+    }
+    .border-btn {
+        background: #00bcd4 none repeat scroll 0 0;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        color: #ffffff;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        margin-top: 35px;
+        padding: 0 30px;
+        z-index: 999;
+    }
+    .border-btn::before {
+        content: "\f019";
+        font-family: fontawesome;
+        margin-right: 10px;
+    }
+    .border-btn:hover {
+        background: #00acc1;
+        cursor: pointer;
+        color: #fff;
+    }
+    .fullwidth-bg:after {
+        content: "";
+        background: #000;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+    .bannerText {
+        //background: rgba(0, 0, 0, 0.3) none repeat scroll 0 0;
+        //border: 1px solid #ffffff;
+        left: 0;
+        max-width: 960px;
+        padding: 30px 0;
+        text-align: center;
+        margin-bottom: 60px;
+        margin: auto;
+    }
+    .bannerText h1 {
+        text-transform: uppercase;
+        font-size: 50px;
+        line-height: 60px;
+        margin: 0;
+        padding-bottom: 8px;
+    }
+    .bannerText h1 span {
+        color: #00bcd4;
+    }
+    .bannerText h2 {
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: 3px;
+        margin: 15px auto;
+        text-transform: uppercase;
+    }
+    .typer {
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        margin: 15px auto;
+    }
+    .bannerText.v2 {
+        margin-top: 70px;
+    }
+
+    .typer__cursor--blink {
+        -webkit-animation: blink 1s infinite;
+        -moz-animation: blink 1s infinite;
+        animation: blink 1s infinite;
+    }
+
+    @-webkit-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-moz-keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    
+    
+    /*--------------------------
+    5. About Area
+----------------------------*/
+.about-area {
+    background: #f4f5f5;
+}
+.about-area iframe {
+    width: 100%;
+    min-height: 350px;
+    padding-bottom: 25px;
+}
+.about-containt h3 {
+    color: #00bcd4;
+    font-size: 34px;
+    text-transform: uppercase;
+}
+.about-containt h5 {
+    color: #727272;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 0;
+    text-transform: capitalize;
+}
+.about-containt p {
+    line-height: 25px;
+}
+.myPic,
+.member-picture {
+    border: 6px solid #ffffff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    display: block;
+    height: 350px;
+    position: relative;
+    width: 340px;
+}
+.myPic img,
+.member-picture img {
+    height: 100%;
+    max-width: inherit !important;
+    position: absolute;
+    width: 100%;
+}
+/* section title area*/
+.section-title {
+    margin-bottom: 50px;
+}
+.section-title h2 {
+    display: inline-block;
+    font-family: "Roboto", sans-serif;
+    padding-bottom: 15px;
+    position: relative;
+    text-transform: uppercase;
+}
+.section-title h2::after {
+    background: #00bcd4 none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 2.5px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    width: 65%;
+}
+.section-title p {
+  font-family: "Roboto",sans-serif;
+  font-size: 18px;
+  margin: auto;
+  width: 55%;
+  text-align: center;
+}
+/*-----skills area--------*/
+.skill-arae {
+    background-color: #f4f5f5;
+}
+.progress-bar-inner {
+    margin-bottom: 10px;
+}
+.progress-bar-label {
+    color: #757575;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: roboto;
+    text-transform: uppercase;
+}
+.progress-bar {
+    background-color: #dadada;
+    position: relative;
+    width: 100%;
+}
+.progress-bar-L1 {
+    background-color: #00ACC1;
+    height: 4px;
+    position: relative;
+    transition: width 1.5s ease 0s;
+    width: 0;
+}
+.progress-conunt {
+    position: absolute;
+    right: -16px;
+    top: -16px;
+}
+.progress-conunt span {
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4.7px 0.3px rgba(0, 0, 0, 0.24);
+    color: #777777;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    height: 27px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    width: 27px;
+}
+.skill-wrap {
+    margin-left: 50px;
+    overflow: hidden;
+    padding : 20px;
+}
+.skill-wrap .skill {
+    margin-bottom: 25px;
+}
+
+/*--------------------------
+    14. Join us social link
+----------------------------*/
+.join-us-area {
+    background: #ededed;
+}
+.s-link {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin: auto 10px;
+    position: relative;
+    width: 40px;
+    z-index: 5;
+}
+.s-link a {
+  color: #ffffff;
+  display: block;
+  font-size: 18px;
+  text-align: center;
+}
+.s-link::before {
+    background: #00bcd4 none repeat scroll 0 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(45deg);
+    transition: all 0.3s ease 0s;
+    width: 100%;
+    z-index: -1;
+    border-radius: 4px;
+}
+.s-link:hover::before {
+    box-shadow: 3px 4px 6px 0 rgba(0, 0, 0, 0.15) !important;
+    background: #00ACC1;
+}
+.s-link.facebook:hover::before {
+    background: #3b5998;
+}
+.s-link.twitter:hover::before {
+    background: #55acee;
+}
+.s-link.google-plus:hover::before {
+    background: #dd4b39;
+}
+.s-link.pinterest:hover::before {
+    background: #cb2027;
+}
+.s-link.tumblr:hover::before {
+    background: #32506d;
+}
+.s-link.dribbble:hover::before {
+    background: #ff0084;
+}
+
+.social-small .s-link {
+  height: 30px;
+  line-height: 30px;
+  width: 30px;
+}
+.social-small .s-link a {
+  font-size: 12px;
+}
+
+/*--------------------------
+   18. Footer Area
+----------------------------*/
+.footer-area {
+    background: #363940 none repeat scroll 0 0;
+    color: #fff;
+    position: relative;
+}
+.footer-area.section_padding {
+    padding: 20px 0px;
+}
+.footer-text p a {
+    color: #00bcd4;
+}
+.footer-text p {
+    letter-spacing: 1px;
+    margin: 0;
+    font-size: 12px;
+}
+.social-link-list{
+    margin-bottom: 30px;
+}
+/*--------------------------
+    12. Why Choose Me
+----------------------------*/
+.why-do-you-choose-area {
+    background: #ededed;
+}
+.why-do-you-choose-area .panel-heading {
+    background: #00bcd4 none repeat scroll 0 0;
+    color: #ffffff;
+    padding:0;
+}
+.why-do-you-choose-area .panel-body {
+    background: #fcfcfc none repeat scroll 0 0;
+    line-height: 23px;
+    padding: 15px 20px 20px;
+    text-align: justify;
+}
+.why-do-you-choose-area .panel-title i {
+    font-size: 22px;
+    line-height: 18px;
+}
+.accordion-toggle {
+    display: block;
+    padding: 15px 20px;
+}
+.why-do-you-choose-area .panel-group .panel-heading {
+    border-bottom: 0 none;
+    border-radius: 0;
+}
+.why-do-you-choose-area .panel-group .panel-heading + .panel-collapse > .list-group,
+.why-do-you-choose-area .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border-top: 0px solid #dddddd;
+}
+.why-do-you-choose-area .panel {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    border-radius: 0;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin: 0;
+    padding: 0;
+}
+.why-do-you-choose-area iframe {
+    width: 100%;
+    min-height: 350px;
+    padding-bottom: 25px;
+}
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+    font-size: 30px;
+    font-weight: 300;
+}
+}
+.email-model{
+    width: 400px !important;
+    margin-left: -40px;
+}
+
+
+/* Medium Layout: 1280px. */
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .profile-public{
+        .logo {
+            left: 50px;
+            top: 30px;
+        }
+        .slider-area-cell h1 {} .bannerText {
+            max-width: 800px;
+        }
+        .slider-area-cell h3 {
+            font-size: 20px;
+        }
+        .slider-area-cell p {
+            font-size: 11px;
+            padding: 10px 195px;
+        }    
+    }
+}
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .profile-public{
+        .logo {
+            left: 0;
+            position: absolute;
+            top: 50px;
+            z-index: 9999;
+            right: 0!important;
+            margin: auto;
+            width: 100%;
+            text-align: center;
+        }
+        .bannerText {
+            max-width: 650px;
+        }
+        .bannerText h1 {
+            font-size: 60px;
+            line-height: 60px;
+        }
+        .slider-area-cell h3 {
+            font-size: 18px;
+        }
+        .slider-area-cell p {
+            font-size: 11px;
+            padding: 10px 80px;
+        }
+
+        .slider-area-cell p {
+            text-transform: lowercase;
+        }    
+    }
+}
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+    .profile-public{
+        .logo {
+            left: 0;
+            position: absolute;
+            top: 50px;
+            right: 0!important;
+            margin: auto;
+            width: 100%;
+            text-align: center;
+        }
+        .bannerText {
+            max-width: 650px;
+        }
+        .bannerText h1 {
+            font-size: 60px;
+            line-height: 60px;
+        }
+        .slider-area-cell h3 {
+            font-size: 18px;
+        }
+        .slider-area-cell p {
+            font-size: 11px;
+            padding: 10px 80px;
+        }
+
+        .slider-area-cell h1 {
+            font-size: 32px;
+            font-weight: 400;
+            padding-bottom: 5px;
+        }
+        .slider-area-cell h1:after {
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        }
+        .slider-area-cell h3 {
+            font-size: 25px;
+        }
+        .slider-area-cell p {
+            font-size: 14px;
+            text-transform: lowercase;
+            padding: 0px;
+        }	
+    }
+}
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+
+}

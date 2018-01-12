@@ -1,0 +1,6 @@
+//.question-text {{multipleChoiceQuestionCtrl.question.question}}
+.question-options
+  .radio(ng-repeat="option in multipleChoiceQuestionCtrl.question.questionOption")
+    label
+      input.option-input.radio(type='radio', ng-change='answerSelected();', ng-model='multipleChoiceQuestionCtrl.question.answer', value='{{option.id}}')
+      |             {{option.option}}

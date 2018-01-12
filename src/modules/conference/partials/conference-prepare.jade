@@ -1,0 +1,11 @@
+.content-wrapper.candidate-view
+  
+      .candidate-view-steps.step(style='margin-left: -45px;')
+        .confprepheading.col-md-4.col-md-offset-5.col-xs-8.col-xs-offset-3
+          | Conference Prepare
+        .step-body
+          .step-3-wrapper
+            .step-accordion
+              .whte-bg
+                help-component
+                button.btn.btn-next.right(data-ng-click="ConferencePrepareCtrl.joinMeeting1()" ng-disabled="ConferencePrepareCtrl.videoCheck || ConferencePrepareCtrl.audioCheck || ConferencePrepareCtrl.speedCheck" data-translate="NEXT")

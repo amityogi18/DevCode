@@ -1,0 +1,395 @@
+.content-wrapper.super_admin.dashboard
+  .row
+    .col-md-12
+      .dashboard
+        span.dashboard-heading(data-translate="DASHBOARD")
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Candidate Profile
+    .panel-body
+      .row
+        .col-md-4.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text  
+                span.md-title.md-title-font(data-translate="2-MIN-INTRO-STATICS")
+            .panel-body.candidate-profile-panel
+                table.table
+                  tbody
+                    tr
+                      td New Signup
+                      td
+                        .mydiv
+                          span {{superadminCtrl.twoMinStaticsData.newSignUp}}
+                    tr
+                      td No. of Intro Recorded
+                      td
+                        .mydiv
+                           span {{superadminCtrl.twoMinStaticsData.noOfIntroRecorded}}
+                    tr
+                      td No. Of Completed Interview
+                      td
+                        .mydiv
+                          span {{superadminCtrl.twoMinStaticsData.noOfTestTaken}}
+                    tr
+                      td Not Logged Since Last One Month
+                      td
+                        .mydiv
+                          span {{superadminCtrl.twoMinStaticsData.notLoggedInSinceLastOneMonth}}
+                    tr
+                      td No. Of Certified Candidates
+                      td
+                        .mydiv
+                          span {{superadminCtrl.twoMinStaticsData.certifiedCandidates}}
+        .col-md-4.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="COMPANY-CANDIDATE-STATICS")
+            .panel-body.candidate-profile-panel
+              table.table
+                tbody
+                  tr
+                    td Total Company
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.companyCount}}
+                  tr
+                    td Total Company Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.companyCandidateCount}}
+                  tr
+                    td Total Live Interview Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.interviewCandidateCountLive}}
+                  tr
+                    td Total Live Now Interview Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.interviewCandidateCountLivenow}}
+                  tr
+                    td Total OnDemand Interview Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.interviewCandidateCountOndemand}}
+                  tr
+                    td Total Onsite Interview Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.companyCandidateList.interviewCandidateCountSite}}
+        .col-md-4.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font Social Media Signup
+            .panel-body.candidate-profile-panel
+              table.table
+                tbody
+                  tr
+                    td Signup With Gmail
+                      span
+                        i.fa.fa-google-plus-square.social-net-icon-gmail(aria-hidden='true')  
+                    td
+                      .mydiv
+                        span {{superadminCtrl.profileSocialList.noOfEmail}}
+                  tr
+                    td Signup With LinkedIn
+                      span
+                        i.fa.fa-linkedin-square.social-net-icon-linkdin(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.profileSocialList.noOfLinkdin}}
+                  tr
+                    td Signup With Twitter
+                      span
+                        i.fa.fa-twitter-square.social-net-icon-twitter(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.profileSocialList.noOfTwitter}}
+                  tr
+                    td Signup With Facebook
+                      span
+                        i.fa.fa-facebook-square.social-net-icon-facebook(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.profileSocialList.noOffacebook}}
+                    tr
+                      td Signup With Others
+                        span
+                          i.fa.fa-link.social-net-icon-facebook(aria-hidden='true')
+                      td
+                        .mydiv
+                          span {{superadminCtrl.profileSocialList.noOfOthers}}
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Interview & Conference
+    .panel-body
+      .row
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="CLIENT-STATICS")
+            .panel-body.interview-conference-panel
+              table.table
+                tbody
+                  tr
+                    td New Signup
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.newSignUp}}
+                  tr
+                    td Active
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.active}}
+                  tr
+                    td Inactive
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.inactive}}
+                  tr
+                    td Re-Activated
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.reactived}}
+                  tr
+                    td Not Logged Since Last One Month
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.notLoggedInSinceOneMonth}}
+                  tr
+                    td No Of Free Conference User
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.noOfFreeConferenceUser}}
+                  tr
+                    td No Of Free Interview User
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.noOfFreeInterviewUser}}
+                  tr
+                    td No Of Paid Conference User
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.noOfpaidConferenceUser}}
+                  tr
+                    td No Of Paid Interview User
+                    td
+                      .mydiv
+                        span {{superadminCtrl.clientList.noOfPaidInterviewUser}}
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="STATUS")
+            .panel-body.interview-conference-panel
+              table.table
+                tbody
+                  tr
+                    td Total Users
+                    td
+                      .mydiv
+                        span {{superadminCtrl.statusCountList.totalUsers}}
+                  tr
+                    td Total Candidate
+                    td
+                      .mydiv
+                        span {{superadminCtrl.statusCountList.totalCandidates}}
+                  tr
+                    td Audio Records
+                    td
+                      .mydiv
+                        span {{superadminCtrl.statusCountList.audioRecords}}
+                  tr
+                    td Video Records
+                    td
+                      .mydiv
+                        span {{superadminCtrl.statusCountList.videoRecords}}
+                  tr
+                    td Guest
+                    td
+                      .mydiv
+                        span {{superadminCtrl.statusCountList.guestUsers}}
+      .row
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="TICKETING-SYSTEM")
+            .panel-body.interview-conference-panel
+              table.table
+                tbody
+                  tr
+                    td Total
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.total}}
+                  tr
+                    td Active
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.active}}
+                  tr
+                    td Closed
+                    td
+                      .mydiv
+                        span  {{superadminCtrl.ticketList.closed}}
+                  tr
+                    td Inactive
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.inActive}}
+                  tr
+                    td On Hold
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.onHold}}
+                  tr
+                    td Opened
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.open}}
+                  tr
+                    td Re-Opened
+                    td
+                      .mydiv
+                        span {{superadminCtrl.ticketList.reOpened}}
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font Social Media Signup
+            .panel-body.interview-conference-panel
+              table.table
+                tbody
+                  tr
+                    td Signup With Google+
+                      span
+                        i.fa.fa-google-plus-square.social-net-icon-gmail(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.interviewSocialList.noOfHitsOnGooglePlus}}
+                  tr
+                    td Signup With LinkedIn
+                      span
+                        i.fa.fa-linkedin-square.social-net-icon-linkdin(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.interviewSocialList.noOfHitsOnLinkdin}}
+                  tr
+                    td Signup With Twitter
+                      span
+                        i.fa.fa-twitter-square.social-net-icon-twitter(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.interviewSocialList.noOfHitsOnTwitter}}
+                  tr
+                    td Signup With Facebook
+                      span
+                        i.fa.fa-facebook-square.social-net-icon-facebook(aria-hidden='true')
+                    td
+                      .mydiv
+                        span {{superadminCtrl.interviewSocialList.noOfHitsOnFacebook}}
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Performance
+    .panel-body                   
+      .row
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="MANAGED-STORAGE-QUOTA")
+            .panel-body
+              table.table
+                tbody
+                  tr
+                    td Available Quota
+                    td
+                      .storage-info
+                        span.label.label-danger.storage-info {{superadminCtrl.storageQuotaList.available}} GB
+                  tr
+                    td Used Quota
+                    td
+                      .storage-info
+                        span.label.label-success.storage-info {{superadminCtrl.storageQuotaList.used}} GB
+                  tr
+                    td Remaining Quota
+                    td
+                      .storage-info
+                          span.label.label-default.storage-info {{superadminCtrl.storageQuotaList.remaining}} GB
+                  tr
+                    td
+                    td
+        .col-md-6.col-sm-12.col-xs-12
+          md-card.super-panel-card
+            md-card-header.super-panel-header
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="DISK-USAGE")
+            .panel-body
+              table.table
+                tbody
+                  tr
+                    td Available Storage
+                    td
+                      .storage-info
+                        span.label.label-danger.storage-info {{superadminCtrl.diskUsageList.available}} GB
+                  tr
+                    td Log Folder Size
+                    td
+                      .storage-info
+                        span.label.label-success.storage-info {{superadminCtrl.diskUsageList.used}} GB
+                  tr
+                    td Available Log Space
+                    td
+                      .storage-info
+                        span.label.label-default.storage-info {{superadminCtrl.diskUsageList.remaining}} GB
+                  tr
+                    td
+                    td
+        //.col-md-3.col-sm-12.col-xs-12
+          md-card
+            md-card-header.panel-heading
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="SOCIAL-MEDIA-ACTIVITIES")
+            .panel-body
+              table.table
+                tbody
+                  tr
+                    td Hits On Google+
+                      span
+                        i.fa.fa-google-plus-square.social-net-icon-gmail(aria-hidden='true')
+                    td
+                      .mydiv
+                        span 12
+                  tr
+                    td Hits On LinkedIn
+                      span
+                        i.fa.fa-linkedin-square.social-net-icon-linkdin(aria-hidden='true')
+                    td
+                      .mydiv
+                        span 9
+                  tr
+                    td Hits On Twitter
+                      span
+                        i.fa.fa-twitter-square.social-net-icon-twitter(aria-hidden='true')
+                    td
+                      .mydiv
+                        span 4
+                  tr
+                    td Hits On Facebook
+                      span
+                        i.fa.fa-facebook-square.social-net-icon-facebook(aria-hidden='true')
+                    td
+                      .mydiv
+                        span 6
+        //.col-md-3.col-sm-12.col-xs-12
+          md-card
+            md-card-header.panel-heading
+              md-card-header-text
+                span.md-title.md-title-font(data-translate="LOAD-AS-PER-TIME")
+            .panel-body
+              ul.list-group
+                li.list-group-item
+                  span(data-translate="LOAD-AS-PER-TIME")
+                img(src='../../../public/img/time.jpg', alt='')

@@ -1,0 +1,76 @@
+.super_admin.position-review {
+    
+    
+    .accept-button {
+        float: right !important;
+        margin-bottom: 11px !important;
+          }      
+   .review-position{
+      font-size:$font-size-large;
+      width:100%;
+      border-bottom:1px solid $lightGrey;
+      margin-bottom: 15px;
+      margin-left: -14px;
+      padding: 0px 10px 5px 10px;
+
+      .review-position-heading{
+      margin-left:10px;
+      text-transform: uppercase;
+      color:#333;
+      }
+
+    }
+    .bold-label{
+        font-weight:600;
+    }
+    .zero-margin{
+        margin-top:0px;
+    }
+    .live-now-btn{
+    margin-left: -91px!important;
+    margin-top: 0px!important;
+  }
+
+  .popover{
+    position: absolute;
+    left: 798px !important;
+    width: 350px !important;
+    border-radius: 0px;
+    min-height: 270px !important;
+    .arrow{
+      position: absolute;
+      left:187px !important;
+    }
+  }
+  .popover-inner {
+    width: 273px;
+  }
+  .popover-content {
+    width: 350px;
+  }
+  .popover-content {
+    width: 350px;
+  }
+  .comment-section{
+    width: 100%;
+    border: 1px solid grey;
+    padding: 10px;
+    float:left;
+  }
+  .comment-text{
+    border: 2px solid grey;
+    padding: 6px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+  }
+  .cmt-icon{
+    padding: 3px;
+    font-size: 20px;
+    color: grey;
+  }
+}
+.error-msg-reject {
+        color: red;
+        font-size: 10px;
+    }
+    

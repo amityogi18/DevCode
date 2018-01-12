@@ -1,0 +1,238 @@
+.candidate-evaluator-acordion{
+  .resend-mail {
+    margin-left: 20px;
+  }
+
+  .close-icon{
+    color:$red;
+  }
+  
+  .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+    .main-table-area{
+         margin-bottom: 15px !important;
+
+        //.table-box-candidate{
+           // overflow-x: auto; 
+       // } 
+    }
+    
+    .inner-candidate-form .right-btn {
+      text-align: center;
+    }
+
+    .inner-candidate-form .bttn-group .form-group {
+      display: block;
+      margin: 0 0 10px 0;
+    }
+    .inner-candidate-form .btn {
+      margin: 0 0 5px !important;
+    }    
+    .interviewer-tab-content {
+      width: 100%;
+      float: left;
+      text-align: center;      
+    }
+    .interviewer-tab-content .btn-add-intrvw {
+      display: inline-block;
+      vertical-align: middle;
+      background: $btnPrimaryColor;
+      font-size: 13px;
+      color: $white;
+      text-transform: uppercase;
+      line-height: 1em;
+      padding: 13px 32px 12px;
+      margin-bottom: 10px;
+      text-decoration: none !important;
+    }
+    .interviewer-tab-content .btn-add-intrvw:hover {
+      background: $btnPrimaryHoverColor;
+      cursor:pointer;
+    }
+    .interviewer-tab-content .table-responsive {
+      width: 100%;
+    }
+    .interviewer-tab-content .table {
+      margin-bottom: 0;
+    }
+    .interviewer-tab-content .table>thead{
+      background: #d2cfcf;
+    }
+    .interviewer-tab-content .table>thead>tr>th {
+      border-bottom: none;
+      text-align: center;
+      font-size: 14px;
+      color: #666666;
+      border-top: #d0d0d0 1px solid !important;
+      padding: 10px 0;
+      white-space: nowrap;
+    }
+    .interviewer-tab-content .table>tbody>tr {
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fcfcfc+0,f3f3f3+69,ececec+100 */
+      //background: #fcfcfc;
+      /* Old browsers */
+      //background: -moz-linear-gradient(top, #fcfcfc 0%, #f3f3f3 69%, #ececec 100%);
+      /* FF3.6-15 */
+      //background: -webkit-linear-gradient(top, #fcfcfc 0%, #f3f3f3 69%, #ececec 100%);
+      /* Chrome10-25,Safari5.1-6 */
+      //background: linear-gradient(to bottom, #fcfcfc 0%, #f3f3f3 69%, #ececec 100%);
+      /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ececec', GradientType=0);*/
+      /* IE6-9 */
+    }
+    .interviewer-tab-content .table>tbody>tr>td {
+      font-size: 12px;
+      color: #434b58;
+      padding: 12px 12px;
+      border: #d0d0d0 1px solid;
+      //white-space: nowrap;
+    }
+    .interviewer-tab-content .table .action-icon a {
+      margin: 0 4px;
+      display: block;
+      vertical-align: middle;
+    }
+    .interviewer-tab-content .table .action-icon a:hover img {
+      opacity: 0.7;
+    }
+    .save-cancel-btns {
+      width: 100%;
+      float: left;
+      text-align: center;
+      margin: 0 0 10px 0;
+    }
+    .save-cancel-btns a {
+      width: 100%;
+      max-width: 108px;
+      text-align: center;
+      height: 35px;
+      line-height: 36px;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 13px;
+      color: #FFF;
+      text-transform: uppercase;
+      text-decoration: none !important;
+    }
+    .save-cancel-btns a:hover {
+      background: #a7a6a6 !important;
+    }
+    .save-cancel-btns a.btn-green {
+      background: #7ac043;
+    }
+    .save-cancel-btns a.btn-blue {
+      background: #5497ba;
+      margin-left: 10px;
+    }
+    @media only screen and (min-width: 992px) {
+      .inner-candidate-form .bttn-group .form-group {
+        display: inline-block;
+        margin: 0 0 5px 0;
+      }
+      .inner-candidate-form .btn {
+        margin: 0 0 5px 5px !important;
+      }
+      .save-cancel-btns {
+        text-align: right;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .btn-add-cand{
+        float: right;
+        margin-right: 8px;
+        padding:1px 26px 1px;
+      }
+      .interviewer-tab-content .btn-add-intrvw {
+        float: right;
+        margin-right: 8px;
+      }
+      .interviewer-tab-content .table .action-icon a {
+        display: inline-block;
+      }
+    }
+    .modal-header .close {
+      font-size:21px !important;
+      color:$white;
+    }
+
+  input {
+    &[type="checkbox"]:focus {
+      outline: none;
+    }
+  }
+  /*--------custom css checkbox------------------*/
+  .option-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 6.33333px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    transition: all 0.15s ease-out 0s;
+    background: #fff;
+    border: 2px solid $materialGrey;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+    &:hover {
+      background: #fff;
+    }
+    &:checked {
+      background: rgba(16, 108, 200, 0.87);
+      border:none !important;
+      &::before {
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        display: inline-block;
+        font-size: 14px;
+        line-height: 20px;
+        content: "\f00c";
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        color: #fff;
+        margin-left: 3px;
+      }
+      &::after {
+        -webkit-animation: click-wave 0.65s;
+        -moz-animation: click-wave 0.65s;
+        animation: click-wave 0.65s;
+        background: #40e0d0;
+        content: '';
+        display: block;
+        position: relative;
+        z-index: 100;
+      }
+    }
+
+  }
+}
+
+
+

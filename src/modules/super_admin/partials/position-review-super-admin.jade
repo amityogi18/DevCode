@@ -1,0 +1,47 @@
+.content-wrapper.applied-joblist-container
+  .row
+    .col-md-12
+      .video-intro-heading
+        span.video-intro-1  Job Posted in {{positionReviewCtrl.portalDetails.portalName}}
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12.col-sm-6.col-md-4
+          md-input-container.md-block(flex="100")
+            label Search...
+            input(type='text', ng-model='positionReviewCtrl.allJobPortalsTableFilter.search')
+            md-icon.position-search(md-font-set='fa') &#xf002
+        .col-xs-12.col-sm-6.col-md-3
+          md-input-container.md-block
+            md-select(ng-model='positionReviewCtrl.id', data-ng-change='positionReviewCtrl.getCompanyData()')
+              md-option(ng-value='{{company.id}}', ng-repeat='company in positionReviewCtrl.companyList') {{company.name}}
+        .col-xs-12.col-sm-6.col-md-3
+          md-button.md-raised.savedata-btn(type='button' data-ui-sref='sa.job-portals') Back
+        .col-md-12
+          .col-md-12.col-xs-12.col-sm-12
+            .tab-content
+              .tab-pane.fade.in.active
+                .panel-body.body-of-panel
+                  .row
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                      select(class="selectpicker" ng-model="positionReviewCtrl.test" ng-change="positionReviewCtrl.toggle()")
+                        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in positionReviewCtrl.cols.slice(1,positionReviewCtrl.cols.length) track by $index") {{col.title()}}
+                    .main-table-area(data-ng-show="positionReviewCtrl.allJobPortalsListCount > 0")
+                      .table-responsive.table-first.hide-overflow
+                        table.tansaction-table.table(ng-table='positionReviewCtrl.allJobPortalsTableParams', ng-table-columns-binding="positionReviewCtrl.cols")
+                          tr(ng-repeat-start='jobs in $data')
+                            td(data-title="'Job Name'", sortable="'jobName'") {{jobs.jobName}}
+                            td(data-title="'Job Dept'", sortable="'jobDepartment'", ng-data='jobs.jobDepartment') {{jobs.jobDepartment}}
+                            td(data-title="'Job Skills'", sortable="'jobSkill'", ng-data='jobs.jobSkill') {{jobs.jobSkill}}
+                            td(data-title="'Job Status'", sortable="'jobStatus'", ng-data='jobs.jobStatus') {{jobs.jobStatus}}
+                            td(data-title="'Company Name'", sortable="'companyName'", ng-data='jobs.companyName') {{jobs.companyName}}
+                            //- td(data-title="'Portal Name'")
+                            //-   span(ng-repeat ="portals in jobs.postedJobPortals", data-title="'Portal Name'", sortable="'portalName'", ng-data='portals.portalName') {{portals.portalName}} 
+                            //-    font(ng-show='!$last') ,
+                            td(ng-if="true", data-title="'Job Detail'")
+                              a.btn.btn-primary(data-ui-sref='sa.position-review-description({jobId:jobs.jobId,portalId:positionReviewCtrl.portalId})', role='button') Job Detail 
+                          tr(ng-repeat-end)    
+                      .row(data-ng-if='positionReviewCtrl.allJobPortalsListCount == 0')
+                        center No record found
+
+                      

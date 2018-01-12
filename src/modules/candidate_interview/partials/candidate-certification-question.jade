@@ -1,0 +1,67 @@
+.container-fluid.certification-question
+  .row
+    .col-md-8
+      div
+        .assessment-header
+          h2 OnDemand Certification
+          .candidate-name-container.hidden-md.hidden-sm
+            b Candidate: {{user.fullName}}
+          h3#clock
+        .section-header
+          span.sections Certification for skill set :
+          .section-title
+            span {{candidateCertificateQuestionCtrl.skillName}}
+        .question-container
+          .question
+            h4 Question No: {{candidateCertificateQuestionCtrl.showQuesNumber }}
+            h3 {{candidateCertificateQuestionCtrl.activeQuestion.question}}
+            hr(style='color:gray;')
+            .question-options(data-ng-show="candidateCertificateQuestionCtrl.activeQuestion.questionType == 3")
+              .radio(ng-repeat="option in candidateCertificateQuestionCtrl.activeQuestion.options")
+                label
+                  input.option-input.radio(id='rb_{{option.optionId}}', type='radio', name="answer",  ng-model='candidateCertificateQuestionCtrl.activeQuestion.answer[option.optionId]', value='{{option.optionId}}', ng-checked="option.selected")
+                  |             {{option.option}}
+            .question-text(data-ng-show="candidateCertificateQuestionCtrl.activeQuestion.questionType != 3") {{multipleChoiceQuestionCtrl.activeQuestion.question}}
+            .question-options(data-ng-show="candidateCertificateQuestionCtrl.activeQuestion.questionType != 3")
+                p(ng-repeat="option in candidateCertificateQuestionCtrl.activeQuestion.options")
+                  label
+                    input.option-checkbox(id='cb_{{option.optionId}}', type='checkbox' ng-value="option.optionId" , ng-model="candidateCertificateQuestionCtrl.activeQuestion.answer[option.optionId]", ng-checked="option.selected")
+                    |             {{option.option}}
+          .question-footer
+            input.md-button.md-raised.md-primary.mark-review-btn(type='button', value='{{candidateCertificateQuestionCtrl.markButton}}', ng-click='candidateCertificateQuestionCtrl.saveAnswer("MARKED")', ng-disabled='candidateCertificateQuestionCtrl.saveButtonText === "Saving..." || candidateCertificateQuestionCtrl.markButton === "Marking and Saving..."')
+            //input.btn.btn-default.clear-response-btn(type='button', value='Clear Response', ng-click='candidateCertificateQuestionCtrl.clearResponse()')
+            input.btn.btn-info.previous-btn(type='button', value='Previous', ng-hide='candidateCertificateQuestionCtrl.isFirstQuestion', ng-click='candidateCertificateQuestionCtrl.getPreviousQuestion()')
+            input.md-button.md-raised.savedata-btn.save-and-next-btn(type='button', value='{{candidateCertificateQuestionCtrl.saveButtonText}}', ng-hide='candidateCertificateQuestionCtrl.isLastQuestion', ng-click='candidateCertificateQuestionCtrl.saveAnswer("SAVE&NEXT")', ng-disabled='candidateCertificateQuestionCtrl.saveButtonText === "Saving..." || candidateCertificateQuestionCtrl.markButton === "Marking and Saving..."')
+            input.md-button.md-raised.savedata-btn.save-and-next-btn(type='button', value='Submit', ng-show="candidateCertificateQuestionCtrl.isLastQuestion" ng-click='candidateCertificateQuestionCtrl.saveAnswer("SUBMIT")')
+      div(ng-show='candidateCertificateQuestionCtrl.showInsructions')
+        h2  Here comes the instructions
+      div(ng-show='candidateCertificateQuestionCtrl.showProfile')
+        h2  Here comes the profile
+    .col-md-3
+      .candidate-profile.mobile-margin
+        .candidate-picture
+        .candidate-name-container.hidden-xs
+          b Candidate: {{user.fullName}}
+      .question-palette
+        div You are viewing Certification Question Palette:
+        .question-numbers
+          button.btn(ng-class="{'btn-default': question.status === undefined,'btn-success': question.status === 'SAVE&NEXT', 'btn-danger': question.status === 'NOT ANSWERED', 'btn-primary': question.status === 'MARKED'}", ng-click='candidateCertificateQuestionCtrl.goToQuestion(question, $index)',  type='button', data-ng-repeat='question in candidateCertificateQuestionCtrl.questionIdList track by $index') {{$index + 1}}
+        hr
+        .legend-container
+          b Legend :
+          .legend
+            span.legend-answered
+              span.btn.btn-success(type='button')
+              |  Answered
+            span.legend-not-answered
+              span.btn.btn-danger(type='button')
+              |  Not Answered
+          .legend
+            span.legend-marked(ng-hide="candidateCertificateQuestionCtrl.activeQuestion.responseType === 'video' || candidateCertificateQuestionCtrl.activeQuestion.responseType === 'audio'")
+              span.btn.btn-primary(type='button')
+              |  Marked
+            span.legend-not-visited
+              span.btn.btn-default(type='button')
+              |  Not Visited
+        .palette-footer
+          div

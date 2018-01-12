@@ -1,0 +1,24 @@
+.modal-header.color-head Add background music
+    button.close(type='button', data-dismiss='modal', ng-click='$ctrl.closeModal()') ×
+.modal-body.adjust-padding
+  uib-tabset.music(active='active')
+    uib-tab(index='0', heading='General')
+      .general-audio-file-container
+        .audio-file(data-ng-repeat='audioFile in $ctrl.generalAudioFiles')
+          .file-name {{audioFile.title}}
+          .audio-icon
+            i.fa.fa-file-audio-o(aria-hidden='true')
+          .add-audio-icon(ng-click='$ctrl.addGeneralMusic(audioFile)')
+            i.fa.fa-plus-square(aria-hidden='true')
+        .audio-file(data-ng-repeat='audioFileList in $ctrl.listofBackgroundMusic track by $index')
+          .file-name audio-{{$index + 1}}
+          .audio-icon
+            i.fa.fa-file-audio-o(aria-hidden='true')
+    uib-tab(index='1', heading='On-device')
+      .on-device-audio-file-container
+        p Add audio file
+        input.on-device-audio-file(type='file', file-modal='$ctrl.backgroundMusicFile' , accept='audio/*', capture='')
+        br
+        div
+          button.btn.btn-primary(ng-disabled='!$ctrl.onDeviceMusicAdded', ng-click='$ctrl.registerOnDeviceAudioHandler()') Proceed
+          button.btn.btn-primary(ng-click='$ctrl.closeModal()', data-translate='CANCEL')

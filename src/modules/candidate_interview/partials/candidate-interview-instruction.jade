@@ -1,0 +1,64 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .row
+      .candidate-view-steps.step
+        ul.step-tab
+          li
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon1.png', alt='')
+            .step-name(data-translate="WELCOME")
+          li
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon2.png', alt='')
+            .step-name(data-translate="YOUR-PROFILE")
+          li
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate="PREPARE")
+          li.active
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate="INTERVIEW")
+        .step-body
+          .col-md-12
+            .col-md-7
+            .col-md-4
+              .main-body-wrapper
+                .default-form
+                  .col-md-12.whte-bg.main-div(data-ng-if='!candidateInterviewInstructionCtrl.isWrongInterviewCode')
+                    .col-md-12
+                      p.title(style='line-height:25px;') {{candidateInterviewInstructionCtrl.questionContent}}
+                      p.sub-title(data-ng-if="candidateInterviewInstructionCtrl.isShowQuestionDetails")
+                        span(style='line-height: 22px;', data-translate="INTERVIEW-CONTENT1")
+                      ol(data-ng-if="candidateInterviewInstructionCtrl.isShowQuestionDetails")
+                        li
+                          span Time to answer {{candidateInterviewInstructionCtrl.interviewQuestionCountDetails.responseTime}} min.
+                        li
+                          span No of retries {{candidateInterviewInstructionCtrl.interviewQuestionCountDetails.numberOfRetries}} (for audio and video type questions).
+                    .col-md-12
+                      p
+                       b(style="color:green;") {{candidateInterviewInstructionCtrl.totalDuration}}
+                    .col-md-12(style='margin-top: -10px;')
+                        hr
+                    .col-md-12(data-ng-if='candidateInterviewInstructionCtrl.interviewDetails.interviewTypeId === 3')
+                      .btn-sec
+                        md-button.md-raised.savedata-btn.btn-interview(aria-label="take",data-ng-click='candidateInterviewInstructionCtrl.takePractice()',data-translate="PRACTICE-QUESTION")
+                    .col-md-12
+                      div(style='margin-top:10px;')
+                        .btn-sec
+                          md-button.md-raised.savedata-btn.btn-interview(aria-label="interview", data-ng-if='!candidateInterviewInstructionCtrl.isNoQuestion' , data-ng-click='candidateInterviewInstructionCtrl.startInterview()', data-translate="START-INTERVIEW")
+                    .col-md-12
+                      .btn-sec
+                        a.btn.btn-success.btn-interview(data-ng-if='candidateInterviewInstructionCtrl.isNoQuestion', data-ui-sref='ci.prepare') Back
+                  .col-md-12.whte-bg(data-ng-if='candidateInterviewInstructionCtrl.isWrongInterviewCode')
+                     .col-md-12
+                        br
+                        p.title(style='line-height:25px;') Interview is not valid.
+
+sidebar-help-component
+
+

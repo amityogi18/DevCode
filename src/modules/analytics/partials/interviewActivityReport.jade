@@ -1,0 +1,43 @@
+div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card
+        md-card-actions
+            .col-md-12.col-sm-12.col-xs-12.interview-analytics.main-body
+                .col-sm-12.col-md-12.col-xs-12
+                  .candidate-status-heading
+                    i.fa.fa-file-excel-o.canidate-status-icon(aria-hidden='true')
+                    span(data-translate='INTERVIEW-ACTIVITY-REPORT')
+                .col-sm-12.col-xs-12.bottom-margin  
+                  .col-md-2.col-sm-12.col-xs-12.report-type
+                     md-input-container.md-block(flex='100')
+                      label(data-translate='REPORT-TYPE')
+                      md-select(ng-model="interviewActivityReportCtrl.reportType")
+                        md-option(ng-value='1') Interviews
+                        md-option(ng-value='2') Position
+                        md-option(ng-value='3') Recruiter
+                        md-option(ng-value='4') Department
+                        md-option(ng-value='5') Candidate
+                  .col-md-2.col-sm-12.col-xs-12.dateFormat.report-type
+                    md-input-container.md-block(flex='100')
+                      label From
+                      md-datepicker(ng-model='interviewActivityReportCtrl.createdFromDate', md-hide-icons = 'triangle')
+                  .col-md-2.col-sm-12.col-xs-12.dateFormat.report-type
+                    md-input-container.md-block(flex='100')
+                      label To
+                      md-datepicker(ng-model='interviewActivityReportCtrl.createdToDate', md-hide-icons = 'triangle')
+                  .col-md-4.col-sm-12.col-xs-12
+                    .col-md-6.col-sm-6.col-xs-12.no-spacing.report-department
+                      md-input-container.md-block(flex='100')
+                        label(data-translate='DEPARTMENT')
+                        md-select(ng-model='interviewActivityReportCtrl.department')
+                          md-option(ng-value='departmentList', ng-repeat='departmentList in interviewActivityReportCtrl.departmentList') {{departmentList.departmentName}}
+                      //select.form-control(ng-model='interviewActivityReportCtrl.department', ng-options='departmentList as departmentList.departmentName for departmentList in interviewActivityReportCtrl.departmentList track by departmentList.id')
+                        option(selected='selected', value='') Select
+                    .col-md-6.col-sm-6.col-xs-12.no-spacing.report-type-file
+                      md-input-container.md-block(flex='100')
+                        label(data-translate='DOWNLOAD-AS')
+                        md-select(ng-model="interviewActivityReportCtrl.fileDnldType")
+                          md-option(ng-value='xls') .csv
+                  .col-sm-12.col-xs-12.col-md-2.btn-box.bottom-btn
+                    md-button.md-raised.md-primary(ng-disabled="interviewActivityReportCtrl.reportType === NaN || interviewActivityReportCtrl.reportType === ''",ng-click="interviewActivityReportCtrl.getActivityReport()") Download
+                    a#downloadLnk.hide-link

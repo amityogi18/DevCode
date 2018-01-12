@@ -1,0 +1,545 @@
+.content-wrapper.edit-my-profile-page
+    .col-md-12.col-xs-12.col-sm-12
+      .row.video-intro-heading
+        .col-md-5.col-sm-12.col-xs-12.video-intro-1
+          span(data-ng-if="CandidateProfileCtrl.mode !== 'edit'", data-translate='CREATE-PROFILE')
+          span(data-ng-if="CandidateProfileCtrl.mode === 'edit'", data-translate='UPDATE-PROFILE')    
+    .col-md-12.col-sm-12.col-xs-12(data-ng-hide="CandidateProfileCtrl.mode === 'edit'")
+      .resume-section
+        .count-box
+          p Create your profile by uploading your resume!!!
+        div(layout-gt-sm="row" flex-gt-sm='')
+          .col-sm-2.col-xs-12.col-sm-2.col-form-label
+            span(data-translate='RESUME-UPLOAD')
+          .col-sm-3.col-xs-12.col-md-3
+            input.form-control(type='file', ngf-max-size='1MB' ngf-select='CandidateProfileCtrl.uploadResumeFile($files); CandidateProfileCtrl.isResumeFileAdded($files)', name='file', accept=".docx,.pdf,.doc,.txt", ngf-model-invalid='errorFile', data-ng-model='CandidateProfileCtrl.candidateResumeFile')
+          .col-md-4
+            md-button.md-raised.md-primary.resume-upload-btn(ng-disabled='CandidateProfileCtrl.ResumeNotSelected', ng-click="CandidateProfileCtrl.initialResumeUpload(CandidateProfileCtrl.candidateResumeFile)") Upload
+              md-icon(md-font-set='fa') &#xf093
+    .col-md-12.col-sm-12.col-xs-12(data-ng-hide="CandidateProfileCtrl.mode === 'edit'")
+      div(layout='row', layout-align='center center')
+        h1.center-heading OR
+      .count-box  
+        p You can create your profile manually by filling the below form.               
+    form(role='form', name='CandidateProfileCtrl.addProfileForm', novalidate='novalidate')
+      .row.btn-section
+        .col-md-5.col-sm-4.col-xs-12
+          //span(data-ng-if="CandidateProfileCtrl.mode !== 'edit'", data-translate='CREATE-PROFILE')
+          //span(data-ng-if="CandidateProfileCtrl.mode === 'edit'", data-translate='UPDATE-PROFILE')
+        .col-md-4.col-sm-4.col-xs-8
+          div(data-ng-if="CandidateProfileCtrl.mode === 'edit' && CandidateProfileCtrl.isActiveProfile")
+            input.col-md-1.col-sm-1.col-xs-1.icheckbox_square-blue(type='checkbox', data-ng-if="CandidateProfileCtrl.mode !== 'edit'", data-ng-model='CandidateProfileCtrl.shareProfile', data-ng-click='CandidateProfileCtrl.shareMyProfile(CandidateProfileCtrl.shareProfile)')
+            span.hidden-xs.hidden-sm.profile-share(data-ng-if="CandidateProfileCtrl.mode !== 'edit'", data-translate='SHARE-PROFILE')
+            span.hidden-md.hidden-lg Share
+        .col-md-3.col-sm-4.col-xs-12
+            md-button.md-raised.savedata-btn(aria-label='save' ,type='button', data-ng-click='CandidateProfileCtrl.createProfile()', data-ng-if="CandidateProfileCtrl.mode !== 'edit'")
+              span.hidden-xs.hidden-sm(data-translate='SAVE')
+              span.hidden-md.hidden-lg
+                i.fa.fa-floppy-o(aria-hidden='true')
+            md-button.md-raised.savedata-btn(aria-label='update' ,type='button', data-ng-click='CandidateProfileCtrl.updateProfile()', data-ng-if="CandidateProfileCtrl.mode === 'edit'")
+              span.hidden-xs.hidden-sm(data-translate='UPDATE')
+              span.hidden-md.hidden-lg
+                i.fa.fa-floppy-o(aria-hidden='true')      
+            md-button.md-raised.canceldata-btn(aria-label='cancel' ,type='button', data-toggle='modal', data-target='#cancelModal')
+              span.hidden-xs.hidden-sm(data-translate='CANCEL')
+              span.hidden-md.hidden-lg
+                i.fa.fa-times(aria-hidden='true')
+      .panel.row.panel-default.edit-profile-panel
+        #cancelModal.modal.fade(role='dialog')
+          .modal-dialog
+            // Modal content
+            .modal-content.content-of-modal
+              .modal-header
+                | Warning
+                button.close(type='button', data-dismiss='modal') ×
+                h4.modal-title
+              .modal-body
+                p.discard-msg(data-translate='DISCARD-MSG')
+              .modal-footer
+                md-button.md-raised.savedata-btn(aria-label='ok' ,type='button', data-dismiss='modal', data-ng-click='CandidateProfileCtrl.discard()', data-translate='OK')
+                md-button.md-raised.canceldata-btn(aria-label='cancel' ,type='button', data-dismiss='modal', data-translate='CANCEL')
+        .panel-body
+          .main-wrapper
+              div(layout="row")
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='PROFILE-NAME')
+                    input(type='text', name='positionName',maxlength='25', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.name', required)
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.positionName.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.positionName.$dirty && CandidateProfileCtrl.addProfileForm.positionName.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.positionName.$error.required') Profile Name Required
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label Experience (in years)   
+                    input(type='number', name='experience',min='1', max='60', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.experience', required)
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.experience.$touched')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.experience.$error.max') maximum allowed experience is 60
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.experience.$error.min') minimum allowed experience is 1
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.experience.$error.required') Experience is required
+              div(layout='row',layout-xs='column', layout-sm="column")
+                .col-md-12.col-sm-12.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='ABOUT-ME')
+                    textarea(type='text', rows='2', cols='50', md-maxlength='2000' , data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.aboutMe', name='aboutMe', required='required', ng-focus='CandidateProfileCtrl.showSuggestions = true')
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.aboutMe.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.aboutMe.$dirty && CandidateProfileCtrl.addProfileForm.aboutMe.$invalid')
+                      span.error-msg.about-me(data-ng-show='CandidateProfileCtrl.addProfileForm.aboutMe.$error.required') Please Provide Information
+                  //md-button.md-raised.savedata-btn(ng-click='CandidateProfileCtrl.showSuggestions = !CandidateProfileCtrl.showSuggestions')  {{CandidateProfileCtrl.showSuggestions ? 'hide suggestions' : 'show suggestions'}}
+                  div.skill-suggestions(ng-show='(CandidateProfileCtrl.showSuggestions) && (CandidateProfileCtrl.skillSuggestionsedit.length > 0)')  
+                    p.suggestion-listing(ng-repeat='suggestion in CandidateProfileCtrl.skillSuggestionsedit', ng-click='CandidateProfileCtrl.appendSuggestion(suggestion)') 
+                        {{suggestion}}   
+                    //p(ng-hide='CandidateProfileCtrl.skillSuggestionsedit.length > 0') no suggestions availible     
+              div(layout='row') 
+                .col-md-6.col-sm-12.col-xs-12
+                  md-input-container.col-md-5.col-sm-5.col-xs-12.md-block
+                    label Select
+                    md-select(data-ng-model='CandidateProfileCtrl.candidateUrlData.urlType', name='urlList',data-ng-blur='CandidateProfileCtrl.analyzeOtherCompany(CandidateProfileCtrl.candidateUrlData.urlType)')
+                      md-option(ng-value='urlType',ng-repeat='urlType in CandidateProfileCtrl.customUrlList') {{urlType.name}}
+                    span.error-msg(data-ng-if='CandidateProfileCtrl.errorMessageOtherCompanyUrl !== ""') {{CandidateProfileCtrl.errorMessageOtherCompanyUrl}}
+                  .col-md-6.col-sm-5.col-xs-12
+                    md-input-container.md-block
+                      label Other Company Url
+                      input(type='text', name='companyUrl', ng-model='CandidateProfileCtrl.candidateUrlData.url',data-ng-blur='CandidateProfileCtrl.analyzeCompanyUrl(CandidateProfileCtrl.candidateUrlData.url)', data-ng-keyup="CandidateProfileCtrl.analyzeCompanyUrl(CandidateProfileCtrl.candidateUrlData.url)")                  
+                      span.error-msg(data-ng-if='CandidateProfileCtrl.errormessagecompurl !== ""') {{CandidateProfileCtrl.errormessagecompurl}}
+                  .col-md-1.col-sm-1.col-xs-6    
+                    i.fa.fa-plus-circle.fa-lg.add-url-plus(data-ng-click='CandidateProfileCtrl.addCandidateUrl()', ng-if='CandidateProfileCtrl.showAddMore')
+                    i.fa.fa-minus-circle.fa-lg.add-url-minus(data-ng-click='CandidateProfileCtrl.deleteCustomField($index)', ng-if='CandidateProfileCtrl.showRemoveField')    
+                .col-md-6.col-sm-7.col-xs-12
+                  .col-md-12.col-sm-12.col-xs-12(ng-repeat='urlData in CandidateProfileCtrl.candidateUrls')
+                    .col-md-4.col-sm-4
+                      span(data-ng-if='urlData.urlTypeId === 1') Facebook
+                      span(data-ng-if='urlData.urlTypeId === 2') Twitter
+                      span(data-ng-if='urlData.urlTypeId === 3') LinkedIn
+                      span(data-ng-if='urlData.urlTypeId === 4') Other
+                    .col-md-5.col-sm-5.overflowScroll {{urlData.url}}
+                    .col-md-3.col-sm-3
+                      i.fa.fa-trash(aria-hidden='true', ng-click='CandidateProfileCtrl.deleteCandidateUrl($index)')
+              div(layout-gt-sm="row", flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='FIRST-NAME')            
+                    input(type='text', name='firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', maxlength='25', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.firstName', data-ng-blur ='removeInvalidFirstNameCP(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.firstName)',required='required')
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.firstName.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.firstName.$dirty && CandidateProfileCtrl.addProfileForm.firstName.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.firstName.$error.required') Please Enter First Name
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='LAST-NAME')
+                    input(type='text', name='lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25', ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.lastName', required='required')
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.lastName.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.lastName.$dirty && CandidateProfileCtrl.addProfileForm.lastName.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.lastName.$error.required') Please Enter Last Name
+              div(layout-gt-sm="row", flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='EMAIL')
+                    input(type='text', name='email', maxlength='50', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.email', data-ng-blur="CandidateProfileCtrl.analyzeEmailId(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.email)", data-ng-keydown="CandidateProfileCtrl.analyzeEmailId(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.email)", required='required')
+                    span.error-msg(data-ng-if='CandidateProfileCtrl.isEmailIdvalid !== ""') {{CandidateProfileCtrl.isEmailIdvalid}}
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='PHONE')
+                    input(type='text', name='phone', maxlength='15', onkeypress='return event.charCode <= 57', ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.phone', data-ng-blur="CandidateProfileCtrl.analyzePhoneNumber(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.phone)", data-ng-change="CandidateProfileCtrl.analyzePhoneNumber(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.phone)", required='required')
+                    span.error-msg(data-ng-if='CandidateProfileCtrl.errmsgcon !== ""') {{CandidateProfileCtrl.errmsgcon}}
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-content.geo-section.md-block(flex="")
+                    place-autocomplete(ng-model='CandidateProfileCtrl.geoAddress', on-address='CandidateProfileCtrl.setAddressValue(addressFn)',search-type='1')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='EMPLOYMENT-TYPE')
+                    md-select(ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType', ng-value='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType', name='employmentType', required='required')
+                      md-option(value='All') All
+                      md-option(value='Full time') Full time
+                      md-option(value='Part time') Part Time
+                      md-option(value='Contract') Contract                 
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.employmentType.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.employmentType.$dirty && CandidateProfileCtrl.addProfileForm.employmentType.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.employmentType.$error.required') Please Select Employement Type          
+              div.functional-section(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='FUNCTIONAL-AREA')
+                    md-select(data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.department',ng-model-options="{ trackBy: '$value.id' }", data-ng-change='CandidateProfileCtrl.getSkillSetAndDesignation(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.department.id);CandidateProfileCtrl.emptySkill()', name='functionalArea', md-on-close="CandidateProfileCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', required='required')
+                      md-select-header.demo-select-header
+                        input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchDepartment', type='search', placeholder='Search for a department..',ng-keydown="$event.stopPropagation()")
+                      md-optgroup(label='Functional Area')
+                      md-option(ng-repeat='department in CandidateProfileCtrl.departmentList | filter: CandidateProfileCtrl.searchDepartment', ng-value='department')
+                        | {{department.name}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.functionalArea.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.functionalArea.$dirty && CandidateProfileCtrl.addProfileForm.functionalArea.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.functionalArea.$error.required') Please Select Functional Area
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='ROLE')           
+                    md-select(data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.candidateDesignation.id', ng-disabled = 'CandidateProfileCtrl.isRoleDisabled', name='role', md-on-close="CandidateProfileCtrl.clearSearchSkill()", data-md-container-class='selectdemoSelectHeader', required='required')
+                      md-select-header.demo-select-header
+                        input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchSkill', type='search', placeholder='Search for a designation..',ng-keydown="$event.stopPropagation()")
+                      md-optgroup(label='Designation')   
+                      md-option(ng-value='designation.id', ng-repeat='designation in CandidateProfileCtrl.designationList | filter: CandidateProfileCtrl.searchSkill')
+                        | {{designation.candidateDesignation}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.role.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.role.$dirty && CandidateProfileCtrl.addProfileForm.role.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.role.$error.required') Please Select Role
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='TRAVEL')              
+                    md-select(ng-model='CandidateProfileCtrl.willingToTravel',ng-model-options="{ trackBy: '$value.id' }", name='travel',required)
+                      md-option(ng-value='travels',ng-repeat='travels in  CandidateProfileCtrl.willingToTravelInputs', ng-click="CandidateProfileCtrl.willingToFunc(travels)") {{travels.value}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.travel.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.travel.$dirty && CandidateProfileCtrl.addProfileForm.travel.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.travel.$error.required') Please Select Willing To Travel
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='LANGUAGE')
+                    md-select(multiple='', ng-model='CandidateProfileCtrl.language', ng-model-options="{ trackBy: '$value.value' }", name= 'language', required)
+                      md-option(ng-value='languages',ng-repeat='languages in CandidateProfileCtrl.languageInputs') {{languages.value}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.language.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.language.$dirty && CandidateProfileCtrl.addProfileForm.language.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.language.$error.required') Please Select Language
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='AVAILABLE')              
+                    md-select(ng-model='CandidateProfileCtrl.availableToStart',ng-model-options="{ trackBy: '$value.value' }", name='available', required)
+                      md-option(ng-value='available', ng-repeat='available in  CandidateProfileCtrl.availableToStartInputs', ng-click="CandidateProfileCtrl.availableToStartFunc(available)") {{available.value}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.available.$touched')
+                        span(data-ng-show='CandidateProfileCtrl.addProfileForm.available.$dirty && CandidateProfileCtrl.addProfileForm.available.$invalid')
+                        span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.available.$error.required') Please Select Availability
+                .col-md-6.col-sm-6.col-xs-12
+                  md-input-container.md-block(flex-gt-sm='')
+                    label(data-translate='WORK-AUTHRIZATION')
+                    md-select(ng-model='CandidateProfileCtrl.workAuthorization',ng-model-options="{ trackBy: '$value.value' }", name='work',required)
+                      md-option(ng-value="works", ng-repeat="works in  CandidateProfileCtrl.workAuthorizationInputs", ng-click="CandidateProfileCtrl.workAuthorizationFunc(works)") {{works.value}}
+                    span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.$submitted || CandidateProfileCtrl.addProfileForm.work.$touched')
+                      span(data-ng-show='CandidateProfileCtrl.addProfileForm.work.$dirty && CandidateProfileCtrl.addProfileForm.work.$invalid')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.work.$error.required') Please Select Work Authorization
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-4.col-sm-6.col-xs-12
+                  .col-md-4.col-sm-6.col-form-label.disable(data-translate='DISABLE')
+                  .col-md-4.col-sm-2
+                    input.option-input.radio(type='radio', name='optradio', ng-value='1', ng-model="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.disable", ng-click='CandidateProfileCtrl.isDisabled(1)')
+                    | Yes
+                  .col-md-4.col-sm-2
+                    input.active.option-input.radio(type='radio', name='optradio', ng-value='0', ng-model="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.disable", ng-click='CandidateProfileCtrl.isDisabled(0)')
+                    | No
+                .col-md-8.col-sm-12.col-xs-12.relocate
+                  md-input-container.md-block
+                    label.col-md-3.col-sm-3.col-xs-8.col-form-label(data-translate='RE-LOCATE')
+                    md-checkbox.col-md-8.col-sm-7.col-xs-4.md-primary.pull-right(aria-label='relocate', data-toggle='collapse', data-target='#demo')
+              #demo.form-group.collapse
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  md-content.geo-section(flex='100')
+                    place-autocomplete(ng-model='CandidateProfileCtrl.preferredLocation.preferredAddressFiled', on-address='CandidateProfileCtrl.setPreferredAddress(addressFn)', on-clear='CandidateProfileCtrl.clearSuggestions(clearFn)', md-input-maxlength="250" , md-input-minlength ="5" , search-type='1')
+
+                  //md-input-container.md-block.col-md-4.col-sm-4
+                    label Country
+                    md-select(data-ng-model='CandidateProfileCtrl.preferredLocation.countryId', data-ng-change='CandidateProfileCtrl.getStateList(CandidateProfileCtrl.preferredLocation.countryId,1,2)', md-on-close="CandidateProfileCtrl.clearSearchPreferredCountry()",data-md-container-class='selectdemoSelectHeader')
+                      md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchPreferredCountry', type='search', placeholder='Search for a country..',ng-keydown="$event.stopPropagation()")
+                      md-optgroup(label='county')
+                      md-option(ng-value='country.id',ng-repeat='country  in CandidateProfileCtrl.countryList | filter: CandidateProfileCtrl.searchPreferredCountry')
+                        |{{country.countryName}}
+                  //md-input-container.md-block.col-md-4.col-sm-4
+                    label State
+                    md-select(data-ng-model='CandidateProfileCtrl.preferredLocation.stateId', data-ng-change='CandidateProfileCtrl.getCityList(CandidateProfileCtrl.preferredLocation.stateId,1,2)', data-ng-disabled='CandidateProfileCtrl.ispreferredStateDisabled', name='preferredState',md-on-close="CandidateProfileCtrl.clearSearchPreferredState()", data-md-container-class='selectdemoSelectHeader')
+                      md-select-header.demo-select-header
+                        input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchPreferredState', type='search', placeholder='Search for a state..',ng-keydown="$event.stopPropagation()")
+                       md-optgroup(label='state')
+                       md-option(ng-value='state.id',ng-repeat='state  in CandidateProfileCtrl.stateList | filter: CandidateProfileCtrl.searchPreferredState')
+                          |{{state.stateName}}
+                  //md-input-container.md-block.col-md-4.col-sm-4
+                    label City
+                    md-select(ng-model='CandidateProfileCtrl.preferredLocation.cityId', data-ng-disabled='CandidateProfileCtrl.ispreferredCity', name= 'preferredCity', md-on-close="CandidateProfileCtrl.clearSearchPreferredCity()", data-md-container-class='selectdemoSelectHeader')
+                      md-select-header.demo-select-header(placeholder='Select City')
+                        input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchPreferredCity', type='search', placeholder='Search for a city..', ng-keydown="$event.stopPropagation()")
+                      md-optgroup(label='city')
+                      md-option(ng-value='city.id',ng-repeat='city  in CandidateProfileCtrl.cityList | filter: CandidateProfileCtrl.searchPreferredCity')
+                        |{{city.cityName}}
+                  .button-icon
+                      i.fa.fa-plus-circle(aria-hidden='true', data-ng-click='CandidateProfileCtrl.addPreferredLocation()', data-ng-disabled="(CandidateProfileCtrl.preferredLocation.length ==4)")
+              div(layout-gt-sm="row" flex-gt-sm='') 
+                table.table.table-responsive
+                  thead
+                    tr(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidatePreferredLocation.length > 0')
+                      th Preferred Location
+                  tbody
+                    tr(ng-repeat='location in CandidateProfileCtrl.candidateProfileInfo.candidatePreferredLocation track by $index')
+                      td {{location.preferredAddress}}
+                      td
+                        i.fa.fa-trash(aria-hidden='true', ng-click='CandidateProfileCtrl.deletePreferredLocation($index)')
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-md-4.col-sm-4.col-xs-12
+                  md-input-container.md-block
+                    label(data-translate='CURRENCY')            
+                    md-select(name='currency', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.currency')
+                      md-option(ng-repeat='currency in CandidateProfileCtrl.currencyList', ng-value='currency.name')
+                        | {{currency.name}}              
+                .col-md-4.col-sm-4.col-xs-12
+                  md-input-container.md-block
+                    label(data-translate='SALARY')
+                    md-select(name='salary', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.salary')
+                      md-option(ng-repeat='salary in CandidateProfileCtrl.salaryList', ng-value='salary.name')
+                        | {{salary.name}}
+                .col-md-4.col-sm-4.col-xs-12
+                  md-input-container.md-block
+                    label(data-translate='HOURLY-RATE')            
+                    input(type='text', minlength='1', maxlength='6', name='hourlyRate', onkeypress='return event.charCode <= 57', data-ng-model='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.hourlyRate', data-ng-blur='CandidateProfileCtrl.analyzeHourlyRate(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.hourlyRate)', data-ng-keyup="CandidateProfileCtrl.analyzeHourlyRate(CandidateProfileCtrl.candidateProfileInfo.candidateProfile.hourlyRate)")
+                  span.error-msg(data-ng-if='CandidateProfileCtrl.errormessageHourlyRate!==""') {{CandidateProfileCtrl.errormessageHourlyRate}}
+              div(layout-gt-sm="row" flex-gt-sm='')
+                .col-sm-3.col-xs-12.col-form-label
+                  span(data-translate='RESUME-UPLOAD')
+                .col-sm-3.col-xs-12.col-md-3
+                  input.form-control(type='file', ngf-max-size='1MB' ngf-select='CandidateProfileCtrl.uploadFile($files); CandidateProfileCtrl.isFileAdded($files)', name='file', accept=".doc", ngf-model-invalid='errorFile', data-ng-model='CandidateProfileCtrl.resumeFile')
+                .col-sm-7.col-xs-12.col-md-6(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.profileResume.path.length > 0')  
+                  md-button.md-primary.md-mini.md-fab.resume-download-mini-btn(href='{{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.profileResume.path}}', download='download')
+                    span
+                      i.fa.fa-arrow-down
+                  {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.firstName}}_Resume&nbsp;| Click to Download Your Resume
+                span.error-msg.error-resume(data-ng-if='CandidateProfileCtrl.errorMessageDocument !== ""') {{CandidateProfileCtrl.errorMessageDocument}}  
+              div.col-md-12.col-sm-12.col-xs-12
+                h4.skill-set(data-translate='SKILLSET')
+            div
+              .col-md-12.col-sm-12.col-xs-12.skill-div-section
+                table.table.table-responsive
+                  thead
+                    tr
+                      th Level
+                      th Skill
+                      th Experience
+                      th Last Used
+                      th
+                  tbody
+                    tr(ng-repeat='skillData in CandidateProfileCtrl.candidateSkillset track by $index')
+                      td
+                        span(data-ng-if='skillData.level == 1') Primary
+                        span(data-ng-if='skillData.level == 2') Secondary
+                        span(data-ng-if='skillData.level == 3') Tertiary
+                        span(data-ng-if='skillData.level == 4') Added Skill 
+                        span(data-ng-if='skillData.level == 5') Other
+
+                      td
+                        span(data-ng-if='skillData.level != 4') {{skillData.skillsetName}}
+                        span(data-ng-if='skillData.level == 4') {{skillData.skillsetText}}
+                      td {{skillData.yearsOfExperience}} year
+                      td {{skillData.lastUse}}
+                      td
+                        i.fa.fa-trash(aria-hidden='true', ng-click='CandidateProfileCtrl.deleteSkill($index, skillData)')
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block
+                      label Level
+                      md-select(data-ng-model='CandidateProfileCtrl.skill.level', data-ng-change='CandidateProfileCtrl.otherSkillChange()', name='level')
+                        md-option(value = '{{skillLevel.levelId}}', ng-repeat = 'skillLevel in CandidateProfileCtrl.skillLevels') {{skillLevel.levelName}}
+                  .col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block(data-ng-if='CandidateProfileCtrl.isAddSkillsetSelected')
+                      label Skill set
+                      input(type='text',maxlength='35', name='skillsetText', data-ng-model='CandidateProfileCtrl.skill.skillsetText')
+                    md-input-container.md-block(data-ng-if='CandidateProfileCtrl.isOtherSkillsetSelected')
+                      label Skill set
+                      md-select(data-ng-model='CandidateProfileCtrl.skill.skillsetId', name='skill')
+                        md-option(value='{{skillset.id}}', ng-repeat='skillset in CandidateProfileCtrl.skillsetList') {{skillset.skillsetName}}
+                      //- input(type='text',maxlength='35', name='skillsetText', placeholder='Skill Set', data-ng-model='CandidateProfileCtrl.skill.skillsetText')
+                    md-input-container.md-block(data-ng-if='!CandidateProfileCtrl.isOtherSkillsetSelected && !CandidateProfileCtrl.isAddSkillsetSelected ')
+                      label Skill set
+                      md-select(data-ng-model='CandidateProfileCtrl.skill.skillsetId', name='skill')
+                        md-option(value='{{skillset.id}}', ng-repeat='skillset in CandidateProfileCtrl.skillsetList') {{skillset.skillsetName}}
+                  .col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block
+                      label Experience
+                      md-select(data-ng-model='CandidateProfileCtrl.skill.yearsOfExperience', name='year')
+                        md-option(value='1') 1 year
+                        md-option(value='2') 2 year
+                        md-option(value='3') 3 year
+                        md-option(value='4') 4 year
+                        md-option(value='5') 5 year
+                        md-option(value='6') 6 year
+                        md-option(value='7') 7 year
+                        md-option(value='8') 8 year
+                        md-option(value='9') 9 year
+                        md-option(value='10') 10 year
+                        md-option(value='11') 11 year
+                        md-option(value='12') 12 year
+                        md-option(value='13') 13 year
+                        md-option(value='14') 14 year
+                        md-option(value='15') 15 year
+                        md-option(value='16') 16 year
+                        md-option(value='17') 17 year
+                  .col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block
+                      label Year
+                      md-select(data-ng-model='CandidateProfileCtrl.skill.lastUse', name='lastuse')                          
+                        md-option(value='2000') 2000
+                        md-option(value='2001') 2001
+                        md-option(value='2002') 2002
+                        md-option(value='2003') 2003
+                        md-option(value='2004') 2004
+                        md-option(value='2005') 2005
+                        md-option(value='2006') 2006
+                        md-option(value='2007') 2007
+                        md-option(value='2008') 2008
+                        md-option(value='2009') 2009
+                        md-option(value='2010') 2010
+                        md-option(value='2011') 2011
+                        md-option(value='2012') 2012
+                        md-option(value='2013') 2013
+                        md-option(value='2014') 2014
+                        md-option(value='2015') 2015
+                        md-option(value='2016') 2016
+                        md-option(value='2017') 2017
+                md-button.md-raised.md-primary.pull-right(aria-label='add' ,data-ng-click='CandidateProfileCtrl.addSkill(CandidateProfileCtrl.skill)', ng-disabled="!(CandidateProfileCtrl.skill.lastUse && CandidateProfileCtrl.skill.yearsOfExperience && (CandidateProfileCtrl.skill.skillsetId || CandidateProfileCtrl.skill.skillsetText) && CandidateProfileCtrl.skill.level)") Add
+            .col-md-12.col-sm-12.col-xs-12
+              h4.skill-set(data-translate='WORK-EXPERIENCE')
+            .col-md-12.col-sm-12.col-xs-12
+              .col-md-12.col-sm-12.col-xs-12.project-summary-tblwrapper
+                table.table.table-responsive
+                  thead
+                    tr(data-ng-if='CandidateProfileCtrl.candidateProfileInfo.candidateExperience.length > 0')
+                      th Job Title
+                      th Company Name
+                      th Start Date
+                      th End Date
+                      th
+                  tbody
+                    tr(data-ng-repeat='experience in CandidateProfileCtrl.candidateProfileInfo.candidateExperience track by $index')
+                      td {{experience.jobTitle}}
+                      td {{experience.companyName}}
+                      td {{experience.startDate | date: "MM-dd-yyyy"}}
+                      td {{experience.endDate | date: "MM-dd-yyyy"}}
+                      td
+                        i.fa.fa-trash(aria-hidden='true', data-ng-click='CandidateProfileCtrl.deleteWorkExperience($index)')
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-input-container.md-block
+                      label(data-translate='JOB-TITLE')              
+                      input(type='text', name='jobTitle',maxlength='80', data-ng-model='CandidateProfileCtrl.experienceData.jobTitle')
+                  .col-md-8.col-sm-8.col-xs-12
+                    md-input-container.md-block
+                      label(data-translate='COMPANY-NAME')              
+                      input(type='text', name='companyName',maxlength='80', data-ng-model='CandidateProfileCtrl.experienceData.companyName')
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-3.col-sm-4.col-xs-12
+                    md-datepicker(data-ng-model='CandidateProfileCtrl.experienceData.startDate', md-placeholder='start date', md-max-date ="CandidateProfileCtrl.today", md-hide-icons="triangle")
+                    span.error-msg-date(data-ng-if='CandidateProfileCtrl.invalidDateRange') Invalid Date Range
+                  .col-md-3.col-sm-4.col-xs-12
+                    md-datepicker.endDateProfile(data-ng-model='CandidateProfileCtrl.experienceData.endDate', md-min-date="CandidateProfileCtrl.experienceData.startDate", md-placeholder='End Date',  md-max-date ="CandidateProfileCtrl.today", md-hide-icons="triangle", ng-disabled='CandidateProfileCtrl.experienceData.isCurrent')
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.isFutureDate')  End Date Cannot Be Later Than The Current Date   
+                  .col-md-6.col-sm-4.col-xs-12
+                    md-checkbox.md-block.md-primary(ng-model='CandidateProfileCtrl.experienceData.isCurrent', aria-label='Checkbox 1',ng-change='CandidateProfileCtrl.isCurrentDateChecked()', ng-disabled='CandidateProfileCtrl.isCurrentWorkExperienceAdded')
+                      | Current
+                    md-button.md-raised.md-primary.work-exp-btn.pull-right(aria-label='add',data-ng-click='CandidateProfileCtrl.addWorkExperience(CandidateProfileCtrl.experienceData); CandidateProfilseCtrl.reset(CandidateProfileCtrl.addProfileForm)', ng-disabled='!(CandidateProfileCtrl.experienceData.jobTitle && CandidateProfileCtrl.experienceData.companyName && CandidateProfileCtrl.experienceData.startDate && CandidateProfileCtrl.experienceData.endDate)') Add
+            .col-md-12.col-sm-12.col-xs-12
+              h4.skill-set Project Summary
+            .col-md-12.col-sm-12.col-xs-12
+              .col-md-12.col-sm-12.col-xs-12.project-summary-tblwrapper
+                table.table.table-responsive
+                  thead
+                    tr(data-ng-if='CandidateProfileCtrl.candidateProfileInfo.candidatePortfolios.length > 0')
+                      th Project Title
+                      th Description
+                      th Project Url
+                      th
+                      th
+                  tbody
+                    tr(data-ng-repeat='summary in CandidateProfileCtrl.candidateProfileInfo.candidatePortfolios track by $index')
+                      td {{summary.title}}
+                      td {{summary.description}}
+                      td {{summary.url}}
+                      td
+                        i.fa.fa-pencil(aria-hidden='true', data-ng-click='CandidateProfileCtrl.editViewPrjectSummary(summary, $index)')
+                      td
+                        i.fa.fa-trash(aria-hidden='true', data-ng-click='CandidateProfileCtrl.deletePrjectSummary($index)')
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-6.col-sm-6.col-xs-12
+                    md-input-container.md-block
+                      label Title         
+                      input(type='text', name='title',maxlength='100', data-ng-model='CandidateProfileCtrl.portfolioData.title', data-ng-blur="CandidateProfileCtrl.analyzeProjectTitle(CandidateProfileCtrl.portfolioData.title)", data-ng-keyup="CandidateProfileCtrl.analyzeProjectTitle(CandidateProfileCtrl.portfolioData.title)")
+                      span.error-msg {{CandidateProfileCtrl.errorMsgTitle}}
+                  .col-md-6.col-sm-6.col-xs-12
+                    md-input-container.md-block
+                      label Project Url         
+                      input(type='url', name='url',maxlength='100', data-ng-model='CandidateProfileCtrl.portfolioData.url',data-ng-blur="CandidateProfileCtrl.analyzeProjectUrl(CandidateProfileCtrl.portfolioData.url)", data-ng-keyup="CandidateProfileCtrl.analyzeProjectUrl(CandidateProfileCtrl.portfolioData.url)")
+                      span.error-msg(data-ng-show='CandidateProfileCtrl.addProfileForm.url.$error.url') Please Enter Valid Url
+                      span.error-msg {{CandidateProfileCtrl.errorMsgUrl}}
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-10.col-sm-10.col-xs-12
+                    md-input-container.md-block
+                      label Description
+                      textarea(type='text', name='jobTitleDescription', maxlength='1000', data-ng-model='CandidateProfileCtrl.portfolioData.description',,data-ng-blur="CandidateProfileCtrl.analyzeProjectDescription(CandidateProfileCtrl.portfolioData.description)", data-ng-keyup="CandidateProfileCtrl.analyzeProjectDescription(CandidateProfileCtrl.portfolioData.description)")
+                      span.error-msg {{CandidateProfileCtrl.errorMsgDescription}}
+                  .col-md-2.col-sm-2.col-xs-12
+                    md-button.md-raised.md-primary.work-exp-btn.pull-right(aria-label='add',data-ng-click='CandidateProfileCtrl.addProfileSummary(CandidateProfileCtrl.portfolioData)', data-ng-hide='CandidateProfileCtrl.isProjectSummary', ng-disabled="!(CandidateProfileCtrl.portfolioData.title && CandidateProfileCtrl.portfolioData.url && CandidateProfileCtrl.portfolioData.description)") Add
+                    md-button.md-raised.md-primary.work-exp-btn.pull-right(aria-label='add',data-ng-click='CandidateProfileCtrl.editProfileSummary()', data-ng-show='CandidateProfileCtrl.isProjectSummary') Update
+            .col-md-12.col-xs-12.col-sm-12
+              h4.skill-set(data-translate='EDUCATION')
+            .col-md-12.col-sm-12.col-xs-12
+              .col-sm-12.col-md-12.col-xs-12.skill-div-section
+                table.table.table-responsive
+                  thead
+                    tr(data-ng-if='CandidateProfileCtrl.candidateProfileInfo.candidateEducation.length > 0')
+                      th Qualification
+                      th Specialization
+                      th University
+                      th Address
+                      th
+                  tbody
+                    tr(data-ng-repeat='education in CandidateProfileCtrl.candidateProfileInfo.candidateEducation track by $index')
+                      td {{education.qualification.name}}
+                      td {{education.specialization}}
+                      td {{education.university}}
+                      td {{education.educationAddress}}
+                      td
+                        i.fa.fa-trash(aria-hidden='true', data-ng-click='CandidateProfileCtrl.deleteEducation($index)')
+                div(layout-gt-sm="row" flex-gt-sm='')
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-input-container.md-block
+                      label Qualification              
+                      md-select(data-ng-model='CandidateProfileCtrl.educationData.qualification.id', data-ng-change ='CandidateProfileCtrl.getSpecializationData(CandidateProfileCtrl.educationData.qualification.id)')                  
+                        md-option(value = '{{qualifi.id}}', ng-bind= 'qualifi.name', ng-repeat = 'qualifi in CandidateProfileCtrl.qualifications') {{qualifi.name}}
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-input-container.md-block
+                      label Specialization              
+                      md-select(data-ng-model='CandidateProfileCtrl.educationData.specialization')                  
+                        md-option(value = '{{special.name}}', ng-repeat = 'special in CandidateProfileCtrl.specializationData') {{special.name}}
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-input-container.md-block
+                      label University
+                      input(data-ng-model='CandidateProfileCtrl.educationData.university', maxlength='45',type='text')
+                div(layout-gt-sm="row")
+                  md-content.geo-section(flex='100')
+                    place-autocomplete(ng-model='CandidateProfileCtrl.educationData.educationAddressField', on-address='CandidateProfileCtrl.setEducationAddressValue(addressFn)', on-clear='CandidateProfileCtrl.clearSuggestionsForEducation(clearFn)' md-input-maxlength="250", md-input-minlength ="5" search-type='1')
+                  //.col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block
+                      label Country                
+                      md-select(data-ng-model='CandidateProfileCtrl.educationData.countryId', data-ng-change='CandidateProfileCtrl.getStateList(CandidateProfileCtrl.educationData.countryId,1,3)',md-on-close="CandidateProfileCtrl.clearSearchCountry()",data-md-container-class='selectdemoSelectHeader')
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchCountry', type='search', placeholder='Search for a country..',ng-keydown="$event.stopPropagation()")
+                        md-optgroup(label='county')  
+                        md-option(ng-value='country.id',ng-repeat='country  in CandidateProfileCtrl.countryList | filter: CandidateProfileCtrl.searchCountry')
+                          |{{country.countryName}}
+                  //.col-md-4.col-sm-4.col-xs-12
+                    md-input-container.md-block
+                      label State                
+                      md-select(data-ng-model='CandidateProfileCtrl.educationData.stateId', data-ng-change='CandidateProfileCtrl.getCityList(CandidateProfileCtrl.educationData.stateId,1,3)', data-ng-disabled='CandidateProfileCtrl.isEducationStateDisabled', name='educationState',md-on-close="CandidateProfileCtrl.clearSearchStateInput()", data-md-container-class='selectdemoSelectHeader')
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchState', type='search', placeholder='Search for a state..',ng-keydown="$event.stopPropagation()")
+                         md-optgroup(label='state')
+                         md-option(ng-value='state.id',ng-repeat='state  in CandidateProfileCtrl.stateList | filter: CandidateProfileCtrl.searchState')
+                           |{{state.stateName}}
+                  //.col-md-3.col-sm-3.col-xs-12
+                    md-input-container.md-block
+                      label City                
+                      md-select(ng-model='CandidateProfileCtrl.educationData.cityId', ng-disabled='CandidateProfileCtrl.isEducationCity', name='educationCity',md-on-close="CandidateProfileCtrl.clearSearchCityInput()", data-md-container-class='selectdemoSelectHeader')
+                        md-select-header.demo-select-header(placeholder='Select City')
+                          input.demo-header-searchbox.md-text(ng-model='CandidateProfileCtrl.searchCity', type='search', placeholder='Search for a city..', ng-keydown="$event.stopPropagation()")
+                        md-optgroup(label='city')
+                        md-option(ng-value='city.id',ng-repeat='city  in CandidateProfileCtrl.cityList | filter: CandidateProfileCtrl.searchCity')
+                          |{{city.cityName}}
+                  .col-md-2.col-sm-2.col-xs-12
+                    md-button.md-raised.md-primary.pull-right(aria-label='add', type='button', data-translate='ADD-QUALIFICATION-BTN', data-ng-click='CandidateProfileCtrl.addEducation(CandidateProfileCtrl.educationData)', ng-disabled ="!(CandidateProfileCtrl.educationData.qualification && CandidateProfileCtrl.educationData.specialization && CandidateProfileCtrl.educationData.university && CandidateProfileCtrl.educationData.educationAddressField)")
+            .panel-footer.heading-box
+              .row
+                .pull-right
+                  md-button.md-raised.savedata-btn(aria-label='save',type='submit', data-translate='SAVE', data-ng-click='CandidateProfileCtrl.createProfile()', data-ng-if="CandidateProfileCtrl.mode !=='edit'")
+                  md-button.md-raised.savedata-btn(aria-label='update' ,type='button', data-translate='UPDATE', data-ng-click='CandidateProfileCtrl.updateProfile()', data-ng-if="CandidateProfileCtrl.mode ==='edit'")
+                  md-button.md-raised.canceldata-btn(aria-label='cancel',type='button', data-translate='CANCEL', data-toggle='modal', data-target='#cancelModal')

@@ -1,0 +1,170 @@
+.candidate-profile-super-admin {
+  
+  
+	.showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+  .tabination-area .tab-content {
+    width: 100%;
+    float: left;
+    margin-top: -1px;
+
+  }
+
+  .profile-heading{
+    margin-top: 18px;
+  }
+
+  .candidate-data-info{
+    margin-top: 30px;
+  }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+  
+  th{
+        //text-align: left!important;
+        //white-space:nowrap;
+    }
+
+  .tabination-area .tab-content .btn-primary {
+    padding: 10px 20px;
+    line-height: 1em;
+    border-radius: 0;
+    font-family: 'ProximaNovaSemibold';
+    font-size: 13px;
+    color: $white;
+    text-transform: uppercase;
+    background: $blue;
+    border: $blue 1px solid;
+    float:left !important;
+  }
+  .pull-right {
+    float: right !important;
+    margin-left: 10px;
+  }
+  
+  .candidate-profile-sa{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        height:30px !important;
+        
+        .candidate-profile-heading{
+            margin-left:10px;
+            text-transform: uppercase;
+            color:#333;
+        }
+    }
+    
+    .evaluator-filter-dropdown{
+        margin-left: -248px;
+        border-radius: 0px;
+        margin-top: 0px;
+        width: 313px;
+    }
+    
+    .dashboard-profile{
+        padding: 6px!important;
+       // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+        background: #3f51b5 !important;
+    }
+    
+    .link-copy-btn{
+        border: none;
+        background-color: white;
+        margin-left: 5px;
+        padding: 0px 0px !important;
+        color:#337ab7;
+        cursor:pointer;
+    }
+/*    .sharable-link{ 
+        padding: 4px !important;
+        text-align: justify !important;
+        margin-left: -13px;
+        margin-bottom: 10px;
+        width:100%;
+        height: 70px;
+        overflow:auto;
+    }*/
+/*    .link-box{
+            float: right;
+    margin-top: -60px;
+    margin-bottom: 25px;
+    margin-right: -25px;
+    }*/
+/*    .text-box-copy{
+        padding-right: 0px !important;
+        width: 375px;
+    }*/
+/*  .delete-candidate {
+    margin-left: 43px
+  }
+
+  .restore-candidate {
+      margin-left: 52px;
+
+  }*/
+  .txt-focus{
+    color:white;
+    width:1px;
+    height:1px;
+    border:none;
+    outline:none;
+  }
+  .txt-focus:focus{
+    outline: none;   
+  }
+  
+  @media only screen and (max-width : 765px) {
+    
+   .delete-candidate {
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .restore-candidate{
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+  }
+  
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+      border:0;
+      background:transparent;
+  }
+  
+}

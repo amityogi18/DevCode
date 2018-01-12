@@ -1,0 +1,12 @@
+#popover-content-meeting
+  .col-sm-9.col-md-9.height-box
+    form(name='rejectForm',novalidate)
+      .form-group
+        label(for='comment') Comment
+        span.mandatory *
+        textarea.form-control(rows='5', name='rejectComment',ng-model='jobDescriptionCtrl.comment',required)
+        span.error-msg(data-ng-show='rejectForm.$submitted || rejectForm.rejectComment.$touched')
+           span(data-ng-show='rejectForm.rejectComment.$dirty && rejectForm.rejectComment.$invalid')
+           span.error-msg-reject(data-ng-show='rejectForm.rejectComment.$error.required') Please Enter Comment
+      button.meetingbtn.btn.btn-default(type='button',data-ng-click='jobDescriptionCtrl.positionReview(statusId=27)' ,ng-disabled="!rejectForm.$valid") Submit
+

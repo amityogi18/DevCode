@@ -1,0 +1,104 @@
+.panel.panel-default.candidate-evaluator-acordion 
+  .panel-heading
+    h4.panel-title 
+      a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#two', data-ng-if="candidateAccordionCtrl.interviewType === 3") Candidates / Evaluators
+      a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#two', data-ng-if="candidateAccordionCtrl.interviewType !== 3") Candidates / Interviewer / Evaluators
+  #two.panel-collapse.collapse
+    .panel-body 
+      md-content
+        md-tabs(md-dynamic-height='', md-border-bottom='') 
+          md-tab(label='Candidates') 
+            md-content.md-padding
+              .interviewer-tab-content 
+                .row(data-ng-show="candidateAccordionCtrl.linkedCandidateCount > 0") 
+                  .col-md-12
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                      select(class="selectpicker" ng-model="candidateAccordionCtrl.test" ng-change="candidateAccordionCtrl.toggle()")
+                        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in candidateAccordionCtrl.cols.slice(1,candidateAccordionCtrl.cols.length) track by $index") {{col.title()}}                 
+                    .main-table-area
+                       .table-responsive.table-box-candidate
+                          table.table(ng-table='candidateAccordionCtrl.linkedCandidatetableParams', ng-table-columns-binding="candidateAccordionCtrl.cols")
+                            tr(ng-repeat='candidate in $data track by candidate.id')                                
+                              td(ng-if="true" class='col-sm-2',title="'Action'")
+                                i.fa.fa-times.close-icon(aria-hidden='true',uib-tooltip='Delete', data-ng-click='candidateAccordionCtrl.removeCandidate(candidate)', style='cursor:pointer')                              
+                                i.fa.fa-envelope.resend-mail(aria-hidden='true', uib-tooltip='Resend Email', style='cursor:pointer', data-ng-click='candidateAccordionCtrl.resendMail(candidate.id, 2)')
+                              td(ng-if="true" class='col-sm-2' title="'Email'", sortable="'email'", ng-data='candidate.email', class-name='table-accordian') {{candidate.email}}  
+                              td(ng-if="true", data-title="'First Name'",  sortable="'firstName'", ng-data='candidate.firstName', class-name='table-accordian') {{candidate.firstName}}
+                              td(ng-if="true", data-title="'Last Name'",  sortable="'lastName'", ng-data='candidate.lastName', class-name='table-accordian') {{candidate.lastName}}
+                              //td.cust-name(ng-if="true" class='col-sm-2' title="'Name'", sortable="'firstName'", ng-data='candidate.firstName', class-name='table-accordian') {{candidate.firstName}}                   
+                              td(ng-if="true" class='col-sm-2' title="'Department'",sortable="'departmentName'", ng-data='candidate.departmentName', class-name='table-accordian') {{candidate.departmentName}}
+                              td(ng-if="true" class='col-sm-2' title="'Skills'", sortable="'skillsetName'", ng-data='candidate.skillsetName', class-name='table-accordian')                                    
+                                  span(ng-if="candidate.skillsetName !== null") {{candidate.skillsetName}}
+                                  span(ng-if="candidate.skillsetName === null") NA
+                              td(ng-if="true" class='col-sm-2' data-title="'Location'") {{candidate.country}}, {{candidate.state}}, {{candidate.city}}
+                              td(ng-if="true" class='col-sm-2' title="'Contact Number'",  sortable="'contactNumber'", ng-data='candidate.contactNumber', class-name='table-accordian') {{candidate.contactNumber}}
+                              td(ng-if="true" class='col-sm-2' title="'Experience'", sortable="'totalYrOfExp'", ng-data='candidate.totalYrOfExp', class-name='table-accordian')
+                                  span(ng-if="candidate.totalYrOfExp && candidate.totalYrOfExp !== 0") {{candidate.totalYrOfExp}} Year 
+                                  span(ng-if="candidate.totalMonthsOfExp && candidate.totalMonthsOfExp !== 0") {{candidate.totalMonthsOfExp}} Month
+                                  span(ng-if="candidate.totalYrOfExp == 0 && candidate.totalMonthsOfExp == 0") NA 
+                .row(data-ng-show="candidateAccordionCtrl.linkedCandidateCount < 1")
+                    .col-md-12.col-sm-12.col-xs-12
+                    | No Candidate Added Yet, Please add Candidate
+              md-button.md-primary.md-raised.btn-add-cand(ng-click='candidateAccordionCtrl.openAddCandidatePopup()') Add Candidate
+          md-tab(label='Interviewer', data-ng-if="candidateAccordionCtrl.interviewType !== 3")
+            md-content.md-padding
+              .interviewer-tab-content
+                //md-button.md-primary.md-raised.btn-add-cand(ng-click='candidateAccordionCtrl.openAddInterviewerPopup()') Add Interviewer
+                .row
+                    .col-md-12
+                      .col-sm-4.col-md-4.col-xs-6.showMe
+                        select(class="selectpicker" ng-model="candidateAccordionCtrl.test" ng-change="candidateAccordionCtrl.toggle()")
+                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in candidateAccordionCtrl.cols.slice(1,candidateAccordionCtrl.cols.length) track by $index") {{col.title()}}                 
+                      .main-table-area(data-ng-if="candidateAccordionCtrl.linkedInterviewerList.length > 0")
+                        .table-responsive.table-box-candidate
+                          table.table(ng-table='candidateAccordionCtrl.linkedInterviewertableParams', ng-table-columns-binding="candidateAccordionCtrl.cols")
+                            tr(ng-repeat='interviewer in $data')
+                              td(ng-if="true" class='col-sm-2',title="'Action'")
+                                i.fa.fa-times.close-icon(aria-hidden='true',title="'Delete'",style='cursor:pointer', data-ng-click='candidateAccordionCtrl.removeInterviewer(interviewer)')                                                           
+                                i.fa.fa-envelope.resend-mail(aria-hidden='true',title="'Resend Mail'", style='cursor:pointer',data-ng-click='candidateAccordionCtrl.resendMail(interviewer.interviewerId, 1)')  
+                              td(data-title="'Host'", sortable="'host'", ng-data='interviewer.host')
+                                input(type='checkbox', ng-model='interviewer.host', data-ng-click="candidateAccordionCtrl.makeInterviewerHost($event, interviewer)")
+                              td(ng-if="true" class='col-sm-2' data-title="'Email'", sortable="'email'", ng-data='interviewer.email') {{interviewer.email}}
+                              //td(ng-if="true" class='col-sm-2' data-title="'Name'", sortable="'firstName'", ng-data='interviewer.firstName') {{interviewer.firstName}} 
+                              td(ng-if="true", data-title="'First Name'",  sortable="'firstName'", ng-data='interviewer.firstName', class-name='table-accordian') {{interviewer.firstName}}
+                              td(ng-if="true", data-title="'Last Name'",  sortable="'lastName'", ng-data='interviewer.lastName', class-name='table-accordian') {{interviewer.lastName}}
+                              td(ng-if="true" class='col-sm-2' data-title="'Department'", sortable="'departmentName'", ng-data='interviewer.departmentName') {{interviewer.departmentName}}
+                              td(ng-if="true" class='col-sm-2' data-title="'Skillsets'", sortable='skillsets', ng-data='interviewer.skillsets')
+                                span(data-ng-repeat="skill in interviewer.skillsets")
+                                      span {{skill.name}}
+                                      span(ng-if="($index + 1) < interviewer.skillsets.length") , 
+                    .row(data-ng-show="candidateAccordionCtrl.linkedInterviewerCount === 0")
+                        .col-md-12.col-sm-12.col-xs-12
+                        | No Interviewer Added Yet, Please add Interviewer
+                    md-button.md-primary.md-raised.btn-add-cand(ng-click='candidateAccordionCtrl.openAddInterviewerPopup()') Add Interviewer
+          md-tab(label='Evaluators')
+            md-content.md-padding
+              .interviewer-tab-content
+                //md-button.md-primary.md-raised.btn-add-cand(ng-click='candidateAccordionCtrl.openAddEvaluatorPopup()') Add Evaluator
+                script#candidate-popup(type='text/ng-template')
+                  include candidate-popup-template
+                .row(ng-show="candidateAccordionCtrl.totalLinkedEvaluators > 0")
+                    .col-md-12
+                      .col-sm-4.col-md-4.col-xs-6.showMe
+                        select(class="selectpicker" ng-model="candidateAccordionCtrl.test" ng-change="candidateAccordionCtrl.toggle()")
+                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in candidateAccordionCtrl.cols.slice(1,candidateAccordionCtrl.cols.length) track by $index") {{col.title()}}                 
+                      .main-table-area
+                        .table-responsive.table-box-candidate
+                          table.table(ng-table='candidateAccordionCtrl.linkedEvaluatortableParams',ng-table-columns-binding="candidateAccordionCtrl.cols")
+                            tr(ng-repeat='evaluator in $data')
+                              td(ng-if="true" class='col-sm-2',title="'Action'")                                
+                                i.fa.fa-times.close-icon(aria-hidden='true',title="'Delete'" ,style='cursor:pointer',data-ng-click='candidateAccordionCtrl.removeEvaluator(evaluator)')                             
+                                i.fa.fa-envelope.resend-mail(aria-hidden='true',title="'Resend Mail'" ,style='cursor:pointer',data-ng-click='candidateAccordionCtrl.resendMail(evaluator.evaluatorId, 1)')  
+                              td(ng-if="true" class='col-sm-2' data-title="'Email'", sortable="'email'", ng-data='evaluator.email') {{evaluator.email}}
+                              //td(ng-if="true" class='col-sm-2' data-title="'Name'",  sortable="'name'", ng-data='evaluator.name') {{evaluator.name}}
+                              td(ng-if="true", data-title="'First Name'",  sortable="'firstName'", ng-data='evaluator.firstName', class-name='table-accordian') {{evaluator.firstName}}
+                              td(ng-if="true", data-title="'Last Name'",  sortable="'lastName'", ng-data='evaluator.lastName', class-name='table-accordian') {{evaluator.lastName}}
+                              td(ng-if="true" class='col-sm-2' data-title="'Department'", sortable="'department'", ng-data='evaluator.department') {{evaluator.departmentName}}
+                              td(ng-if="true" class='col-sm-2' data-title="'Skillsets'",  sortable="'skillsets'", ng-data='evaluator.skillsets') 
+                                 span(data-ng-repeat="skill in evaluator.skillsets")
+                                         span {{skill.name}}
+                                         span(ng-if="($index + 1) < evaluator.skillsets.length") , 
+                .row(ng-show="candidateAccordionCtrl.totalLinkedEvaluators < 1")
+                    .col-md-12.col-sm-12.col-xs-12
+                    | No Evaluator Added Yet, Please add Evaluator 
+                md-button.md-primary.md-raised.btn-add-cand(ng-click='candidateAccordionCtrl.openAddEvaluatorPopup()') Add Evaluator

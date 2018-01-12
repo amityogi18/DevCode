@@ -1,0 +1,127 @@
+header.header-bar
+    ul.top-left-links
+        li
+          a(uib-popover-template='ConferenceWebrtcCtrl.callViaInternetPopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.callViaInternetPopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.callViaInternetPopup.selected}}',popover-append-to-body="true", href='javascript:void(0);',popover-trigger="outsideClick", style="padding:0;")
+            i.fa.fa-phone.fa-2x
+        li(ng-if='ConferenceWebrtcCtrl.interviewTypeId === 1')
+          a(uib-popover-template='ConferenceWebrtcCtrl.recommendedQuestions.templateUrl', popover-title='{{ConferenceWebrtcCtrl.recommendedQuestions.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.recommendedQuestions.selected}}',popover-append-to-body="true", href='javascript:void(0);', popover-trigger="outsideClick")
+            i.fa.fa-question-circle-o(aria-hidden='true')
+        li(ng-hide='ConferenceWebrtcCtrl.interviewTypeId === 1 || ConferenceWebrtcCtrl.interviewTypeId === 4')
+          a(uib-popover-template='ConferenceWebrtcCtrl.meetingLink.templateUrl', popover-title='{{ConferenceWebrtcCtrl.meetingLink.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.meetingLink.selected}}',popover-append-to-body="true", href='javascript:void(0);',popover-trigger="outsideClick")
+            span.meeting-link   Meeting link
+        li
+            button.btn.btn-danger.stopmeeting(ng-click="ConferenceWebrtcCtrl.meetingstatus()") Stop Meeting
+
+    .icon-groups
+        ul
+            li
+                a(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.screenSharePopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.screenSharePopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.screenSharePopup.selected}}', popover-append-to-body="true",popover-trigger="outsideClick", style="padding:0;")
+                    i.fa.fa-plus.icon1
+            li
+                a(href='javascript:void(0)', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('P')", title='Participants')
+                    i.fa.fa-user.icon2
+            li
+                a(href='javascript:void(0)', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('C')", title='Chat')
+                    i.fa.fa-comment.icon3
+                    i.fa.fa-circle.chatcountcircle(ng-hide='ConferenceWebrtcCtrl.isShowChat || ConferenceWebrtcCtrl.chatcounter===0')
+                    p.chatcount(ng-hide='ConferenceWebrtcCtrl.isShowChat || ConferenceWebrtcCtrl.chatcounter===0') {{ConferenceWebrtcCtrl.chatcounter}}
+            
+    ul.top-right-links
+        li
+          a(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.connectToVideo.templateUrl', popover-title='{{ConferenceWebrtcCtrl.connectToVideo.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.connectToVideo.selected}}',popover-trigger="outsideClick",popover-append-to-body="true", style="padding:0;", ng-click='ConferenceWebrtcCtrl.getDevices()')
+                i.fa.fa-cog.usr-icon   
+        li
+          a(uib-popover-template='ConferenceWebrtcCtrl.recordingHelp.templateUrl', popover-title='{{ConferenceWebrtcCtrl.recordingHelp.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.recordingHelp.selected}}', href='javascript:void(0);',popover-trigger="outsideClick",ng-hide="ConferenceWebrtcCtrl.recordingStarts", popover-append-to-body="true", style="padding:0;")
+            i.fa.fa-circle.innerrecIcon.orangecircle
+            i.fa.fa-circle-thin.outerrecIcon.orangecircle
+        li(ng-if='ConferenceWebrtcCtrl.recordingStarts')
+          a
+            i.fa.fa-circle.innerrecIcon.redcircle
+            i.fa.fa-circle-thin.outerrecIcon.redcircle    
+        li(ng-if='ConferenceWebrtcCtrl.interviewTypeId !== 4')
+            a(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.shareLinkPopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.shareLinkPopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.shareLinkPopup.selected}}',popover-trigger="outsideClick", style="padding:0;")
+                i.fa.fa-user-plus.usr-icon
+
+section#imgwrapper(class='{{ConferenceWebrtcCtrl.bgclass}}')
+    .row#videoSection.video-section
+        .video-container(ng-draggable='dragOptions')
+            .screenshareheader(ng-show="ConferenceWebrtcCtrl.haveScreenStream") {{ConferenceWebrtcCtrl.whoIsSharing}} sharing screen       
+            video.selfvideo.video(autoplay='')
+            i.fa.fa-video-camera.fa-2x.videoIcon(aria-hidden='true', ng-click="ConferenceWebrtcCtrl.toogleVideoMute()")
+            i.fa.fa-microphone.fa-2x.audioIcon(aria-hidden='true', ng-click="ConferenceWebrtcCtrl.toogleAudioMute()")            
+   .arrowdivleft(ng-click="ConferenceWebrtcCtrl.scrollLeft()")
+          span
+            i.fa.fa-arrow-circle-left.arrowicon(aria-hidden='true')      
+    #remotefeeds
+        #myfeed.scrollV
+           video.myfeedremote
+    .arrowdivright(ng-click="ConferenceWebrtcCtrl.scrollRight()")
+          span
+            i.fa.fa-arrow-circle-right.arrowicon(aria-hidden='true')
+                   
+     .row.chat-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isShowChat')
+                .chat-container
+                    .chat-page(ng-draggable='dragOptions')
+                      .part-container
+                          .col-md-12(style='width: 150%;margin-left: -15px;')
+                            .panel.panel-primary
+                              .panel-heading
+                                span.glyphicon.glyphicon-comment
+                                |  Chat
+                                .btn-group.pull-right
+                                  button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown' style='padding-bottom: 3px; margin-top: -3px;', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('C')")
+                                    i.fa.fa-times.fa-lg(aria-hidden='true')
+                              .panel-body(style='height: 308px;padding: 5px !important;')
+                                ul.chat#chatid(style='height: 290px !important;overflow-y: scroll;')
+                              .panel-footer
+                                .input-group
+                                  input#textbox.form-control.input-sm(type='text', placeholder='Type your message here...', ng-keydown='ConferenceWebrtcCtrl.sendChatMsg($event)', ng-click='ConferenceWebrtcCtrl.setFocus("textbox")')
+                                  span.input-group-btn
+                                    button#btn-chat.btn.btn-warning.btn-sm(data-ng-click='ConferenceWebrtcCtrl.sendChatMsg(ConferenceWebrtcCtrl.e)')
+                                      | Send
+
+
+
+    .row.participants-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isShowParticipants')
+                .participants-container
+                    .participants-page(ng-draggable='dragOptions')
+                      .part-container
+                        .header-container
+                          .chatpanel-heading Participants
+                            button.btn.btn-close(type='button', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('P')") X
+                        div(style="height:100px; overflow-y:scroll; padding:5px important;")
+                          ul.userlist
+                            li(style="padding: 5px 0px 5px 10px")
+                              i.fa.fa-user(style="padding-right:5px;")
+                              span {{ConferenceWebrtcCtrl.AuthService.user.fullName || ConferenceWebrtcCtrl.participantName }}
+
+
+                        .chatpanel-footer
+                          i.fa.fa-user-plus.usr-icon(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.shareLinkPopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.shareLinkPopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.shareLinkPopup.selected}}',popover-trigger="outsideClick", style="float:right", ng-if='ConferenceWebrtcCtrl.interviewTypeId !== 4')
+                          
+
+    .row.participants-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isTextEditor')
+                    .participants-container
+                        .text-editor-page
+                          .text-editor-container
+                            .header-container
+                              .chatpanel-heading Text Editor
+                                button.btn.btn-close(type='button', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('E')") X
+                            textarea#codebox(style='height: 300px; width: 700px;', ng-click="ConferenceWebrtcCtrl.setFocus('codebox')")
+
+    .row.participants-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isAddParticipant')
+                .participants-container
+                    .participants-page(ng-draggable='dragOptions')
+                      .part-container
+                        .header-container
+                          .chatpanel-heading Add Participant
+                            button.btn.btn-close(type='button', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('A')") X
+                        div(style="height:100px; overflow-y:scroll; padding:5px important;")
+                            textarea#addpart(style="height: 100px; width: 185px; border-radius:5px;", name="addpart", placeholder="Please enter email id", ng-list="", ng-model="ConferenceWebrtcCtrl.inviteParticipant", ng-click="ConferenceWebrtcCtrl.setFocus('addpart')")
+                            hr
+                            button.btn.btn-sm.invitebtn(type='button',  ng-click="ConferenceWebrtcCtrl.inviteparticipants()") Send Invitation Now
+#output
+  div
+#janus-extension-installed(style='display: none;')
+
+

@@ -1,0 +1,79 @@
+.company-infomation
+  form
+    .video-iframe-sec.admin-info
+      img(id="countdown-img", ng-if="evr.countdownStarted", src="../../../public/img/countdown.gif")
+      iframe#exit-video-iframe(ng-if='!evr.recordingOn', ng-src='{{evr.trustSrc(evr.videoUrl)}}',frameborder='0', allowfullscreen='', controls)
+      video#exitRecorderElement.wel-video-dimension(ng-show='evr.recordingOn',ng-src='{{evr.trustSrc(evr.videoUrl)}}',frameborder='0', allowfullscreen='', controls)
+    ul.nav.nav-tabs.welcome-tabs
+      li.active(uib-tooltip="Record Exit Video")
+        a(data-toggle='tab', href='#record')
+          i.fa.fa-video-camera.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Upload Video")
+        a(data-toggle='tab', data-target='#upload')
+          i.fa.fa-arrow-up.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Upload Video From YouTube")
+        a(data-toggle='tab', href='#youtube')
+          i.fa.fa-youtube.edit-icon(aria-hidden='true')
+      li(uib-tooltip="Exit video list")
+        a(data-toggle='tab', href='#exit')
+          i.fa.fa-list-ol.edit-icon(aria-hidden='true')
+    .tab-content
+      #record.tab-pane.fade.in.active
+        .form-group.row.admin-bottom
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='record',ng-click='evr.onRecordClicked()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='RECORD')
+                //i.fa.fa-video-camera
+              span.hidden-md.hidden-lg
+                i.fa.fa-video-camera.fa-lg
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='stop',ng-click='evr.onStopClicked()')
+              span.hidden-xs.hidden-sm
+                span(data-translate='STOP')
+                //i.fa.fa-stop-circle-o
+              span.hidden-md.hidden-lg
+                i.fa.fa-stop-circle-o.fa-lg
+          .col-sm-4.col-xs-4.col-md-4
+            md-button.md-raised.md-primary.video-btn(aria-label='upload',aria-hidden='true', ng-click='evr.upload()', ng-disabled='evr.showUploadBtn || evr.hideBtn')
+              span.hidden-xs.hidden-sm
+                span(data-translate='UPLOAD')
+                //i.fa.fa-upload
+              span.hidden-md.hidden-lg
+                i.fa.fa-upload.fa-lg
+          //.col-sm-12.col-xs-12.col-md-4
+            button.btn.btn-primary.video-btn(ng-click='evr.onPauseClicked()') Pause
+      #upload.tab-pane.fade
+        .form-group.row.browse-section
+          .col-sm-2.col-xs-12.col-md-2
+            label Browse
+          .col-sm-5.col-xs-12.col-md-5
+            .browse-btn
+              input(type='file', file-modal='evr.videoFile' file-modal-url='evr.videoUrl' callback='evr.uploadBrowsedVideo()')
+          .col-sm-3.col-sm-offset-1.col-md-3.col-md-offset-1.col-xs-12
+            md-button.md-raised.md-primary.cipher-margin(aria-label='uploadfile', aria-hidden='true', ng-click='evr.upload()') Upload
+      #youtube.tab-pane.fade
+        .form-group.row.welcom-exit-video
+          label.col-sm-12.col-xs-12.col-md-3.col-form-label
+            i.v-icon
+              img(src='../../../public/img/v-icon.png', alt='')
+          .col-sm-12.col-xs-12.col-md-5
+            md-input-container.md-block.cipher-margin(flex-gt-sm='')
+              label
+              input(type='text', ng-model='evr.youTubeLink',placeholder='Paste Url Here...')
+          .col-sm-12.col-xs-12.col-md-4
+            md-button.md-raised.md-primary.cipher-margin(ng-hide='evr.showUploadBtn',aria-label='uploadyoutube',aria-hidden='true', ng-click='evr.uploadYoutubeLink()' ) Upload
+      #exit.tab-pane.fade
+        h4 Exit Video List
+        .form-body
+          p.title Choose From Existing Video :
+          form
+            .fields-sec.preview-sec
+              .row
+                .col-sm-12
+                  .col-sm-10
+                    select.form-control(ng-options='exitVideo as exitVideo.name for exitVideo in evr.exitVideoList track by exitVideo.fileId', ng-model='evr.exitVideo', ng-change="evr.exitVideoUpdated(evr.exitVideo)")
+                      option(selected='selected', value='') Select
+
+
+

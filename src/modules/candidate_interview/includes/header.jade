@@ -1,0 +1,48 @@
+header.main-header
+  .col-xs-6.col-sm-3.col-md-2
+    .logo
+      a(data-ui-sref='candidateProfile.home')
+        img(src='../../../public/img/logo-oda.png', alt='')
+  .col-xs-2.col-sm-6.col-md-6
+    .row
+      nav.navbar.navbar-default(role='navigation')
+        .navbar-header
+          button.navbar-toggle(type='button', data-target='#navbarCollapse', data-toggle='collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        // Collection of nav links and other content for toggling
+        #navbarCollapse.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='javascript:void(0)', data-ui-sref='candidateProfile.home') My Profile
+  .col-xs-4.col-sm-3.col-md-4.dropdown
+      .user-login(data-ng-hide='AppCtrl.isLoggedIn || isLoggedIn')
+        a.small-logo(href='javascript:void(0)')
+          img(src='../../../public/img/small-logo.png', alt='user logo')
+      .user-settings(data-ng-if='AppCtrl.isLoggedIn || isLoggedIn')
+          div.pull-right(layout='row')
+            .user-logo
+                img.user-image(data-ng-show='isLoggedIn', ng-src='{{profilePicPath}}', alt='user logo')
+            .name-section
+                #menu1.profile-name.dropdown-toggle(data-toggle='dropdown')
+                    span(data-ng-show='isLoggedIn', data-toggle='collapse', data-target='#settings-content')
+                        span.namespace {{user.fullName.substr(0, 10)}}
+                        span.namespace(ng-if='user.fullName.length > 10') ...
+                        span.caret
+            ul.settings-content.dropdown-menu(role="menu",aria-labelledby="menu1")
+              h5 
+                i(data-ng-if='user.userRoles == 1')  ADMIN
+                i(data-ng-if='user.userRoles == 2')  CO-ADMIN
+                i(data-ng-if='user.userRoles == 3')  INTERVIEWER
+                i(data-ng-if='user.userRoles == 4')  EVALUATOER
+                i(data-ng-if='user.userRoles == 5')  CANDIDATE
+                i(data-ng-if='user.userRoles == 6')  RECRUITER
+                i(data-ng-if='user.userRoles == 7')  SUPER ADMIN
+              li(data-ui-sref='settings.general-settings')
+                i.fa.fa-cog(aria-hidden='true')
+                | Settings
+              li( data-ng-click='doLogout()' style='color:red;')
+                i.fa.fa-power-off(aria-hidden='true')
+                | Logout

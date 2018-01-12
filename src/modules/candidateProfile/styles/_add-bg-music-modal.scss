@@ -1,0 +1,55 @@
+.music{
+    background-color: $white !important;
+    .nav-tabs > li.active >a{
+        color: blue !important;
+    }
+    .nav-tabs >li >a{
+       color: #ccc !important; 
+    }
+    
+}
+.color-head{
+        color: $white !important;
+    }
+.btn{
+    border-radius: 0px !important;
+}
+.general-audio-file-container{
+  .audio-file{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 10px 10px 10px 0px;
+    border: 1px solid grey;
+    position: relative;
+    border-radius: 2px;
+  }
+
+  .add-audio-icon{
+    position: absolute;
+    bottom: 0px;
+    left: 82px;
+    cursor: pointer;
+  }
+
+  .file-name{
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .audio-icon{
+    text-align: center;
+
+    .fa-file-audio-o{
+      font-size: 35px;
+    }
+  }
+}
+
+.on-device-audio-file-container{
+  margin-top: 20px;
+}
+
+.adjust-padding{
+  padding: 18px 21px !important;
+}

@@ -1,0 +1,89 @@
+#position-navbar.add-position-page 
+  .col-md-12.col-sm-12.col-xs-12 
+    .col-md-12.col-sm-12.col-xs-12.position-heading  
+      h1.panel-title
+        .col-md-4.col-sm-4.col-xs-12.position-name-heading 
+          div(data-ng-if='newPositionCtrl.PositionCount.positionName') {{newPositionCtrl.PositionCount.positionName}}  
+            i.fa.fa-pencil-square-o.position-edit-icon(aria-hidden='true')
+          div(data-ng-if='!newPositionCtrl.PositionCount.positionName') Position            
+        .col-sm-8.col-md-8.col-xs-12.button-box.pull-right
+          a.md-button.md-raised.canceldata-btn(aria-label='cancel', type='button', data-toggle='modal', data-target='#cancelModal') 
+            span.hidden-xs Cancel 
+            i.fa.fa-times.popbtn_cross.visible-xs(data-toggle='tooltip', data-placement='top', title='cancel', aria-hidden='true') 
+          a.md-button.md-raised.md-primary(aria-label='saveActivate', type='button', data-toggle='modal', data-target='#activateModal', data-ng-if='newPositionCtrl.PositionCount.statusId !== 1') 
+            span.hidden-xs Save & Activate 
+            i.fa.fa-floppy-o.visible-xs(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='save & activate')
+            i.fa.fa-check.activate.visible-xs(aria-hidden='true') 
+          a.md-button.md-raised.savedata-btn(aria-label='savedraft', type='button', ng-if='newPositionCtrl.isEditMode && newPositionCtrl.positionId !== "new" && newPositionCtrl.PositionCount.statusId !== 1', data-ng-click="newPositionCtrl.saveData('UPDATE')") 
+            span.hidden-xs Save
+            i.fa.fa-floppy-o.visible-xs(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='save')
+          a.md-button.md-raised.savedata-btn(aria-label='saveDraft', type='button', ng-if='!newPositionCtrl.isEditMode && newPositionCtrl.positionId !== "new" && newPositionCtrl.PositionCount.statusId !== 1', data-ng-click="newPositionCtrl.saveData('UPDATE')") 
+            span.hidden-xs Save
+            i.fa.fa-floppy-o.visible-xs(data-toggle='tooltip', data-placement='top', title='save', aria-hidden='true')
+          a.md-button.md-raised.savedata-btn(aria-label='saveDraft', type='button', ng-if='!newPositionCtrl.isEditMode && newPositionCtrl.positionId === "new" && newPositionCtrl.PositionCount.statusId !== 1', data-ng-click="newPositionCtrl.saveData('SAVE')")
+            span.hidden-xs Save
+            i.fa.fa-floppy-o.visible-xs(data-toggle='tooltip', data-placement='top', title='save', aria-hidden='true')
+          a.md-button.md-raised.savedata-btn(aria-label='save', type='button', ng-if='newPositionCtrl.positionId !== "new" && newPositionCtrl.PositionCount.statusId === 1', data-ng-click="newPositionCtrl.saveData('SAVE')")
+            span.hidden-xs Save
+            i.fa.fa-floppy-o.visible-xs(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='save')
+          //a.btn.btn-success.live-now-btn(type='button', ng-if='newPositionCtrl.PositionCount.statusId === 1', ng-click='newPositionCtrl.setLiveNowData();', uib-popover-template='newPositionCtrl.liveNow.templateUrl', popover-title='{{newPositionCtrl.liveNow.title}}', popover-animation='true', popover-placement='{{newPositionCtrl.liveNow.selected}}') LIVE NOW
+          live-now-interview(pid='newPositionCtrl.positionId', ng-if='newPositionCtrl.PositionCount.statusId === 1')
+        #cancelModal.modal.fade(role='dialog')
+          .modal-dialog
+            .modal-content.content-of-modal
+              .modal-header
+                | Warning
+                button.close(type='button', data-dismiss='modal') ×
+              .modal-body.body-of-cp-modal
+                p.discard-msg(data-translate='DISCARD-MSG')
+              .modal-footer.footer-of-cp-modal
+                md-button.md-raised.md-primary(aria-label='save', type='button', data-dismiss='modal', data-ng-click='newPositionCtrl.discard()', data-translate='OK')
+                md-button.md-raised.canceldata-btn(aria-label='save', type='button', data-dismiss='modal', data-translate='CANCEL')
+        #activateModal.modal.fade(role='dialog')
+          .modal-dialog
+            .modal-content.content-of-modal
+              .modal-header
+                | Activate Position
+                button.close(type='button', data-dismiss='modal') ×
+                h4.modal-title
+              .modal-body.body-of-cp-modal
+                p.discard-msg Are you sure you want to Activate the Position ?
+              .modal-footer.footer-of-cp-modal
+                md-button.md-raised.md-primary(aria-label='save', type='button', data-dismiss='modal', data-ng-click="newPositionCtrl.saveData('ACTIVATE')") ACTIVATE
+                md-button.md-raised.canceldata-btn(aria-label='save', type='button', data-dismiss='modal', data-translate='CANCEL') CANCEL
+        
+    div.seprate-line              
+    .col-md-12.col-sm-12.col-xs-12.margin-40
+        md-content.md-padding
+            md-nav-bar.visible-sm.visible-md.visible-lg.hidden-xs(md-selected-nav-item='newPositionCtrl.currentNavItem.current', nav-bar-aria-label='Position Navigation')
+              md-nav-item(md-nav-sref='app.create-position({positionId: "{{newPositionCtrl.positionId}}"})',  name='position')
+                | Position
+              md-nav-item(md-nav-sref='app.application({positionId: "{{newPositionCtrl.positionId}}"})', name='application')
+                | Application 
+              md-nav-item(md-nav-sref='app.advertise({positionId: "{{newPositionCtrl.positionId}}"})', name='advertise', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Advertise{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.postedCount +')':""}}
+              md-nav-item(md-nav-sref='app.applied({positionId: "{{newPositionCtrl.positionId}}"})', name='applied', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Applied{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.appliedCandidateCount +')':""}}
+              md-nav-item(md-nav-sref='app.interview({positionId: "{{newPositionCtrl.positionId}}"})', name='interview', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Interview{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.interviewCount +')':""}}
+              md-nav-item(md-nav-sref='app.hired({positionId: "{{newPositionCtrl.positionId}}"})', name='hired', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Hired{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.hiredCandidateCount +')':""}}
+            md-nav-bar.hidden-sm.hidden-md.hidden-lg.visible-xs(md-selected-nav-item='newPositionCtrl.currentNavItem.current', nav-bar-aria-label='Position Navigation')
+              md-nav-item.prev-btn(md-nav-sref='{{newPositionCtrl.currentNavItem.prev}}', name='previous') 
+                i.fa.fa-angle-double-left.fa-lg.prev-arrow(aria-hidden='true', title='Previous')
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='position'", md-nav-sref='app.create-position({positionId: "{{newPositionCtrl.positionId}}"})',  name='position')
+                | Position
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='application'", md-nav-sref='app.application({positionId: "{{newPositionCtrl.positionId}}"})', name='application')
+                | Application 
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='advertise'", md-nav-sref='app.advertise({positionId: "{{newPositionCtrl.positionId}}"})', name='advertise', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Advertise{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.postedCount +')':""}}
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='applied'", md-nav-sref='app.applied({positionId: "{{newPositionCtrl.positionId}}"})', name='applied', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Applied{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.appliedCandidateCount +')':""}}
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='interview'", md-nav-sref='app.interview({positionId: "{{newPositionCtrl.positionId}}"})', name='interview', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Interview{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.interviewCount +')':""}}
+              md-nav-item(ng-if="newPositionCtrl.currentNavItem.current==='hired'", md-nav-sref='app.hired({positionId: "{{newPositionCtrl.positionId}}"})', name='hired', ng-disabled="newPositionCtrl.positionId ==='new' || newPositionCtrl.positionId == '1'")
+                | Hired{{newPositionCtrl.showPositionCount ? '(' + newPositionCtrl.PositionCount.hiredCandidateCount +')':""}}
+              md-nav-item.next-btn(md-nav-sref='{{newPositionCtrl.currentNavItem.next}}', name='next') 
+                i.fa.fa-angle-double-right.fa-lg.next-arrow(aria-hidden='true', title='Next')
+               
+      

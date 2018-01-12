@@ -1,0 +1,58 @@
+.quick-stastics-section {
+    md-content{
+        padding:0px;
+        background: transparent;
+        md-card-actions{
+            margin:0px !important;
+        }
+        md-card{
+            box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+            width: 100%;
+            p{
+                font-weight: 600;
+            }
+        }
+    }
+    button{
+        font-size: 20px;
+        margin: 0px;
+        padding: 0px;
+        min-width: 30px;
+    }
+    .card-box {
+        background-color: #ffffff;
+    }
+    .widget-inline-box{
+        text-align: center;
+        width: 20%;
+        color: #7a7d84;
+        border-right: 1px solid #e3e8f1;
+        padding: 20px 10px;
+        .green-text{
+            color: #23b195;
+        }
+        .red-text{
+            color: #d57171;
+        }
+        .blue-text{
+            color: #3db9dc;
+        }
+        .yellow-text{
+            color: #ffb822;
+        }
+        .pink-text{
+            color: #f4516c;
+        }
+    }
+    .widget{
+        border-right: none !important;
+    }
+    @media only screen and(max-width:500px){ 
+        .widget-box{
+            width: 50% !important;
+        }
+        .widget{
+            width: 100% !important;
+        }
+    }
+}

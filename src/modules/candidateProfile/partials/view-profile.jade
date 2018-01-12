@@ -1,0 +1,302 @@
+.content-wrapper.view-profile-page
+  .row.view-profile-heading
+    span.video-intro-1(data-translate='CREATE-PROFILE', data-ng-if='!CandidateProfileCtrl.isProfileAdded')
+    span.video-intro-1(ng-if='CandidateProfileCtrl.isProfileAdded')
+      .col-md-6.col-sm-12.col-xs-12.profile_name {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.name}}
+      .col-md-4.col-sm-12.col-xs-12.margin-top-15(ng-show='CandidateProfileCtrl.twoMinIntro')
+        label.checkbox-inline(data-ng-if='CandidateProfileCtrl.isActiveProfile')
+        input.option-checkbox(type='checkbox', tooltip-placement ="left", uib-tooltip="Share with my profile" data-ng-show="CandidateProfileCtrl.isActiveProfile" ,data-ng-model='CandidateProfileCtrl.shareProfile', data-ng-click='CandidateProfileCtrl.shareMyProfile(CandidateProfileCtrl.shareProfile)')
+        span.active-profile.share-profile(data-ng-show="CandidateProfileCtrl.isActiveProfile", data-translate='SHARE-PROFILE')
+      .col-md-2.col-sm-12.col-xs-12
+        .row         
+            md-button.md-fab.md-mini.md-primary(aria-label="manage",data-ui-sref='candidateProfile.manage-profile',tooltip-placement ="top", uib-tooltip="Manage")
+              span
+                i.fa.fa-cogs(aria-hidden='true')                  
+            md-button.md-fab.md-mini.md-primary.edit-md-button(aria-label="edit",data-ng-click='CandidateProfileCtrl.editProfile(CandidateProfileCtrl.profileId)',tooltip-placement ="top", uib-tooltip="Edit")
+              span
+                i.fa.fa-pencil(aria-hidden='true')
+  .panel.panel-default.row.view-profile-panel
+    .panel-body(data-ng-if='!CandidateProfileCtrl.isProfileAdded')
+      .row
+        //.col-md-12.col-sm-8.col-xs-12
+          .alert.alert-warning  No Profile Created Yet, 
+            a(data-ui-sref='candidateProfile.create-profile') 
+              u Click Here  
+            span To Create New profile
+        .col-md-12.col-sm-12.col-xs-12
+          .resume-section
+            .count-box
+              span Create your profile by uploading your resume&nbsp;&nbsp;
+              strong OR&nbsp;&nbsp;
+              span 
+                a(data-ui-sref='candidateProfile.create-profile') 
+                  u Click Here&nbsp;  
+                span to create your profile manually.
+            div(layout-gt-sm="row" flex-gt-sm='')
+              .col-sm-12.col-xs-12.col-md-2.col-form-label
+                span(data-translate='RESUME-UPLOAD')
+              .col-sm-12.col-xs-12.col-md-3
+                input.form-control(type='file', ngf-max-size='1MB', ngf-select='CandidateProfileCtrl.uploadResumeFile($files); CandidateProfileCtrl.isResumeFileAdded($files)', name='file', accept=".docx,.pdf,.doc,.txt", ngf-model-invalid='errorFile', data-ng-model='CandidateProfileCtrl.candidateResumeFile')
+              .col-md-6.col-xs-2.col-sm-12
+                md-button.md-raised.md-primary.resume-upload-btn(ng-disabled='CandidateProfileCtrl.ResumeNotSelected', ng-click="CandidateProfileCtrl.initialResumeUpload(CandidateProfileCtrl.candidateResumeFile)") Upload
+                  md-icon(md-font-set='fa') &#xf093              
+    .panel-body(ng-if='CandidateProfileCtrl.isProfileAdded')
+      .row
+        .col-md-6.col-sm-12.col-xs-12.first-coloumn-division
+          md-card
+            .row
+              .col-md-4.col-sm-12.col-xs-10.col-md-offset-0.col-xs-offset-2
+                div(layout-margin="", layout="column", layout-xs="row")
+                  img.img-circle.cand-img(src='{{profilePicPath}}', alt='candidate-image', width='140', height='130')
+              .col-md-8.col-sm-12.col-xs-12
+                md-card-title.basic-profile-section
+                  md-card-title-text
+                    span.md-headline.candidate-name
+                      | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.firstName}}    {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.lastName}}
+                    span.md-subhead
+                      i.fa.fa-envelope-o.email-phone-code(aria-hidden='true')
+                      | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.email}}
+                    span.md-subhead
+                      i.fa.fa-phone.email-phone-code(aria-hidden='true')
+                      | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.phone}}
+                .col-md-12.col-sm-12.col-xs-12  
+                  .profile-section(data-ng-repeat='socialUrl in CandidateProfileCtrl.candidateProfileInfo.candidateUrl', data-ng-if='CandidateProfileCtrl.candidateProfileInfo.candidateUrl.length > 0 ')               
+                    a(target = "_blank", data-ng-if="socialUrl.urlType.name === 'Facebook' ", href='https://{{socialUrl.url}}')
+                      i.fa.fa-facebook.email-phone-code
+                      | {{socialUrl.url}}
+                    a(target = "_blank", data-ng-if="socialUrl.urlType.name === 'Twitter' ", href='https://{{socialUrl.url}}')
+                      i.fa.fa-twitter.email-phone-code
+                      | {{socialUrl.url}}
+                    a(target = "_blank", data-ng-if="socialUrl.urlType.name === 'LinkedIn'", href='https://{{socialUrl.url}}')
+                      i.fa.fa-linkedin.email-phone-code
+                      | {{socialUrl.url}}
+                    a(target = "_blank", data-ng-if="socialUrl.urlType.name === 'Others' ", href='https://{{socialUrl.url}}') 
+                      i.fa.fa-link.email-phone-code
+                      | {{socialUrl.url}}    
+        .col-md-6.col-sm-12.col-xs-12          
+          .row.location-name
+            .col-md-12.col-sm-12.col-xs-12
+              i.fa.fa-location-arrow.email-phone-code(aria-hidden='true')
+              | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.address}}
+              | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.city.cityName}} , {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.state.stateName}}
+          .row.location
+            .col-md-8.col-sm-12.col-xs-12
+              i.fa.fa-location-arrow.email-phone-code(aria-hidden='true')
+              | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.country.countryName}} ,
+              | {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.zipCode}}
+       
+        .col-md-6.col-sm-12.col-xs-12
+          .col-md-12.col-sm-12.col-xs-12.profile-box-container
+            .profile-box 
+               label Profile Completeness
+              .progress-bar
+                  .progress-bar-L1.wow.fadeInLeft.animated(data-progress='{{CandidateProfileCtrl.profileCompletenessCount}}%', style='width: {{CandidateProfileCtrl.profileCompletenessCount}}%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;', data-wow-duration='1.5s', data-wow-delay='1.2s')
+                    .progress-conunt
+                      span.pr-pg {{CandidateProfileCtrl.profileCompletenessCount}}%
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.certificationPercentageStatus.isAvailable === false')
+                small Please Complete&nbsp;&nbsp;
+                |certification  
+                small  to complete 10% of your profile |  
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.resumePercentageStatus.isAvailable === false') 
+                small Please Complete&nbsp;&nbsp;
+                |resume 
+                small  to complete 30% of your profile |  
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.coverLetterPercentageStatus.isAvailable === false') 
+                small Please Complete&nbsp;&nbsp;
+                |cover letter 
+                small  to complete 10% of your profile |  
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.skillPercentageStatus.isAvailable === false')  
+                small Please Complete&nbsp;&nbsp;
+                |skill 
+                small  to complete 10% of your profile | 
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.profilePicturePercentageStatus.isAvailable === false')  
+                small Please Complete&nbsp;&nbsp;
+                |profile picture
+                small  to complete 10% of your profile | 
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.toMinIntroPercentageStatus.isAvailable === false')  
+                small Please Complete&nbsp;&nbsp;
+                |2 min intro
+                small   to complete 20% of your profile |  
+              strong(ng-if= 'CandidateProfileCtrl.profileCompletenessStatus.portfolioPercentageStatus.isAvailable === false')
+                small Please Complete&nbsp;&nbsp;
+                |project summary
+                small  to complete 10% of your profile |
+              small(ng-if="CandidateProfileCtrl.profileCompletenessStatus.totalProfileCompleteness === 100")
+                Strong Your Profile is 100% completed 
+    
+      hr(align='left', width='100%')             
+      .row.seprate-line.profile-section
+        .col-sm-12
+          h3.skill-set Profile Information
+      .form-group.row
+        label.col-md-12.col-sm-12.col-xs-6.labelForm.about-me About Me
+        .col-md-10.col-sm-10.col-xs-12.about-me-discription
+           span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.aboutMe}}
+        .col-sm-1.col-md-1.col-xs-12
+          button.btn-btn-primary(ng-show='CandidateProfileCtrl.updateSkillSuggestion', ng-click='CandidateProfileCtrl.updateSkillSuggestionText("about-me-discription", "aboutMe")') update   
+      .col-md-6.first-coloumn-division
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Designation
+          .col-sm-12.col-xs-6.col-md-6
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.candidateDesignation.candidateDesignationName}}
+        .form-group.row
+          label.col-sm-12.col-md-6.col-xs-6.labelForm Experience
+          .col-sm-12.col-xs-6.col-md-6
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.experience}} 
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Salary
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.salary == null')
+               p N/A
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.salary}}   
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Currency
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.currency == null')
+               p N/A
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.currency}}
+        .form-group.row
+          label.col-sm-4.col-xs-6.col-md-6.labelForm Department
+          .col-xs-6.col-sm-12.col-md-6
+              span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.department.name}}          
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Language
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-repeat='criteria in CandidateProfileCtrl.candidateProfileInfo.candidateCriteria')
+              span(ng-repeat='values in criteria.language')
+                | {{values.value}} {{$last ? '' : ($index==criteria.language.length-2) ? ' & ' : '| '}}
+                //- span.list-comma , 
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Resume
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.profileResume == null')
+              p  N/A
+            span(data-ng-if='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.profileResume !== null')  
+              md-button.md-primary.md-mini.md-fab(aria-label ="resume", href='{{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.profileResume.path}}', download='download')
+                span
+                  i.fa.fa-arrow-down
+              | Click to Download Your Resume.     
+      .col-md-6.col-sm-12.second-column-division
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Employment Type
+          .col-sm-12.col-xs-6.col-md-6
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType}}
+            //- span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType === '1' ") Full Time
+            //- span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType === '2' ") Part Time
+            //- span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType === '3' ") Contracts
+            //- span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.employmentType === '4' ") Third Party          
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Hourly Rate
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.hourlyRate == null')
+               p N/A
+            span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.hourlyRate}}
+        .form-group.row  
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Work Authorization
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-repeat='criteria in CandidateProfileCtrl.candidateProfileInfo.candidateCriteria')
+              p {{criteria.workAuthorization.value}}      
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Available to start
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-repeat='criteria in CandidateProfileCtrl.candidateProfileInfo.candidateCriteria')
+              p {{criteria.availableToStart.value}}  
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Willing to travel
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-repeat='criteria in CandidateProfileCtrl.candidateProfileInfo.candidateCriteria')
+              p {{criteria.willingToTravel.value}}
+        .form-group.row
+          label.col-sm-4.col-xs-6.col-md-6.labelForm Preferred Location
+          .col-sm-8.col-xs-6.col-md-6
+            span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidatePreferredLocation.length == 0')
+              p N/A
+            span(data-ng-repeat='location in CandidateProfileCtrl.candidateProfileInfo.candidatePreferredLocation')
+              p
+                {{location.preferredAddress}}
+        .form-group.row
+          label.col-sm-12.col-xs-6.col-md-6.labelForm Disability
+          .col-sm-12.col-xs-6.col-md-6
+            span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.disable == '1' ") Yes
+            span(data-ng-if="CandidateProfileCtrl.candidateProfileInfo.candidateProfile.disable == '0' ") No  
+      hr(align='left', width='100%')  
+      .col-md-12
+      .col-md-12
+        .form-group.row
+           label.col-sm-2.col-xs-12.col-md-12.labelForm Cover Letter
+           .col-sm-12.col-xs-12.col-md-12.cover-letter
+             span(data-ng-show='CandidateProfileCtrl.candidateProfileInfo.candidateProfile.coverLetter == null')
+               p N/A
+             span {{CandidateProfileCtrl.candidateProfileInfo.candidateProfile.coverLetter.content}}
+      hr(align='left', width='100%')        
+      .row.seprate-line.profile-section
+        .col-sm-12.col-md-12.skill-coloumn-sepration
+          .col-sm-12.col-xs-12.col-md-12
+            .row
+              .col-md-12.col-xs-12.col-sm-12
+                h3.skill-set(data-translate='SKILL')
+              .col-sm-12.col-xs-12.col-md-12
+                table.table.table-bordered
+                  tbody
+                    tr
+                      th.labelForm Skillset
+                      th.labelForm Years of Experience
+                      th.labelForm Last Used(Year)
+                    tr(ng-repeat='skill in CandidateProfileCtrl.candidateProfileInfo.candidateSkillset')
+                      td(ng-if ="skill.level==4") {{skill.skillsetText}}
+                      td(ng-if ="skill.level !==4") {{skill.skillset.name}}
+                      td {{skill.yearsOfExperience}}
+                      td {{skill.lastUse}}
+          .col-sm-12.col-xs-12.col-md-12
+            .row
+              .col-sm-12.col-xs-12.col-md-12
+                h3.skill-set(data-translate='WORK-EXPERIENCE')
+              .col-sm-12.col-xs-12.col-md-12
+                table.table.table-bordered
+                  tbody
+                    tr
+                      th.labelForm Company Name 
+                      th.labelForm Job Title
+                      th.labelForm Start Date - End Date 
+                    tr(ng-repeat='experience in CandidateProfileCtrl.candidateProfileInfo.candidateExperience')
+                      td {{experience.companyName}}
+                      td {{experience.jobTitle}}
+                      td {{experience.startDate | date: "dd-MM-yyyy"}} - {{experience.endDate | date: "dd-MM-yyyy"}}
+      .row.seprate-line.profile-section
+        .col-sm-12.col-xs-12.col-md-12.skill-coloumn-sepration
+          .col-md-12.col-sm-12.col-xs-12
+                h4.skill-set(data-translate='EDUCATION')   
+          .col-md-12.col-sm-12.col-xs-12      
+            md-card.main-education-section
+              .col-md-12.col-sm-12.col-xs-12
+                div.education-section(ng-repeat='education in CandidateProfileCtrl.candidateProfileInfo.candidateEducation')
+                  .education-heading {{education.university}}
+                  p {{education.qualification.name}}
+                  p {{education.specialization}}
+                  p {{education.educationAddress}}
+      .row.seprate-line.profile-section
+        .col-sm-12.col-xs-12.col-md-12.skill-coloumn-sepration
+          .col-sm-12.col-xs-12.col-md-12
+            h3.skill-set Project Summary
+          .col-sm-12.col-xs-12.col-md-12
+            md-card.main-education-section
+              .col-md-12.col-sm-12.col-xs-12
+                div.education-section(ng-repeat='summary in CandidateProfileCtrl.candidateProfileInfo.candidatePortfolios')
+                  .education-heading  Title - {{summary.title}}
+                  button.pull-right.btn-btn-primary(ng-show='CandidateProfileCtrl.updateButtonObj.projectDes_{{$index}}', ng-click='CandidateProfileCtrl.updateSkillSuggestionText("projectDes_"+$index,"project")') update   
+                  p(class='projectDes_{{$index}}') Description - {{summary.description}}
+                  a(target = "_blank", title='Project Url', href='{{summary.url}}') {{summary.url}}
+//- #skillSuggestion.modal.fade(role='dialog')
+//-   .modal-dialog
+//-     // Modal content
+//-     .modal-content
+//-       .modal-header
+//-         button.close(type='button', data-dismiss='modal') ×
+//-         h4.modal-title Skill Suggestions
+//-       .modal-body
+//-         div(ng-repeat='suggestion in CandidateProfileCtrl.selectedSkill')
+//-           p(ng-click='CandidateProfileCtrl.selectedSuggestion=suggestion') {{suggestion}}
+//-         div(ng-show='CandidateProfileCtrl.selectedSkill.length === 0')  
+//-           p There are no suggestions for this skill..  
+//-       .modal-footer
+//-         button.btn.btn-default(type='button',ng-click='CandidateProfileCtrl.replaceSuggested()', data-dismiss='modal') Close        

@@ -1,0 +1,75 @@
+.content-wrapper.general-setting
+  .col-md-12
+    .video-intro-heading
+      span.video-intro-1 General Setting
+    .panel-body
+      div(ng-cloak='')
+        md-content
+          md-tabs(md-dynamic-height='', md-border-bottom='') 
+            md-tab(label='Profile')
+              md-content.md-padding
+                  .col-sm-12.col-md-12.col.xs-12
+                    span.alert(ng-if='GeneralSettingsCtrl.message.text', ng-class="{'alert-danger' : GeneralSettingsCtrl.message.error,'alert-success':!GeneralSettingsCtrl.message.error}") {{GeneralSettingsCtrl.message.text?GeneralSettingsCtrl.message.text:''}}
+                  .col-md-9.col-sm-9.col-xs-9
+                    .image-box
+                      .row.image-box-row
+                        button.btn.btn-danger(type='button',ng-click='GeneralSettingsCtrl.removeProfilePic()',title='Remove Profile Picture', data-ng-show='GeneralSettingsCtrl.isProfilePicFileAdded') -
+                        //- button.btn.btn-danger(type='button',ng-click='GeneralSettingsCtrl.showCameraPopUp()',title='Upload Profile Picture', data-ng-show='GeneralSettingsCtrl.isProfilePicFileAdded') +
+                        input(type='file', ngf-max-size='512KB' ngf-select='GeneralSettingsCtrl.uploadProfilePic($files); GeneralSettingsCtrl.isFileAdded($files)', name='file', accept='image/*', ngf-model-invalid='errorFile' data-ng-if='!root.mobile' && '!GeneralSettingsCtrl.isProfilePicFileAdded')
+                        img(alt='', class='thumbnail' ng-src="{{GeneralSettingsCtrl.profilePic?GeneralSettingsCtrl.profilePic:'./img/user.png'}}")
+                  .col-xs-12.col-sm-8.col-md-8
+                    form.form-horizontal(role='form',name="GeneralSettingsCtrl.settingForm")
+                      md-input-container.md-block(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")
+                        label(for='name') First Name
+                        input#name(type='text', maxlength='25', name='firstName',data-ng-model='GeneralSettingsCtrl.settingData.firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+                        span.error-msg(data-ng-show='GeneralSettingsCtrl.settingForm.$submitted || GeneralSettingsCtrl.settingForm.firstName.$touched')
+                          span(data-ng-show='GeneralSettingsCtrl.settingForm.firstName.$dirty && GeneralSettingsCtrl.settingForm.firstName.$invalid')
+                          span.error-msg(data-ng-show='GeneralSettingsCtrl.settingForm.firstName.$error.required') Please Enter first Name
+                      md-input-container.md-block(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")
+                        label(for='name') Last Name
+                        input(type='text', maxlength='25', name='lastName', ng-model='GeneralSettingsCtrl.settingData.lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+                        span.error-msg(data-ng-show='GeneralSettingsCtrl.settingForm.$submitted || GeneralSettingsCtrl.settingForm.lastName.$touched')
+                          span(data-ng-show='GeneralSettingsCtrl.settingForm.lastName.$dirty && GeneralSettingsCtrl.settingForm.lastName.$invalid')
+                          span.error-msg(data-ng-show='GeneralSettingsCtrl.settingForm.lastName.$error.required') Please Enter Last Name
+                      md-input-container.md-block(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")
+                        label(for='email', data-translate='EMAIL')
+                        input(type='email', ng-model='GeneralSettingsCtrl.settingData.emailId', disabled) 
+                      div(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")
+                        md-content.geo-section.md-block(flex="")
+                          place-autocomplete(ng-model='GeneralSettingsCtrl.geoAddress', on-address='GeneralSettingsCtrl.setAddressValue(addressFn)', search-type='1')  
+                      md-input-container.md-block(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")
+                        label Contact Number
+                        input(type='text', name='contactNumber',minlength='10',maxlength='14', ng-model='GeneralSettingsCtrl.settingData.contactNumber',data-ng-blur='GeneralSettingsCtrl.analyzePhoneNumber(GeneralSettingsCtrl.settingData.contactNumber)', data-ng-keypress="GeneralSettingsCtrl.analyzePhoneNumber(GeneralSettingsCtrl.settingData.contactNumber)", data-ng-keyup="GeneralSettingsCtrl.analyzePhoneNumber(GeneralSettingsCtrl.settingData.contactNumber)", onkeypress='return event.charCode >= 48 && event.charCode <= 57', required)
+                        span.error-msg(data-ng-if='GeneralSettingsCtrl.errmsgcon !== ""') {{GeneralSettingsCtrl.errmsgcon}}
+                    md-button.md-raised.savedata-btn.md-cornered.pull-right(type='submit',ng-click='GeneralSettingsCtrl.updateProfile()') Save
+            md-tab(label='Password Settings')
+              md-content.md-padding
+                .col-xs-12.col-sm-12.col-md-12
+                  .alert.alert-info
+                    strong Note :
+                    |  Password should contain minimum 6 and maximum 15 characters, one lowercase, one uppercase character, one number and one special character.
+                  form.form-horizontal(role='form', name="GeneralSettingsCtrl.passwordForm")
+                    md-input-container.md-block(flex="50", flex-xs='100')
+                      label Old Password
+                      input#password(type='password', name='currentPassword',maxlength='15',data-ng-model='GeneralSettingsCtrl.currentPassword',data-ng-blur='GeneralSettingsCtrl.analyzePassword(GeneralSettingsCtrl.currentPassword)', data-ng-keypress="GeneralSettingsCtrl.analyzePassword(GeneralSettingsCtrl.currentPassword)", data-ng-keyup="GeneralSettingsCtrl.analyzePassword(GeneralSettingsCtrl.currentPassword)",required)
+                      span.error-msg(data-ng-show='GeneralSettingsCtrl.passwordForm.$submitted || GeneralSettingsCtrl.passwordForm.currentPassword.$touched')
+                        span(data-ng-show='GeneralSettingsCtrl.passwordForm.currentPassword.$dirty && GeneralSettingsCtrl.passwordForm.currentPassword.$invalid')
+                        span.error-msg(data-ng-show='GeneralSettingsCtrl.passwordForm.currentPassword.$error.required') Please enter password
+                        p.error-msg(data-ng-if='!GeneralSettingsCtrl.isPasswordRight') Password should contain atleast 6 and maximum 15 characters, one lowercase, one uppercase character, one number and one special character.
+                    md-input-container.md-block(flex="50",flex-xs="100")
+                      label  New Password
+                      input(type='password',name='newPassword',maxlength='15', data-ng-class="{'valid-password':GeneralSettingsCtrl.isPasswordMatched === true,'invalid-password':GeneralSettingsCtrl.isPasswordMatched === false}", data-ng-model='GeneralSettingsCtrl.newPassword',data-ng-blur='GeneralSettingsCtrl.analyzeNewPassword(GeneralSettingsCtrl.newPassword)', data-ng-keypress="GeneralSettingsCtrl.analyzeNewPassword(GeneralSettingsCtrl.newPassword)", data-ng-keyup="GeneralSettingsCtrl.analyzeNewPassword(GeneralSettingsCtrl.newPassword)",required)
+                      span.error-msg(data-ng-show='GeneralSettingsCtrl.passwordForm.$submitted || passwordMismatchErr.passwordForm.newPassword.$touched')
+                        span(data-ng-show='GeneralSettingsCtrl.passwordForm.newPassword.$dirty && GeneralSettingsCtrl.passwordForm.newPassword.$invalid')
+                        span.error-msg(data-ng-show='GeneralSettingsCtrl.passwordForm.newPassword.$error.required') Please enter new password
+                        p.error-msg(data-ng-if='!GeneralSettingsCtrl.isNewPasswordRight') Password should contain minimum 6 and maximum 15 characters, one lowercase, one uppercase character, one number and one special character.
+                    md-input-container.md-block(flex="50", flex-xs="100")
+                      label Confirm Password
+                      input(type='password', name='confirmPassword',maxlength='15', data-ng-class="{'valid-password':GeneralSettingsCtrl.isPasswordMatched === true,'invalid-password':GeneralSettingsCtrl.isPasswordMatched === false}", ng-model='GeneralSettingsCtrl.password2', data-ng-change="GeneralSettingsCtrl.confirmPassword()",required)
+                      span.error-msg(data-ng-show="GeneralSettingsCtrl.isPasswordMatched === false") Password Mismatch
+                        span.error-msg {{GeneralSettingsCtrl.passwordMismatchErr}}
+                        span.error-msg {{GeneralSettingsCtrl.showErrorMsg}}
+                    .row
+                      .col-sm-offset-4.col-sm-2
+                        md-button.md-raised.savedata-btn(data-translate = 'SUBMIT', ng-click='GeneralSettingsCtrl.changePassword()') Save
+      

@@ -1,0 +1,44 @@
+﻿.content-wrapper.conference-startMeet{
+  min-height: 540px;
+  .box-left{
+    background:$lightestGrey;
+    border:1px solid $lightestGrey;
+    margin-right: 30px;
+    margin-left: 30px;
+    height: auto;
+    .first-col-div{
+      padding: 15px 0px 0px 52px;
+      border-right: 1px solid grey;
+      line-height: 39px;
+    }
+    .link-row{
+      margin-top: 158px;
+    }
+    .guest-icon{
+      font-size: 45px;
+    }
+    .first-div-header{
+      color:$curiousBlue;
+      margin-left: 12px;
+    }
+    .second-div-header-2{
+      color:$curiousBlue;
+    }
+    .second-div-header-1{
+      color:$green;
+    }
+    .join-button{
+      border-radius:0;
+      margin-left: 59px;
+      font-size: $font-size-large;
+      padding:7px;
+    }
+
+  }
+
+  .margin-left-7{
+    margin-left:7px !important;
+    margin-right: 8px;
+  }
+
+}

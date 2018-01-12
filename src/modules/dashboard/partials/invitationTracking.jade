@@ -1,0 +1,32 @@
+.invitation-tracking-section 
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                div.invitation-tracking-heading
+                  i.fa.fa-table.invitation-trac-icon(aria-hidden='true')
+                  | Invitation Tracking
+                #chart-container
+                  .funnel-chart
+                    .trapezoid_01.funel-border
+                      .text-box
+                        label Sent: {{invitationTrackingCtrl.chartData.Sent}}
+                    .trapezoid_02.funel-border
+                      .text-box
+                        label Clicked Invite: {{invitationTrackingCtrl.chartData.Invite}}
+                    .trapezoid_03.funel-border
+                      .text-box
+                        label Started: {{invitationTrackingCtrl.chartData.Started}}
+                    .trapezoid_04.funel-border
+                      .text-box
+                        label Completed: {{invitationTrackingCtrl.chartData.Completed}}
+                    .trapezoid_05.funel-border
+                      .text-box
+                        label Evaluated: {{invitationTrackingCtrl.chartData.Evaluated}}
+                    .trapezoid_06
+                      .text-box
+                        label Hired: {{invitationTrackingCtrl.chartData.Hired}}
+                .col-md-12.col-sm-12.col-xs-12.text-bottom
+                  span.note-text
+                    strong NOTE:  
+                    span Based on last one month data

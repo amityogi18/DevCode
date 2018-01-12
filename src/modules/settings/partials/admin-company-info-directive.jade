@@ -1,0 +1,168 @@
+.company-information
+  .modal-header
+    button.close(type='button', data-dismiss='modal' ng-click='companyProfileCtrl.cancel()') ×
+    h4.modal-title Edit Your Company Profile
+  .modal-body
+    form(role='form', name='companyProfileCtrl.companyProfileForm', novalidate='novalidate')
+      .form-group.row
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="FIRST-NAME")
+            input(type='text', maxlength='25', name='firstName', data-ng-model='companyProfileCtrl.companyProfile.firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.firstName.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.firstName.$dirty && companyProfileCtrl.companyProfileForm.firstName.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.firstName.$error.required') First Name Required
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="LAST-NAME")
+            input(type='text', maxlength='25',name='lastName', data-ng-model='companyProfileCtrl.companyProfile.lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.lastName.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.lastName.$dirty && companyProfileCtrl.companyProfileForm.lastName.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.lastName.$error.required') Last Name Required
+      .form-group.row
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="JOB-TITLE")
+            input(type='text', maxlength='50', name='jobTitle', data-ng-model='companyProfileCtrl.companyProfile.jobTitle' required)
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.jobTitle.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.jobTitle.$dirty && companyProfileCtrl.companyProfileForm.jobTitle.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.jobTitle.$error.required') Job Title Required
+        .col-md-6
+          md-input-container.md-block(flex="100")
+           label(data-translate="CONTACT-NUMBER")
+           input(type='text',maxlength='14', name='contactNumber', onkeypress='return event.charCode >= 48 && event.charCode <= 57', data-ng-model='companyProfileCtrl.companyProfile.companyContactNo', data-ng-blur='companyProfileCtrl.analyzePhoneNumber(companyProfileCtrl.companyProfile.companyContactNo)', data-ng-keyup='companyProfileCtrl.analyzePhoneNumber(companyProfileCtrl.companyProfile.companyContactNo)', required)
+           span.error-msg(data-ng-if='companyProfileCtrl.errmsgcon !== ""') {{companyProfileCtrl.errmsgcon}}
+      .form-group.row
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="COMPANY-NAME")
+            input(type='text', name='companyName', maxlength='50',data-ng-model='companyProfileCtrl.companyProfile.companyName' required)
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.companyName.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.companyName.$dirty && companyProfileCtrl.companyProfileForm.companyName.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.companyName.$error.required') Comapny Name Required
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="COMPANY-SIZE")
+            md-select(data-ng-model="companyProfileCtrl.companyProfile.companySize", name='companySize', data-ng-init="companyProfileCtrl.companyProfile.companySize = 'Please Select'"  required='')
+              md-option(value='500') under 500 employees
+              md-option(value='1000') under 501-1000 employees
+              md-option(value='2500') under 1001-2500 employees
+              md-option(value='5000') under 2501-5000 employees
+              md-option(value='5001') more then 5001 employees
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.companySize.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.companySize.$dirty && companyProfileCtrl.companyProfileForm.companySize.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.companySize.$error.required') Please Select Company Size
+      .form-group.row
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="COMPANY-WEBSITE")
+            input(type='text', name='companyWebsite', data-ng-model='companyProfileCtrl.companyProfile.companyWebsite',data-ng-blur='companyProfileCtrl.analyzeWebsiteUrl(companyProfileCtrl.companyProfile.companyWebsite)', data-ng-keyup="companyProfileCtrl.analyzeWebsiteUrl(companyProfileCtrl.companyProfile.companyWebsite)", required)
+            span.error-msg(data-ng-if='companyProfileCtrl.errorMessageWebsiteUrl !== ""') {{companyProfileCtrl.errorMessageWebsiteUrl}}
+        .col-md-6
+          md-content.geo-section(flex='100')
+            place-autocomplete(data-ng-model='companyProfileCtrl.companyProfile.companyAddress', on-address='companyProfileCtrl.setAddressValue(addressFn)', on-clear='companyProfileCtrl.clearSuggestions(clearFn)' md-input-maxlength="250", md-input-minlength ="5" search-type='1')
+          div {{companyProfileCtrl.companyProfile.companyAddress}}    
+          //md-input-container.md-block(flex="100")
+           label Company Address
+           input(type='text',name='companyAddress', maxlength='50', data-ng-model='companyProfileCtrl.companyProfile.companyAddress', required)
+           span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.companyAddress.$touched')
+             span(data-ng-show='companyProfileCtrl.companyProfileForm.companyAddress.$dirty && companyProfileCtrl.companyProfileForm.companyAddress.$invalid')
+             span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.companyAddress.$error.required') Company Address Required
+      //.form-group
+        .row
+            label.location-lab.control-label.col-md-12.col-sm-12.col-xs-12
+              span(data-translate="COMPANY-HQ")
+              span.mandatory-filed *
+        .row
+          .col-md-4.col-sm-3.col-xs-12.company-hq
+            md-input-container.md-block(flex="100")
+              label Country
+              md-select(data-ng-model='companyProfileCtrl.companyProfile.country.id', data-ng-change='companyProfileCtrl.getStateList(companyProfileCtrl.companyProfile.country.id, true)', name='country' required)
+                md-option(ng-repeat='countryObj  in companyProfileCtrl.countryList' ng-value='countryObj.id') {{countryObj.countryName}}
+            //ui-select(data-ng-model='companyProfileCtrl.companyProfile.country.id', data-ng-change='companyProfileCtrl.getStateList(companyProfileCtrl.companyProfile.country.id, true)', name='country' required)
+              ui-select-match(placeholder='Select Country')
+                span(ng-bind='$select.selected.countryName')
+              ui-select-choices(repeat='countryObj.id as countryObj  in companyProfileCtrl.countryList | filter: $select.search')
+                span(ng-bind='countryObj.countryName')
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.country.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.country.$dirty && companyProfileCtrl.companyProfileForm.country.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.country.$error.required') Please Select Country
+          .col-md-4.col-sm-3.col-xs-12.company-hq
+            md-input-container.md-block(flex="100")
+              label State
+              md-select(data-ng-model='companyProfileCtrl.companyProfile.state.id' ,data-ng-change='companyProfileCtrl.getCityList(companyProfileCtrl.companyProfile.state.id, true)', ng-disabled='companyProfileCtrl.isStateDisabled',data-md-container-class='selectdemoSelectHeader',md-on-close="companyProfileCtrl.clearSearchState()",name='state' required)
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='companyProfileCtrl.searchState', type='search', placeholder='Search for a State..',ng-keydown="$event.stopPropagation()")
+                md-option(ng-repeat='stateObj  in companyProfileCtrl.stateList|filter :companyProfileCtrl.searchState' ng-value='stateObj.id') {{stateObj.stateName}}
+            //ui-select(data-ng-model='companyProfileCtrl.companyProfile.state.id', data-ng-change='companyProfileCtrl.getCityList(companyProfileCtrl.companyProfile.state.id, true)', ng-disabled='companyProfileCtrl.isStateDisabled',name='state' required)
+              ui-select-match(placeholder='Select State')
+                p(ng-bind='$select.selected.stateName')
+              ui-select-choices(repeat='stateObj.id as stateObj  in companyProfileCtrl.stateList | filter: $select.search')
+                p(ng-bind='stateObj.stateName')
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.state.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.state.$dirty && companyProfileCtrl.companyProfileForm.state.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.state.$error.required') Please Select State
+          .col-md-4.col-sm-3.col-xs-12.company-hq
+            md-input-container.md-block(flex="100")
+              label City
+              md-select(ng-model='companyProfileCtrl.companyProfile.city.id',placeholder='Select City', ng-disabled='companyProfileCtrl.isCityDisabled',data-md-container-class='selectdemoSelectHeader',md-on-close="companyProfileCtrl.clearSearchCity()",name='city' required)
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='companyProfileCtrl.searchCity', type='search', placeholder='Search for a City..',ng-keydown="$event.stopPropagation()")
+                md-option(ng-repeat='city  in companyProfileCtrl.cityList|filter:companyProfileCtrl.searchCity' ng-value='city.id') {{city.cityName}}
+            //ui-select(ng-model='companyProfileCtrl.companyProfile.city.id', ng-disabled='companyProfileCtrl.isCityDisabled',name='city' required)
+              ui-select-match(placeholder='Select city')
+                span(ng-bind='$select.selected.cityName')
+              ui-select-choices(repeat='city.id as city  in companyProfileCtrl.cityList | filter: $select.search')
+                span(ng-bind='city.cityName')
+            span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.$submitted || companyProfileCtrl.companyProfileForm.city.$touched')
+              span(data-ng-show='companyProfileCtrl.companyProfileForm.city.$dirty && companyProfileCtrl.companyProfileForm.city.$invalid')
+              span.error-msg(data-ng-show='companyProfileCtrl.companyProfileForm.city.$error.required') Please Select City
+      //.form-group.row
+        .col-md-6
+          md-input-container.md-block(flex="100")
+            label(data-translate="ZIP-CODE")
+            input(type='text', maxlength='6',name='zipCode', data-ng-model='companyProfileCtrl.companyProfile.zipCode', data-ng-blur='companyProfileCtrl.analyzeZipCode(companyProfileCtrl.companyProfile.zipCode)', data-ng-keypress="companyProfileCtrl.analyzeZipCode(companyProfileCtrl.companyProfile.zipCode)", data-ng-keyup="companyProfileCtrl.analyzeZipCode(companyProfileCtrl.companyProfile.zipCode)", onkeypress='return event.charCode >= 48 && event.charCode <= 57', required)
+            span.error-msg(data-ng-if='companyProfileCtrl.errZipmsg !== ""') {{companyProfileCtrl.errZipmsg}}
+      .form-group          
+        .row
+          .col-md-5.col-sm-5.col-xs-5
+            md-input-container.md-block(flex="100")
+              label(data-translate="COMPANY-OTHER-URL")
+              md-select(data-ng-model='companyProfileCtrl.companyUrlForms.urlType')
+                md-option(ng-repeat='urlType in companyProfileCtrl.customUrlList' ng-value='urlType') {{urlType.name}}
+            //select.form-control(data-ng-model='companyProfileCtrl.companyUrlForms.urlType', ng-options='urlType as urlType.name for urlType in companyProfileCtrl.customUrlList track by urlType.urlTypeId')
+              option(selected='selected', value='') Select
+          .col-md-6.col-sm-5.col-xs-5
+            md-input-container.md-block(flex="100")
+              label
+              input(type='text',name="companyWebsite",placeholder='http://Company url',ng-model='companyProfileCtrl.companyUrlForms.url',maxlength='50',data-ng-blur='companyProfileCtrl.analyzeUrl(companyProfileCtrl.companyUrlForms.url)', data-ng-keyup="companyProfileCtrl.analyzeUrl(companyProfileCtrl.companyUrlForms.url)")
+            //input.form-control.input__field(type='text',name="companyWebsite",placeholder='http://Company url',ng-model='companyProfileCtrl.companyUrlForms.url',maxlength='50',data-ng-blur='companyProfileCtrl.analyzeUrl(companyProfileCtrl.companyUrlForms.url)', data-ng-keyup="companyProfileCtrl.analyzeUrl(companyProfileCtrl.companyUrlForms.url)")
+            span.error-msg(data-ng-if='companyProfileCtrl.errormessageurl !== ""') {{companyProfileCtrl.errormessageurl}}
+          .col-md-1.col-sm-1.col-xs-2
+            i.fa.fa-plus-circle.fa-lg.add-url-plus(data-ng-click='companyProfileCtrl.addCompanyUrl()')
+    
+      .form-group.row
+        label.col-md-2.col-sm-2.col-xs-12
+        .col-md-6.col-sm-6.col-xs-12
+          table.table.table-responsive
+            tr(ng-repeat='urlData in companyProfileCtrl.companyUrls')
+              td(data-ng-if='urlData.urlTypeId === 1') Facebook
+              td(data-ng-if='urlData.urlTypeId === 2') Twitter
+              td(data-ng-if='urlData.urlTypeId === 3') LinkedIn
+              td(data-ng-if='urlData.urlTypeId === 4') Other
+              td {{urlData.url}}
+              td
+                i.fa.fa-trash.hover-pointer(aria-hidden='true', ng-click='companyProfileCtrl.deleteCandidateUrl($index)')
+          //table.table.table-responsive
+            tr(ng-repeat='urls in companyProfileCtrl.companyProfile.companyUrlForms')
+              td(data-ng-if='urls.urlTypeId === 1') Facebook
+              td(data-ng-if='urls.urlTypeId === 2') Twitter
+              td(data-ng-if='urls.urlTypeId === 3') LinkedIn
+              td(data-ng-if='urls.urlTypeId === 4') Other
+              td {{urls.url}}
+              td
+                i.fa.fa-trash(aria-hidden='true', ng-click='companyProfileCtrl.deleteCandidateUrl($index)', style='cursor:pointer')
+  .modal-footer
+    .form-group.row      
+      button.btn.btn-warning(type='button',data-ng-click='companyProfileCtrl.updateCompanyProfile()') Update        
+      button.btn.btn-danger.margin-from-bottom(type='button', data-dismiss='modal', data-translate="CANCEL-BTN", ng-click='companyProfileCtrl.cancel()')

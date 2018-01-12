@@ -1,0 +1,5 @@
+#line-chart
+  .panel.panel-default
+    .panel-heading Load Average
+    .panel-body
+      canvas#line.chart.chart-line.ng-isolate-scope(chart-data='loadAverageCtrl.data', chart-labels='loadAverageCtrl.labels', chart-click='loadAverageCtrl.onClick', chart-hover='loadAverageCtrl.onHover', chart-series='loadAverageCtrl.series', chart-options='loadAverageCtrl.options', chart-dataset-override='loadAverageCtrl.datasetOverride', width='523', height='261', style='display: block; width: 523px; height: 261px;')

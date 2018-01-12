@@ -1,0 +1,272 @@
+.super_admin.clients {
+  .img-box {
+      margin-bottom: 25px;
+  }
+  .showMe {
+    display: none;
+  }
+ 
+ .showColumn {
+    display: block;
+  }
+  
+  .form-section{
+    background-color: $white!important;
+  }
+  
+  md-input-container {
+    margin: 13px !important;
+  }
+
+  .product-left{
+    margin-left: 4px;
+  }
+  md-content{
+    background: transparent;
+  }
+  
+  // .company-hq-location{
+  //   margin-top: -15px;
+  // }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+
+  .hover-pointer{
+    cursor:pointer;
+  }
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+  .country-label-position {
+    line-height: 2.55
+  }
+  .company-filter {
+    .ui-select-match-text {
+      line-height: 1.666;
+    }
+  }
+
+
+  .super_admin .ui-select-match-text {
+    line-height: 2.666!important;
+
+  }
+  .department-skillset {
+    .ui-select-container .ui-select-placeholder {
+    line-height: 2.2 !important;
+  }
+}
+    .pull-right {
+      float: right !important;
+      margin-left: 10px;
+    }
+
+    .ui-select-container .ui-select-placeholder {
+        line-height:0!important;
+    }
+
+
+    .btn-eye{
+      border: none;
+      background: transparent;
+    }
+
+    .client-btn{
+      width: 110px;
+      border-radius: 0px;
+      // margin-right: 30px;
+      // margin-left: 24px;
+      // top: 0px;
+      background-color: #3f51b5;
+      color: #fff;
+     }
+
+    .btn-eye {
+        border: 1px solid transparent !important;
+        background-color: transparent !important;
+    }
+    
+    .client{
+      font-size:$font-size-large;
+      width:100%;
+      border-bottom:1px solid $lightGrey;
+      margin-bottom: 15px;
+      margin-left: -14px;
+      padding: 0px 10px 5px 10px;
+
+      .client-heading{
+      margin-left:10px;
+      text-transform: uppercase;
+      color:#333;
+      }
+    }
+
+    .header-button{
+       margin-top: 8px!important;
+      // margin-left: 80px;
+   }
+
+    .candidate-data-info{
+        margin-top: 30px;
+    }
+
+  .trigger-dwn-client{
+    margin-left: 8px;
+  }
+
+   .client-view-btn{
+
+        float: right;
+        margin-top: -26px;
+    }
+
+    .error-msg-email{
+        margin-left: 15px;
+        font-size: 12px;
+        color: $red;
+    }
+
+    .dashboard-profile-heading{
+        padding: 6px;
+        // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: #fff;
+        font-size: 18px;
+        background: #3f51b5;
+    }
+
+    .mandatory-filed {
+        color: $red;
+        font-size: 18px;
+    }
+     
+     .client-icon-btn{
+        background: transparent!important;
+        border: none!important;
+        cursor:pointer;
+     }
+     
+     th{
+        //text-align: left!important;
+        white-space: nowrap;
+     }
+     
+     .client-add-btn{
+         margin-right: 20px;
+         width: 70px;
+     }
+
+     .inactive-clients-table{
+         margin-top:18px;
+  }
+  .active-clients-table{
+    margin-top:9px;
+  }
+  .product-msg{
+    margin-left:15px;
+  }
+  
+  @media only screen and (max-width : 765px) { 
+  
+    .client-btn{
+      margin-top: 10px!important;
+      margin-left: 0px;
+      width: 110px;
+      margin-bottom: 10px;
+    }
+    
+    .company-filter-dropdown{
+      margin-top: 15px;
+    }
+    
+    .active-btn{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .inactive-btn{
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media only screen and (max-width : 992px) { 
+  
+    .active-btn{
+      margin-top: 4px;
+    }
+    
+    .company-filter-dropdown{
+      margin-bottom: 15px;
+    }
+  }
+  
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+      border:0;
+      background:transparent;
+  }
+  
+  .other-company-url-position{
+    margin-bottom: -35px!important;
+  }
+
+}
+  .company-information.super_admin.clients{
+    .ui-select-container .ui-select-placeholder {
+      line-height: 2.2!important;
+    }
+    .company-size {
+        font-size: 13px;
+        color: rgba(0,0,0,0.54);
+    }
+    .comapny-location {
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .comapny-other-pos{
+      margin-left: 28px;
+    }
+  }
+
+//ng-table  css for super admin
+  .active-clients-table{
+    thead {
+       background: #d2cfcf;
+      th {
+        padding: 10px 10px !important;
+        font-size: $font-size-normal;
+        color: #666666;
+        text-align: center !important;
+        position: relative;
+        //white-space: nowrap;
+    }    
+  }
+  tbody tr {
+      text-align: center;
+      border: #cbcbcb 1px solid;
+      background-color: #fff !important;
+    }
+    tr td {
+      padding: 10px 10px !important;
+      vertical-align: middle;
+      color: #5e646e;
+      font-size: 12px;
+    }
+}

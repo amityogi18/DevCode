@@ -1,0 +1,55 @@
+.analytic.content-wrapper
+    .col-md-12.col-sm-12.col-xs-12.select-box.no-marg 
+      .col-md-2.col-sm-4.col-xs-12
+        .analytic-heading Analytics
+      .col-md-6.col-sm-8.col-xs-12.col-md-offset-4.no-marg        
+          div(layout="row", layout-sm="column", layout-xs="column")                         
+            md-input-container.md-block(flex='100', flex-xs='100', data-ng-if='user.userRoles == 7')
+              label
+                span(data-translate='COMPANY')
+              md-select(ng-model='AnalyticsCtrl.reportCompany',ng-model-options="{ trackBy: '$value.id' }",  md-on-close="AnalyticsCtrl.clearSearchCompany()",data-md-container-class='selectdemoSelectHeader')
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='AnalyticsCtrl.searchCompany', ng-keydown="$event.stopPropagation()", type='search', placeholder='Search for a company..')
+                md-optgroup(label='Company')
+                md-option(ng-value='{{companyListing}}',ng-click='AnalyticsCtrl.selectedData("company", companyListing)', ng-repeat='companyListing in AnalyticsCtrl.companyList | filter: AnalyticsCtrl.searchCompany') {{companyListing.name}}
+            md-input-container.md-block(flex='100', flex-xs='100')
+              label
+                span(data-translate='POSITION') 
+              md-select(ng-model='AnalyticsCtrl.reportPosition',ng-model-options="{ trackBy: '$value.id' }",  md-on-close="AnalyticsCtrl.clearSearchPosition()",data-md-container-class='selectdemoSelectHeader')
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='AnalyticsCtrl.searchPosition', ng-keydown="$event.stopPropagation()", type='search', placeholder='Search for a position..')
+                md-optgroup(label='Position')
+                md-option(ng-value='{{positionListing}}',ng-click='AnalyticsCtrl.selectedData("position", positionListing)', ng-repeat='positionListing in AnalyticsCtrl.positionList') {{positionListing.positionName}}      
+            md-input-container.md-block(flex='100', flex-xs='100')
+              label
+                span(data-translate='ANALYTIC-DURATION')
+              md-select(ng-model='AnalyticsCtrl.reportDuration', ng-blur='AnalyticsCtrl.selectedData2()')
+                md-option(ng-value='1', ng-click='AnalyticsCtrl.selectedData("duration", "1")') 1 months
+                md-option(ng-value='2', ng-click='AnalyticsCtrl.selectedData("duration", "2")') 3 months
+                md-option(ng-value='3', ng-click='AnalyticsCtrl.selectedData("duration", "3")') 6 months
+                md-option(ng-value='4', ng-click='AnalyticsCtrl.selectedData("duration", "4")') 9 months
+                md-option(ng-value='5', ng-click='AnalyticsCtrl.selectedData("duration", "5")') 12 months 
+    .col-md-12.col-sm-12.col-xs-12
+        .col-md-6.col-sm-12.col-xs-12.no-space
+          candidate-status-report(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+        .col-md-6.col-sm-12.col-xs-12.no-space
+          candidate-rating(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+    .col-md-12.col-sm-12.col-xs-12
+          interview-by-month-report(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+    .col-md-12.col-sm-12.col-xs-12
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          invitation-tracking-chart(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id',  durationid='AnalyticsCtrl.reportDuration')
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          average-completion-time(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+    .col-md-12.col-sm-12.col-xs-12
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          recruiterwise-report(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          departmentwise(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+    .col-md-12.col-sm-12.col-xs-12
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          app-type(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+        .col-md-6.col-sm-12.col-xs-12.space-margin-0.no-space
+          candidate-organisation(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')
+    .col-md-12.col-sm-12.col-xs-12.bottom-space
+      interview-activity-report(cid='AnalyticsCtrl.reportCompany.id', pid='AnalyticsCtrl.reportPosition.id', durationid='AnalyticsCtrl.reportDuration')

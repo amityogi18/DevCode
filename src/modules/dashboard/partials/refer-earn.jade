@@ -1,0 +1,52 @@
+.refer-earn-page
+  .row
+      .col-sm-6
+        h3(data-translate="REFER-AND-EARN")
+      .col-sm-6
+  .row
+    .col-md-8
+      .table-responsive
+        table.table.table-bordered(ng-table='referEarnCtrl.tableParams', show-filter='false')
+          tr(ng-repeat-start='refer in $data', ng-click="referEarnCtrl.setCurrenttransactionId($event, referEarnCtrl.referEarnCtrl)")
+            td(title="'Company Name'", filter="{ companyName: 'text'}", sortable="'companyName'", ng-data='refer.companyName', class-name='table-accordian') {{refer.companyName}}
+            td(title="'Invitation Sent Date'", filter="{ invitationSentDate: 'text'}", sortable="'invitationSentDate'", ng-data='refer.invitationSentDate', class-name='table-accordian') {{refer.invitationSentDate | date:'dd/MM/yyyy'}}
+            td(title="'Invitation Receive Date'", filter="{ invitationReceiveDate: 'text'}", sortable="'invitationReceiveDate'", ng-data='refer.invitationReceiveDate',  class-name='table-accordian') {{refer.invitationReceiveDate  | date:'dd/MM/yyyy' }}
+            td(title="'Member Since(Days)'", filter="{ memberSince: 'text'}", sortable="'memberSince'", ng-data='refer.memberSince',  class-name='table-accordian') {{refer.memberSince}}
+            td(title="'Total Credit Earn'", filter="{ totalCreditEarn: 'text'}", sortable="'totalCreditEarn'", ng-data='refer.totalCreditEarn', class-name='table-accordian') {{refer.totalCreditEarn }}
+            td(title="'Status'", filter="{ status: 'text'}", data='refer.status',  class-name='table-accordian') {{refer.status}}
+          tr(ng-repeat-end)
+    .col-md-4.col-sm-12.col-xs-12
+      .refrence-details
+        .refrence-deatils-heading(data-translate="REFRENCE-DETAILS")
+        hr
+        form.form-horizontal(role='form')
+          .form-group
+            label.control-label.col-sm-4.refrence-label(data-translate="COMPANY-NAME")
+            .col-sm-6.col-xs-12
+              input.form-control(type='text', placeholder='Enter Company Name')
+          .form-group
+            label.control-label.col-sm-4.refrence-label(data-translate="EMAIL")
+            .col-sm-6
+              input.form-control(type='email', placeholder='Enter Email')
+          .form-group
+            label.control-label.col-sm-4.refrence-label(data-translate="CONTACT-NUMBER")
+            .col-sm-6
+              input.form-control(type='text', placeholder='Enter Contact Number')
+          .form-group
+            label.control-label.col-sm-4.refrence-label(data-translate="CONTACT-PERSON")
+            .col-sm-6
+              input.form-control(type='text', placeholder='Enter Contact Person Name')
+          .form-group
+            label.control-label.col-sm-4.refrence-label(data-translate="REFER-VIA-EMAIL")
+            .col-sm-6
+              input.form-control(type='text', placeholder='Enter Refer Email')
+          .form-group
+            label.control-label.col-sm-4.col-xs-4.refrence-label
+          .col-sm-6.col-xs-12.col-md-3
+            .refferal-code
+              small(data-translate="YOUR-REFFERAL-CODE-IS")
+              small 012ASDWRT
+          .form-group
+            .save-cancel-btns
+              a.btn.btn-primary.save-btn(href='javascript:void(0)',data-translate="SAVE")
+              a.btn.btn-primary(href='javascript:void(0)',data-translate="CANCEL")

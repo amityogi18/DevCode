@@ -1,0 +1,36 @@
+.content-wrapper
+  .col-md-12
+    nav.navbar.navbar-default(role='navigation')
+      // Collection of nav links and other content for toggling
+      div
+        ul.nav.navbar-nav
+          li.instruction-menu
+            a.active(href='#')
+              | 1.Welcome
+              i.fa.fa-angle-double-right(aria-hidden='true')
+          li.instruction-menu
+            a(href='#')
+              | 2.Prepare & Practice
+              i.fa.fa-angle-double-right(aria-hidden='true')
+          li.instruction-menu
+            a(href='#')
+              | 3.Interview
+              i.fa.fa-angle-double-right(aria-hidden='true')
+  .col-md-12
+    .col-md-6.col-md-offset-4
+      .list-group
+        a.list-group-item You will be answer 3 video question, 2 text question and 5 multiple question
+        ul.list-group-item
+          | You will have the following options for each question :
+          li Time to think
+          li Time to answer
+          li Retries
+        a.list-group-item Duration : 10 min. estimated
+        ul.list-group-item.text-center
+          li
+            a.btn.btn-default(data-ui-sref='app.candidate-welcome-video')
+              | Take a Practice Question
+        ul.list-group-item.text-center
+          li
+            a.btn.btn-default(data-ui-sref='app.candidate-interview')
+              | Start Interview

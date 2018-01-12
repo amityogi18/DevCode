@@ -1,0 +1,60 @@
+.div-md-12
+  .col-md-10
+    h1.panel-titlestyle(data-translate="DASHBOARD-SUPERADMIN")
+  .col-md-2
+    a(data-ui-sref="app.refer" data-translate="REFER-AND-EARN")
+  // default-tab-end
+  .default-tab-module.interview-tabs
+    .tab-content
+      #index4.tab-pane.fade.in.active
+        // max wrapper end
+        .accordion-row
+          #accordion.panel-group
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion2', href='#item3', aria-expanded='true' data-translate="NOTIFICATION-AND-EVENTS")
+              #item3.panel-collapse.collapse.in
+                .panel-body
+                  notification
+                  events
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion2', href='#item2', aria-expanded='true' data-translate="CANDIDATE-STATUS")
+              #item2.panel-collapse.collapse.in
+                .panel-body
+                  candidate-status
+                  quick-stastics
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion2', href='#item4', aria-expanded='true' data-translate="CANDIDATE-STATUS")
+              #item4.panel-collapse.collapse.in
+                .panel-body
+                  .col-md-12
+                    invitation-tracking
+                    favorite-candidates
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion2', href='#item5', aria-expanded='true',data-translate="POSITIONS")
+                  div(style='float:right; margin-top:-35px; right:0; margin-right:50px; z-index:999; position:absolute;')
+                    button.btn.btn-success(data-translate="CREATE-NEW-POSITION")
+                    button.btn.btn-default(data-translate="VIEW-ALL")
+              #item5.panel-collapse.collapse.in
+                .panel-body
+                  .content-wrapper
+                    position-dashboard
+
+            .panel.panel-default
+              .panel-heading
+                h4.panel-title
+                  a(data-toggle='collapse', data-parent='#accordion2', href='#item6', aria-expanded='true',data-translate="CANDIDATE-LIST")
+                  div(style='float:right; margin-top:-35px; right:0; margin-right:50px; z-index:999; position:absolute;')
+                    button.btn.btn-default(data-translate="VIEW-ALL")
+              #item6.panel-collapse.collapse.in
+                .panel-body
+                  .content-wrapper
+                    evaluator-dashboard
+

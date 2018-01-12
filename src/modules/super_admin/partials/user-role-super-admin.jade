@@ -1,0 +1,101 @@
+.content-wrapper.user-role-super-admin
+  .row
+    .col-xs-12.col-sm-6.col-md-6
+      .user-roles
+        span.user-roles-heading(data-translate="USER-AND-ROLE")
+    .col-xs-12.col-sm-offset-4.col-sm-2.col-md-offset-4.col-md-2
+      span.add-user-btn
+        a(data-asm-modal='userPopupModal',info-data="add", btn-class='btn btn-primary add-user-btn', on-close="usersCtrl.onClose()") Add User
+
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading USERS
+    .panel-body
+      .row
+        .col-xs-12.col-sm-3.col-md-3
+          md-input-container.md-block.position-search-continer(flex="100")
+            label.position-search-lebel Search...
+            input(type='text', ng-model='usersCtrl.userTableFilter.search')
+            md-icon.position-search(md-font-set='fa') &#xf002
+        .col-xs-12.col-sm-3.col-md-3
+          md-input-container.md-block(flex="100")
+            label Select Company
+            md-select(data-ng-model='usersCtrl.id', name='companyName', data-ng-change='usersCtrl.getCompanyData()', md-on-close="usersCtrl.clearSearchActiveCompany()", data-md-container-class='selectdemoSelectHeader')
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='usersCtrl.searchActiveCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Company')
+              md-option(ng-value='company.id', data-ng-repeat='company in usersCtrl.companyList | filter: usersCtrl.searchActiveCompany') {{company.name}}
+        .col-xs-12.col-sm-2.col-md-2(data-ng-if='usersCtrl.companyUserStatus == "active"')
+          md-button.md-raised.md-primary(aria-label="save", data-ng-click='usersCtrl.changeUserStatus(2)' ng-disabled="!usersCtrl.selectedUserId.length", on-close="usersCtrl.onClose()") Mark Inactive
+        .col-xs-12.col-sm-2.col-md-2(data-ng-if='usersCtrl.companyUserStatus == "inactive"')
+          md-button.md-raised.md-primary(aria-label="save", data-ng-click='usersCtrl.changeUserStatus(1)', ng-disabled="!usersCtrl.selectedInactiveUserId.length", on-close="usersCtrl.onClose()") Mark Active
+        .col-xs-12.col-sm-3.col-md-3
+          md-input-container.md-block(flex="100")
+            label User Filter
+            md-select(data-ng-model="usersCtrl.companyUserStatus", name='companyUserStatus', data-md-container-class='selectdemoSelectHeader', md-on-close="usersCtrl.clearSearchSize()", data-ng-change="usersCtrl.getUserStatus()")
+              md-option(value='active') Active
+              md-option(value='inactive') Inactive
+      .row(data-ng-show="usersCtrl.userListCount > 0")
+        .col-sm-4.col-md-4.col-xs-6.showMe
+          select(class="selectpicker" ng-model="usersCtrl.test1" ng-change="usersCtrl.toggle(usersCtrl.test1)")
+            option(ng-model="col.show" value="{{$index}}" ng-repeat="col in usersCtrl.cols.slice(1,usersCtrl.cols.length) track by $index") {{col.title()}}
+        .col-md-12.col-sm-12.col-xs-12
+          p.text-label(ng-hide='usersCtrl.userList.length < 1') Showing 
+            span
+              strong 1-{{usersCtrl.userList.length}}
+              |  of  
+              strong
+                {{usersCtrl.userListCount}}    
+              |  records    
+        .main-table-area
+          .table-responsive
+            table.table.table-condensed.table-bordered.table-striped.active-clients-table(ng-table='usersCtrl.userTableParams', ng-table-columns-binding="usersCtrl.cols")
+              tr(ng-repeat-start='users in $data')
+                td
+                  input(type='checkbox', data-ng-click='usersCtrl.addActiveUserId($event, users)')
+                td(ng-if="true" class='col-sm-1' title="'Actions'")
+                  a(btn-class='client-icon-btn',info-data="edit", data-asm-modal='userPopupModal', modal-data='users', on-close="usersCtrl.onClose()")
+                    i.fa.fa-edit
+                  a(class='client-icon-btn', type='button', data-toggle='modal', data-target='#usrRoleModal' data-ng-click='usersCtrl.viewUser(users)')
+                    i.fa.fa-eye
+                td(ng-if="true" class='col-sm-1' title="' First Name'",sortable="'firstName'", ng-data='users.firstName') {{users.firstName}}
+                td(ng-if="true" class='col-sm-1' title="' Last Name'", sortable="'lastName'", ng-data='users.lastName') {{users.lastName}}
+                td(ng-if="true" class='col-sm-2' title="' Email'", sortable="'email'", ng-data='users.email') {{users.email}}
+                td(ng-if="true" class='col-sm-2' title="' Company'", sortable="'companyName'", ng-data='users.companyName') {{users.companyName}}
+                td(ng-if="true" class='col-sm-2' title="'Role'", sortable="'role'", ng-data='users.role') {{users.role}}
+                td(ng-if="true" class='col-sm-1' title="'Status'",  sortable="'status'", ng-data='users.status') {{users.status}}
+                td(ng-if="true" class='col-sm-3' title="'Last Visited'",sortable="'lastVisited'", ng-data='users.lastVisited') {{users.lastVisited  | date:'dd/MM/yyyy' }}
+              tr(ng-repeat-end, ng-if="usersCtrl.usersCtrl === usersCtrlController.currentusersId")
+      .row(data-ng-show="usersCtrl.userListCount == 0")
+        .col-md-12
+          .alert.alert-success.user-data-info No Users Found
+#usrRoleModal.modal.fade(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal') ×
+        h4.modal-title User Details
+      .modal-body
+        table.table
+          tbody
+            tr
+              td First Name
+              td  {{usersCtrl.firstName}}
+            tr
+              td Last Name
+              td  {{usersCtrl.lastName}}
+            tr
+              td Email
+              td  {{usersCtrl.email}}
+            tr
+              td Role
+              td  {{usersCtrl.role}}
+            tr
+              td Status
+              td  {{usersCtrl.status}}
+            tr
+              td Last Visited
+              td  {{usersCtrl.lastVisited}}
+      .modal-footer
+        .col-xs-12.pull-right
+          button.btn.btn-primary(type='button', data-ng-click='usersCtrl.hideUserModal()') Close
+

@@ -1,0 +1,289 @@
+.content-wrapper.question-bank-super-admin
+  .row
+    .col-xs-12.col-sm-12.col-md-12
+      .question-bank
+        span.question-bank-heading Question Bank
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Question Bank
+    .panel-body
+      .row
+        .col-xs-12.col-sm-10.col-md-10
+        .col-xs-12.col-sm-2.col-md-2.add-modal-btn
+          a(data-asm-modal='questionPopModal', btn-class='btn btn-primary add-qb-btn header-button', on-close="questionBankCtrl.onClose()") Add Question
+      .row.departments-details
+        #exTab2
+          ul.nav.nav-tabs
+            li.active
+              a(data-toggle='tab', href='#general' ng-click="questionBankCtrl.showSetQuestion(1)") General Question
+            li
+              a(data-toggle='tab', href='#custom' ng-click="questionBankCtrl.showSetQuestion(2)") Custom Question
+            li
+              a(data-toggle='tab', href='#practice' ng-click="questionBankCtrl.showSetQuestion(3)") Practice Question
+          .tab-content.border-of-tab
+            #general.tab-pane.fade.in.active
+              .row.practice-dropdown
+                .col-xs-12.col-sm-12.col-md-4
+                  md-input-container.md-block.position-search-continer(flex="100")
+                    label.position-search-lebel Search...
+                    input(type='text', ng-model='questionBankCtrl.generalTableFilter.search')
+                    md-icon.position-search(md-font-set='fa') &#xf002
+                  //- .input-group.stylish-input-group
+                  //-   input.form-control(type='text', placeholder='Search',  ng-model='questionBankCtrl.generalTableFilter.search')
+                  //-   span.input-group-addon
+                  //-     button(type='submit')
+                  //-       span.glyphicon.glyphicon-search
+                .col-xs-12.col-sm-6.col-md-3
+                  md-button.md-raised.md-primary(aria-label="save", data-ng-click='questionBankCtrl.setPracticeQuestion()', ng-show="questionBankCtrl.showSetPractice", ng-disabled="!questionBankCtrl.videoQuestionSelected.length",  on-close="questionBankCtrl.onClose()") Set As Practice Question
+                .col-xs-12.col-sm-6.col-md-2.del-btn
+                  md-button.md-raised.canceldata-btn(aria-label="save", data-ng-click='questionBankCtrl.deleteGeneralQuestion()' ng-disabled="!questionBankCtrl.questionList[questionBankCtrl.tabIdSelected].length", on-close="questionBankCtrl.onClose()") Delete
+              .row.question-content(data-ng-show="questionBankCtrl.generalQuestionListCount > 0")
+                .col-sm-4.col-md-4.col-xs-6.showMe
+                  select(class="selectpicker" ng-model="questionBankCtrl.test1" ng-change="questionBankCtrl.toggle(questionBankCtrl.test1)")
+                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in questionBankCtrl.cols.slice(1,questionBankCtrl.cols.length) track by $index") {{col.title()}}
+                .col-md-12.col-sm-12.col-xs-12
+                  p.text-label(ng-hide='questionBankCtrl.generalQuestionList.length < 1') Showing 
+                    span
+                      strong 1-{{questionBankCtrl.generalQuestionList.length}}
+                      |  of  
+                      strong
+                        {{questionBankCtrl.generalQuestionListCount}}    
+                      |  records    
+                .table-responsive.margin-to-table
+                  table.table.table-condensed.table-bordered.table-striped.active-clients-table(ng-table='questionBankCtrl.generalTableParams', ng-table-columns-binding="questionBankCtrl.cols")
+                    tr(ng-repeat-start='question in $data')
+                      td
+                        input(type='checkbox', data-ng-click='questionBankCtrl.addQuestionId($event, question.questionId,question)')
+                      td(ng-if="true" class='col-sm-1' title="'Actions'")
+                        a(btn-class='general-custom-icon-btn', data-asm-modal='questionPopModal', modal-data='question.questionId', info-data="edit", on-close="questionBankCtrl.onClose()")
+                          i.fa.fa-edit
+                        a.hover-pointer(data-toggle='modal',data-target='#myQuestionBankModal',  data-ng-click="questionBankCtrl.getQuestionDetailsById(question.questionId)")
+                          i.fa.fa-eye
+                      td(ng-if="true" class='col-sm-3' title="'Question'",  sortable="'question'", ng-data='question.question') {{question.question}}
+                      td(ng-if="true" class='col-sm-2' title="'Skill'",  sortable="'skill'", ng-data='question.skill') {{question.skill}}
+                      td(ng-if="true" class='col-sm-2' title="'Question Type'",sortable="'questionType'", ng-data='question.questionType') {{question.questionType}}
+                      td(ng-if="true" class='col-sm-3' title="'Company Name'", sortable="'companyName'", ng-data='question.companyName') {{question.companyName}}
+                      td(ng-if="true" class='col-sm-2' title="'Difficulty Level'", sortable="'difficultyLevel'", ng-data='question.difficultyLevel') {{question.difficultyLevel}}
+                    tr(ng-repeat-end='ng-repeat-end')
+              .row.question-msg-show(data-ng-show="questionBankCtrl.generalQuestionListCount == 0")
+                .col-md-12
+                  .alert.alert-success.candidate-data-info No Data Found
+            #custom.tab-pane
+              .row.practice-dropdown
+                .col-xs-12.col-sm-12.col-md-4
+                  .input-group.stylish-input-group
+                    md-input-container.md-block.position-search-continer(flex="100")
+                      label.position-search-lebel Search...
+                      input(type='text', ng-model='questionBankCtrl.customTableFilter.search')
+                      md-icon.position-search(md-font-set='fa') &#xf002
+                    //- input.form-control(type='text', placeholder='Search', ng-model='questionBankCtrl.customTableFilter.search')
+                    //- span.input-group-addon
+                    //-   button(type='submit')
+                    //-     span.glyphicon.glyphicon-search
+                .col-xs-12.col-sm-6.col-md-3
+                  md-input-container.md-block(flex="100")
+                    label Select Company
+                    md-select(data-ng-model='questionBankCtrl.companyId', name='companyName', data-ng-change='questionBankCtrl.getCompanyData(questionBankCtrl.companyId)', md-on-close="questionBankCtrl.clearSearchCompany()", data-md-container-class='selectdemoSelectHeader')
+                      md-select-header.demo-select-header
+                        input.demo-header-searchbox.md-text(ng-model='questionBankCtrl.searchCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+                      md-optgroup(label='Company')
+                      md-option(ng-value='company.id', data-ng-repeat='company in questionBankCtrl.companyFilterList | filter: questionBankCtrl.searchCompany') {{company.name}}
+                .col-xs-12.col-sm-6.col-md-2.del-btn
+                  md-button.md-raised.canceldata-btn(aria-label="save", data-ng-click='questionBankCtrl.deleteCustomQuestion()' ng-disabled="!questionBankCtrl.questionList[questionBankCtrl.tabIdSelected].length", on-close="questionBankCtrl.onClose()") Delete
+              .row.question-content(data-ng-show="questionBankCtrl.customQuestionListCount > 0")
+                .col-sm-4.col-md-4.col-xs-6.showMe
+                  select(class="selectpicker" ng-model="questionBankCtrl.test" ng-change="questionBankCtrl.toggle11(questionBankCtrl.test11)")
+                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in questionBankCtrl.cols11.slice(1,questionBankCtrl.cols11.length) track by $index") {{col.title()}}
+                .col-md-12.col-sm-12.col-xs-12
+                  p.text-label(ng-hide='questionBankCtrl.customQuestionList.length < 1') Showing 
+                    span
+                      strong 1-{{questionBankCtrl.customQuestionList.length}}
+                      |  of  
+                      strong
+                        {{questionBankCtrl.customQuestionListCount}}    
+                      |  records    
+                .table-responsive.margin-to-table
+                  table.table.table-condensed.table-bordered.table-striped.active-clients-table(ng-table='questionBankCtrl.customTableParams', ng-table-columns-binding="questionBankCtrl.cols11")
+                    tr(ng-repeat-start='custom in $data')
+                      td
+                        input(type='checkbox', data-ng-click='questionBankCtrl.addQuestionId($event, custom.questionId)')
+                      td(ng-if="true" class='col-sm-1' title="'Actions'")
+                        a(btn-class='general-custom-icon-btn', data-asm-modal='questionPopModal', modal-data='custom.questionId', info-data="edit", on-close="questionBankCtrl.onClose()")
+                          i.fa.fa-edit
+                        a.hover-pointer(data-toggle='modal',data-target='#myQuestionBankModal', data-ng-click="questionBankCtrl.getQuestionDetailsById(custom.questionId)")
+                          i.fa.fa-eye
+                      td(ng-if="true" class='col-sm-3' title="'Question'",  sortable="'question'", ng-data='custom.question') {{custom.question}}
+                      td(ng-if="true" class='col-sm-2' title="'Skill'",  sortable="'skill'", ng-data='custom.skill') {{custom.skill}}
+                      td(ng-if="true" class='col-sm-2' title="'Question Type'",  sortable="'questionType'", ng-data='custom.questionType') {{custom.questionType}}
+                      td(ng-if="true" class='col-sm-2' title="'Company Name'", sortable="'companyName'", ng-data='custom.companyName') {{custom.companyName}}
+                      td(ng-if="true" class='col-sm-2' title="'Difficulty Level'",  sortable="'difficultyLevel'", ng-data='custom.difficultyLevel') {{custom.difficultyLevel}}
+                    tr(ng-repeat-end='ng-repeat-end')
+              .row.question-msg-show(data-ng-show="questionBankCtrl.customQuestionListCount == 0")
+                .col-md-12
+                  .alert.alert-success.candidate-data-info No Data Found
+            #practice.tab-pane
+              .row.practice-dropdown
+                .col-md-3.col-sm-6.col-xs-12
+                  select.form-control.practice-video-skill.dept-dropdown(ng-change='questionBankCtrl.getSkillSet(questionBankCtrl.departmentId)', ng-model='questionBankCtrl.departmentId', ng-options='department.id as department.name for department in questionBankCtrl.departmentList',  name='department' required )
+                    option(selected='selected', value='') Select Department
+                .col-md-3.col-sm-6.col-xs-12
+                  select.form-control.practice-video-skill.skillset-dropdown(data-ng-change='questionBankCtrl.getSkillData(questionBankCtrl.skillsetId)', ng-model='questionBankCtrl.skillsetId', ng-options='skillset.id as skillset.skillsetName for skillset in questionBankCtrl.skillsetList',  name='skillset' required)
+                    option(selected='selected', value='') Select Skillset
+                .col-xs-12.col-sm-12.col-md-2.del-btn
+                  md-button.md-raised.canceldata-btn(aria-label="save", data-ng-click='questionBankCtrl.deletePracticeQuestion()' ng-disabled="!questionBankCtrl.questionList[questionBankCtrl.tabIdSelected].length", on-close="questionBankCtrl.onClose()") Delete
+              .row.margin-to-table.question-content(data-ng-show="questionBankCtrl.practiceQuestionListCount > 0")
+                .col-sm-4.col-md-4.col-xs-6.showMe
+                  select(class="selectpicker" ng-model="questionBankCtrl.test" ng-change="questionBankCtrl.toggle12(questionBankCtrl.cols12)")
+                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in questionBankCtrl.cols12.slice(1,questionBankCtrl.cols12.length) track by $index") {{col.title()}}
+                .col-md-12.col-sm-12.col-xs-12
+                  p.text-label(ng-hide='questionBankCtrl.practiceQuestionList.length < 1') Showing 
+                    span
+                      strong 1-{{questionBankCtrl.practiceQuestionList.length}}
+                      |  of  
+                      strong
+                        {{questionBankCtrl.practiceQuestionListCount}}     
+                      |  records    
+                table.table.table-condensed.table-bordered.table-striped.table-responsive.active-clients-table(ng-table='questionBankCtrl.practiceQuestionTableParams', ng-table-columns-binding="questionBankCtrl.cols12")
+                  tr(ng-repeat-start='practice in $data')
+                    td(class='col-sm-1')
+                      input(type='checkbox', ng-disabled="!practice.questionId" data-ng-click='questionBankCtrl.addQuestionId($event, practice.questionId)')
+                    td(ng-if="true" class='col-sm-3' title="'Question'", sortable="'question'", ng-data='practice.question') {{practice.question}}
+                    td(ng-if="true" class='col-sm-2' title="'Question Type'", sortable="'questionType'", ng-data='practice.questionType') {{practice.questionType}}
+                    td(ng-if="true" class='col-sm-2' title="'Skill'",  sortable="'skillsetName'", ng-data='custom.skillsetName') {{practice.skillsetName}}
+                  tr(ng-repeat-end='ng-repeat-end')
+              .row.question-msg-show(data-ng-show="questionBankCtrl.practiceQuestionListCount == 0")
+                .col-md-12
+                  .alert.alert-success.candidate-data-info No Data Found
+          .col-md-12.col-sm-12.col-xs-12.import-question-position(ng-show="questionBankCtrl.showSetPractice")
+            .col-md-3.col-sm-6.col-xs-12.del-btn
+              p
+                a(href='https://jottp.com/templates/custom_question_template_sa.xlsx' download) Download Question Template
+              a.button.btn.btn-primary(type='file', ngf-max-size='1MB' name="file", ngf-select='questionBankCtrl.uploadAttachment($files);questionBankCtrl.isFileAdded($files)', ngf-model-invalid="errorFile" data-ng-model='questionBankCtrl.attachment', on-close="questionBankCtrl.onClose()") Import Question
+  #myQuestionBankModal.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title(data-translate='VIEW-QUE')
+        .modal-body
+          .row
+            .col-md-3.col-sm-3.col-xs-12
+              label Question Type :
+              span {{questionBankCtrl.questionTypeName}}
+            .col-md-3.col-sm-3.col-xs-12
+              label Function Area :
+              span {{questionBankCtrl.departmentName}}
+            .col-md-3.col-xs-12.col-sm-3
+              label Skillset :
+              span {{questionBankCtrl.skillsetName}}
+            .col-md-3.col-xs-12.col-sm-3
+              label Response Type :
+              p(data-ng-if='questionBankCtrl.selectedResponseType == 1') VIDEO
+              p(data-ng-if='questionBankCtrl.selectedResponseType == 2') TEXT
+              p(data-ng-if='questionBankCtrl.selectedResponseType == 3') MSQ
+              p(data-ng-if='questionBankCtrl.selectedResponseType == 4') MCQ
+              p(data-ng-if='questionBankCtrl.selectedResponseType == 5') AUDIO
+          .row.mg-b-10.category-controls
+            .col-md-12.col-sm-12.col-xs-12
+              .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showText && !questionBankCtrl.showAudio && !questionBankCtrl.showVideo && !questionBankCtrl.showMCQ && !questionBankCtrl.showMSQ' )
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{questionBankCtrl.enteredQuestion}}
+
+              .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showMSQ')
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{questionBankCtrl.enteredQuestion}}
+                .col-md-12
+                  .col-md-2
+                    label Option 1
+                  .col-md-9
+                    span {{questionBankCtrl.option1}}
+                  .col-md-1
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption1', disabled)
+
+                .col-md-12
+                  .col-md-2
+                    label Option 2
+                  .col-md-9
+                    span {{questionBankCtrl.option2}}
+                  .col-md-1
+                    input#option3(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption2', disabled)
+                .col-md-12
+                  .col-md-2
+                    label Option 3
+                  .col-md-9
+                    span#cbOption3 {{questionBankCtrl.option3}}
+                  .col-md-1
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption3', disabled)
+
+                .col-md-12
+                  .col-md-2
+                    label Option 4
+                  .col-md-9
+                    span#cbOption4 {{questionBankCtrl.option4}}
+                  .col-md-1
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption4', disabled)
+
+              .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showMCQ')
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{questionBankCtrl.enteredQuestion}}
+                .col-md-12
+                  .col-md-2
+                    label Option 1
+                  .col-md-9
+                    span {{questionBankCtrl.option1}}
+                  .col-md-1
+                    input(type='radio', name='chooseone', value='questionBankCtrl.answerOption1', data-ng-model='questionBankCtrl.answerOption1', ng-value="2",disabled)
+                .col-md-12
+                  .col-md-2
+                    label Option 2
+                  .col-md-9
+                    span {{questionBankCtrl.option2}}
+                  .col-md-1
+                    input(type='radio', name='chooseone',value='customQuestionControllerCtrl.answerOption2', data-ng-model='questionBankCtrl.answerOption2', ng-value="3", disabled)
+                .col-md-12
+                  .col-md-2
+                    label Option 3
+                  .col-md-9
+                    span {{questionBankCtrl.option3}}
+                  .col-md-1
+                    input(type='radio', name='chooseone',value='customQuestionControllerCtrl.answerOption3', data-ng-model='questionBankCtrl.answerOption3', ng-value="4",disabled)
+                .col-md-12
+                  .col-md-2
+                    label Option 4
+                  .col-md-9
+                    span {{questionBankCtrl.option4}}
+                  .col-md-1
+                    input(type='radio', name='chooseone',value='customQuestionControllerCtrl.answerOption2', data-ng-model='questionBankCtrl.answerOption4', ng-value="5", disabled)
+              .row.mg-b-10(ng-show='questionBankCtrl.showVideo')
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{questionBankCtrl.enteredQuestion}}
+                .video-area.col-md-12
+                  .video-border
+                    video#questionBankVideoElement(autoplay='autoplay', controls='controls',ng-src='{{questionBankCtrl.trustSrc(questionBankCtrl.filePath)}}')
+              .row.mg-b-10(ng-show='questionBankCtrl.showAudio')
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{questionBankCtrl.enteredQuestion}}
+                audio#questionBankAudioElement(autoplay='autoplay', controls='controls', ng-src='{{questionBankCtrl.trustSrc(questionBankCtrl.filePath)}}')
+              .row.mg-b-10.pull-right
+                button.btn.btn-danger(type='button',data-dismiss='modal',,ng-click='questionBankCtrl.cameraOffButton();') Close
+
+//- #myImage.modal.fade(role='dialog')
+//-   .modal-dialog.modal-md
+//-     .modal-content
+//-       .modal-header
+//-         button.close(type='button', data-dismiss='modal') ×
+//-       .modal-body
+//-         ul.list-group
+//-           li.list-group-item
+//-             img(src='{{settingsImagePath}}')
+//-       .modal-footer
+//-         button.btn.btn-default(type='button', data-dismiss='modal') Close

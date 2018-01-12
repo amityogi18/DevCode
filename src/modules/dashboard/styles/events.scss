@@ -1,0 +1,193 @@
+.dasboard-events-section{
+    md-content{
+        padding:0px;
+        background: transparent;
+        md-card{
+            width:100%;
+            box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+        }
+    }
+  @media only screen and(max-width:500px){
+    .no-mrg{
+      padding:0px !important;
+    }
+    .left-mrg{
+      margin-left: 5px;
+      margin-right: 5px;
+      padding:0px !important;
+    } 
+    .onsite-position{
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .square-box-section{
+      width:99% !important;
+    }
+    .mobl-view{
+      .panel-body{
+        padding:10px 0px!important;
+      }
+    }
+    .total-complt-intrw{
+      margin:0px !important;
+    }
+  }
+  .show{
+    min-height: 370px !important;
+  }
+  .min-show{    
+    min-height:240px !important;
+  }
+  .event-heading{
+        font-size: 16px;
+        padding: 15px;
+        color: #676a6c;
+        font-weight: 700;
+        border-bottom: 1px solid #ebedf2;
+  }
+  .panel-body{
+    padding: 15px !important;
+  } 
+  
+  .text-center {
+      font-weight: 0;
+  }
+  
+  .see-more-button {
+       padding: 9px 20px;
+        border-radius: 0;
+        font-size: 12px;
+        color: #FFF;
+        text-transform: uppercase;
+        background: #5497ba;
+        border: none;
+        &:hover {
+          background: #1671a0;
+        }     
+  }
+   .top-btn-popup {
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        background: $btnPrimaryColor;
+        padding: 8px 20px;
+        color: $white;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+    
+    .top-btn-popup:hover {
+        background: $btnPrimaryHoverColor !important;
+  
+  }
+    .second-table thead th {
+
+      padding: 11px 10px !important;
+    }
+
+    .first-row-et{
+        margin-left:-14px;
+    }
+    .events-message {      
+      text-align: center;
+      margin-top: 50px;
+    }
+    
+    .events-icon{
+      margin-right: 5px;
+    }
+    
+    .up-events-icon{
+      font-size: 5em;
+      color: #009788;
+      display: block;
+      
+    }
+    .loggedemailmargin {
+      margin-right: 240px;
+    }
+    .total-complt-intrw{
+      margin:0px 15px;
+    }
+    .square-box{
+      position: relative;
+      //width: 100%;
+      height: 70px;
+      overflow: hidden;
+      background: white;
+      border: 1px solid lightgrey;
+  }
+  .square-box:before{
+      content: "";
+      display: block;
+      padding-top: 100%;
+  }
+  .square-content{
+      position:  absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      color: black;
+  }
+  .square-content div {
+     display: table;
+     width: 100%;
+     height: 100%;
+  }
+  .square-content span {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      color: black;
+  }
+  
+  .onsite-position{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .status-count{
+    display: inline!important;
+    padding: 5px 10px!important;
+    margin-left: 8px!important;
+    background-color: #e6ae10!important;
+  }
+  .calender .cal-month-day {
+    height: 100px!important;
+  }
+  .calender-sec{
+      color:#676a6c !important; 
+      .btn{
+          background: #f4f5f8;
+          }
+      .btngrp.active{
+          outline: none;
+          background: #7ac043;
+          color:$white;
+      }
+  }
+  
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+
+  .loggedemail {
+    float: left;
+    position: relative;
+    bottom: 60px;
+  }
+  
+  @media only screen and (min-width: 768px) and (max-width: 1024px){
+      
+      .status-count{
+        padding: 5px 10px!important;
+        background-color: #e6ae10!important;
+        margin-left: 33px !important;
+        float: left!important;
+    }
+  }  
+
+
+}

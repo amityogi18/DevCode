@@ -1,0 +1,33 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .row
+      .candidate-view-steps.step(style='margin-left: -30px;')
+        ul.step-tab
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon1.png', alt='')
+            .step-name(data-translate="WELCOME")
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon2.png', alt='')
+            .step-name(data-translate="YOUR-PROFILE")
+          li.active
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate="PREPARE")
+          li
+            figure.step-icons
+              span
+                img.img-icon(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate="INTERVIEW")
+        .step-body
+          .step-3-wrapper
+            .step-accordion
+              .whte-bg
+                  help-component
+                  .panel-footer
+                  hr
+                  button.btn.btn-next.right(data-ng-click="interviewPrepareCtrl.getUserDetailForInterview()" ng-disabled="interviewPrepareCtrl.videoCheck || interviewPrepareCtrl.audioCheck || interviewPrepareCtrl.speedCheck" data-translate="NEXT")

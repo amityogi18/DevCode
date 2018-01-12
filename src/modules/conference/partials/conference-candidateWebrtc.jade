@@ -1,0 +1,135 @@
+header.header-bar
+    ul.top-left-links
+        li(style='display:none;')
+          a(uib-popover-template='ConferenceWebrtcCtrl.callViaInternetPopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.callViaInternetPopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.callViaInternetPopup.selected}}', popover-append-to-body="true", href='javascript:void(0);',popover-trigger="outsideClick",tooltip-placement="bottom-left", uib-tooltip="Call in the conference", style="padding:0;")
+            i.fa.fa-phone.fa-2x
+        li
+          button.btn.btn-danger.stopmeeting(ng-click="ConferenceWebrtcCtrl.meetingstatus()", ng-disabled="ConferenceWebrtcCtrl.isRejoining") Leave Meeting
+        li(ng-if="ConferenceWebrtcCtrl.meetingTypeM==='unlisted' && !ConferenceWebrtcCtrl.$rootScope.isLoggedIn")
+           a(uib-popover-template='ConferenceWebrtcCtrl.addDisplayNamePopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.addDisplayNamePopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.addDisplayNamePopup.selected}}', popover-trigger="outsideClick", href='javascript:void(0);', tooltip-placement="bottom-right", uib-tooltip="Set Display Name", style="padding:0;")
+            i.fa.fa-user.fa-2x   
+    .icon-groups
+        ul
+            li
+                a(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.screenSharePopup.templateUrl', popover-title='{{ConferenceWebrtcCtrl.screenSharePopup.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.screenSharePopup.selected}}',
+                popover-trigger="outsideClick", popover-append-to-body="true",tooltip-placement="bottom-right", uib-tooltip="Open Screen Share/Text Editor", style="padding:0;")
+                    i.fa.fa-plus.icon1
+            li
+                a(href='javascript:void(0)', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('P')", tooltip-placement="bottom-right", uib-tooltip="View Participants")
+                    i.fa.fa-user.icon2
+            li
+                a(href='javascript:void(0)', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('C')", tooltip-placement="bottom-right", uib-tooltip="Open Close Chat")
+                    i.fa.fa-comment.icon3
+                    i.fa.fa-circle.chatcountcircle(ng-hide='ConferenceWebrtcCtrl.isShowChat || ConferenceWebrtcCtrl.chatcounter===0')
+                    p.chatcount(ng-hide='ConferenceWebrtcCtrl.isShowChat || ConferenceWebrtcCtrl.chatcounter===0') {{ConferenceWebrtcCtrl.chatcounter}}
+            
+    ul.top-right-links
+            li
+              a(href='javascript:void(0)', uib-popover-template='ConferenceWebrtcCtrl.connectToVideo.templateUrl', popover-title='{{ConferenceWebrtcCtrl.connectToVideo.title}}', popover-animation='true', popover-placement='{{ConferenceWebrtcCtrl.connectToVideo.selected}}',popover-trigger="outsideClick", popover-append-to-body="true", tooltip-placement="bottom-right", uib-tooltip="Change Microphone and Camera", style="padding:0;", ng-click='ConferenceWebrtcCtrl.getDevices()')
+                    i.fa.fa-cog.usr-icon 
+
+section#imgwrapper(class='{{ConferenceWebrtcCtrl.bgclass}}')
+    .row#videoSection.video-section
+        .video-container(ng-draggable='dragOptions')
+            .screenshareheader(ng-show="ConferenceWebrtcCtrl.haveScreenStream") {{ConferenceWebrtcCtrl.whoIsSharing}} sharing screen 
+            video.selfvideo.video(autoplay='', controls='true')
+            i.fa.fa-video-camera.fa-2x.videoIcon(aria-hidden='true', ng-click="ConferenceWebrtcCtrl.toogleVideoMute()")
+            i.fa.fa-microphone.fa-2x.audioIcon(aria-hidden='true', ng-click="ConferenceWebrtcCtrl.toogleAudioMute()") 
+
+    .arrowdivleft(ng-click="ConferenceWebrtcCtrl.scrollLeft()")
+          span
+            i.fa.fa-arrow-circle-left.arrowicon(aria-hidden='true')        
+    #remotefeeds
+        #myfeed.scrollV.mirrorImage
+           video.myfeedremote
+    .arrowdivright(ng-click="ConferenceWebrtcCtrl.scrollRight()")
+          span
+            i.fa.fa-arrow-circle-right.arrowicon(aria-hidden='true')
+                     
+                
+
+   .row.chat-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isShowChat')
+        .chat-container(style='margin-left: 365%;')
+            .chat-page
+              .part-container
+                .col-md-12(style='width: 123%;margin-left: -15px;')
+                    .panel.panel-primary
+                      .panel-heading
+                        span.glyphicon.glyphicon-comment
+                        |  Chat
+                        .btn-group.pull-right
+                          button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown' style='padding-bottom: 3px; margin-top: -3px;', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('C')")
+                             i.fa.fa-times.fa-lg(aria-hidden='true')
+                      .panel-body(style='height: 308px;padding: 5px !important;')
+                        ul.chat#chatid(style='height: 290px !important;overflow-y: scroll;')
+                      .panel-footer
+                        .input-group
+                          input#textbox.form-control.input-sm(type='text', placeholder='Type your message here...', ng-keydown='ConferenceWebrtcCtrl.sendChatMsg($event, "textbox", "chatid")', ng-click='ConferenceWebrtcCtrl.setFocus("textbox")')
+                          span.input-group-btn
+                            button#btn-chat.btn.btn-warning.btn-sm(data-ng-click='ConferenceWebrtcCtrl.sendChatMsg(ConferenceWebrtcCtrl.e, "textbox", "chatid")')
+                              | Send
+
+   .row.participants-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isShowParticipants')
+          .participants-container
+              .participants-page
+                .part-container
+                  .header-container
+                    .chatpanel-heading
+                        i.fa.fa-users(aria-hidden='true')
+                        span   Participants
+                        .btn-group.pull-right
+                            button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown' style='padding-bottom: 3px; margin-top: -2px; margin-right: 0px;', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('P')")
+                              i.fa.fa-times.fa-lg(aria-hidden='true')
+                  div(style="height:150px; overflow-y:scroll; padding:5px important;")
+                    ul.userlist
+                      li(style="padding: 5px 0px 5px 10px")
+                        i.fa.fa-user(style="padding-right:5px;")
+                        span {{ConferenceWebrtcCtrl.AuthService.user.fullName || ConferenceWebrtcCtrl.participantName}}
+
+                  .chatpanel-footer
+
+   .row.participants-section(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isTextEditor')
+      .participants-container
+            .text-editor-page
+              .text-editor-container
+                .header-container
+                  .chatpanel-heading Text Editor
+                    button.btn.btn-close(type='button', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('E')") X
+                textarea.dimension-of-textarea#codebox(ng-click="ConferenceWebrtcCtrl.setFocus('codebox')")
+
+   .row.participants-section.code-editor-dimension(ng-draggable='dragOptions', data-ng-show='ConferenceWebrtcCtrl.isCodeEditor')
+       .participants-container
+           .code-editor-page
+             .text-editor-container(style='height:500px !important;')
+               .header-container
+                 .chatpanel-heading Code Editor
+                   button.btn.btn-close(type='button', data-ng-click="ConferenceWebrtcCtrl.openClosePopUp('CE')") X
+               nav.navbar
+                 .container-fluid
+                   .navbar-header
+                     select#ddlLanguage.form-control.navbar-form(data-ng-click='ConferenceWebrtcCtrl.setFocus("ddlLanguage")')
+                         option(value='') Select language
+                         option(value='1') Angular js
+                         option(value='2') Jquery
+                         option(value='3') Bootstrap JS
+                   ul.nav.navbar-nav.navbar-right
+                     li.active
+                       button.btn.btn-success(data-ng-click='ConferenceWebrtcCtrl.compile()') RUN
+                     li
+                       button.btn.btn-warning(data-ng-click='ConferenceWebrtcCtrl.reset()' style='margin-left:5px;') RESET
+               .col-md-6
+                 textarea#myHtmlSection.designing-div(data-ng-click='ConferenceWebrtcCtrl.setFocus("myHtmlSection")')
+                 .divPlaceholder(style='display: block;') HTML
+               .col-md-6
+                 textarea#myCssSection.designing-div(data-ng-click='ConferenceWebrtcCtrl.setFocus("myCssSection")')
+                 .divPlaceholder(style='display: block;') CSS
+               .col-md-6
+                 textarea#myJsSection.designing-div(data-ng-click='ConferenceWebrtcCtrl.setFocus("myJsSection")')
+                 .divPlaceholder(style='display: block;', ConferenceWebrtcCtrl.setFocus("myCssSection")) Java Script
+               .col-md-6
+                 iframe#resultSection.designing-div
+                 .divPlaceholder(style='display: block;') Output
+
+#output
+  div
+#janus-extension-installed(style='display: none;')

@@ -1,0 +1,121 @@
+.content-wrapper.notification-setting.payment-plan
+  .video-intro-heading
+    span.video-intro-1 Plans & Payment
+    md-button.md-raised.md-primary.cipher-margin.pull-right(ng-click='AdminPaymentPlanCtrl.backToAdminPlan()') Back
+  .panel-body
+      .row
+        .panel.panel-default
+          .panel-heading
+            .confrence-heading(data-translate="INTERVIEW")
+          .panel-body
+            .row
+              .table-responsive
+                .col-md-3.plan-detalis
+                      ul.list-group
+                        li.list-group-item.plan-details-heading
+                          | Plan Details                    
+                        li.list-group-item
+                          | Users
+                        li.list-group-item
+                          | Position
+                        li.list-group-item
+                          | Interviews(per Position)
+                        li.list-group-item
+                          | Candidates                         
+                        li.list-group-item
+                          | Storage
+                        li.list-group-item
+                          | Live now  
+                        li.list-group-item
+                          | Recording 
+                        li.list-group-item
+                          | Duration                    
+                        li.list-group-item
+                          | Registration & Fee                    
+                        li.list-group-item
+                          | Plan Expiry Date
+                    .col-md-3.my-payment-plan(ng-repeat='plans in AdminPaymentPlanCtrl.interviewData',ng-class="{'selectedPlan':plans.currentCompanyPlanStatus}")
+                      ul.list-group
+                        li.list-group-item.plan-heading(ng-class="{'non-selected-plan':!plans.currentCompanyPlanStatus, 'selectedPlan':plans.currentCompanyPlanStatus}")
+                          h4(tooltip-placement ="top", uib-tooltip="{{plans.description}}") {{plans.planName}}
+                          h5.price-color ${{plans.price}}                    
+                        li.list-group-item
+                          | {{plans.noOfUsers}}
+                        li.list-group-item
+                          | {{plans.noOfPosition}}
+                        li.list-group-item
+                          | {{plans.noOfInterviewInEachPosition}}
+                        li.list-group-item
+                          | {{plans.noOfCandidate}}                          
+                        li.list-group-item
+                          | {{plans.totalStorage}}
+                        li.list-group-item
+                          | {{plans.noOfLivenowInterviewInEachPosition}}  
+                        li.list-group-item
+                          | {{plans.recording}}  
+                        li.list-group-item
+                          | {{plans.validity}}                    
+                        li.list-group-item
+                          | {{plans.registrationAndFee}}
+                        li.list-group-item 
+                          span(ng-if='plans.companyPlanDetail[0].planExpireDate') {{plans.companyPlanDetail[0].planExpireDate}}
+                          span(ng-if='!plans.companyPlanDetail[0].planExpireDate') NA
+                        li.list-group-item
+                          button.btn.btn-primary.btn-block.free-plan(ng-if ='!plans.currentCompanyPlanStatus', data-translate="GET-NOW", ng-click='AdminPaymentPlanCtrl.adminConfirmation(plans.plansId)')
+                          button.btn.btn-primary.btn-block(ng-if ='plans.currentCompanyPlanStatus', data-translate='GET-NOW', ng-click='AdminPaymentPlanCtrl.adminConfirmation(plans.plansId)')
+          .pricing-bottom-line
+            .panel.panel-default
+              .panel-heading
+                .confrence-heading Conference
+              .panel-body
+                .row
+                  .table-responsive
+                    .col-md-3.plan-detalis
+                      ul.list-group
+                        li.list-group-item.plan-details-heading
+                          | Plan Details                        
+                        li.list-group-item
+                          | Users
+                        li.list-group-item
+                          | Meetings
+                        li.list-group-item
+                          | No of participants(per meeting)
+                        li.list-group-item
+                          | Recording
+                        li.list-group-item
+                          | Storage
+                        li.list-group-item
+                          | Duration                    
+                        li.list-group-item
+                          | Registration & Fee
+                    .col-md-3.my-payment-plan(ng-repeat='plans in AdminPaymentPlanCtrl.conferenceData',ng-class="{'selectedPlan':plans.currentCompanyPlanStatus}")
+                      ul.list-group
+                        li.list-group-item.plan-heading(ng-class="{'non-selected-plan':!plans.currentCompanyPlanStatus, 'selectedPlan':plans.currentCompanyPlanStatus}")
+                          h4 {{plans.planName}}
+                          h5.price-color ${{plans.price}}                        
+                        li.list-group-item
+                          | {{plans.noOfUsers}}
+                        li.list-group-item
+                          | {{plans.noOfMeetings}}
+                        li.list-group-item
+                          | {{plans.noOfParticipantsInConfrence}}
+                        li.list-group-item
+                          | {{plans.recording}}
+                        li.list-group-item
+                          | {{plans.totalStorage}}
+                        li.list-group-item
+                          | {{plans.validity}}                        
+                        li.list-group-item
+                          | {{plans.registrationAndFee}}
+                        li.list-group-item
+                          button.btn.btn-primary.btn-block.free-plan(ng-if='!plans.currentCompanyPlanStatus', data-translate='GET-NOW', ng-click='AdminPaymentPlanCtrl.adminConfirmation(plans.plansId)')
+                          button.btn.btn-primary.btn-block(ng-if ='plans.currentCompanyPlanStatus', data-translate='GET-NOW', ng-click='AdminPaymentPlanCtrl.adminConfirmation(plans.plansId)')
+              .panel-footer
+                .alert.alert-warning
+                  strong After Trial Period Ends!
+                  |  No upload video, no question upload video,no update question in interview,only standard question get added with disabled question bank.
+                .alert.alert-info
+                  | If you need some personalized plan then please contact:
+                  strong 568465123
+
+

@@ -1,0 +1,209 @@
+.panel.panel-default.interview-section
+  .panel-heading
+    h4.panel-title
+      a(data-toggle='collapse', data-parent='#accordion', href='#one') Interview Settings
+  #one.panel-collapse.collapse.in
+    .panel-body
+      .col-md-12.col-sm-12.col-xs-12.space-margin
+        .col-lg-4.col-md-4.col-xs-12
+          .interview-form
+            header Welcome Video
+            .form-body
+              p.title(data-ng-show="interviewSettingCtrl.welcomeVideoList.length > 0") Choose From Existing Video :
+              p.title(data-ng-show="interviewSettingCtrl.welcomeVideoList.length < 1")               
+              form
+                .fields-sec.preview-sec(data-ng-show="interviewSettingCtrl.welcomeVideoList.length > 0")
+                  //select.form-control( ng-options='welcomeVideo as welcomeVideo.name for welcomeVideo in interviewSettingCtrl.welcomeVideoList track by welcomeVideo.fileId', ng-model='interviewSettingCtrl.welcomeVideo', ng-change="interviewSettingCtrl.videoUpdated(1,interviewSettingCtrl.welcomeVideo);interviewSettingCtrl.interviewSettingUpdated()")
+                    //option(selected='selected', value='') Select
+                  md-input-container.md-block(flex="100")
+                   md-select(ng-model='interviewSettingCtrl.welcomeVideo.fileId', ng-change="interviewSettingCtrl.videoUpdated(1,interviewSettingCtrl.welcomeVideo);")
+                     md-option(ng-repeat='welcomeVideo in interviewSettingCtrl.welcomeVideoList track by welcomeVideo.fileId',ng-value='{{welcomeVideo.fileId}}', ng-click='interviewSettingCtrl.interviewSettingUpdated()') {{welcomeVideo.name}}
+                  a.btn-preview(data-toggle='modal', data-target='#welcomeVideoPreview') Preview
+                .upload-btn
+                  md-button.md-raised.savedata-btn.record-upload-btn(href='javascript:void(0)', ng-click='interviewSettingCtrl.openWelcomeRecordModal()') RECORD / UPLOAD A VIDEO
+        //
+        .col-lg-4.col-md-4.col-xs-12
+          .interview-form
+            header Exit Video
+            .form-body
+              p.title(data-ng-show="interviewSettingCtrl.exitVideoList.length > 0") Choose From Existing Video :
+              p.title(data-ng-show="interviewSettingCtrl.exitVideoList.length < 1") 
+              form
+                .fields-sec.preview-sec(data-ng-show="interviewSettingCtrl.exitVideoList.length > 0")
+                  //select.form-control(ng-options='exitVideo as exitVideo.name for exitVideo in interviewSettingCtrl.exitVideoList track by exitVideo.fileId', ng-model='interviewSettingCtrl.exitVideo', ng-change="interviewSettingCtrl.videoUpdated(2,interviewSettingCtrl.exitVideo);interviewSettingCtrl.interviewSettingUpdated()")
+                   // option(selected='selected', value='') Select
+                  md-input-container.md-block(flex="100")
+                    md-select(ng-model='interviewSettingCtrl.exitVideo.fileId', ng-change="interviewSettingCtrl.videoUpdated(2,interviewSettingCtrl.exitVideo);")
+                      md-option(ng-repeat='exitVideo in interviewSettingCtrl.exitVideoList track by exitVideo.fileId',ng-value='{{exitVideo.fileId}}', ng-click='interviewSettingCtrl.interviewSettingUpdated()') {{exitVideo.name}}
+                  a.btn-preview(data-toggle='modal', data-target='#exitVideoPreview') Preview
+                .upload-btn
+                  md-button.md-raised.savedata-btn.record-upload-btn(href='javascript:void(0)', ng-click='interviewSettingCtrl.openExitRecordModal()') RECORD / UPLOAD A VIDEO
+        .col-lg-4.col-md-4.col-xs-12
+          .interview-form
+            header Advance
+            .form-body
+              .row
+                .colum-6.fields-sec
+                  //.title Response Limit :
+                  //select.form-control(ng-model='interviewSettingCtrl.responseLimit',ng-options="responseLimitList as responseLimitList.value for responseLimitList in interviewSettingCtrl.responseLimitList track by responseLimitList.id", required, ng-change="interviewSettingCtrl.interviewSettingUpdated()")
+                    //option(selected='selected', value='') select
+                  md-input-container.md-block(flex="100")
+                    label Response Limit
+                    md-select(ng-model='interviewSettingCtrl.responseLimit.id', required)
+                      md-option(ng-repeat="responseLimitList in interviewSettingCtrl.responseLimitList track by responseLimitList.id",ng-value='{{responseLimitList.id}}', ng-click='interviewSettingCtrl.interviewSettingUpdated()')  {{responseLimitList.value}}
+                  .error-box(data-ng-if='interviewSettingCtrl.isRequiredField') Response limit required
+                .colum-6.fields-sec
+                  //.title Retries Per Question :
+                  //select.form-control(ng-model='interviewSettingCtrl.retryPerQuestion', ng-options="retryPerQuestionList as retryPerQuestionList.value for retryPerQuestionList in interviewSettingCtrl.retryPerQuestionList track by retryPerQuestionList.id", required, ng-change="interviewSettingCtrl.interviewSettingUpdated()")
+                    //option(selected='selected', value='') select
+                  md-input-container.md-block(flex="100")
+                    label Retries Per Question
+                    md-select(ng-model='interviewSettingCtrl.retryPerQuestion.id',required)
+                      md-option(ng-repeat="retryPerQuestionList in interviewSettingCtrl.retryPerQuestionList track by retryPerQuestionList.id",ng-value='{{retryPerQuestionList.id}}', ng-click='interviewSettingCtrl.interviewSettingUpdated()')  {{retryPerQuestionList.value}}
+                  .error-box(data-ng-if='interviewSettingCtrl.isRequiredField') Retries per Question required
+              .colum-12
+                .fields-sec
+                  md-input-container.md-block(flex="100")
+                   label Redirect To Website :
+                   input(type='text', ng-model='interviewSettingCtrl.interviewSetting.redirectUrl', ng-blur="interviewSettingCtrl.interviewSettingUpdated()")
+      .save-cancel-btns
+        //a.btn-green(ng-if='!interviewSettingCtrl.isEditMode',ng-click='interviewSettingCtrl.saveInterviewSetting()') SAVE
+        //a.btn-green(ng-if='interviewSettingCtrl.isEditMode',ng-click='interviewSettingCtrl.saveInterviewSetting()') UPDATE
+        //a.btn-blue(ng-click='interviewSettingCtrl.cancelInterviewSetting()') CANCEL
+      #welcomeVideoPreview.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-body
+              .col-md-12.col-sm-12
+                button.close(type='button', data-dismiss='modal',  ng-click='interviewSettingCtrl.closeModal("#wlcm-video")') ×
+              .col-md-12.col-sm-12
+                h3 Welcome Video 
+                .preview-iframe-sec
+                 div(data-ng-show="!interviewSettingCtrl.isYoutubeWelcomeVideo")
+                  video#welcomeVideo.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-bbox(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                 //video(data-ng-if="!interviewSettingCtrl.isYoutubeWelcomeVideo", src='{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.welcomeVideo.videoPath)}}', frameborder='0', allowfullscreen='', controls)
+                 iframe(data-ng-if="interviewSettingCtrl.isYoutubeWelcomeVideo", ng-src='{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.welcomeVideo.videoPath)}}', frameborder='0', allowfullscreen='')
+              .col-md-12.col-sm-12
+                div.pull-right
+                  md-button.md-raised.canceldata-btn(data-dismiss='modal', ng-click='interviewSettingCtrl.closeModal("#wlcm-video")') Close
+      #exitVideoPreview.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-body
+              .col-md-12.col-sm-12
+                button.close(type='button', data-dismiss='modal',  ng-click='interviewSettingCtrl.closeModal("#exit-video")') ×
+              .col-md-12.col-sm-12
+                h3 Exit video
+                .preview-iframe-sec
+                  div(data-ng-show="!interviewSettingCtrl.isYoutubeExitVideo")
+                    video#exitVideo.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-bbox(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                  //video(data-ng-if="!interviewSettingCtrl.isYoutubeExitVideo", src="{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.exitVideo.videoPath)}}", frameborder='0', allowfullscreen='', controls)
+                  iframe(data-ng-if="interviewSettingCtrl.isYoutubeExitVideo", ng-src="{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.exitVideo.videoPath)}}", frameborder='0', allowfullscreen='')
+              .col-md-12.col-sm-12
+                div.pull-right
+                  md-button.md-raised.canceldata-btn(data-dismiss='modal', ng-click='interviewSettingCtrl.closeModal("#exit-video")') Close
+      #wlcm-video.modal.fade.welcome-video(role='dialog')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', ng-click='interviewSettingCtrl.closeModal("#wlcm-video")')
+                img.cross-image(src='../../../public/img/popup-cross.png', alt='',width='15px',height='15px')
+              h4 Welcome Video
+            .modal-body
+              modal-popup(ng-if='interviewSettingCtrl.openModal', text='interviewSettingCtrl.text', dismiss='interviewSettingCtrl.dismiss()')
+              .video-iframe-sec
+                img#countdown-img(ng-if='interviewSettingCtrl.countdownStarted', src='../../../public/img/countdown.gif')
+                iframe(ng-hide='interviewSettingCtrl.recordingMode || interviewSettingCtrl.countdownStarted', src='{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.videoUrl)}}', frameborder='0', allowfullscreen='')
+                video#videoElement(ng-show='interviewSettingCtrl.recordingMode')
+                .row.recording-controls(ng-show='interviewSettingCtrl.isRecordingOn')
+                  .col-md-12
+                    .col-md-5.col-sm-5.col-xs-5.col-md-offset-5.col-xs-offset-5
+                      .col-md-2.col-sm-2.col-xs-2.play-icon
+                        i.fa-2x.fa.fa-pause(aria-hidden='true', ng-click='interviewSettingCtrl.onPauseClick()', data-ng-if='!interviewSettingCtrl.paused')
+                        i.fa-2x.fa.fa-play(aria-hidden='true', ng-click='interviewSettingCtrl.onResumeClick()', data-ng-if='interviewSettingCtrl.paused')
+                      .col-md-2.col-sm-2.col-xs-2.stop-icon
+                        i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', ng-click='interviewSettingCtrl.onStopClick()')
+              .modal-footer
+                .col-md-12.col-sm-12.col-xs-12.record-btn-section
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-button.md-raised.md-primary.btn-record(data-ng-click='interviewSettingCtrl.onRecordClick("videoElement")')
+                      | Record
+                      span
+                        i.fa.fa-camera
+                  .col-md-4.col-sm-4.col-xs-12
+                    .input-group
+                      input#file-upload.file-load(type='file', file-modal='interviewSettingCtrl.videoFile', file-modal-url='interviewSettingCtrl.videoUrl')
+                      //a.btn.visible-xs(type='button',ng-click="interviewSettingCtrl.upload('1')")
+                        i.fa.fa-upload.fa-2x(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='upload')
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-button.md-raised.md-primary.btn-upload(ng-click="interviewSettingCtrl.upload('1')")
+                      i.fa.fa-cloud-upload.upload-icon(aria-hidden='true')
+                      | Upload
+                .col-md-12.col-sm-12.col-xs-12.record-btn-section
+                  .youtube-section
+                    .col-md-1.col-sm-1.col-xs-12
+                      span.hidden-xs
+                        i.fa.fa-youtube.fa-2x.youtube-icon
+                      a.you-tube.visible-xs(type='button',ng-click="interviewSettingCtrl.upload('1')")
+                        i.fa.fa-youtube.fa-2x.youtube-icon(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Youtube Link')
+                    .col-md-7.col-sm-7.col-xs-12
+                      input.form-control(type='text', ng-model='interviewSettingCtrl.youtubeLink')
+                    .col-md-4.col-sm-4.col-xs-12
+                      md-button.md-raised.md-primary.btn-upload.youtube-btn(ng-click="interviewSettingCtrl.uploadYoutubeLink('1')")
+                        i.fa.fa-cloud-upload.upload-icon(aria-hidden='true')
+                        | Upload
+                md-button.md-raised.canceldata-btn(type='button', ng-click='interviewSettingCtrl.closeModal("#wlcm-video")') Cancel
+      // welcome video popup end// Exit video popup start
+      #exit-video.modal.fade.welcome-video(role='dialog')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', ng-click='interviewSettingCtrl.closeModal("#exit-video")')
+                img(src='../../../public/img/popup-cross.png', alt='',width='15px',height='15px')
+              h4 Exit Video
+            .modal-body
+              modal-popup(ng-if='interviewSettingCtrl.openModal', text='interviewSettingCtrl.text', dismiss='interviewSettingCtrl.dismiss()')
+              .video-iframe-sec
+                img#countdown-img2(ng-if='interviewSettingCtrl.countdownStarted', src='../../../public/img/countdown.gif')
+                iframe(ng-hide='interviewSettingCtrl.recordingMode || interviewSettingCtrl.countdownStarted', src='{{interviewSettingCtrl.trustSrc(interviewSettingCtrl.videoUrl)}}', frameborder='0', allowfullscreen='')
+                video#videoElementExit(ng-show='interviewSettingCtrl.recordingMode')
+                .row.recording-controls(ng-show='interviewSettingCtrl.isRecordingOn')
+                  .col-md-12
+                    .col-md-5.col-sm-5.col-xs-5.col-md-offset-5.col-xs-offset-5
+                      .col-md-2.col-sm-2.col-xs-2.play-icon
+                        i.fa-2x.fa.fa-pause(aria-hidden='true', ng-click='interviewSettingCtrl.onPauseClick()', data-ng-if='!interviewSettingCtrl.paused')
+                        i.fa-2x.fa.fa-play(aria-hidden='true', ng-click='interviewSettingCtrl.onResumeClick()', data-ng-if='interviewSettingCtrl.paused')
+                      .col-md-2.col-sm-2.col-xs-2.stop-icon
+                        i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', ng-click='interviewSettingCtrl.onStopClick()')
+              .modal-footer
+                .col-md-12.col-sm-12.col-xs-12.record-btn-section
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-button.md-raised.md-primary.btn-record(data-ng-click='interviewSettingCtrl.onRecordClick("videoElementExit")')
+                      | Record
+                      span
+                        i.fa.fa-camera
+                  .col-md-4.col-sm-4.col-xs-12
+                    .input-group
+                      input#file-upload.file-load(type='file', file-modal='interviewSettingCtrl.videoFile', file-modal-url='interviewSettingCtrl.videoUrl')
+                      //a.btn.visible-xs(type='button',ng-click="interviewSettingCtrl.upload('2')")
+                        i.fa.fa-upload.fa-2x(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='upload')
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-button.md-raised.md-primary.btn-upload(ng-click="interviewSettingCtrl.upload('2')")
+                      i.fa.fa-cloud-upload.upload-icon(aria-hidden='true')
+                      | Upload
+                .col-md-12.col-sm-12.col-xs-12.record-btn-section
+                  .youtube-section
+                    .col-md-1.col-sm-1.col-xs-12
+                      span.hidden-xs
+                        i.fa.fa-youtube.fa-2x.youtube-icon
+                      a.you-tube.visible-xs(type='button',ng-click="interviewSettingCtrl.upload('2')")
+                        i.fa.fa-youtube.fa-2x.youtube-icon(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Youtube Link')
+                    .col-md-7.col-sm-7.col-xs-12
+                      input.form-control(type='text', ng-model='interviewSettingCtrl.youtubeLink')
+                    .col-md-4.col-sm-4.col-xs-12
+                      md-button.md-raised.md-primary.btn-upload.youtube-btn(ng-click="interviewSettingCtrl.uploadYoutubeLink('2')")
+                        i.fa.fa-cloud-upload.upload-icon(aria-hidden='true')
+                        | Upload
+                md-button.md-raised.canceldata-btn(type='button', ng-click='interviewSettingCtrl.closeModal("#exit-video")') Cancel

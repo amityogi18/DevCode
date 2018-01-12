@@ -1,0 +1,70 @@
+.content-wrapper.notification-setting.admin-payment-transaction-detail
+  .video-intro-heading
+    span.video-intro-1 Transaction History    
+  .col-sm-4.col-md-4.col-xs-6.showMe
+    .from-group
+      select.form-control(class="selectpicker" ng-model="transactionDetailCtrl.test" ng-change="transactionDetailCtrl.toggle()")
+        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in transactionDetailCtrl.cols.slice(1,transactionDetailCtrl.cols.length) track by $index") {{col.title()}}
+  .col-md-12.col-sm-12.col-xs-12
+    p.text-label(ng-hide='transactionDetailCtrl.transactionList.length < 1') Showing 
+            span
+              strong 1-{{transactionDetailCtrl.transactionList.length}}
+              |  of  
+              strong
+                {{transactionDetailCtrl.transactionListCount}}   
+              |  records          
+  .main-table-area
+    table.table(ng-table='transactionDetailCtrl.tableParams', ng-table-columns-binding="transactionDetailCtrl.cols")
+      tr(ng-repeat-start='transaction in $data', ng-click="transactionDetailCtrl.setCurrenttransactionId($event, transactionDetailCtrl.transactionDetailCtrl)")
+        td(data="transaction")
+          md-card.transaction-card
+            md-card-title
+              md-card-title-text.transaction-card-text
+                span
+                  label Payment Type : 
+                  span  {{transaction.paymentType}}
+                span(data-ng-if='transaction.portalPlanName !== ""')
+                  label Portal Plan Name :                   
+                  span(ng-repeat="portalPaymentPlanList in transaction.portalPlanName track by $index")
+                    span  {{portalPaymentPlanList}}
+                span(data-ng-if='transaction.portalPlanName == ""')
+                  label Portal Plan Name :
+                  span  N/A           
+                span
+                  label Original Amount :
+                  span  $ {{transaction.originalAmount}}
+                span
+                  label Amount Paid:
+                  span  $ {{transaction.amountPaid}} 
+                span(data-ng-if='transaction.productName == ""')
+                  label Product Name :
+                  span  N/A
+                span(data-ng-if='!transaction.productName == ""')
+                  label Product Name :
+                  span  {{transaction.productName}}                
+                span(data-ng-if='transaction.productPlanName == ""')
+                  label Product Plan Name :
+                  span  N/A
+                 span(data-ng-if='!transaction.productPlanName == ""')
+                  label Product Plan Name :
+                  span  {{transaction.productPlanName}}
+                span(data-ng-if='transaction.candidateName == ""')
+                  label Candidate Name :
+                  span  N/A
+                span(data-ng-if='!transaction.candidateName == ""')
+                  label Candidate Name :
+                  span  {{transaction.candidateName}}  
+              md-card-actions(layout='row', layout-align='end center') 
+                span
+                  label Payment Status
+                  md-chips                    
+                    md-chip.transaction-chip {{transaction.paymentStatus}}
+                  small
+                    i.fa.fa-clock-o(area-hidden="true")
+                    //span  {{transaction.time}}
+                    strong  {{transaction.transactionTime}}       
+      tr(ng-repeat-end)
+    .row(data-ng-show="transactionDetailCtrl.transactionList.length < 1 ")
+          center 
+            p  No Transaction Found !!!    
+

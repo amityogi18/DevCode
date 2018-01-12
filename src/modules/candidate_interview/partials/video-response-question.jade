@@ -1,0 +1,80 @@
+.row.video-response-question.hidden-sm.hidden-xs(ng-if="!$root.mobile")
+  .col-md-6.col-sm-6.col-xs-12.question-text.video-container(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 1 ", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right:10px !important;")
+     video#questionFileVideo.custom-video-player.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled(data-setup='{"autoplay": true, "controls" : true}', style='border-radius: 5px;')
+  .col-md-6.col-sm-6.col-xs-12.question-text.video-container(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 5", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right:10px !important;")
+     audio#questionFileAudio(controls="true", autoplay="true", width="100%")
+       source(src="{{videoResponseQuestionCtrl.question.questionFile}}", type="audio/ogg")
+  .col-md-6.col-sm-6.col-xs-12.question-text.video-container(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 2", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right:10px !important;")
+      span(style='float: left; font-size: 18px;color: #337AB7; font-stYle: italic;') Q. {{videoResponseQuestionCtrl.question.question}}
+  .col-md-6.col-sm-6.col-xs-12.video-response-container
+    div
+      .preparation-time-timer.embed-responsive.embed-responsive-16by9(ng-if='videoResponseQuestionCtrl.question.preparationTime > 0') {{videoResponseQuestionCtrl.question.preparationTime}}
+      div(ng-show='videoResponseQuestionCtrl.question.preparationTime === 0')
+        video#videoResponse.custom-video-player.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled(controls)
+    .preview-retry-submit-btns
+      //button.btn.btn-primary.btn.btn-next(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.preview()')
+        //i.fa.fa-search(aria-hidden='true')
+        //span(data-translate='PREVIEW')
+      button.btn.btn-primary(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.retry()')
+        i.fa.fa-refresh(aria-hidden='true')
+        span(data-translate='RETRY')
+      button.btn.btn-success(type='button', data-ng-disabled='(!videoResponseQuestionCtrl.recordingStarted) || videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.finishRecording()' style='margin-left:20px;')
+        span(data-translate='FINISHING-RECORDING')
+      //button.btn.btn-primary.btn.btn-next(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.submit()')
+        //i.fa.fa-arrow-circle-right(aria-hidden='true')
+        //span(data-translate='SUBMIT')
+      //input.btn.btn-next(type='file', id="tempId" ng-click='videoResponseQuestionCtrl.tempFile()' value="select")
+    .preparation-response-time
+      p.pull-left
+        span(data-translate='PRE-TIME')
+        span
+          | {{videoResponseQuestionCtrl.question.preparationTime  | secondsToDateTime | date:'mm:ss' }}
+      p.pull-right
+        span Response Time :
+        span
+          |  {{videoResponseQuestionCtrl.question.responseTime  | secondsToDateTime | date:'mm:ss' }}
+//Mobile and Tablet View          
+.row.video-response-question.hidden-lg.hidden-md(ng-if="$root.mobile")
+  .col-sm-12.col-xs-12.question-text.video-container.mobile-video.question(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 1 ")
+     video#questionFileVideo.custom-video-player.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled(data-setup='{"autoplay": true, "controls" : true}', style='border-radius: 5px;')
+  .col-sm-12.col-xs-12.question-text.video-container(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 5", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right:10px !important;")
+     audio#questionFileAudio(controls="true", autoplay="true", width="100%")
+       source(src="{{videoResponseQuestionCtrl.question.questionFile}}", type="audio/ogg")
+  .col-sm-12.col-xs-12.question-text.video-container(data-ng-show="videoResponseQuestionCtrl.question.questionTypeId === 2", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right:10px !important;")
+      span(style='float: left; font-size: 18px;color: #337AB7; font-stYle: italic;') Q. {{videoResponseQuestionCtrl.question.question}}
+  //This Button For record response
+  .col-sm-12.col-xs-12.mobile-video.responsebtn
+    .pull-right
+      button.btn.btn-success(data-ng-click='videoResponseQuestionCtrl.init()' data-ng-show='videoResponseQuestionCtrl.isShowNext') Next
+    
+  //Prepration Time and Video response
+  .col-sm-12.col-xs-12.video-response-container
+    div
+      .preparation-time-timer.embed-responsive.embed-responsive-16by9.response-video(ng-if='videoResponseQuestionCtrl.question.preparationTime > 0') {{videoResponseQuestionCtrl.question.preparationTime}}
+      div.response-video(ng-show='videoResponseQuestionCtrl.question.preparationTime === 0')
+        video#videoResponse(controls)
+    .preview-retry-submit-btns
+      //button.btn.btn-primary.btn.btn-next(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.preview()')
+        //i.fa.fa-search(aria-hidden='true')
+        //span(data-translate='PREVIEW')
+      button.btn.btn-primary.retry-button(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.retry()')
+        i.fa.fa-refresh(aria-hidden='true')
+        span(data-translate='RETRY')
+      button.btn.btn-success.finish-recording(type='button', data-ng-disabled='(!videoResponseQuestionCtrl.recordingStarted) || videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.finishRecording()' style='margin-left:20px;')
+        span(data-translate='FINISHING-RECORDING')
+      //This Button For Back to video or Audio Question
+      button.btn.btn-warning.back-to-question(data-ng-click='videoResponseQuestionCtrl.backToQuestion()') Back To Question
+      //button.btn.btn-primary.btn.btn-next(type='button', data-ng-disabled='!videoResponseQuestionCtrl.recordingCompleted', data-ng-click='videoResponseQuestionCtrl.submit()')
+        //i.fa.fa-arrow-circle-right(aria-hidden='true')
+        //span(data-translate='SUBMIT')
+      //input.btn.btn-next(type='file', id="tempId" ng-click='videoResponseQuestionCtrl.tempFile()' value="select")
+       
+    .preparation-response-time.col-xs-12
+      p.col-xs-5
+        span(data-translate='PRE-TIME')
+        span
+          | {{videoResponseQuestionCtrl.question.preparationTime  | secondsToDateTime | date:'mm:ss' }}
+      p.col-xs-7
+        span Response Time :
+        span
+          |  {{videoResponseQuestionCtrl.question.responseTime  | secondsToDateTime | date:'mm:ss' }}

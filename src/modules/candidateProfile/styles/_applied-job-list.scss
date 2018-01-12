@@ -1,0 +1,99 @@
+.applied-joblist-container {
+ 
+ .applied-joblist-tab{
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    padding:10px;
+  }
+  .applied-joblist-nav > li.active > a{
+    color:#337ab7 !important;
+  }
+  .applied-joblist-nav > li > a{
+    color:#555 !important;
+  }
+  .showMe {
+    display: none;
+  }
+
+  .showColumn {
+    display: block;
+  }
+  .srch-icon{
+     position: absolute;
+    margin-top: -67px;
+    margin-left: 147px;
+  }
+
+  .appliedJobviewIcon {
+    float: left;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+ .appliedJobPortal {
+  margin-right: 40px;
+ }
+  @media only screen and (max-width: 480px) {
+    .showMe {
+      display: block;
+    }
+    .showColumn {
+      display: none;
+    }
+    .content-wrapper .panel-default {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .panel-body {
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .col-xs-12 {    
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+    .panel{
+      border:transparent;
+    }
+  }
+
+  table > tbody > tr > td {
+    font-size: $font-size-small;
+  }
+  thead{
+    background: #d2cfcf;
+    color: #666666;
+   // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+    //color:$white;
+  }
+
+  .r-pad{
+    padding:10px;
+  }
+  .search-box {
+    border-radius: 0px;
+    padding: 4px 12px;
+  }
+  .fav-card{
+    .md-headline{
+      font-size:13px;
+      color:#0e82a9;
+      font-weight:600;
+      line-height: 14px;
+    }
+    .md-subhead {
+       line-height: 14px;
+       i{
+        color:#888da8;
+       }
+      span{
+      margin-left:5px;
+      font-size: 12px;
+      color:#888da8;
+
+    }
+    }
+
+    
+  }
+}

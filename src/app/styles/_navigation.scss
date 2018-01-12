@@ -1,0 +1,41 @@
+.app-navigation-bar{
+  .navigation-bar {
+    margin-bottom: 0;
+    background-color: $darkGrey;
+    z-index: 9999;
+    border: 0;
+    font-size: $font-size-medium !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: $global-radius;
+    padding: 1px;
+    margin-top: 20px;
+  }
+
+  .nav-icon {
+    font-size: $font-size-large;
+  }
+
+  .navigation-bar {
+    li a, .navbar-brand {
+      color: $white !important;
+    }
+  }
+
+  .navigation-dropdown {
+    background: linear-gradient($mediumDarkGrey, $darkGrey);
+    color: $mediumBlue;
+  }
+
+  .navigation-nav li {
+    a:hover, &.active a {
+      color: $white !important;
+      background-color: $mediumBlue !important;
+    }
+  }
+
+  .navigation-bar .bar-toggle {
+    border-color: transparent;
+    color: $mediumBlue !important;
+  }
+}

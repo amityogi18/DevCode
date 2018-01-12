@@ -1,0 +1,103 @@
+.funnel-chart{
+    width: 300px;
+    margin: auto;
+    padding-bottom: 20px;
+    .trapezoid_01 {
+		border-top: 55px solid #d57171;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0px;
+		width: 285px;
+		margin-left: 15px;
+                &:hover{
+                    border-top: 55px solid #d57171;
+                }
+	}
+	.trapezoid_02 {
+		border-top: 55px solid #626773;;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0;
+		width: 245px;
+		margin-left: 35px;
+                &:hover{
+                    border-top: 55px solid #626773;
+                }
+	}
+	.trapezoid_03 {
+		border-top: 55px solid #e2ab3b;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0;
+		width: 205px;
+		margin-left: 55px;
+                &:hover{
+                    border-top: 55px solid #e2ab3b;
+                }
+	}
+	.trapezoid_04 {
+		border-top: 55px solid  #458bc4;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0;
+		width: 165px;
+		margin-left: 75px;
+                &:hover{
+                    border-top: 55px solid #458bc4;
+                }
+	}
+	.trapezoid_05 {
+		border-top: 55px solid #d0d6cb;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		height: 0;
+		width: 125px;
+		margin-left: 95px;
+                &:hover{
+                    border-top: 55px solid #d0d6cb;
+                }
+	}
+	.trapezoid_06 {
+		border-top: 50px solid  #4fc55b;
+		height: 0px;
+		width: 85px;
+		margin-left: 115px;
+                &:hover{
+                    border-top: 50px solid #4fc55b;
+                }
+	}
+	.text-box{
+	    font-size: 12px;
+		color: white;
+		margin-top: -35px;
+		text-align: center;
+	}
+  @media only screen and (max-width: 480px){
+    .trapezoid_01 {      
+      width: 270px;
+      margin-left: 10px;
+    }
+    .trapezoid_02 {
+        width: 230px;
+        margin-left: 30px;
+    }
+    .trapezoid_03 {
+        width: 190px;
+        margin-left: 50px;
+    } 
+    .trapezoid_04 {      
+      width: 150px;
+      margin-left: 70px;
+    }
+    .trapezoid_05 {      
+      width: 110px;
+      margin-left: 90px;
+    }
+    .trapezoid_06 {      
+      width: 70px;
+      margin-left: 110px;
+    }
+    
+  }
+}
+

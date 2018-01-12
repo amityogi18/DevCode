@@ -1,0 +1,18 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion3', href='#audioTest') Microphone Check
+  #audioTest.panel-collapse.collapse(ng-init='audioTestAccordionCtrl.startRecording()')
+    .panel-body
+      .col-xs-12.col-sm-6
+          .microphone-content
+               p Test your Microphone and adjust the volume to ensure the best sound quality for your interview.
+                 |   Mic level must reach(but should just peak above) the red line to continue. To do this.
+               p 1.Speak out in normal voice and the mic level will move as you speak.
+               p 2. If you do reach the red line, raise the volume by gradually dragging the grey slider on the bar.
+               p After you complete the test, Next button will Appear
+
+      .col-xs-12.col-sm-6
+        .volume-meter
+            canvas(id='volume-meter' height='6')
+            input(type='range', min='0', max='1', step='0.1', ng-model='selectedVolume', class='volume-slider')

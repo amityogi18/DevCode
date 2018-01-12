@@ -1,0 +1,103 @@
+.admin-department {
+  .search-department {
+    float: right;
+    margin-top: 20px;
+  }
+  
+  .departments-details {
+    margin-top: 40px;
+  }
+
+  .add-department-btn {
+    margin-top: -6px;
+    border-radius: 0px;
+    float: right !important;
+  }
+
+  .btn-department-icon {
+    margin: 2px;
+    padding: 0px;
+  }
+
+  .dept-icon {
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .company-setting-icon {
+    float: right;
+  }
+  
+  .pagination {
+    float: left;
+  }
+  .margin-to-table{
+    margin-left:-13px;
+  }
+  .button-for-search{
+    margin-left:-13px !important;
+  }
+}
+
+.user-department-popup {
+    modal-body{
+        max-height: 480px;
+    }
+    form{
+        max-height: 485px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+  .dept-radio-area{
+      margin-top: -10px;
+    label{
+     margin-left:5px; 
+    }
+  }
+  i {
+    outline: none !important;
+    padding-left:5px;
+  }
+  .minus-btn{
+      color:$red !important;     
+      font-size:25px !important;      
+      cursor: pointer;
+  }
+  
+  .plus-btn{
+      color:$green !important; 
+      font-size:25px !important;
+      cursor: pointer;
+  }
+  .ui-select-container .ui-select-placeholder{
+    line-height: 2.428571;
+  }
+}
+
+.my-email-btn {
+  button{
+      margin-bottom: 0px;
+    }
+}
+
+.dial-in-section {
+  span.ui-select-match-text {
+    line-height:1.5;
+  }
+}
+.showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}

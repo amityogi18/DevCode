@@ -1,0 +1,76 @@
+.modal-content-admin-pop-up.user-department-popup
+  .modal-header
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-ng-show='adminUserEditCtrl.IsAdd') Add User
+    h4.modal-title(data-ng-show='adminUserEditCtrl.IsEdit') Update User
+  .modal-body
+    form(role='form', name='adminUserEditCtrl.userForm', novalidate)
+      .form-group.top-spacing(layout-gt-sm="row", flex-gt-sm='')
+        md-input-container.md-block(flex="50")
+          label First Name
+          input(type='text', maxlength='25',name='firstName', data-ng-model='adminUserEditCtrl.firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+          span.error-msg(data-ng-show='adminUserEditCtrl.userForm.$submitted || adminUserEditCtrl.userForm.firstName.$touched')
+            span(data-ng-show='adminUserEditCtrl.userForm.firstName.$dirty && adminUserEditCtrl.userForm.firstName.$invalid')
+            span.error-msg(data-ng-show='adminUserEditCtrl.userForm.firstName.$error.required') Please Enter first Name
+        md-input-container.md-block(flex="50")
+          label Last Name
+          input(type='text',maxlength='25', name='lastName', data-ng-model='adminUserEditCtrl.lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+          span.error-msg(data-ng-show='adminUserEditCtrl.userForm.$submitted || adminUserEditCtrl.userForm.lastName.$touched')
+            span(data-ng-show='adminUserEditCtrl.userForm.lastName.$dirty && adminUserEditCtrl.userForm.lastName.$invalid')
+            span.error-msg(data-ng-show='adminUserEditCtrl.userForm.lastName.$error.required') Please Enter Last Name 
+      .form-group(layout-gt-sm="row" flex-gt-sm='', data-ng-hide='adminUserEditCtrl.IsEdit')
+        md-input-container.md-block(flex="100")
+          label Email
+          input(type='text', maxlength="50", name='email', data-ng-model='adminUserEditCtrl.email',data-ng-blur='adminUserEditCtrl.analyzeEmail(adminUserEditCtrl.email)', data-ng-keyup="adminUserEditCtrl.analyzeEmail(adminUserEditCtrl.email)", required)
+          span.error-msg(data-ng-if='adminUserEditCtrl.errormessage !== ""') {{adminUserEditCtrl.errormessage}}
+      .form-group(layout-gt-sm="row", flex-gt-sm='')
+          md-input-container.md-block(flex="100")
+            label Functional Area
+            md-select(data-ng-model='adminUserEditCtrl.departmentId', data-ng-change='adminUserEditCtrl.getSkillSet(adminUserEditCtrl.departmentId, true)', name='functionalArea', md-on-close="adminUserEditCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader',required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='adminUserEditCtrl.searchDepartment', type='search', placeholder='Search Department', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Department')
+              md-option(ng-value='department.id', data-ng-repeat='department in adminUserEditCtrl.departmentList | filter: adminUserEditCtrl.searchDepartment') {{department.name}}
+            span.error-msg(data-ng-show='adminUserEditCtrl.userForm.$submitted || adminUserEditCtrl.userForm.functionalArea.$touched')
+              span(data-ng-show='adminUserEditCtrl.userForm.functionalArea.$dirty && adminUserEditCtrl.userForm.functionalArea.$invalid')
+              span.error-msg(data-ng-show='adminUserEditCtrl.userForm.functionalArea.$error.required') Please Select Functional Area
+      .form-group(layout-gt-sm="row", flex-gt-sm='')
+          md-input-container.md-block(flex="100")
+            label SkillSet
+            md-select(ng-model='adminUserEditCtrl.skillsetId', name='skill', multiple='multiple', md-on-close="adminUserEditCtrl.clearSkillInput()",  data-md-container-class='selectdemoSelectHeader', required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='adminUserEditCtrl.searchSkill', type='search', placeholder='Search Skillset', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Skill')
+              md-option(ng-value='skillset.id', ng-repeat='skillset in adminUserEditCtrl.skillsetList | filter: adminUserEditCtrl.searchSkill') {{skillset.skillsetName}}
+            span.error-msg(data-ng-show='adminUserEditCtrl.userForm.$submitted || adminUserEditCtrl.userForm.skill.$touched')
+              span(data-ng-show='adminUserEditCtrl.userForm.skill.$dirty && adminUserEditCtrl.userForm.skill.$invalid')
+              span.error-msg(data-ng-show='adminUserEditCtrl.userForm.skill.$error.required') Please Select Skill
+      .form-group(layout-gt-sm="row", flex-gt-sm='')
+          md-input-container.md-block(flex="100")
+            label Role
+            md-select(data-ng-model='adminUserEditCtrl.roles', name='roles', md-on-close="adminUserEditCtrl.clearSearchRole()", data-md-container-class='selectdemoSelectHeader', data-ng-change="adminUserEditCtrl.getDefaultData(adminUserEditCtrl.roles)" required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='adminUserEditCtrl.searchRole', type='search', placeholder='Search Role', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Role')
+              md-option(ng-value='roles.id', data-ng-repeat='roles in adminUserEditCtrl.rolesList | filter: adminUserEditCtrl.searchRole') {{roles.role}}
+            span.error-msg(data-ng-show='adminUserEditCtrl.userForm.$submitted || adminUserEditCtrl.userForm.roles.$touched')
+              span(data-ng-show='adminUserEditCtrl.userForm.roles.$dirty && adminUserEditCtrl.userForm.roles.$invalid')
+              span.error-msg(data-ng-show='adminUserEditCtrl.userForm.roles.$error.required') Please Select Roles
+      .form-group(layout-gt-sm="row", flex-gt-sm='', data-ng-show='adminUserEditCtrl.IsEdit')
+          label.control-label.col-md-2.col-sm-2.col-xs-12 Status
+            span.mandatory-field *
+          .col-md-9.col-sm-9.col-xs-12
+            md-radio-group(data-ng-model='adminUserEditCtrl.statusId')
+              md-radio-button.md-primary.display-inline(id='rbActive', name='userSatus', placeholder='Select USer Satus', value='1',data-ng-checked='adminUserEditCtrl.statusId === 1', required)
+                label Active
+              md-radio-button.md-primary.display-inline(id='rbInactive', name='userSatus', placeholder='Select User Satus', value='2', data-ng-checked='adminUserEditCtrl.statusId === 2', required)
+                label Inactive
+  .modal-footer
+    .form-group(layout-gt-sm="row", flex-gt-sm='')
+        div(flex="50")
+          span(data-ng-show="adminUserEditCtrl.isDefaultEvaluatorAndInterviewer")
+            md-checkbox.md-primary.pull-left(ng-checked='adminUserEditCtrl.isDefault',ng-model="adminUserEditCtrl.isDefault", aria-label='setuser') set as default user ?       
+        div(flex="50")
+            md-button.md-raised.savedata-btn(aria-label="add", type='button',data-ng-click='adminUserEditCtrl.addUser()', data-ng-show='adminUserEditCtrl.IsAdd') Add        
+            md-button.md-raised.savedata-btn(aria-label="update",type='button', data-ng-click='adminUserEditCtrl.updateUser()', data-ng-show='adminUserEditCtrl.IsEdit') Update
+            md-button.md-raised.canceldata-btn(aria-label="close",type='button', data-ng-click='close()') Close

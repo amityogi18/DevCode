@@ -1,0 +1,75 @@
+.introduction-container
+  #myNav.overlay
+    .col-md-12.col-sm-12.col-xs-12
+      .col-sm-2
+      .col-sm-8.col-xs-6.heading-alignment
+        h2 Hello,Welcome to jottp !!
+        h3.h3-responsive What you can do at jottp !!
+      .col-sm-2.col-xs-2
+        a.closebtn(ng-click ='dashboardCtrl.closeIntro()||ConferenceCtrl.closeIntro()') ×
+    .overlay-content
+      .container.fixed-width1
+        br
+        .col-md-12.col-xs-12.col-sm-12(data-ng-show="(user.userRoles == 1 && ConferenceCtrl.user.products[0] !== 2)||(user.userRoles == 6 && ConferenceCtrl.user.products[0] !== 2)")
+          #carousel1.carousel.slide(data-ride='carousel')
+            // Indicators
+            ol.carousel-indicators
+              li.active(data-target='#carousel1', data-slide-to='0')
+              li(data-target='#carousel1', data-slide-to='1')
+              li(data-target='#carousel1', data-slide-to='2')
+              li(data-target='#carousel1', data-slide-to='3')
+              li(data-target='#carousel1', data-slide-to='4')
+            // Wrapper for slides
+            .carousel-inner.div-margin(role='listbox')
+              .item.active
+                img(alt='Bootstrap template', src='../../../public/img/LiveInterview.png')
+              .item
+                img(alt='RealAnalytics', src='../../../public/img/RealAnalytics.png')
+              .item
+                img(src='../../../public/img/IntegratedConferenceFeature.png', alt='IntegratedConferenceFeature')
+              .item
+                img(src='../../../public/img/OneWayInterview.png', alt='OneWayInterview')
+             // Left and right controls
+            a.left.carousel-control.change-color(href='#carousel1', role='button', data-slide='prev', target='_self')
+              i.fa.fa-arrow-circle-o-left.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Previous
+            a.right.carousel-control.change-color(href='#carousel1', role='button', data-slide='next', target='_self')
+              i.fa.fa-arrow-circle-o-right.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Next
+        .col-md-12.col-xs-12.col-sm-12(data-ng-show="user.userRoles == 3")
+          #myCarousel1.carousel.slide(data-ride='carousel')
+            // Indicators
+            ol.carousel-indicators
+              li.active(data-target='#myCarousel1', data-slide-to='0')
+              li(data-target='#myCarousel1', data-slide-to='1')
+              // Wrapper for slides
+            .carousel-inner.div-margin1.slide(role='listbox')
+              .item.active
+                img(alt='evaluate', src='../../../public/img/rateandevaluate.png')
+              .item
+                img(src='../../../public/img/live.png', alt='live template')
+             // Left and right controls
+            a.left.carousel-control.change-color(href='#myCarousel1', role='button', data-slide='prev', target='_self')
+              i.fa.fa-arrow-circle-o-left.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Previous
+            a.right.carousel-control.change-color(href='#myCarousel1', role='button', data-slide='next', target='_self')
+              i.fa.fa-arrow-circle-o-right.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Next
+        .col-md-12.col-xs-12.col-sm-12(data-ng-show="user.userRoles == 4 && user.userRoles !== 3")
+          #myCarousel4.carousel.slide(data-ride='carousel')
+            ol.carousel-indicators
+              li.active(data-target='#myCarousel4', data-slide-to ='0')
+              li(data-target='#myCarousel4', data-slide-to ='1')
+            .carousel-inner.div-margin.slide(role='listbox')
+              .item.active
+                img(alt='evaluate1', src='../../../public/img/evaluator1.png')
+              .item
+                img(src='../../../public/img/evaluator2.png', alt='evaluate2')
+            a.left.carousel-control.change-color(href='#myCarousel4', role='button', data-slide='prev')
+              i.fa.fa-arrow-circle-o-left.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Previous
+            a.right.carousel-control.change-color(href='#myCarousel4', role='button', data-slide='next')
+              i.fa.fa-arrow-circle-o-right.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Next
+        
+             

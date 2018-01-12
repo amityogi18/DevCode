@@ -1,0 +1,16 @@
+.admin-company-info
+    md-card
+        .video-intro-heading
+            span.video-intro-1(data-translate="ADMIN-COMPANY-LOGO")
+            .company-logo            
+          .panel-body
+            ul.list-groups
+              li.list-group-item
+                img.admin-image.admin-logo-image(ng-src='{{companyLogoCtrl.companyLogoPath}}')
+              li.list-group-item
+                label(data-translate="SELECT-COMPANY-LOGO-BTN")
+                .row.logo-section
+                  .col-md-10.col-sm-10.col-xs-12
+                    input(type='file', ngf-max-size='512KB' ngf-select="companyLogoCtrl.uploadCompnayLogo($files); companyLogoCtrl.isFileAdded($files)", data-ng-model='companyLogoCtrl.importCompanyLogo',accept="image/*")
+                  .col-md-2.col-sm-2.col-xs-12
+                    i.fa.fa-upload.fa-2x.logo-upload(aria-hidden='true', data-ng-click='companyLogoCtrl.addCompanyLogo()', title='Upload Logo')

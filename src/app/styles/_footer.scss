@@ -1,0 +1,20 @@
+footer{
+    z-index: 9;
+    position: relative;
+    bottom:0px;
+    width: 100%;
+    float: left;
+    text-align: center;
+    font-size: 15px;
+    color: #c8cccee0;
+    padding:5px 0px !important;
+    background: $HeaderClr; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left, white, $HeaderClr, white); /* Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left,white, $HeaderClr, white); /* For Opera 11.6 to 12.0 */
+    background: -moz-linear-gradient(left,white, $HeaderClr, white); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,white, $HeaderClr, white); /* Standard syntax (must be last) */
+    .app-logo{
+        width: 120px;
+        margin: auto;
+    }
+}

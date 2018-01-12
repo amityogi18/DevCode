@@ -1,0 +1,268 @@
+script.
+  function openNav() {  
+    document.getElementById("sideBarNav").style.width = "100px";
+    document.getElementById("fixed-top").style.width = "0";
+  }
+  function closeNav() {
+      document.getElementById("sideBarNav").style.width = "0";
+      document.getElementById("fixed-top").style.width = "0";
+  }
+  function showNav() {
+      document.getElementById("fixed-top").style.display = "block";
+      document.getElementById("fixed-iconMenu").style.display = "none";
+  }
+  function hideNav() {
+      document.getElementById("fixed-top").style.display = "none";
+      document.getElementById("fixed-iconMenu").style.display = "block";
+  }
+.superAdminSideMenu
+    .col-md-1.pull-right.hidden-lg.hidden-md.hidden-sm
+      i#open-icon.fa.fa-ellipsis-v.fa-2x(onclick='openNav()') 
+    .navigation-container
+      #fixed-iconMenu.nav-side-menu.navbar-fixed-top.icon-menu
+        .menu-list.hidden-xs
+            ul#menu-content.menu-content(aria-expanded='false')
+                li.menu-color(onclick="showNav()")
+                    md-button(aria-label='Open menu', uib-tooltip='Open Menu', tooltip-placement='bottom')
+                      md-icon(md-font-set='fa') &#xf233
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.home', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 11 || user.userRoles == 12 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='Dashboard', uib-tooltip='Dashboard')
+                        md-icon(md-font-set='fa') &#xf015
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.clients', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='Clients', uib-tooltip='Clients')
+                        md-icon(md-font-set='fa') &#xf007 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.company-candidates', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='Company candidates', uib-tooltip='Company Candidates')
+                        md-icon(md-font-set='fa') &#xf0c0 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-profiles',data-ng-show='user.userRoles == 7 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='Candidate Profile', uib-tooltip='Candidate Profile')
+                        md-icon(md-font-set='fa') &#xf03d 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.user-roles',data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='User & Role', uib-tooltip='User & Role')
+                        md-icon(md-font-set='fa') &#xf234
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.admin-payment-plan', data-ng-hide='user.userRoles == 12 ||user.userRoles == 15 || user.userRoles == 16 || user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Plans', uib-tooltip='Plans')
+                        md-icon(md-font-set='fa') &#xf046       
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.payment', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 12')
+                    md-button(aria-label='Payment', uib-tooltip='Payment')
+                        md-icon(md-font-set='fa') &#xf283
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.ticketing-system', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14 || user.userRoles == 12 || user.userRoles == 11')
+                    md-button(aria-label='Ticketing System', uib-tooltip='Ticketing System')
+                        md-icon(md-font-set='fa') &#xf145 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.job-portals', data-ng-show='user.userRoles == 7')
+                    md-button(aria-label='Portal Job Review', uib-tooltip='Portal Job Review')
+                        md-icon(md-font-set='fa') &#xf1e1    
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.question-bank', data-ng-show='user.userRoles == 7 || user.userRoles == 11 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='Question Bank', uib-tooltip='Question Bank')
+                        md-icon(md-font-set='fa') &#xf19c
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.social-media-integration' , data-ng-hide='user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='social Media Integration', uib-tooltip='Social Media Integration')
+                        md-icon(md-font-set='fa') &#xf14d 
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='sa.statics')
+                    md-button(aria-label='Technical Static', uib-tooltip='Technical Static')
+                        md-icon(md-font-set='fa') &#xf13b 
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='sa.third-party-integration')
+                    md-button(aria-label='Third Party Integration', uib-tooltip='Third Party Integration')
+                        md-icon(md-font-set='fa') &#xf21b 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-applied-job', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Candidate Applied Job', uib-tooltip='Candidate Applied Job')
+                        md-icon(md-font-set='fa') &#xf135 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-credentials', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Candidate Credentials', uib-tooltip='Candidate Credentials')
+                        md-icon(md-font-set='fa') &#xf01c
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.blog-super-admin', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Blog', uib-tooltip='Blog')
+                        md-icon(md-font-set='fa') &#xf143 
+      #fixed-top.nav-side-menu.navbar-fixed-top
+        .menu-list.menu-list-item.hidden-xs
+            ul#menu-content.menu-content
+                li.close-list-menu.sideBarMenuIcon
+                    a(onclick='hideNav()')
+                      md-button(aria-label='Close Menu')
+                        md-icon(md-font-set='fa') &#xf00d
+                      span.text-of-sidebar Close Menu
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.home', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 11 || user.userRoles == 12 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='DASHBOARD')
+                      md-icon(md-font-set='fa') &#xf108
+                    span.text-of-sidebar(data-translate='DASHBOARD')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.clients', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='CLIENTS')
+                      md-icon(md-font-set='fa') &#xf007
+                    span.text-of-sidebar(data-translate='CLIENTS')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.company-candidates', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='COMPANY-CANDIDATES')
+                      md-icon(md-font-set='fa') &#xf0c0
+                    span.text-of-sidebar(data-translate='COMPANY-CANDIDATES')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-profiles', data-ng-show='user.userRoles == 7 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='CANDIDATES-PROFILE')
+                      md-icon(md-font-set='fa') &#xf03d
+                    span.text-of-sidebar(data-translate='CANDIDATES-PROFILE')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.user-roles', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='USER-AND-ROLE')
+                      md-icon(md-font-set='fa') &#xf234
+                    span.text-of-sidebar(data-translate='USER-AND-ROLE')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.admin-payment-plan', data-ng-hide='user.userRoles == 12 ||user.userRoles == 15 || user.userRoles == 16 || user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='PLANS')
+                      md-icon(md-font-set='fa') &#xf046
+                    span.text-of-sidebar(data-translate='PLANS')      
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.payment', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 12')
+                    md-button(aria-label='PAYMENT')
+                      md-icon(md-font-set='fa') &#xf283
+                    span.text-of-sidebar(data-translate='PAYMENT')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.ticketing-system', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14 || user.userRoles == 12 || user.userRoles == 11')
+                    md-button(aria-label='TICKETING-SYSTEM')
+                      md-icon(md-font-set='fa') &#xf145
+                    span.text-of-sidebar(data-translate='TICKETING-SYSTEM')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.job-portals', data-ng-show='user.userRoles == 7')
+                    md-button(aria-label='Portal Job Review')
+                      md-icon(md-font-set='fa') &#xf1e1
+                    span.text-of-sidebar Portal Job Review    
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.question-bank', data-ng-show='user.userRoles == 7 || user.userRoles == 11 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='QUESTION-BANK')
+                      md-icon(md-font-set='fa') &#xf19c
+                    span.text-of-sidebar(data-translate='QUESTION-BANK')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.social-media-integration', data-ng-hide='user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='SOCIAL-MEDIA-INTEGRATION')
+                      md-icon(md-font-set='fa') &#xf14d
+                    span.text-of-sidebar(data-translate='SOCIAL-MEDIA-INTEGRATION')
+                li.sideBarMenuIcon(ui-sref-active="active",hidden)
+                  a(data-ui-sref='sa.statics')
+                    md-button(aria-label='TECHNICAL-STATICS')
+                      md-icon(md-font-set='fa') &#xf13b
+                    span.text-of-sidebar(data-translate='TECHNICAL-STATICS')
+                li.sideBarMenuIcon(ui-sref-active="active", hidden)
+                  a(data-ui-sref='sa.third-party-integration')
+                    md-button(aria-label='THIRD-PARTY-INTEGRATION')
+                      md-icon(md-font-set='fa') &#xf21b
+                    span.text-of-sidebar(data-translate='THIRD-PARTY-INTEGRATION')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-applied-job', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Candidate Applied Job')
+                      md-icon(md-font-set='fa') &#xf135
+                    span.text-of-sidebar Candidate Applied Job
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-credentials' , data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Candidate Credentials')
+                      md-icon(md-font-set='fa') &#xf01c
+                    span.text-of-sidebar Candidate Credentials
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='sa.blog-super-admin' , data-ng-hide='user.userRoles == 14 || user.userRoles == 13 ||  user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='Blog')
+                      md-icon(md-font-set='fa') &#xf143
+                    span.text-of-sidebar Blog
+    #sideBarNav.MySideBarNav.hidden-lg.hidden-md.hidden-sm
+      .menu-list
+            ul.menu-content.superadmin-menu(aria-expanded='false')
+                li.close-list-menu
+                  a(onclick='closeNav()')
+                    md-button(aria-label='Close Menu', uib-tooltip='Close Menu')
+                      md-icon(md-font-set='fa') &#xf00d
+                    span.text-of-sidebar Close Menu
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.home',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 11 || user.userRoles == 12 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='DASHBOARD')
+                      md-icon(md-font-set='fa') &#xf108
+                    span.text-of-sidebar(data-translate='DASHBOARD')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.clients',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='CLIENTS')
+                      md-icon(md-font-set='fa') &#xf007
+                    span.text-of-sidebar(data-translate='CLIENTS') 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.company-candidates',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='COMPANY-CANDIDATES')
+                      md-icon(md-font-set='fa') &#xf0c0
+                    span.text-of-sidebar(data-translate='COMPANY-CANDIDATES') 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.candidate-profiles',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14')
+                    md-button(aria-label='CANDIDATES-PROFILE')
+                      md-icon(md-font-set='fa') &#xf03d
+                    span.text-of-sidebar(data-translate='CANDIDATES-PROFILE') 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.user-roles',onclick='closeNav()',data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='USER-AND-ROLE')
+                      md-icon(md-font-set='fa') &#xf234
+                    span.text-of-sidebar(data-translate='USER-AND-ROLE')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.admin-payment-plan',onclick='closeNav()', data-ng-hide='user.userRoles == 12 ||user.userRoles == 15 || user.userRoles == 16 || user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='PLANS')
+                      md-icon(md-font-set='fa') &#xf046 
+                    span.text-of-sidebar(data-translate='PLANS')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.payment',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 12')
+                    md-button(aria-label='PAYMENT')
+                      md-icon(md-font-set='fa') &#xf283
+                    span.text-of-sidebar(data-translate='PAYMENT')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.ticketing-system',onclick='closeNav()', data-ng-show='user.userRoles == 7 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 13 || user.userRoles == 14 || user.userRoles == 12 || user.userRoles == 11 ')
+                    md-button(aria-label='TICKETING-SYSTEM')
+                      md-icon(md-font-set='fa') &#xf145
+                    span.text-of-sidebar(data-translate='TICKETING-SYSTEM') 
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.job-portals',onclick='closeNav()', data-ng-show='user.userRoles == 7')
+                    md-button(aria-label='Portal Job Review')
+                      md-icon(md-font-set='fa') &#xf1e1
+                    span.text-of-sidebar Portal Job Review  
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.question-bank',onclick='closeNav()',data-ng-show='user.userRoles == 7 || user.userRoles == 11 || user.userRoles == 13 || user.userRoles == 14' )
+                    md-button(aria-label='QUESTION-BANK')
+                      md-icon(md-font-set='fa') &#xf19c
+                    span.text-of-sidebar(data-translate='QUESTION-BANK')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='sa.social-media-integration',onclick='closeNav()', data-ng-hide='user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                    md-button(aria-label='SOCIAL-MEDIA-INTEGRATION')
+                      md-icon(md-font-set='fa') &#xf14d
+                    span.text-of-sidebar(data-translate='SOCIAL-MEDIA-INTEGRATION') 
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='sa.statics',onclick='closeNav()')
+                    md-button(aria-label='TECHNICAL-STATICS')
+                      md-icon(md-font-set='fa') &#xf13b
+                    span.text-of-sidebar(data-translate='TECHNICAL-STATICS')
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='sa.third-party-integration',onclick='closeNav()')
+                    md-button(aria-label='THIRD-PARTY-INTEGRATION')
+                      md-icon(md-font-set='fa') &#xf21b
+                    span.text-of-sidebar(data-translate='THIRD-PARTY-INTEGRATION')
+                li(ui-sref-active="active")
+                    a(data-ui-sref='sa.candidate-applied-job',onclick='closeNav()', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                      md-button(aria-label='Candidate Applied Job')
+                        md-icon(md-font-set='fa') &#xf135
+                      span.text-of-sidebar Candidate Applied Job 
+                li(ui-sref-active="active")
+                    a(data-ui-sref='sa.candidate-credentials',onclick='closeNav()', data-ng-hide='user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                      md-button(aria-label='Candidate Credentials')
+                        md-icon(md-font-set='fa') &#xf01c
+                      span.text-of-sidebar Candidate Credentials 
+                li(ui-sref-active="active")
+                    a(data-ui-sref='sa.blog-super-admin',onclick='closeNav()' , data-ng-hide='user.userRoles == 14 || user.userRoles == 13 || user.userRoles == 12 || user.userRoles == 9 || user.userRoles == 11 || user.userRoles == 10')
+                      md-button(aria-label='Blog')
+                        md-icon(md-font-set='fa') &#xf143
+                      span.text-of-sidebar Blog
+

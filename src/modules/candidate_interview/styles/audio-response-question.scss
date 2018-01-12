@@ -1,0 +1,133 @@
+.audio-response-question {
+	.question-text{
+		text-align: center;
+		padding: 100px 0px;
+
+		audio::-webkit-media-controls-panel{
+			border: solid #0069A9 3px;
+			padding: 10px;
+			border-radius: 3px;
+		}
+
+		audio::-webkit-media-controls-mute-button{}
+		audio::-webkit-media-controls-play-button{}
+		audio::-webkit-media-controls-download-button{ display:none;}
+		audio::-webkit-media-controls-timeline-container{}
+		audio::-webkit-media-controls-current-time-display{
+			color: #0069A9;
+		}
+		audio::-webkit-media-controls-time-remaining-display{
+			color: #0069A9;
+		}
+		audio::-webkit-media-controls-timeline{
+			color: #0069A9;
+			background-color: #0069A9;
+		}
+		audio::-webkit-media-controls-volume-slider-container{}
+		audio::-webkit-media-controls-volume-slider{}
+		audio::-webkit-media-controls-seek-back-button{}
+		audio::-webkit-media-controls-seek-forward-button{}
+		audio::-webkit-media-controls-fullscreen-button{}
+		audio::-webkit-media-controls-rewind-button{}
+		audio::-webkit-media-controls-return-to-realtime-button{}
+		audio::-webkit-media-controls-toggle-closed-captions-button{}
+	}
+	.audio-response-container {
+		border-left: 1px solid #aaa;
+
+		.recording-text{
+			//margin-top: 80px;
+			font-size: 30px;
+			text-align: center;
+			padding-top: 170px;
+
+			.blink_me {
+				animation: blinker 1s linear infinite;
+			}
+		}
+
+		#audioResponse{
+			height: 400px !important;
+			width: 500px !important;
+			margin-left: -3px;
+			border-radius: 5px;
+		}
+
+		.audio-response-contents{
+			height: 400px !important;
+			width: 500px !important;
+			margin-left: -3px;
+			border-radius: 5px;
+		}
+
+		.preparation-time-timer {
+			box-shadow: 0 0 5px #aaa;
+			border-radius: 5px;
+			font-size: 125px;
+			color:#0168A7;
+			font-weight: 500;
+			text-align: center;
+			height: 400px !important;
+			width: 535px !important;
+			line-height: 250px;
+			margin-top: 1px;
+			padding-top: 65px;
+		}
+
+		.audio-response-content{
+			border: 1px solid #aaa;
+			height: 200px;
+		}
+
+		.preview-retry-submit-btns{
+			text-align: center;
+			padding: 10px;
+		}
+
+		.preparation-response-time{
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #aaa;
+			padding: 0px 5px;
+		}
+
+		.finish-record-btn-container{
+			text-align: center;
+			margin-top: 10px;
+		}
+	}
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+	.audio-response-question{
+		#questionFileVideo{
+			height: 212px !important;
+			width: 282px !important;
+		}
+		.audio-response-container .preparation-time-timer {
+			width:290px !important;
+			height:300px !important;
+		}
+		.audio-response-container #audioResponse {
+			height: 250px !important;
+			width: 290px !important;
+		}
+		.audio-response-container .audio-response-contents {
+			height:300px !important;
+			width: 310px !important;
+		}
+		.audio-response-container {
+			.recording-text {
+				padding-top: 70px;
+			}
+		}
+	} 
+	}
+
+

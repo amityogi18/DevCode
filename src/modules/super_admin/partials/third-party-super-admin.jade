@@ -1,0 +1,127 @@
+.content-wrapper.third-party-integration
+  .row
+    .col-md-12
+      .third-party
+        span.third-party-heading Third Party Integration
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading Third Party Integration
+    .panel-body
+        .row.technical-statics-search
+            .col-md-4.col-sm-6.col-xs-10
+                .input-group
+                  input.form-control.dept-search-box(type='text', placeholder='Search Here...')
+            .col-md-8.col-sm-6.col-xs-10
+                 button.btn.btn-primary.add-department-btn Add
+        .row
+            .table-responsive
+                table.table.table-bordered
+                    tbody
+                        thead.third
+                            tr
+                                th(data-translate="SELECT-ALL")
+                                th(data-translate="ACTION")
+                                th(data-translate="COMPANY-NAME")
+                                th(data-translate="SMS")
+                                th(data-translate="SERVICE-1")
+                                th(data-translate="SERVICE-2")
+                        tr
+                            td
+                                input(type='checkbox', ng-model='')
+                            td
+                                i.fa.fa-pencil.dept-icon(aria-hidden='true', data-toggle='modal', data-target='#myModal1')
+                                i.fa.fa-times.dept-icon(aria-hidden='true')
+                            td  CTS
+
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-times.third-icon(aria-hidden='true')
+                                // Modal
+                                #myModal1.modal.fade(role='dialog')
+                                    .modal-dialog.modal-md
+                                        .modal-content
+                                            .modal-header
+                                                button.close(type='button', data-dismiss='modal') ×
+                                                h4.modal-title Edit User
+                                            .modal-body
+                                                .form-group.row
+                                                    label.col-xs-2.col-form-label()
+                                                    .col-xs-9
+                                                        input#firstName.form-control(type='url', value='Enter First Name')
+                                                .form-group.row
+                                                    label.col-xs-2.col-form-label()
+                                                    .col-xs-9
+                                                        input#lastName.form-control(type='url', value='Enter Last Name')
+                                                .form-group.row
+                                                    label.col-xs-2.col-form-label()
+                                                    .col-xs-9
+                                                        input#email.form-control(type='url', value='Enter Email')
+                                                .form-group.row
+                                                    .col-md-3.col-xs-6.col-sm-3
+                                                        label.radio-inline
+                                                            input(type='radio', name='optradio')
+                                                            | View
+                                                    .col-md-3.col-xs-6.col-sm-3
+                                                        label.radio-inline
+                                                            input(type='radio', name='optradio')
+                                                            | Evaluators
+                                                    .col-md-3.col-xs-6.col-sm-3
+                                                        label.radio-inline
+                                                            input(type='radio', name='optradio')
+                                                            | Recruiter
+                                                    .col-md-3.col-xs-6.col-sm-3
+                                                        label.radio-inline
+                                                            input(type='radio', name='optradio')
+                                                            | Admin
+                                                .form-group.row
+                                                    label.col-xs-3.col-form-label()
+                                                    .col-xs-3
+                                                        button.btn.btn-default(type='button') Save
+                                                    .col-xs-4
+                                                        button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                                                .modal-footer
+                        tr
+                            td
+                                input(type='checkbox', ng-model='')
+                            td
+                                i.fa.fa-pencil.dept-icon(aria-hidden='true', data-toggle='modal', data-target='#myModal1')
+                                i.fa.fa-times.dept-icon(aria-hidden='true')
+                            td  TCS
+
+                            td 
+                                   i.fa.fa-times.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-times.third-icon(aria-hidden='true')  
+                        tr
+                            td
+                                input(type='checkbox', ng-model='')
+                            td
+                                i.fa.fa-pencil.dept-icon(aria-hidden='true', data-toggle='modal', data-target='#myModal1')
+                                i.fa.fa-times.dept-icon(aria-hidden='true')
+                            td  Itech
+
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')  
+                        tr
+                            td
+                                input(type='checkbox', ng-model='')
+                            td
+                                i.fa.fa-pencil.dept-icon(aria-hidden='true', data-toggle='modal', data-target='#myModal1')
+                                i.fa.fa-times.dept-icon(aria-hidden='true')
+                            td  APPLE
+
+                            td 
+                                   i.fa.fa-check.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-times.third-icon(aria-hidden='true')
+                            td 
+                                   i.fa.fa-times.third-icon(aria-hidden='true')  
+        

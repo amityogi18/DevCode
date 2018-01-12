@@ -1,0 +1,215 @@
+.content-wrapper.payment-plan.super-admin
+    .row
+        .col-md-12
+          .payments-plan
+            span.payments-plan-heading Payment Plan
+    .panel.panel-default
+        .panel-heading.dashboard-profile-heading Payment Plan
+        .panel-body
+            ul.nav.nav-tabs
+                li.active
+                  a(data-toggle='tab', href='#master') Master Plan
+                li
+                  a(data-toggle='tab', href='#custom') Custom Plan
+            .tab-content.plan-tab-position
+                #master.tab-pane.fade.in.active
+                    .panel.panel-default
+                      .panel-heading Confrenece
+                      .panel-body
+                        .row
+                          .table-responsive
+                            .col-md-3.plan-detalis
+                              ul.list-group
+                                li.list-group-item.plan-details-heading
+                                  | Plan Details                        
+                                li.list-group-item
+                                  | Users
+                                li.list-group-item
+                                  | Meetings
+                                li.list-group-item
+                                  | No of participants(per meeting)
+                                li.list-group-item
+                                  | Recording
+                                li.list-group-item
+                                  | Storage
+                                li.list-group-item
+                                  | Duration                    
+                                li.list-group-item
+                                  | Registration & Fee
+                            .col-md-3.my-payment-plan(ng-repeat='plans in PaymentPlansSaCtrl.conferenceData')
+                              ul.list-group
+                                li.list-group-item.plan-heading
+                                  h4 {{plans.planName}}
+                                  h5.price-color ${{plans.price}}                        
+                                li.list-group-item
+                                  | {{plans.noOfUsers}}
+                                li.list-group-item
+                                  | {{plans.noOfMeetings}}
+                                li.list-group-item
+                                  | {{plans.noOfParticipantsInConfrence}}
+                                li.list-group-item
+                                  | {{plans.recording}}
+                                li.list-group-item
+                                  | {{plans.totalStorage}}
+                                li.list-group-item
+                                  | {{plans.validity}}                        
+                                li.list-group-item
+                                  | {{plans.registrationAndFee}}
+ 
+                    .pricing-bottom-line
+                    .panel.panel-default
+                      .panel-heading(data-translate="INTERVIEW")
+                      .panel-body
+                        .row
+                          .table-responsive
+                            .col-md-3.plan-detalis
+                              ul.list-group
+                                li.list-group-item.plan-details-heading
+                                  | Plan Details                    
+                                li.list-group-item
+                                  | Users
+                                li.list-group-item
+                                  | Position
+                                li.list-group-item
+                                  | Interviews(per Position)
+                                li.list-group-item
+                                  | Candidates                         
+                                li.list-group-item
+                                  | Storage
+                                li.list-group-item
+                                  | Live interviews(per position)  
+                                li.list-group-item
+                                  | Recording 
+                                li.list-group-item
+                                  | Duration                    
+                                li.list-group-item
+                                  | Registration & Fee                
+                                
+                            .col-md-3.my-payment-plan(ng-repeat='plans in PaymentPlansSaCtrl.interviewData')
+                              ul.list-group
+                                li.list-group-item.plan-heading
+                                  h4 {{plans.planName}}
+                                  h5.price-color ${{plans.price}}                    
+                                li.list-group-item
+                                  | {{plans.noOfUsers}}
+                                li.list-group-item
+                                  | {{plans.noOfPosition}}
+                                li.list-group-item
+                                  | {{plans.noOfInterviewInEachPosition}}
+                                li.list-group-item
+                                  | {{plans.noOfCandidate}}                          
+                                li.list-group-item
+                                  | {{plans.totalStorage}}
+                                li.list-group-item
+                                  | {{plans.noOfLivenowInterviewInEachPosition}}  
+                                li.list-group-item
+                                  | {{plans.recording}}  
+                                li.list-group-item
+                                  | {{plans.validity}}                    
+                                li.list-group-item
+                                  | {{plans.registrationAndFee}}
+                #custom.tab-pane.fade
+                    .panel-heading
+                          div.confrence-heading Custom Plan
+                        .panel-body
+                            .row
+                                .col-xs-12.col-sm-6.col-md-3.filter-position
+                                  md-input-container.md-block(flex="100")
+                                    label 
+                                    md-select(data-ng-model='PaymentPlansSaCtrl.search', placeholder='Select Company', name='companyName', data-ng-change='PaymentPlansSaCtrl.getCompanyData()', md-on-close="PaymentPlansSaCtrl.clearSearchActiveCompany()", data-md-container-class='selectdemoSelectHeader')
+                                      md-select-header.demo-select-header
+                                        input.demo-header-searchbox.md-text(ng-model='PaymentPlansSaCtrl.searchActiveCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+                                      md-optgroup(label='Company')
+                                      md-option(ng-value='company.name', data-ng-repeat='company in PaymentPlansSaCtrl.companyFilterList | filter: PaymentPlansSaCtrl.searchActiveCompany') {{company.name}}
+                                .col-xs-12.col-sm-6.col-md-3
+                                   a(data-asm-modal='customPlanPopupModal', btn-class='btn btn-primary add-user-btn', on-close="PaymentPlansSaCtrl.onClose()") Add Custom Plan
+                            .row(data-ng-show="PaymentPlansSaCtrl.customPlanListCount > 0")
+                                .col-sm-4.col-md-4.col-xs-6.showMe
+                                  select(class="selectpicker" ng-model="PaymentPlansSaCtrl.test" ng-change="PaymentPlansSaCtrl.toggle()")
+                                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in PaymentPlansSaCtrl.cols.slice(1,PaymentPlansSaCtrl.cols.length) track by $index") {{col.title()}}
+                                .col-md-12.col-sm-12.col-xs-12
+                                  p.text-label(ng-hide='PaymentPlansSaCtrl.customPlanList.length < 1') Showing 
+                                    span
+                                      strong 1-{{PaymentPlansSaCtrl.customPlanList.length}}
+                                      |  of  
+                                      strong
+                                        {{PaymentPlansSaCtrl.customPlanListCount}}    
+                                      |  records      
+                                .main-table-area
+                                    .table-responsive
+                                      table.table.table-condensed.table-bordered.table-striped.active-clients-table(ng-table='PaymentPlansSaCtrl.customPlansTableParams', ng-table-columns-binding="PaymentPlansSaCtrl.cols")
+                                        tr(ng-repeat-start='custom in $data')
+                                          td(ng-if="true" class='col-sm-2' title="'Actions'")
+                                            a(btn-class='add-plan-btn', data-asm-modal='customPlanPopupModal', modal-data='custom', info-data="edit", on-close='PaymentPlansSaCtrl.onClose()')
+                                              i.fa.fa-edit
+                                            a(btn-class='client-icon-btn', type='button', data-toggle='modal', data-target='#viewPlanModal', data-ng-click="PaymentPlansSaCtrl.viewPlanDetails(custom)")
+                                              i.fa.fa-eye
+                                          td(ng-if="true" class='col-sm-2' title="' Company'", sortable="'companyName'", ng-data='custom.companyName') {{custom.companyName}}
+                                          td(ng-if="true" class='col-sm-2' title="' Product'", sortable="'productName'", ng-data='custom.productName') {{custom.productName}}
+                                          td(ng-if="true" class='col-sm-2' title="' Plan'", sortable="'planName'", ng-data='custom.planName') {{custom.planName}}
+                                          td(ng-if="true" class='col-sm-2' title="' Description'", sortable="'description'", ng-data='custom.description') {{custom.description}}
+                                          td(ng-if="true" class='col-sm-2' title="'No of User'",sortable="'noOfUsers'", ng-data='custom.noOfUsers') {{custom.noOfUsers}}
+                                          td(ng-if="true" class='col-sm-2' title="'No of Position'", sortable="'noOfPosition'", ng-data='custom.noOfPosition') {{custom.noOfPosition}}
+                                          td(ng-if="true" class='col-sm-2' title="'No of Candidate'",  sortable="'noOfCandidate'", ng-data='custom.noOfCandidate') {{custom.noOfCandidate}}
+                                          td(ng-if="true" class='col-sm-2' title="'Total Storage'", sortable="'totalStorage'", ng-data='custom.totalStorage') {{custom.totalStorage}}
+                                          td(ng-if="true" class='col-sm-2' title="'Registration Fee'",  sortable="'registrationAndFee'", ng-data='custom.registrationAndFee') {{custom.registrationAndFee}}
+                                          td(ng-if="true" class='col-sm-2' title="'Created At'",sortable="'createdAt'", ng-data='custom.createdAt') {{custom.createdAt  | date:'dd/MM/yyyy' }}
+                                        tr(ng-repeat-end, ng-if="PaymentPlansSaCtrl.PaymentPlansSaCtrl === PaymentPlansSaCtrlController.currentcustomId")
+                            .row(data-ng-show="PaymentPlansSaCtrl.customPlanListCount == 0")
+                                .col-md-12
+                                    .alert.alert-success.candidate-data-info No Data Found
+        .panel-footer
+          .interview-footer
+            b
+              | After Trail Ends:No upload video, no question upload video,no update question in interview,only standard question get added so question bank disabled.
+          .plan-helpline
+              | If you need some personalized plan then please contact:
+              b 568465123
+#viewPlanModal.modal.fade(role='dialog')
+  .modal-dialog.lg
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal') ×
+        h4.modal-title Plan Details
+      .modal-body
+        table.table
+          tbody
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 2')
+              td  No Of Interview In Each Position
+              td  {{PaymentPlansSaCtrl.plan.noOfInterviewInEachPosition}}
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 2')
+              td No Of Live Now Interview In Each Position
+              td  {{PaymentPlansSaCtrl.plan.noOfLivenowInterviewInEachPosition}}
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 1')
+              td No Of Meetings
+              td  {{PaymentPlansSaCtrl.plan.noOfMeetings}}
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 1')
+              td No Of Participants In Confrence
+              td  {{PaymentPlansSaCtrl.plan.noOfParticipantsInConfrence}}
+            tr
+              td Plan Name
+              td {{PaymentPlansSaCtrl.plan.planName}}
+            tr
+              td Price
+              td  {{PaymentPlansSaCtrl.plan.price}}
+            tr
+              td Recording
+              td  {{PaymentPlansSaCtrl.plan.recording}}
+            tr
+              td Call Using Number
+              td  {{PaymentPlansSaCtrl.plan.callUsingNumber}}
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 2')
+              td Analytics
+              td  {{PaymentPlansSaCtrl.plan.analytics}}
+            tr(data-ng-hide='PaymentPlansSaCtrl.plan.productId === 2')
+              td No Of Position
+              td  {{PaymentPlansSaCtrl.plan.noOfPosition}}
+            tr
+              td Description
+              td  {{PaymentPlansSaCtrl.plan.description}}
+            tr
+              td Validity
+              td  {{PaymentPlansSaCtrl.plan.validity}}
+      .modal-footer
+        button.btn.btn-primary(type='button', data-dismiss='modal') Close
+

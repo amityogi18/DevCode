@@ -1,0 +1,169 @@
+script.
+  function openNav() {  
+    document.getElementById("sideBarNav").style.width = "190px";
+    //document.getElementById("fixed-top").style.width = "0";
+  }
+  function closeNav() {
+      document.getElementById("sideBarNav").style.width = "0";
+      //document.getElementById("fixed-top").style.width = "0";
+  }
+  function showNav() {
+      document.getElementById("fixed-top").style.display = "block";
+      document.getElementById("fixed-iconMenu").style.display = "none";
+  }
+  function hideNav() {
+      document.getElementById("fixed-top").style.display = "none";
+      document.getElementById("fixed-iconMenu").style.display = "block";
+  }
+.sideMenuSection
+    .col-md-1.pull-right.hidden-lg.hidden-md.hidden-sm
+      i#open-icon.fa.fa-ellipsis-v.fa-2x(onclick='openNav()') 
+    .navigation-container
+      #fixed-iconMenu.nav-side-menu.navbar-fixed-top.icon-menu
+        .menu-list.hidden-xs
+            ul#menu-content.menu-content(aria-expanded='false')
+                li.menu-color(onclick="showNav()")
+                    md-button(aria-label='Open menu', uib-tooltip='Open Menu', tooltip-placement='bottom')
+                      md-icon(md-font-set='fa') &#xf233 
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.general-settings', uib-tooltip='General')
+                      md-button(aria-label='General')
+                        md-icon(md-font-set='fa') &#xf108
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.notification-settings', uib-tooltip='Notifications')
+                      md-button(aria-label='Notifications')
+                        md-icon(md-font-set='fa') &#xf0a2
+                li(ui-sref-active="active", hidden)
+                    a(data-ui-sref='conference.email-template-settings', uib-tooltip='Email Template',  data-ng-show='user.products[0] == 1 && (user.userRoles == 1  || user.userRoles == 2)')
+                      md-button(aria-label='Email Template')
+                        md-icon(md-font-set='fa') &#xf128 
+                li(ui-sref-active="active", hidden)
+                    a(data-ui-sref='conference.theme-settings', uib-tooltip='Theme')
+                      md-button(aria-label='Theme')
+                        md-icon(md-font-set='fa') &#xf2b2 
+                li(ui-sref-active="active", data-ng-hide='user.userRoles == 7' )
+                    a(data-ui-sref='conference.issue-ticketing', uib-tooltip='Issue Ticketing')
+                      md-button(aria-label='Issue Ticketing')
+                        md-icon(md-font-set='fa') &#xf145
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.admin-company-info' , uib-tooltip='Company Information', data-ng-show='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 18')
+                      md-button(aria-label='Company Information')
+                        md-icon(md-font-set='fa') &#xf129
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.admin-user', uib-tooltip='Users' , data-ng-show='user.userRoles == 1 || user.userRoles == 2')
+                      md-button(aria-label='Users')
+                        md-icon(md-font-set='fa') &#xf007
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.admin-plan', uib-tooltip='My Plan')
+                      md-button(aria-label='My Plan')
+                        md-icon(md-font-set='fa') &#xf12e
+                li(ui-sref-active="active")
+                    a(data-ui-sref='conference.admin-payment-transaction', uib-tooltip='Transaction History')
+                      md-button(aria-label='Transaction History')
+                        md-icon(md-font-set='fa') &#xf0d6 
+      #fixed-top.nav-side-menu.navbar-fixed-top
+        .menu-list.menu-list-item.hidden-xs
+          ul#menu-content.menu-content
+                li.close-list-menu.sideBarMenuIcon
+                  a(onclick='hideNav()')
+                    md-button(aria-label='Close Menu')
+                      md-icon(md-font-set='fa') &#xf00d
+                    span.text-of-sidebar Close Menu
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='conference.general-settings')
+                    md-button(aria-label='General')
+                      md-icon(md-font-set='fa') &#xf108
+                    span.text-of-sidebar(data-translate='GENERAL')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='conference.notification-settings')
+                    md-button(aria-label='Notifications')
+                        md-icon(md-font-set='fa') &#xf0a2
+                    span.text-of-sidebar(data-translate='NOTIFICATIONS')
+                li.sideBarMenuIcon(ui-sref-active="active", hidden)
+                  a(data-ui-sref='conference.email-template-settings', data-ng-show='user.products[0] == 1 && (user.userRoles == 1  || user.userRoles == 2)')
+                    md-button(aria-label='Email Template')
+                        md-icon(md-font-set='fa') &#xf128
+                    span.text-of-sidebar(data-translate='EMAIL-TEMPLATE')
+                li.sideBarMenuIcon(ui-sref-active="active", hidden)
+                  a(data-ui-sref='conference.theme-settings')
+                    md-button(aria-label='Theme')
+                        md-icon(md-font-set='fa') &#xf2b2
+                    span.text-of-sidebar(data-translate='THEME')
+                li.sideBarMenuIcon(ui-sref-active="active", data-ng-hide='user.userRoles == 7')
+                  a(data-ui-sref='conference.issue-ticketing')
+                    md-button(aria-label='Issue Ticketing')
+                        md-icon(md-font-set='fa') &#xf145
+                    span.text-of-sidebar(data-translate='ISSUE-TICKETING')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='conference.admin-company-info' , data-ng-show='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6')
+                    md-button(aria-label='Company Information')
+                        md-icon(md-font-set='fa') &#xf129
+                    span.text-of-sidebar(data-translate='COMPANY-INFORMATION')
+                li.sideBarMenuIcon(ui-sref-active="active")
+                  a(data-ui-sref='conference.admin-user' , data-ng-show='user.userRoles == 1 || user.userRoles == 2')
+                    md-button(aria-label='Users')
+                        md-icon(md-font-set='fa') &#xf007
+                    span.text-of-sidebar(data-translate='USERS')
+                li.sideBarMenuIcon(ui-sref-active="active", data-ng-show='user.userRoles == 1')
+                  a(data-ui-sref='conference.admin-plan' )
+                    md-button(aria-label='My Plan')
+                        md-icon(md-font-set='fa') &#xf12e
+                    span.text-of-sidebar(data-translate='MY-PLAN')
+                li.sideBarMenuIcon(ui-sref-active="active", data-ng-show='user.userRoles == 1')
+                  a(data-ui-sref='conference.admin-payment-transaction')
+                    md-button(aria-label='Transaction History')
+                        md-icon(md-font-set='fa') &#xf0d6
+                    span.text-of-sidebar(data-translate='TRANSACTION-HISTORY')
+    #sideBarNav.MySideBarNav.hidden-lg.hidden-md.hidden-sm
+       .menu-list
+            ul.sub-menu.admin-menu
+                li.close-list-menu
+                    a(onclick='closeNav()', uib-tooltip='Close Menu')
+                      md-button(aria-label='Close Menu')
+                        md-icon(md-font-set='fa') &#xf00d
+                      span.text-of-sidebar Close Menu
+                li(ui-sref-active="active")
+                  a(data-ui-sref='conference.general-settings',onclick='closeNav()')
+                    md-button(aria-label='General')
+                      md-icon(md-font-set='fa') &#xf108
+                    span.text-of-sidebar(data-translate='GENERAL')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='conference.notification-settings',onclick='closeNav()')
+                    md-button(aria-label='Notifications')
+                        md-icon(md-font-set='fa') &#xf0a2
+                    span.text-of-sidebar(data-translate='NOTIFICATIONS')
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='conference.email-template-settings',onclick='closeNav()', data-ng-show='user.products[0] == 1 && (user.userRoles == 1  || user.userRoles == 2)')
+                    md-button(aria-label='Email Template')
+                        md-icon(md-font-set='fa') &#xf128
+                    span.text-of-sidebar(data-translate='EMAIL-TEMPLATE')
+                li(ui-sref-active="active", hidden)
+                  a(data-ui-sref='conference.theme-settings',onclick='closeNav()')
+                    md-button(aria-label='Theme')
+                        md-icon(md-font-set='fa') &#xf2b2
+                    span.text-of-sidebar(data-translate='THEME')
+                li(ui-sref-active="active", data-ng-hide='user.userRoles == 7')
+                  a(data-ui-sref='conference.issue-ticketing',onclick='closeNav()')
+                    md-button(aria-label='Issue Ticketing')
+                        md-icon(md-font-set='fa') &#xf145
+                    span.text-of-sidebar(data-translate='ISSUE-TICKETING')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='conference.admin-company-info' , data-ng-show='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6')
+                    md-button(aria-label='Company Information',onclick='closeNav()')
+                        md-icon(md-font-set='fa') &#xf129
+                    span.text-of-sidebar(data-translate='COMPANY-INFORMATION')
+                li(ui-sref-active="active")
+                  a(data-ui-sref='conference.admin-user' ,onclick='closeNav()', data-ng-show='user.userRoles == 1 || user.userRoles == 2')
+                    md-button(aria-label='Users')
+                        md-icon(md-font-set='fa') &#xf007
+                    span.text-of-sidebar(data-translate='USERS')
+                li(ui-sref-active="active", data-ng-show='user.userRoles == 1')
+                  a(data-ui-sref='conference.admin-plan' ,onclick='closeNav()')
+                    md-button(aria-label='My Plan')
+                        md-icon(md-font-set='fa') &#xf12e
+                    span.text-of-sidebar(data-translate='MY-PLAN')
+                li(ui-sref-active="active", data-ng-show='user.userRoles == 1')
+                  a(data-ui-sref='conference.admin-payment-transaction',onclick='closeNav()')
+                    md-button(aria-label='Transaction History')
+                        md-icon(md-font-set='fa') &#xf0d6
+                    span.text-of-sidebar(data-translate='TRANSACTION-HISTORY')

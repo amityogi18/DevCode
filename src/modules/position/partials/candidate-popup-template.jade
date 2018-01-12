@@ -1,0 +1,375 @@
+.candidate-popup-template
+    div.modal-header
+      button.close(type='button', ng-click='$ctrl.cancelPopup()')
+        i.fa.fa-times
+      h4 Add {{$ctrl.headerName}}
+    button(class='hidden', id='hiddenInterview', ng-click='$ctrl.controlInterviewerDisplay()')
+    button(class='hidden', id='hiddenEvaluator', ng-click='$ctrl.controlEvaluatorDisplay()')
+    button(class='hidden', id='hiddenCandidate', ng-click='$ctrl.controlCandidateDisplay()')
+    div.modal-body(ng-show='$ctrl.showEvaluator')
+      .interviewer-sec
+        .col-md-12.col-xs-12.col-sm-12
+          .col-md-3.col-sm-4.col-xs-12.search-bar-candidate
+            md-input-container.md-block(flex="100")
+              label Search...
+              input(type='text', ng-model='$ctrl.searchEvaluatorFilter.search')
+              md-icon.src-icon(md-font-set='fa') &#xf002
+          .col-md-4.col-sm-4.col-xs-12
+            md-button.md-raised.md-primary(aria-label="add Evaluator", data-toggle='collapse', data-target='#demo1')  Add Evaluator    
+        #demo1.collapse.multiple-inputs(data-ng-if='user.userRoles === 1 || user.userRoles === 2 || user.userRoles === 7')
+          ul
+            li
+             form(role='form', name='$ctrl.evalatorForm', novalidate)
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input(type='text', name='email',maxlength='50', placeholder='Email Address', ng-model='$ctrl.email',data-ng-blur='$ctrl.isInvalidEmailId($ctrl.email)', data-ng-keyup="$ctrl.isInvalidEmailId($ctrl.email)",required )
+                  span.error-msg(data-ng-if='$ctrl.errormessage !== ""') {{$ctrl.errormessage}}
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input(type='text',name='firstName',maxlength='25', placeholder='First Name',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', ng-model='$ctrl.firstName',data-ng-blur='$ctrl.removeInvalidFName($ctrl.firstName)',required)
+                  span.error-msg(data-ng-show='$ctrl.evalatorForm.$submitted || $ctrl.evalatorForm.firstName.$touched')
+                    span(data-ng-show='$ctrl.evalatorForm.firstName.$dirty && $ctrl.evalatorForm.firstName.$invalid')
+                    span.error-msg(data-ng-show='$ctrl.evalatorForm.firstName.$error.required') Please Enter First Name
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input.lastName(type='text', name='lastName',maxlength='25' placeholder='Last Name',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', ng-model='$ctrl.lastName',data-ng-blur='$ctrl.removeInvalidLName($ctrl.lastName)', required)
+                  span.error-msg(data-ng-show='$ctrl.evalatorForm.$submitted || $ctrl.evalatorForm.lastName.$touched')
+                    span(data-ng-show='$ctrl.evalatorForm.lastName.$dirty && $ctrl.evalatorForm.lastName.$invalid')
+                    span.error-msg(data-ng-show='$ctrl.evalatorForm.lastName.$error.required') Please Enter Last Name
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  label Department
+                  md-select(data-ng-model='$ctrl.departmentId', data-ng-change='$ctrl.getSkillSet($ctrl.departmentId)',md-on-close="$ctrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', name='functionalArea',required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='$ctrl.searchDepartment', type='search', placeholder='Search for a department..',ng-keydown="$event.stopPropagation()")
+                    md-option(ng-value='department.id',ng-repeat='department in $ctrl.departmentList|filter:$ctrl.searchDepartment') {{department.name}}
+                span.error-msg.dept-msg-position(data-ng-show='$ctrl.evalatorForm.$submitted || $ctrl.evalatorForm.functionalArea.$touched')
+                  span(data-ng-show='$ctrl.evalatorForm.functionalArea.$dirty && $ctrl.evalatorForm.functionalArea.$invalid')
+                  span.error-msg(data-ng-show='$ctrl.evalatorForm.functionalArea.$error.required') Please Select Department
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  label Skill
+                  md-select(ng-model='$ctrl.skillsetId', name="skillset",md-on-close="$ctrl.clearSearchSkill()", data-md-container-class='selectdemoSelectHeader', multiple='', required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='$ctrl.searchSkill', type='search', placeholder='Search skill..',ng-keydown="$event.stopPropagation()")
+                    md-option(ng-value='skillset.id', ng-repeat='skillset in $ctrl.skillsetList|filter:$ctrl.searchSkill') {{skillset.skillsetName}}
+                span.error-msg.dept-msg-position(data-ng-show='$ctrl.evalatorForm.$submitted || $ctrl.evalatorForm.skill.$touched')
+                    span(data-ng-show='$ctrl.evalatorForm.skill.$dirty && $ctrl.evalatorForm.skill.$invalid')
+                    span.error-msg(data-ng-show='$ctrl.evalatorForm.skill.$error.required') Please Select Skill
+          a.btn-plus(title='Add New Evaluator', data-ng-disabled="$ctrl.evalatorForm.$invalid || $ctrl.evalatorForm.$pending", data-ng-click='$ctrl.addEvaluator()')
+            i.fa.fa-plus-circle.fa-2x
+        .row
+          .col-md-12
+            .col-sm-4.col-md-4.col-xs-6.showMe
+              select(class="selectpicker" ng-model="$ctrl.test" ng-change="$ctrl.toggle()")
+                option(ng-model="col.show" value="{{$index}}" ng-repeat="col in $ctrl.cols.slice(1,$ctrl.cols.length) track by $index") {{col.title()}}
+            .col-md-12.col-sm-12.col-xs-12
+              p.text-label(ng-hide='$ctrl.evaluatorList.length < 1') Showing 
+                  span
+                    strong 1-{{$ctrl.evaluatorList.length}}
+                    |  of  
+                    strong
+                      {{$ctrl.evaluatorListCount}} 
+                    |  records    
+            .main-table-area
+              .table-responsive
+                table.table.table-first(ng-table='$ctrl.evaluatorTableParams', ng-table-columns-binding="$ctrl.cols")
+                  tr(ng-repeat='evaluator in $data')
+                    td(ng-if="true")
+                      input.option-checkbox(type='checkbox', data-ng-click='$ctrl.addEvaluatorUserId($event, evaluator)')
+                    td(ng-if="true", data-title="'Default Evaluator'") 
+                      span(data-ng-if='evaluator.isDefaultEvaluator === true') Yes
+                      span(data-ng-if='evaluator.isDefaultEvaluator === false') No
+                    td(ng-if="true", data-title="'Email'",  sortable="'email'", ng-data='evaluator.email'){{evaluator.email}}
+                    //td(ng-if="true", data-title="'Name'",  sortable="'name'", ng-data='evaluator.name'){{evaluator.name }}
+                    td(ng-if="true", data-title="'First Name'",  sortable="'firstName'", ng-data='evaluator.firstName'){{evaluator.firstName}}
+                    td(ng-if="true", data-title="'Last Name'",  sortable="'lastName'", ng-data='evaluator.lastName'){{evaluator.lastName}}
+                    td(ng-if="true", data-title="'Department'",  sortable="'departmentName'", ng-data='evaluator.departmentName') {{evaluator.departmentName}}
+                    td(ng-if="true", data-title="'Skills'", sortable="'skillsets'", ng-data='evaluator.skillsets') 
+                      span(data-ng-repeat="skill in evaluator.skillsets track by $index")
+                        span {{skill.name}}
+                        span(ng-if="($index + 1) < evaluator.skillsets.length") ,
+              .col-md-12.no-data-errormsg(ng-show="$ctrl.evaluatorList.length == 0")
+                | No Evaluator Found
+      .modal-footer
+        .pull-left.dwnld-area(data-ng-if='user.userRoles === 1 || user.userRoles === 2 || user.userRoles === 7')
+          p 
+            a(href='https://jottp.com/templates/evaluator_template.xlsx' download) Download Evaluator Template
+          md-button.md-raised.md-primary.btn-candidate-list(data-ng-click='$ctrl.openevaluatorUpload()') Import Evaluators list
+          input.hidden#evaluatorfilectrl(type='file', ngf-max-size='1MB' ngf-select="$ctrl.uploadEvaluatorFile($files); $ctrl.isFileAdded($files)", accept='.xls,.xlsx', fileread, griddata='$ctrl.evaluatorList', ngtableparams='$ctrl.evaluatorTableParams', data-ng-model='$ctrl.importEvaluatorFile')
+        .pull-right.submit-btns
+          md-button.md-raised.savedata-btn(ng-click='$ctrl.linkEvaluatorToInterview()') Add
+          md-button.md-raised.md-primary(ng-click='$ctrl.cancelPopup()') Cancel
+    div.modal-body(ng-show='$ctrl.showInterviewer')
+      .interviewer-sec
+        .col-md-12.col-xs-12.col-sm-12
+          .col-md-3.col-sm-4.col-xs-12.search-bar-candidate          
+            md-input-container.md-block(flex="100")
+              label Search...
+              input(type='text', ng-model='$ctrl.searchInterviewerFilter.search')
+              md-icon.src-icon(md-font-set='fa') &#xf002
+          .col-md-4.col-sm-4.col-xs-12
+            md-button.md-raised.md-primary(aria-label="add Interviewer", data-toggle='collapse', data-target='#demo3')  Add Interviewer    
+        #demo3.collapse.multiple-inputs(data-ng-if='user.userRoles === 1 || user.userRoles === 2 || user.userRoles === 7')
+          ul
+            li
+             form(novalidate, name='$ctrl.interviewerForm')
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input(type='text', name='email',maxlength='50', placeholder='Email Address',ng-model='$ctrl.email',data-ng-blur='$ctrl.isInvalidEmailId($ctrl.email)', data-ng-keyup="$ctrl.isInvalidEmailId($ctrl.email)",required)
+                  span.error-msg(data-ng-if='$ctrl.errormessage !== ""') {{$ctrl.errormessage}}
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input.firstName(type='text', name='firstName', placeholder='First Name',maxlength='25',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', ng-model='$ctrl.firstName',data-ng-blur='$ctrl.removeInvalidFName($ctrl.firstName)', required)
+                  span.error-msg(data-ng-show='$ctrl.interviewerForm.$submitted || $ctrl.interviewerForm.firstName.$touched')
+                    span(data-ng-show='$ctrl.interviewerForm.firstName.$dirty && $ctrl.interviewerForm.firstName.$invalid')
+                    span.error-msg(data-ng-show='$ctrl.interviewerForm.firstName.$error.required') Please Enter First Name
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  input.lastName(type='text', name='lastName', placeholder='Last Name', ng-model='$ctrl.lastName',maxlength='25',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',data-ng-blur='$ctrl.removeInvalidLName($ctrl.lastName)', required)
+                  span.error-msg(data-ng-show='$ctrl.interviewerForm.$submitted || $ctrl.interviewerForm.lastName.$touched')
+                    span(data-ng-show='$ctrl.interviewerForm.lastName.$dirty && $ctrl.interviewerForm.lastName.$invalid')
+                    span.error-msg(data-ng-show='$ctrl.interviewerForm.lastName.$error.required') Please Enter Last Name
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  label Department
+                  md-select(data-ng-model='$ctrl.departmentId', data-ng-change='$ctrl.getSkillSet($ctrl.departmentId)',md-on-close="$ctrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', name='functionalArea',required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='$ctrl.searchDepartment', type='search', placeholder='Search for a department..',ng-keydown="$event.stopPropagation()")
+                    md-option(ng-value='department.id',ng-repeat='department in $ctrl.departmentList|filter:$ctrl.searchDepartment') {{department.name}}
+                span.error-msg(data-ng-show='$ctrl.interviewerForm.$submitted || $ctrl.interviewerForm.functionalArea.$touched')
+                  span(data-ng-show='$ctrl.interviewerForm.functionalArea.$dirty && $ctrl.interviewerForm.functionalArea.$invalid')
+                  span.error-msg(data-ng-show='$ctrl.interviewerForm.functionalArea.$error.required') Please Select Department
+              .input-field-part
+                md-input-container.md-block(flex="100")
+                  label Skill
+                  md-select(ng-model='$ctrl.skillsetId', name="skillset", multiple='',md-on-close="$ctrl.clearSearchSkill()", data-md-container-class='selectdemoSelectHeader',required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='$ctrl.searchSkill', type='search', placeholder='Search skill..',ng-keydown="$event.stopPropagation()")
+                    md-option(ng-value='skillset.id', ng-repeat='skillset in $ctrl.skillsetList|filter:$ctrl.searchSkill') {{skillset.skillsetName}}
+                span.error-msg(data-ng-show='$ctrl.interviewerForm.$submitted || $ctrl.interviewerForm.skill.$touched')
+                  span(data-ng-show='$ctrl.interviewerForm.skill.$dirty && $ctrl.interviewerForm.skill.$invalid')
+                  span.error-msg(data-ng-show='$ctrl.interviewerForm.skill.$error.required') Please Select Skills
+          a.btn-plus(title='Add New Interviewer', data-ng-disabled="$ctrl.interviewerForm.$invalid || $ctrl.interviewerForm.$pending", data-ng-click='$ctrl.addInterviewer()')
+            i.fa.fa-plus-circle.fa-2x
+        .row
+          .col-md-12
+            .col-sm-4.col-md-4.col-xs-6.showMe
+              select(class="selectpicker" ng-model="$ctrl.test" ng-change="$ctrl.toggle()")
+                option(ng-model="col.show" value="{{$index}}" ng-repeat="col in $ctrl.cols.slice(1,$ctrl.cols.length) track by $index") {{col.title()}}
+            .col-md-12.col-sm-12.col-xs-12
+              p.text-label(ng-hide='$ctrl.interviewerList.length < 1') Showing 
+                  span
+                    strong 1-{{$ctrl.interviewerList.length}}
+                    |  of  
+                    strong
+                      {{$ctrl.interviewerListCount}} 
+                    |  records    
+            .main-table-area
+              .table-responsive
+                table.table.table-first(ng-table='$ctrl.interviewerTableParams',ng-table-columns-binding="$ctrl.cols")
+                  tr(ng-repeat='interviewer in $data')
+                    td(ng-if="true")
+                      input.option-checkbox(type='checkbox', data-ng-click='$ctrl.addInterviewerUserId($event, interviewer)')
+                    td(ng-if="true", data-title="'Default Interviewer'") 
+                      span(data-ng-if='interviewer.isDefaultInterviewer === true') Yes
+                      span(data-ng-if='interviewer.isDefaultInterviewer === false') No
+                    td(ng-if="true", data-title="'Email'",  sortable="'email'", ng-data='interviewer.email'){{interviewer.email}}
+                    td(ng-if="true", data-title="'First Name'",  sortable="'firstName'", ng-data='interviewer.firstName'){{interviewer.firstName}}
+                    td(ng-if="true", data-title="'Last Name'",  sortable="'lastName'", ng-data='interviewer.lastName'){{interviewer.lastName}}
+                    td(ng-if="true", data-title="'Department'", sortable="'departmentName'", ng-data='interviewer.departmentName') {{interviewer.departmentName}}
+                    td(ng-if="true", data-title="'Skills'",  sortable='skillsets', ng-data='interviewer.skillsets')
+                      span(data-ng-repeat="skill in interviewer.skillsets") 
+                        span {{skill.name}}
+                        span(ng-if="($index + 1) < interviewer.skillsets.length") ,
+              .col-md-12.no-data-errormsg(ng-show="$ctrl.interviewerList.length == 0")
+                | No Interviewer Found        
+      .modal-footer
+        .pull-left.dwnld-area(data-ng-if='user.userRoles === 1 || user.userRoles === 2 || user.userRoles === 7')
+          p
+             a(href='https://jottp.com/templates/interviewer_template.xlsx' download) Download Interviewer Template
+          md-button.md-raised.md-primary.btn-candidate-list(data-ng-click='$ctrl.openinterviewerUpload()') Import Interviewer list
+          input.hidden#interviewerfilectrl(type='file', ngf-select="$ctrl.uploadInterviewerFile($files); $ctrl.isFileAdded($files)", accept='.xls,.xlsx', fileread, griddata='$ctrl.interviewerList', ngtableparams='$ctrl.interviewerTableParams', data-ng-model='$ctrl.importInterviewerFile')
+        .pull-right.submit-btns
+          md-button.md-raised.savedata-btn(ng-click='$ctrl.linkInterviewerToInterview()') Add
+          md-button.md-raised.md-primary(ng-click='$ctrl.cancelPopup()') Cancel
+          label.error-lbl {{$ctrl.errorLblTxt}}
+    div.modal-body(ng-show='$ctrl.showCandidate')
+      md-content
+        md-tabs(md-dynamic-height='', md-border-bottom='')
+          md-tab(label='Company Candidates')
+            md-content.md-padding
+              .interviewer-sec
+                .col-md-12.col-sm-12.col-xs-12
+                  .col-md-3.col-sm-4.col-xs-12.search-bar-candidate
+                    md-input-container.md-block(flex="100")
+                      label
+                      input(type='text', placeholder='Search...', ng-model='$ctrl.candidateTableFilter.search')
+                    md-icon.src-icon(md-font-set='fa') &#xf002
+                  .col-md-4.col-sm-4.col-xs-12
+                    md-button.md-raised.md-primary(aria-label="add Candidate", data-toggle='collapse', data-target='#demo')  Add Candidate  
+                #demo.collapse.multiple-inputs(data-ng-if='user.userRoles === 1 || user.userRoles === 2 || user.userRoles === 7')
+                  ul
+                    li
+                     form.candidate-form(name='$ctrl.candidateForm', role='form', novalidate)
+                      .row
+                        .col-md-3
+                          //md-input-container.md-block(flex="100")
+                            input(type='text', name='email', maxlength='50', placeholder='Email Address', ng-model='$ctrl.email', ng-pattern="/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i", required)
+                            div(ng-messages='$ctrl.candidateForm.email.$error', ng-if='$ctrl.candidateForm.$error || $ctrl.candidateForm.email.$touched')
+                                div(ng-message='required')
+                                  | Please Enter 
+                                  b Email Address
+                                div(ng-message='pattern') Must be a valid Email address
+                          md-input-container.md-block(flex="100")
+                            input(type='text', name='email', maxlength='50', placeholder='Email Address', ng-model='$ctrl.email',data-ng-blur='$ctrl.isInvalidEmailId($ctrl.email)', data-ng-keyup="$ctrl.isInvalidEmailId($ctrl.email)", required)
+                            span.error-msg(data-ng-if='$ctrl.errormessage !== "" || $ctrl.candidateForm.email.$error.required') {{$ctrl.errormessage}}
+                        .col-md-3
+                          md-input-container.md-block(flex="100")
+                            input(type='text', maxlength='25', name='firstName', placeholder='First Name', ng-model='$ctrl.firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',data-ng-blur='$ctrl.removeInvalidFName($ctrl.firstName)', required)
+                            span.error-msg(data-ng-show='$ctrl.candidateForm.$submitted || $ctrl.candidateForm.firstName.$touched')
+                              span(data-ng-show='$ctrl.candidateForm.firstName.$dirty && $ctrl.candidateForm.firstName.$invalid')
+                              span.error-msg(data-ng-show='$ctrl.candidateForm.firstName.$error.required') Please Enter First Name
+                        .col-md-3
+                          md-input-container.md-block(flex="100")
+                            input(type='text',maxlength='25',name='lastName', placeholder='Last Name', ng-model='$ctrl.lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',data-ng-blur='$ctrl.removeInvalidLName($ctrl.lastName)', required)
+                            span.error-msg(data-ng-show='$ctrl.candidateForm.$submitted || $ctrl.candidateForm.lastName.$touched')
+                              span(data-ng-show='$ctrl.candidateForm.lastName.$dirty && $ctrl.candidateForm.lastName.$invalid')
+                              span.error-msg(data-ng-show='$ctrl.candidateForm.lastName.$error.required') Please Enter Last Name
+                        .col-md-3
+                          md-input-container.md-block(flex="100")
+                            input(type='text',name='contactNumber', maxlength='14',onkeypress='return event.charCode <= 57', placeholder='Contact No', ng-model='$ctrl.contactNumber', data-ng-blur='$ctrl.analyzePhoneNumber($ctrl.contactNumber)', data-ng-keyup="$ctrl.analyzePhoneNumber($ctrl.contactNumber)",required)
+                            span.error-msg(data-ng-show='$ctrl.candidateForm.$submitted || $ctrl.candidateForm.lastName.$touched')
+                                span.error-msg(data-ng-if='$ctrl.errmsgcon !== "" || $ctrl.candidateForm.contactNumber.$error.required') {{$ctrl.errmsgcon}}
+                      .row
+                        .col-md-3.year-month
+                          md-input-container.md-block(flex="100")
+                            input(type='number', maxlength='2', name='totalYears', placeholder='Years', ng-model='$ctrl.totalYears',data-ng-blur="$ctrl.analyzeYearExp($ctrl.totalYears)", data-ng-keypress= "$ctrl.analyzeYearExp($ctrl.totalYears)", data-ng-keyup = "$ctrl.analyzeYearExp($ctrl.totalYears)", required)
+                            span.error-msg.error-msg-position(data-ng-if='$ctrl.yearErrormessage !== ""') {{$ctrl.yearErrormessage}}.
+                        .col-md-3.year-month
+                          md-input-container.md-block(flex="100")
+                            input(type='number',maxlength='2', name='totalMonths', placeholder='Month', ng-model='$ctrl.totalMonths',data-ng-blur="$ctrl.analyzeMonthExp($ctrl.totalMonths)", data-ng-keypress= "$ctrl.analyzeMonthExp($ctrl.totalMonths)", data-ng-keyup = "$ctrl.analyzeMonthExp($ctrl.totalMonths)", required)
+                            span.error-msg.error-msg-position(data-ng-if='$ctrl.monthErrormessage !== ""') {{$ctrl.monthErrormessage}}.
+                        .col-md-6
+                          md-content.geo-section(flex='100')
+                            place-autocomplete(data-ng-model='$ctrl.geoAddress', on-address='$ctrl.setAddressValue(addressFn)', on-clear='$ctrl.clearSuggestions(clearFn)' md-input-maxlength="250", md-input-minlength ="5" search-type='1')
+                      .row
+                        .col-md-4.input-field-part
+                          md-input-container.md-block(flex="100")
+                            label Department
+                            md-select(data-ng-model='$ctrl.departmentId', data-ng-change='$ctrl.getSkillSet($ctrl.departmentId)',md-on-close="$ctrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', name='functionalArea',required)
+                              md-select-header.demo-select-header
+                                input.demo-header-searchbox.md-text(ng-model='$ctrl.searchDepartment', type='search', placeholder='Search for a department..',ng-keydown="$event.stopPropagation()")
+                              md-option(ng-value='department.id',ng-repeat='department in $ctrl.departmentList|filter:$ctrl.searchDepartment') {{department.name}}
+                          span.error-msg.error-msg-position(data-ng-show='$ctrl.candidateForm.$submitted || $ctrl.candidateForm.functionalArea.$touched')
+                              span(data-ng-show='$ctrl.candidateForm.functionalArea.$dirty && $ctrl.candidateForm.functionalArea.$invalid')
+                              span.error-msg(data-ng-show='$ctrl.candidateForm.functionalArea.$error.required') Please Select Department
+                        .col-md-8.col-sm-8.col-xs-12.skill-set-box
+                          md-input-container.md-block(flex="100")
+                            label Skill
+                            md-select(ng-model='$ctrl.skillsetId', name="skillset", multiple='',,md-on-close="$ctrl.clearSearchSkill()", data-md-container-class='selectdemoSelectHeader',required)
+                              md-select-header.demo-select-header
+                                input.demo-header-searchbox.md-text(ng-model='$ctrl.searchSkill', type='search', placeholder='Search skill..',ng-keydown="$event.stopPropagation()")
+                              md-option(ng-value='skillset.id', ng-repeat='skillset in $ctrl.skillsetList|filter:$ctrl.searchSkill') {{skillset.skillsetName}}
+                          span.error-msg.error-msg-position(data-ng-show='$ctrl.candidateForm.$submitted || $ctrl.candidateForm.skillset.$touched')
+                              span(data-ng-show='$ctrl.candidateForm.skillset.$dirty && $ctrl.candidateForm.skillset.$invalid')
+                              span.error-msg(data-ng-show='$ctrl.candidateForm.skillset.$error.required') Please Select Skills
+                        a.btn-plus(data-ng-click='$ctrl.addCandidate()',data-ng-disabled='$ctrl.candidateForm.firstName.$dirty && $ctrl.candidateForm.firstName.$invalid || $ctrl.candidateForm.lastName.$dirty && $ctrl.candidateForm.lastName.$invalid || $ctrl.candidateForm.email.$dirty && $ctrl.candidateForm.email.$invalid || $ctrl.candidateForm.totalYears.$dirty && $ctrl.candidateForm.totalYears.$invalid || $ctrl.candidateForm.totalMonths.$dirty && $ctrl.candidateForm.totalMonths.$invalid || $ctrl.candidateForm.contactNumber.$dirty && $ctrl.candidateForm.contactNumber.$invalid || $ctrl.candidateForm.country.$dirty && $ctrl.candidateForm.country.$invalid || $ctrl.candidateForm.state.$dirty && $ctrl.candidateForm.state.$invalid || $ctrl.candidateForm.city.$dirty && $ctrl.candidateForm.city.$invalid || $ctrl.candidateForm.functionalArea.$dirty && $ctrl.candidateForm.functionalArea.$invalid', title='Add New Candidate')
+                          i.fa.fa-plus-circle.fa-2x.candidate-add-btn
+                .row
+                  .col-md-12
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                      select(class="selectpicker" ng-model="$ctrl.test" ng-change="$ctrl.toggle()")
+                        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in $ctrl.cols.slice(1,$ctrl.cols.length) track by $index") {{col.title()}}
+                    .col-md-12.col-sm-12.col-xs-12
+                      p.text-label(ng-hide='$ctrl.candidateList.length < 1') Showing 
+                          span
+                            strong 1-{{$ctrl.candidateList.length}}
+                            |  of  
+                            strong
+                            |  {{$ctrl.candidateListCount}}  
+                            |  records 
+                    .main-table-area
+                      .table-responsive.checkbox-table
+                        table.table.table-first(ng-table='$ctrl.candidateTableParams', ng-table-columns-binding="$ctrl.cols")
+                          tr(ng-repeat='candidate in $data')
+                            td(ng-if="true" class='col-md-1 col-sm-2')
+                              input.option-checkbox(type='checkbox', data-ng-click='$ctrl.addCompanyCandidateId($event, candidate)')
+                            td(ng-if="true", data-title="'Status'", sortable="'jobAppliedStatusOfCandidate'", ng-data='candidate.jobAppliedStatusOfCandidate')  
+                              span(ng-if="candidate.jobAppliedStatusOfCandidate == 'APPROVED'")   
+                               i.fa.fa-check.approve-icon-status(aria-hidden='true')
+                              span(ng-if="candidate.jobAppliedStatusOfCandidate == 'REJECTED'")   
+                               i.fa.fa-times.close-icon-status(aria-hidden='true')
+                            td(ng-if="true", data-title="'Email'", sortable="'email'", ng-data='candidate.email') {{candidate.email}}
+                            td(ng-if="true", data-title="'First Name'", sortable="'firstname'", ng-data='candidate.firstName')  {{candidate.firstName}}
+                            td(ng-if="true", data-title="'Last Name'", sortable="'lastname'", ng-data='candidate.lastName')  {{candidate.lastName}}
+                            td(ng-if="true", data-title="'Contact No'", sortable="'contactnumber'", ng-data='candidate.contactnumber') {{candidate.contactNumber}}
+                            td(ng-if="true", data-title="'Location'") {{candidate.country}}, {{candidate.state}}, {{candidate.city}}
+                            td(ng-if="true", data-title="'Department'", sortable="'department'", ng-data='candidate.department') {{candidate.departmentName}}
+                            td(ng-if="true", data-title="'Skills'", sortable="'skills'", ng-data='candidate.skills') {{candidate.skillsetName}}
+                            td(ng-if="true", data-title="'Experience'",  sortable="'experience'", ng-data='candidate.experience') 
+                                span(ng-if="candidate.totalYrOfExp !== null && candidate.totalYrOfExp !== ''") {{candidate.totalYrOfExp}} Year 
+                                span(ng-if="candidate.totalMonthsOfExp !== null && candidate.totalMonthsOfExp !== '' ") {{candidate.totalMonthsOfExp}} Months
+                      .col-md-12.no-data-errormsg(ng-show="$ctrl.candidateList.length == 0")
+                        | No Candidate Found        
+              .modal-footer
+                .pull-left.dwnld-area
+                  p
+                    a(href='https://jottp.com/templates/candidate_template.xls', download) Download Candidate Template
+                  md-button.md-primary.md-raised.btn-candidate-list(data-ng-click='$ctrl.openCandidateUpload()') Import Candidate list
+                  input.hidden#candidatefilectrl(type='file',ngf-max-size='1MB' ngf-select="$ctrl.uploadCandidateFile($files); $ctrl.isFileAdded($files)", accept='.xls,.xlsx', fileread, griddata='$ctrl.candidateList', ngtableparams='$ctrl.candidateTableParams', data-ng-model='$ctrl.importCandidateFile')
+                .pull-right.submit-btns.hidden-xs
+                  md-button.md-raised.savedata-btn(ng-click='$ctrl.linkCompanyCandidateToInterview()') Add
+                  md-button.md-primary.md-raised(ng-click='$ctrl.cancelPopup()') Cancel
+                .submit-btns.visible-xs
+                  a.btn-save(ng-click='$ctrl.linkCompanyCandidateToInterview()') Add
+                  a.btn-blue(ng-click='$ctrl.cancelPopup()') Cancel
+          md-tab(label='On-Demand Candidates')
+            md-content.md-padding
+              .interviewer-sec
+                .col-md-12.col-sm-12.col-xs-12
+                  .col-md-4.col-sm-4.col-xs-12.search-bar-candidate
+                    md-input-container.md-block(flex="100")
+                     label
+                     input(type='text', placeholder='Search...', ng-model='$ctrl.searchCandidateFilter.search')
+                     md-icon.src-icon(md-font-set='fa') &#xf002
+                .row
+                  .col-md-12
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                        select(class="selectpicker" ng-model="$ctrl.test" ng-change="$ctrl.toggle()")
+                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in $ctrl.cols.slice(1,$ctrl.cols.length) track by $index") {{col.title()}}
+                    .col-md-12.col-sm-12.col-xs-12
+                      p.text-label(ng-hide='$ctrl.profileCandidateList.length < 1') Showing 
+                          span
+                            strong 1-{{$ctrl.profileCandidateList.length}}
+                            |  of  
+                            strong
+                              {{$ctrl.profileCandidateListCount}}  
+                            |   records                           
+                    .main-table-area
+                      .table-responsive.checkbox-table
+                        table.table.table-first(ng-table='$ctrl.candidateProfileTableParams',ng-table-columns-binding="$ctrl.cols")
+                          tr(ng-repeat='candidate in $data')
+                            td(ng-if="true" class='col-md-1 col-sm-2')
+                              input.option-checkbox(type='checkbox', data-ng-click='$ctrl.addProfileCandidateId($event, candidate)')
+                            td(ng-if="true", data-title="'Email'",  sortable="'email'", ng-data='candidate.email') {{candidate.email}}
+                            td(ng-if="true", data-title="'First Name'",  sortable="'firstname'", ng-data='candidate.firstName')  {{candidate.firstName}}
+                            td(ng-if="true", data-title="'Last Name'", sortable="'lastname'", ng-data='candidate.lastName')  {{candidate.lastName}}
+                            td(ng-if="true", data-title="'Contact No'", sortable="'contactnumber'", ng-data='candidate.contactNumber') {{candidate.contactNumber}}
+                            td(ng-if="true", data-title="'Location'") {{candidate.country}}, {{candidate.state}}, {{candidate.city}}
+                            td(ng-if="true", data-title="'Department'", sortable="'department'", ng-data='candidate.departmentName') {{candidate.departmentName}}
+                            td(ng-if="true", data-title="'Skills'", sortable="'skills'", ng-data='candidate.skillsetName') {{candidate.skillsetName}}
+                            td(ng-if="true", data-title="'Experience'", sortable="'experience'", ng-data='candidate.totalYrOfExp') 
+                                span(ng-if="candidate.totalYrOfExp !== null && candidate.totalYrOfExp !== ''") {{candidate.totalYrOfExp}} Year 
+                                span(ng-if="candidate.totalMonthsOfExp !== null && candidate.totalMonthsOfExp !== ''") {{candidate.totalMonthsOfExp}} Months
+                      .col-md-12.no-data-errormsg(ng-show="$ctrl.profileCandidateList.length == 0")
+                        | No Candidate Found           
+              .modal-footer
+                .pull-right.submit-btns.hidden-xs
+                  md-button.md-raised.savedata-btn(ng-click='$ctrl.linkProfileCandidateToInterview()') Add
+                  md-button.md-raised.md-primary(ng-click='$ctrl.cancelPopup()') Cancel
+                  label.error-lbl {{$ctrl.errorLblTxt}}
+                .submit-btns.visible-xs
+                  a.btn-save(ng-click='$ctrl.linkProfileCandidateToInterview()') Add
+                  a.btn-blue(ng-click='$ctrl.cancelPopup()') Cancel
+                  label.error-lbl {{$ctrl.errorLblTxt}}

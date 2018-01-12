@@ -1,0 +1,27 @@
+.content-wrapper.email-template-setting
+    .video-intro-heading
+      span.video-intro-1(data-translate='EMAIL-TEMPLATE-SETTINGS')
+      span.pull-right
+        //- button.btn.btn-success.header-button(data-toggle='modal', data-target='#myModal',data-translate='ADD-NEW-TEMPLATES')
+        a(data-asm-modal='emailTemplateModal', btn-class='btn btn-success header-button', on-close="EmailTemplateSettingsCtrl.onClose()")
+          span(data-translate='ADD-NEW-TEMPLATES')
+    .panel-body
+        .row(data-ng-show="EmailTemplateSettingsCtrl.totalemailTemplates > 0")
+            .col-md-12.first-row-et
+                .main-table-area
+                    .table-responsive.second-table
+                        table.table(ng-table='EmailTemplateSettingsCtrl.emaiTemplatetableParams')
+                          tr(ng-repeat='template in $data')
+                            td.text-center(title="'Action'")
+                               a(data-asm-modal='emailTemplateModal', data-ng-click="EmailTemplateSettingsCtrl.showTemplate(template, 'EDIT')",btn-class='edit-button',on-close="EmailTemplateSettingsCtrl.onClose()")
+                                 i.fa.fa-pencil(aria-hidden='true')
+                               a(data-asm-modal='emailTemplateModal',  data-ng-click="EmailTemplateSettingsCtrl.showTemplate(template, 'VIEW')",btn-class='edit-button',on-close="EmailTemplateSettingsCtrl.onClose()")
+                                 i.fa.fa-eye(aria-hidden='true')
+                               a(data-ng-click='EmailTemplateSettingsCtrl.deleteTemplate(template.id)',btn-class='edit-button')
+                                 i.fa.fa-times(aria-hidden='true')   
+                            td.text-center(title="'Template Name'", filter="{ name: 'text'}", sortable="'name'", ng-data='template.name', class-name='table-accordian') {{template.name}}  
+                            td.text-center.cust-name(title="'Subject'", filter="{ 'subject': 'text'}", sortable="'subject'", ng-data='template.subject', class-name='table-accordian') {{template.subject}}                   
+                            td.text-center(title="'Template Type'", filter="{ templateType: 'text'}", sortable="'templateType'", ng-data='template.templateType', class-name='table-accordian') {{template.templateType}}
+        .row(data-ng-show="EmailTemplateSettingsCtrl.totalemailTemplates == 0")
+                    .col-md-12
+                    | No Email Template Found Please add Email Template !!!                     

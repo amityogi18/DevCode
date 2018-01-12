@@ -1,0 +1,62 @@
+//variables
+$imgPath: '../public/img';
+$fontFilePath:'libs/fonts/';
+
+@import "libs/styles/external-css/font-awesome-4.6.3/css/font-awesome.min.css";
+@import "libs/styles/external-css/video-js.css";
+@import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+@import "../../node_modules/angular-material/angular-material.css";
+//@import "common2";
+
+@import "buttons";
+@import "grid";
+@import "ui-select";
+@import "global";
+
+
+// Package Level
+
+// App level
+
+@import "../app/styles/index.scss";
+
+
+// feature level
+
+// Analytics 
+@import "../modules/analytics/styles/index.scss";
+
+// candidate 
+
+// candidate Interview
+@import "../modules/candidate_interview/styles/index.scss";
+
+// candidate review 
+@import "../modules/candidate_review/styles/index.scss";
+
+//Candidate profile
+@import "../modules/candidateProfile/styles/index.scss";
+
+//conference 
+@import "../modules/conference/styles/index.scss";
+
+// dashboard
+@import "../modules/dashboard/styles/index.scss";
+
+// home
+@import "../modules/home/styles/index.scss";
+
+
+// position
+@import "../modules/position/styles/index.scss";
+
+// settings
+@import "../modules/settings/styles/index.scss";
+
+
+//signup 
+@import "../modules/signup/styles/index.scss";
+
+
+// super admin
+@import "../modules/super_admin/styles/index.scss";

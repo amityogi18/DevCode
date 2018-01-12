@@ -1,0 +1,19 @@
+.content-wrapper.theme-setting
+    .video-intro-heading
+         span.video-intro-1 Calendar
+    h4 Import Calendar Events
+    p.alert.alert-info You will be route to respective authentication page on saving your preference. 
+    .logedin-id
+        label LogedIn As: 
+        span  surbhitiwari@gmail.com
+    div
+      md-radio-group(ng-model='CalendarCtrl.calendarOption')  
+        .cardCalendar
+            img.calimage(src='../../../public/img/gmail1.png', alt='Gmail')
+            .containerCalendar
+                md-radio-button.md-primary.calendar-radio-radio(value='gmail')
+        .cardCalendar
+            img.calimage(src='../../../public/img/outlook.png', alt='outlook')
+            .containerCalendar
+                md-radio-button.md-primary.calendar-radio-radio(value='outlook')
+        md-button.md-raised.md-primary.calendar-button(type='button', ng-click='CalendarCtrl.saveCalendarSettings()',ng-class="(CalendarCtrl.calendarOption ==='gmail') ? 'calendar-button-gmail' : 'calendar-button-outlook'")  Next 

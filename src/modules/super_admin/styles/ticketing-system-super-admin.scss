@@ -1,0 +1,226 @@
+.ticketing-system-super-admin {
+  
+  
+	.showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+  
+  md-input-container {
+    margin: 1px;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+  
+  .conversation{
+    max-height:180px;
+    background:$lightestGrey;
+    border-radius:4px;
+    padding: 10px;
+    overflow-x:hidden;
+    }
+  .comment-textBox{
+    max-height:130px;
+    max-width:838px;
+    margin:0px !important;
+  }
+
+  .ticket-tab-position{
+    padding:10px;
+    border: 1px solid lightgrey;
+    border-top: none;
+  }
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+    
+  .tabination-area .tab-content {
+    width: 100%;
+    float: left;
+    margin-top: -1px;
+
+  }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+
+  .candidate-data-info{
+    margin-top: 30px;
+  }
+
+  .pull-right {
+    float: right !important;
+    margin-left: 10px;
+  }
+
+
+  .tabination-area .tab-content .btn-primary {
+    padding: 10px 20px;
+    line-height: 1em;
+    border-radius: 0;
+    font-size: $font-size-small + 1;
+    color: $white;
+    text-transform: uppercase;
+    background: $blue;
+    border: $blue 1px solid;
+    float:left !important;
+  }
+  
+  .ticketing{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .ticketing-heading{
+        //margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+    }
+    
+    .evaluator-filter-dropdown{
+        margin-left: -231px;
+        border-radius: 0px;
+        margin-top: 0px;
+        width: 296px;
+    
+    }
+    
+    .add-issue-btn{
+        margin-top: 12px;
+    }
+    
+    .error-msg{
+        font-size:12px;
+        color: $red;
+        float: left;
+     }
+  
+    .error-lbl{
+        color:$red;
+        font-size:12px;
+        font-weight:normal;
+        word-spacing:1px;
+    }
+    
+    .mandatory-filed {
+            color: $red;
+            float: left;
+            margin-left: -64px!important;
+    }
+    
+    .ticket-text-area{
+            width: 260px;
+            height: 115px!important;
+    }
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+         background: #3f51b5 !important;
+    }
+    
+    .ticket-view-btn{
+        background: transparent!important;
+        border: none!important;
+    }
+     
+     th{
+        text-align: left!important;
+     }
+     
+     .add-issue-btn{
+         margin-top: 0px!important;
+     }
+     
+     .issue-field{
+         margin-left: -97px !important;
+     }
+     
+     .reson-type-field{
+         margin-left: -83px !important;
+     }
+     
+     .btn-ondemand{
+         margin-left: 48px;
+     }
+     
+     .filter-label-position{
+         margin-top: 14px;
+     }
+  .comment-icon{
+    cursor:pointer;
+  }
+  .modal-footer{
+      .col-form-label{
+          margin-top: 10px;
+      }
+  }
+ .hover-pointer{
+   cursor:pointer;
+ }
+  .icon-position{
+    margin-left:8px;
+  }
+  .attachment-position{
+    margin-left:5px;
+    clear: both;
+  }
+  .textarea-dimen{
+    max-width:838px !important;
+  }
+  
+  @media only screen and (max-width : 765px) { 
+  
+    .company-filter-dropdown{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .duration-filter{
+      margin-top: 15px;
+    }
+  }
+  
+  @media only screen and (max-width : 992px) { 
+  
+    .company-filter-dropdown{
+      margin-top: 0px;
+    }
+    
+    .duration-filter{
+      margin-bottom: 15px;
+    }
+  }
+  
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+      border:0;
+      background:transparent;
+  }
+}

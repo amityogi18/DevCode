@@ -1,0 +1,378 @@
+.edit-my-profile-page {
+  .count-box {
+    padding-bottom: 5px;
+  }
+  .center-heading{
+    padding: 10px;
+    border-radius: 51%;
+    border: 2px solid #ccc;
+  }
+  .resume-upload-btn{
+      margin-top: 0px;
+    }
+  .work-section{
+    padding-right:15px;
+    padding-left:15px;
+  }
+  .location-width{
+    min-width: 149px;
+  }
+  .ok-btn-pos{
+    margin-bottom:0px;
+  }
+    .error-resume{
+        margin-left: 196px;
+    }
+  .message-error-align{
+    margin-left: 10px;
+  }
+  .candidate-url-table-fixed{
+    table-layout:fixed
+  }
+ 
+  .download-resume{
+      margin-right: 8px;
+      color: white;
+      border-radius: 50%;
+      border-style: double;
+      border-width: 4px;
+      border-color:lightgrey;
+      padding:7px;
+      font-size:20px;
+      //background: -webkit-linear-gradient($blue, $desatDarkBlue); /* For Safari 5.1 to 6.0 */
+      //background: -moz-linear-gradient($blue, $desatDarkBlue); /* For Firefox 3.6 to 15 */
+   }
+   .resume-section {
+    padding:15px;
+    border:1px solid #ddd;
+  }
+
+  .resume-download-mini-btn{
+    margin-top: -3px;
+    width:35px !important;
+    height:35px !important;
+    line-height: 38px !important;
+  }
+
+  .ui-select-match-text{
+      line-height:1.66;
+   }
+  .pointer{
+    cursor: pointer;
+  }
+    .min-width-dropdown{
+     
+    .ui-select-choices.ui-select-choices-content.ui-select-dropdown.dropdown-menu {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+    margin-top: -1px;
+    width: 149px;
+}
+        
+    }
+    
+    button{
+        text-transform: uppercase;
+        margin:5px;
+    }
+  .profile-header{
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  .heading-box{
+    padding: 5px 15px !important;
+    background:white;
+  }
+  .button-submit{
+      margin-left: -33px;
+    .fa {
+      margin-left : 5px;
+    }
+  }
+  .update-btn{
+     margin-left: -5px !important;
+     padding-top: 2px;
+  }
+  .btn-save-cancel{
+    padding: 5px 15px !important;
+  }
+  .checkbox{
+    margin-top: 7px;
+  }
+  .current-box{
+    margin-top: -20px;
+    margin-left: 25px;
+  }
+  .btn {
+    border-radius: $global-radius;
+  }
+ 
+  .share-profile {
+    margin-top: 0px;
+    margin-left: -10px;
+  }
+  .candidate-heading{
+    margin-bottom: 20px!important;
+  }
+  .recruiter-heading{
+    margin-bottom: 20px!important;
+  }
+  
+  .relocate-add-btn{
+      margin-left: -105px;
+  }
+  
+  .resume-browse-btn{
+      margin-left: -200px;
+  }
+  
+  
+  .add-qualification-btn{
+      margin-top: 22px;
+  }
+  
+  .skill-heading{
+    margin-bottom: 20px!important;  
+    margin-top: 20px!important;
+  }
+  .disable{
+    margin-top:13px;
+  }
+  .main-wrapper{
+      background: $white!important;
+      padding: 10px !important;
+  }
+  .relocate{
+    md-input-container{
+      margin:5px 0px;
+    }
+  }
+  a:hover{
+  text-decoration:none;
+  }
+  .form-group {
+    select , input, textarea {
+      border-radius: $global-radius;
+    }
+  }
+  .fix-width{
+      width: 100% !important;
+  }
+
+  input[type=file] {
+    padding: 5px;
+    height: 23pt;
+    width: 230px;
+    border: 1px solid $mediumLightGrey;
+    &:focus {
+      outline: $white;
+    }
+  }
+  input[type=file]::-webkit-file-upload-button {
+    padding: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    margin-bottom: 10px;
+  }
+  input[type=file]::before {
+    content: ' +';
+    color: $white;
+    background: $blue;
+    margin-top: 0;
+    margin-left: 187px !important;
+    cursor: pointer;
+    padding: 7px 14px;
+  }
+  
+  .error-msg{
+    font-size:11px;
+    color: $red;
+  }
+  .error-msg-date{
+    font-size:12px;
+    color: $red;
+    margin-top: 5px!important;
+    float: left;
+  }
+  .error-lbl{
+    color:$red;
+    font-size:12px;
+    font-weight:normal;
+    word-spacing:1px;
+    margin-left:20px;
+  }
+  
+  .mandatory-filed{
+    color: $red;
+    font-size: 18px;
+  }
+  .input-bottom{
+      margin-bottom: 3px;
+  }
+  .add-url-minus{
+    margin-left: 15px;
+    color:$red;
+    font-size: 30px;
+    margin-top: 5px;
+  }
+  
+  .add-url-plus{
+    color: $green;
+    font-size: 22px;
+    margin-top: 8px;
+    margin-left: -20px;
+  }
+  .button-icon {
+    .fa-plus-circle{
+      color: $green;
+      font-size: 20px;
+      margin-top: 5px;
+    }
+  }
+
+  .fa-trash {
+    color: #c9302c;
+    font-size:14px;
+  }
+  .url-field {
+    margin-left: -35px;
+  }
+  .url-input{
+    margin-left: 10px;
+  }
+  textarea {
+    resize:none;
+  }
+  #ddlUrlType {
+    //width:118px;
+  }
+  .ui-select-container .ui-select-placeholder {
+    margin-left : 8px;
+    line-height:0px;
+  }
+  .ui-select-container input{
+    width:100% !important;
+  }
+  .about-me {
+    margin-top:100px !important;
+  }
+   @media only screen and (max-width: 780px) {
+  .edit-profile-panel{
+        margin-top:35px;
+  }
+  }
+    .skill-set{
+        padding:6px;
+        background:$blue;
+        color:$white;
+        margin-top:45px;
+    }
+    .col-form-label{
+        color:$blue;
+        font-weight:bold !important;
+        font-size:11px;
+    }
+    .btn-section{
+        .md-button{
+            margin: 0px 10px 10px !important;
+        }
+    }
+  .video-intro-heading{
+    font-size:$font-size-large;
+    width:100%;
+    border-bottom:1px solid $lightGrey;
+    margin-bottom: 15px;
+    margin-left: -1px;
+    padding: 0px 10px 5px 10px;
+    .video-intro-1{
+    margin-left:10px;
+    text-transform: uppercase;
+    color:#333;
+    }
+}
+  .md-button.md-icon-button{
+    //float:right;
+    ///margin-right:-10px;
+  }
+  .md-datepicker-input-container {
+/*    width:87%;
+    margin-left:0px !important;
+    padding: 6px 12px;
+    border: 1px solid $mediumBlue;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
+  }
+  .md-datepicker-triangle-button{
+    //display:none;
+  }
+  .modal-header {
+    color: $white;
+    .close {
+      color: $white;
+    }
+  }
+  .modal-content{
+    border-radius:0px;
+  }
+  .content-of-modal{
+    width:380px;
+    margin-left: 107px;
+    border-radius:0px;
+  }
+   .profile-share {
+    margin-left: 14px;
+  } 
+  .icheckbox_square-blue {
+    margin-top: 2px !important;
+  }
+.ui-select-multiple.ui-select-bootstrap {
+  border-radius : 0px;
+ 
+}
+
+.overflowScroll {
+  overflow-x: auto;
+}
+
+.skill-suggestions{
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #f7f1f1;
+}
+.suggestion-listing {
+  padding: 3px
+}
+.suggestion-listing:hover {
+  background: #dbdce0;
+}
+
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .edit-my-profile-page {
+    .skill-div-section{
+      overflow-x:scroll;
+    }
+  }
+}
+
+ @media only screen and (max-width: 500px) {
+   .edit-my-profile-page {
+      .functional-section{
+        margin-top:35px;     
+      }
+     md-input-container.md-input-has-placeholder label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float){
+        margin-bottom:-6px;
+      }
+     md-input-container>md-select{
+       padding:5px;
+     }
+   }
+ }
+ 

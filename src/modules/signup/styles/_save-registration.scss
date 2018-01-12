@@ -1,0 +1,20 @@
+.registration-page {
+  .star {
+    color: $red;
+  }
+
+  .registraion-label {
+    text-align: left;
+  }
+
+  .errormessage {
+    margin-left: 260px;
+    margin-top: -9px;
+    color: $red;
+  }
+
+  .requiremessage {
+    color: $red;
+    font-weight: bold;
+  }
+}

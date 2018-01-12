@@ -1,0 +1,342 @@
+.payment-plan{
+    box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+  li {
+      min-height: 42px;
+    }
+    .btn-ondemand{
+      width:110px !important;
+      height:100%;
+      border:2px 2px 2px;
+      border-radius:0px;
+      color:$white;
+      margin-left: 110px;
+    }
+    .pricing-label{
+      border: 1px solid $mediumDarkGrey;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background: $mediumLightGrey;
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      font-weight: $font-family;
+      color: $black;
+    }
+    .pricing-bottom-line{
+      border-bottom: 3px solid $mediumDarkGrey;
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+    .interview-footer{
+      border: 1px solid $mediumDarkGrey;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background: $mediumLightGrey;
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      color: $black;
+
+    }
+    .plan-details{
+      color: $black;
+    }
+    .btn-block{
+       font-weight: 600;
+    }
+    .btn-block_0{
+        width: 425px;
+        margin: auto;
+    }
+    .payment-box{
+        width: 625px;
+        margin: auto;
+    }
+    .payment-heading{
+      margin-top:20px;
+    }
+    .top-box{
+          margin-bottom: 10px;
+          margin-top: 15px;
+    }
+    .plan-details-active{
+      background-color: $mediumGrey;
+    }
+    .plan-helpline{
+      border: 2px solid $mediumDarkGrey;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: $black ;
+      width: 100%;
+      height: 100%;
+      padding: 5px;
+      font-weight: $font-family;
+      text-align: center;
+
+    }
+    .plan-active{
+      border:5px solid $green;
+    }
+    .active-plan{
+      margin-left: 140px;
+    }
+    
+    .panel-heading{
+      // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+      color:$white!important;
+      font-size:14px;
+      font-weight:600 !important;
+      border-radius: $global-radius;
+      background: #3f51b5 !important;
+    }
+    .get-now-btn{
+      margin-right:16px;
+    }
+  
+  .selectedPlan{
+    border: 3px solid $maxDarkBlue;
+    background-color:$maxDarkBlue !important;
+  }
+  .list-group {
+      margin-top: 20px;
+  }  
+  .my-payment-plan {
+    padding-right: 0px;
+    padding-left: 0px;
+    
+    ul li:nth-child(odd){
+      background-color:#f1eef5;
+    }
+    h4{
+      margin-top: 0px;
+      margin-bottom: 5px;
+    }
+
+    li {
+      text-align:center;
+      border-radius: $global-radius;
+    }
+    .price-color {
+      color:#fff;
+      font-size:18px;
+    }
+  }
+  .select-heading{
+      border: 6px solid $maxDarkBlue;
+  }
+  .plan-heading {
+      padding-top:5px;
+      padding-bottom:10px;
+      background: $maxDarkBlue !important;
+      text-align: center;
+      color:#fff !important;
+  }
+  .sub-heading{ 
+      padding-top:24px;
+      padding-bottom:10px;
+      text-align: center;
+      color:#fff !important;
+      background: #aaa !important;
+      border: 6px solid #aaa;
+      }
+  .free-plan{
+    border: $navDarkColor;
+    background-color: $navDarkColor;
+  }
+  .non-selected-plan{  
+      border: 5px solid $navDarkColor;
+      background-color: $navDarkColor !important;
+  }
+  .plan-detalis {
+    padding-right: 0px;
+    li {
+      border-radius:$global-radius;
+      min-height: 42px;
+    }
+    .plan-details-heading{
+      padding-top: 20px;
+      padding-bottom: 35px;
+      font-size: 20px;
+      text-align: center;
+      visibility: hidden;
+    }
+  }
+  
+  .payment{
+        background: #E6EBF1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+      form {
+        width: 480px;
+        margin: 15px 0;
+      }
+      
+      iframe {
+        width: 100%;
+        border:1px solid #ddd;
+        border-radius: 3px; 
+        clear:both;
+      }
+
+      #iframe {
+          clear:both;
+          
+          iframe {
+                  width: 100%;
+                  border:1px solid #ddd;
+                  border-radius: 3px; 
+                  clear:both;
+                }
+      }
+
+      .group {
+        background: white;
+        box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10),
+                    0 3px 6px 0 rgba(0,0,0,0.08);
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      label {
+        position: relative;
+        color: #8898AA;
+        font-weight: 300;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .group label:not(:last-child) {
+        border-bottom: 1px solid #F0F5FA;
+      }
+
+      label > span {
+        width: 100px;
+        text-align: right;
+        margin-right: 30px;
+      }
+
+      .field {
+        background: transparent;
+        font-weight: 300;
+        border: 0;
+        color: #31325F;
+        outline: none;
+        flex: 1;
+        padding-right: 10px;
+        padding-left: 10px;
+        cursor: text;
+      }
+
+      .field::-webkit-input-placeholder { color: #CFD7E0; }
+      .field::-moz-placeholder { color: #CFD7E0; }
+
+      button {
+        float: left;
+        display: block;
+        background: #666EE8;
+        color: white;
+        box-shadow: 0 7px 14px 0 rgba(49,49,93,0.10),
+                    0 3px 6px 0 rgba(0,0,0,0.08);
+        border-radius: 4px;
+        border: 0;
+        margin-top: 8px;
+        font-size: 15px;
+        font-weight: 400;
+        width: 100%;
+        height: 40px;
+        line-height: 38px;
+        outline: none;
+      }
+
+      button:focus {
+        background: #555ABF;
+      }
+
+      button:active {
+        background: #43458B;
+      }
+
+      .outcome {
+        float: left;
+        width: 100%;
+        padding-top: 8px;
+        min-height: 24px;
+        text-align: center;
+      }
+
+      .success, .error {
+        display: none;
+        font-size: 13px;
+      }
+
+      .success.visible, .error.visible {
+        display: inline;
+      }
+
+      .error {
+        color: #E4584C;
+        padding-bottom: 10px;
+      }
+
+      .success {
+        color: #666EE8;
+      }
+
+      .success .token {
+        font-weight: 500;
+        font-size: 13px;
+      }
+      .privacy-policy-link{
+        outline: none !important;
+      }
+      .agree-box{
+            margin-top: -31px;
+            margin-bottom: -20px;
+      }
+
+
+  }
+  .modal-dialog {
+/*        position: relative;
+        margin:30px 10px; */
+        .modal-header{
+              padding: 8px 15px;
+        }
+        .modal-title{
+            color: white;
+            //font-size: 16px;
+            //font-weight: 600;
+        }
+        .modal-body{
+          max-height: 500px;
+          overflow: auto;
+          font-size: 12px;
+          text-align: justify;
+          padding:15px;
+        }
+        .modal-footer{
+            button {
+              font-weight: 600;
+              padding: 5px 25px; 
+              margin: 4px 10px;
+            }
+        }
+  }
+  #termsCondition{
+    .modal-dialog{
+      .modal-body{
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.payment-success{
+        position: relative;
+        top: 30%;
+}

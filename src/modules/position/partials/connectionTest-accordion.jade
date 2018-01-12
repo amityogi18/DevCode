@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion3', href='#connectionTest') Connection Check
+  #connectionTest.panel-collapse.collapse
+    .panel-body
+      .col-xs-12.col-sm-12
+          .connection-content
+              .loading-gif(ng-if='!connectionTestAccordionCtrl.speed')
+                  img(src='../../../public/img/loader.gif')
+              .connection-info(ng-if='connectionTestAccordionCtrl.speed')
+                   .connection-status(ng-class='{"background-red": connectionTestAccordionCtrl.connectionStatus == "Bad", "background-green": connectionTestAccordionCtrl.connectionStatus == "Fine" }')
+                   span Your Internet Speed is {{connectionTestAccordionCtrl.connectionStatus}}
+              .connection-warning(ng-if='connectionTestAccordionCtrl.speed < connectionTestAccordionCtrl.acceptedSpeed')
+                   span Your connection is below our recommended speed. You may experience cheppy video.

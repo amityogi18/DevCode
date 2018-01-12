@@ -1,0 +1,459 @@
+.question-bank-super-admin {
+    .md-button{
+        margin:0px;
+    }
+  .add-qb-btn{
+    background-color: #3f51b5;
+    color:#ffff
+ }
+
+  .showMe {
+    display: none;
+  }
+
+  .showColumn {
+    display: block;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .showMe {
+      display: block;
+    }
+    .showColumn {
+      display: none;
+    }
+  }
+
+  .choose_file{
+    position:relative;
+    display:inline-block;    
+    border-radius:8px;
+    border:#ebebeb solid 1px;
+    width:175px; 
+    padding: 4px 6px 4px 8px;
+    font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+    color: #7f7f7f;
+    margin-top: 2px;
+    background:white
+  }
+  .choose_file input[type="file"]{
+    -webkit-appearance:none; 
+    position:absolute;
+    top:0; left:0;
+    opacity:0; 
+  }
+  .image-box{
+    //width: 120px;
+    // margin: auto;
+    padding: 15px 0px;
+    //margin-left:196px;
+    input[type=file]{
+      color:$mediumLightGrey;
+      border:1px solid $mediumDarkGrey;
+      background-color: $mediumLightGrey;
+      height: 33px !important;
+      width: 26px !important;
+    }
+    .image-box-row {
+      border: 1px solid #ddd;
+      width: 204px;
+      margin-left: 0px;
+    }
+    input[type=file]::before {
+      content: '+';
+      color: #fff;
+      margin-top: 0;
+      margin-left: -5px;
+      padding: 8px;
+    }
+    .thumbnail {
+      width: 150px;
+      height: 129px;
+      margin-left: 26px;
+      border-radius:$global-radius;
+    }
+
+    i{
+      position: absolute;
+      top: 20px;
+      padding-left: 5px;
+    }
+    .user-icon{
+      border: 2px solid $lightBlue;
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+
+  .hover-pointer{
+    cursor:pointer;
+  }
+  .margin-of-options{
+    margin-top:20px;
+  }
+
+  .textarea-dimension-qb{
+    max-width:840px;
+    max-height:46px;
+  }
+  .border-of-tab{
+    border:1px solid lightgrey;
+    padding:20px;
+    border-top:none;
+  }
+  .margin-to-table{
+    margin-right:17px;
+  }
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+
+
+  button.btn.btn-primary.add-department-btn {
+
+    margin-right : 35px ;
+  }
+
+  .import-question-position{
+    margin-top: 20px;
+  }
+
+  .video-iframe{
+    margin-left: 280px!important;
+  }
+
+  .pull-right {
+    float: right !important;
+    margin-left: 10px;
+  }
+
+  .search-department {
+    float: right;
+    margin-top: 40px;
+    margin-right: -160px;
+  }
+
+  .departments-details {
+    margin-top: -11px;
+    margin-left: -13px;
+  }
+
+
+  .add-department-btn {
+    margin-top: -6px;
+    border-radius: 0px;
+    float: right;
+
+  }
+
+  .btn-department-icon {
+    margin: 2px;
+    padding: 0px;
+  }
+
+  .dept-icon {
+    margin: 12px;
+    text-align: center;
+  }
+
+  .company-setting-icon {
+    float: right;
+  }
+
+  .edit-template-icon {
+    float: right;
+    color: $red;
+  }
+
+  .close-template-icon {
+    float: right;
+    color: $red;
+  }
+
+  .add-question-textarea {
+    height: 100% !important;
+  }
+
+  .add-question-btn {
+    border-radius: 0px;
+  }
+
+  .add-question-btn-position {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .response-dropdown {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btn-success{
+    color: $white !important;
+    border-radius:  0px;
+  }
+
+  .small-text{
+    font-size: $font-size-normal;
+    padding-bottom: 2px;
+  }
+
+  .question-bank{
+    font-size:$font-size-large;
+    width:100%;
+    border-bottom:1px solid $lightGrey;
+    margin-bottom: 15px;
+    margin-left: -14px;
+    padding: 0px 10px 5px 10px;
+
+    .question-bank-heading{
+      //margin-left:10px;
+      text-transform: uppercase;
+      color:#333;
+    }
+  }
+
+  .add-del-btn{
+    margin-top: 35px;
+  }
+
+  .del-btn{
+    margin-top: 0px;
+  }
+
+  .add-modal-btn{
+    margin-top: 8px;
+  }
+
+  .evaluator-filter-dropdown{
+    margin-left: -224px;
+    border-radius: 0px;
+    margin-top: 0px;
+    width: 289px;
+  }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+
+  .candidate-data-info{
+    margin-top: 30px;
+  }
+
+  .error-msg{
+    font-size:12px;
+    color: $red;
+    float: left;
+  }
+
+  .error-lbl{
+    color:$red;
+    font-size:12px;
+    font-weight:normal;
+    word-spacing:1px;
+  }
+
+  .mandatory-filed {
+    color: $red;
+    margin-left: 3px !important;
+    font-size: 15px;
+  }
+
+  .ticket-view-btn{
+    float: right;
+    margin-top: -26px;
+  }
+
+  .dashboard-profile-heading{
+    padding: 6px!important;
+    // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+    color: $white!important;
+    font-size: 18px!important;
+    background: #3f51b5 !important;
+  }
+
+  .general-custom-icon-btn{
+    background: transparent!important;
+    border: none!important;
+  }
+
+  th{
+    text-align: left!important;
+  }
+  .question-msg-show{
+    margin-top: 26px;
+    text-align: center;
+  }
+
+  .question-content{
+    margin-top: 0px;
+    margin-left: 0px;
+  }  
+
+  .save-update-btn{
+    margin-right: 20px;
+  }
+
+  .practice-dropdown{
+    margin-top: 15px!important;
+    margin-bottom: 15px!important;
+  }
+
+  .practice-video-skill{
+    border-radius: 0px;
+  }
+
+  .set-practice-btn{
+    margin-top: 9px!important;
+  }
+
+
+  .viewQuestionBankModal{
+    margin-left: -185px;
+    .modal-content {
+      width:800px;
+    }
+
+    .question-area {
+      background-color: #ffffcc;
+      border-left: 6px solid #ffeb3b;
+    }
+
+    .question-div {
+      padding: 15px 15px;
+      margin-top: 15px!important;
+      margin-bottom: 15px!important;
+    }
+
+    .video-area {
+      width: 100%;
+      float: left;
+      margin-bottom: 18px;
+      .video-border{
+        border:2px solid #cfcfcf;
+        #questionBankVideoElement {
+          margin-left: 0px;
+          width: 100%;
+          height:290px;
+        }
+      }
+    }
+    video::-internal-media-controls-download-button {
+      display:none !important;
+    }
+
+    video::-webkit-media-controls-enclosure {
+      overflow:hidden !important;
+    }
+
+    video::-webkit-media-controls-panel {
+      width: calc(100% + 30px); /* Adjust as needed */
+    }
+  }
+
+
+
+  .recordVideoSection {
+    .video-area {
+      width: 100%;
+      float: left;
+      margin-bottom: 18px;
+      .video-border{
+        border:2px solid #cfcfcf;
+        #questionBankVideoElement {
+          margin-left: 0px;
+          width: 100%;
+          height:290px;
+        }
+      }
+    }
+    video::-internal-media-controls-download-button {
+      display:none !important;
+    }
+
+    video::-webkit-media-controls-enclosure {
+      overflow:hidden !important;
+    }
+
+    video::-webkit-media-controls-panel {
+      width: calc(100% + 30px); /* Adjust as needed */
+    }
+  }
+
+  @media only screen and (max-width : 765px) { 
+
+    .set-as-practice-btn{
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .company-filter-dropdown{
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .skillset-dropdown{
+      margin-top: 5px;
+      margin-bottom: 15px;
+    }
+
+    .add-modal-btn{
+      margin-left: 0px!important;
+    }
+  }
+
+  @media only screen and (max-width : 992px) { 
+
+    .search-tab{
+      margin-bottom: 15px;
+    }
+
+    .set-as-practice-btn{
+      margin-right: 15px;
+    }
+
+    .dept-dropdown{
+      margin-bottom: 15px;
+    }
+
+    .add-modal-btn{
+      margin-left: -60px;
+    }
+  }
+
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+    border:0;
+    background:transparent;
+  }
+  
+  md-input-container {
+    margin: 8px;
+  }
+
+}
+  #myQuestionBankModal{
+    .video-area {
+      width: 100%;
+      float: left;
+      margin-bottom: 18px;
+      .video-border{
+        border:2px solid #cfcfcf;
+        #questionBankVideoElement {
+          margin-left: 0px;
+          width: 100%;
+          height:290px;
+        }
+      }
+    }
+  }

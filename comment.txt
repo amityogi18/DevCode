@@ -1,0 +1,15 @@
+Fix
+
+Video is working
+Interview is Worrking
+Meet Now Conference is working  Deep link is fix
+
+
+
+Certification :-
+meet now  
+Need to improve certifcation View
+When live now meeting is over need to redirect to interview request page
+conference  feeds should be small..
+Side menu and dropdown should not be open together
+practice video test is not working properly

@@ -1,0 +1,29 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .row
+      .candidate-view-steps.step
+        ul.step-tab
+          li.active
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate='PREPARE')
+          li
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate='CERTIFICATE')
+        .step-body
+            .step-3-wrapper
+              .step-accordion
+                .whte-bg.white-bg-padding
+                  help-component
+                  .panel-footer
+                  hr
+                  .row
+                    .col-md-12.col-xs-12
+                      a.btn-next.pull-left.back-btn-position(data-ui-sref='ci.certificate',  data-translate="BACK")
+                      a.btn-next.pull-right.next-btn-position(data-ui-sref='ci.certification-instruction', data-translate="NEXT")
+
+
+

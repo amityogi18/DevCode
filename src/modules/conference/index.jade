@@ -1,0 +1,10 @@
+.conference
+  div(ng-if="showConfHeader")          
+    include includes/header
+  div.hidden-xs(ng-class="{'col-sm-3 col-md-1': isSettingPath}")
+  .sidebar-box(ng-if='isSettingPath')
+    include includes/sidebar-settings-menu 
+  div.pull-right(ng-class="{'col-xs-12 col-sm-10 col-md-11': isSettingPath, 'col-xs-12 col-sm-12 col-md-12 conference-container': !isSettingPath }")
+    include includes/content
+  div(ng-if="!hideFooter")   
+    include includes/footer

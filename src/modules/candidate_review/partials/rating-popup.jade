@@ -1,0 +1,74 @@
+.candidate-review
+  .modal-content
+    .modal-header.bg-primary
+      button.close(type='button', ng-click='close()') ×
+      h4.modal-title(data-translate='RATING')
+    .modal-body.box-body
+      ul.nav.nav-tabs
+        li.active
+          a(data-toggle='tab', href='#myRating')
+            label.ratings(data-translate='MY-RATINGS')
+        li
+          a(data-toggle='tab', href='#otherRating', ng-click='RatingPopupCtrl.getOtherRating()')
+            label.ratings(data-translate='OTHER-RATINGS')
+      .tab-content
+        #myRating.tab-pane.fade.in.active
+          .col-md-12.col-sm-12.col-xs-12.margin-set
+            .col-sm-6.spacing-set.box-top(ng-repeat='ratings in RatingPopupCtrl.newRatingData', ng-if='ratings.ratingTypeName !== "" ')
+              .col-sm-12(ng-if='ratings.isMandatory && (ratings.ratingTypeName !== "" && ratings.ratingTypeId !== 5)')
+                .col-md-12.col-sm-12.col-xs-12.name-box
+                  span.rating-name {{ratings.ratingTypeName}}
+                  span.exclamation(ng-show='ratings.isMandatory') *
+                .col-sm-12.all-star(uib-rating='', ng-model='ratings.avg', max='5', read-only='RatingPopupCtrl.isReadOnly', ng-click='RatingPopupCtrl.addRating(ratings.ratingTypeId, ratings.avg)', aria-labelledby='default-rating', ng-disabled='RatingPopupCtrl.status === 6')
+              .col-sm-12(ng-if='(!ratings.isMandatory && ratings.ratingTypeName !== "") && ratings.ratingTypeId == 5')
+                .col-md-12.col-sm-12.col-xs-12.rating-name {{ratings.ratingTypeName}}
+                .col-sm-12.all-star(uib-rating='', ng-model='ratings.avg', max='5', read-only='true', aria-labelledby='default-rating')
+              .col-sm-12(ng-if='(!ratings.isMandatory && ratings.ratingTypeName !== "") && ratings.ratingTypeId !== 5')
+                .col-md-12.col-sm-12.col-xs-12.rating-name {{ratings.ratingTypeName}}
+                .col-sm-12.all-star(uib-rating='', ng-model='ratings.avg', max='5', read-only='RatingPopupCtrl.isReadOnly', ng-click='RatingPopupCtrl.addRating(ratings.ratingTypeId, ratings.avg)', aria-labelledby='default-rating')    
+          .col-md-12.col-sm-12.col-xs-12.recomendation-box
+            .col-sm-3.col-sm-3.col-xs-12.recomendation
+              label(data-translate='MY-RCOMMENDATION')
+            .col-md-9.col-sm-9.col-xs-12
+              md-radio-group.md-primary(ng-model='RatingPopupCtrl.recommendationValue', ng-click='RatingPopupCtrl.saveRecomendation()', ng-disabled='RatingPopupCtrl.isReadOnly == true')
+                md-radio-button.col-sm-2.col-xs-4(value = 'Yes', ng-disabled='RatingPopupCtrl.isReadOnly == true') Yes
+                md-radio-button.col-sm-3.col-xs-4(value = 'Maybe', ng-disabled='RatingPopupCtrl.isReadOnly == true') Maybe
+                md-radio-button.col-sm-2.col-xs-4(value = 'No', ng-disabled='RatingPopupCtrl.isReadOnly == true') No
+          .col-md-12.col-sm-12.col-xs-12
+            .col-md-1.col-sm-1.col-xs-2.note-box
+              span NOTE:
+            .col-md-11.col-sm-11.col-xs-10.left-spacing
+              span Ratings marked with asterix (
+              span.exclamation.exclm *
+              span ) are Mandatory. 
+        #otherRating.tab-pane.fade
+          .col-md-12.col-sm-12.col-xs-12.margin-set
+            .col-md-12.col-sm-12.col-xs-12.eval-section(ng-repeat='row in RatingPopupCtrl.otherRatingData')
+              .hidden-xs
+                .col-md-1.col-sm-1.col-xs-4.user-img
+                  img.img-box(ng-src="{{row.profileUrl?row.profileUrl:'./img/user.png'}}", alt='')
+                .col-md-6.col-sm-6.col-xs-8
+                  .col-md-12.col-sm-12.col-xs-12
+                    label {{row.name}}
+                    span ( {{row.role}} )
+                  .col-md-12.col-sm-12.col-xs-12 {{row.email}} 
+                .col-md-2.col-sm-2.col-xs-8.stars(star-rating='', rating-value='row.averageRating', max='5')
+                .col-md-3.col-sm-3.col-xs-8(ng-if='row.evaluated')
+                  i.fa.fa-check-circle.fa-2x.green-box(aria-hidden='true')
+                  span.text-box (Evaluated)
+              .visible-xs
+                .col-xs-4.user-img
+                  img.img-box(ng-src="{{row.profileUrl?row.profileUrl:'./img/user.png'}}", alt='')
+                .col-xs-8
+                  .col-xs-12
+                    label {{row.name}}
+                  .col-xs-12 {{row.role}} 
+                  .col-xs-12.stars(star-rating='', rating-value='row.averageRating', max='5')
+                  .col-xs-12(ng-if='row.evaluated')
+                    i.fa.fa-check-circle.fa-2x.green-box(aria-hidden='true')
+                    span.text-box (Evaluated)
+                .col-xs-12 {{row.email}}
+    .modal-footer
+      .col-md-12.col-sm-12.col-xs-12.save-section
+        md-input-container.md-block.pull-right
+          md-button.md-primary.cancel-bottom-btn(type='button', data-translate='CLOSE', data-ng-click='close()') Close  

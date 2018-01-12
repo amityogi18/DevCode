@@ -1,0 +1,361 @@
+.view-profile-page {
+  .progress-bar-inner {
+    margin-bottom: 10px;
+  }
+.progress-bar-label {
+    color: #757575;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-family: roboto;
+    text-transform: uppercase;
+  }
+.progress-bar {
+    background-color: #dadada;
+    position: relative;
+    width: 100%;
+  }
+.progress-bar-L1 {
+    background-color: #00ACC1;
+    height: 4px;
+    position: relative;
+    transition: width 1.5s ease 0s;
+    width: 0;
+  }
+.progress-conunt {
+    position: absolute;
+    right: -16px;
+    top: -16px;
+  }
+.progress-conunt span {
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4.7px 0.3px rgba(0, 0, 0, 0.24);
+    color: #777777;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 400;
+    height: 27px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    width: 27px;
+   }
+    .resume-upload-btn{
+      margin-top: 0px;
+    }
+    .instruction-text{
+      font-size: 13px;
+    }
+    
+    .not-visited-palette{
+        border-radius: 8px;
+        background: grey;
+        padding: 14px;
+        width: 6px;
+        height: 0px;  
+    }
+    
+    .not-answer-palette{
+        border-radius: 8px;
+        background: $red;
+        padding: 14px;
+        width: 6px;
+        height: 0px;  
+    }
+    
+    .answer-palette{
+        border-radius: 8px;
+        background: $green;
+        padding: 14px;
+        width: 6px;
+        height: 0px;  
+    }
+    
+    .not-visited{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .not-answer{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .answer-success{
+       margin-bottom: 10px; 
+    }
+    
+    .instruction-heading{
+        margin-top: -17px;
+    }
+    
+    .instruction-head{
+        text-decoration: underline;
+    }
+    
+    .review-palette{
+        border-radius: 8px;
+        background: $blue;
+        padding: 14px;
+        width: 6px;
+        height: 0px; 
+    }
+    .profile-box{
+      //border:1px solid #ddd;
+      padding:5px;
+      //margin-top:15px;
+    }
+    .profile-box-container{
+     border:1px solid #ddd;
+    margin-top:15px;
+    }
+    .answer-review{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+  
+    .location-name {   
+    margin-top: 40px;
+  }
+  
+  .contact-number {
+    margin-top: 10px;
+  }
+
+  .button-alignment {
+    padding-left: 8px;
+
+  }
+
+  .manage-profile-button {
+    background-color: $mediumBlue;
+    color: $white;
+  }
+  .about-me {
+    margin-left: 15px;
+  }
+  .about-me-discription {
+    margin-left: 15px;
+    text-align: justify;
+  }
+
+  .cover-letter{
+    //margin-left: -7px;
+    text-align: justify;
+    word-wrap: break-word;
+  }
+
+  
+  .skill-coloumn-sepration {
+    margin-left: -15px;
+  }
+
+  .profile-name{
+    margin-left:-10px;
+    margin-top:7px;
+  }
+  
+  .btn {
+    display:inline-block;
+    text-transform: uppercase; 
+    box-shadow: none;
+  }
+
+  .checkbox-inline {
+    margin-top:-3px;
+    padding-left: 0px;    
+
+  .icheckbox_square{
+    margin-left:0px !important;
+
+  }
+ 
+  .active-profile {
+    margin-left: 20px;
+    margin-top:inherit;
+  }
+  }
+  .general-hading{
+      font-size: 12px;
+      margin-left: 5px;
+   }
+   .candidate-name{
+     font-size:20px;
+     font-weight:600;     
+     text-transform: uppercase;
+     color: rgba(0, 0, 0, 0.85);
+     text-align: -webkit-auto;
+}
+  .cand-img{
+    border:5px solid #ddd;
+  }
+  .basic-profile-section{
+    border-bottom: 1px solid #ddd;
+  }
+   .edit-icon{
+      margin-top: 13px;
+      margin-right: 3px!important;
+      color: white;
+      border-radius: 50%;
+      border-style: double;
+      border-width: 4px;
+      border-color:lightgrey;
+      padding:7px;
+      font-size:20px;
+     // background: -webkit-linear-gradient($blue, $desatDarkBlue); /* For Safari 5.1 to 6.0 */
+      //background: -moz-linear-gradient($blue, $desatDarkBlue); /* For Firefox 3.6 to 15 */
+   }
+   .download-resume{
+      margin-right: 8px;
+      color: white;
+      border-radius: 50%;
+      border-style: double;
+      border-width: 4px;
+      border-color:lightgrey;
+      padding:7px;
+      font-size:20px;
+      //background: -webkit-linear-gradient($blue, $desatDarkBlue); /* For Safari 5.1 to 6.0 */
+      //background: -moz-linear-gradient($blue, $desatDarkBlue); /* For Firefox 3.6 to 15 */
+   }
+   .email-phone-code{
+       margin-right: 8px;
+   }
+   
+   .location{
+      margin-top: 8px;
+   }
+   
+   .first-coloumn-division {
+     border-right:1px solid $lightGrey;
+     padding-top:15px;
+   }
+   .second-column-division {
+     padding-top:15px;
+   }
+   
+   .profile-url{
+      margin-right: 8px; 
+   }
+   
+   .profile-section{
+      margin-top: 10px; 
+      margin-bottom: 10px;
+      
+   }
+   .main-education-section {
+     .education-section{       
+        padding: 15px;
+        border: 1px solid #ddd;
+        margin-bottom: 15px;
+        border-left: 3px solid;
+        border-left-color: #3f51b5;
+        margin-top: 15px;
+        .education-heading {
+          font-size:18px;
+        }
+        p{
+          color:grey;         
+        }
+     }
+   }
+   .seprate-line{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: 0;
+   }
+
+   a:hover{
+      text-decoration:none;
+   }
+
+   .experience-section{
+      margin-left:-14px;
+   }
+    @media only screen and (max-width: 780px) {
+    .view-profile-panel{
+        margin-top:40px;
+    }
+   }
+   .skill-set{
+  padding:6px;
+  background:$blue;
+  color:$white;
+  font-size:$font-size-large;
+  }
+  .labelForm{
+  color:$blue;
+  font-weight:bold !important;
+  }
+  .manage-edit-row {
+   p{
+    font-size: 11px;
+    text-align:center;    
+   }
+}
+.view-profile-heading{
+  font-size:$font-size-large;
+  width:100%;
+  border-bottom:1px solid $lightGrey;
+  margin-bottom: 15px;
+  margin-left: -1px;
+  padding: 10px;
+  .video-intro-1{
+  //margin-left:10px;
+  text-transform: uppercase;
+  color:#333;
+  }
+}
+.margin-top-15 {
+  margin-top: 15px;
+}
+
+.nav-tabs > li.active > a{
+    border-top: 1px solid red;
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+}
+.share-profile {
+  margin-left: 10px;
+  font-size: 14px;
+  text-transform: initial;
+  font-weight: 600;
+}
+
+}
+
+.test-instruction-header {
+  background:#009788;
+  border:1px solid #009788;
+  margin-bottom:20px;
+  h4{
+    padding:10px 15px;
+    color:#fff;
+    font-weight: 600;
+  }
+}
+
+
+
+//----rohit css for ipad----//
+
+.cedit-profile-left{margin-left: 14px;}
+@media screen and (-webkit-min-device-pixel-ratio: 2)  and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: landscape)
+{
+  .view-profile-page .resume-upload-btn {
+    margin-top: -3px;
+    margin-left: 30px;
+}
+
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2)  and (max-device-width:  5120px) and (min-device-width: 2880px)
+{
+   
+
+.view-profile-page .manage-edit-row p {
+  font-size: 11px;
+  text-align: left;
+}
+
+}

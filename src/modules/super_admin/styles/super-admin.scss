@@ -1,0 +1,193 @@
+.super_admin.dashboard {
+ 
+  .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+  .candidate-profile-panel{
+    min-height:300px !important;
+  }
+
+  .interview-conference-panel{
+    min-height:390px !important;
+  }
+
+    .panel.panel-default .panel-heading {
+      border-radius: 0px;
+    }
+
+    .panel-body{
+        //min-height: 280px;
+    }
+    .social-net-icon{
+        margin-left:10px;
+    }
+    .social-net-icon-gmail {
+       margin-left:10px;
+       color: #dd4b39;
+    }
+    .social-net-icon-linkdin {
+       margin-left:10px;
+       color: #007bb5;
+    }
+    .social-net-icon-twitter {
+       margin-left:10px;
+      color: #55acee
+    }
+    .social-net-icon-facebook {
+        margin-left:10px;
+        color: #3b5998
+     }
+     .mydiv {
+        width: 25px;
+        height: 21px;
+        background-color: #337ab7;
+        text-align: center;
+        color: white;
+        float: right;
+        padding-top: 3px;
+     }
+
+     .storage-info{
+            width: 52px !important;
+            height: 21px !important;
+            /* text-align: center !important; */
+            color: $white !important;
+            float: right;
+            border-radius: 0px;
+            line-height: 17px!important;
+            font-style: normal!important;
+     }
+    .dashboard{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+
+        .dashboard-heading{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+    }
+
+    .dashboard-profile-heading{
+        padding: 6px;
+        // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: #fff;
+        font-size: 18px;
+         background: #3f51b5;
+    }
+    .super-panel-card {
+      .super-panel-header{
+        border-bottom: 1px solid #ddd;
+        .md-title-font{
+          font-size: 12px;
+          font-weight: 600;
+        }          
+      }
+      .table > tbody > tr > td{
+        border:none;
+        font-size: 12px;
+      }  
+    }
+}
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .content-wrapper.super_admin.dashboard {
+    margin-top:0px;
+  }
+  .content-wrapper.super_admin.clients{
+    margin-top:0px;
+  }
+  .content-wrapper.super_admin{
+    margin-top:0px;
+  }
+  .content-wrapper.candidate-profile-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.user-role-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.payment-plan.super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.paymentDashboards.user-role-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.ticketing-system-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.view-position.super_admin.position-review{
+    margin-top:0px;
+  }
+  .content-wrapper.question-bank-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.social-media-integration{
+    margin-top:0px;
+  }
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .content-wrapper.super_admin.dashboard {
+    margin-top:0px;
+  }
+  .content-wrapper.super_admin.clients{
+    margin-top:0px;
+  }
+  .content-wrapper.super_admin{
+    margin-top:0px;
+  }
+  .content-wrapper.candidate-profile-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.user-role-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.payment-plan.super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.paymentDashboards.user-role-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.ticketing-system-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.view-position.super_admin.position-review{
+    margin-top:0px;
+  }
+  .content-wrapper.question-bank-super-admin{
+    margin-top:0px;
+  }
+  .content-wrapper.social-media-integration{
+    margin-top:0px;
+  }
+}

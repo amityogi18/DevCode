@@ -1,0 +1,75 @@
+.content-wrapper.certification-container.padding-mobile
+  .row.video-intro-heading
+    .col-md-5
+      span.video-intro-1(data-translate="CERTIFICATION")
+    .col-md-3.col-sm-3.col-xs-12
+      span(ng-show='certificateTemplateCtrl.isShowShareCheckBox ||CandidateProfileCtrl.twoMinIntro')
+        input.option-checkbox(type='checkbox',ng-model = 'certificateTemplateCtrl.shareCertification', data-ng-click="certificateTemplateCtrl.shareMyCertification(certificateTemplateCtrl.shareCertification)")
+        span.share-profile.hidden-xs.hidden-sm(data-translate='SHARE-PROFILE')
+        span.hidden-md.hidden-lg  Share
+  .panel.panel-default.row.certificate-panel
+    img(src='../../../public/img/certificate.png', alt='certificate-image', width='100%', height='100')
+    .panel-body
+      .alert.alert-danger(data-ng-if='!certificateTemplateCtrl.isCertificateFound') No Certificate Found!! Please Create Profile First
+      .row
+        ul.list-group.checked-list-box
+          span.certificate-list|List of Certificates
+          li.list-group-item(data-ng-repeat='certificate in certificateTemplateCtrl.allCertificates') Get Certificate in {{certificate.skillsetName}}
+            md-button.md-raised.md-primary.pull-right(aria-label='start',data-ng-click='certificateTemplateCtrl.startCertificate(certificate)', data-translate='START-NOW', data-ng-disabled='certificate.statusId == 10', data-ng-if='certificate.statusId != 11')
+            span
+              img.logo-image(src='../../../public/img/Gold_Medal.png', data-ng-if='certificate.certificationType === "GOLD" && certificate.statusId === 11')
+              img.logo-image(src='../../../public/img/Silver_Medal.png', data-ng-if='certificate.certificationType === "SILVER" && certificate.statusId === 11')
+              img.logo-image(src='../../../public/img/Bronze_Medal.png', data-ng-if='certificate.certificationType === "BRONZE" && certificate.statusId === 11')
+            md-button.md-fab.md-mini.md-primary.pull-right(aria-label='Certificate', download='HTML 5 PDF', data-ng-click="certificateTemplateCtrl.downloadCertificate(certificate)", data-ng-if='certificate.statusId == 11', data-toggle="modal" data-target="#myModal")
+              span
+                i.fa.fa-eye(aria-hidden='true')
+            p.pull-right.hidden-xs Click To View Your Certificate
+.modal.fade#myModal(role="dialog")
+   .modal-dialog
+      .modal-content(style='width: 800px;')
+          button.btn.btn-success(type='button', style='margin-left: 20px; margin-top: 20px;', data-ng-click='certificateTemplateCtrl.generatePDF()')
+            i.fa.fa-file-pdf-o(aria-hidden='true')
+            span    Download Certificate
+          button.close(type='button', data-dismiss='modal', style='margin-right: 25px; margin-top: 20px; font-size: 35px; border: 1px solid gray; border-radius: 50%; width: 37px;') ×
+          hr
+          div.modal-cert-form-wrapper(style='width:714px;margin:0 auto;')
+            form.ui.form
+                #certificateModal(style='width:714px; height: 580px; padding: 15px; text-align: center; border: 25px solid #4d79ff; background-color: #fff !important;')
+                  div(style='width: 107% !important; height: 108% !important; margin-left: -21px; -webkit-border-radius: 16px; -moz-border-radius: 16px; border-radius: 16px; background-color: white; margin-top: -20px;')
+                    img(src='../../../public/img/ondemand-certificate-logo.jpg', style='float: left;height: 130px;width: 130px;margin-left: 10px;margin-top: 5px;')
+                    img(data-ng-if='certificateTemplateCtrl.certificationContent.certificationType === "GOLD"', src='../../../public/img/gold-medal.jpg', style='float: right;height: 130px;width: 130px;margin-right: 10px;margin-top: 5px;')
+                    img(data-ng-if='certificateTemplateCtrl.certificationContent.certificationType === "SILVER"', src='../../../public/img/silver-medal.jpg', style='float: right;height: 130px;width: 130px;margin-right: 10px;margin-top: 5px;')
+                    img(data-ng-if='certificateTemplateCtrl.certificationContent.certificationType === "BRONZE"', src='../../../public/img/bronze-medal.jpg', style='float: right;height: 130px;width: 130px;margin-right: 10px;margin-top: 5px;')
+                    br
+                    br
+                    div(style="font-family: 'Blackadder ITC';color: #4d79ff;font-size:38px;float: left;margin-left: 30px;") Certificate of Achievement
+                    div(style="font-family: 'Times New Roman'; color: black; font-size: 18px; margin-top: 60px;")
+                      br
+                      span This is to acknowledge that
+                      br
+                      span(style='font-size: 25px; margin-top: 60px;') {{certificateTemplateCtrl.certificationContent.firstName}}  {{certificateTemplateCtrl.certificationContent.lastName}}
+                      br
+                      span(style='font-size: 18px;') is OnDemand {{certificateTemplateCtrl.certificationContent.certificationType}} certified in
+                      br
+                      span(style='font-size: 25px;') {{certificateTemplateCtrl.certificationContent.skillsetName}}
+                      br
+                      br
+                      br
+                      span(style='font-size: 15px;')
+                        | OnDemand is world's largest provider of online certificates on various skills over internet
+                      br
+                      span(style='font-size: 15px;')
+                        | These certifications are recognized by major corporations and trusted by professionals across the globe.
+                    div(style='height: 80px;margin-top 10px;')
+                      img(src='../../../public/img/chairman-sign.png', style='float: left;height: 120px;width: 120px;margin-left: 10px;margin-top: 5px;')
+                      img(src='../../../public/img/vice-chairman-sign.png', style='float: left;height: 120px;width: 120px;margin-left: 130px;margin-top: 5px;')
+                      img(src='../../../public/img/member-sign.png', style='float: right;height: 120px;width: 120px;margin-right: 10px;margin-top: 5px;')
+                    div(style='border-top: 1px solid #4d79ff; border-bottom: 1px solid #4d79ff; height: 35px; clear: both;font-size: 13px;')
+                      span(style="float: left; margin-top: 7px; margin-left: 10px;font-family: 'Times New Roman';") Registration No. :
+                        b     203713436263474327
+                      span(style="float: right;margin-top: 7px;margin-right: 10px;font-family: 'Times New Roman';") Certificate No. :
+                        b     {{certificateTemplateCtrl.certificationContent.certificationCode}}
+                    p(style='text-align: center; font-size: 12px; margin-top: 10px;')
+                      span This certificate may be verified at
+                      span(style='color:#4d79ff;')    verify.ondemand.com
+                      span     using certificate holder's certificate number.

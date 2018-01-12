@@ -1,0 +1,268 @@
+.integration-container
+  .row.video-intro-heading.row
+    span.video-intro-1 Candidate Applied Job Description
+    md-button.md-raised.md-primary.pull-right.col-xs-1(type='button', data-ui-sref='sa.candidate-applied-job') Back
+  ul.row.nav.nav-tabs
+    li.active
+      a(data-toggle='tab', href='#candidateList') Candidate List
+    li
+      a(data-toggle='tab', href='#profileDescription', ng-click="candidateAppliedJobDescCtrl.getJobInfo()") Job Description
+  .row.tab-content.profile-tab-position
+      #candidateList.tab-pane.fade.in.active.candidate-description-style
+        .company-header
+          ul.list-group
+            li.list-group-item.integration-subheader
+              h4 Candidate List
+        .col-xs-12.col-sm-6.col-md-4
+          md-input-container.md-block.position-search-continer(flex="100")
+            label.position-search-lebel Search...
+            input(type='text', ng-model='candidateAppliedJobDescCtrl.searchFilter.search')
+            md-icon.position-search(md-font-set='fa') &#xf002      
+        .panel-body      
+          table.table.table-hover(ng-table='candidateAppliedJobDescCtrl.tableParams',ng-table-columns-binding="candidateAppliedJobDescCtrl.cols")
+            tr(ng-repeat-start='candidate in $data', id="{{'candidate-row'+$index}}")  
+              td(class='col-sm-1' title="'Sr. No.'" style="text-align: center;") ({{$index + 1}})
+              td(class='col-sm-1' title="'Details'" style="text-align: center;" ng-click='candidateAppliedJobDescCtrl.handleCollapse(candidate.candidateId)')
+                  a.trigger-dwn
+                    i.fa.fa-chevron-circle-down.clickable(style="font-size:22px;", tooltip-placement='right', uib-tooltip='Click here to view candidate profile', aria-hidden='true', data-rowid="{{'candidate-row'+$index}}", data-toggle='collapse', data-target='#{{candidate.id}}', id='candidateTab-{{candidate.id}}', ng-click='candidateAppliedJobDescCtrl.changeIcon($event)')
+              td(class='col-sm-1' title="'Image'" style="text-align: center;")
+                img.img-box(style='width: 50px;height: 40px;', ng-src="{{candidate.candidateLogo ? candidate.candidateLogo : './img/user.png'}}", alt='Candidate Profile Image')
+              td(class='col-sm-2' title="'Candidate Name'" sortable="'candidateName'" ng-data='candidate.candidateName') {{candidate.candidateName}}
+              td(class='col-sm-2' title="'Candidate Email'" sortable="'email'" ng-data='candidate.email') {{candidate.email}}
+              td(class='col-sm-2' title="'Designation'"  sortable="'designation'" ng-data='candidate.designation') {{candidate.designation}}
+              td(class='col-sm-2' title="'Applied Date'"  sortable="'jobAppliedDate'" ng-data='candidate.jobAppliedDate') {{candidate.jobAppliedDate | date : "MM/dd/yyyy"}} 
+              td(class='col-sm-2' title="'Status'")
+                select.form-control(id="{{ 'ddl_' + candidate.id }}" ng-click="candidateAppliedJobDescCtrl.changeCandidateJobStatus(candidate, $event)" style="outline:none !important; outline-offset: none !important; outline-style: none !important; border-radius:5px;width: 145px;")
+                  option(value="28" ng-selected="{{candidate.appliedJobStatusId == 28}}") INITIATED
+                  option(value="13" ng-selected="{{candidate.appliedJobStatusId == 13}}") INPROGRESS
+                  option(value="11" ng-selected="{{candidate.appliedJobStatusId == 11}}") COMPLETED
+                  option(value="12" ng-selected="{{candidate.appliedJobStatusId == 12}}") REJECTED
+                
+                //- dialog box starts
+                .modal.fade.modal-open.in(id="{{ 'modal_' + candidate.id }}" role='dialog')
+                  .modal-dialog
+                    .modal-content
+                      .modal-header
+                        button.close(type='button', data-dismiss='modal' data-ng-click="candidateAppliedJobDescCtrl.closeDialogBox(candidate)") ×
+                        h4.modal-title 
+                          i.fa.fa-pencil-square(aria-hidden='true')
+                          span    Comments For Rejection
+                      .modal-body
+                        br
+                        .col-md-12
+                            textarea.form-control(placeholder="Enter Your Comment Here" style="max-height: 100px;min-height: 100px; height: 100px; max-width: 500px;min-width: 500px; margin-bottom: 5px; font-size: 15px !important; padding: 5px !important;" ng-model='candidateAppliedJobDescCtrl.comment')
+                            span(ng-if="!candidateAppliedJobDescCtrl.isCommented" style="color: red; font-size: 12px;") Please Enter Your Comments For Rejection 
+                      .modal-footer
+                        button.btn.btn-success(ng-click='candidateAppliedJobDescCtrl.changeCandidateJobStatus(candidate, $event)') Save                          
+            tr.collapse.candidate-profile-supeadmin(ng-repeat-end='ng-repeat-end', id='{{candidate.id}}')
+              td.superadmin-candidate-profile(colspan='12')
+                .candidate-review.candidate-Profile
+                  .col-md-12.col-sm-12.col-xs-12.basic-info
+                    .row.color-section
+                      .col-md-2.col-sm-3.col-xs-3.profile
+                        .user-img-section
+                          img.img-box(ng-src="{{candidateAppliedJobDescCtrl.CandidateProfileInfo.profilePicUrl ? candidateAppliedJobDescCtrl.CandidateProfileInfo.profilePicUrl : './img/user.png'}}", alt='')
+                      .col-md-4.col-sm-5.col-xs-5
+                        .candidate-profile-name {{candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.firstName}} {{candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.lastName}}
+                        .designation {{candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.designationName}}
+                      .col-md-6.col-sm-4.col-xs-12.contact-info
+                        .row
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf0e0
+                          span {{candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.email}}
+                          span(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.email == null') N/A
+                        .row
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf095
+                          span {{candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.phone}}
+                          span(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.phone == null') N/A
+                        .row
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf041
+                          span {{candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.address}}
+                          span(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.address == null') N/A
+                        .row(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.resume !=="" ')
+                          .col-md-4.col-sm-4.col-xs-12
+                            a.btn.btn-md.btn-information(href='{{candidateAppliedJobDescCtrl.CandidateProfileInfo.contactInfo.resume}}', download='download') Download Resume
+                    .col-md-12.col-sm-12.col-xs-12.candidate-section
+                      .col-md-12.col-sm-12.col-xs-12.about-candidate
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf007
+                          span ABOUT ME
+                        .col-md-12.col-sm-12.col-xs-12.candidate-text {{candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.aboutMe}}
+                        .col-md-12.col-sm-12.col-xs-12.candidate-text(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.aboutMe == null') N/A
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.experience-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf0f2
+                          span WORK EXPERIENCE 
+                        .col-md-12.col-sm-12.col-xs-12
+                          .col-md-3.col-sm-3
+                            span Total Experience : {{candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.experience}} Years
+                            span(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateInfo.experience == null') (N/A)
+                        .col-md-12.col-sm-12.col-xs-12(ng-repeat='exp in candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateExperiences')
+                          .col-md-4.col-sm-4 {{exp.jobTitle}} in {{exp.companyName}}
+                          .col-md-8.col-sm-8 {{exp.startDate}} - {{exp.endDate}}
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.skill-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf234
+                          span SKILLS
+                        .col-md-12.col-sm-12.col-xs-12.skill
+                          label.col-md-4.col-sm-6.col-xs-12 Skill
+                          label.col-md-3.col-sm-3.col-xs-12 Years Of Experience
+                          label.col-md-3.col-sm-3.col-xs-12 Last Used
+                          div(ng-repeat='skill in candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateSkills')
+                            .col-md-4.col-sm-6.col-xs-12 {{skill.skillsetName}}
+                            .col-md-4.col-sm-6.col-xs-12(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateSkills == null && candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateSkills.length ===0 ') N/A
+                            .col-md-3.col-sm-3.col-xs-12 {{skill.yearsOfExperience}}
+                            .col-md-3.col-sm-3.col-xs-12 {{skill.lastUse}}
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.education-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf19d
+                          span EDUCATION
+                        .col-md-12.col-sm-12.col-xs-12.education
+                          label.col-md-4.col-sm-4.col-xs-12 Qualification
+                          label.col-md-8.col-sm-8.col-xs-12 Specialization
+                          div(ng-repeat='row in candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateEducation')
+                            .col-md-4.col-sm-4.col-xs-12 {{row.qualification}}
+                            .col-md-8.col-sm-8.col-xs-12 {{row.specialization}} from {{row.university}}
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.certification-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf0a3
+                          span CERTIFICATION
+                        .col-md-6.col-sm-6.col-xs-12.certificate(ng-repeat='row in candidateAppliedJobDescCtrl.CandidateProfileInfo.candidateCertifications')
+                          span.certificate-text {{row.certificateType}}
+                          span.both-margin certified in
+                          span.text {{row.name}}
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.certification-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            md-icon(md-font-set='fa') &#xf15c
+                          span COVER LETTER
+                        .col-md-12.col-sm-6.col-xs-12
+                          span.certificate-text {{candidateAppliedJobDescCtrl.CandidateProfileInfo.coverLetter}}
+                          span(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.coverLetter == null') N/A
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                      .col-md-12.col-sm-12.col-xs-12.certification-section
+                        h4
+                          md-button.md-icon-button(aria-label='notification')
+                            i.fa.fa-briefcase(aria-hidden='true')
+                          span Portfolio
+                        .col-md-12.col-sm-6.col-xs-12
+                          .table-responsive(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.candidatePortfolios.length > 0')
+                            table.table.table-striped.table-bordered.table-hover
+                              thead
+                                tr
+                                  //th Sr. No.
+                                  th Title
+                                  th Description
+                                  th Url
+                              tbody
+                                tr(ng-repeat='candidatePortfolio in candidateAppliedJobDescCtrl.CandidateProfileInfo.candidatePortfolios')
+                                  //td 
+                                    span ({{$index+1}})
+                                  td 
+                                    span {{candidatePortfolio.title}}
+                                  td 
+                                    span {{candidatePortfolio.description}}
+                                  td 
+                                    a(href='{{candidatePortfolio.url}}' title='{{candidatePortfolio.url}}' target='_blank') Click&nbsp;To&nbsp;Visit&nbsp;Url                             
+                          .table-responsive(ng-if='candidateAppliedJobDescCtrl.CandidateProfileInfo.candidatePortfolios.length === 0') N/A
+                      
+                      .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.certification-section
+            .hr            
+      #profileDescription.tab-pane.fade.in.candidate-description-style
+        .company-header
+          ul.list-group
+            li.list-group-item.integration-subheader
+              h4 Job Description
+        .row
+          .col-md-2
+            label Job Title
+          .col-md-1
+            label :  
+          .col-md-9  
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobTitle}}
+        hr
+        .row
+          .col-md-2
+            label Job Code
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobCode}}
+        hr
+        .row
+          .col-md-2
+            label Job Location
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobLocation}}    
+        hr
+        .row
+          .col-md-2
+            label Job Description
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobDescription}}
+        hr
+        .row
+          .col-md-2
+            label Job Url
+          .col-md-1
+            label :  
+          .col-md-9    
+            a(ng-href="{{candidateAppliedJobDescCtrl.candidateJobDescription.jobUrl}}" target='_blank' title="{{candidateAppliedJobDescCtrl.candidateJobDescription.jobUrl}}")
+              span Click Here To See Job
+        hr
+        .row
+          .col-md-2
+            label Company Name
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.companyName}}
+        hr
+        .row
+          .col-md-2
+            label Job Portal
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobPortal}} 
+        hr
+        .row
+          .col-md-2
+            label Job Status
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobStatus}}   
+        hr
+        .row
+          .col-md-2
+            label Job Created Date
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.jobCreatedDate}}
+        hr
+        .row
+          .col-md-2
+            label Job Applied Date
+          .col-md-1
+            label :  
+          .col-md-9     
+            p {{candidateAppliedJobDescCtrl.candidateJobDescription.appliedDate}}                               

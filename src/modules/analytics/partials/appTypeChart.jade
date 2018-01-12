@@ -1,0 +1,21 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-laptop.canidate-status-icon(aria-hidden='true')
+              span(data-translate='APP-TYPE')
+            #pie-chart.panel-body.pie-height
+              .pie-dec-chart_01.chart-0.col-md-8.col-sm-8.col-xs-12
+                canvas#pie.chart.chart-pie.chart-xs(chart-colors='appTypeCtrl.colors', chart-data='appTypeCtrl.appTypeData.data', chart-labels='appTypeCtrl.appTypeData.labels', chart-options='appTypeCtrl.options')
+              .managing.col-sm-4.col-md-4.col-xs-12
+                ul.col-sm-8.col-md-8.col-xs-6.managing
+                  li(ng-repeat='row in appTypeCtrl.appTypeData.labels')
+                    i.fa.fa-square(aria-hidden='true', ng-class= "{'label_1':row == 'IOS','label_2':row == 'Android','label_3':row == 'Windows','label_4': row=='Others'}")
+                    span
+                      strong {{row}}
+                ul.col-sm-4.col-md-4.col-xs-6.managing
+                  li(ng-repeat='x in appTypeCtrl.appTypeData.data track by $index')
+                    span
+                      strong {{x}}

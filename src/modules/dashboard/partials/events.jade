@@ -1,0 +1,43 @@
+.dasboard-events-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card
+        md-card-actions
+            .event-heading
+              i.fa.fa-calendar-o.events-icon(aria-hidden='true')
+              | Upcoming Events
+            .panel-body(ng-class="{'show': eventsCtrl.fullHeight , 'min-show': !eventsCtrl.fullHeight}")
+             .col-xs-12.col-sm-12.col-md-12.calender.ng-cloak(data-ng-show="(eventsCtrl.noGoogleEvent===0) || eventsCtrl.isLocalEvents" )
+                //p.pull-left(ng-show='eventsCtrl.loggedInMail') 
+                  b Logged in as: 
+                  span {{eventsCtrl.loggedInMail}}
+                .calender-sec
+                  .row
+                    h4.col-md-4.col-sm-6.col-xs-12.text-center.visible-xs {{ eventsCtrl.calendarTitle }}
+                    .col-md-4.col-sm-6.col-xs-6.text-center
+                      .btn-group
+                        button.btn.btn-default(type='button', mwl-date-modifier='', date='eventsCtrl.viewDate', decrement='eventsCtrl.calendarView') Previous
+                        button.btn.btn-default.active(type='button', mwl-date-modifier='', date='eventsCtrl.viewDate', set-to-today='') Today
+                        button.btn.btn-default(type='button', mwl-date-modifier='', date='eventsCtrl.viewDate', increment='eventsCtrl.calendarView') Next
+                    br.visible-xs.visible-sm
+                    h4.col-md-4.col-sm-6.col-xs-12.text-center {{ eventsCtrl.calendarTitle }}
+                    .col-md-4.col-sm-6.col-xs-6.text-center
+                      .btn-group
+                        button.btn.btngrp.btn-default(type='button', ng-model='eventsCtrl.calendarView', uib-btn-radio="'year'") Year
+                        button.btn.btngrp.btn-default(type='button', ng-model='eventsCtrl.calendarView', uib-btn-radio="'month'") Month
+                        button.btn.btngrp.btn-default(type='button', ng-model='eventsCtrl.calendarView', uib-btn-radio="'week'") Week
+                        button.btn.btngrp.btn-default(type='button', ng-model='eventsCtrl.calendarView', uib-btn-radio="'day'") Day
+                  br
+                  mwl-calendar(events='eventsCtrl.events', view='eventsCtrl.calendarView', view-title='eventsCtrl.calendarTitle', view-date='eventsCtrl.viewDate', on-event-click='eventsCtrl.eventClicked(calendarEvent)', on-event-times-changed='eventsCtrl.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd', cell-is-open='eventsCtrl.isCellOpen', day-view-start='06:00', day-view-end='22:59', day-view-split='30', cell-modifier='eventsCtrl.modifyCell(calendarCell)')
+                  br
+             .col-md-12.col-sm-12.col-xs-12.events-message.ng-cloak(data-ng-show="(eventsCtrl.noGoogleEvent===1) && !eventsCtrl.isLocalEvents")
+                //p.loggedemail 
+                  b Login As: 
+                  span {{eventsCtrl.loggedInMail}}
+                div 
+                  i.fa.fa-calendar.up-events-icon(aria-hidden='true')
+                  | No Upcoming Event as of Now   
+             .col-md-12.col-sm-12.col-xs-12.events-message.ng-cloak(data-ng-show="(eventsCtrl.noGoogleEvent===2) && !eventsCtrl.isLocalEvents")
+                .p 
+                  i.fa.fa-calendar.up-events-icon(aria-hidden='true')
+                  | You do not have any mail prefernce. please go to setting to choose one

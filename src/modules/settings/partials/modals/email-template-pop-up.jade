@@ -1,0 +1,50 @@
+.modal-content.email-template-modal
+  .modal-header
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-translate='ADD-TEMPLATE', data-ng-show='emailTemplateSettingsCtrl.isAdd')
+    h4.modal-title(data-translate='UPDATE-TEMPLATE', data-ng-show='emailTemplateSettingsCtrl.isEdit')
+    h4.modal-title(data-translate='VIEW-TEMPLATE', data-ng-show='emailTemplateSettingsCtrl.isView')
+  .modal-body
+    form(data-ng-hide='emailTemplateSettingsCtrl.isView')
+        .form-group.row
+          label.col-md-4(data-translate='TEMPLATE-NAME')
+          .col-md-6.col-xs-12.col-sm-10
+            input.form-control(type='text', placeholder='Enter Template Name', data-ng-model='emailTemplateSettingsCtrl.name')
+        .form-group.row
+          label.col-md-4(data-translate='SUBJECTS')
+          .col-md-6.col-xs-12.col-sm-10
+            input.form-control(type='text', placeholder='Enter Template Subject', data-ng-model='emailTemplateSettingsCtrl.subject')
+        .form-group.row
+          label.col-md-4(data-translate='TEMPLATE-TYPE') 
+          .col-md-6.col-xs-12.col-sm-10
+            ui-select(data-ng-model='emailTemplateSettingsCtrl.templateTypeId', name='TemplateType' required)
+              ui-select-match(placeholder='Select Template Type')
+                span(ng-bind='$select.selected.templateTypeName')
+              ui-select-choices(repeat='templte.templateTypeId as templte in emailTemplateSettingsCtrl.templateList | filter: $select.search')
+                span(ng-bind='templte.templateTypeName')    
+        .form-group.row
+          label.col-md-4(data-translate='CONTENT')
+          .col-md-6   
+            textarea(ng-model='emailTemplateSettingsCtrl.content', rows='5', cols='50',ng-trim='false', maxlength='1000')
+            span.char-limit {{1000 - emailTemplateSettingsCtrl.content.length}} 
+    div(data-ng-if='emailTemplateSettingsCtrl.isView')
+        table.table
+            thead
+              tr
+                th Name
+                th Subject
+                th Type
+                th Content
+            tbody
+              tr
+                td {{emailTemplateSettingsCtrl.name}} 
+                td {{emailTemplateSettingsCtrl.subject}} 
+                td {{emailTemplateSettingsCtrl.templateType}} 
+                td {{emailTemplateSettingsCtrl.content}}              
+
+  .modal-footer
+    .pull-right.my-email-button
+      button.btn.btn-primary(type='button', data-ng-click='emailTemplateSettingsCtrl.saveNewTemplate();', data-ng-show='emailTemplateSettingsCtrl.isAdd') Save
+      button.btn.btn-warning(type='button', data-ng-click='emailTemplateSettingsCtrl.updateTemplate()', data-ng-show='emailTemplateSettingsCtrl.isEdit') Update
+      button.btn.btn-danger(type='button', data-ng-click='close()') Cancel
+       

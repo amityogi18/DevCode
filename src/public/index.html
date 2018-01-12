@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assessment</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" href="https://vjs.zencdn.net/5.16.0/video-js.css">-->
+    <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/mipnbheeimfogijebnebgnlljhndlame">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">
+    <script>
+            window.appBasePath = "/";
+            window.mobile= false;
+    </script>
+    <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css">-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFnpi1PrHkilUk9dmsL1869m9PaMDZKZc&libraries=places"></script>
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    
+    <base href="/">
+    <style>
+        .full-page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999999;
+            background: transparent;
+            background-color: black;
+            opacity: .8;
+        }
+
+        .full-page-loader > div {
+            position: relative;
+            height: 100%;
+            text-align: center;
+            color: #4285f4;
+        }
+
+        .full-page-loader > div > div {
+            position: absolute;
+            top: 45%;
+            width: 100%;
+        }
+
+        .loading {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <link rel='stylesheet' ng-href='style/{{ themeClass }}.css'>
+<div ng-if="loader.active" class="full-page-loader">
+    <div>
+        <div><i aria-hidden="true" class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div>
+    </div>
+</div>
+<div data-ui-view=""></div>
+<div asm-growler=""></div>
+
+<script async defer type="text/javascript" src="https://cdn.rawgit.com/niklasvh/html2canvas/0.5.0-alpha2/dist/html2canvas.min.js"></script>
+<script async defer type="text/javascript" src="https://cdn.rawgit.com/MrRio/jsPDF/master/dist/jspdf.min.js"></script>
+<script async defer src="https://vjs.zencdn.net/5.16.0/video.js"></script>
+
+</body>
+</html>

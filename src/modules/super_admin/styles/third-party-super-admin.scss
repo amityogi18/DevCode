@@ -1,0 +1,85 @@
+.third-party-integration {
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+  }
+	
+.search-department{
+  float: right;
+  margin-top: 30px;
+  margin-right: 2px;
+ }
+
+ thead.third {
+
+ background-color : $lightBlue;
+
+ }
+ .dept-search-box{
+  float: right;
+  margin-top: auto;
+  margin-right: 2px;
+ }
+ .departments-details{
+
+  margin-top:40px;
+ }
+ .add-department-btn{
+  margin-top:-6px;
+  border-radius:0px;
+  float:right;
+ }
+ .btn-department-icon{
+  margin:2px;
+  padding:0px;
+ }
+ .dept-icon{
+  margin:12px;
+  text-align:center;
+ }
+ .company-setting-icon{
+
+  float:right;
+ }
+
+ .admin-user-pagination{
+  margin-top:-10px;
+ }
+
+ i.fa.fa-check.third-icon {
+ color : $green;
+ }
+
+ i.fa.fa-times.third-icon {
+
+ color  : $red ;
+ }
+ 
+ .technical-statics-search{
+     margin-bottom: 15px;
+ }
+ 
+ .third-party{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .third-party-heading{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+    }
+    
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+    }
+
+}

@@ -1,0 +1,176 @@
+.interview-section{
+    @media only screen and (min-width: 768px) {
+    .interview-form .colum-6 {
+      width: 50%;
+      float: left;
+      padding: 0 5px;
+    }
+    .interview-form .form-body {
+      min-height: 215px;
+    }
+  }
+
+  @media only screen and (min-width: 1199px) {
+    .interview-form {
+      margin-bottom: 20px;
+      min-height: 347px;
+      iframe{
+        min-width: 100%;
+        min-height: 298px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1500px) {
+    .interview-form p.title {
+      font-size: 16px;
+    }
+  }
+  .space-margin{
+    padding: 0px !important;
+  }
+.interview-form {
+  width: 100%;
+  float: left;
+  background: #f7f7f7;
+  border: #cbcbcb 1px solid;
+  margin-bottom: 10px;
+    .error-box{
+      color: $red;
+      font-size: 11px;
+    }
+    .row {
+      margin: 0 0;
+    }
+    header {
+      text-align: center;
+      background: #e8e8e8;
+      font-size: 17px;
+      color: #666666;
+      line-height: 1em;
+      padding: 12px 0;
+      border-bottom: #cbcbcb 1px solid;
+    }
+    .form-body {
+      padding: 17px 10px;
+      width: 100%;
+      float: left;
+    }
+    .title {
+       font-size: 12px !important;
+       color: #666666;
+       margin: 0 0 8px 0;
+       line-height: 1em;
+    }
+    .fields-sec {
+       width: 100%;
+       float: left;
+       position: relative;
+       margin-bottom: 15px;
+    }
+    .error-box{
+      color:red;
+      font-size:11px;
+    }
+    .fields-sec.preview-sec {
+      padding-right: 70px;
+    }
+    .form-control {
+      border: #5497ba 1px solid;
+      background: transparent;
+      font-size: 13px;
+      color: #a5a5a5;
+    }
+    select.form-control {
+      border-radius: 0px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -o-appearance: none;
+      appearance: none;
+      background: url(#{$imgPath}/slct-arw.png) no-repeat right;
+      background-position: 96%;
+    }
+    .btn-preview {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 13px;
+      color: #0078f0;
+    }
+    .btn-preview:hover {
+      color: #666666;
+      cursor:pointer;
+    }
+    .upload-btn {
+      width: 100%;
+      text-align: -webkit-center;
+      position: relative;
+      overflow: hidden;
+    }
+    .upload-btn a {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 13px;
+      color: #FFF;
+      text-transform: uppercase;
+      padding: 13px 22px 11px;
+      background: #7ac043;
+      line-height: 1em;
+      text-decoration: none !important;
+    }
+    .upload-btn a:hover{
+      background: #4da707;
+    }
+
+    .sttng-list li {
+      font-size: 16px;
+      color: #5497ba;
+      list-style-image: url(#{$imgPath}/write.png);
+      position: relative;
+      left: 25px;
+      line-height: 1em;
+    }
+    .sttng-list li + li {
+      margin-top: 12px;
+    }
+    .sttng-list li a {
+      color: #5497ba;
+    }
+    .stng-title {
+      border-top: #cbcbcb 1px solid;
+      border-bottom: #cbcbcb 1px solid;
+      font-size: 17px;
+      color: #666666;
+      line-height: 1em;
+      padding: 12px 0;
+      background: #e8e8e8;
+      margin: 20px -10px 0;
+      text-align: center;
+    }
+}
+  .upload-icon{
+    margin-right: 5px;
+  }
+  .upload-video-button{
+    margin-left:61px !important;
+  }
+  
+  .youtube-icon{
+    color:#e62117;
+    }
+      
+  .youtube-btn{
+    margin-left: 32px;
+    margin-top: 0px;
+  }
+  .record-btn-section{
+    border: 2px solid #cbcbcb;
+    width: 106%;
+    height: 100%;
+    margin-left: -15px;
+    margin-bottom: 15px;
+  }
+  .youtube-section{
+    margin-top: 10px;
+  }
+}

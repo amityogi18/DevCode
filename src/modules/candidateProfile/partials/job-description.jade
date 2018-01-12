@@ -1,0 +1,36 @@
+.content-wrapper.applied-joblist-container
+  .row
+    .col-md-12
+      .video-intro-heading
+        span.video-intro-1 Job Description
+  .panel.panel-default
+    .panel-body
+      md-card.fav-card
+        md-card-title
+          md-card-title-text
+            span.md-headline(style="") {{jobDescriptionCtrl.descriptionList.jobTitle}}
+            span.md-subhead  
+              i.fa.fa-building(area-hidden="true")
+              span
+                |{{jobDescriptionCtrl.descriptionList.companyName}}
+            span.md-subhead
+              i.fa.fa-map-marker(area-hidden="true")                  
+              span
+                |{{jobDescriptionCtrl.descriptionList.jobLocation}}
+            span.md-subhead                                    
+              i.fa.fa-calendar(area-hidden="true")
+              span Posted :
+                |{{jobDescriptionCtrl.descriptionList.jobCreatedDate}}
+      .col-md-12.col-sm-12.col-xs-12
+        label Applied Date  : 
+        span {{jobDescriptionCtrl.descriptionList.appliedDate}}
+      .col-md-12.col-sm-12.col-xs-12
+        label Job Portal : 
+        span {{jobDescriptionCtrl.descriptionList.jobPortal}}
+      .col-md-12.col-sm-12.col-xs-12
+        label Job Status : 
+        span {{jobDescriptionCtrl.descriptionList.jobStatus}}
+      .col-md-12.col-sm-12.col-xs-12
+        label Description
+        p(ng-bind-html='jobDescriptionCtrl.descriptionList.jobDescription')
+        

@@ -1,0 +1,46 @@
+.container-fluid.ondemand-test-question
+  .row.ondemand-container(ng-show='candidateInterviewQuestionCtrl.showQuestionPaper' && '!$root.mobile')
+  .ondemand-container(ng-show='candidateInterviewQuestionCtrl.showQuestionPaper' && '$root.mobile')
+    .col-md-12.col-sm-12.col-xs-12.ondemand-section
+      .ondemand-div
+        .ondemand-header-text
+            h4 OnDemand Interview
+          .row.ondemand-header-row
+            .col-md-6.col-sm-6.col-xs-6
+              i.fa.fa-clock-o.ondemand-clock-text(aria-hidden='true')
+              #clock.ondemand-clock
+            .col-md-5.col-sm-5.col-xs-6.ondemand-user-name
+               i.fa.fa-user.
+               span    {{user.fullName}}
+        .question-container(data-ng-if='!candidateInterviewQuestionCtrl.isInterviewFinish')
+          .question
+            fieldset(ng-disabled='candidateInterviewQuestionCtrl.saveButtonText === "Saving..."')
+              h4 Question No: {{candidateInterviewQuestionCtrl.quesNumber}}
+              .row(data-ng-if='candidateInterviewQuestionCtrl.activeQuestion.imageFilePath == ""')
+                .col-md-12.col-sm-12.col-xs-12
+                    h4 {{candidateInterviewQuestionCtrl.activeQuestion.question}}
+              .row(data-ng-if='candidateInterviewQuestionCtrl.activeQuestion.imageFilePath != ""')
+                .col-md-9.col-sm-9.col-xs-12
+                    h4 {{candidateInterviewQuestionCtrl.activeQuestion.question}}
+                .col-md-3.col-sm-3.col-xs-12
+                    img(ng-src='{{candidateInterviewQuestionCtrl.activeQuestion.imageFilePath}}')
+              hr
+              audio-response-question(on-update="candidateInterviewQuestionCtrl.onQuestionUpdate(question)", is-new-question='candidateInterviewQuestionCtrl.isNext', question='candidateInterviewQuestionCtrl.activeQuestion', number-of-questions='{{::candidateInterviewQuestionCtrl.questions.length}}', trigger-stop-recording='{{candidateInterviewQuestionCtrl.finishRecording}}', ng-if="candidateInterviewQuestionCtrl.activeQuestion.responseTypeId === 5")
+              video-response-question(on-update="candidateInterviewQuestionCtrl.onQuestionUpdate(question)", is-new-question='candidateInterviewQuestionCtrl.isNext', question='candidateInterviewQuestionCtrl.activeQuestion', number-of-questions='{{::candidateInterviewQuestionCtrl.questions.length}}', trigger-stop-recording='{{candidateInterviewQuestionCtrl.finishRecording}}', ng-if="candidateInterviewQuestionCtrl.activeQuestion.responseTypeId === 1")
+              text-response-question(is-new-question='candidateInterviewQuestionCtrl.isNext', disable-previous-button='candidateInterviewQuestionCtrl.disablePreviousButton', question='candidateInterviewQuestionCtrl.activeQuestion', number-of-questions='{{::candidateInterviewQuestionCtrl.questions.length}}', ng-if="candidateInterviewQuestionCtrl.activeQuestion.responseTypeId === 2")
+              multiple-choice-question(disable-previous-button='candidateInterviewQuestionCtrl.disablePreviousButton', question='candidateInterviewQuestionCtrl.activeQuestion', number-of-questions='{{::candidateInterviewQuestionCtrl.questions.length}}', ng-if="candidateInterviewQuestionCtrl.activeQuestion.responseTypeId === 4")
+              multiple-select-question(disable-previous-button='candidateInterviewQuestionCtrl.disablePreviousButton', question='candidateInterviewQuestionCtrl.activeQuestion', number-of-questions='{{::candidateInterviewQuestionCtrl.questions.length}}', ng-if="candidateInterviewQuestionCtrl.activeQuestion.responseTypeId === 3")
+          .question-footer
+            input.btn.btn-success.save-and-next-btn(type='button', ng-hide='candidateInterviewQuestionCtrl.activeQuestion.isLastQuestion', ng-click='candidateInterviewQuestionCtrl.saveAndGetNextQuestion()', value='{{candidateInterviewQuestionCtrl.saveButtonText}}', ng-disabled='!candidateInterviewQuestionCtrl.countdownFinish || candidateInterviewQuestionCtrl.saveButtonText === "Saving..."')
+            md-button.md-raised.md-primary(aria-label="submit",type='button', ng-show='candidateInterviewQuestionCtrl.activeQuestion.isLastQuestion', ng-click='candidateInterviewQuestionCtrl.submitInterview()') Submit
+        .question-container(data-ng-if='candidateInterviewQuestionCtrl.isInterviewFinish')
+           h4 You have successfully completed your interview process.
+           hr
+           button.btn.btn-success(data-ng-click='candidateInterviewQuestionCtrl.submitInterview()') Submit
+  .row(ng-hide='candidateInterviewQuestionCtrl.showQuestionPaper')
+     div(style="border:1px solid gray; width:50%; text-align:center; border-radius:3px; margin:0 auto; margin-top:10%; padding:20px;")
+       h4 No question available in question bank.
+       md-button.md-raised.md-primary(data-ng-click='candidateInterviewQuestionCtrl.goBack()') Go Back
+sidebar-help-component
+
+

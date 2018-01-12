@@ -1,0 +1,250 @@
+tr.full-row.ta-box
+  td.candidate-record(colspan='12')
+    .tabination-area.default-tab-module
+      ul.nav.nav-tabs
+        li(ng-repeat='interview in candidateAccordionCtrl.interviewsList',ng-class="{'active':$index==0}")
+          a(data-toggle='tab', ng-href='#interview_{{$index + 1}}', ng-click='candidateAccordionCtrl.showCandidates(interview.id,$event)')  {{interview.name}}
+        li(id='li_interviewAccordian',data-ng-if="candidateAccordionCtrl.isLiveNow", data-ng-click='candidateAccordionCtrl.showLiveNow()',ng-class="{'active' : !candidateAccordionCtrl.interviewsList.length || candidateAccordionCtrl.interviewsList.length==0}")
+            a(data-toggle='tab', href='#interviewAccordian') Live Now
+      .tab-content(ng-show='candidateAccordionCtrl.interviewsList.length > 0 || candidateAccordionCtrl.isLiveNow')
+        .tab-pane.fade.in.active.grid-show-tool-tip
+          .col-md-12.col-sm-12.col-xs-12.candidate-wrapper
+            .col-md-12.col-sm-12.col-xs-12.candidate-wrapper-section
+              .row
+                .col-md-2.col-sm-2.col-xs-12
+                  .form-group
+                    md-input-container.md-block(flex="100")
+                      label.cnd-search-lebel Search...
+                      input(type='text', ng-model="candidateAccordionCtrl.candidateFilter.search")
+                .col-md-1.col-sm-1.col-xs-12
+                  ul.setView
+                    li.box-compare(ng-click='candidateAccordionCtrl.showListView()', data-title='showList')
+                      i.fa.fa-list.fa-lg
+                      .tool-tip
+                        p
+                          i
+                          | List View
+                    li(ng-click='candidateAccordionCtrl.showGridView()', ,data-title='showGrid')
+                      i.fa.fa-th.fa-lg
+                      .tool-tip
+                        p
+                          i
+                          | Grid View
+                .col-md-2.col-sm-2.col-xs-12
+                  a.md-button.md-raised.md-primary(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', data-ng-show ='candidateAccordionCtrl.compareList.length > 1', ng-disabled='!candidateAccordionCtrl.compareList.length > 1')
+                    i.fa.fa-th.compare-icon(aria-hidden='true')
+                    | Compare
+                    span.caret.dropdown-icon
+                  ul.dropdown-menu(ng-if='candidateAccordionCtrl.compareList.length > 1')
+                    h6.text-center Compare Candiate List
+                    .col-md-12.name-section(ng-repeat='selected in candidateAccordionCtrl.compareList track by $index')
+                      input.col-md-2(type='checkbox', ng-click='candidateAccordionCtrl.addSelectedCandidate(selected)', ng-checked='selected.ischecked')
+                      span.col-md-10 {{selected.fullName}}
+                    .btn-compare
+                      md-button.md-raised.md-primary(ng-click='candidateAccordionCtrl.compareCandidates()') Compare
+                  a(data-asm-modal='evaluatorPopupModal',modal-data="candidateAccordionCtrl.selectedCandidate", btn-class='btn-popup', data-ng-show="CandidateReviewCtrl.selectedQuestion.recordingList > 0 || CandidateReviewCtrl.selectedCandidate.questionList > 0")
+                    i.fa.fa-share(aria-hidden='true')
+                    | Share          
+                .col-md-7.col-sm-7.col-xs-12
+                  .multiple-color-box                    
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box1(data-title='completed', ng-click="candidateAccordionCtrl.applyCandidateFilter(11)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.COMPLETED}}
+                        p.text-completed  Completed  
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box2(data-title='in-review', ng-click="candidateAccordionCtrl.applyCandidateFilter(22)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.INREVIEW}}
+                        p.text-review In Review
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box3(data-title='hired', ng-click="candidateAccordionCtrl.applyCandidateFilter(6)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.HIRED}}
+                        p.text-hired Hired
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box4(data-title='hold', ng-click="candidateAccordionCtrl.applyCandidateFilter(14)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.ONHOLD}}
+                        p.text-hold On Hold 
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box5(data-title='archive', ng-click="candidateAccordionCtrl.applyCandidateFilter(5)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.ARCHIVED}}
+                        p.text-archive Archive
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box6(data-title='no', ng-click="candidateAccordionCtrl.applyCandidateFilter(12)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.REJECTED}}
+                        p.text-reject Rejected
+                      .status-color-box
+                        .candidate-status-box
+                          .status-color-box7(data-title='evaluated', ng-click="candidateAccordionCtrl.applyCandidateFilter(23)")
+                            p {{candidateAccordionCtrl.candidateAccordionSummary.EVALUATED}}
+                        p.text-evaluated Evaluated 
+                  //ul
+                    li(data-title='completed', ng-click="candidateAccordionCtrl.applyCandidateFilter(11)")
+                      //i.fa.fa-check.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.COMPLETED}}
+                    | Completed   
+                    li(data-title='in-review', ng-click="candidateAccordionCtrl.applyCandidateFilter(22)")
+                      //i.fa.fa-question.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.INREVIEW}}
+                    | In Review  
+                    li(data-title='hired', ng-click="candidateAccordionCtrl.applyCandidateFilter(6)")
+                      //i.fa.fa-briefcase.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.HIRED}}
+                    | Hired  
+                    li(data-title='hold', ng-click="candidateAccordionCtrl.applyCandidateFilter(14)")
+                      //i.fa.fa-pause.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.ONHOLD}}
+                    | On Hold   
+                    li(data-title='archive', ng-click="candidateAccordionCtrl.applyCandidateFilter(5)")
+                      //i.fa.fa-archive.cnd-status-space(aria-hidden='true', name='archive')
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.ARCHIVED}}
+                    | Archive  
+                    li(data-title='no', ng-click="candidateAccordionCtrl.applyCandidateFilter(12)")
+                      //i.fa.fa-times.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.REJECTED}}
+                    | Rejected  
+                    li(data-title='evaluated', ng-click="candidateAccordionCtrl.applyCandidateFilter(23)")
+                      //i.fa.fa-times.cnd-status-space(aria-hidden='true')                      
+                      | {{candidateAccordionCtrl.candidateAccordionSummary.EVALUATED}}
+                    | Evaluated                       
+            .col-md-12.col-xs-12.col-sm-12
+              //.col-md-4.col-xs-12.col-sm-12.pull-right
+                .form-group
+                  md-input-container.md-block(flex="100")
+                    label.cnd-search-lebel Search...
+                    input(type='text', ng-model="candidateAccordionCtrl.candidateFilter.search")
+                  //md-icon.cnd-search-icon(md-font-set='fa') &#xf002
+              //.col-md-2.col-xs-12.col-sm-12.pull-right
+                a.md-button.md-raised.md-primary(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', data-ng-show ='candidateAccordionCtrl.compareList.length > 1', ng-disabled='!candidateAccordionCtrl.compareList.length > 1')
+                  i.fa.fa-th.compare-icon(aria-hidden='true')
+                  | Compare
+                  span.caret.dropdown-icon
+                ul.dropdown-menu(ng-if='candidateAccordionCtrl.compareList.length > 1')
+                  h6.text-center Compare Candiate List
+                  .col-md-12.name-section(ng-repeat='selected in candidateAccordionCtrl.compareList track by $index')
+                    input.col-md-2(type='checkbox', ng-click='candidateAccordionCtrl.addSelectedCandidate(selected)', ng-checked='selected.ischecked')
+                    span.col-md-10 {{selected.fullName}}
+                  .btn-compare
+                    md-button.md-raised.md-primary(ng-click='candidateAccordionCtrl.compareCandidates()') Compare
+                a(data-asm-modal='evaluatorPopupModal',modal-data="candidateAccordionCtrl.selectedCandidate", btn-class='btn-popup', data-ng-show="CandidateReviewCtrl.selectedQuestion.recordingList > 0 || CandidateReviewCtrl.selectedCandidate.questionList > 0")
+                  i.fa.fa-share(aria-hidden='true')
+                  | Share
+            .col-sm-4.col-md-4.col-xs-12.showMe
+              select.form-control(class="selectpicker" ng-model="candidateAccordionCtrl.test" ng-change="candidateAccordionCtrl.toggle()")
+                option(ng-model="col.show" value="{{$index}}" ng-repeat="col in candidateAccordionCtrl.cols.slice(1,candidateAccordionCtrl.cols.length) track by $index") {{col.title()}}
+            .col-md-12.col-sm-12.col-xs-12
+              p.text-label(ng-hide='candidateAccordionCtrl.initialCandidateList.length < 1') Showing 
+                  span
+                    strong 1-{{candidateAccordionCtrl.initialCandidateList.length}}
+                    |  of  
+                    strong
+                     {{candidateAccordionCtrl.candidateTotal}}  
+                    |  records                                        
+            .table-responsive.second-table(ng-show='candidateAccordionCtrl.isListViewSelected' data-ng-show='candidateAccordionCtrl.candidateTotal > 0')
+              table.table(ng-table='candidateAccordionCtrl.candidateTableParams',  ng-table-columns-binding="candidateAccordionCtrl.cols")
+                tr(ng-repeat='candidate in $data', ng-class="{'newStatus':candidate.candidateStatus==='NEW','inProgress':candidate.candidateStatus==='IN PROGRESS','completed':candidate.candidateStatus==='COMPLETED','inReviewStatsus':candidate.candidateStatus==='INREVIEW','hiredStatus':candidate.candidateStatus==='HIRED','onhold':candidate.candidateStatus==='ON HOLD','rejected':candidate.candidateStatus==='REJECTED','grey':candidate.candidateStatus==='ARCHIVED'}")
+                  td
+                    input.option-checkbox(type='checkbox', ng-checked='candidate.ischecked', ng-click='candidateAccordionCtrl.addSelectedCandidate(candidate)')
+                  td.cust-name(ng-if="true" class='col-sm-2' title="'Name'", sortable="'fullName'", ng-data='candidate.fullName', class-name='table-accordian') {{candidate.fullName}}
+                    .hover-sec
+                      img(ng-src="{{candidate.imageUrl}}", alt='')
+                  td.action-width(ng-if="true" class='col-sm-2' title="'Actions'")
+                    a(data-ng-click="candidateAccordionCtrl.viewCandidate(candidate.id)")
+                      i.fa.fa-eye(uib-tooltip='View Candidate')
+                  td(ng-if="true" class='col-sm-2' title="'Primary Skills'",sortable="'primarySkill'", ng-data='candidate.primarySkill', class-name='table-accordian')
+                    span(ng-if="candidate.primarySkill !== null") {{candidate.primarySkill}}
+                    span(ng-if="candidate.primarySkill == null") N/A
+                  td(ng-if="true" class='col-sm-2' title="'Candidate Status'", sortable="'candidateStatus'", ng-data='candidate.candidateStatus', class-name='table-accordian')
+                    .candidate-status-box(ng-if="!candidateAccordionCtrl.liveNowClicked")    
+                      ui-select.status-area(ng-disabled='candidateAccordionCtrl.userRole == 3',data-ng-model='candidate.candidateStatus', data-ng-change='candidateAccordionCtrl.updateCandidateStatus(candidate.id, candidate.candidateStatus)')
+                        ui-select-match(placeholder='Select status')
+                          span(ng-bind='$select.selected.statusName')
+                        ui-select-choices(repeat='cstatus.statusName as cstatus in candidateAccordionCtrl.candidateStatusAvailable | filter: $select.search')
+                          span(ng-bind='cstatus.statusName')
+                    .candidate-status-box(ng-if="candidateAccordionCtrl.liveNowClicked")   
+                      ui-select.status-area(ng-disabled='candidateAccordionCtrl.userRole == 3',data-ng-model='candidate.candidateStatus', data-ng-change='candidateAccordionCtrl.updateCandidateStatus(candidate.id, candidate.candidateStatus, candidate.interviewid)')
+                        ui-select-match(placeholder='Select status')
+                          span(ng-bind='$select.selected.statusName')
+                        ui-select-choices(repeat='cstatus.statusName as cstatus in candidateAccordionCtrl.candidateStatusAvailable | filter: $select.search')
+                          span(ng-bind='cstatus.statusName')
+                  td(ng-if="true" class='col-sm-2' title="'Interview Status'", sortable="'interviewStatus'", ng-data='candidate.interviewStatus', class-name='table-accordian')
+                    span(ng-if="candidate.interviewStatus !== null") {{candidate.interviewStatus}}
+                    span(ng-if="candidate.interviewStatus == null") N/A
+                  td(ng-if="true" class='col-sm-2' title="'Rating'",  data='candidate.overallRating', class-name='table-accordian')
+                    span.all-star(uib-rating='', ng-model='candidate.overallRating', max='5', read-only='true',  aria-labelledby='default-rating')
+                  td(ng-if="true" class='col-sm-2' title="'Test Score'",  sortable="'score'", ng-data='candidate.score', class-name='table-accordian') {{candidate.score}}
+                  td(ng-if="true" class='col-sm-2' title="'Yes'", sortable="'yes'", ng-data='candidate.yes', class-name='table-accordian') {{candidate.yes}}
+                  td(ng-if="true" class='col-sm-2' title="'No'",  sortable="'no'", ng-data='candidate.no', class-name='table-accordian') {{candidate.no}}
+                  td(ng-if="true" class='col-sm-2' title="'May be'",  sortable="'maybe'", ng-data='candidate.maybe', class-name='table-accordian') {{candidate.maybe}}
+            center(data-ng-show='candidateAccordionCtrl.initialCandidateList.length < 1') No candidate added for this position
+            .gridViewCandidateList(ng-show='candidateAccordionCtrl.isGridViewSelected' data-ng-show='candidateAccordionCtrl.candidateTotal > 0')
+              .col-md-4.col-sm-6.col-xs-12.grid-area(ng-repeat='candidate in candidateAccordionCtrl.initialCandidateList track by $index')
+                md-card.grid-section(ng-class="{'newStatus':candidate.candidateStatus==='NEW','inProgress':candidate.candidateStatus==='IN PROGRESS','completed':candidate.candidateStatus==='COMPLETED','inReviewStatsus':candidate.candidateStatus==='INREVIEW','hiredStatus':candidate.candidateStatus==='HIRED','onhold':candidate.candidateStatus==='ON HOLD','rejected':candidate.candidateStatus==='REJECTED','grey':candidate.candidateStatus==='ARCHIVED'}")
+                  .row
+                    .col-xs-12.col-sm-12.col-md-12
+                      .col-md-1.col-sm-1.col-xs-1
+                        input.option-checkbox(type='checkbox', ng-checked='candidate.ischecked', data-ng-click='candidateAccordionCtrl.addSelectedCandidate(candidate)')
+                      .col-md-1.col-sm-1.col-xs-1
+                        a(data-ng-click="candidateAccordionCtrl.viewCandidate(candidate.id)")
+                          i.fa.fa-eye.fa-lg
+                      .col-md-3.col-md-offset-4.col-xs-4.col-xs-offset-2
+                        ui-select.grid-status-area(ng-disabled='candidateAccordionCtrl.userRole == 3',data-ng-model='candidate.candidateStatus', data-ng-change='candidateAccordionCtrl.updateCandidateStatus(candidate.id, candidate.candidateStatus)')
+                          ui-select-match(placeholder='Select status')
+                            span(ng-bind='$select.selected.statusName')
+                          ui-select-choices(repeat='cstatus.statusName as cstatus in candidateAccordionCtrl.candidateStatusAvailable | filter: $select.search')
+                            span(ng-bind='cstatus.statusName')
+                  .row.candidate-widget        
+                    .col-md-4.col-sm-4.col-xs-4
+                      img.img-circle(ng-src='{{candidate.imageUrl}}', style="width:50px;height:50px;")
+                      table.table.my-table
+                        thead
+                          tr
+                            th
+                              i.fa.fa-thumbs-o-up(title='yes',aria-hidden='true')
+                            th
+                              i.fa.fa-thumbs-o-down(title='no',aria-hidden='true')
+                            th
+                              i.fa.fa-hand-paper-o(title='maybe',aria-hidden='true')
+                        tbody
+                          tr
+                            td
+                              span.badge.bg-green {{candidate.yes}}
+                            td
+                              span.badge.bg-light-blue {{candidate.no}}
+                            td
+                              span.badge.bg-red {{candidate.maybe}}
+                      label Test Score
+                            | {{candidate.score}}        
+                    .col-md-8.col-sm-8.col-xs-8
+                      .input-group
+                          span.input-group-addon
+                            i.fa.fa-user
+                          input.form-control(type='text', value='{{candidate.fullName}}' disabled='')
+                        table.grid-table
+                          tr
+                            td
+                              label Primary Skills
+                            td
+                              span(ng-if="candidate.primarySkill !== null") {{candidate.primarySkill}}
+                              span(ng-if="candidate.primarySkill == null") N/A
+                          tr
+                            td
+                              label Interview Status
+                            td
+                              span(ng-if='candidate.interviewStatus !== null') {{candidate.interviewStatus}}
+                              span(ng-if="candidate.interviewStatus === null") N/A
+                          tr
+                            td
+                              label Overall ratings
+                            td
+                              span.all-star(uib-rating='', ng-model='candidate.overallRating', max='5', read-only='true',  aria-labelledby='default-rating')                  
+
+  td.candidate-record(colspan='12' ,data-ng-show='candidateAccordionCtrl.interviewsList.length < 1 && !candidateAccordionCtrl.isLiveNow')
+    .tabination-area.default-tab-module
+      .tab-content
+        .interview-message      
+          span No Interview added for this position

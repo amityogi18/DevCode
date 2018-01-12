@@ -1,0 +1,149 @@
+//App level
+@import "variables";
+@import "buttons";
+@import "grid";
+@import "ui-select";
+@import "global";
+
+
+
+// Package Level
+
+// App level
+
+@import "../../packages/app/styles/component-loader";
+@import "../../packages/app/styles/content";
+@import "../../packages/app/styles/footer";
+@import "../../packages/app/styles/growler";
+@import "../../packages/app/styles/header";
+@import "../../packages/app/styles/modal";
+@import "../../packages/app/styles/ng-table";
+@import "../../packages/app/styles/page-loader";
+@import "../../packages/app/styles/sidebar";
+@import "../../packages/app/styles/angular-bootstrap-calendar";
+@import "../../packages/app/styles/navigation";
+@import "../../packages/app/styles/sidebar-help";
+@import "../../packages/app/styles/funnel";
+@import "../../packages/app/styles/block-help";
+
+
+
+
+// feature level
+
+// Analytics 
+@import "../../packages/app/features/analytics/styles/analytics";
+
+// candidate 
+
+// candidate Interview
+@import "../../packages/app/features/candidate_interview/styles/candidate-interview";
+@import "../../packages/app/features/candidate_interview/styles/candidate-question";
+@import "../../packages/app/features/candidate_interview/styles/video-response-question";
+@import "../../packages/app/features/candidate_interview/styles/audio-response-question";
+@import "../../packages/app/features/candidate_interview/styles/candidate-slot-selection";
+@import "../../packages/app/features/candidate_interview/styles/candidate-certificate";
+
+// candidate review 
+@import "../../packages/app/features/candidate_review/styles/candidate-review";
+
+// dashboard
+@import "../../packages/app/features/dashboard/styles/dashboard";
+@import "../../packages/app/features/dashboard/styles/refer-earn";
+@import "../../packages/app/features/dashboard/styles/notification";
+@import "../../packages/app/features/dashboard/styles/dashboard-position";
+@import "../../packages/app/features/dashboard/styles/events";
+@import "../../packages/app/features/dashboard/styles/candidate-status";
+@import "../../packages/app/features/dashboard/styles/quick-statics";
+@import "../../packages/app/features/dashboard/styles/invitation-tracking";
+@import "../../packages/app/features/dashboard/styles/favorite-candidate";
+@import "../../packages/app/features/dashboard/styles/dashboard-evaluator";
+@import "../../packages/app/features/dashboard/styles/introduction";
+
+// home
+@import "../../packages/app/features/home/styles/_login";
+@import "../../packages/app/features/home/styles/_reset-password";
+@import "../../packages/app/features/home/styles/_forget-password";
+
+// position
+@import "../../packages/app/features/position/styles/position";
+@import "../../packages/app/features/position/styles/createPosition";
+@import "../../packages/app/features/position/styles/interviewSetting";
+@import "../../packages/app/features/position/styles/welcomeVideoPopup";
+@import "../../packages/app/features/position/styles/candidate-evaluator";
+@import "../../packages/app/features/position/styles/audio-video-accordion";
+@import "../../packages/app/features/position/styles/view-position";
+@import "../../packages/app/features/position/styles/candidate-popup-template";
+@import "../../packages/app/features/position/styles/add-position";
+
+
+
+// settings
+@import "../../packages/app/features/settings/styles/admin-custom-question";
+@import "../../packages/app/features/settings/styles/admin-department";
+@import "../../packages/app/features/settings/styles/admin-payment-plan";
+@import "../../packages/app/features/settings/styles/admin-payment-transaction";
+@import "../../packages/app/features/settings/styles/admin-user";
+@import "../../packages/app/features/settings/styles/company-info";
+@import "../../packages/app/features/settings/styles/settings";
+@import "../../packages/app/features/settings/styles/user-department-popup";
+
+
+
+// super admin
+@import "../../packages/app/features/super_admin/styles/candidate-profile-super-admin";
+@import "../../packages/app/features/super_admin/styles/clients";
+@import "../../packages/app/features/super_admin/styles/company-candidates";
+@import "../../packages/app/features/super_admin/styles/payment-plan-super-admin";
+@import "../../packages/app/features/super_admin/styles/super-admin";
+@import "../../packages/app/features/candidate_review/styles/candidate-review";
+@import "../../packages/app/features/super_admin/styles/third-party-super-admin";
+@import "../../packages/app/features/super_admin/styles/question-bank-super-admin";
+@import "../../packages/app/features/super_admin/styles/user-role-super-admin";
+@import "../../packages/app/features/super_admin/styles/ticketing-system-super-admin";
+@import "../../packages/app/features/super_admin/styles/social-media-super-admin";
+@import "../../packages/app/features/super_admin/styles/technical-statics-super-admin";
+@import "../../packages/app/features/super_admin/styles/blog-super-admin";
+@import "../../packages/app/features/super_admin/styles/super-admin-sidemenu";
+
+
+//Candidate profile 
+@import "../../packages/candidateProfile/styles/certification";
+@import "../../packages/candidateProfile/styles/cover-letter";
+@import "../../packages/candidateProfile/styles/footer";
+@import "../../packages/candidateProfile/styles/header";
+@import "../../packages/candidateProfile/styles/interview-request";
+@import "../../packages/candidateProfile/styles/multi-apply";
+@import "../../packages/candidateProfile/styles/my-profile";
+@import "../../packages/candidateProfile/styles/sidemenu";
+@import "../../packages/candidateProfile/styles/video-intro";
+@import "../../packages/candidateProfile/styles/candidate-assessment";
+@import "../../packages/candidateProfile/styles/candidate-profile-public";
+@import "../../packages/candidateProfile/styles/edit-my-profile";
+@import "../../packages/candidateProfile/styles/view-profile";
+@import "../../packages/candidateProfile/styles/manage-profile";
+@import "../../packages/candidateProfile/styles/add-bg-music-modal";
+@import "../../packages/candidateProfile/styles/practice-video";
+@import "../../packages/candidateProfile/styles/job-openings";
+//@import "../../packages/candidateProfile/styles/content";
+
+//conference 
+@import "../../packages/conference/styles/conference-home";
+@import "../../packages/conference/styles/conference-meeting";
+@import "../../packages/conference/styles/conference-schedule";
+@import "../../packages/conference/styles/conference-startMeet";
+@import "../../packages/conference/styles/conference-webrtc";
+@import "../../packages/conference/styles/footer";
+@import "../../packages/conference/styles/header";
+@import "../../packages/conference/styles/conference-heading";
+@import "../../packages/conference/styles/contact-popup";
+
+//signup 
+@import "../../packages/signup/styles/company-info";
+@import "../../packages/signup/styles/email-confirmation";
+@import "../../packages/signup/styles/footer";
+@import "../../packages/signup/styles/header";
+@import "../../packages/signup/styles/save-registration";
+@import "../../packages/signup/styles/signup-home";
+@import "../../packages/signup/styles/_signup";
+@import "../../packages/signup/styles/_candidate-signup";

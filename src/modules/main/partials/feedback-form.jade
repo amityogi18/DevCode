@@ -1,0 +1,37 @@
+.feedback-form 
+  .feedback-button-box
+    button.btn.btn-feedback.hidden-xs(type='button', ng-click='$ctrl.toggleFeedbackContainer();$ctrl.clearMsgField();') Feedback
+    a.btn.btn-feedback.visible-xs(type='button', ng-click='$ctrl.toggleFeedbackContainer()')
+      i.fa.fa-commenting-o.fa-2x(aria-hidden='true', data-toggle='tooltip', data-placement='top', title='Feedback')
+  .feedback-form-container
+    .row
+      .col-md-12.col-xs-12.col-sm-12
+        form(name='$ctrl.feedbacform', novalidate='novalidate')
+          .form-group.row
+              md-input-container.md-block(flex="100")
+                label.md-input-label Email Id
+                input(type='text', data-ng-model='$ctrl.emailId', name='emailId', data-ng-blur='$ctrl.isEmailValid($ctrl.emailId)', data-ng-keyup='$ctrl.isEmailValid($ctrl.emailId)',maxlength='50',required='required')
+                span.err-msg(data-ng-if='$ctrl.errormessage !== ""') {{$ctrl.errormessage}}
+          .form-group.row
+              md-input-container.md-block(flex="100")
+                label.md-input-label Topic
+                md-select(name='topic',data-ng-model='$ctrl.topic', required='required')
+                  md-option(value='Application Related') Application Related
+                  md-option(value='Feature Related') Feature Related
+                  md-option(value='Generic') Generic
+                  md-option(value='others') Others
+                span.err-msg(data-ng-show='$ctrl.feedbacform.$submitted || $ctrl.feedbacform.topic.$touched')
+                  span(data-ng-show='$ctrl.feedbacform.topic.$dirty && $ctrl.feedbacform.topic.$invalid')
+                  span.err-msg(data-ng-show='$ctrl.feedbacform.topic.$error.required') {{$ctrl.selectMsg}}
+          .form-group.row
+            md-input-container.md-block(flex="100")
+              label.md-input-label Description
+              textarea(rows='3', data-ng-model='$ctrl.description')
+          .form-group.row
+            .col-md-5.col-sm-4.col-xs-12
+              span Overall Rating
+            .col-md-7.col-sm-8.col-xs-12
+              span.all-star(uib-rating='', ng-model='$ctrl.ratings', max='5', read-only='false', aria-labelledby='default-rating')
+          span Your Feedback Is Important To Us.
+          .col-md-12.col-md-12.col-xs-12
+            md-button.md-raised.savedata-btn.btn-block(ng-click='$ctrl.saveFeedback()') Submit

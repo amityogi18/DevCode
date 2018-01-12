@@ -1,0 +1,99 @@
+.conference-heading
+  .row
+    ul
+      .col-md-offset-2.col-md-3.col-sm-offset-2.col-sm-3.col-xs-4
+        li
+          a(href='javascript:void(0)', ng-click='ConferenceHeadingCtrl.openConferenceModal("meetnow")')
+            i.fa.fa-laptop.laptop-icon-conference(aria-hidden='true')
+            span.top-tab(data-translate='MEET-NOW-TAB')
+      .col-md-3.col-sm-3.col-xs-4
+        li
+          a(href='javascript:void(0)',data-toggle="modal" data-target="#conferenceModal")
+            i.fa.fa-calendar-check-o.calender-icon-conference(aria-hidden='true')
+            span.top-tab(data-translate='SCHEDULE-MEETING-TAB')
+      .col-md-3.col-sm-3.col-xs-4
+        li
+          a.noborder(href='javascript:void(0)', ng-click='ConferenceHeadingCtrl.openConferenceModal("joinbynumber")')
+            i.fa.fa-user-plus.plus-user-icon-conference(aria-hidden='true')
+            span.top-tab(data-translate='JOIN-BY-NUMBER-TAB')
+      .col-md-1.col-sm-1
+  .row(ng-show='ConferenceHeadingCtrl.showConferenceMeetNowPopup')
+    .col-md-offset-2.col-md-6.col-sm-offset-2.col-sm-6.col-xs-10
+      .conference-pop-wrapper
+        .conference-meet-now-form
+          form.meet-now-Form
+            .form-group
+            span.text-box-in-popup(data-translate='TOPIC-OF-MEETING-BOX')
+            input.form-control(type='text')
+            .form-group
+            span.text-box-in-popup(data-translate='PARTICIPANT-OF-MEETING')
+            input.form-control(type='text', placeholder='Enter email address or name')
+            .square-icon
+              i.fa.fa-plus.plus-square-icon(aria-hidden='true')
+            hr
+            button.btn.hide-popup(type='button', data-translate='CANCEL-MEETING', ng-click='ConferenceHeadingCtrl.closeConferenceModal()')
+            button.btn.start-popup(type='button', data-translate='START-MEETING')
+  .row(ng-show='ConferenceHeadingCtrl.showJoinByNumberPopup')
+    .col-md-offset-2.col-md-6.col-sm-offset-2.col-sm-6.col-xs-10
+      .conference-pop-wrapper
+        .conference-join-by-number
+          form.join-by-number-form
+            .form-group
+            span.meeting-number(data-translate='MEETING-NUMBER-BOX')
+            input.form-control(type='text')
+            button.btn.join-by-number-cancel(type='button', data-translate='CANCEL-MEETING', ng-click='ConferenceHeadingCtrl.closeConferenceModal()')
+            button.btn.join-by-number-join(type='button', data-translate='JOIN-MEETING-BY-NUMBER')
+  #conferenceModal.modal.fade(role='dialog')
+    .modal-dialog.modal-lg
+      .modal-content.conferenceModal
+        .modal-header
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title(data-translate='SCHEDULE-A-CONFERENCE')
+        .modal-body
+          .form-group.row
+            label.col-md-3.col-sm-3.col-xs-12(data-translate='TITLE-OF-MEETING')
+            .col-md-9.col-sm-9.col-xs-12
+              input.form-control(type='text')
+          .form-group.row
+            label.col-md-3.col-sm-3.col-xs-12(data-translate='DATE-OF-MEETING')
+            .col-md-4.col-sm-4.col-xs-12
+              input.form-control(type='date')
+            label.col-md-1.col-sm-1.col-xs-12(data-translate='LENGTH-OF-MEETING')
+            .col-md-2.col-sm-2.col-xs-12
+              select.form-control
+                option hr
+                option 1
+                option 2
+            .col-md-2.col-sm-2.col-xs-12
+              select.form-control
+                option min
+                option 1
+          .form-group.row
+            .col-md-3.col-md-offset-3.col-sm-offset-3.col-sm-4.col-xs-12
+              label.checkbox-inline
+                input(type='checkbox', value='')
+                span(data-translate='RECORD-MEETING-CHECKBOX')
+            .col-md-6.col-sm-5.col-xs-12
+              label.checkbox-inline
+                input(type='checkbox', value='')
+                span(data-translate='AUDIO-CONNECTION')
+          .form-group.row
+            label.col-md-3.col-sm-4.col-xs-12(data-translate='MEETING-PASSWORD')
+            .col-md-1.col-sm-1.col-xs-12
+              input(type='checkbox',ng-click='ConferenceHeadingCtrl.openTextBox("open")')
+            .col-md-8.col-sm-7.col-xs-12
+              input.form-control(type='text',ng-show='ConferenceHeadingCtrl.showTextBox')
+          .form-group.row
+            label.col-md-3.col-sm-3.col-xs-12(data-translate='INVITE-MORE-PEOPLE')
+            .col-md-9.col-sm-9.col-xs-12
+              textarea.form-control.area_for_text
+          .form-group.row
+            label.col-md-3.col-sm-3.col-xs-12(data-translate='AGENDA-OF-MEETING')
+            .col-md-9.col-sm-9.col-xs-12
+              textarea.form-control.area_for_text
+          .modal-footer
+            .row
+              .col-md-offset-8.col-md-2.col-sm-offset-7.col-sm-3.col-xs-12
+                button.btn.btn-success(type='button', data-dismiss='modal', data-translate='SCHEDULE-BUTTON')
+              .col-md-2.col-sm-2.col-xs-12
+                button.btn.btn-default(type='button', data-dismiss='modal', data-translate='CANCEL-MEETING')

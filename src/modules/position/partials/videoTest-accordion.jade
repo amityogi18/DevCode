@@ -1,0 +1,18 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion3', href='#videoTest') Webcam Check
+  #videoTest.panel-collapse.collapse(ng-init='videoTestAccordionCtrl.startRecording()')
+    .panel-body
+      .col-xs-12.col-sm-6
+          .microphone-content
+               p When your video appears on the screen and you can see yourself click next to proceed to
+                 | Microphone test
+
+      .col-xs-12.col-sm-6
+        .video-meter
+                .video-iframe-sec
+                    iframe(ng-show="!videoTestAccordionCtrl.recordingMode" ng-src='{{videoTestAccordionCtrl.trustSrc(videoTestAccordionCtrl.videoUrl)}}')
+                    video(id='videoTestElement' ng-show="videoTestAccordionCtrl.recordingMode")
+
+

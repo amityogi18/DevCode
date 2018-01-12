@@ -1,0 +1,167 @@
+.content-wrapper.view-position.super_admin.position-review
+  .row
+    .col-xs-12.col-sm-10.col-md-10
+      .review-position
+        span.review-position-heading Job Details
+    .col-xs-12.col-sm-2.col-md-2
+      md-button.md-raised.savedata-btn(type='button' data-ng-click='jobDescriptionCtrl.goBack()') Back
+  md-content
+    md-tabs(md-dynamic-height='', md-border-bottom='')
+      md-tab(label='Job Details')
+        md-content.md-padding
+          h1.md-display-2
+          .row
+            .col-md-12
+                .col-md-6
+                  h3.zero-margin {{jobDescriptionCtrl.JobDescription.name}}  
+                .pull-right.hidden-xs.accept-button
+                    a.edit-back.btn-green(type='button',data-ng-click='jobDescriptionCtrl.positionReview(26)') Accept
+                    a.btn-green(uib-popover-template='jobDescriptionCtrl.iscomment.templateUrl', popover-title='{{jobDescriptionCtrl.iscomment.title}}', popover-animation='true', popover-placement='{{jobDescriptionCtrl.iscomment.selected}}', type='button') Reject
+          .panel.panel-default
+            .panel-body             
+                .row
+                  .col-md-3
+                    span.bold-label Position code:
+                    span {{jobDescriptionCtrl.JobDescription.code}}         
+                  .col-md-3
+                    span.bold-label Expiry Date:
+                    span(ng-if="jobDescriptionCtrl.JobDescription.additionalOptions.positionExpiryDate == '0000-00-00 00:00:00' || jobDescriptionCtrl.JobDescription.additionalOptions.positionExpiryDate === null") N/A
+                    span(ng-if="jobDescriptionCtrl.JobDescription.additionalOptions.positionExpiryDate !== '0000-00-00 00:00:00' && jobDescriptionCtrl.JobDescription.additionalOptions.positionExpiryDate !== null") {{jobDescriptionCtrl.JobDescription.additionalOptions.positionExpiryDate | date : "MM-dd-yyyy"}}
+                hr  
+                .row
+                  .col-md-12
+                    h4 Job Description:
+                    span(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.description == ""') N/A
+                    span(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.description !== ""',ng-bind-html="jobDescriptionCtrl.JobDescription.additionalOptions.description")
+                hr 
+                .row
+                  .col-md-12
+                    .col-md-4
+                      h4 Department:
+                      span {{jobDescriptionCtrl.JobDescription.departmentName}}
+                hr      
+                .row
+                  .col-md-12
+                    .col-md-3
+                      .bold-label Primary Skill:
+                      p(ng-if='jobDescriptionCtrl.primarySkillName.skillsetName == null') N/A
+                      p {{jobDescriptionCtrl.primarySkillName.skillsetName}} 
+                    .col-md-3
+                      .bold-label Secondary Skill:
+                      p(ng-if='jobDescriptionCtrl.secondrySkillName.skillsetName == null') N/A
+                      p {{jobDescriptionCtrl.secondrySkillName.skillsetName}}
+                    .col-md-3
+                      .bold-label Tertiary Skill:
+                      p(ng-if='jobDescriptionCtrl.tertiarySkillName.skillsetName == null') N/A
+                      p {{jobDescriptionCtrl.tertiarySkillName.skillsetName}}
+                    .col-md-3
+                      .bold-label Other Skills:
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.otherSkills == ""') N/A
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.otherSkills !== ""') {{jobDescriptionCtrl.JobDescription.additionalOptions.otherSkills}}  
+                  
+                hr    
+                .row
+                  .col-md-12
+                    .col-md-4
+                      .bold-label Location:
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.country == null && jobDescriptionCtrl.JobDescription.additionalOptions.state == null && jobDescriptionCtrl.JobDescription.additionalOptions.city == null ') N/A
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.country !== null && jobDescriptionCtrl.JobDescription.additionalOptions.state !== null && jobDescriptionCtrl.JobDescription.additionalOptions.city !== null ') {{jobDescriptionCtrl.countrySetName.countryName}}, {{jobDescriptionCtrl.stateSetName.stateName}}, {{jobDescriptionCtrl.citySetName.cityName}}
+                    .col-md-4
+                      .bold-label Experience(years):
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.experienceFrom == 0 && jobDescriptionCtrl.JobDescription.additionalOptions.experienceTo == 0') N/A
+                      p(ng-if='jobDescriptionCtrl.JobDescription.additionalOptions.experienceFrom !== 0 && jobDescriptionCtrl.JobDescription.additionalOptions.experienceTo !== 0') {{jobDescriptionCtrl.JobDescription.additionalOptions.experienceFrom}} To {{jobDescriptionCtrl.JobDescription.additionalOptions.experienceTo}}           
+                    .col-md-4
+                      .bold-label Custom Fields:
+                      div(ng-repeat='data in jobDescriptionCtrl.JobDescription.additionalOptions.customOptions')
+                        p Custom Field {{$index + 1}}
+                        p {{data.customOption}}
+                hr    
+                .row
+                  .col-md-6.col-sm-4.col-xs-12
+                    h4 Insight Ratings: 
+                    table.table
+                        thead
+                          tr
+                            th Criteria
+                            th Is Mandatory
+                        tbody
+                          tr(ng-show='data.criteria !== ""', ng-repeat='data in jobDescriptionCtrl.JobDescription.insightCriteria.criterias')
+                            td
+                              span(ng-if='data.criteria !== ""') {{data.criteria}}
+                              span(ng-if='data.criteria == ""') N/A
+                            td
+                              span(ng-if='data.isMandatory == 0') No
+                              span(ng-if='data.isMandatory !== 0') Yes
+                  .col-md-6.col-sm-4.col-xs-12
+                    h4 Advance Criteria: 
+                    table.table
+                        thead
+                          tr
+                            th Criteria
+                            th Is Mandatory
+                        tbody
+                          tr(ng-show='data.criteria !== ""', ng-repeat='data in jobDescriptionCtrl.JobDescription.advanceCriteria.criterias')
+                            td
+                              span(ng-if='data.criteria !== ""') {{data.criteria}}
+                              span(ng-if='data.criteria == ""') N/A
+                            td
+                              span(ng-if='data.isMandatory == 0') No
+                              span(ng-if='data.isMandatory !== 0') Yes
+                hr
+                .row
+                  .col-md-12.col-sm-12.col-xs-12
+                    i.fa.fa-comment.cmt-icon(aria-hidden='true')
+                    label Comment
+                    .comment-section
+                      .col-md-12.comment-text
+                        .col-sm-8.col-md-8.col-xs-8.user-name {{jobDescriptionCtrl.JobDescription.portals.comment}}
+
+          
+      md-tab(label='Company Details' data-ng-click='jobDescriptionCtrl.getCompanyDetails(jobDescriptionCtrl.JobDescription.companyId)')
+        md-content.md-padding
+          .panel.panel-default
+            .panel-body             
+                .row
+                  .col-md-6
+                    .row
+                      .col-md-3
+                        span Company Name
+                      .col-md-3
+                        span {{jobDescriptionCtrl.companyDetails.companyName}}  
+                    hr
+                    .row
+                      .col-md-3
+                        span Company Size
+                      .col-md-3
+                        span {{jobDescriptionCtrl.companyDetails.companySize}} (employees)
+                    hr
+                    .row
+                      .col-md-3
+                        span Company Address
+                      .col-md-3
+                        span {{jobDescriptionCtrl.companyDetails.companyAddress}} 
+                    hr
+                    .row
+                      .col-md-3
+                        span Company Website
+                      .col-md-3
+                        a(ng-href="{{jobDescriptionCtrl.companyDetails.companyWebsite}}" target='_blank') {{jobDescriptionCtrl.companyDetails.companyWebsite}}   
+                    hr
+                    .row
+                      .col-md-3
+                        span Company Contact No
+                      .col-md-3
+                        span {{jobDescriptionCtrl.companyDetails.companyContactNo}}                 
+                  .col-md-6
+                    .row
+                      span Company Logo
+                    .row
+                        img(ng-src="{{jobDescriptionCtrl.companyDetails.companyLogo}}" alt="company logo")    
+
+  
+
+          
+
+        
+           
+            

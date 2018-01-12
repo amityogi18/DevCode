@@ -1,0 +1,377 @@
+.candidate-review(ng-cloak='')
+  .col-md-12.col-sm-12.col-xs-12.review-section.no-marg
+    .col-md-12.col-sm-12.col-xs-12.no-marg
+      .header-candidate-review.hidden-xs  
+        .candidate-heading.col-md-5.col-sm-4.col-xs-8(data-translate='CANDIDATE-REVIEW')
+      .header-candidate-review.hidden-md.hidden-sm.hidden-lg
+        md-button.md-primary.back-btn.col-xs-1(type='button',id='backbutton',ng-click='CandidateReviewCtrl.showList()') 
+          i.fa.fa-arrow-left(aria-hidden='true')      
+        md-button.md-primary.back-btn.col-xs-1(type='button',id='backbuttonQuestion',ng-click='CandidateReviewCtrl.showQuestionList()') 
+          i.fa.fa-arrow-left(aria-hidden='true')  
+        .col-xs-9.candidate-heading(data-translate='CANDIDATE-REVIEW')
+        .col-xs-1.mobile-button(data-ng-hide='CandidateReviewCtrl.candidateReviewList.length < 1')
+          md-button.md-primary.btn-right.hidden-xs.hidden-sm.stting-add.pull-right.col-md-4(data-ng-if='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 7')
+            a(data-asm-modal='addCandidatePopupModal', modal-data='CandidateReviewCtrl.selectedCandidate', btn-class='top-btn-popup')
+              span(data-translate='ADD-NEW-CANDIDATE')
+          md-button.md-primary.hidden-lg.hidden-md
+            a(data-asm-modal='addCandidatePopupModal', modal-data='CandidateReviewCtrl.selectedCandidate')     
+              i.fa.fa-user-plus(aria-hidden='true')     
+    .col-md-12.col-sm-12.col-xs-12.review.no-marg
+        .col-md-3.col-sm-3.col-xs-12.nospace
+            .input-group.search-tab
+              input.form-control(type='text', placeholder='Search', ng-model='CandidateReviewCtrl.searchText', ng-change="CandidateReviewCtrl.filter('name')")
+              .input-group-btn
+                button.btn.candidate-listing-btn(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', ng-click='CandidateReviewCtrl.openFilterBox()')
+                  | Filter
+                  span.caret
+                .choose-skill(ng-show='CandidateReviewCtrl.filterCollapse')
+                  .filter-form.col-md-12.col-sm-12.col-xs-12
+                    div(layout='row')
+                      md-input-container.md-block(flex='70')
+                        md-select(ng-model='CandidateReviewCtrl.positionId', placeholder='select', ng-change="CandidateReviewCtrl.filter('position')",ng-disabled='CandidateReviewCtrl.hidePsitionSelection')
+                          md-option(value='') None
+                          md-option(ng-repeat='item in CandidateReviewCtrl.positionList', value='{{item.id}}') {{item.positionName}}
+                      md-input-container.md-block.filter-option(flex='30', flex-offset='5') 
+                        label Position
+                    div(layout='row')
+                      md-input-container.md-block(flex='70')
+                        md-select(ng-model='CandidateReviewCtrl.interviewId', placeholder='select', ng-change="CandidateReviewCtrl.filter('interview')")
+                          md-option(value='') None
+                          md-option(ng-repeat='item in CandidateReviewCtrl.interviewList', value='{{item.id}}') {{item.name}}
+                      md-input-container.md-block.filter-option(flex='30', flex-offset='5')
+                        label Interview
+                    div(layout='row')
+                      md-input-container.md-block(flex='70')
+                        md-select(ng-model='CandidateReviewCtrl.statusFilter', placeholder='select', ng-change="CandidateReviewCtrl.filter('status')")
+                          md-option(value='') None
+                          md-option(ng-repeat='(key, value) in CandidateReviewCtrl.screenConfigData.filterOptions', value='{{key}}') {{value}}
+                      md-input-container.md-block.filter-option(flex='30', flex-offset='5')
+                        label Status
+                    div(layout='row')
+                      md-input-container.md-block(flex='70')
+                        md-select(ng-model='CandidateReviewCtrl.sortBy', placeholder='select', ng-change="CandidateReviewCtrl.sortFields()")
+                          md-option(value='') None
+                          md-option(ng-repeat='(key, value) in CandidateReviewCtrl.screenConfigData.sortOptions', value='{{key}}') {{value}}
+                      md-input-container.md-block.filter-option(flex='30', flex-offset='5')
+                        label Sort By
+        .col-md-9.col-sm-6.col-xs-1.mobile-button(data-ng-hide='CandidateReviewCtrl.candidateReviewList.length < 1')
+          md-button.col-md-3.col-md-offset-5.col-sm-4.col-sm-offset-4.col-xs-10.col-xs-offset-4.md-primary.btn-right.hidden-xs.hidden-sm.stting-add.pull-right(data-ng-if='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 7')
+            a(data-asm-modal='addCandidatePopupModal', modal-data='CandidateReviewCtrl.selectedCandidate', btn-class='top-btn-popup')
+              span(data-translate='ADD-NEW-CANDIDATE')
+          md-button.md-primary.hidden-lg.hidden-md
+            a(data-asm-modal='addCandidatePopupModal', modal-data='CandidateReviewCtrl.selectedCandidate', btn-class='top-popup')     
+              i.fa.fa-user-plus(aria-hidden='true')
+        .col-md-12.col-sm-12.col-xs-12(data-ng-if='CandidateReviewCtrl.candidateReviewList.length < 1')
+            p.alert.alert-danger.danger-text NO CANDIDATE AVAILABLE TO REVIEW
+    .col-md-12.col-sm-12.col-xs-12.review.no-marg
+        md-content.md-padding(ng-hide='CandidateReviewCtrl.candidateReviewList.length < 1')
+          .col-md-3.col-sm-3.col-xs-12.nospace  
+            md-card
+              md-card-actions
+                span.text-label(ng-hide='CandidateReviewCtrl.candidateReviewList.length < 1') 
+                    | showing 
+                    b 1
+                    | -
+                    b {{CandidateReviewCtrl.candidateReviewList.length}} 
+                    |  of 
+                    b {{CandidateReviewCtrl.candidateCount}} 
+                    | records
+                .candidate-bar(ng-class="{'no-candidate':CandidateReviewCtrl.shownone}")  
+                  .candidate
+                    table.table.table-first(ng-table='CandidateReviewCtrl.tableParams',ng-table-columns-binding="CandidateReviewCtrl.cols", id='candidateBar',ng-click='CandidateReviewCtrl.hideList()')
+                      tr(ng-repeat='candidate in $data', ng-click='CandidateReviewCtrl.selectCandidate(candidate.candidateId)', ng-class="{'active':candidate.candidateId==CandidateReviewCtrl.selectedCandidate.candidateId,'newStatus':candidate.candidateStatus==='New','inProgress':candidate.candidateStatus==='In Progress','completed':candidate.candidateStatus==='Completed','inReviewStatsus':candidate.candidateStatus==='Inreview','hiredStatus':candidate.candidateStatus==='Hired','onhold':candidate.candidateStatus==='on hold','rejected':candidate.candidateStatus==='rejected','grey':candidate.candidateStatus==='Archived'}")
+                        td(ng-if="true" class='col-md-12 col-sm-12 col-xs-12' data='candidate')
+                          .col-sm-4.col-md-4.col-xs-4.user-img
+                            img.img-box(ng-src="{{candidate.imageUrl?candidate.imageUrl:'.//'}}", alt='')
+                          .col-sm-8.col-md-8.col-xs-8.user-details.user-details-review
+                            .title 
+                                span(ng-bind='candidate.fullName| limitTo:15')
+                                span(ng-if='candidate.fullName.length >15') ...
+                            .stars(star-rating='', rating-value='candidate.overallRating', max='5')
+                            .like-sec
+                              a(uib-tooltip='Yes')
+                                md-button.md-icon-button(aria-label='Recommended')
+                                  md-icon(md-font-set='fa') &#xf087
+                                | {{candidate.yes}}
+                              a(uib-tooltip='No')
+                                md-button.md-icon-button(aria-label='Not Recommended')
+                                  md-icon(md-font-set='fa') &#xf088
+                                | {{candidate.no}}
+                              a(uib-tooltip='Maybe')
+                                md-button.md-icon-button(aria-label='Maybe')
+                                  md-icon(md-font-set='fa') &#xf256
+                                | {{candidate.maybe}}
+                      tr(data-ng-if='CandidateReviewCtrl.candidateReviewList.length>0 && CandidateReviewCtrl.candidateCount > 10')
+                        td.show-text(ng-if="true" class='col-md-12 col-sm-12 col-xs-12',ng-hide='CandidateReviewCtrl.candidateCount === CandidateReviewCtrl.candidateReviewList.length', data-ng-click='CandidateReviewCtrl.showMoreData()') Show More
+          .col-md-9.col-sm-9.col-xs-12.detail-of-candidate.nospace(data-ng-if='CandidateReviewCtrl.candidateInterviews.length > 0 && CandidateReviewCtrl.candidateReviewList.length>0')
+            md-card#candidateDetail
+              md-card-actions
+                .demand-tab-sec.right-spacing(ng-if='CandidateReviewCtrl.selectedCandidate', ng-init='CandidateReviewCtrl.limit=5;CandidateReviewCtrl.begin=0;')
+                  a.left-arrow-btn.hide-mbl(role='button', data-slide='prev', ng-if='CandidateReviewCtrl.candidateInterviews.length>5', ng-click='CandidateReviewCtrl.loadPreviousInterviews()')
+                    | {{begin}}
+                    i.left-right_0.fa.fa-2x.fa-chevron-circle-left(aria-hidden='true')
+                  a.right-arrow-btn.hide-mbl(role='button', data-slide='next', ng-if='CandidateReviewCtrl.candidateInterviews.length>5', ng-click='CandidateReviewCtrl.loadNextInterviews()')
+                    | {{begin}}
+                    i.left-right_0.fa-2x.fa.fa-chevron-circle-right(aria-hidden='true')
+                  ul.nav.nav-tabs.hide-mbl(ng-init='CandidateReviewCtrl.activeTabIndex=0;')
+                    li(ng-repeat='interview in CandidateReviewCtrl.candidateInterviews|limitTo : CandidateReviewCtrl.limit: CandidateReviewCtrl.begin', ng-class="{'active' : $index==CandidateReviewCtrl.activeTabIndex}")
+                      a(data-toggle='tab', ng-click='CandidateReviewCtrl.selectInterview(interview.interviewId)', href="{{'#interview'+$index}}")
+                        span(ng-bind='interview.interviewName| limitTo:18')
+                        span(ng-if='interview.interviewName.length>18') ...
+                  .list-stacked(ng-if='CandidateReviewCtrl.shownone')
+                    md-input-container.md-block(flex-xs="100")
+                      label Interviews
+                      md-select(ng-model='CandidateReviewCtrl.interviewId')
+                        md-option(ng-repeat='(index, interview) in CandidateReviewCtrl.candidateInterviews', ng-value='{{interview.interviewId}}', ng-click='CandidateReviewCtrl.selectInterview(interview.interviewId)', ng-selected='index == 0')
+                         | {{interview.interviewName}}
+                  .tab-content
+                    .user-details-box.tab-pane(ng-repeat='interview in CandidateReviewCtrl.candidateInterviews', id="{{'interview'+$index}}", ng-class="{'active' : $index==CandidateReviewCtrl.activeTabIndex}")
+                      .col-sm-12.col-xs-12.col-md-12.username-sec
+                        .col-sm-1.col-md-1.col-xs-4
+                          .user-img
+                            img(ng-src="{{CandidateReviewCtrl.selectedCandidate.imageUrl?CandidateReviewCtrl.selectedCandidate.imageUrl:'./img/user.png'}}", alt='')
+                        .col-md-4.col-sm-2.col-xs-8.name-spacing
+                            .candidate-name {{CandidateReviewCtrl.selectedCandidate.fullName}}
+                            .candidate-name-text {{CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName}}
+                            .candidate-name-text(data-ng-if='CandidateReviewCtrl.selectedCandidate.interviewTypeId === 3 && CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName !== "New" && CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName !== "In Progress" && CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName !== "On Hold" && CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName !== "Interview" && CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName !== "has started"') Objective Test Score: {{CandidateReviewCtrl.selectedCandidateInterview.score}} / {{CandidateReviewCtrl.selectedCandidateInterview.totalObjectiveQuestion}}
+                        .col-md-7.col-sm-7.col-xs-12
+                          .multiple-box
+                            ul
+                              li(uib-tooltip='Share', data-ng-if='(user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 7) && (CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 11 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 14 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 23 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 22 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 6) && (CandidateReviewCtrl.selectedQuestion.recordingList.filePath  || CandidateReviewCtrl.selectedCandidate.questionList.length > 0 || CandidateReviewCtrl.selectedCandidate.interviewTypeId !== 2)')
+                                span(data-asm-modal='evaluatorPopupModal', modal-data='CandidateReviewCtrl.selectedCandidate')
+                                  md-button.md-fab(aria-label='share')
+                                    md-icon(md-font-set='fa') &#xf064 
+                              li(uib-tooltip='Profile')
+                                span(data-asm-modal='profilePopupModalReview', modal-data='CandidateReviewCtrl.selectedCandidate')
+                                  md-button.md-fab(aria-label='profile')
+                                    md-icon(md-font-set='fa') &#xf007
+                              li(uib-tooltip='Rating', data-ng-if= 'CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus == 11 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus == 14 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus == 23 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus == 22 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus == 6')
+                                span(data-asm-modal='ratingPopupModalReview', modal-data='CandidateReviewCtrl.selectedCandidate', on-close='CandidateReviewCtrl.onClose()')
+                                  md-button.md-fab(aria-label='rating')
+                                    md-icon(md-font-set='fa') &#xf005
+                              li.alignment-btn(uib-tooltip='Favourite', data-ng-if='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 7 || user.userRoles == 3 || user.userRoles == 4')
+                                md-button.md-fab(aria-label='Favourite',ng-click='CandidateReviewCtrl.toggleFavorite()')
+                                  md-icon(md-font-set='fa', ng-if='CandidateReviewCtrl.selectedCandidate.isFavorite') &#xf004
+                                  md-icon(md-font-set='fa', ng-if='!CandidateReviewCtrl.selectedCandidate.isFavorite') &#xf08a 
+                              li(uib-tooltip='Resume', data-ng-if='CandidateReviewCtrl.selectedCandidate.profile.resumeUrl')
+                                a(href='{{CandidateReviewCtrl.selectedCandidate.profile.resumeUrl}}', download='download')
+                                  md-button.md-fab(aria-label='Resume')
+                                    md-icon(md-font-set='fa') &#xf0f6
+                              li.evaluator-btn(uib-tooltip='Add Evaluator', data-ng-if='(CandidateReviewCtrl.Roles === 1 || CandidateReviewCtrl.Roles === 2 || CandidateReviewCtrl.Roles === 6 || CandidateReviewCtrl.Roles == 7) && (CandidateReviewCtrl.selectedCandidate.interviewTypeId !== 2) && (CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus !== 6)')      
+                                span(data-asm-modal='addEvaluatorPopupModal', modal-data='CandidateReviewCtrl.selectedCandidate')
+                                  md-button.md-fab(aria-label='user plus')
+                                    md-icon(md-font-set='fa') &#xf234
+                              li.alignment-btn-review(uib-tooltip='Submit Review', ng-hide="CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName === 'Hired' || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName === 'New' || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName === 'has started' || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatusName === 'In Progress'")
+                                md-button.md-fab(aria-label='submit', ng-click='CandidateReviewCtrl.markEvaluated()') 
+                                  span.submit-review submit
+                        .col-sm-12.col-md-12.col-xs-12(ng-show='false')
+                          span
+                            a#share(href='#')
+                              span(data-translate='SHARE-VIEW-ONLY-LINK')
+                          span.pull-right
+                            label.switch
+                              input(type='checkbox', checked='')
+                              span.slider.round
+            //.col-md-9.col-sm-9.col-xs-12.detail-of-candidate.nospace(id ='candidateResponse',data-ng-if='CandidateReviewCtrl.candidateInterviews.length > 0 && CandidateReviewCtrl.candidateReviewList.length>0')
+            md-card#candidateResponse
+              md-card-actions
+                .demand-tab-sec(ng-if='!CandidateReviewCtrl.selectedCandidate')
+                  .col-md-12.col-sm-12.col-xs-12(data-translate='NO-CANDIDATE-SELECTED')
+                  // Profile Modal
+                .other-rating-sec(ng-if='CandidateReviewCtrl.selectedCandidate && CandidateReviewCtrl.selectedCandidate.questionList.length > 0 && CandidateReviewCtrl.selectedCandidateInterview.interviewTypeId === 3')
+                  h1.panel-title(data-translate='QUESTION')
+                  .col-md-12.col-sm-12.col-xs-12.panel-text
+                    #accordion.col-sm-4.spacing.panel-group(ng-if='CandidateReviewCtrl.selectedCandidate.questionList')
+                      ul.list-group.listing.panel.panel-default.question-bar(id='mobileQuestion',ng-click ='CandidateReviewCtrl.hideQuestionList();CandidateReviewCtrl.showResponse()')
+                        li.list-group-item(ng-click='CandidateReviewCtrl.selectQuestion($index);CandidateReviewCtrl.hideQuestionList()', data-toggle='collapse', data-parent='#accordion', href="{{'#question-row'+$index}}", ng-repeat-start='question in CandidateReviewCtrl.selectedCandidate.questionList', ng-class="{'active':question.questionId==CandidateReviewCtrl.selectedQuestion.questionId}")               
+                          span.icon-response
+                            i.fa.fa-volume-up(data-ng-if='question.responseTypeId === 5')
+                            i.fa.fa-video-camera(data-ng-if='question.responseTypeId === 1')
+                            i.fa.fa-list-ol(data-ng-if='question.responseTypeId === 4')
+                            i.fa.fa-list-ul(data-ng-if='question.responseTypeId === 3')
+                            i.fa.fa-file-code-o(data-ng-if='question.responseTypeId === 2')
+                          span(ng-bind='question.questionName | limitTo:36')
+                          span(ng-if='question.questionName.length > 36') ...
+                        .panel-collapse.collapse(ng-repeat-end='ng-repeat-end', id="{{'question-row'+$index}}", ng-show='question.questionName.length > 35')
+                          .panel-body.question-body {{question.questionName}}
+                    .col-md-8.col-sm-8.col-xs-12.average-rating-slider
+                      .col-md-12.col-sm-12.col-xs-12.background_box(role='listbox', ng-hide='CandidateReviewCtrl.hideAnswer',ng-show='!CandidateReviewCtrl.hideAnswer')
+                        .item.active.response-detail(ng-show='CandidateReviewCtrl.selectedQuestion.response',id='responseBar')
+                          figure.col-md-12.col-sm-12.col-xs-12.img-sec
+                            #text.col-md-12.col-sm-12.col-xs-12.img-sec(ng-show='CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.questionType==1 || CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.questionType== 2 || CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.questionType== 5')
+                              //video(src='{{CandidateReviewCtrl.trustSrc(CandidateReviewCtrl.selectedQuestion.response.answersGiven)}}', frameborder='0', allowfullscreen='', controls='controls', ng-show='CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.responseType==1')
+                              div(ng-show='CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.responseType==1')
+                                video#responseVideo.meet-video.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled(data-setup='{"autoplay": true, "controls" : true}')
+                              audio.ui-audio(src='{{CandidateReviewCtrl.trustSrc(CandidateReviewCtrl.selectedQuestion.response.answersGiven)}}', frameborder='0', allowfullscreen='', controls='controls', ng-show='CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.responseType==5')
+                              #text(ng-if='CandidateReviewCtrl.selectedQuestion && CandidateReviewCtrl.selectedQuestion.response.responseType==2')
+                                h5.col-md-12.col-sm-12.col-xs-12.text-answer-box
+                                  .selected-option(ng-show='CandidateReviewCtrl.selectedQuestion.response.answersGiven !== "" ') ANSWER
+                                  label.not-answered(ng-if='CandidateReviewCtrl.selectedQuestion.response.answersGiven === null || CandidateReviewCtrl.selectedQuestion.response.answersGiven === "" ') Not Answered
+                                  .col-md-12.col-sm-12.col-xs-12.text-arrange(ng-if='CandidateReviewCtrl.selectedQuestion.response.answersGiven !== null') {{CandidateReviewCtrl.selectedQuestion.response.answersGiven}}
+                            #mcq.text-area-option(ng-if='(CandidateReviewCtrl.selectedQuestion && (CandidateReviewCtrl.selectedQuestion.response.questionType==3 || CandidateReviewCtrl.selectedQuestion.response.questionType==4))')
+                              .selected-option Selected Option
+                              .col-md-12.col-sm-12.col-xs-12.answer-options.no-marg(ng-repeat='option in CandidateReviewCtrl.selectedQuestion.response.options')
+                                .col-md-3.col-sm-3.col-xs-3.no-marg
+                                  span(ng-if='option.selected')
+                                    input.col-md-1.col-sm-1.col-xs-3(type='checkbox', ng-model='option.selected', disabled='disabled')
+                                    md-button.col-md-1.col-sm-1.col-xs-4.md-icon-button(aria-label='correct', ng-if='option.isCorrect')
+                                      md-icon.green-box(md-font-set='fa') &#xf058
+                                    md-button.col-md-1.col-sm-1.col-xs-4.md-icon-button(aria-label='correct', ng-if='!option.isCorrect')
+                                      md-icon.red-box(md-font-set='fa') &#xf057
+                                  span(ng-if='!option.selected')
+                                    input.col-md-2.col-sm-2.col-xs-2(type='checkbox', value='', disabled='disabled')
+                                    span {{option.isCorrect}}
+                                .col-sm-9.col-md-9.col-xs-9.answer-index {{$index + 1}}. {{option.option}}
+                              span.answer-text.no-marg.col-md-4.col-sm-4.col-xs-12(data-translate='CORRECT-ANSWER')
+                              ol.no-marg.col-md-8.col-sm-8.col-xs-12(type='a')
+                                li.answer-box(ng-repeat='option in CandidateReviewCtrl.selectedQuestion.answer') {{option.option}}
+                          .img-caption
+                            span(data-translate='AVG-QUE-RATING')
+                            // span.all-star(star-rating='', rating-value='CandidateReviewCtrl.selectedQuestion.rating', max='5')
+                            span.all-star(uib-rating='', ng-model='CandidateReviewCtrl.selectedQuestion.ratings', max='5', read-only='CandidateReviewCtrl.isReadonly', ng-click='CandidateReviewCtrl.addRating(12)', aria-labelledby='default-rating')
+                        .item.active(ng-if='!CandidateReviewCtrl.selectedQuestion', data-translate='NO-QUE')
+                      #myCarousel3.carousel.slide.user-slider(data-ride='carousel', ng-if='CandidateReviewCtrl.selectedQuestion.evaluators.length > 0')
+                        // Wrapper for slides
+                        .carousel-inner.evaluator(role='listbox')
+                          .item(ng-repeat='evaluator in CandidateReviewCtrl.selectedQuestion.evaluators', ng-class="{'active' : $index==0}")
+                            li
+                              .col-md-4.col-sm-4.col-xs-4.user-img
+                                img(ng-src="{{evaluator.profileUrl?evaluator.profileUrl:'./img/user.png'}}", alt='')
+                              .col-md-8.col-sm-8.col-xs-8.user-name
+                                .h5 {{evaluator.firstName}} {{evaluator.lastName}}
+                                .h6 {{evaluator.email}}
+                                span.all-star(star-rating='', rating-value='evaluator.stars', max='5')
+                        // Left and right controls
+                        a.left.carousel-control(href='#myCarousel3', role='button', data-slide='prev')
+                          i.left-right_0.fa.fa-chevron-circle-left(aria-hidden='true')
+                        a.right.carousel-control(href='#myCarousel3', role='button', data-slide='next')
+                          i.left-right_0.fa.fa-chevron-circle-right(aria-hidden='true')
+                      .comment-wrap(ng-if='CandidateReviewCtrl.selectedQuestion')
+                        .comment-sec
+                          span.title.icons
+                            i.fa.fa-comment(aria-hidden='true')
+                            span.comment-heading(data-translate='COMMENTS')
+                          .comment-grp(ng-if='CandidateReviewCtrl.selectedQuestion.commentList')
+                            .col-sm-12.col-md-12.col-xs-12.comment-box(ng-repeat='comment in CandidateReviewCtrl.selectedQuestion.commentList ')
+                              .col-sm-2.col-md-2.col-xs-2.user-image
+                                img(ng-src="{{comment.userImageUrl?comment.userImageUrl:'./img/user.png'}}", alt='')
+                              .col-sm-8.col-md-8.col-xs-8.user-name
+                                div {{comment.firstName}} {{comment.lastName}} : {{comment.comment}}
+                                small {{comment.updatedAt}}
+                          .form-group
+                            form(ng-submit='CandidateReviewCtrl.postComment(12)')
+                              .col-sm-12.col-md-12.col-xs-12
+                                .col-sm-2.col-md-2.col-xs-3.user-image.image-mrgn
+                                  img(ng-src="{{CandidateReviewCtrl.commentList.userImageUrl?CandidateReviewCtrl.commentList.userImageUrl:'./img/user.png'}}", alt='')
+                                .col-sm-7.col-md-7.col-xs-7.top-padding
+                                  md-input-container.md-block
+                                    input(maxlength="50", placeholder='Post a Comment', ng-model="CandidateReviewCtrl.comment")
+                                    //input.form-control(type='text', placeholder='Post a Comment', ng-model='CandidateReviewCtrl.comment')
+                                .col-sm-3.col-md-3.col-xs-3.top-padding
+                                  input.btn.btn-popup.comment-btn(type='submit', value='Comment')
+                  .panel-text(ng-if='!CandidateReviewCtrl.selectedCandidate.questionList', data-translate='NO-QUE')
+                .other-rating-sec(ng-show='CandidateReviewCtrl.selectedCandidate && (CandidateReviewCtrl.selectedCandidateInterview.interviewTypeId === 1 || CandidateReviewCtrl.selectedCandidateInterview.interviewTypeId === 4) && CandidateReviewCtrl.selectedQuestion.recordingList.filePath')
+                  h1.panel-title(ng-show='CandidateReviewCtrl.selectedQuestion.recordingList.filePath') Interview Recordings 
+                  .col-sm-12.col-md-12.panel-text(ng-show='CandidateReviewCtrl.selectedQuestion.recordingList.filePath')
+                    .col-md-12.average-rating-slider
+                      .background_box(role='listbox')
+                        .item.active
+                          figure.img-sec
+                            //video.interview-recording(src='{{ CandidateReviewCtrl.trustSrc(CandidateReviewCtrl.selectedQuestion.recordingList.filePath)}}', frameborder='0', allowfullscreen='', controls='controls')
+                            video#interviewRecording.video-js.vjs-default-skin.vjs-controls-enabled.meet-video.vjs-big-play-centered(poster="./img/video-player-background.jpg",  data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                          .img-caption
+                            span(data-translate='AVG-QUE-RATING')
+                            span.all-star(uib-rating='', ng-model='CandidateReviewCtrl.selectedQuestion.ratings', max='5', read-only='CandidateReviewCtrl.isReadonly', ng-click='CandidateReviewCtrl.addRating(13)', aria-labelledby='default-rating')
+                      #myCarousel3.carousel.slide.user-slider(data-ride='carousel', ng-if='CandidateReviewCtrl.selectedQuestion.evaluators.length > 0')
+                        // Wrapper for slides
+                        .carousel-inner.evaluator(role='listbox')
+                          .item(ng-repeat='evaluator in CandidateReviewCtrl.selectedQuestion.evaluators', ng-class="{'active' : $index==0}")
+                            li
+                              .col-md-4.col-sm-4.col-xs-4.user-image
+                                img(ng-src="{{evaluator.profileUrl?evaluator.profileUrl:'./img/user.png'}}", alt='')
+                              .col-md-8.col-sm-8.col-xs-8.user-name
+                                .h5 {{evaluator.firstName}} {{evaluator.lastName}}
+                                .h6 {{evaluator.email}}
+                                span.all-star(star-rating='', rating-value='evaluator.stars', max='5')
+                        // Left and right controls
+                        a.left.carousel-control(href='#myCarousel3', role='button', data-slide='prev')
+                          i.left-right_0.fa.fa-chevron-circle-left(aria-hidden='true')
+                        a.right.carousel-control(href='#myCarousel3', role='button', data-slide='next')
+                          i.left-right_0.fa.fa-chevron-circle-right(aria-hidden='true')
+                      .comment-wrap(ng-if='CandidateReviewCtrl.selectedQuestion')
+                        .comment-sec
+                          span.title.icons
+                            i.fa.fa-comment(aria-hidden='true')
+                            span.comment-heading(data-translate='COMMENTS')
+                          .col-sm-12.comment-box(ng-repeat='comment in CandidateReviewCtrl.selectedQuestion.commentList ')
+                            .col-sm-2.user-image
+                              img(ng-src="{{comment.userImageUrl?comment.userImageUrl:'./img/user.png'}}", alt='')
+                            .col-sm-10.user-name
+                              .h5 {{comment.firstName}} {{comment.lastName}} : {{comment.comment}}
+                              small {{comment.updatedAt}}
+                          .form-group
+                            form(ng-submit='CandidateReviewCtrl.postComment(13)')
+                              .col-sm-12
+                                .col-sm-2.user-image
+                                  img(ng-src="{{CandidateReviewCtrl.selectedQuestion.userImageUrl?CandidateReviewCtrl.selectedQuestion.userImageUrl:'./img/user.png'}}", alt='')
+                                .col-sm-7.top-padding
+                                  md-input-container.md-block
+                                    input(maxlength="50", placeholder='Post a Comment', ng-model="CandidateReviewCtrl.comment")
+                                  //input.form-control(type='text', placeholder='Post a Comment', ng-model='CandidateReviewCtrl.comment')
+                                .col-sm-3.top-padding
+                                  input.btn.btn-popup.comment-btn(type='submit', value='Comment')
+                .other-rating-sec(ng-if='CandidateReviewCtrl.selectedCandidate && CandidateReviewCtrl.selectedCandidateInterview.interviewTypeId === 2 && (CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 11 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 14 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 23 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 22 || CandidateReviewCtrl.selectedCandidateInterview.candidateInterviewStatus === 6)')
+                  h1.panel-title Feedback
+                  .col-sm-12.col-md-12.panel-text
+                    .col-md-12.average-rating-slider
+                      .background_box(role='listbox')
+                        .item.active(ng-if='CandidateReviewCtrl.selectedQuestion.ratings')
+                          .img-caption
+                            span Average Rating
+                            span.all-star(star-rating='', rating-value='CandidateReviewCtrl.selectedQuestion.ratings', max='5')
+                      // 
+                      #myCarousel3.carousel.slide.user-slider(data-ride='carousel', ng-if='CandidateReviewCtrl.selectedQuestion.evaluators.length > 0')
+                        // Wrapper for slides
+                        .carousel-inner.evaluator(role='listbox')
+                          .item(ng-repeat='evaluator in CandidateReviewCtrl.selectedQuestion.evaluators', ng-class="{'active' : $index==0}")
+                            li
+                              .col-sm-4.user-image
+                                img(ng-src="{{evaluator.profileUrl?evaluator.profileUrl:'./img/user.png'}}", alt='')
+                              .col-sm-8.user-name
+                                .h5 {{evaluator.firstName}} {{evaluator.lastName}}
+                                .h6 {{evaluator.email}}
+                                span.all-star(star-rating='', rating-value='evaluator.stars', max='5')
+                        // Left and right controls
+                        a.left.carousel-control(href='#myCarousel3', role='button', data-slide='prev')
+                          i.left-right_0.fa.fa-chevron-circle-left(aria-hidden='true')
+                        a.right.carousel-control(href='#myCarousel3', role='button', data-slide='next')
+                          i.left-right_0.fa.fa-chevron-circle-right(aria-hidden='true')
+                      .comment-wrap(ng-if='CandidateReviewCtrl.selectedQuestion')
+                        .comment-sec
+                          span.title.icons
+                            i.fa.fa-comment(aria-hidden='true')
+                            span.comment-heading(data-translate='COMMENTS')
+                          .col-sm-12.comment-box(ng-repeat='comment in CandidateReviewCtrl.selectedQuestion.commentList ')
+                            .col-sm-2.user-image
+                              img(ng-src="{{comment.userImageUrl?comment.userImageUrl:'./img/user.png'}}", alt='')
+                            .col-sm-10.user-name
+                              .h5 {{comment.firstName}} {{comment.lastName}} : {{comment.comment}}
+                              small {{comment.updatedAt}}
+                          .form-group
+                            form(ng-submit='CandidateReviewCtrl.postComment(14)')
+                              .col-sm-12
+                                .col-sm-2.user-image
+                                  img(ng-src="{{CandidateReviewCtrl.comment.userImageUrl?CandidateReviewCtrl.comment.userImageUrl:'./img/user.png'}}", alt='')
+                                .col-sm-7.top-padding
+                                  md-input-container.md-block
+                                    input(maxlength="50", placeholder='Post a Comment', ng-model="CandidateReviewCtrl.comment")
+                                  //input.form-control(type='text', placeholder='Post a Comment', ng-model='CandidateReviewCtrl.comment')
+                                .col-sm-3.top-padding
+                                  input.btn.btn-popup.comment-btn(type='submit', value='Comment')
+                .other-rating-sec(ng-if='CandidateReviewCtrl.selectedCandidate && CandidateReviewCtrl.selectedCandidate.otherPositionRatings.length > 0')
+                  h1.panel-title(data-translate='OTHER-POSITION-RATING')
+                  .panel-text(ng-if='CandidateReviewCtrl.selectedCandidate.otherPositionRatings')
+                    p(ng-repeat='rating in CandidateReviewCtrl.selectedCandidate.otherPositionRatings', ng-click='CandidateReviewCtrl.changeData(rating.id, rating.positionName)')
+                      span.user {{rating.positionName}}
+                      span.all-star(star-rating='', rating-value='rating.rating', max='5')
+                  .panel-text(ng-if='!CandidateReviewCtrl.selectedCandidate.otherPositionRatings', data-translate='NO-RATING')

@@ -1,0 +1,138 @@
+.admin-payment-transaction-detail{
+  box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+  tr:focus{
+          cursor: default;
+          outline:none;
+        }
+    .main-table-area .table-first > thead th {
+      padding: 8px 0px !important;
+    }
+    .table-first { 
+            text-align: center;
+        .transaction-head{
+            padding: 10px;
+            font-size: 16px;
+            color: #FFF;
+            text-decoration: none !important;
+            position: relative;
+            background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%);
+
+        }
+        
+        thead th > span:hover .hover-box {
+          display: block;
+        }
+
+        thead th .hover-box {
+          width: 300px;
+          position: absolute;
+          top: 0px;
+          right: 140px;
+          background: #FFF;
+          border: #c1c8ca 1px solid;
+          padding: 5px 7px;
+          display: none;
+        }
+
+        thead th .hover-box:before {
+         content: '';
+         width: 10px;
+         height: auto;
+         position: absolute;
+         z-index: 9;
+         border-top: #ffffff 7px solid;
+         border-left: transparent 10px solid;
+         border-right: transparent 10px solid;
+         bottom: -6px;
+         left: 0;
+         right: 0;
+         margin: 0 auto;
+       }
+  
+         thead th .hover-box:after {
+         content: '';
+         width: 10px;
+         height: auto;
+         position: absolute;
+         border-top: #cacaca 7px solid;
+         border-left: transparent 10px solid;
+         border-right: transparent 10px solid;
+         bottom: -7px;
+         left: 0;
+         right: 0;
+         margin: 0 auto;
+       }
+
+         thead th .hover-box .color-box {
+          width: 26px;
+          height: 26px;
+          float: left;
+          margin-right: 7px;
+        }
+
+        thead th .hover-box ul li {
+         width: 33.33%;
+         float: left;
+         text-align: left;
+         line-height: 1em;
+       }
+
+         thead th .hover-box ul li:nth-child(1) .color-box {
+          border: #898989 1px solid;
+          background: #FFF;
+        }
+
+         thead th .hover-box ul li:nth-child(2) .color-box {
+          background: #90d45d;
+        }
+
+         thead th .hover-box ul li:nth-child(3) .color-box {
+          background: #45d7e4;
+        }
+
+         thead th .hover-box label {
+          font-size: 14px;
+          color: #5e646e;
+          font-weight: normal;
+          display: block;
+          overflow: hidden;
+          margin: 5px 0 0 0;
+        }
+
+         thead th .hover-box label {
+          font-size: 18px;
+        }    
+    }
+    .tansaction-table{
+      margin-left:-13px;
+    }
+    .showMe {
+    display: none;
+ }
+ 
+ .transaction-card{
+   text-align:left;
+   .transaction-card-text{
+     font-size:12px;
+   }
+   .transaction-chip{
+     background: rgb(76, 175, 80);
+     color: rgb(255, 255, 255);
+   }
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+
+}

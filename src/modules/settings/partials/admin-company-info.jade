@@ -1,0 +1,24 @@
+.content-wrapper.notification-setting.company-information
+  .video-intro-heading
+    span.video-intro-1 Company Information
+  .panel-body
+      .row
+          .col-md-6.col-sm-12.col-xs-12
+              company-logo
+          .col-md-6.col-sm-12.col-xs-12
+              company-profile
+          //.col-md-4
+              reporting
+      .row.video-row
+          .col-md-6(data-ng-if='user.products[0]==1')
+              welcome-video
+          .col-md-6(data-ng-if='user.products[0]==1')
+              exit-video
+      .row.video-row
+          .col-md-6
+              landing-image(data-ng-if='user.products[0]==1')
+          .col-md-6
+              social-media
+          //.col-md-4
+              dial-in
+

@@ -1,0 +1,18 @@
+#popover-control(style='width:210px !important; line-height:normal !important;')
+  .form-group
+    table(style='padding:5px;', cellpadding='7', cellspacing='7')
+      tr
+        td
+          i.fa.fa-desktop.fa-lg.margin-10-5(aria-hidden='true')
+        td
+          span.share-screen(ng-click="ConferenceWebrtcCtrl.toggleScreenShare()") {{ConferenceWebrtcCtrl.isScrnSharing ? 'Stop Screen Share' : ' Share Screen'}}
+      tr
+        td
+          i.fa.fa-laptop.fa-lg.margin-10-5(aria-hidden='true')
+        td
+          span.share-screen(ng-click="ConferenceWebrtcCtrl.openClosePopUp('E')") Text Editor
+      tr
+        td
+          i.fa.fa-code.fa-lg.margin-10-5(aria-hidden='true')
+        td
+          span.share-screen(ng-click="ConferenceWebrtcCtrl.openClosePopUp('CE')") Code Editor

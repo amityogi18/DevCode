@@ -1,0 +1,41 @@
+.panel.panel-default.view-position
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#five')  Live Interview Candidates 
+  #five.panel-collapse.collapse
+    .panel-body
+      // 
+      .table-row
+        .live-now-tab
+          .tab-content.inner-candidate-form
+            #candidates.tab-pane.fade.in.active
+              .interviewer-tab-content
+                .col-md-12.col-sm-12.col-xs-12(data-ng-show="liveInterviewAccordionCtrl.totalliveNowCandidates > 0")
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                        select(class="selectpicker" ng-model="liveInterviewAccordionCtrl.test" ng-change="liveInterviewAccordionCtrl.toggle()")
+                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in liveInterviewAccordionCtrl.cols.slice(1,liveInterviewAccordionCtrl.cols.length) track by $index") {{col.title()}}
+                    .main-table-area
+                        .table-responsive.third-table
+                            table.table(ng-table='liveInterviewAccordionCtrl.liveNowCandidatetableParams', ng-table-columns-binding="liveInterviewAccordionCtrl.cols")
+                              tr(ng-repeat='candidate in $data', ng-class="{'newStatus':candidate.candidateStatus==='NEW','inProgress':candidate.candidateStatus==='INPROGRESS','completed':candidate.candidateStatus==='COMPLETED','inReviewStatsus':candidate.candidateStatus==='INREVIEW','hiredStatus':candidate.candidateStatus==='HIRED','onhold':candidate.candidateStatus==='ON HOLD','rejected':candidate.candidateStatus==='REJECTED','grey':candidate.candidateStatus==='ARCHIVED'}")
+                                td(ng-if="true" class='col-sm-2' title="'Interview'", sortable="'interviewName'", ng-data='candidate.interviewName', class-name='table-accordian') {{candidate.interviewName}}                                  
+                                td.cust-name(ng-if="true" class='col-sm-2' title="'Name'", sortable="'fullName'", ng-data='candidate.fullName', class-name='table-accordian') {{candidate.fullName}}
+                                  .hover-sec
+                                    img(ng-src="{{candidate.imageUrl}}", alt='')                                
+                                td(ng-if="true" class='col-sm-2' title="'Primary Skills'", sortable="'primarySkill'", ng-data='candidate.primarySkill', class-name='table-accordian')
+                                  span(ng-if="candidate.primarySkill !== null") {{candidate.primarySkill}}
+                                  span(ng-if="candidate.primarySkill == null") N/A
+                                td(ng-if="true" class='col-sm-2' title="'Candidate Status'", sortable="'candidateStatusName'", ng-data='candidate.candidateStatusName', class-name='table-accordian') {{candidate.candidateStatusName}}                                  
+                                td(ng-if="true" class='col-sm-2' title="'Interview Status'", sortable="'interviewStatusName'", ng-data='candidate.interviewStatusName', class-name='table-accordian') {{candidate.interviewStatusName}}                                  
+                                td(ng-if="true" class='col-sm-2' title="'OverAll Rating'", data='candidate.overallRating', class-name='table-accordian')
+                                  span.all-star(uib-rating='', ng-model='candidate.overallRating', max='5', read-only='true',  aria-labelledby='default-rating')
+                                td(ng-if="true" class='col-sm-2' title="'Test Score'", sortable="'score'", ng-data='candidate.score', class-name='table-accordian')
+                                    span(data-ng-if="candidate.score === 0") N/A
+                                    span(data-ng-if="candidate.score !== 0") {{candidate.score}}
+                                td(ng-if="true" class='col-sm-2' title="'Yes'", sortable="'yes'", ng-data='candidate.yes', class-name='table-accordian') {{candidate.yes}}
+                                td(ng-if="true" class='col-sm-2' title="'No'", sortable="'no'", ng-data='candidate.no', class-name='table-accordian') {{candidate.no}}
+                                td(ng-if="true" class='col-sm-2' title="'May be'", sortable="'maybe'", ng-data='candidate.maybe', class-name='table-accordian') {{candidate.maybe}}
+                                td(ng-if="true" class='col-sm-2' title="'Link'",  ng-data='candidate.interviewLink', class-name='table-accordian')
+                                    a(href="{{candidate.interviewLink}}") Link
+                        .col-md-12.col-sm-12.col-xs-12(data-ng-show="liveInterviewAccordionCtrl.totalliveNowCandidates == 0")
+                            | No data Found        

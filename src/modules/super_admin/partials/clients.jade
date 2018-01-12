@@ -1,0 +1,134 @@
+.content-wrapper.super_admin.clients
+  .row
+    .col-xs-12.col-sm-12.col-md-12
+      .client
+        span.client-heading(data-translate='CLIENTS')
+  .panel.panel-default
+    .panel-heading.dashboard-profile-heading CLIENTS
+    .panel-body
+      .row
+        .col-xs-12.col-sm-3.col-md-3
+          md-input-container.md-block.position-search-continer(flex="100")
+            label.position-search-lebel Search...
+            input(type='text', ng-model='clientsCtrl.searchFilter.search')
+            md-icon.position-search(md-font-set='fa') &#xf002
+        .col-xs-12.col-sm-3.col-md-3
+          md-input-container.md-block(flex="100")
+            label Select Company
+            md-select(data-ng-model='clientsCtrl.companyName', name='companyName', data-ng-change='clientsCtrl.getCompanyData()', md-on-close="clientsCtrl.clearSearchActiveCompany()", data-md-container-class='selectdemoSelectHeader')
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='clientsCtrl.searchActiveCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Company')
+              md-option(ng-value='company.name', data-ng-repeat='company in clientsCtrl.companyList | filter: clientsCtrl.searchActiveCompany') {{company.name}}
+        .col-xs-6.col-sm-2.col-md-2
+          md-button.md-primary
+            a.client-btn(data-asm-modal='clientPopupModal', btn-class='btn btn-primary header-button client-btn',  on-close="clientsCtrl.onClose()") Add Client
+        .col-xs-6.col-sm-2.col-md-2(ng-if="clientsCtrl.clientStatus == 1")
+          md-button.md-raised.md-primary(aria-label="save", data-ng-click='clientsCtrl.changeClientStatus(2)' ng-disabled="!clientsCtrl.selectedActiveCompanyId.length", on-close="clientsCtrl.onClose()") Mark Inactive
+        .col-xs-6.col-sm-2.col-md-2(ng-if="clientsCtrl.clientStatus == 2")
+          md-button.md-raised.md-primary(aria-label="save", data-ng-click='clientsCtrl.changeClientStatus(1)' ng-disabled="!clientsCtrl.selectedInactiveCompanyId.length", on-close="clientsCtrl.onClose()") Mark Active
+        .col-xs-12.col-sm-2.col-md-2
+          md-input-container.md-block(flex="100")
+            label Client Filter
+            md-select(data-ng-model="clientsCtrl.clientStatus", name='clientStatus', data-md-container-class='selectdemoSelectHeader', md-on-close="companyInfoCtrl.clearSearchSize()", data-ng-change="clientsCtrl.getClientStatus()")
+              md-option(value='1') Active
+              md-option(value='2') Inactvie
+              md-option(value='8') Signup Initiated
+      .row(data-ng-show="clientsCtrl.clientListCount > 0")
+        .col-sm-4.col-md-4.col-xs-6.showMe
+          select(class="selectpicker" ng-model="clientsCtrl.test1" ng-change="clientsCtrl.toggle(clientsCtrl.test1)")
+            option(ng-model="col.show" value="{{$index}}" ng-repeat="col in clientsCtrl.cols.slice(1,clientsCtrl.cols.length) track by $index") {{col.title()}}
+        // Active Clients
+        .col-md-12.col-sm-12.col-xs-12
+          p.text-label(ng-hide='clientsCtrl.clientList.length < 1') Showing 
+              span
+                strong 1-{{clientsCtrl.clientList.length}}
+                |  of  
+                strong
+                  {{clientsCtrl.clientListCount}}   
+                |  records  
+        .table-responsive
+          table.table.table-condensed.table-bordered.table-striped.table-responsive.active-clients-table(ng-table='clientsCtrl.clientTableParams', ng-table-columns-binding="clientsCtrl.cols")
+            tr(ng-repeat-start='clients in $data')
+              td
+                input(type='checkbox', data-ng-click='clientsCtrl.addActiveInactiveCompanyId($event, clients)', ng-disabled='clients.companyStatus === 0')
+              td(ng-if="true" class='col-sm-1' title="'Actions'")
+                a(btn-class='client-icon-btn', info-data="edit", modal-data='clients.companyId', data-asm-modal='clientPopupModal', on-close="clientsCtrl.onClose()", data-ng-hide="clients.statusId == 8")
+                  i.fa.fa-edit
+                a(class='client-icon-btn', type='button', data-toggle='modal', data-target='#viewClientModal', data-ng-click="clientsCtrl.showUpdateClients(clients)")
+                  i.fa.fa-eye
+                a.trigger-dwn-client
+                  i.fa.fa-chevron-circle-down.clickable.hover-pointer(aria-hidden='true', id='trActive_{{clients.userId}}', data-toggle='collapse', data-target='#accordionActive_{{$index}}', ng-click='clientsCtrl.changeIcon($event)')
+              td(ng-if="true" class='col-sm-2' title="'Company'", sortable="'companyName'", ng-data='clients.companyName') {{clients.companyName}}
+              td(ng-if="true" class='col-sm-2' title="'Product'", sortable="'productName'", ng-data='clients.productsPlan')
+                span {{clients.productsPlans[0].productName}}
+                span(ng-if="clients.productsPlans.length > 1") , {{clients.productsPlans[1].productName}}
+              td(ng-if="true" class='col-sm-2' title="'Registration Date'",  sortable="'registrationDate'") {{clients.registrationDate | date:'MM/dd/yyyy'}}
+              td(ng-if="true" class='col-sm-1' title="'Active Users'",  sortable="'activeUsers'", ng-data='clients.activeUsers') {{clients.activeUsers}}
+              td(ng-if="true" class='col-sm-1' title="'Inactive Users'",  sortable="'inActiveUsers'", data='clients.inActiveUsers') {{clients.inActiveUsers}}
+              td(ng-if="true" class='col-sm-1' title="'Company Admin '",  sortable="'userName'") {{clients.userName}}
+              td(ng-if="true" class='col-sm-2' title="'Status'",  sortable="'status'", ng-data='clients.status') {{clients.status}}
+            tr.collapse(ng-repeat-end='ng-repeat-end', id='accordionActive_{{$index}}')
+              td(colspan='10')
+                table.table.table-bordered
+                  thead
+                    tr
+                      th Product
+                      th Plan
+                      th Purchase Date
+                      th Expiry Date
+                      th Remaining Day
+                  tbody
+                    tr(data-ng-repeat='plan in clients.productsPlans')
+                      td {{plan.productName}}
+                      td {{plan.planName}}
+                      td {{plan.planPurchaseDate}}
+                      td {{plan.planExpireDate}}
+                      td {{plan.planRemainingDay}}
+      .row(data-ng-show="clientsCtrl.clientListCount == 0")
+        .col-md-12
+          .alert.alert-success.candidate-data-info No Data Found
+#viewClientModal.modal.fade(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal') ×
+        h4.modal-title Client Details
+      .modal-body
+        table.table
+          tbody
+            tr
+              td  Company
+              td  {{clientsCtrl.client.companyName}}
+            tr
+              td Product
+              td
+                div(data-ng-repeat='plan in clientsCtrl.client.productsPlans')
+                  span {{plan.productName}}
+            tr
+              td Plan
+              td
+                div(data-ng-repeat='plan in clientsCtrl.client.productsPlans')
+                  span {{plan.planName}}
+            tr
+              td No. Of Active User
+              td  {{clientsCtrl.client.activeUsers}}
+            tr
+              td No. Of InActive User
+              td  {{clientsCtrl.client.inActiveUsers}}
+            tr
+              td Registration Date
+              td  {{clientsCtrl.client.registrationDate}}
+            tr
+              td Plan Expiry Date
+              td
+                div(data-ng-repeat='plan in clientsCtrl.client.productsPlans')
+                  span {{plan.planExpireDate}}
+            tr
+              td Company Admin
+              td  {{clientsCtrl.client.userName}}
+            tr
+              td Status
+              td  {{clientsCtrl.client.status}}
+      .modal-footer
+        button.btn.btn-primary(type='button', data-dismiss='modal') Close

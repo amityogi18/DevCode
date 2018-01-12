@@ -1,0 +1,49 @@
+.company-information
+    md-card 
+        .video-intro-heading.welcome-video
+          span.video-intro-1.welcome-video(data-translate="EXIT-VIDEO")
+        .panel-body.padding-of-panel
+            .form-body
+              exit-video-recorder(default-url='https://www.youtube.com/embed/mcixldqDIEQ')
+            #exit-video.modal.fade.welcome-video(role='dialog')
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      button.close(type='button', data-dismiss='modal')
+                        img(src='../../../public/img/popup-cross.png', alt='')
+                      h4(data-translate="EXIT-VIDEO")
+                    .modal-body
+                      p.sub-title(data-translate="PREVIEW-LINK")
+                      .video-iframe-sec
+                        iframe.exit-video-frame(src='https://www.youtube.com/embed/mcixldqDIEQ', frameborder='0', allowfullscreen='')
+                      .modal-footer
+                        .video-upload-sec
+                          .input-area
+                            i.fa.fa-youtube(aria-hidden='true')
+                            input.form-control(type='text')
+                            .upload-btn
+                              input(type='file')
+                              span
+                                i.fa.fa-upload(aria-hidden='true')
+                                span(data-translate="UPLOAD-BTN")
+                                i.fa.fa-sort-desc(aria-hidden='true')
+                        .choose-video-sec
+                          .col-md-5
+                            .row
+                              .slct-area
+                                span.lebel Choose From Existing Video :
+                                .select-field
+                                  select.form-control
+                                    option Danny Smith
+                                  a(href='#') Preview
+                          .col-md-7
+                            .row
+                              .btns-area
+                                .browse-btn
+                                  input(type='file')
+                                  span Browse
+                                a.btn-upld(href='#')
+                                  i.fa.fa-upload(aria-hidden='true')
+                                  | Upload
+                                button.btn-record(type='button') Record
+              // exit video popup end

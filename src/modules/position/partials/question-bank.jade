@@ -1,0 +1,489 @@
+.modal-header.question-bank-modal
+  span(ng-if='$ctrl.showFromQuestionBank') Choose Questions From Question Bank
+  span(ng-if='$ctrl.showNewQuestion') New Question
+  span(ng-if='$ctrl.showExistingTemplate') Choose Questions From Existing Template
+  span(ng-if='$ctrl.showPrevPositionTemplate') Choose Questions From Previous Position
+  button.close(type='button', ng-click='$ctrl.closeModal()')
+    i.fa.fa-times.fa-lg(aria-hidden='true')
+.modal-body.q-bank-body
+  .row
+    .left-panel-area.full-border
+      .written-tab-sec(data-ng-if='!$ctrl.hideView')
+        button#hiddennewbutton(ng-click='$ctrl.controlNewTabsDisplay()')
+        button#hiddenbutton(ng-click='$ctrl.controlTabsDisplay()')
+        button#hiddenExstingTemplateBtn.hidden(ng-click='$ctrl.controlExistingTemplateTabsDisplay()')
+        button#hiddenPrevPosBtn.hidden(ng-click='$ctrl.controlPrevPosTabsDisplay()')
+        ul.nav.nav-tabs.question-bank-tabs
+          li(ng-show='$ctrl.showFromQuestionBank', ng-class='$ctrl.showFromQuestionBank ? "active" : ""', ng-click="$ctrl.getQuestionBankInfo('custom')")
+            a(data-toggle='tab', href='#tab1') Question Bank
+          li(ng-show='$ctrl.showNewQuestion', ng-class='$ctrl.showNewQuestion ? "active" : ""')
+            a(data-toggle='tab', href='#tab2') Write a Question
+          li(ng-show='$ctrl.showFromQuestionBank', ng-class='$ctrl.showFromQuestionBank', ng-click="$ctrl.getQuestionBankInfo('company')")
+            a(data-toggle='tab', href='#tab3') Custom Question bank
+          li.hidden
+            a(data-toggle='tab', href='#tab4', ng-show='$ctrl.showExistingTemplate') Existing Template
+          li.hidden
+            a(data-toggle='tab', href='#tab5', ng-show='$ctrl.showPrevPositionTemplate') Previous Position
+        .tab-content
+          #tab1.tab-pane.fade.in(ng-class='$ctrl.showFromQuestionBank ? "active" : ""')
+            .category-panel.hidden-xs
+              .col-md-4.col-sm-4.col-xs-12.section-box
+                .category-part
+                  .panel-heading Choose Category
+                    span.caret
+                  .panel-ul-body
+                    ul
+                      li(ng-repeat='c in $ctrl.questionBankList', ng-class="{'active': c.id === $ctrl.categoryId}", ng-click='$ctrl.selectCategory(c.id)') {{c.name}}                          
+              .col-md-4.col-sm-4.col-xs-12.section-box
+                .category-part
+                  .panel-heading Choose Sub-Category
+                    span.caret
+                  .panel-ul-body
+                    ul
+                      li(ng-repeat='s in $ctrl.subCategory', ng-class="{'active': s.id === $ctrl.subCategoryId}" , ng-click="$ctrl.selectSubCategory($index,'custom')") {{s.skillsetName}}                          
+              .col-md-4.col-sm-4.col-xs-12.section-box
+                .category-part
+                  .panel-heading Choose Question
+                  .panel-ul-body
+                    ul
+                      li(ng-repeat='q in $ctrl.question', ng-click='$ctrl.selectQuestions($index, q)') {{q.question}}
+            .category-panel.visible-xs
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Category
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li(ng-repeat='c in $ctrl.questionBankList', ng-class="{'active': c.id === $ctrl.categoryId}", ng-click='$ctrl.selectCategory(c.id)')
+                    a(href="#") {{c.name}}                          
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Sub-Category
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='s in $ctrl.subCategory', ng-class="{'active': s.id === $ctrl.subCategoryId}" , ng-click="$ctrl.selectSubCategory($index,'custom')")
+                    a(href="#") {{s.skillsetName}}                                                  
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Question
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='q in $ctrl.question', ng-click='$ctrl.selectQuestions($index, q)')
+                    a(href="#") {{q.question}}
+          #tab2.tab-pane.fade(ng-class='$ctrl.showNewQuestion ? "active in" : ""')
+            form.form-margin(role='form',name='$ctrl.questionBankForm', novalidate)
+              .row.category-controls
+                .col-md-4.col-sm-4.col-xs-12.text-left
+                  md-input-container.md-block(flex="100")
+                    label Question Type
+                    md-select(ng-change='$ctrl.questionTypeChanged()',name='questionType', ng-model='$ctrl.selectedQuestionType',required)
+                      md-option(ng-value='item.id',ng-repeat='item in $ctrl.questionTypeList') {{item.questionType}}
+                  span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.questionType.$touched')
+                    span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.questionType.$error.required') Please Select Question Type
+                .col-md-4.col-sm-4.col-xs-12.text-left
+                  md-input-container.md-block(flex="100")
+                   label Choose category
+                   md-select(ng-change='$ctrl.categoryChanged()',name='category', ng-model='$ctrl.selectedCategory',md-on-close="$ctrl.clearSearchCategory()", data-md-container-class='selectdemoSelectHeader',required)
+                     md-select-header.demo-select-header
+                       input.demo-header-searchbox.md-text(ng-model='$ctrl.searchCategory', type='search', placeholder='Search...',ng-keydown="$event.stopPropagation()")
+                     md-option(ng-value='item.id',ng-repeat='item in $ctrl.questionBankList|filter:$ctrl.searchCategory') {{item.name}}
+                  span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.category.$touched')
+                    span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.category.$error.required') Please Select Category
+                .col-md-4.col-sm-4.col-xs-12.text-left
+                  md-input-container.md-block(flex="100")
+                    label Choose Sub-category
+                    md-select(ng-model='$ctrl.selectedSubCategory',name='subcategory',md-on-close="$ctrl.clearSearchSubCategory()", data-md-container-class='selectdemoSelectHeader',required)
+                      md-select-header.demo-select-header
+                        input.demo-header-searchbox.md-text(ng-model='$ctrl.searchSubCategory', type='search', placeholder='Search...',ng-keydown="$event.stopPropagation()")
+                      md-option(ng-value='item.id ',ng-repeat='item in $ctrl.subCategoryList|filter:$ctrl.searchSubCategory') {{item.skillsetName}}
+                    span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.subcategory.$touched')
+                      span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.subcategory.$error.required') Please Select Subcategory
+              .row.mg-b-10.category-controls
+                .col-md-12.col-sm-12.col-xs-12
+                  .row.category-controls(ng-show='$ctrl.showText && !$ctrl.showAudio && !$ctrl.showVideo && !$ctrl.showMCQ && !$ctrl.showMSQ')
+                    .col-md-12
+                      .form-margin.row
+                        .col-md-8.col-sm-8.col-xs-12.spacing-box
+                          md-input-container.md-block(flex="100")
+                            label Type your question here
+                            textarea.form-field(rows='2',cols='84', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion',required)
+                          //md-input-container.md-block.visible-xs(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='38', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='min-width: 270px; max-width:270px; margin-top: 8px;',required)
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.enteredQuestion.$touched')
+                            span.error-qb(data-ng-show='$ctrl.questionBankForm.enteredQuestion.$error.required') Please Enter Question
+                        //- .col-md-3.col-sm-4.col-xs-12
+                        //-   label Image:
+                        //-   .choose_file
+                        //-     .row(data-ng-show='!$ctrl.isQuestionImageFileAdded')
+                        //-       p
+                        //-         i.fa.fa-image.fa-2x
+                        //-       p.image-placeholder Upload an image as a question                       
+                        //-     input(type='file',ng-model='$ctrl.mcqMsqImage', ngf-select='$ctrl.uploadImage($files);$ctrl.isFileAdded($files)', name='file', accept='image/*', ngf-max-size='2MB', ngf-model-invalid='errorFile' data-ng-show='!$ctrl.isQuestionImageFileAdded;!$ctrl.isEdit')
+                        //-     img.question-pic(alt='',ngf-thumbnail="$ctrl.mcqMsqImage", data-ng-if='!$ctrl.showFileChooser', ng-model='$ctrl.mcqMsqImage')
+                        //- .col-md-1    
+                        //-   button.btn.btn-primary.btn-sm.preview-btn(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview')
+                        //-     i.fa.fa-eye
+                        //-   a.btn.btn-danger.btn-sm.remove-btn(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()", title='Remove')
+                        //-     i.fa.fa-times-circle    
+                            //- button.btn.btn-danger(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()" style="border-radius: 50% !important; height: 20px; width: 20px; font-size: 9px; padding: 3px 3px 10px 4px; margin-top: -85px;") X
+                            //- i.fa.fa-eye(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview',style='float:right') 
+                    .col-md-4.col-sm-4.col-xs-12.text-left
+                      md-input-container.md-block(flex="100")
+                        label Response Type
+                        md-select(ng-disabled='$ctrl.responseTypeList.length < 1', ng-model='$ctrl.selectedResponseType',name='selectedResponseTypeText',required)
+                          md-option(ng-value='item.id',ng-repeat='item in $ctrl.responseTypeList') {{item.responseType}}
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.selectedResponseTypeText.$touched')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.selectedResponseTypeText.$error.required') Please Select Response Type
+                  .row(ng-show='$ctrl.showMSQ')
+                    .col-md-12
+                      .form-margin.row
+                        .col-md-8.col-sm-8.col-xs-12.spacing-box
+                          md-input-container.md-block(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='84', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='max-width:415px; max-height:100px',required)
+                          //md-input-container.md-block.visible-xs(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='38', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='min-width: 270px; max-width:270px; margin-top: 8px;',required)
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.enteredQuestion.$touched')
+                            span.error-qb(data-ng-show='$ctrl.questionBankForm.enteredQuestion.$error.required') Please Enter Question
+                        //- .col-md-3.col-sm-4.col-xs-12
+                        //-   label Image:
+                        //-   .choose_file
+                        //-     .row(data-ng-show='!$ctrl.isQuestionImageFileAdded')
+                        //-       p
+                        //-         i.fa.fa-image.fa-2x
+                        //-       p.image-placeholder Upload an image as a question                       
+                        //-     input(type='file',ng-model='$ctrl.mcqMsqImage', ngf-select='$ctrl.uploadImage($files);$ctrl.isFileAdded($files)', name='file', accept='image/*', ngf-max-size='2MB', ngf-model-invalid='errorFile' data-ng-show='!$ctrl.isQuestionImageFileAdded;!$ctrl.isEdit')
+                        //-     img.question-pic(alt='',ngf-thumbnail="$ctrl.mcqMsqImage", data-ng-if='!$ctrl.showFileChooser', ng-model='$ctrl.mcqMsqImage')
+                        //- .col-md-1    
+                        //-   button.btn.btn-primary.btn-sm.preview-btn(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview')
+                        //-     i.fa.fa-eye
+                        //-   a.btn.btn-danger.btn-sm.remove-btn(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()", title='Remove')
+                        //-     i.fa.fa-times-circle
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 1
+                        input.form-field(name='msqOption1', type='text', maxlength='50', ng-model='$ctrl.option1', required)
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.msqOption1.$touched')
+                          span(data-ng-show='$ctrl.questionBankForm.msqOption1.$dirty && $ctrl.questionBankForm.msqOption1.$invalid')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.msqOption1.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                        input.option-checkbox(type='checkbox', name='checkbox', data-ng-model='$ctrl.answerOption1', ng-disabled="$ctrl.option1==''",ng-click='$ctrl.checkMsqAnswerSelection()')
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 2
+                        input.form-field(name='msqOption2', type='text', maxlength='50', ng-model='$ctrl.option2', required)
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.msqOption2.$touched')
+                          span(data-ng-show='$ctrl.questionBankForm.msqOption2.$dirty && $ctrl.questionBankForm.msqOption2.$invalid')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.msqOption2.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                        input.option-checkbox(type='checkbox', name='checkbox', data-ng-model='$ctrl.answerOption2', ng-disabled="$ctrl.option2==''",ng-click='$ctrl.checkMsqAnswerSelection()')
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 3
+                        input.form-field(type='text', maxlength='50', ng-model='$ctrl.option3')
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                      input.option-checkbox(type='checkbox', name='checkbox', data-ng-model='$ctrl.answerOption3', ng-disabled="$ctrl.option3==''",ng-click='$ctrl.checkMsqAnswerSelection()')
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 4
+                        input.form-field.top-space(type='text', maxlength='50', ng-model='$ctrl.option4')
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                      input.option-checkbox(type='checkbox', name='checkbox', data-ng-model='$ctrl.answerOption4', ng-disabled="$ctrl.option4==''",ng-click='$ctrl.checkMsqAnswerSelection()')
+                    .col-md-offset-7.col-md-5.col-sm-offset-7.col-sm-5.col-xs-12
+                      span.error-msg-qb {{$ctrl.answerMsg}}
+                    .col-md-4.col-sm-6.col-xs-12.text-left
+                      md-input-container.md-block(flex="100")
+                        label Response Type
+                        md-select(ng-disabled='$ctrl.responseTypeList.length < 1', ng-model='$ctrl.selectedResponseType',name='selectedResponse',required)
+                          md-option(ng-value='item.id',ng-repeat='item in $ctrl.responseTypeList') {{item.responseType}}
+                      span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.selectedResponse.$touched')
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.selectedResponse.$error.required') Please Select Response Type
+                  .row(ng-show='$ctrl.showMCQ')
+                    .col-md-12
+                      .form-margin.row
+                        .col-md-8.col-sm-8.col-xs-12.spacing-box
+                          md-input-container.md-block(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='84', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='max-width:415px; max-height:100px',required)
+                          //md-input-container.md-block.visible-xs(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='38', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='min-width: 270px; max-width:270px; margin-top: 8px;',required)
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.enteredQuestion.$touched')
+                            span.error-qb(data-ng-show='$ctrl.questionBankForm.enteredQuestion.$error.required') Please Enter Question
+                        //- .col-md-3.col-sm-4.col-xs-12
+                        //-   label Image:
+                        //-   .choose_file
+                        //-     .row(data-ng-show='!$ctrl.isQuestionImageFileAdded')
+                        //-       p
+                        //-         i.fa.fa-image.fa-2x
+                        //-       p.image-placeholder Upload an image as a question                       
+                        //-     input(type='file',ng-model='$ctrl.mcqMsqImage', ngf-select='$ctrl.uploadImage($files);$ctrl.isFileAdded($files)', name='file', accept='image/*', ngf-max-size='2MB', ngf-model-invalid='errorFile' data-ng-show='!$ctrl.isQuestionImageFileAdded;!$ctrl.isEdit')
+                        //-     img.question-pic(alt='',ngf-thumbnail="$ctrl.mcqMsqImage", data-ng-if='!$ctrl.showFileChooser', ng-model='$ctrl.mcqMsqImage')
+                        //- .col-md-1    
+                        //-   button.btn.btn-primary.btn-sm.preview-btn(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview')
+                        //-     i.fa.fa-eye
+                        //-   a.btn.btn-danger.btn-sm.remove-btn(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()", title='Remove')
+                        //-     i.fa.fa-times-circle
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 1
+                        input#rbOption1.form-field(name="mcqOption1", maxlength='50', type='text', ng-model='$ctrl.option1', required)
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.mcqOption1.$touched')
+                          span(data-ng-show='$ctrl.questionBankForm.mcqOption1.$dirty && $ctrl.questionBankForm.mcqOption1.$invalid')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.mcqOption1.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space
+                      input.option-input.radio(type='radio', name='chooseone', data-ng-model='$ctrl.answerOption1' , data-ng-click="$ctrl.optionsChanged($ctrl.answerOption1); $ctrl.checkAnswerSelection()",  ng-value="2" ,ng-disabled="$ctrl.option1==''")
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 2
+                        input#rbOption2.form-field(name="mcqOption2", maxlength='50', type='text', ng-model='$ctrl.option2', required)
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.mcqOption2.$touched')
+                          span(data-ng-show='$ctrl.questionBankForm.mcqOption2.$dirty && $ctrl.questionBankForm.mcqOption2.$invalid')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.mcqOption2.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space
+                      input.option-input.radio(type='radio', name='chooseone', data-ng-model='$ctrl.answerOption2', data-ng-click="$ctrl.optionsChanged($ctrl.answerOption2);$ctrl.checkAnswerSelection()",  ng-value="3",ng-disabled="$ctrl.option2==''")
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 3
+                        input#rbOption3.form-field(type='text', maxlength='50', ng-model='$ctrl.option3')
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                        input.option-input.radio(type='radio', name='chooseone', data-ng-model='$ctrl.answerOption3', data-ng-click="$ctrl.optionsChanged($ctrl.answerOption3);$ctrl.checkAnswerSelection()",  ng-value="4",ng-disabled="$ctrl.option3==''")
+                    .col-md-8.col-sm-8.col-xs-8.text-left.top-space
+                      md-input-container.md-block(flex="100")
+                        label option 4
+                        input#rbOption4.form-field.top-space(type='text', maxlength='50', ng-model='$ctrl.option4')
+                    .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                      input.option-input.radio(type='radio', name='chooseone', data-ng-model='$ctrl.answerOption4', data-ng-click="$ctrl.optionsChanged($ctrl.answerOption4);$ctrl.checkAnswerSelection()",  ng-value="5",ng-disabled="$ctrl.option4==''")
+                    .col-md-offset-7.col-md-5.col-sm-offset-7.col-sm-5.col-xs-12
+                      span.error-msg-qb {{$ctrl.productMsg}}
+                    .col-md-12.col-sm-12.col-xs-12.text-left
+                      .col-md-4.col-sm-4.col-xs-4.text-left.top-space.text
+                        md-input-container.md-block(flex="100")
+                          label Response Type
+                          md-select(ng-disabled='$ctrl.responseTypeList.length < 1', ng-model='$ctrl.selectedResponseType',name='selectedResponseType',required)
+                            md-option(ng-value='item.id',ng-repeat='item in $ctrl.responseTypeList') {{item.responseType}}
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.selectedResponse.$touched')
+                            span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.selectedResponse.$error.required') Please Select Response Type
+                  .row.video-area-section(ng-show='$ctrl.showVideo')
+                    .col-md-12
+                      .form-margin.row
+                        .col-md-8.col-sm-8.col-xs-12.spacing-box
+                          md-input-container.md-block(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='84', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='max-width:415px; max-height:100px',required)
+                          //md-input-container.md-block.visible-xs(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='38', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='min-width: 270px; max-width:270px; margin-top: 8px;',required)
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.enteredQuestion.$touched')
+                            span.error-qb(data-ng-show='$ctrl.questionBankForm.enteredQuestion.$error.required') Please Enter Question
+                        //- .col-md-3.col-sm-4.col-xs-12
+                        //-   label Image:
+                        //-   .choose_file
+                        //-     .row(data-ng-show='!$ctrl.isQuestionImageFileAdded')
+                        //-       p
+                        //-         i.fa.fa-image.fa-2x
+                        //-       p.image-placeholder Upload an image as a question                       
+                        //-     input(type='file',ng-model='$ctrl.audioVideoImage', ngf-select='$ctrl.uploadImage($files);$ctrl.isFileAdded($files)', name='file', accept='image/*', ngf-max-size='2MB', ngf-model-invalid='errorFile' data-ng-show='!$ctrl.isQuestionImageFileAdded;!$ctrl.isEdit')
+                        //-     img.question-pic(alt='',ngf-thumbnail="$ctrl.audioVideoImage", data-ng-if='!$ctrl.showFileChooser', ng-model='$ctrl.audioVideoImage')
+                        //- .col-md-1    
+                        //-   button.btn.btn-primary.btn-sm.preview-btn(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview')
+                        //-     i.fa.fa-eye
+                        //-   a.btn.btn-danger.btn-sm.remove-btn(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()", title='Remove')
+                        //-     i.fa.fa-times-circle
+                    .col-md-12.col-sm-12.col-xs-12
+                    .video-area.col-md-12.col-sm-12.col-xs-12
+                      .video-border
+                        .countDownBox(ng-if='$ctrl.countdownStarted')
+                          img#questionBank-countdown-img(ng-if='$ctrl.countdownStarted', src='../../../public/img/countdown.gif')
+                        iframe#video-iframe.video-iframe(ng-hide='$ctrl.recordingOn || $ctrl.countdownStarted', ng-src='{{$ctrl.trustSrc($ctrl.videoUrl)}}', frameborder='0', allowfullscreen='')
+                        video#questionBankVideoElement(ng-show='$ctrl.recordingOn')
+                        .row.recording-controls(ng-show='$ctrl.recordingOn')
+                          .col-md-12.col-sm-12.col-xs-12
+                            .col-md-5.col-sm-5.col-xs-12.col-md-offset-5
+                              .col-md-2.col-sm-2.col-xs-4.play-icon
+                                i.fa-2x.fa.fa-pause(aria-hidden='true', data-ng-click='$ctrl.onPauseClick()', data-ng-if='!$ctrl.paused')
+                                i.fa-2x.fa.fa-play(aria-hidden='true', data-ng-click='$ctrl.onResumeClick()', data-ng-if='$ctrl.paused')
+                              .col-md-2.col-sm-2.col-xs-4.stop-icon
+                                i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', data-ng-click='$ctrl.onStopClick()')
+                    .btn-sec.col-md-12.col-sm-12.col-xs-12
+                      .col-md-8.col-sm-9.col-xs-12.pull-right
+                        md-button.md-raised.md-primary(ng-click="$ctrl.onRecordClick('video')") Record
+                        md-button.md-raised.md-primary(ng-click="$ctrl.preview('video')") Preview
+                        md-button.md-raised.md-primary(ng-click="$ctrl.onRecordClick('video')") Re-record
+                    .col-md-4.col-sm-4.col-xs-12.text-left
+                      md-input-container.md-block(flex="100")
+                        label Response Type
+                        md-select.audio-vedio-rt(ng-disabled='$ctrl.responseTypeList.length < 1', ng-model='$ctrl.selectedResponseType',name='selectedResponseType',required)
+                          md-option(ng-value='item.id',ng-repeat='item in $ctrl.responseTypeList') {{item.responseType}}
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.selectedResponseType.$touched')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.selectedResponseType.$error.required') Please Select Response Type
+                  .row(ng-show='$ctrl.showAudio')
+                    .col-md-12
+                      .form-margin.row
+                        .col-md-8.col-sm-8.col-xs-12.spacing-box
+                          md-input-container.md-block(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='84', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='max-width:415px; max-height:100px',required)
+                          //md-input-container.md-block.visible-xs(flex="100")
+                            label.label-width Type your question here
+                            textarea.form-field(rows='2',cols='38', maxlength='500', ng-model='$ctrl.enteredQuestion',name='enteredQuestion', style='min-width: 270px; max-width:270px; margin-top: 8px;',required)
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.enteredQuestion.$touched')
+                            span.error-qb(data-ng-show='$ctrl.questionBankForm.enteredQuestion.$error.required') Please Enter Question
+                        //- .col-md-3.col-sm-4.col-xs-12
+                        //-   label Image:
+                        //-   .choose_file
+                        //-     .row(data-ng-show='!$ctrl.isQuestionImageFileAdded')
+                        //-       p
+                        //-         i.fa.fa-image.fa-2x
+                        //-       p.image-placeholder Upload an image as a question                       
+                        //-     input(type='file',ng-model='$ctrl.audioVideoImage', ngf-select='$ctrl.uploadImage($files);$ctrl.isFileAdded($files)', name='file', accept='image/*', ngf-max-size='2MB', ngf-model-invalid='errorFile' data-ng-show='!$ctrl.isQuestionImageFileAdded;!$ctrl.isEdit')
+                        //-     img.question-pic(alt='',ngf-thumbnail="$ctrl.audioVideoImage", data-ng-if='!$ctrl.showFileChooser', ng-model='$ctrl.audioVideoImage')
+                        //- .col-md-1    
+                        //-   button.btn.btn-primary.btn-sm.preview-btn(data-ng-show='$ctrl.isQuestionImageFileAdded',data-toggle='modal', data-target='#myAudioVideoImage', title='Preview')
+                        //-     i.fa.fa-eye
+                        //-   a.btn.btn-danger.btn-sm.remove-btn(data-ng-show='$ctrl.isQuestionImageFileAdded', data-ng-click="$ctrl.removeImage()", title='Remove')
+                        //-     i.fa.fa-times-circle
+                    .col-md-12.col-sm-12.col-xs-12
+                    audio#questionBankAudioElement(controls='controls', ng-src='{{$ctrl.trustSrc($ctrl.videoUrl)}}')
+                    .row.recording-controls(ng-show='$ctrl.recordingOn')
+                      .col-md-12.col-sm-12.col-xs-12
+                        .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                          .col-md-2.col-sm-2.col-xs-2.play-icon
+                            i.fa-2x.fa.fa-pause(aria-hidden='true', data-ng-click='$ctrl.onPauseClick()', data-ng-if='!$ctrl.paused')
+                            i.fa-2x.fa.fa-play(aria-hidden='true', data-ng-click='$ctrl.onResumeClick()', data-ng-if='$ctrl.paused')
+                          .col-md-2.col-sm-2.col-xs-2.stop-icon
+                            i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', data-ng-click='$ctrl.onStopAudio()')
+                    .btn-sec.col-md-12.col-sm-12.col-xs-12
+                      .col-md-4.col-sm-9.col-xs-12.pull-right
+                        input.col-md-3.col-sm-3.col-xs-12(type='button', value='record', ng-click="$ctrl.onRecordClick('audio')")
+                      .col-md-4.col-sm-9.col-xs-12.pull-right  
+                        input.col-md-3.col-sm-3.col-xs-12(type='button', value='preview', ng-click="$ctrl.preview('audio')")
+                    .col-md-4.col-sm-4.col-xs-12.text-left
+                      md-input-container.md-block(flex="100")
+                        label Response Type
+                        md-select.audio-vedio-rt(ng-disabled='$ctrl.responseTypeList.length < 1', ng-model='$ctrl.selectedResponseType',name='selectedResponseTypeVideo',required)
+                          md-option(ng-value='item.id',ng-repeat=' item in $ctrl.responseTypeList') {{item.responseType}}
+                        span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.$submitted || $ctrl.questionBankForm.selectedResponseTypeVideo.$touched')
+                          span.error-msg-qb(data-ng-show='$ctrl.questionBankForm.selectedResponseTypeVideo.$error.required') Please Select Response Type
+          #tab3.tab-pane.fade.in(ng-class='$ctrl.showFromQuestionBank')
+            .category-panel.hidden-xs
+              .col-md-4
+                .row
+                  .category-part
+                    .panel-heading Choose Category
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='c in $ctrl.questionBankList', ng-class="{'active': c.id === $ctrl.categoryId}", ng-click='$ctrl.selectCategory(c.id)') {{c.name}}
+              .col-md-4
+                .row
+                  .category-part
+                    .panel-heading Choose Sub-Category
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='s in $ctrl.subCategory', ng-class="{'active': s.id === $ctrl.subCategoryId}", ng-click="$ctrl.selectSubCategory($index,'company')") {{s.skillsetName}}
+              .col-md-4
+                .row
+                  .category-part
+                    .panel-heading Choose Question
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='q in $ctrl.question', ng-click='$ctrl.selectQuestions($index, q)') {{q.question}}
+            .category-panel.visible-xs
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Category
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li(ng-repeat='c in $ctrl.questionBankList', ng-class="{'active': c.id === $ctrl.categoryId}", ng-click='$ctrl.selectCategory(c.id)')
+                    a(href="#") {{c.name}}                          
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Sub-Category
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='s in $ctrl.subCategory', ng-class="{'active': s.id === $ctrl.subCategoryId}" , ng-click="$ctrl.selectSubCategory($index,'company')")
+                    a(href="#") {{s.skillsetName}}                                                  
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Question
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='q in $ctrl.question', ng-click='$ctrl.selectQuestions($index, q)')
+                    a(href="#") {{q.question}}            
+          #tab4.tab-pane.fade.in(ng-class='$ctrl.showExistingTemplate ? "active" : ""')
+            .category-panel.hidden-xs
+              .col-md-4
+                .row
+                  .category-part
+                    .panel-heading Choose Template
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='tmpl in $ctrl.existingTemplateList', ng-class="{'active': tmpl.id === $ctrl.templateId}", ng-click='$ctrl.selectedExistingTemplate($index)') {{tmpl.name}}
+              .col-md-8
+                .row
+                  .category-part
+                    .panel-heading Choose Question
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='item in $ctrl.existingTemplateQuestion', ng-click='$ctrl.selectExistingTemplateQuestions($index,item)') {{item.name}}
+            .category-panel.visible-xs
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Template
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li(ng-repeat='tmpl in $ctrl.existingTemplateList', ng-class="{'active': tmpl.id === $ctrl.templateId}", ng-click='$ctrl.selectedExistingTemplate($index)')
+                    a(href="#") {{tmpl.name}}                          
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Question
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='item in $ctrl.existingTemplateQuestion', ng-click='$ctrl.selectExistingTemplateQuestions($index,item)')
+                    a(href="#") {{item.name}}               
+          #tab5.tab-pane.fade.in(ng-class='$ctrl.showPrevPositionTemplate ? "active" : ""')
+            .category-panel.hidden-xs
+              .col-md-4
+                .row
+                  .category-part
+                    .panel-heading Choose Position
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='item in $ctrl.PrevPositionList', ng-class="{'active': item.id === $ctrl.prevPositionId}", ng-click='$ctrl.selectedPrevPosition($index)') {{item.positionName}}
+              .col-md-8
+                .row
+                  .category-part
+                    .panel-heading Choose Question
+                    .panel-ul-body
+                      ul
+                        li(ng-repeat='item in $ctrl.PrevPositionQuestion', ng-click='$ctrl.selectPrevPositionQuestions($index,item)') {{item.question}}
+            .category-panel.visible-xs
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Position
+                  span.caret
+                ul.dropdown-menu(role='menu')
+                  li(ng-repeat='item in $ctrl.PrevPositionList', ng-class="{'active': item.id === $ctrl.prevPositionId}", ng-click='$ctrl.selectedPrevPosition($index)')
+                    a(href="#") {{item.positionName}}                          
+              .col-xs-12.section-box
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown') Choose Question
+                  span.caret
+                ul.dropdown-menu(role="menu")
+                  li(ng-repeat='item in $ctrl.PrevPositionQuestion', ng-click='$ctrl.selectPrevPositionQuestions($index,item)')
+                    a(href="#") {{item.question}}                
+      .modal-footer
+        .row.action-buttons.hidden-xs
+          .col-md-8.col-sm-9.col-xs-12.pull-right
+            md-button.md-raised.savedata-btn(ng-show='$ctrl.showNewQuestion',ng-click='$ctrl.onStopClick();$ctrl.saveQuesstion()') Save
+            md-button.md-raised.md-primary(ng-click='$ctrl.chooseQuestionFinish()') Finish
+            md-button.md-raised.canceldata-btn(ng-click='$ctrl.closeModal()') Cancel
+        .row.action-buttons_1.visible-xs
+          span(data-toggle='tooltip', data-placement='top', title='save', ng-show='$ctrl.showNewQuestion', ng-click='$ctrl.onStopClick();$ctrl.saveQuesstion()')
+            i.fa.fa-floppy-o.fa-2x.popbtn_save(aria-hidden='true')
+          span(data-toggle='tooltip', data-placemenelt='top', title='finish', ng-click='$ctrl.chooseQuestionFinish()')
+            i.fa.fa-check.fa-2x.popbtn_finish(aria-hidden='true')
+          span(data-toggle='tooltip', data-placement='top', title='cancel', ng-click='$ctrl.closeModal()')
+            i.fa.fa-times.fa-2x.popbtn_cross(aria-hidden='true')
+    .right-panel-area(ng-show='$ctrl.showSelectedQuestions')
+      h4 Selected Questions
+      .gray-bg-sec
+        .multiple-input-area(ng-repeat='q in $ctrl.selectedQuestions')
+          .input-area
+            .right-panel-question(readonly='true') {{q.question}}
+            button.remove-button(type='button', ng-click='$ctrl.removeSelectedQuestion($index)')
+              i.fa.fa-times.remove-icon(aria-hidden='true')
+              
+
+  

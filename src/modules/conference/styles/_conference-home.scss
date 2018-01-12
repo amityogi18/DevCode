@@ -1,0 +1,695 @@
+﻿.content-wrapper.conference-home {
+  
+  background: #f9fcff !important;
+
+  @mixin placeholder {
+    &::-webkit-input-placeholder {@content}
+    &:-moz-placeholder           {@content}
+    &::-moz-placeholder          {@content}
+    &:-ms-input-placeholder      {@content}  
+  }
+
+  .conference-meet-now-section{
+      width:100%;
+  }
+
+  md-content{
+    background:$white;
+    overflow:hidden;
+    box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08)!important;
+  }
+
+  .meet-now-user-field{
+    border-top:none!important;
+    border-left:none!important;
+    border-right:none!important;
+    box-shadow: none!important;
+  }
+
+  .schedule-form-section{
+    //margin-left:-60px!important;
+  }
+
+  .schedule-date{
+      margin-top:-15px;
+  }
+
+  ._md-datepicker-floating-label > md-datepicker .md-datepicker-input-container {
+    width: 75%!important;
+    margin-left:0px!important;
+  }
+
+  ._md-datepicker-floating-label._md-datepicker-has-calendar-icon > label:not(.md-no-float):not(.md-container-ignore) {
+    right: 85px!important;
+  }
+
+  ._md-datepicker-floating-label > md-datepicker .md-datepicker-button {
+    float: right!important;
+  }
+
+  .panel.panel-default .panel-heading {
+    padding: 10px!important;
+    font-size: 16px!important;
+    text-decoration: none !important;
+    position: relative!important;
+    background: #d2cfcf!important;
+    color: grey!important;
+    text-transform: none!important;
+  }
+
+  .view-all-link {
+      margin-bottom:15px;
+  }
+
+  .btn{
+    padding: 8px 12px!important;
+  }
+
+  .start-cancel-btn {
+    padding-right: 30px;
+    margin-top:14px;
+  }
+
+  .conference-user-field{
+    font-size:12px!important;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+  }
+
+  .user-label{
+    font-size: 9px !important;
+    transition-duration: 1s;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+  }
+
+  .conference-user-position{
+    margin-top:-15px!important;
+  }
+
+  .invite-label{
+    font-size: 9px !important;
+    transition-duration: 1s;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+  }
+
+  .invite-position-more{
+    margin-top:-15px;
+  }
+
+  .error-msg{
+        font-size:12px;
+        color: $red;
+        float: left;
+  }
+
+  .error-msg-row{
+    margin-left:14px;
+  }
+
+  .error-lbl{
+      color:$red;
+      font-size:12px;
+      font-weight:normal;
+      word-spacing:1px;
+  }
+    
+    .mandatory-filed {
+      color: $red !important;
+      //float: left;
+      //margin-left: -90px !important;
+      font-size: 15px !important;
+  }
+
+  .conference-user-name{
+      color:$black;
+      font-weight:bold;
+  }
+
+  .btn-dimension{
+    min-width:80px;
+  }
+
+  .coloumn-set {
+    width: 10%;
+  }
+  .end-heading-position{
+    margin-top: 215px;
+    text-align: center;
+  }
+
+  .import-contact-list{
+    margin-top: 25px;
+  }
+
+  .download-link {
+    margin-right: 10px;
+    margin-top: -8px;
+  }
+  
+    .cantact-list{
+      margin-top: -10px;
+  }
+  
+  .btn-position{
+        margin-top: 12px;
+    }
+
+    .contact.body{
+        border:0px!important;
+    }
+
+  .contact-list-info{
+    margin-top: 30px;
+  }
+
+  .contact-searchIcon {
+    margin-right: 15px!important;
+  }
+    
+    .add-contact-btn{
+        margin-top: 26px;
+        margin-left: 50%;
+    }
+
+    .delete-contact-btn{
+      margin-top: 25px;
+      margin-left: 48px;
+  }
+
+  .contact-search-icon{
+    margin-right: 24px!important;
+  }
+
+  .conference-contact-table thead {
+    background: #d2cfcf;
+  }  
+
+  .meeting-inform-row {
+      border-bottom: 1px solid lightgrey;
+      border: 1px solid lightgrey;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      margin: 5px 2px 10px 2px;
+      //box-shadow: 4px 4px #c9ced8;
+    }
+    
+    .evaluator-filter-dropdown{
+        margin-left: -235px !important;
+        width: 300px;
+        border-radius: 0px;
+        margin-top: 0px;
+    }
+    .contact-view-icon{
+        background: transparent!important;
+        border: none!important;
+    }
+
+    md-card{
+      box-shadow:none!important;
+    }
+
+  .conference-header-div {
+    min-width: 100%;
+
+    .link-button {
+      border-radius: 6px;
+      padding: 8px;
+    }
+    @media only screen and (max-width: 1266px) {
+      .link-button {
+        margin-right: 20px;
+      }
+
+    }
+
+  }
+  
+  .meeting-password-textbox {
+    position: absolute;
+    margin-left: -30px;
+  }
+
+  .search-btn {
+    position: absolute;
+    margin-top: -34px;
+    margin-left: -1px;
+    border-radius: 0px;
+  }
+
+  .schedule-conference {
+    //color: #4289c8;
+    //margin-top: 20px;
+  }
+  .scheduleConference {
+    .meetNow-form-container{
+      //margin-top: 11px;
+      height: 100%;
+      background: #f4f5f7;
+      width: 100%;
+     // margin-left: 10px;
+      padding-bottom: 44px;
+    }
+
+  .date-picker-btn{
+     margin-top:-34px;
+     float:right;
+     margin-right: 38px;
+
+  }
+    .form-control {
+      border: 1px solid #4289c8;
+      
+    }
+    .area-for-text{
+      height:54px!important;
+    }
+    input[type=date] {
+      text-transform:uppercase;
+    }
+  }
+  .checkbox-label {
+    font-weight: normal;
+  }
+  .main-panel {
+    z-index: 1;
+    background: $white;
+
+    .laptop-icon-conference, .calender-icon-conference, .plus-user-icon-conference {
+      font-size: 16px;
+      .top-tab {
+        margin-left: 8px;
+        font-size: 16px;
+        font-family: sans-serif;
+      }
+
+    }
+    label {
+      font-weight: 600;
+    }
+
+    .upcoming-meetings {
+      color: #4289c8;
+    }
+    .view-all-link {
+      margin-top: 8px;
+      font-size: 16px;
+    }
+
+    md-input-container{
+      margin: 12px 0!important;
+    }
+    .upcoming-meetings-heading{
+      margin-top:10px;
+    }
+    .user-icon {
+      font-size: 40px;
+      margin-left: -10px;
+
+    }
+    .icon-div {
+      border: 1px solid lightgrey;
+      background: lightgrey;
+    }
+
+    .btn-cancel {
+      background: #ccc;
+      border: none;
+      color: white;
+      &:hover {
+        background: #aaa;
+      }
+
+    }
+    .meeting-text {
+      font-weight: bold;
+    }
+    
+    .nav-pills > li {
+      float: left;
+      background: lightgrey;
+      border-radius: 8px 8px 0px 0px;
+      width: 171px;
+      &.active > a {
+        color: #fff;
+        background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%);
+        &:hover, &:focus {
+          color: #fff;
+        background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%);
+        }
+      }
+    }
+
+    @media only screen and(max-width:1070px){
+      .nav-pills > li{
+        width:auto;
+      }
+    }
+
+    .meetNow {
+      width: 100%;
+      border: 1px solid $navColor;
+      min-height: 100%;
+      padding:10px 10px 10px 10px;
+
+      .meetNowForm {
+        width: 100%;
+        height: 132px;
+        background: #f4f5f7;
+        //margin: 24px 13px 10px 18px;
+        position: relative;
+        padding-top: 20px;
+        .meetNowField {
+          padding-left: 22px;
+        }
+        .cancelMeeting {
+          margin-top: 10px;
+        }
+
+        .start-cancel-btn {
+          padding-right: 30px;
+        }
+        .meeting-number-btn {
+          padding-right: 0px;
+        }
+        .btn-cancel {
+          background: #ccc;
+          border: none;
+          color: white;
+          &:hover {
+            background: #aaa;
+          }
+
+        }
+      }
+    }
+    //@media only screen and (max-width: 507px) {
+      //.nav-pills > li {
+        //float: left;
+        //width: 138px;
+      //}
+    //}
+    @media only screen and (max-width: 458px) {
+      .nav-pills > li {
+        width: 52px;
+        float: left;
+      }
+      .evaluator-filter-dropdown{
+        margin-left: -163px !important;
+        width: 228px;
+      }
+    }
+
+    @media only screen and (max-width: 766px) {
+
+      .meetNow {
+        width: 100%;
+        border: 1px solid #4289c8;
+        min-height: 260px;
+        padding-bottom: 10px;
+
+        .meetNowForm {
+          width: 100%;
+          height: 250px;
+          background: #f4f5f7;
+          //margin: 24px 13px 10px 5px;
+          position: relative;
+          padding-top: 20px;
+          .meetNowField {
+            padding-left: 22px;
+          }
+          .cancelMeeting {
+            margin-top: 10px;
+          }
+          .start-cancel-btn {
+            padding-right: 30px;
+          }
+          .meeting-number-btn {
+            padding-right: 0px;
+          }
+          .btn-cancel {
+            background: #ccc;
+            border: none;
+            color: white;
+            &:hover {
+              background: #aaa;
+            }
+
+          }
+          .meeting-number-box {
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 766px) {
+    .btn-dimension{
+      max-width:80px;
+    }
+    .btn-cancel{
+      margin-top:10px;
+      min-width:80px;
+    }
+    .main-panel {
+      //margin-top: -106px;
+    }
+
+    .start-btn,.btn-can{
+      margin-top:10px;
+      min-width:80px;
+    }
+    .btn-can{
+      min-width:80px;
+    }
+    .minute-select-box{
+      margin-top:10px;
+    }
+  }
+  .margin-top-15 {
+    margin-top: 15px;
+  }
+  .start-btn{
+    background:#7ac043;
+    border:#7ac043;
+    //margin-top:19px;
+    //opacity: 0.6;
+    color:white;
+    &:hover{
+      background: #6bac39
+    }
+  }
+  .error-msg {
+    color: red;
+    font-size: 10px;
+  }
+  .mandatory-field {
+    color: red;
+  }
+  .uib-increment.hours{
+
+    .btn-link{
+      margin-top: -46px;
+      outline:none;
+    }
+    .glyphicon-chevron-up{
+      font-size:10px;
+    }
+  }
+  .uib-increment.minutes{
+
+    .btn-link{
+      margin-top: -46px;
+      outline:none;
+    }
+    .glyphicon-chevron-up{
+      font-size:10px;
+    }
+  }
+  .uib-time.hours{
+    .form-control{
+      margin-top:-37px;
+      height:34px;
+      width: 54px;
+    }
+  }
+  .uib-time.minutes{
+    .form-control{
+      margin-top:-37px;
+      height:34px;
+      width: 54px;
+    }
+  }
+  .uib-decrement.hours{
+
+    .btn-link{
+      margin-top: -42px;
+      outline:none;
+    }
+    .glyphicon-chevron-down{
+      font-size:10px;
+    }
+  }
+  .uib-decrement.minutes{
+
+    .btn-link{
+      margin-top: -42px;
+      outline:none;
+    }
+    .glyphicon-chevron-down{
+      font-size:10px;
+    }
+  }
+  .uib-time.am-pm{
+       .btn.btn-default{
+         margin-top:-43px;
+         width: 44px;
+      }
+   }
+  .time-picker-div{
+    margin-top: 6px;
+  }
+  .uib-separator{
+    visibility:hidden;
+  }
+  input::-webkit-inner-spin-button {
+    display: none;
+  }
+  .form-control{
+    border-radius:0px !important;
+    padding-left: 10px;
+  }
+  .btn-cancel-meeting{
+    margin-left: -37px;
+  }
+  .contact-searchIcon {
+    position: relative;
+    bottom: 25px;
+    float: right;
+  }
+  .fullWidth {
+    width:100%;
+  }
+  input[type="search"] { @include placeholder {
+    color: #999999;
+  }}
+
+  input[type=date] { @include placeholder {
+    color: #999999;
+  }}
+.showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+    
+}
+.confprepheading{
+  color:white;
+  width:300px;
+  text-align:center;
+  background:#7bb5e8;
+  padding: 9px;
+  font-size: 18px;
+}
+.ui-select-multiple.ui-select-bootstrap.ui-select-container input.ui-select-search { width: 100% !important; }
+
+@media only screen and (max-width: 458px) {
+  .pad-mobile{
+    padding:0px !important;
+  }
+}
+
+@media only screen and (max-width: 766px) {
+  .add-contact-btn{
+    margin-top:20px !important;
+  }
+  .delete-btn-pos{
+    margin-top:14px !important;
+  }
+}
+
+
+//-------rohit css for ipad--------//
+@media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: portrait)
+{
+  
+.delete-btn-pos {
+  margin-top: -4px;
+  margin-left: 30px;
+}
+.add-contact-btn {
+  margin-top: 4px;
+  margin-left: 200px;
+}
+
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2)  and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: landscape)
+{
+  .delete-btn-pos {
+    margin-top: -4px;
+    margin-left: 30px;
+  }
+  .add-contact-btn {
+  
+    margin-left: 430px;
+  }
+  .left-timer{margin-left:-17px;}
+  .content-wrapper.conference-home .main-panel .upcoming-meetings {
+    color: #4289c8;
+    font-size:14px;
+}
+.content-wrapper.conference-home .main-panel .view-all-link {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+
+}
+
+.contact-popup-container{
+ 
+  .error-msg{
+        font-size:12px;
+        color: $red;
+        float: left;
+     }
+  .error-msg-row{
+    margin-left:14px;
+  }
+    .error-lbl{
+        color:$red;
+        font-size:12px;
+        font-weight:normal;
+        word-spacing:1px;
+    }
+    
+    .mandatory-filed {
+            color: $red !important;
+            //float: left;
+            //margin-left: -90px !important;
+            font-size: 15px !important;
+    }
+}
+
+.conference-container{
+  padding:0px!important;
+}

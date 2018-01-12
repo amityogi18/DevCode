@@ -1,0 +1,22 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-users.canidate-status-icon(aria-hidden='true')
+              span(data-translate='CANDIDATE-ORIGINATION')
+            #pie-chart.panel-body.pie-height
+              .pie-dec-chart_01.chart-0.col-sm-8.col-md-8.col-xs-12
+                canvas#pie.chart.chart-pie.chart-xs(chart-colors='candidateOrganisationCtrl.colors', chart-data='candidateOrganisationCtrl.candidateOrgnData.data', chart-labels='candidateOrganisationCtrl.candidateOrgnData.labels', chart-options='candidateOrganisationCtrl.options')
+              .col-sm-4.col-md-4.col-xs-12.managing
+                ul.col-sm-8.col-md-8.col-xs-6.managing
+                  li(ng-repeat='row in candidateOrganisationCtrl.candidateOrgnData.labels')
+                    i.fa.fa-square(aria-hidden='true', ng-class= "{'label_1':row == 'Facebook','label_2':row == 'Linkedin','label_3':row == 'Twitter','label_4': row=='Email','label_5':row=='Others'}")
+                    span
+                      strong {{row}}
+                ul.col-sm-4.col-md-4.col-xs-6.managing
+                  li(ng-repeat='x in candidateOrganisationCtrl.candidateOrgnData.data track by $index')
+                    span
+                      strong {{x}}
+

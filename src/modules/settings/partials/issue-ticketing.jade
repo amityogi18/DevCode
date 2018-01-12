@@ -1,0 +1,120 @@
+.content-wrapper.issue-ticketing-setting
+  .video-intro-heading
+    span.video-intro-1(data-translate='ISSUE-TICKET')
+    md-button.md-primary.md-raised.pull-right(ng-click='IssueTicketingCtrl.showSection()') Add Issue
+  .panel-body    
+    .row
+      .md-padding(ng-if='IssueTicketingCtrl.showAddSection')
+        form(role='form',name='IssueTicketingCtrl.issueForm' , novalidate)
+          .form-group
+            div(layout-gt-sm="row", flex-gt-sm='')
+                md-input-container.md-block(flex="50",flex-offset-xs='5',flex-sm='50',flex-xs='100')
+                  label Issue
+                  input#issue(type='text', name='issue', maxlength='50', ng-model='IssueTicketingCtrl.ticketData.issue' required)
+                  span.error-msg(data-ng-show='IssueTicketingCtrl.issueForm.$submitted || IssueTicketingCtrl.issueForm.issue.$touched')
+                    span(data-ng-show='IssueTicketingCtrl.issueForm.issue.$dirty && IssueTicketingCtrl.issueForm.issue.$invalid')
+                    span.error-msg(data-ng-show='IssueTicketingCtrl.issueForm.issue.$error.required') Please Enter Issue
+                md-input-container.md-block(flex="25", flex-offset='5',flex-offset-xs='0',flex-xs='100', flex-sm='25')
+                  label Reason
+                  md-select(name='ddltickettype', ng-model='IssueTicketingCtrl.ticketData.ticketType',  required)
+                    md-option(ng-repeat='reason in IssueTicketingCtrl.reasonTypeList',ng-value='reason.id') {{reason.title}}
+                  span.error-msg(data-ng-show='issueForm.$submitted || issueForm.ddltickettype.$touched')
+                    span(data-ng-show='issueForm.ddltickettype.$dirty && issueForm.ddltickettype.$invalid')
+                    span.error-msg(data-ng-show='issueForm.ddltickettype.$error.required') Please select reason
+                md-input-container.md-block(flex="25",flex-offset='5',flex-offset-xs='0',cflex-sm='25',cflex-xs='90')
+                  label Priority
+                  md-select(name='priority', ng-model='IssueTicketingCtrl.ticketData.priority',  required)
+                    md-option(ng-repeat='priorityType in IssueTicketingCtrl.priorityTypeList',ng-value='priorityType.id') {{priorityType.name}}
+                  span.error-msg(data-ng-show='issueForm.$submitted || issueForm.ddltickettype.$touched')
+                    span(data-ng-show='issueForm.priority.$dirty && issueForm.priority.$invalid')
+                    span.error-msg(data-ng-show='issueForm.priority.$error.required') Please select priority 
+          .form-group
+            div(layout-gt-sm="row", flex-gt-sm='')
+                md-input-container.md-block(flex="100",flex-offset-xs='5',flex-sm='100',flex-xs='100')
+                  label Description
+                  textarea(rows='1', col='5', maxlength='500', name='description', ng-model='IssueTicketingCtrl.ticketData.description', required)
+                  span.error-msg(data-ng-show='IssueTicketingCtrl.issueForm.$submitted || IssueTicketingCtrl.issueForm.description.$touched')
+                    span(data-ng-show='IssueTicketingCtrl.issueForm.description.$dirty && IssueTicketingCtrl.issueForm.description.$invalid')
+                    span.error-msg(data-ng-show='IssueTicketingCtrl.issueForm.description.$error.required') Please Enter Description
+          .form-group
+            .row.ticketing-row
+              .col-md-7.col-sm-7.col-xs-12.ticketing-row
+                input.form-control(type='file', ngf-max-size='1MB' name="file", ngf-select='IssueTicketingCtrl.uploadAttachment($files);IssueTicketingCtrl.isFileAdded($files)', accept="application/pdf", ngf-model-invalid="errorFile" data-ng-model='IssueTicketingCtrl.attachment', multiple='multiple')
+              .col-md-5.col-sm-5.col-xs-12.ticketing-row.ticketing-left
+                .pull-right
+                  md-button.md-raised.savedata-btn(type='submit', ng-click='IssueTicketingCtrl.saveIssueTicket(issueForm);', data-ng-if="!IssueTicketingCtrl.isEditMode",ng-disabled='IssueTicketingCtrl.hideSaveBtn') Save
+                  md-button.md-raised.canceldata-btn(aria-label='cancel',ng-click='IssueTicketingCtrl.hideAddSEction();IssueTicketingCtrl.resetTicket(issueForm)', data-translate='CANCEL')
+                  button.btn.btn-primary.btn-ondemand(type='button', ng-click='IssueTicketingCtrl.updateIssueTicket(issueForm);', data-ng-if="IssueTicketingCtrl.isEditMode") Update
+              .col-sm-2.col-md-4.col-xs-6.showMe
+                .from-group
+                  select.form-control(class="selectpicker" ng-model="IssueTicketingCtrl.test" ng-change="IssueTicketingCtrl.toggle()")
+                    option(ng-model="col.show" value="{{$index}}" ng-repeat="col in IssueTicketingCtrl.cols.slice(1,IssueTicketingCtrl.cols.length) track by $index") {{col.title()}}
+      .col-md-12.col-sm-12.col-xs-12
+        p.text-label(ng-hide='IssueTicketingCtrl.ticketDatalist.length < 1') Showing 
+          span
+            strong 1-{{IssueTicketingCtrl.ticketDatalist.length}}
+            |  of  
+            strong
+            |  {{IssueTicketingCtrl.ticketDataListCount}}    
+            |  records                         
+      .col-xs-12.col-sm-12.col-md-12.issue-table
+        .main-table-area
+          .table-responsive.hide-overflow
+            table.table.table-first(ng-table='IssueTicketingCtrl.issueTicketTableParams', ng-table-columns-binding="IssueTicketingCtrl.cols")
+              tr(ng-repeat='tickets in $data')
+                td(ng-if="true" class='col-sm-2' data-title="'Action'")
+                  a(data-toggle='modal', data-target='#issueModal', data-ng-click="IssueTicketingCtrl.setSelectedTicket(tickets)", title='Add Comment')
+                    i.fa.fa-comment
+                td(ng-if="true" class='col-sm-2' data-title="'Issue Code'", sortable="'ticketCode'", ng-data='tickets.ticketCode') {{tickets.ticketCode}}
+                td(ng-if="true" class='col-sm-2' data-title="'Issue'", sortable="'issue'", ng-data='tickets.issue') {{tickets.issue}}
+                td(ng-if="true" class='col-sm-2' data-title="'Reason'", sortable="'ticketType'", ng-data='tickets.ticketType') {{tickets.ticketType}}
+                td(ng-if="true" class='col-sm-2' data-title="'Created By'", sortable="'firstName'", ng-data='tickets.firstName') {{tickets.firstName}} {{tickets.lastName}}
+                td(ng-if="true" class='col-sm-2' data-title="'Created On'", sortable="'createdAt'", ng-data='tickets.createdAt') {{tickets.createdAt | date:'MM/dd/yyyy'}}
+                td(ng-if="true" class='col-sm-2' data-title="'Updated On'",  sortable="'updatedAt'", ng-data='tickets.updatedAt') {{tickets.updatedAt | date:'MM/dd/yyyy'}}
+                td(ng-if="true" class='col-sm-2' data-title="'Priority'", sortable="'ticketPriority'", ng-data='tickets.ticketPriority')
+                   span(data-ng-if="tickets.ticketPriority === '1' ") High
+                   span(data-ng-if="tickets.ticketPriority === '2' ") Medium
+                   span(data-ng-if="tickets.ticketPriority === '3' ") Low
+                td(ng-if="true" class='col-sm-2' data-title="'Attachment'", ng-data='tickets.attachment')
+                  span(ng-repeat='attachments in tickets.attachment track by $index')
+                    div
+                      a.attachment-position(href='{{attachments}}', target="_blank") attachment_{{$index+1}}
+                td(ng-if="true" class='col-sm-2' data-title="'Status'",sortable="'status'", ng-data='tickets.status')
+                  span.label.label-primary {{tickets.status}}
+          .row.notification-message(ng-show="IssueTicketingCtrl.ticketDatalist.length < 1")
+            center No Issues Added Yet !!!
+      #issueModal.modal.fade(role='dialog')
+        .modal-dialog
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') ×
+              h4.modal-title {{IssueTicketingCtrl.selectedTicket.id}}({{IssueTicketingCtrl.selectedTicket.status}})
+            .modal-body
+              .row
+                label.col-md-3.col-sm-3.col-xs-4.description Description: 
+                .col-md-9.col-sm-9.col-xs-8 {{IssueTicketingCtrl.selectedTicket.description}}
+              .conversation(ng-if='IssueTicketingCtrl.ticketComments.length >0')
+                label Comments :
+                .row
+                  .col-md-offset-2.col-md-10(data-ng-repeat="ticketComment in IssueTicketingCtrl.ticketComments")
+                    b {{ticketComment.user.fullName}} :
+                    span {{ticketComment.comment}}
+                    br
+                    | {{ticketComment.createdAt }}
+              form(name='commentForm')
+                .form-group.top-spacing
+                  md-input-container.md-block
+                    label.comment-label.col-md-3.col-sm-3.col-xs-12 Comment
+                    textarea(name='comment' ,data-ng-model='IssueTicketingCtrl.comment',rows='1', col='5' , maxlength='1000' )
+                .form-group
+                  md-input-container.md-block(flex="100")
+                    label Status
+                    md-select#ddlQuestionType(ng-model='IssueTicketingCtrl.selectedStatus', name='statusType')
+                      md-option(ng-repeat='status in IssueTicketingCtrl.statusList',ng-value='status.statusId') {{status.statusName}}
+                  //label Status
+                  //select.form-control#ddlQuestionType(ng-model='IssueTicketingCtrl.selectedStatus', ng-options='status.statusId as status.statusName for status in IssueTicketingCtrl.statusList',  name='statusType')
+            .modal-footer                            
+              md-button.md-raised.savedata-btn(aria-label="save",type='button', data-ng-click='IssueTicketingCtrl.createComment()' data-dismiss='modal') Save
+              md-button.md-raised.canceldata-btn.custom-que-btn(aria-label="cancel",type='button', data-dismiss='modal') Close
+
+

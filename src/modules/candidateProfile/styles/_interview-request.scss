@@ -1,0 +1,123 @@
+.interview-request-container {
+  
+   .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+  .interview-type-spn{
+    font-size:11px; 
+    color:#808080;
+  }
+
+  .book-a-slot-i{
+    font-size: 24px; 
+    color: #e65c00;
+  }
+
+  .start-i{
+    font-size: 25px; 
+    color: #009900;
+  }
+
+  .reschedule-i{
+    font-size: 24px;
+    color:#ff0000;
+    margin-left: 5px; 
+    cursor: pointer;
+  }
+
+  .status-completed{
+    color: gray;
+    font-size: 20px;
+  }
+
+  .action-div{
+    width: 55px;
+    text-align: center;
+  }
+
+  .status-text{
+    text-transform:uppercase !important;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+  background:$white;
+  min-height: 600px;
+  //margin-top: 25px !important;
+
+  .set-margin{
+    //width: 1040px;
+    //margin-left: 18px;
+  }
+
+   .video-intro-heading{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -1px;
+        padding: 0px 10px 10px 10px;
+        margin-top: -10px;
+        
+        .video-intro-1{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+}
+    .panel-default {
+      border-radius:$global-radius;
+    }
+    table > tbody > tr > td {
+      font-size: $font-size-normal;
+    }
+    thead{
+       background: #d2cfcf;
+       color: #666666;
+    //background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+    //color:$white;
+    }
+    .btn.btn-primary {
+      border-radius: $global-radius;
+    }
+    
+    .interview-table-position{
+        margin-left: -8px;
+        padding-left: 26px!important;
+    }
+    .ng-table-header{
+        float: left;
+    }
+     @media only screen and (max-width: 780px) {
+    .interview-request-panel{
+        margin-top:60px;
+    }
+   } 
+ 
+  .interview-card{
+    .md-headline{
+      font-size:16px;
+      font-weight: 600;
+      line-height: 16px;
+    }
+    .md-subhead{
+      font-size:12px;
+      line-height: 12px;
+    }
+  }
+
+}
+
+

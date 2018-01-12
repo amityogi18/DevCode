@@ -1,0 +1,29 @@
+.favorite-candidate-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                div.favorite-candidate-heading
+                  i.fa.fa-star.fav-candidate-icon(aria-hidden='true')
+                  span(data-translate="FAVORITE-CANDIDATES")
+                  md-button.md-raised.savedata-btn.link-to-favourite(data-ui-sref='app.allFavoriteCandidates', data-ng-if="favoriteCandidatesCtrl.favoriteCandidates.length > 0") View All
+                .row.favorite-candidate(data-ng-show="favoriteCandidatesCtrl.favoriteCandidates.length > 0")
+                  table.table
+                    tbody
+                      tr(ng-repeat='candidate in favoriteCandidatesCtrl.favoriteCandidates')
+                        td.col-md-4.col-sm-4
+                          .col-md-4.col-sm-3.col-xs-3.candidate-img
+                            img.img-box.pull-right(ng-src="{{candidate.profilePicUrl?candidate.profilePicUrl:'./img/user.png'}}", alt='')
+                          .col-md-8.col-sm-8.col-xs-8.favourite-details
+                            .title.name-spacing {{candidate.candidateName}}
+                            .designation {{candidate.candidateDesignation}}
+                        td.text-center.col-md-6.col-sm-6(ng-data='candidate.candidateSkills') 
+                            .name-spacing
+                                span.skills(ng-repeat='skills in candidate.candidateSkills')  {{skills.skillsetName}}
+                                span.no-skills(ng-if='candidate.candidateSkills.length < 1') N/A
+                        td.col-md-2.col-sm-2
+                            .stars.name-spacing(aria-hidden='true',uib-rating='', ng-model='candidate.overAllRating', max='5', read-only='true', aria-labelledby='default-rating')   
+                .row.favorite-message(data-ng-show="favoriteCandidatesCtrl.favoriteCandidates.length === 0") 
+                 .p  
+                    i.fa.fa-users.fav-cadidate-msg-icon(aria-hidden='true')
+                    | No Favorite Candidate as of Now

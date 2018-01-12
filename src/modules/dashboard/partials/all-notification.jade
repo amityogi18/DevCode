@@ -1,0 +1,33 @@
+.content-wrapper.dashboard-notification-section
+  .panel.panel-default
+    .panel-heading.view-notification-heading
+      div.notification-heading
+        i.fa.fa-bell.notification-icon(aria-hidden='true')
+        | Notifications
+    .panel-body
+      .col-xs-12.showMe
+        select(class="selectpicker" ng-model="allNotificationCtrl.test" ng-change="allNotificationCtrl.toggle()")
+          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in allNotificationCtrl.cols.slice(1,allNotificationCtrl.cols.length) track by $index") {{col.title()}}
+      .col-md-12.col-sm-12.col-xs-12
+        .col-md-12.col-sm-12.col-xs-12
+          p.text-label(ng-hide='allNotificationCtrl.notificationList.length < 1') Showing 
+            span
+              strong 1-{{allNotificationCtrl.notificationList.length}}
+              |  of  
+              strong
+                {{allNotificationCtrl.notificationCount}}   
+              |  records    
+      .col-sm-12.col-md-12.col-xs-12.main-table-area(ng-if="allNotificationCtrl.tableParams", ng-table-columns-binding="allNotificationCtrl.cols")
+        .table-responsive(ng-show="allNotificationCtrl.notificationList.length >= 1")
+          table.table(ng-table='allNotificationCtrl.tableParams', ng-cloak='')
+            tr(ng-repeat='notification in $data')
+              td.notification-msg
+                | {{notification.message}}
+              td
+                span(style="color: gray; font-size: 11px;")
+                  i.fa.fa-clock-o(aria-hidden='true')
+                  span &nbsp;{{notification.duration}} ago.
+      .row.notification-message(ng-show="allNotificationCtrl.notificationList.length < 1")
+        .h4 No Notification !!!    
+
+

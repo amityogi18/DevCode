@@ -1,0 +1,54 @@
+.modal-content.user-department-popup
+  .modal-header.margin-to-hdr
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-translate='ADD-DEPT-BTN', data-ng-if='!adminDepartmentCtrl.IsEdit')
+    h4.modal-title(data-translate='UPDATE-DEPT-BTN', data-ng-if='adminDepartmentCtrl.IsEdit')
+  .modal-body
+    form(role='form', name='departmentForm', novalidate)
+        .form-group.top-spacing
+          .col-md-12.col-sm-12.col-xs-12
+            md-input-container.md-block(flex="100")
+              label Department
+              input.textbox-dimension(type='text', maxlength='50', name='departmentName',data-ng-model='adminDepartmentCtrl.name', required)
+              span.error-msg(data-ng-show='departmentForm.$submitted || departmentForm.departmentName.$touched')
+                span(data-ng-show='departmentForm.departmentName.$dirty && departmentForm.departmentName.$invalid')
+                span.error-msg(data-ng-show='departmentForm.departmentName.$error.required') Please Enter Department Name
+        .form-group(data-ng-show='adminDepartmentCtrl.IsEdit')
+          .col-md-12.col-sm-12.col-xs-12.bottom-spacing
+            label.control-label.col-md-2.col-sm-2.col-xs-12  Status
+              span.mandatory-field *
+            .col-md-8.col-sm-8.col-xs-12.dept-radio-area
+              .col-md-6.col-sm-6.col-xs-12
+                input.option-input.radio(type='radio', id='rbActive', maxlength='50', name='departmentSatus', placeholder='Select Department Satus', value='1', data-ng-model='adminDepartmentCtrl.statusId',  data-ng-checked='adminDepartmentCtrl.statusId === 1', required)
+                span(for='rbActive')  Active
+              .col-md-6.col-sm-6.col-xs-12  
+                input.option-input.radio(type='radio', id='rbInactive', maxlength='50', name='departmentSatus', placeholder='Select Department Satus', value='2', data-ng-model='adminDepartmentCtrl.statusId', data-ng-checked='adminDepartmentCtrl.statusId === 2', required)
+                span(for='rbInactive')  Inactive
+        .form-group
+          .col-md-10.col-sm-10.col-xs-8(data-ng-repeat="skill in adminDepartmentCtrl.addSkillsetList", data-ng-hide='adminDepartmentCtrl.IsEdit')
+            md-input-container.md-block(flex="100")
+              label Skillset
+              input.skillset-textbox(type='text', maxlength='50', name='skillsetName', data-ng-model='skill.skillsetName', required)
+              span.error-msg(data-ng-show='departmentForm.$submitted || departmentForm.skillsetName.$touched')
+                span(data-ng-show='departmentForm.skillsetName.$dirty && departmentForm.skillsetName.$invalid')
+                span.error-msg(data-ng-show='departmentForm.skillsetName.$error.required') Please Enter SkillSet Name
+          .col-md-2.col-sm-2.col-xs-4( data-ng-hide='adminDepartmentCtrl.IsEdit')
+            i.fa.fa-plus-circle.plus-btn(aria-hidden='true', data-ng-click='adminDepartmentCtrl.addMoreSkill()')
+            i.fa.fa-minus-circle.minus-btn(aria-hidden='true', data-ng-click='adminDepartmentCtrl.removeSkill()', data-ng-show="adminDepartmentCtrl.addSkillsetList.length > 1")
+        .form-group
+          .col-md-11.col-sm-11.col-xs-11(data-ng-repeat="skill in adminDepartmentCtrl.skillsetList", data-ng-show='adminDepartmentCtrl.IsEdit', ng-hide='skill.delete === true')
+            span(ng-disabled='skill.skillUsed')
+                .col-md-11.col-sm-11.col-xs-11.no-spacing
+                  md-input-container.md-block(flex="100")
+                   label Skillset
+                   input(type='text', name='skillsetName', data-ng-model='skill.skillsetName', required)
+                   input(type='hidden', name='skillsetId', data-ng-model='skill.id', required)
+                .col-md-1.col-sm-1.col-xs-12
+                  i.fa.fa-minus-circle.minus-btn(aria-hidden='true', data-ng-click='adminDepartmentCtrl.removeUpdateSkill(skill)', data-ng-show="adminDepartmentCtrl.IsEdit && adminDepartmentCtrl.skillsetList.length > 1")
+          .col-md-1.col-sm-1.col-xs-12.no-spacing(data-ng-show='adminDepartmentCtrl.IsEdit')
+            i.fa.fa-plus-circle.plus-btn(aria-hidden='true', data-ng-click='adminDepartmentCtrl.addMoreSkill()')
+    .modal-footer.footer-section
+      md-button.md-raised.savedata-btn(aria-label="save",type='button', data-ng-click='adminDepartmentCtrl.saveDepartment()', data-ng-show='!adminDepartmentCtrl.IsEdit') Add
+      md-button.md-raised.savedata-btn(aria-label="update",type='button', data-ng-click='adminDepartmentCtrl.updateDepartment()', data-ng-show='adminDepartmentCtrl.IsEdit') Update
+      md-button.md-raised.canceldata-btn(aria-label="close",type='button', data-ng-click='close()') Close
+      label.error-lbl {{adminDepartmentCtrl.errorLblTxt}}

@@ -1,0 +1,67 @@
+header.main-header{
+  .right-header-section{
+    color:white;
+    .welcome-note{
+      border-right:2px dotted white;
+      padding-right:6px;
+      padding-left: 20px;
+    }
+    a{
+      color: white;
+      text-decoration: none;
+      padding-left: 6px;
+      &:hover{
+      color:lightgrey;
+    }
+
+    }
+    .sign-out-link{
+      border-right: 2px dotted white;
+      padding-right: 7px;
+    }
+    margin-top: 7px;
+  }
+  .input-group-btn {
+
+    .search-btn {
+      margin-top: -34px;
+      margin-right: -3px;
+      border-radius: 0px;
+    }
+  }
+  .navigationbar-dimension{
+   width:600px !important;
+  }
+
+  .logo-image{
+    height: 50px !important;
+    width: 140px !important;
+    margin-top: -6px;
+    margin-left: -4px;
+  }
+  .superadmin-company-logo{
+    height:55px !important;
+    width:200px !important;
+    margin-top:-5px;
+  }
+  .color-logout{
+    color:$red !important;
+  }
+  .user-image-conf{
+    height: 49px !important;
+    margin-top:-8px;
+    width: 56px !important;
+    border:none;
+    outline:none;
+  }
+  .dropdown-menu:after {
+          position: absolute;
+          top: -6px;
+          right: 30px;
+          display: inline-block;
+          border-right: 6px solid transparent;
+          border-bottom: 6px solid #ffffff;
+          border-left: 6px solid transparent;
+          content: '';
+        }
+}

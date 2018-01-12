@@ -1,0 +1,109 @@
+.favorite-candidate-section {
+    md-content{
+        padding:0px;
+        background: transparent;
+        md-card{
+            width: 100%;
+            box-shadow: 0px 1px 15px 1px rgba(81, 77, 92, 0.08);
+            min-height: 450px;
+            max-height: 450px
+        }
+    }
+  .favorite-candidate-heading{
+    font-size: 16px;
+    padding: 15px;
+    color: #676a6c;
+    font-weight: 700;
+    border-bottom: 1px solid #ebedf2;
+  }
+  
+  .panel-body{
+    min-height:260px !important;
+  }
+  .link-to-analytics{
+    float: right;
+    color: #015392 !important;
+    cursor: pointer;
+    
+  }
+  .name-spacing{      
+        margin-top: 10px;
+  }
+  .favourite-details{
+      .title {
+          font-weight: 700;
+          color: #7a7d84;
+      }
+      .designation{
+          color: #7a7d84;
+          font-size:10px;
+      }
+  }
+  .no-skills{
+      padding:2px;
+      margin: 10px 2px 2px;
+      font-size: 12px;
+      color: #7a7d84;
+  }
+  .skills{
+      border: 1px solid #e3e8f1;
+      padding:2px;
+      margin: 10px 2px 2px;
+      font-size: 12px;
+      color: #7a7d84;
+  }
+  table{
+      tr{
+          td{
+            border:none;
+          }
+      }
+  }
+  .panel-default > .panel-heading .link-to-analytics:after{
+    content: "\f068";
+    position: absolute;
+    width: 36px;
+    height: 100%;
+    top: 0;
+    right: 0;
+  }
+  .favorite-message {      
+    text-align: center;
+    margin-top: 65px;
+    }
+    @media only screen and (max-width: 480px){
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    
+    .favorite-candidate {
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+      table{
+        margin-bottom: 8px;
+      }
+      .candidate-img{
+          img{
+                width: 65px;
+                height: 50px;
+                border-radius: 50%;
+          }
+      }
+    }
+    
+    .fav-candidate-icon{
+      margin-right: 5px;
+    }
+    
+    .fav-cadidate-msg-icon{
+      font-size: 5em;
+      color: #009788;
+      display: block;
+    }
+  .link-to-favourite{
+    float: right;
+    margin: -8px 0px;
+  }
+}
+
+

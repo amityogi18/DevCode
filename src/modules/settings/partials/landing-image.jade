@@ -1,0 +1,59 @@
+.company-information.landing-image-container
+    md-card
+      .video-intro-heading.welcome-video
+          span.video-intro-1 LANDING PAGE IMAGE    
+        .panel-body.border-of-panel(ng-hide='landingImageCtrl.noLandingImage')
+          .thumbnail
+            img.admin-image.landingpage-image(ng-src='{{landingImageCtrl.landingPageUrl}}')
+          table.table.table-responsive.landing-image-table
+            tr
+              th Image
+              th Name
+              th Activate
+              th Delete
+            tr(ng-repeat='image in landingImageCtrl.landingImageList')
+              td
+                img.thumbnail.logo-dimension(ng-src='{{image.thumbnailUrl}}')
+              td {{image.imagePath}}
+              td
+                input(type='radio', name='chooseone',data-ng-click='landingImageCtrl.getActiveLandingImage(image.landingImageId)', data-ng-checked='image.statusId === 1')
+              td
+                i.fa.fa-trash.hover-cursor(aria-hidden='true',uib-tooltip='DELETE', data-ng-click='landingImageCtrl.deleteLandingImage(image)')
+          .row.landing-section
+            input(type='file', ngf-max-size='512KB' ngf-select="landingImageCtrl.uploadLandingImage($files); landingImageCtrl.isFileAdded($files)", data-ng-model='landingImageCtrl.landingImageFile', data-ng-hide='user.userRoles == 7',accept="image/*")
+            md-button.md-raised.md-primary.add-landing(aria-label='addImage',data-ng-click='landingImageCtrl.addLandingImage()', data-translate="ADD-BTN")
+          //button.btn.btn-danger.video-btn-image(data-ng-click='landingImageCtrl.deleteLandingImage()', data-translate="REMOVE-BTN")
+
+
+
+        .panel-body.border-of-panel(ng-show='landingImageCtrl.noLandingImage')
+          .noImageHolder
+          h3 No Image Available
+          .row.landing-section
+            input(type='file', ngf-max-size='512KB' ngf-select="landingImageCtrl.uploadLandingImage($files); landingImageCtrl.isFileAdded($files)", data-ng-model='landingImageCtrl.landingImageFile', data-ng-hide='user.userRoles == 7',accept="image/*")
+            md-button.md-raised.md-primary.add-landing(aria-label='add',data-ng-click='landingImageCtrl.addLandingImage()', data-translate="ADD-BTN")
+          //button.btn.btn-danger.video-btn-image(data-ng-click='landingImageCtrl.deleteLandingImage()', data-translate="REMOVE-BTN")
+      //ul.list-group
+            li.list-group-item
+              img.admin-image(ng-src='{{landingImageCtrl.landingPageUrl}}')
+            li.list-group-item
+              form(role='form')
+                .form-group
+                  ui-select.landing-image-select(data-ng-model='landingImageCtrl.landingImageId', data-ng-change='landingImageCtrl.getActiveLandingImage(landingImageCtrl.landingImageId)', name='landingImage' required)
+                      ui-select-match(placeholder='Select Landing Image')
+                        span(ng-bind='$select.selected.imagePath')
+                      ui-select-choices(repeat='image.landingImageId as image in landingImageCtrl.landingImageList | filter: $select.search')
+                        span(ng-bind='image.imagePath')
+              //i.fa.fa-eye.fa-2x.video-btn-image-preview(aria-hidden='true', data-toggle='modal', data-target='#myModal2', title='Preview')
+                  #myModal2.modal.fade(role='dialog')
+                      .modal-dialog.modal-md
+                        .modal-content
+                          .modal-header
+                            button.close(type='button', data-dismiss='modal') ×
+                            h4.modal-title Landing Image
+                          .modal-body
+                            ul.list-group
+                              li.list-group-item
+                                img(ng-src='{{landingImageCtrl.landingPageUrl}}')
+                          .modal-footer
+                            button.btn.btn-default(type='button', data-dismiss='modal') Close

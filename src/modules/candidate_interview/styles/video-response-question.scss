@@ -1,0 +1,161 @@
+.video-response-question {
+  .question-text{
+    text-align: center;
+    padding: 100px 0px;
+
+    &.video-container{
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-left:0 !important;
+    }
+  }
+  .video-response-container {
+    border-left: 1px solid #aaa;
+
+    .preparation-time-timer {
+      box-shadow: 0 0 5px #aaa;
+      border-radius: 5px;
+      font-size: 125px;
+      color:#0168A7;
+      font-weight: 500;
+      text-align: center;
+      height: 400px !important;
+      line-height: 250px;
+      margin-top: 1px;
+      padding-top: 65px;
+    }
+
+    #videoResponse {
+      height: 400px !important;
+      //width: 500px !important;
+      margin-left: -3px;
+      border-radius: 5px;
+    }
+
+    .preview-retry-submit-btns{
+      text-align: center;
+      padding: 10px;
+    }
+
+    .preparation-response-time{
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #aaa;
+      padding: 0px 5px;
+    }
+
+    .finish-record-btn-container{
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+}
+
+video::-internal-media-controls-download-button { display:none; }
+video::-webkit-media-controls-enclosure {overflow:hidden;}
+video::-webkit-media-controls-panel {width: calc(100% + 30px); /* Adjust as needed */ }
+
+
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+
+/* Portrait */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+  .video-response-question {
+    
+    .video-response-container {
+      border-left:none !important;
+    }
+    .video-response-container #videoResponse {
+      height: 200px !important;
+      width:263px;
+  }
+  .question-text{
+    &.video-container{
+      height:235px;
+    }
+  }
+}
+.question-container .question{
+  border:none !important;
+}
+}
+
+
+/* Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+  .video-response-question {
+    .video-response-container {
+      border-left:none !important;
+    }
+    .video-response-container #videoResponse{
+      width:522px;
+      margin-top:50px;
+    }
+  }
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+  
+  .video-response-question .video-response-container #videoResponse {
+    height: 244px !important;
+    width: 331px;
+    margin-top: 50px;
+  }  
+}
+
+/* ----------- iPhone 6+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+  
+  
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+  .video-response-question .custom-video-player {
+    height: 274px !important;
+    width: 365px !important;
+  }
+  
+  .video-response-question .video-response-container #videoResponse {
+    height: 280px !important;
+    width: 370px;
+    margin-top: 50px;
+  }  
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+  
+  
+}

@@ -1,0 +1,92 @@
+.modal {
+    z-index: 10000 !important; background: rgba(0, 0, 0, 0.75);
+    z-index: 999999;
+}
+.modal-content {
+    border-radius: 0px !important;
+}
+.modal-backdrop {
+    display: none;
+}
+.modal-header {
+    text-align: left;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#009fe0+0,0080c1+48,01508f+100 */
+    background: $HeaderClr;
+    //background: -moz-linear-gradient(top, $navColor 0%, $navDarkColor 52%, $navDarkerColor 100%);
+    //background: -webkit-linear-gradient(top, $navColor 0%, $navDarkColor 52%, $navDarkerColor 100%);
+    //background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 52%, $navDarkerColor 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#009fe0', endColorstr='#01508f', GradientType=0);*/
+    /* IE6-9 */
+    /*padding: 20px 28px;*/
+    padding: 10px;
+    .close {
+        background: transparent !important;
+        padding: 0;
+        opacity: 1;
+    }
+    h4 {
+        margin: 0;
+        color: #f7f7f7;
+        line-height: 1em;
+    }
+}
+
+.modal-content {
+    width: 100%;
+    float: left;
+    border: none;
+    border-radius: $global-radius;
+    box-shadow: none;
+    background: $white;
+    .modal-body {
+        width: 100%;
+        float: left;
+        padding: 18px 30px;
+    }
+    .candidate-body-area {
+        width: 100%;
+        float: left;
+        min-height: 410px;
+    }
+}
+
+.modal-body {
+    .form-control {
+        width: 100%;
+        border: #5497ba 1px solid !important;
+        background: #FFF;
+        padding: 0 14px !important;
+        font-size: 13px !important;
+        //color: #a5a5a5 !important;
+        margin-bottom: 5px !important;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    form {
+        position: relative;
+    }
+    .btn-plus {
+        display: block;
+        text-align: center;
+    }
+}
+
+.modal-content .modal-body p.sub-title {
+    font-size: 20px;
+    color: #282828;
+    line-height: 1em;
+    margin: 0 0 20px 0;
+}
+
+
+
+.modal-footer {
+    width: 100%;
+    float: left;
+    padding: 0;
+    border: none;
+}

@@ -1,0 +1,21 @@
+.participants-page(ng-draggable='dragOptions')
+  .part-container
+    .header-container
+      h3(style='padding-top:15px;') Participants
+      button.btn.btn-close(type='button', data-ng-click='ParticipantCtrl.cancel()') X
+    hr
+    table.people-table
+      tr
+        td
+          div
+            i.fa.fa-user(aria-hidden='true')
+            |    Host
+      tr
+        td  
+      tr
+        td  
+style.
+  .modal {
+    z-index: 0 !important;
+    background: none !important;
+  }

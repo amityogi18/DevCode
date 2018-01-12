@@ -1,0 +1,126 @@
+.content-wrapper.cover-letter-container
+  .row
+    .col-md-12.col-sm-12.col-xs-12
+      .video-intro-heading
+        span.video-intro-1(data-translate='COVER-LETTER') 
+  .panel.panel-default.cover-letter-panel
+    .panel-body
+      .alert.alert-warning(data-translate='COVER-LETTER-ERROR', ng-if='coverLetterCtrl.coverLetterError')
+      .row
+        .col-md-12.col-sm-12.col-xs-12
+          p.cover-para(data-translate='COVER-LETTER-PARAGRAPH')
+      #accordion.panel-group
+        .cover-letter-list(data-ng-if='coverLetterCtrl.coverLetterList.length > 0')
+          .row(data-ng-repeat="coverLetter in coverLetterCtrl.coverLetterList")
+            .col-md-6.col-sm-6.col-xs-12.align-middle
+              h4
+                i.fa.fa-check-circle.cover-letter-state(aria-hidden='true',data-ng-show='coverLetter.statusId === 1')
+                span   Cover Letter For {{coverLetter.coverletterTitle}}
+            .col-md-4.col-sm-6.col-xs-6
+              .row.align-middle
+                .col-md-12.col-sm-12.col-xs-12
+                    |Last Updated
+                .col-md-12.col-sm-12.col-xs-12
+                  label {{coverLetter.updatedAt}}
+            .col-md-2.col-sm-4.col-xs-6
+              .row
+                .col-md-4.col-xs-6.col-sm-6
+                  md-button.md-raised.md-primary.md-fab.md-mini(aria-label="view",uib-tooltip='View', tooltip-placement ="top")
+                    span
+                      i.fa.fa-eye(ng-disabled="coverLetterCtrl.disableView" ,aria-hidden='true', data-toggle="modal" , data-target="#viewModal{{coverLetter.profileId}}")
+                      //.tool-tip(data-ng-show="coverLetterCtrl.showView") View
+                  .modal.fade(role='dialog', id='viewModal{{coverLetter.profileId}}')
+                    .modal-dialog.modal-lg
+                      .modal-content
+                        .modal-header Cover Letter
+                          button.close(type='button', data-dismiss='modal') ×
+                        .modal-body
+                          .row
+                            h4.cover-title 
+                              |{{coverLetter.coverletterTitle}}
+                          .row
+                            p.cover-letter-content  {{coverLetter.content}}
+                .col-md-4.col-xs-6.col-sm-6
+                  md-button.md-raised.md-primary.md-fab.md-mini.save-btn-display(aria-label="save",data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{coverLetter.profileId}}',  id='saveBtn_{{coverLetter.profileId}}',  data-ng-click='coverLetterCtrl.updateCoverLetter($event, coverLetter)', ng-disabled='coverLetterCtrl.coverLetterError', uib-tooltip='Save', tooltip-placement ="top", type='submit')
+                    span
+                      i.fa.fa-floppy-o(aria-hidden='true')
+                      //.tool-tip(data-ng-show="coverLetterCtrl.showSave") Save
+                  md-button.md-raised.md-primary.md-fab.md-mini(aria-label="edit",data-toggle='collapse', data-parent='#accordion',  data-target='#collapse{{coverLetter.profileId}}', id='editBtn_{{coverLetter.profileId}}', data-ng-click="coverLetterCtrl.changeEditMode($event)", ng-disabled='coverLetterCtrl.coverLetterError', uib-tooltip='Edit', tooltip-placement ="top")
+                    span
+                      i.fa.fa-edit(aria-hidden='true')
+                      //.tool-tip(data-ng-show="coverLetterCtrl.showEdit") Edit
+
+            .panel-collapse.collapse(id='collapse{{coverLetter.profileId}}')
+              .panel-body
+                .row
+                .cover-letter-content
+                  form(role='form', name='coverLetterCtrl.editCoverLetterForm', novalidate='novalidate')
+                    .form-group
+                      .row
+                        .col-md-4.col-sm-6.col-xs-12
+                            md-input-container.md-block(flex-gt-sm='')
+                              label Cover Letter Title                                
+                              input(type='text', maxlength='50', name='coverLetterTitle', data-ng-model="coverLetter.coverletterTitle", required='required')
+                              span.error-msg(data-ng-show='coverLetterCtrl.editCoverLetterForm.$submitted || coverLetterCtrl.editCoverLetterForm.coverLetterTitle.$touched')
+                                span(data-ng-show='coverLetterCtrl.editCoverLetterForm.coverLetterTitle.$dirty && coverLetterCtrl.editCoverLetterForm.coverLetterTitle.$invalid')
+                                span.error-msg.alert-error-message(data-ng-show='coverLetterCtrl.editCoverLetterForm.coverLetterTitle.$error.required') Please Enter Cover Letter Title
+                        .col-md-offset-6.col-md-2
+                      .row
+                        .col-md-4.col-sm-6.col-xs-12
+                          select.form-control(ng-model='coverLetter.profileName',ng-selected='coverLetter.profileName.name == profiles.name'  value="profiles.name" ng-options='profiles.name for profiles in coverLetterCtrl.profileList track by profiles.id', ng-disabled='coverLetterCtrl.coverLetterError || coverLetterCtrl.disableProfile')
+                      hr
+                    .form-group
+                      .row
+                        .col-md-12.col-sm-12.col-xs-12
+                          textarea(ng-model='coverLetter.content', rows='5', cols='50',ng-disabled='coverLetterCtrl.coverLetterError',name='coverLetterConti',ng-trim='false', maxlength='1000', required='required')
+                          span.error-msg(data-ng-show='coverLetterCtrl.editCoverLetterForm.$submitted || coverLetterCtrl.editCoverLetterForm.coverLetterConti.$touched')
+                            span(data-ng-show='coverLetterCtrl.editCoverLetterForm.coverLetterConti.$dirty && coverLetterCtrl.editCoverLetterForm.coverLetterConti.$invalid')
+                            span.error-msg.alert-error-message(data-ng-show='coverLetterCtrl.editCoverLetterForm.coverLetterConti.$error.required') Please Fill the Content of the Cover Letter
+                          br
+                          span {{1000 - coverLetter.content.length}}
+                        
+                        
+      hr
+      md-button.md-raised.md-primary(aria-label='add', type='button',data-toggle="modal",data-target="#clModal3",ng-click="coverLetterCtrl.filterProfile()", ng-disabled="coverLetterCtrl.isEditMode || coverLetterCtrl.coverLetterList.length == 4 || coverLetterCtrl.profileList.length == 0 || (coverLetterCtrl.profileList.length == coverLetterCtrl.coverLetterList.length)") Add Cover Letter
+      #clModal3.modal.fade(role='dialog')
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              span.add-cover-letter  Add Cover Letter
+              button.close(type='button', data-dismiss='modal' ng-click="coverLetterCtrl.clearForm()") ×
+              h4.modal-title
+            .modal-body
+              form(role='form', name='coverLetterCtrl.addCoverLetterForm', novalidate='novalidate')
+                div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')
+                  md-input-container.md-block(flex-gt-sm='')
+                    label Cover Letter Title:
+                    input(type='text',maxlength='50', name='coverLetterTitle',  data-ng-model="coverLetterCtrl.coverletterTitle", required='required')
+                    span.error-msg(data-ng-show='coverLetterCtrl.addCoverLetterForm.$submitted || coverLetterCtrl.addCoverLetterForm.coverLetterTitle.$touched')
+                      span(data-ng-show='coverLetterCtrl.addCoverLetterForm.coverLetterTitle.$dirty && coverLetterCtrl.addCoverLetterForm.coverLetterTitle.$invalid')
+                      span.error-msg.alert-error-message(data-ng-show='coverLetterCtrl.addCoverLetterForm.coverLetterTitle.$error.required') Please Enter Cover Letter Title
+                div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                    //md-input-container.md-block(flex-gt-sm='')
+                      label Profile Name:
+                      md-select(ng-model='coverLetterCtrl.profile',name='profileName',ng-change='coverLetterCtrl.getCoverLetterData(coverLetterCtrl.profile.id)')
+                        md-optgroup(label='profiles')
+                          md-option(ng-value='profiles.id', ng-repeat='profiles in coverLetterCtrl.addNewCoverList') {{profiles.name}}
+                    label Profile Name:
+                    select.form-control(ng-model='coverLetterCtrl.profile', name='profileName', ng-change='coverLetterCtrl.getCoverLetterData(coverLetterCtrl.profile.id)', ng-options='profiles as profiles.name for profiles in coverLetterCtrl.addNewCoverList track by profiles.id', required='required')
+                    span.error-msg.alert-error-message(data-ng-show='!coverLetterCtrl.profile') Please Select Profile
+                div(layout-margin='', layout-gt-sm="row" flex-gt-sm='')
+                  md-input-container.md-block(flex-gt-sm='')
+                    label Content:                  
+                    textarea.cl-content(rows='5',cols='5', name = 'coverLetterCont', ng-model='coverLetterCtrl.content' md-maxlength='1000', required='required' )
+                    span.error-msg(data-ng-show='coverLetterCtrl.addCoverLetterForm.$submitted || coverLetterCtrl.addCoverLetterForm.coverLetterCont.$touched')
+                      span(data-ng-show='coverLetterCtrl.addCoverLetterForm.coverLetterCont.$dirty && coverLetterCtrl.addCoverLetterForm.coverLetterCont.$invalid')
+                      span.error-msg.alert-error-message(data-ng-show='coverLetterCtrl.addCoverLetterForm.coverLetterCont.$error.required') Please Fill the Content of the Cover Letter
+                    //br(ng-if ="!coverLetterCtrl.content.length")
+                    //span {{1000 - coverLetterCtrl.content.length}}
+                md-button.md-raised.md-primary.pull-right(aria-label='save', type='button', data-ng-click='coverLetterCtrl.addCoverLetter()') Save
+
+
+
+
+
+
+

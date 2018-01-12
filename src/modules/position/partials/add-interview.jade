@@ -1,0 +1,174 @@
+include position-navbar
+#add-position-page.add-position-page    
+  .col-md-12.col-sm-12.col-xs-12.add-position-content
+    .col-md-12.col-sm-12.col-xs-12.help-box(ng-show="!newPositionCtrl.hideHelpBox", ng-class="{'fade': newPositionCtrl.hideHelpBox}")
+      .alert.alert-warning
+            h5 Create set of interviews to assess the candidates on required skills
+            p
+              | A. OnDemand interview – Beat the time zone and let the candidate record their interview in their time zone and place.
+            p
+              | B. Live Interview – Reduce the infrastructure cost and assess the candidate live along with other teammates.
+            p 
+              | C. Live Now – Pick a candidate and schedule live interview instantly.
+            br
+            .cross-icon 
+              i.fa.fa-times-circle.fa-lg(ng-click='newPositionCtrl.hideHelpBox = true')
+    .col-md-12.col-sm-12.col-xs-12.default-tab-module.interview-tabs 
+      ul.nav.nav-tabs.hidden-xs
+        li(ng-repeat='interviewAccordian in newPositionCtrl.interviewAccordians', id='li_{{interviewAccordian.id}}', data-ng-click='newPositionCtrl.showTabSwitchModal(interviewAccordian)')
+          a(data-toggle='tab', href='#interviewAccordian') {{interviewAccordian.name}}
+        li#li_interviewAccordian(data-ng-if='newPositionCtrl.isLiveNow', data-ng-click='newPositionCtrl.showLiveNow()')
+          a(data-toggle='tab', href='#interviewAccordian') Live Now
+        li#btnAddNewInterview(ng-hide='newPositionCtrl.isShowAddNewInterviewBtn')
+          a(href='javascript:void(0)', data-ng-click='newPositionCtrl.showTabNewModal()')
+            | Add New Interview
+            i.fa.fa-plus
+      ul.nav.nav-tabs.tab-interview.visible-xs
+        li.dropdown
+          a.dropdown-toggle.font-clr(data-toggle='dropdown') Interview
+            span.caret
+          ul.dropdown-menu
+            li(ng-repeat='interviewAccordian in newPositionCtrl.interviewAccordians', id='li_{{interviewAccordian.id}}', data-ng-click='newPositionCtrl.showTabSwitchModal(interviewAccordian)')
+              a(href='#interviewAccordian') {{interviewAccordian.name}}
+        li#li_interviewAccordian(data-ng-if='newPositionCtrl.isLiveNow', data-ng-click='newPositionCtrl.showLiveNow()')
+          a.font-clr(href='#interviewAccordian') Live Now
+        li#btnAddNewInterview(ng-hide='newPositionCtrl.isShowAddNewInterviewBtn')
+          a.font-clr(href='javascript:void(0)', data-ng-click='newPositionCtrl.showTabNewModal()')
+            span 
+              i.fa.fa-plus
+      .tab-content
+        #interviewAccordian.tab-pane.fade.active.in
+          .panel-default.tab-section
+            form.form-inline(role='form', name='newPositionCtrl.interviewForm', novalidate='novalidate')
+              .interview-upper-form.botom-space.box-hght(data-ng-if='newPositionCtrl.selectedInterviewTypeId !== 4')
+                .col-md-12.col-sm-12.col-xs-12.space-margin
+                  .col-md-6.col-sm-6.col-xs-12.space-margin
+                    md-input-container.md-block(flex="100")
+                      label Interview Type
+                      md-select(ng-model='newPositionCtrl.interview.interviewTypeId', name='interviewType', title='Choose Interview type', ng-change='newPositionCtrl.showAccordions();', required='required')
+                        md-option(ng-repeat='interviewType in newPositionCtrl.interviewsTypeId',ng-value='interviewType.id', ng-click='newPositionCtrl.interviewUpdated()') {{interviewType.name}}
+                      .error-msg-interview(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.interviewType.$touched')
+                        span(data-ng-show='newPositionCtrl.interviewForm.interviewType.$dirty && newPositionCtrl.interviewForm.interviewType.$invalid')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.interviewType.$error.required') Please Select Interview Type
+                  .col-md-6.col-sm-6.col-xs-12.space-margin
+                    .input-fields
+                      md-input-container.md-block(flex="100")
+                        label Interview Name
+                        input.input__field.interview-box(type='text', name='interviewName', placeholder='Interview Name', ng-model='newPositionCtrl.interview.name', maxlength='25', required='required', ng-blur='newPositionCtrl.interviewUpdated()')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.interviewName.$touched')
+                          span(data-ng-show='newPositionCtrl.interviewForm.interviewName.$dirty && newPositionCtrl.interviewForm.interviewName.$invalid')
+                          span.error-msg(data-ng-show='newPositionCtrl.interviewForm.interviewName.$error.required') Please Enter Interview Name
+              .col-md-12.col-sm-12.col-xs-12.interview-form.space-margin
+                .col-md-6.col-sm-6.col-xs-12.space-margin(data-ng-show='newPositionCtrl.selectedInterviewTypeId === 2')
+                  .input-fields
+                    md-input-container.md-block(flex="100")
+                      label.interview-expiry-pos Start Date
+                      md-datepicker.md-datepicker-css(name='fromDate', ng-model='newPositionCtrl.interview.fromDate',md-min-date="newPositionCtrl.dateOptions.minDate", md-max-date="newPositionCtrl.dateOptions.maxDate",ng-required ='true', md-hide-icons='triangle', ng-blur='newPositionCtrl.interviewUpdated()')
+                      span.error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.fromDate.$touched')
+                        span(data-ng-show='newPositionCtrl.interviewForm.fromDate.$dirty && newPositionCtrl.interviewForm.fromDate.$invalid')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.fromDate.$error.required') Please Enter Start Date
+                .col-md-6.col-sm-6.col-xs-12.space-margin(data-ng-show='newPositionCtrl.selectedInterviewTypeId === 2')
+                  .input-fields
+                    md-input-container.md-block(flex="100")
+                      label.interview-expiry-pos End Date
+                      md-datepicker(name='toDate', ng-model='newPositionCtrl.interview.toDate',md-min-date="newPositionCtrl.dateOptions.minDate && newPositionCtrl.interview.fromDate", md-max-date="newPositionCtrl.dateOptions.maxDate",ng-required ='true', md-hide-icons='triangle', ng-blur='newPositionCtrl.interviewUpdated()')
+                      span.error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.toDate.$touched')
+                        span(data-ng-show='newPositionCtrl.interviewForm.toDate.$dirty && newPositionCtrl.interviewForm.toDate.$invalid')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.toDate.$error.required') Please Enter End Date
+              .col-md-12.col-sm-12.col-xs-12.space-margin
+                .col-md-6.col-sm-6.col-xs-12.space-margin(data-ng-show='newPositionCtrl.selectedInterviewTypeId === 2')
+                  .input-fields
+                    .col-md-3.col-sm-5.col-xs-5.default 
+                      label  Start Time
+                      span.mandatory-filed *
+                    .col-md-9.col-sm-7.col-xs-7.default
+                      .time-picker-section.space-margin
+                        div(uib-timepicker='',name='fromTime', ng-model='newPositionCtrl.interview.fromTime', required='required', min="(newPositionCtrl.interview.fromDate && (newPositionCtrl.interview.fromDate.toLocaleDateString()==newPositionCtrl.minTime.toLocaleDateString()))?newPositionCtrl.minTime:null",show-meridian='false', ng-blur='newPositionCtrl.interviewUpdated()')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.fromTime.$touched')
+                          span(data-ng-show='newPositionCtrl.interviewForm.fromTime.$dirty && newPositionCtrl.interviewForm.fromTime.$invalid') From time should not be less than current time
+                          span.error-msg(data-ng-show='newPositionCtrl.interviewForm.fromTime.$error.required') Please Enter Start Time
+                .col-md-6.col-sm-6.col-xs-12.space-margin(data-ng-show='newPositionCtrl.selectedInterviewTypeId === 2')
+                  .input-fields
+                    .col-md-3.col-sm-5.col-xs-5.default
+                      label End Time
+                      span.mandatory-filed *
+                    .col-md-9.col-sm-7.col-xs-7.default
+                      .time-picker-section.space-margin
+                        div(uib-timepicker='',name='toTime', ng-model='newPositionCtrl.interview.toTime', min='newPositionCtrl.interview.fromTime' , show-meridian='false' ,required='required', ng-blur='newPositionCtrl.interviewUpdated()')
+                        span.error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.toTime.$touched')
+                          span(data-ng-show='newPositionCtrl.interviewForm.toTime.$dirty && newPositionCtrl.interviewForm.toTime.$invalid')
+                          span.error-msg(data-ng-show='newPositionCtrl.interviewForm.toTime.$error.required') Please Enter End Time 
+              .col-md-12.col-sm-12.col-xs-12.interview-form.space-margin
+                .col-md-6.col-sm-6.col-xs-12.space-margin(data-ng-hide='newPositionCtrl.selectedInterviewTypeId === 1 || newPositionCtrl.selectedInterviewTypeId === 4 || newPositionCtrl.selectedInterviewTypeId === 2')
+                  .input-fields
+                    md-input-container.md-block(flex="100")
+                      label.interview-expiry-pos Interview Expiry Date
+                      md-datepicker(ng-model='newPositionCtrl.interview.interviewExpiryDate', name='interviewExpiryDate', md-min-date='newPositionCtrl.dateOptions.minDate',md-max-date='newPositionCtrl.dateOptions.maxDate', md-hide-icons='triangle', ng-required='true', ng-blur='newPositionCtrl.interviewUpdated()')                           
+                      .error-msg(data-ng-show='newPositionCtrl.interviewForm.$submitted || newPositionCtrl.interviewForm.interviewExpiryDate.$touched')
+                        span(data-ng-show='newPositionCtrl.interviewForm.interviewExpiryDate.$dirty && newPositionCtrl.interviewForm.interviewExpiryDate.$invalid')                         
+                        span(data-ng-show='newPositionCtrl.interviewForm.interviewExpiryDate.$error.required') Please Select Interview Expiry Date
+                .col-md-6.col-sm-6.col-xs-12.pull-right.space-margin(data-ng-show='newPositionCtrl.selectedInterviewTypeId === 3')
+                  .input-fields
+                    label.col-md-4.col-sm-4.col-xs-12.spacing(data-ng-show='newPositionCtrl.interviewId !== ""') Enable Sharable Link
+                      p.chk-box.visible-xs
+                        input(type='checkbox', ng-model='newPositionCtrl.interview.enableShareLink', data-ng-true-value='1', data-ng-false-value='0', ng-click='newPositionCtrl.interviewUpdated()')
+                        a.col-xs-12(href='{{newPositionCtrl.interview.interviewUrl}}', data-ng-if='newPositionCtrl.interview.enableShareLink == 1', target='_blank') {{newPositionCtrl.interview.interviewUrl}}
+                    .col-md-8.col-sm-8.col-xs-12.fields(data-ng-show='newPositionCtrl.interviewId !== ""')
+                      p.chk-box.hidden-xs
+                        input(type='checkbox', ng-model='newPositionCtrl.interview.enableShareLink', data-ng-true-value='1', data-ng-false-value='0', ng-click='newPositionCtrl.interviewUpdated()')
+                        a(href='{{newPositionCtrl.interview.interviewUrl}}', data-ng-if='newPositionCtrl.interview.enableShareLink == 1', target='_blank') {{newPositionCtrl.interview.interviewUrl}}
+                      p.social-icon
+                        .col-md-12.col-sm-12.col-xs-12.share-url-icon.space-margin(data-ng-if='newPositionCtrl.interview.enableShareLink == 1')
+                          span(ng-repeat='portal in newPositionCtrl.socialMediaPortal')
+                            .col-md-1.col-sm-3.col-xs-3(ng-show='portal.socialPortalId == 1')
+                              a.fb-share-button(ng-if='portal.status == 1', socialshare='', socialshare-provider='facebook', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{newPositionCtrl.interview.interviewUrl}}')
+                                i.fa.fa-facebook-square.fa-2x(aria-hidden='true') 
+                            .col-md-1.col-sm-3.col-xs-3(ng-show='portal.socialPortalId == 2') 
+                              a.twitter-share-button(ng-if='portal.status == 1', socialshare='', socialshare-provider='twitter', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{newPositionCtrl.interview.interviewUrl}}')
+                                i.fa.fa-twitter-square.fa-2x(aria-hidden='true')
+                            .col-md-1.col-sm-3.col-xs-3(ng-show='portal.socialPortalId == 3') 
+                              a.twitter-share-button(ng-if='portal.status == 1', socialshare='', socialshare-provider='linkedin', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{newPositionCtrl.interview.interviewUrl}}')
+                                i.fa.fa-linkedin-square.fa-2x(aria-hidden='true')
+                            .col-md-1.col-sm-3.col-xs-3(ng-show='portal.socialPortalId == 4')    
+                              a.g-plusone(ng-if='portal.status == 1', socialshare='', socialshare-provider='google', socialshare-text='CheckOut the new position', socialshare-hashtags='', socialshare-url='{{newPositionCtrl.interview.interviewUrl}}')
+                                i.fa.fa-google-plus.fa-2x(aria-hidden='true')
+              .interview-upper-form(data-ng-if='newPositionCtrl.selectedInterviewTypeId == 4')
+                .col-md-6.col-sm-6.col-xs-12
+                  .input-fields
+                    label.col-md-4.col-sm-4.col-xs-12 Interview Type 
+                    .col-md-8.col-sm-8.col-xs-12.fields
+                      span Live Now
+        .accordion-row(data-ng-show='newPositionCtrl.isAccordianSectionShow') 
+          #accordion.panel-group
+            asm-interview-settings-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 3', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId')
+            asm-candidate-evaluator-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 1 || newPositionCtrl.selectedInterviewTypeId == 2 || newPositionCtrl.selectedInterviewTypeId == 3', interviewtype='newPositionCtrl.selectedInterviewTypeId', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId')
+            asm-audio-video-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 3', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId', primary-skill-id='newPositionCtrl.position.primarySkillsetId', secondary-skill-id='newPositionCtrl.position.secondarySkillsId', tertiary-skill-id='newPositionCtrl.position.tertiarySkillsId', recommendations='newPositionCtrl.fetchRecommendations')
+            asm-written-interview-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId== 3', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId', primary-skill-id='newPositionCtrl.position.primarySkillsetId', secondary-skill-id='newPositionCtrl.position.secondarySkillsId', tertiary-skill-id='newPositionCtrl.position.tertiarySkillsId', recommendations='newPositionCtrl.fetchRecommendations')              
+            asm-questions-list-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 1', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId', primary-skill-id='newPositionCtrl.position.primarySkillsetId', secondary-skill-id='newPositionCtrl.position.secondarySkillsId', tertiary-skill-id='newPositionCtrl.position.tertiarySkillsId', recommendations='newPositionCtrl.fetchRecommendations')
+            asm-live-now-interview-accordion(is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 4', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId')  
+            asm-schedule-accordion(on-update='newPositionCtrl.interviewUpdated(value)', is-fetch='newPositionCtrl.doGet', is-reset='newPositionCtrl.doReset', current-state='newPositionCtrl.saveInterviewData', data-ng-if='newPositionCtrl.selectedInterviewTypeId == 1', mode='newPositionCtrl.isEditMode', pid='newPositionCtrl.positionId', interviewid='newPositionCtrl.interviewId')
+  
+#tabModal.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content.content-of-modal
+        .modal-header
+          | Warning
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title
+        .modal-body.body-of-cp-modal
+          p.discard-msg(data-translate='DISCARD-MSG')
+        .modal-footer.footer-of-cp-modal
+          md-button.md-raised.md-primary(aria-label='save', type='button', data-dismiss='modal', data-ng-click="newPositionCtrl.discardChanges('NEW')") DISCARD
+          md-button.md-raised.canceldata-btn(aria-label='save', type='button', data-dismiss='modal', data-ng-click="newPositionCtrl.saveData('NEW')") SAVE
+#tabSwitchModal.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content.content-of-modal
+        .modal-header
+          | Warning
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title
+        .modal-body.body-of-cp-modal
+          p.discard-msg(data-translate='DISCARD-MSG')
+        .modal-footer.footer-of-cp-modal
+          md-button.md-raised.md-primary(aria-label='save', type='button', data-dismiss='modal', data-ng-click="newPositionCtrl.discardChanges('SWITCH')") DISCARD
+          md-button.md-raised.canceldata-btn(aria-label='save', type='button', data-dismiss='modal', data-ng-click="newPositionCtrl.saveData('SWITCH')") SAVE

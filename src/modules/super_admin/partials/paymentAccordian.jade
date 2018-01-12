@@ -1,0 +1,27 @@
+.row.super_admin.paymentDashboards
+    .col-md-12.col-sm-12.col-xs-12.list-hide
+      #accordion_child.panel-group
+        .panel.panel-default
+            .panel-heading.paymentDashboards
+              h4.panel-title
+                a.accordion-toggle(data-toggle='collapse', data-parent='#accordion_child', href='#id_{{paymentAccordionController.category}}' , aria-expanded='true',data-translate="{{paymentAccordionController.category}}")
+            .panel-collapse.collapse.in(id="id_{{paymentAccordionController.category}}")
+              .panel-body
+                .table-row
+                  .tabination-area
+                    .tab-content.inner-candidate-form
+                      .col-sm-4.col-md-4.col-xs-6.showMe
+                        select(class="selectpicker" ng-model="paymentAccordionController.test" ng-change="paymentAccordionController.toggle()")
+                          option(ng-model="col.show" value="{{$index}}" ng-repeat="col in paymentAccordionController.cols.slice(1,paymentAccordionController.cols.length) track by $index") {{col.title()}}
+                      .main-table-area
+                        .table-responsive
+                          table.table.table-condensed.table-bordered.table-striped(ng-table='paymentAccordionController.tableParams',ng-table-columns-binding="paymentAccordionController.cols", show-filter='false')
+                            tr
+                              th(ng-repeat="column in paymentAccordionController.columns ") {{column}}
+                            tr(ng-repeat='paymentDashboard in $data track by $index')
+                              td(ng-repeat="column in paymentAccordionController.columns ") 
+                                div(ng-if="!(paymentDashboard[column] == 'true' || paymentDashboard[column] == 'false') "){{paymentDashboard[column]}}
+                                div(ng-if="(paymentDashboard[column] == 'true' || paymentDashboard[column] == 'false') ") 
+                                  input(type='checkbox' checked data-toggle="toggle" disabled) 
+                            
+                            

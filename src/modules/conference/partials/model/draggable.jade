@@ -1,0 +1,71 @@
+.shape(ng-draggable='dragOptions', style='width:auto !important;')
+  .part-container
+    .header-container
+      h3(style='padding-top:15px;') Participants
+      button.btn.btn-close(type='button', ng-click='cancel()') X
+    hr
+    table(style='text-align:left; width:98%; margin:0 auto; ')
+      tr
+        td
+          div
+            i.fa.fa-user(aria-hidden='true')
+            |    Host
+      tr
+        td  
+      tr
+        td  
+      tr
+        td  
+    div(style='border-top:1px dotted black;width:98%; margin:0 auto;')
+      p(style='float:left; color:black !important;') 9 spots left.
+      a(style='float:right; bottom:0;')
+        i.fa.fa-user-plus(aria-hidden='true')
+style.
+  .ngdialog-content {
+    min-width: 200px !important;
+  }
+  .cursor {
+    cursor: move;
+  }
+  .read-out {
+    margin-top: 30px;
+  }
+  .dragging {
+    border: 1px dashed #ccc;
+  }
+  .modal-content {
+    background: none !important;
+    box-shadow: none;
+    border: none;
+  }
+  .shape {
+    width: 50% !important;
+  }
+  .part-container {
+    min-height: 185px !important;
+    width: 50% !important;
+    margin: 0 auto;
+    font-family: 'Malgun Gothic';
+    color: black;
+    font-size: 13px;
+    background-color: white;
+    padding: 0px 20px 0px 20px;
+    cursor: move;
+  }
+  .header-container {
+    text-align: center;
+    font-family: 'Malgun Gothic';
+    margin-top: 80px;
+  }
+  .btn-close {
+    float: right;
+    margin-top: -51px;
+    margin-right: -5px;
+    padding: 2px 20px 2px 20px;
+    border-radius: 0px;
+  }
+  .btn-close:hover {
+    color: white;
+    cursor: pointer;
+    background-color: black;
+  }

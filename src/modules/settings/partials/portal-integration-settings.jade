@@ -1,0 +1,279 @@
+.integration-container
+  .video-intro-heading
+    span.video-intro-1 Portal Integration
+  ul.list-group
+    li.list-group-item.integration-subheader
+      h4 Embed jobs
+    li.list-group-item.embedded-list(data-toggle='collapse', href='#collapseListing')
+      .row.company-header
+        .col-md-1.img-area
+          i.fa.fa-code.fa-3x(aria-hidden='true')
+        .col-md-10.content-header
+          h5 Company Website
+          p
+            | Display a list of jobs on your company website that auto-updates with each new job created in Workable        
+    #collapseListing.panel-collapse.collapse
+      .row.company-content
+        .col-md-12
+          label Initial Listing
+        .col-md-12.job-listing-section
+          .col-md-4
+            .radio
+              label
+                input(type='radio', name='optradio')
+                | Jobs
+            p The simple option that lets you show a list of your job openings.
+          .col-md-4
+            .radio
+              label
+                input(type='radio', name='optradio')
+                | List By Location
+            p The simple option that lets you show a list of your job openings.
+          .col-md-4
+            .radio
+              label
+                input(type='radio', name='optradio')
+                | List by Department
+            p The simple option that lets you show a list of your job openings.
+        .col-md-12.grouping-details
+          .col-md-4
+            label Grouping
+            ul
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | No grouping
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | Gropup by location
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | Gropup by department
+          .col-md-4
+            label View Details
+            ul
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | Show only titles
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | Show full description
+          .col-md-4
+            label Location Details
+            ul
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | Country
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | State/Region
+              li
+                .radio
+                  input(type='radio', name='optradio')
+                  | City
+          
+    li.list-group-item.embedded-list(data-toggle='collapse', href='#collapseFacebook')
+      .row.company-header
+        .col-md-1.facebook-area
+          i.fa.fa-facebook-square.fa-4x(aria-hidden='true')
+        .col-md-10.content-header
+          h5 Facebook page
+          p
+            | Make a Jobs Tab for your company Facebook page which auto-updates with each new job created in Workable          
+    #collapseFacebook.panel-collapse.collapse
+      .row.facebook-content
+        .panel-body
+          .col-md-12
+            .facebook-content-area
+              p
+                i.fa.fa-link.fa-4x(aria-hidden='true')
+              h3 Feature the jobs you're hiring for on your Facebook page
+              p Get started by connecting Workable to your Facebook account.
+              p
+                a.btn.btn-large.btn-primary.fb-btn Connect Your Facebook Account Here
+    li.list-group-item.integration-subheader
+      h4 Job Boards
+      ul(data-ng-repeat='jobList in PortalIntegrationCtrl.jobPortalList')
+        li.list-group-item.embedded-list(data-toggle='collapse', href='#collapse{{jobList.portalId}}' ng-click="PortalIntegrationCtrl.getPortalDetails(jobList.portalId)")
+          .row.company-header
+            .col-md-1
+              img(src="{{jobList.portalImagePath}}" , width="50", height="50")
+            .col-md-10.content-header
+              h5 {{jobList.portalName}}
+              p {{jobList.portalType}}
+        .panel-collapse.collapse(id="collapse{{jobList.portalId}}" ng-if="jobList.portalName === 'LinkedIn'")
+            .row.linkedin-content
+              .panel-body
+                .col-md-12
+                  .linkedin-content-area
+                    .note-section
+                      p
+                        |Do you have a contract with LinkedIn? Great, connect your LinkedIn Recruiter account with Workable and post your job Ads with one click.
+                      p
+                        |Just follow these simple steps:
+                      .col-md-12
+                        ul
+                          li Enter your contract and company ID
+                          li Define who will appear as a recruiter on LinkedIn Ads
+                          li Go to your LinkedIn Recruiter account and authorise Workable to post jobs on your behalf
+                      p
+                        |Note: This will consume job slots from your LinkedIn contract, please ensure availability before posting.
+                    .row.linkedin-section-row
+                      .col-md-6
+                        .form-group
+                          label LinkedIn Company Id
+                          .linkdIn-btn-section
+                            a.btn.btn-large.btn-primary 
+                              i.fa.fa-linkedin-square
+                              | CONNECT MY LINKEDIN ACCOUNT
+                      .col-md-6
+                        .form-group
+                          label LinkedIn Contract Id 
+                          span
+                            i.fa.fa-question-circle(title="How do i know my contract id", area-hidden="true")
+                          md-input-container.md-block(flex="100")
+                            input(type="text",placeholder='Contract Id')
+                    .row.linkedin-section-area
+                      .col-md-1
+                        label.switch
+                          input(type='checkbox')
+                          .slider.round
+                      .col-md-11
+                        strong Show poster details on LinkedIn 
+                        span
+                          small  By default, poster details will not be published on the LinkedIn posting.
+                    .row.linkedin-section-area
+                      .col-md-1
+                        label.switch
+                          input(type='checkbox')
+                          .slider.round
+                      .col-md-11
+                        strong Show poster details on LinkedIn 
+                        span
+                          small  By default, poster details will not be published on the LinkedIn posting.
+                    .row
+                      .col-md-1
+                        label.switch
+                          input(type='checkbox')
+                          .slider.round
+                      .col-md-11
+                        strong Show poster details on LinkedIn 
+                        span
+                          small  By default, poster details will not be published on the LinkedIn posting.
+                    .form-group
+                        a.btn.btn-large.btn-primary UPDATE SETTINGS
+        .panel-collapse.collapse(id="collapse{{jobList.portalId}}" ng-if="jobList.portalName === 'CareerBuilder'")
+            .row.cb-content
+              .panel-body
+                .col-md-12
+                  .cb-content-area
+                    .note-section
+                      p
+                        | Do you have a contract with CareerBuilder? Great, connect your CareerBuilder account with Workable and post your job Ads with one click.
+                      p
+                        | Contact your CareerBuilder account representative and ask for your account's "Vendor ID" and "Company Profile Name" (optional) to connect your account.
+                    .row
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label CareerBulider Career Id
+                            input.form-control(type="text")
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Company Logo
+                            input.form-control(type="text")
+                            small Only .jpg, .jpeg, .gif or .png files allowed, no size limit.
+                    .row
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Company Profile Name
+                            input.form-control(type="text")
+                    .form-group
+                        a.btn.btn-large.btn-primary UPDATE SETTINGS
+        .panel-collapse.collapse(id="collapse{{jobList.portalId}}" ng-if="jobList.portalName === 'Monster US/India'")
+            .row.linkedin-content
+              .panel-body
+                .col-md-12
+                  .linkedin-content-area
+                    .note-section
+                      p
+                        |Do you have a contract with Monster? Great, connect your Monster Recruiter account with Workable and post your job Ads with one click.
+                      p
+                        |Contact your Monster Representative and ask that they
+                      .col-md-12
+                        ul
+                          li provide you with an XML username and password
+                          li have "job specific - Custom Apply inventory" be added to your account                    
+                      p
+                        |Note: This will consume job slots from your Monster contract, please ensure availability before posting.
+                    .row.linkedin-section-row
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Monster XML Username
+                            input(type="text" ng-model='PortalIntegrationCtrl.job.key1')
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Password
+                            input(type="password" ng-model='PortalIntegrationCtrl.job.key2')
+                      .col-md-6
+                        .form-group
+                          label Inventory type
+                          select.form-control(ng-model='PortalIntegrationCtrl.job.key3')
+                            option 30 Days
+                            option 60 Days
+                    .row
+                      .col-md-1
+                        label.switch
+                          input(type='checkbox' ng-model='PortalIntegrationCtrl.job.key4')
+                          .slider.round
+                      .col-md-11
+                        strong Show poster details on LinkedIn 
+                        span
+                          small By default, poster details will not be published on the LinkedIn posting.
+                    .form-group
+                        a.btn.btn-large.btn-primary(ng-click='PortalIntegrationCtrl.updateSettings(jobList.portalId)') UPDATE SETTINGS
+        .panel-collapse.collapse(id="collapse{{jobList.portalId}}" ng-if="jobList.portalName === 'Dice'" )
+            .row.linkedin-content
+              .panel-body
+                .col-md-12
+                  .linkedin-content-area
+                    .note-section
+                      p
+                        |Integrate your Dice account with Workable and centralize your hiring. To connect your Dice account, you'll need your Dice ID, username, password, and posting type (subscription or classified).                
+                    .row.linkedin-section-row
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Dice Id
+                            input(type="text",required)
+                      .col-md-6
+                        .form-group
+                          span *
+                            label Posting Typeci
+                          select.form-control
+                            option Subscription
+                            option Classified
+                    .row.linkedin-section-row
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Username                 
+                            input.form-control(type="text",required)
+                      .col-md-6
+                        .form-group
+                          md-input-container.md-block(flex="100")
+                            label Password
+                            input.form-control(type="password",required)
+                    .form-group
+                        a.btn.btn-large.btn-primary UPDATE SETTINGS
+        

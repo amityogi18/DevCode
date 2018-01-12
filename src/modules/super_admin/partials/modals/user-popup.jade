@@ -1,0 +1,85 @@
+.user-role-super-admin.usr-role-modal
+  .modal-header.dashboard-profile-heading
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-ng-show='usersCtrl.IsAdd') Add User
+    h4.modal-title(data-ng-show='usersCtrl.IsEdit') Update User
+  .modal-body
+    form(role='form', name='usersCtrl.userForm', novalidate='novalidate')
+      .form-group.row
+        .col-xs-12.col-sm-6.col-md-6
+            md-input-container.md-block(flex="100")   
+                label First Name
+                input(type='text', name='firstName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='usersCtrl.firstName',required='required')
+                span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.firstName.$touched')
+                  span(data-ng-show='usersCtrl.userForm.firstName.$dirty && usersCtrl.userForm.firstName.$invalid')
+                  span.error-msg(data-ng-show='usersCtrl.userForm.firstName.$error.required') Please Enter first Name
+        .col-xs-12.col-sm-6.col-md-6
+            md-input-container.md-block(flex="100")   
+                label Last Name
+                input(type='text', name='lastName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='usersCtrl.lastName',required='required')
+                span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.lastName.$touched')
+                  span(data-ng-show='usersCtrl.userForm.lastName.$dirty && evalatorForm.lastName.$invalid')
+                  span.error-msg(data-ng-show='usersCtrl.userForm.lastName.$error.required') Please Enter Last Name
+      .form-group.row
+        .col-xs-12.col-sm-6.col-md-6
+            md-input-container.md-block(flex="100")   
+                label Email
+                input(type='text', name='email', maxlength='50', data-ng-model='usersCtrl.email',data-ng-blur='usersCtrl.isInvalidEmail(usersCtrl.email)', data-ng-keypress='usersCtrl.isInvalidEmail(usersCtrl.email)', data-ng-keyup='usersCtrl.isInvalidEmail(usersCtrl.email)', data-ng-disabled='usersCtrl.IsEdit', required='required')
+                span.error-msg(data-ng-if='usersCtrl.errormessage !== ""') {{usersCtrl.errormessage}}
+        .col-xs-12.col-sm-6.col-md-6
+          md-input-container.md-block(flex="100")
+            label Functional Area
+            md-select(data-ng-model='usersCtrl.departmentId', data-ng-change='usersCtrl.getSkillSet(usersCtrl.departmentId, true)', name='functionalArea', md-on-close="usersCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader',required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='usersCtrl.searchDepartment', type='search', placeholder='Search Department', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Department')
+              md-option(ng-value='department.id', data-ng-repeat='department in usersCtrl.departmentList | filter: usersCtrl.searchDepartment') {{department.name}}
+            span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.functionalArea.$touched')
+              span(data-ng-show='usersCtrl.userForm.functionalArea.$dirty && usersCtrl.userForm.functionalArea.$invalid')
+              span.error-msg(data-ng-show='usersCtrl.userForm.functionalArea.$error.required') Please Select Functional Area          
+      .form-group.row
+        .col-xs-12.col-sm-6.col-md-6
+          md-input-container.md-block(flex="100")
+            label SkillSet
+            md-select(data-ng-model='usersCtrl.skillsetId', name='skill', multiple='multiple', md-on-close="usersCtrl.clearSkillInput()",  data-md-container-class='selectdemoSelectHeader', required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='usersCtrl.searchSkill', type='search', placeholder='Search Skillset', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Skill')
+              md-option(ng-value='skillset.id', ng-repeat='skillset in usersCtrl.skillsetList | filter: usersCtrl.searchSkill') {{skillset.skillsetName}}
+            span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.skill.$touched')
+              span(data-ng-show='usersCtrl.userForm.skill.$dirty && usersCtrl.userForm.skill.$invalid')
+              span.error-msg(data-ng-show='usersCtrl.userForm.skill.$error.required') Please Select Skill
+        .col-xs-12.col-sm-6.col-md-6
+          md-input-container.md-block(flex="100")
+            label Role
+            md-select(data-ng-model='usersCtrl.roles', name='roles', md-on-close="usersCtrl.clearSearchRole()", data-md-container-class='selectdemoSelectHeader',  data-ng-change="usersCtrl.getCompanyForSuperUser(usersCtrl.roles)" , required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='usersCtrl.searchRole', type='search', placeholder='Search Role', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Role')
+              md-option(ng-value='roles.id', data-ng-repeat='roles in usersCtrl.rolesList | filter: usersCtrl.searchRole') {{roles.role}}
+            span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.roles.$touched')
+              span(data-ng-show='usersCtrl.userForm.roles.$dirty && usersCtrl.userForm.roles.$invalid')
+              span.error-msg(data-ng-show='usersCtrl.userForm.roles.$error.required') Please Select Roles
+      .form-group.row
+        .col-xs-12.col-sm-6.col-md-6
+          md-input-container.md-block(flex="100")
+            label Company
+            md-select(data-ng-model='usersCtrl.companyId', name='companyName', md-on-close="usersCtrl.clearSearchCompany()", data-md-container-class='selectdemoSelectHeader', ng-disabled = "usersCtrl.isCompanyDisable" ,required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='usersCtrl.searchCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Company')
+              md-option(ng-value='company.id', data-ng-repeat='company in usersCtrl.companyList | filter: usersCtrl.searchCompany') {{company.name}}
+            span.error-msg(data-ng-show='usersCtrl.userForm.$submitted || usersCtrl.userForm.companyName.$touched')
+              span(data-ng-show='usersCtrl.userForm.companyName.$dirty && usersCtrl.userForm.companyName.$invalid')
+              span.error-msg(data-ng-show='usersCtrl.userForm.companyName.$error.required') Please Select Company 
+      .alert.alert-info(data-ng-show="usersCtrl.isCompanyDisable")
+        strong {{usersCtrl.selectedRole}}!
+        |  Now this user will be a super user for your company.                
+  .modal-footer
+    .form-group.row
+      .col-xs-12.col-sm-6.col-md-6
+        label
+      .col-xs-12.col-sm-6.col-md-6
+        md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='usersCtrl.addUser()', data-ng-show='usersCtrl.IsAdd') Add
+        md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='usersCtrl.updateUser()', data-ng-show='usersCtrl.IsEdit') Update
+        md-button.md-raised.canceldata-btn(aria-label="save", type='button', data-ng-click='close()') Close

@@ -1,0 +1,51 @@
+.chat-page(ng-draggable='dragOptions', style='width:auto !important;')
+  .part-container
+    .header-container
+      h3(style='padding-top:15px;') Chats
+      button.btn.btn-close(type='button', data-ng-click='ChatCtrl.cancel()') X
+    hr
+    table(style='text-align:left; width:98%; margin:0 auto; ')
+      tr
+        td
+          span.gray-span From Project One to Everyone :
+          br
+          | Hii..
+      tr
+        td
+          span.gray-span From Gaurav to Everyone :
+          br
+          | Hii.. All, Howare you?
+      tr
+        td
+          span.gray-span From Shubham to Everyone :
+          br
+          | Hii.. All Good !
+      tr
+        td  
+      tr
+        td  
+      tr
+        td  
+      tr
+        td  
+      tr
+        td
+          | Send To
+          select(style='width:75%;float:right;')
+            option Everyone
+            option Gaurav
+            option Shubham
+      tr
+        td
+          textarea(rows='3', cols='37', style="margin-top:10px;")
+      tr
+        td  
+    div(style='border-top:1px dotted black;width:98%; margin:0 auto;max-height:20px;')
+      p(style='float:left; color:black !important;') 9 spots left.
+      a(style='float:right; bottom:0;')
+        i.fa.fa-user-plus(aria-hidden='true')
+style.
+  .modal {
+    z-index: 0 !important;
+    background: none !important;
+  }

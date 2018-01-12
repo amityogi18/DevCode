@@ -1,0 +1,118 @@
+header.main-header
+  .col-md-2.col-sm-3.col-xs-5.margin-logo.desktop-logo
+      .logo(data-ng-if='ConferenceCtrl.isLoggedIn || isLoggedIn')
+        a(data-ui-sref="conference.conference-home", data-ng-if='isLoggedIn && user.userRoles != 7')
+          img.logo-image(ng-src='{{companyLogoPath}}', alt='Company Logo',)
+        a(data-ui-sref='sa.home', data-ng-if='isLoggedIn && user.userRoles === 7')
+          img.company-logo-img(data-ng-if='isLoggedIn  && user.userRoles === 7', ng-src='{{companyLogoPath}}', alt='Company Logo')
+  .col-md-5.col-sm-5.col-xs-2
+    .row
+      nav.navbar.navbar-default.navigationbar-dimension(role='navigation')
+        .navbar-header
+          button.navbar-toggle(type='button', data-target='#navbarCollapse', data-toggle='collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        // Collection of nav links and other content for toggling
+        #navbarCollapse.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li#headerLi8(ui-sref-active="active")
+              a(data-ui-sref="conference.conference-home") Conference
+            //li#headerLi9(ng-class="{active : conferenceMeetingCtrl.activemenu === 'Meetings'}",data-ng-click='setActiveLi(9)')
+              a(data-ui-sref="conference.conference-meeting", ng-click="conferenceMeetingCtrl.activemenu = 'Meetings'") Meetings
+            li#headerLi9(ui-sref-active="active")
+              a(data-ui-sref="conference.conference-meeting") Meetings  
+            //li#headerLi10(ng-class="{active : conferenceContactCtrl.activemenu === 'Contacts'}", data-ng-click='setActiveLi(10)')
+              a(data-ui-sref="conference.conference-contact", ng-click="conferenceContactCtrl.activemenu = 'Contacts'") Contacts
+            li#headerLi10(ui-sref-active="active")
+              a(data-ui-sref="conference.conference-contact") Contacts
+            li#headerLi11(ui-sref-active="active", ng-if='user.userRoles != 7')
+              a(data-ui-sref='conference.general-settings') Settings  
+            li(ng-class="{active : ConferenceCtrl.activemenu === 'Interview'}",data-ng-if="user.products[0] == 1 || user.products[1] == 1 || user.products[2] == 1", ng-hide='user.userRoles === 7 || user.userRoles === 18 || user.userRoles == 8 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 11 || user.userRoles == 12 || user.userRoles == 13 || user.userRoles == 14 || user.userRoles == 15 || user.userRoles == 16 || user.userRoles == 17')
+              a(data-ui-sref='app.dashboard', ng-click="ConferenceCtrl.activemenu = 'Interview'") Interview
+            li#headerLi2(ui-sref-active="active", ng-show='user.userRoles === 7 || user.userRoles == 8 || user.userRoles == 9 || user.userRoles == 10 || user.userRoles == 11 || user.userRoles == 12 || user.userRoles == 13 || user.userRoles == 14 || user.userRoles == 15 || user.userRoles == 16 || user.userRoles == 17')
+              a(data-ui-sref="sa.home") Dashboard
+  .col-md-5.col-sm-5.col-xs-6.mobile-logo.margin-logo
+      .logo(data-ng-if='ConferenceCtrl.isLoggedIn || isLoggedIn')
+        a(data-ui-sref="conference.conference-home", data-ng-if='isLoggedIn && user.userRoles != 7')
+          img.logo-image(ng-src='{{companyLogoPath}}', alt='Company Logo',)
+        a(data-ui-sref='sa.home', data-ng-if='isLoggedIn && user.userRoles === 7')
+          img.superadmin-company-logo(data-ng-if='isLoggedIn  && user.userRoles === 7', ng-src='{{companyLogoPath}}', alt='Company Logo')
+  .col-md-5.col-sm-5.col-xs-4.dropdown.profile-section-conference
+    .col-md-12.col-sm-12.col-xs-12.user-settings(data-ng-if='AppCtrl.isLoggedIn || isLoggedIn')
+        div.pull-right(layout='row')
+            .notification-box
+                header-notification-component
+            .user-logo.hidden-xs
+                img.user-image(ng-src='{{profilePicPath}}', alt='user logo')
+            .name-section.hidden-xs
+                #menu1.profile-name.dropdown-toggle(data-toggle='dropdown')
+                    span(data-ng-show='isLoggedIn', data-toggle='collapse', data-target='#settings-content')
+                        span.namespace {{user.fullName.substr(0, 10)}}
+                        span.namespace(ng-if='user.fullName.length > 10') ...
+                        span.caret
+                    .company-name {{user.companyName}}
+                ul.settings-content.dropdown-menu(role='menu', aria-labelledby='menu1')
+                  h5
+                    i(data-ng-if='user.userRoles == 1')  ADMIN
+                    i(data-ng-if='user.userRoles == 2')  CO-ADMIN
+                    i(data-ng-if='user.userRoles == 3')  INTERVIEWER
+                    i(data-ng-if='user.userRoles == 4')  EVALUATOER
+                    i(data-ng-if='user.userRoles == 5')  CANDIDATE
+                    i(data-ng-if='user.userRoles == 6')  RECRUITER
+                    i(data-ng-if='user.userRoles == 7')  SUPER ADMIN
+                    i(data-ng-if='user.userRoles == 8')  MARKETING
+                    i(data-ng-if='user.userRoles == 9')  ACCOUNT-MANAGER-COMPANY
+                    i(data-ng-if='user.userRoles == 10')  ACCOUNT-MANAGER-CANDIDATE
+                    i(data-ng-if='user.userRoles == 11')  QUESTION BANK UPDATER
+                    i(data-ng-if='user.userRoles == 12')  FINANACE
+                    i(data-ng-if='user.userRoles == 13')  TECH-SUPPORT
+                    i(data-ng-if='user.userRoles == 14')  TECH-SUPPORT-MANAGER
+                    i(data-ng-if='user.userRoles == 15')  VIEW 
+                    i(data-ng-if='user.userRoles == 16')  VIEW-RECRUITER
+                    i(data-ng-if='user.userRoles == 17')  VIEW-ADMIN
+                    i(data-ng-if='user.userRoles == 18')  CONFERENCE-USER
+                  li(data-ng-if='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6 || user.userRoles == 7 || user.userRoles == 18')
+                    a.help-block(href='https://jottp.com/help/conference-help.html',target='_blank')
+                      i.fa.fa-question-circle(aria-hidden='true')
+                      span.text Help
+                  li.color-logout(data-ng-click='doLogout()')
+                    i.fa.fa-power-off(aria-hidden='true')
+                    span.text Logout
+            .name-section.hidden-lg.hidden-md.hidden-sm
+                #menu1.dropdown-toggle(data-toggle='dropdown')
+                    img.user-image(data-toggle='collapse', data-target='#settings-content', ng-src='{{profilePicPath}}', alt='user logo')
+                ul.settings-content.dropdown-menu(role='menu', aria-labelledby='menu1')
+                    h5(data-ng-show='isLoggedIn') 
+                       .company-name {{user.fullName}} 
+                    h5 
+                      | {{user.companyName}}
+                      i(data-ng-if='user.userRoles == 1')  (Admin)
+                      i(data-ng-if='user.userRoles == 2')  (Co-Admin)
+                      i(data-ng-if='user.userRoles == 3')  (Interviewer)
+                      i(data-ng-if='user.userRoles == 4')  (Evaluater)
+                      i(data-ng-if='user.userRoles == 5')  (Candidate)
+                      i(data-ng-if='user.userRoles == 6')  (Recruiter)
+                      i(data-ng-if='user.userRoles == 7')  (Super Admin)
+                      i(data-ng-if='user.userRoles == 8')  (Marketing)
+                      i(data-ng-if='user.userRoles == 9')  (Account-Manager-Company)
+                      i(data-ng-if='user.userRoles == 10')  (Account-Manager-Candidate)
+                      i(data-ng-if='user.userRoles == 11')  (Question Bank Updater)
+                      i(data-ng-if='user.userRoles == 12')  (Finance)
+                      i(data-ng-if='user.userRoles == 13')  (Tech-Support)
+                      i(data-ng-if='user.userRoles == 14')  (Tech-Support-Manager)
+                      i(data-ng-if='user.userRoles == 15')  (View)
+                      i(data-ng-if='user.userRoles == 16')  (View-Recruiter)
+                      i(data-ng-if='user.userRoles == 17')  (View-Admin(
+                      i(data-ng-if='user.userRoles == 18')  (Conference-User)
+                    li(data-ui-sref='settings.general-settings')
+                      i.fa.fa-cog(aria-hidden='true')
+                      span.text Settings
+                    li(data-ng-if='user.userRoles == 1 || user.userRoles == 2 || user.userRoles == 6')
+                      a.help-block(href='https://jottp.com/help/how_to.html',target='_blank')
+                       i.fa.fa-question-circle(aria-hidden='true')
+                       span.text Help
+                    li.color-logout(data-ng-click='doLogout()')
+                      i.fa.fa-power-off(aria-hidden='true')
+                      span.text Logout

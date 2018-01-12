@@ -1,0 +1,123 @@
+.company-information.super_admin.clients
+    .modal-header.dashboard-profile-heading
+        button.close(type='button', data-ng-click='close()') ×
+        h4.modal-title(data-ng-if='clientsCtrl.IsAdd') Add Client
+        h4.modal-title(data-ng-if='clientsCtrl.IsEdit') Update Client
+    .modal-body
+        form.form-section(role='form', name='clientsCtrl.clientForm', novalidate='novalidate')
+            .row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")          
+                    label(data-translate="FIRST-NAME")
+                    input(type='text', name='firstName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='clientsCtrl.firstName' required)
+                    span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.firstName.$touched')
+                      span(data-ng-show='clientsCtrl.clientForm.firstName.$dirty && clientsCtrl.clientForm.firstName.$invalid')
+                      span.error-msg(data-ng-show='clientsCtrl.clientForm.firstName.$error.required') First Name Required
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")           
+                  label(data-translate="LAST-NAME")               
+                  input(type='text', name='lastName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='clientsCtrl.lastName' required)
+                  span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.lastName.$touched')
+                    span(data-ng-show='clientsCtrl.clientForm.lastName.$dirty && clientsCtrl.clientForm.lastName.$invalid')
+                    span.error-msg(data-ng-show='clientsCtrl.clientForm.lastName.$error.required') Last Name Required
+            .row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100") 
+                    label Email              
+                    input(type='email', name='email', maxlength='50', data-ng-model='clientsCtrl.email', data-ng-blur='clientsCtrl.isInvalidEmail(clientsCtrl.email)', data-ng-keypress="clientsCtrl.isInvalidEmail(clientsCtrl.email)", data-ng-keyup="clientsCtrl.isInvalidEmail(clientsCtrl.email)" required)
+                    span.error-msg(data-ng-if='clientsCtrl.errormessage !== ""') {{clientsCtrl.errormessage}}
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                    label(data-translate="JOB-TITLE")            
+                    input(type='text', name='jobTitle', maxlength='80',data-ng-model='clientsCtrl.jobTitle' required)
+                    span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.jobTitle.$touched')
+                        span(data-ng-show='clientsCtrl.clientForm.jobTitle.$dirty && clientsCtrl.clientForm.jobTitle.$invalid')
+                        span.error-msg(data-ng-show='clientsCtrl.clientForm.jobTitle.$error.required') Job Title Required
+            .row.product-left
+              .col-xs-12.col-sm-2.col-md-2
+                span Product
+                span.mandatory-filed.job-title-position *
+              .col-xs-12.col-sm-3.col-md-3
+                  input.icheckbox_square-blue(type='checkbox', data-ng-model='clientsCtrl.isInterview', ng-checked="clientsCtrl.isInterview", data-ng-disabled='clientsCtrl.IsEdit',ng-click='clientsCtrl.checkProductSelection()')
+                  span(data-translate='INTERVIEW')
+              .col-xs-12.col-sm-3.col-md-3    
+                  input.icheckbox_square-blue(type='checkbox', data-ng-model='clientsCtrl.isConfrence' ng-checked="clientsCtrl.isConfrence", data-ng-disabled='clientsCtrl.IsEdit',ng-click='clientsCtrl.checkProductSelection()')
+                  span(data-translate='CONFERENCE')
+                  .row
+                      span.error-msg.product-msg {{clientsCtrl.productMsg}}
+            .row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                    label(data-translate="COMPANY-NAME")              
+                    input(type='text', name='companyName', maxlength='80', data-ng-model='clientsCtrl.companyName' required)
+                    span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.companyName.$touched')
+                        span(data-ng-show='clientsCtrl.clientForm.companyName.$dirty && clientsCtrl.clientForm.companyName.$invalid')
+                        span.error-msg(data-ng-show='clientsCtrl.clientForm.companyName.$error.required') Company Name Required
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                  label(data-translate="COMPANY-SIZE")
+                  md-select(data-ng-model="clientsCtrl.companySize", name='companySize', required)
+                    md-option(value='' selected) Select
+                    md-option(value='500') under 500 employees
+                    md-option(value='1000') under 501-1000 employees
+                    md-option(value='2500') under 1001-2500 employees
+                    md-option(value='5000') under 2501-5000 employees
+                    md-option(value='5001') more than 5001 employees
+                  span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.companySize.$touched')
+                      span(data-ng-show='clientsCtrl.clientForm.companySize.$dirty && clientsCtrl.clientForm.companySize.$invalid')
+                      span.error-msg(data-ng-show='clientsCtrl.clientForm.companySize.$error.required') Please Select Company Size
+            .row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                    label(data-translate="COMPANY-WEBSITE")
+                    input(type='text', name='companyWebsite', maxlength='80', data-ng-model='clientsCtrl.companyWebsite',data-ng-keyup="clientsCtrl.analyzeCompanyWebsite(clientsCtrl.companyWebsite)",data-ng-blur="clientsCtrl.analyzeCompanyWebsite(clientsCtrl.companyWebsite)")
+                    span.error-msg(data-ng-if='clientsCtrl.errormessageWebsite !== ""') {{clientsCtrl.errormessageWebsite}}
+              .col-xs-12.col-sm-6.col-md-6
+                div(flex="100",flex-offset="", flex-xs="100", flex-offset-xs="0")  
+                  md-content.geo-section.md-block(flex="")
+                    //label Company Address            
+                    place-autocomplete(ng-model='clientsCtrl.geoAddress', on-address='clientsCtrl.setAddressValue(addressFn)', search-type='1', required )
+                    //input(type='text', name='geoAddress',maxlength='150',data-ng-model='clientsCtrl.geoAddress' required)
+                    span.error-msg(data-ng-show='clientsCtrl.clientForm.$submitted || clientsCtrl.clientForm.geoAddress.$touched')
+                        span(data-ng-show='clientsCtrl.clientForm.geoAddress.$dirty && clientsCtrl.clientForm.geoAddress.$invalid')
+                        span.error-msg(data-ng-show='clientsCtrl.clientForm.geoAddress.$error.required') Company Address Required
+            .row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                   label(data-translate="CONTACT-NUMBER")
+                   input(type='text', name='contactNumber', maxlength='14',onkeypress='return event.charCode <= 57', data-ng-model='clientsCtrl.companyContactNo', data-ng-blur='clientsCtrl.analyzePhoneNumber(clientsCtrl.companyContactNo)', data-ng-keypress="clientsCtrl.analyzePhoneNumber(clientsCtrl.companyContactNo)", data-ng-keyup="clientsCtrl.analyzePhoneNumber(clientsCtrl.companyContactNo)" required)
+                   span.error-msg(data-ng-if='clientsCtrl.errmsgcon !== ""') {{clientsCtrl.errmsgcon}}
+            .row
+               span.company-size.comapny-other-pos(data-translate="COMPANY-OTHER-URL")
+              .col-xs-12.col-sm-3.col-md-4
+                  select.form-control(data-ng-model='clientsCtrl.companyUrlForms.urlType',name='urlType', ng-options='urlType as urlType.name for urlType in clientsCtrl.customUrlList track by urlType.urlTypeId',ng-change='clientsCtrl.checkFilledField()')
+                      option(selected='selected', value='') Select
+                  span.error-msg(data-ng-show='clientsCtrl.clientForm.urlType.$touched')
+                  span.error-msg  {{clientsCtrl.fieldMsg}}
+              .col-xs-12.col-sm-4.col-md-4
+                  input.form-control.url-input(type='text', name='companyUrl', placeholder='Other Company Url', ng-model='clientsCtrl.companyUrlForms.url', data-ng-keyup="clientsCtrl.analyzeComPanyUrl(clientsCtrl.companyUrlForms.url)",data-ng-blur = "clientsCtrl.analyzeComPanyUrl(clientsCtrl.companyUrlForms.url)", maxlength='80',ng-change='clientsCtrl.checkFilledFieldUrl()')
+                  span.error-msg(data-ng-if='clientsCtrl.errmsgUrl !== ""') {{clientsCtrl.errmsgUrl}}
+                  span.error-msg  {{clientsCtrl.fieldMsgUrl}}
+              .col-xs-12.col-sm-3.col-md-3
+                  i.fa.fa-plus-circle.fa-lg.add-url-plus(data-ng-click='clientsCtrl.addCompanyUrl()')
+            .row.other-company-url-position.product-left
+              .col-xs-12.col-sm-2.col-md-2
+                span
+              .col-xs-12.col-sm-6.col-md-6
+                  table.table.table-responsive
+                      tr(ng-repeat='urlData in clientsCtrl.companyUrls')
+                        td(data-ng-if='urlData.urlTypeId === 1') Facebook
+                        td(data-ng-if='urlData.urlTypeId === 2') Twitter
+                        td(data-ng-if='urlData.urlTypeId === 3') LinkedIn
+                        td(data-ng-if='urlData.urlTypeId === 4') Other
+                        td {{urlData.url}}
+                        td
+                          i.fa.fa-trash(aria-hidden='true', ng-click='clientsCtrl.deleteCandidateUrl($index)')
+    .modal-footer
+        .form-group.row
+          .col-xs-12.col-sm-6.col-md-6
+            label
+          .col-xs-12.col-sm-6.col-md-6
+              md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='clientsCtrl.addClient()', data-ng-if='!clientsCtrl.IsEdit') Add
+              md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='clientsCtrl.updateClientProfile()', data-ng-if='clientsCtrl.IsEdit') Update
+              md-button.md-raised.canceldata-btn(aria-label="save", type='button', data-ng-click='close()') Cancel

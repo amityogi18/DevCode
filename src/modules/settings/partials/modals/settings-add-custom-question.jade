@@ -1,0 +1,206 @@
+.modal-content-customQue.settings-add-customQue
+  .modal-header
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-translate='WRT-QUE',data-ng-show='customQuestionControllerCtrl.isAdd')
+    h4.modal-title(data-translate='UPDATE-QUE',data-ng-show='customQuestionControllerCtrl.isEdit')
+  .modal-body
+    .col-md-12.col-sm-12.col-xs-12
+      .row.category-controls
+        form.question-bank-form(name='customQuestionControllerCtrl.customQuestionForm', role='form', novalidate)
+          .col-md-3.col-sm-3.col-xs-12
+            .input-field-part
+              md-input-container.md-block(flex="100")
+               label Question Type
+               md-select(ng-change='customQuestionControllerCtrl.questionTypeChanged()', ng-model='customQuestionControllerCtrl.selectedQuestionType', name='questionType', ng-disabled="customQuestionControllerCtrl.isEdit", required)
+                 md-option(ng-repeat='item in customQuestionControllerCtrl.questionTypeList',ng-value='item.id' ) {{item.questionType}}
+              span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.questionType.$touched')
+                span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.questionType.$dirty && customQuestionControllerCtrl.customQuestionForm.questionType.$invalid')
+                span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.questionType.$error.required') Please Select Question Type
+          .col-md-3.col-sm-3.col-xs-12
+            .input-field-part
+              md-input-container.md-block(flex="100")
+                label Function Area
+                md-select(ng-change='customQuestionControllerCtrl.getSkillSet(customQuestionControllerCtrl.departmentId)', ng-model='customQuestionControllerCtrl.departmentId',name='department' ,required)
+                  md-option(ng-repeat='department in customQuestionControllerCtrl.departmentList',ng-value='department.id' ) {{department.name}}
+              span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.department.$touched')
+                span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.department.$dirty && customQuestionControllerCtrl.customQuestionForm.department.$invalid')
+                span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.department.$error.required') Please Select Functional Area
+          .col-md-3.col-sm-3.col-xs-12
+            .input-field-part
+              md-input-container.md-block(flex="100")
+                label Skill
+                md-select(ng-model='customQuestionControllerCtrl.skillsetId',name='skillset' , required)
+                  md-option(ng-repeat='skillset in customQuestionControllerCtrl.skillsetList',ng-value='skillset.id' ) {{skillset.skillsetName}}
+              span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.skillset.$touched')
+                span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.skillset.$dirty && customQuestionControllerCtrl.customQuestionForm.skillset.$invalid')
+                span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.skillset.$error.required') Please Select Skill
+          .col-md-3.col-sm-3.col-xs-12
+            md-input-container.md-block(flex="100")
+              label Response Type
+              md-select(name='responseType',ng-disabled='customQuestionControllerCtrl.responseTypeList.length < 1', ng-model='customQuestionControllerCtrl.selectedResponseType',required)
+                md-option(ng-repeat='item in customQuestionControllerCtrl.responseTypeList',ng-value='item.id' ) {{item.responseType}}
+            span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.responseType.$touched')
+              span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.responseType.$dirty && customQuestionControllerCtrl.customQuestionForm.responseType.$invalid')
+              span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.responseType.$error.required') Please Select Response Type
+          .row.mg-b-10.category-controls
+            .col-md-12.col-sm-12.col-xs-12
+              .row.mg-b-10.category-controls(ng-if='customQuestionControllerCtrl.showText && !customQuestionControllerCtrl.showAudio && !customQuestionControllerCtrl.showVideo && !customQuestionControllerCtrl.showMCQ && !customQuestionControllerCtrl.showMSQ' )
+                .col-md-12
+                  .form-group.row
+                    .col-md-9.md-textarea-margin
+                      md-input-container.md-block
+                        label Question:
+                        textarea(name='textQuestion',rows='2', maxlength='500', ng-model='customQuestionControllerCtrl.enteredQuestion',required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.textQuestion.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.textQuestion.$dirty && customQuestionControllerCtrl.customQuestionForm.textQuestion.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.textQuestion.$error.required') Enter Question
+              .row.mg-b-10.category-controls(ng-if='customQuestionControllerCtrl.showMSQ')
+                .col-md-12
+                  .form-group.row
+                    .col-sm-9.md-textarea-margin
+                      md-input-container.md-block
+                        label Question:
+                        textarea(name='msqQuestion',rows='2',maxlength='150', ng-model='customQuestionControllerCtrl.enteredQuestion', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.msqQuestion.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqQuestion.$dirty && customQuestionControllerCtrl.customQuestionForm.msqQuestion.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqQuestion.$error.required') Enter Question
+                  .row.md-textarea-margin
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                          label Option 1
+                          input.md-input-border#cbOption1(name='msqOption1',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option1', required)
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.msqOption1.$touched')
+                            span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqOption1.$dirty && customQuestionControllerCtrl.customQuestionForm.msqOption1.$invalid')
+                            span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqOption1.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4
+                      input.option-checkbox(name='msqAnswer1',type='checkbox', data-ng-model='customQuestionControllerCtrl.answerOption1',ng-disabled='!customQuestionControllerCtrl.option1',ng-click = 'customQuestionControllerCtrl.checkMsqAnswerSelection()')
+                  .row
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 2
+                        input.md-input-border#cbOption2(name='msqOption2',type='text', maxlength='50',ng-model='customQuestionControllerCtrl.option2', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.msqOption2.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqOption2.$dirty && customQuestionControllerCtrl.customQuestionForm.msqOption2.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.msqOption2.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4
+                      input.option-checkbox#option3(name='msqAnswer2',type='checkbox', data-ng-model='customQuestionControllerCtrl.answerOption2',ng-disabled='!customQuestionControllerCtrl.option2',ng-click = 'customQuestionControllerCtrl.checkMsqAnswerSelection()')
+                  .row
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 3
+                        input.md-input-border#cbOption3(name='msqOption3',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option3')
+                    .col-md-4.col-sm-4.col-xs-4
+                      input.option-checkbox(name='msqAnswer3',type='checkbox', data-ng-model='customQuestionControllerCtrl.answerOption3',ng-disabled='!customQuestionControllerCtrl.option3',ng-click = 'customQuestionControllerCtrl.checkMsqAnswerSelection()')
+                  .row
+                     .col-md-8.col-sm-8.col-xs-8
+                       md-input-container.md-block(flex="100")
+                        label Option 4
+                        input.md-input-border#cbOption4(name='msqOption4',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option4')
+                     .col-md-4.col-sm-4.col-xs-4
+                        input.option-checkbox(name='msqAnswer4',type='checkbox', data-ng-model='customQuestionControllerCtrl.answerOption4',ng-disabled='!customQuestionControllerCtrl.option4',ng-click = 'customQuestionControllerCtrl.checkMsqAnswerSelection()')
+                        span.error-msg {{customQuestionControllerCtrl.answerMsg}}
+              .row.mg-b-10.category-controls(ng-if='customQuestionControllerCtrl.showMCQ')
+                .col-md-12
+                  .form-group.row
+                    .col-md-9.md-textarea-margin
+                      md-input-container.md-block
+                        label Question:
+                        textarea.form-field(name='mcqQuestion',rows='2', maxlength='150', ng-model='customQuestionControllerCtrl.enteredQuestion', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.mcqQuestion.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqQuestion.$dirty && customQuestionControllerCtrl.customQuestionForm.mcqQuestion.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqQuestion.$error.required') Enter Question
+                  .row.md-textarea-margin
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 1
+                        input.md-input-border#rbOption1(name='mcqOption1',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option1', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.mcqOption1.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqOption1.$dirty && customQuestionControllerCtrl.customQuestionForm.mcqOption1.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqOption1.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4
+                      input.option-input.radio(type='radio', name='chooseone', data-ng-model='customQuestionControllerCtrl.answerOption1', data-ng-click="customQuestionControllerCtrl.optionsChanged(customQuestionControllerCtrl.answerOption1); customQuestionControllerCtrl.checkAnswerSelection()",ng-disabled='!customQuestionControllerCtrl.option1',ng-value="2")
+                  .row
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 2
+                        input.md-input-border#rbOption2(name='mcqOption2',type='text', maxlength='50',ng-model='customQuestionControllerCtrl.option2', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.mcqOption2.$touched')
+                          span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqOption2.$dirty && customQuestionControllerCtrl.customQuestionForm.mcqOption2.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.mcqOption2.$error.required') Please Fill This Field
+                    .col-md-4.col-sm-4.col-xs-4
+                        input.option-input.radio(type='radio', name='chooseone',  data-ng-model='customQuestionControllerCtrl.answerOption2', data-ng-click="customQuestionControllerCtrl.optionsChanged(customQuestionControllerCtrl.answerOption2); customQuestionControllerCtrl.checkAnswerSelection()" ,ng-disabled='!customQuestionControllerCtrl.option2',ng-value="3")
+                  .row
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 3
+                        input.md-input-border#rbOption3(name='mcqOption3',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option3')
+                    .col-md-4.col-sm-4.col-xs-4
+                        input.option-input.radio(type='radio', name='chooseone',  data-ng-model='customQuestionControllerCtrl.answerOption3', data-ng-click="customQuestionControllerCtrl.optionsChanged(customQuestionControllerCtrl.answerOption3); customQuestionControllerCtrl.checkAnswerSelection()" ,ng-disabled='!customQuestionControllerCtrl.option3',ng-value="4")
+                  .row
+                    .col-md-8.col-sm-8.col-xs-8
+                      md-input-container.md-block(flex="100")
+                        label Option 4
+                        input.md-input-border#rbOption4(name='mcqOption4',type='text',maxlength='50', ng-model='customQuestionControllerCtrl.option4')
+                    .col-md-4.col-sm-4.col-xs-4
+                      input.option-input.radio(type='radio', name='chooseone',  data-ng-model='customQuestionControllerCtrl.answerOption4', data-ng-click="customQuestionControllerCtrl.optionsChanged(customQuestionControllerCtrl.answerOption4); customQuestionControllerCtrl.checkAnswerSelection()" ,ng-disabled='!customQuestionControllerCtrl.option4',ng-value="5")
+                      span.error-msg {{customQuestionControllerCtrl.productMsg}}
+              .row.mg-b-10.video-question-area(ng-if='customQuestionControllerCtrl.showVideo')
+                .form-group.textbox-dimension-vedio.row
+                  .col-md-9.md-textarea-margin
+                    md-input-container.md-block
+                      label Question:
+                      textarea(name='videoQuestion',rows='2',maxlength='150',ng-model='customQuestionControllerCtrl.enteredQuestion', required)
+                      span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.videoQuestion.$touched')
+                        span(data-ng-show='customQuestionControllerCtrl.customQuestionForm.videoQuestion.$dirty && customQuestionControllerCtrl.customQuestionForm.videoQuestion.$invalid')
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.videoQuestion.$error.required') Enter question
+                .video-area.col-md-12
+                  .video-border(style='height:290px;')
+                    .countDownBox.col-md-8.col-md-offset-4(ng-if='customQuestionControllerCtrl.countdownStarted')
+                      img#questionBank-countdown-img(ng-if='customQuestionControllerCtrl.countdownStarted', src='../../../../public/img/countdown.gif')
+                    iframe#video-iframe.video-iframe(ng-hide='customQuestionControllerCtrl.recordingOn || customQuestionControllerCtrl.countdownStarted', ng-src='{{customQuestionControllerCtrl.trustSrc(customQuestionControllerCtrl.filePath)}}', frameborder='0', allowfullscreen='' style='width: 707px;height: 289px;')
+                    video#questionBankVideoElement(ng-show='customQuestionControllerCtrl.recordingOn')
+                    .row.recording-controls(ng-show='customQuestionControllerCtrl.recordingOn')
+                      .col-md-12
+                        .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                          .col-md-2.col-sm-2.col-xs-2.play-icon
+                            i.fa-2x.fa.fa-pause(aria-hidden='true',title='pause', data-ng-click='customQuestionControllerCtrl.onPauseClick()', data-ng-if='!customQuestionControllerCtrl.paused')
+                            i.fa-2x.fa.fa-play(aria-hidden='true',title='play', data-ng-click='customQuestionControllerCtrl.onResumeClick()', data-ng-if='customQuestionControllerCtrl.paused')
+                          .col-md-2.col-sm-2.col-xs-2.stop-icon
+                            i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true',title='stop', data-ng-click='customQuestionControllerCtrl.onStopClick()')
+                .btn-sec
+                  .row.col-md-offset-3
+                    button.btn.btn-primary(type='button', ng-click="customQuestionControllerCtrl.onRecordClick('video')") Record
+                    button.btn.btn-primary(type='button', ng-click="customQuestionControllerCtrl.preview('video')") Preview
+                    button.btn.btn-primary(type='button', ng-click="customQuestionControllerCtrl.onRecordClick('video')") Re-Record
+              .row.mg-b-10(ng-if='customQuestionControllerCtrl.showAudio')
+                .col-md-12
+                  .form-group.row
+                    .col-md-9.md-textarea-margin
+                      md-input-container.md-block
+                        label Question:
+                        textarea(name='audioQuestion',rows='2',maxlength='150', ng-model='customQuestionControllerCtrl.enteredQuestion', required)
+                        span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.$submitted || customQuestionControllerCtrl.customQuestionForm.audioQuestion.$touched')
+                          span(data-ng-show='customQuestionForm.audioQuestion.$dirty && customQuestionControllerCtrl.customQuestionForm.audioQuestion.$invalid')
+                          span.error-msg(data-ng-show='customQuestionControllerCtrl.customQuestionForm.audioQuestion.$error.required') Enter question
+                .col-md-12.col-md-offset-3
+                  audio#questionBankAudioElement( controls='controls', ng-src='{{customQuestionControllerCtrl.trustSrc(customQuestionControllerCtrl.filePath)}}')
+                .row.recording-controls(ng-show='customQuestionControllerCtrl.recordingOn')
+                  .col-md-12
+                    .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                      .col-md-2.col-sm-2.col-xs-2.play-icon
+                        i.fa-2x.fa.fa-pause(aria-hidden='true', data-ng-click='customQuestionControllerCtrl.onPauseClick()', data-ng-if='!customQuestionControllerCtrl.paused')
+                        i.fa-2x.fa.fa-play(aria-hidden='true', data-ng-click='customQuestionControllerCtrl.onResumeClick()', data-ng-if='customQuestionControllerCtrl.paused')
+                      .col-md-2.col-sm-2.col-xs-2.stop-icon
+                        i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', data-ng-click='customQuestionControllerCtrl.onStopAudio()')
+                .btn-sec.col-md-offset-3
+                  button.btn.btn-primary(type='button', title='record', ng-click="customQuestionControllerCtrl.onRecordClick('audio')") Record
+                  button.btn.btn-primary(type='button', ng-click="customQuestionControllerCtrl.preview('audio')") Preview
+              .col-md-12.col-sm-12.col-xs-12
+                 md-checkbox(ng-checked='customQuestionControllerCtrl.isDefaultQuestion',ng-model="customQuestionControllerCtrl.isDefaultQuestion", aria-label='Finished?') set as default question ? 
+              .row.action-buttons.pull-right
+                md-button.md-raised.savedata-btn(type='button',data-ng-click='customQuestionControllerCtrl.saveNewCustomeQuesstion();customQuestionControllerCtrl.onStopClick()',ng-disabled='!customQuestionControllerCtrl.hideBtn', data-ng-show='customQuestionControllerCtrl.isAdd') Save
+                md-button.md-raised.savedata-btn.custom-que-btn(type='button', data-ng-click='customQuestionControllerCtrl.updateCustomQuestion()', data-ng-show='customQuestionControllerCtrl.isEdit') Update
+                md-button.md-raised.canceldata-btn.custom-que-btn(type='button',data-ng-click='customQuestionControllerCtrl.cameraOffButton();') Cancel
+
+
+   

@@ -1,0 +1,62 @@
+#mySidenav.sidenav
+      a.closebtn(href='javascript:void(0)', ng-click='SideBarHelpController.closeNav()') ×
+      .col-md-12
+        .main-body-wrapper
+            .default-form
+              .col-md-12
+                .upper-form-wrapper
+                  #sideBarAccordion.panel-group
+                    .panel.panel-default
+                      .panel-heading
+                        h4.panel-title
+                          a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarConection')
+                            | Connection Test Check
+                      #collapseSidebarConection.panel-collapse.collapse.in
+                        .panel-body
+                          .col-md-12.loading-gif(ng-if="SideBarHelpController.speed === ''")
+                            img(src='../../../public/img/loader.gif')
+                          .col-md-12(ng-if='SideBarHelpController.speed !== ""')
+                            .col-md-12
+                              button.btn.btn-circle(type='button', ng-class='{"btn-warning": SideBarHelpController.connectionStatus == "Bad", "btn-success": SideBarHelpController.connectionStatus == "Fine" }')
+                                span(ng-if='SideBarHelpController.connectionStatus == "Fine"', class='fa fa-check')
+                              | Your Upload Link is {{SideBarHelpController.connectionStatus}}
+                            .col-md-12
+                              button.btn.btn-circle(type='button', ng-class='{"btn-warning": SideBarHelpController.connectionStatus == "Bad", "btn-success": SideBarHelpController.connectionStatus == "Fine" }')
+                                span(ng-if='SideBarHelpController.connectionStatus == "Fine"', class='fa fa-check')
+                              | Your Download Speed is {{SideBarHelpController.connectionStatus}}
+                            .col-md-12(ng-if='SideBarHelpController.speed < SideBarHelpController.acceptedSpeed')
+                              div(align='center') Warning
+                            .col-md-12(ng-if='SideBarHelpController.speed < SideBarHelpController.acceptedSpeed')
+                             | Your Connection is below our recommended speed you may experience chappy video
+                      .panel.panel-default
+                      .panel-heading
+                        h4.panel-title
+                          a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarWebcam', ng-click='SideBarHelpController.startRecording()')
+                            | Webcam
+                      #collapseSidebarWebcam.panel-collapse.collapse
+                        .panel-body
+                          .col-md-12
+                            .col-md-5.col-sm-5.col-xs-12
+                              select#videoSource(ng-model='SideBarHelpController.videosourceselect' ng-change='SideBarHelpController.changeVideoFeed()' ng-options="device.text for device in SideBarHelpController.deviceList track by device.deviceId")
+                              p | When your video appears on the screen and you can see  yourself. click next to proceed to the microphone text
+                            .col-md-7.col-sm-7.col-xs-12
+                              video(id='videoTestElementCertIns' ng-show="SideBarHelpController.recordingMode" style="width: 100%; margin-left: -15px !important;") 
+                            
+                    .panel.panel-default
+                      .panel-heading
+                        h4.panel-title
+                          a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarMicrophone', ng-click='SideBarHelpController.startRecordingAudio()')
+                            | Microphone Check
+                      #collapseSidebarMicrophone.panel-collapse.collapse
+                        .panel-body
+                          .col-md-12
+                            .col-md-2
+                            .col-md-8
+                              select#audioSource(ng-model='SideBarHelpController.audiosourceselect' ng-change='SideBarHelpController.changeAudioFeed()' ng-options="device.text for device in SideBarHelpController.deviceListAudio track by device.id")
+                          .col-md-12
+                            .col-md-2
+                            .col-md-8
+                              .volume-meter
+                                canvas(id='volume-meter-block' height='6')
+                                input(type='range', min='0', max='1', step='0.1', ng-model='selectedVolume', class='volume-slider')
+    span.fa.fa-cog.sideNavigation(ng-click='SideBarHelpController.openNav()')

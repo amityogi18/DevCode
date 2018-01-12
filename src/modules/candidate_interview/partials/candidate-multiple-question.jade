@@ -1,0 +1,56 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .col-md-12
+      .candidate-view-steps.step
+        ul.step-tab
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon1.png', alt='')
+            .step-name(data-translate="WELCOME")
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon2.png', alt='')
+            .step-name(data-translate="YOUR-PROFILE")
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate="PREPARE")
+          li.active
+            figure.step-icons
+              span
+                img.img-icon(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate="INTERVIEW")
+        .step-body
+          .col-md-12
+            .main-body-wrapper
+              .default-form
+                .col-md-12
+                  .upper-form-wrapper
+                    .col-md-3
+                    .col-md-6
+                      .panel.panel-default
+                        // Default panel contents
+                        .panel-heading
+                          span.title-question(data-translate="QUESTION")
+                          span.title-question {{candidateQuestionCtrl.multiQuestion.question}}/3
+                        .col-md-12
+                          span.timeleft {{candidateQuestionCtrl.multiQuestion.timeallowed}}
+                          span.timeleft(data-translate="TIME-ALLOWED")
+                        .col-md-12
+                          span.timeleft {{candidateQuestionCtrl.multiQuestion.timeleft}}
+                          span.timeleft(data-translate="TIME-LEFT")
+
+                        .panel-body
+                          p
+                          p  {{candidateQuestionCtrl.multiQuestion.question}}
+                          p
+                          p(ng-repeat="option in candidateQuestionCtrl.multiQuestion.questionOption")
+                            input(type='checkbox' ng-value="option.id")
+                            |  {{option.option}}
+                          .save-cancel-btns
+                            a.btn-next.left(href="javascript:void(0);",data-ng-click="candidateQuestionCtrl.showMultiQuestionPrevious()" data-translate="PREVIOUS")
+                            a.btn-next.right(href="javascript:void(0);",data-ng-click="candidateQuestionCtrl.showMultiQuestionNext()" data-translate="NEXT")
+

@@ -1,0 +1,181 @@
+.content-wrapper.applied-joblist-container
+  .row
+    .col-md-12
+      .video-intro-heading
+        span.video-intro-1(data-translate='JOB-APPLIED')
+  md-content
+    md-tabs(md-dynamic-height='', md-border-bottom='')
+      md-tab(label='My Jobs')
+        md-content.md-padding
+          .row
+            div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+              .input-group
+                md-input-container.md-block(flex="100")
+                  label Search
+                  input(type='text', ng-model='appliedJobListCtrl.appliedJobListTableFilter.search')
+                md-icon.srch-icon(md-font-set='fa') &#xf002
+            .col-sm-4.col-md-4.col-xs-6.showMe
+              select(class="selectpicker" ng-model="appliedJobListCtrl.test1" ng-change="appliedJobListCtrl.toggle(appliedJobListCtrl.test1)")
+                option(ng-model="col.show" value="{{$index}}" ng-repeat="col in appliedJobListCtrl.cols.slice(1,appliedJobListCtrl.cols.length) track by $index") {{col.title()}}
+            .col-md-12.col-sm-12.col-xs-12
+              p.text-label(ng-hide='appliedJobListCtrl.appliedJobList.length < 1') Showing 
+                span
+                  strong 1-{{appliedJobListCtrl.appliedJobList.length}}
+                  |  of  
+                  strong
+                   {{appliedJobListCtrl.appliedJobListCount}} 
+                  |  records    
+            .main-table-area
+              .table-responsive.table-first.hide-overflow
+                table.tansaction-table.table(ng-table='appliedJobListCtrl.appliedJobListTableParams', ng-table-columns-binding="appliedJobListCtrl.cols")
+                  tr(ng-repeat='jobs in $data')                      
+                    td(class='col-sm-2' data-title="'Job Portal'", sortable="'jobPortal'") 
+                      i.fa.fa-eye.appliedJobviewIcon(data-ui-sref='candidateProfile.job-description({jobId:jobs.jobId})', aria-hidden='true')
+                      span.appliedJobPortal {{jobs.jobPortal}} 
+                    td(class='col-sm-2' data-title="'Job Name'", sortable="'jobTitle'", ng-data='jobs.jobTitle') {{jobs.jobTitle | limitTo :30}}
+                    td(class='col-sm-2' data-title="'Company Name'", sortable="'companyName'", ng-data='jobs.companyName') {{jobs.companyName}}
+                    td(class='col-sm-2' data-title="'Applied Date'", sortable="'appliedDate'", ng-data='jobs.appliedDate') {{jobs.appliedDate}}                    
+                    td(class='col-sm-2' data-title="'Location'", sortable="'jobLocation'", ng-data='jobs.jobLocation') {{jobs.jobLocation}}
+                    td(class='col-sm-2' data-title="'Status'", sortable="'appliedJobStatus'", ng-data='jobs.appliedJobStatus') {{jobs.appliedJobStatus}}  
+              .row(data-ng-if='appliedJobListCtrl.appliedJobList.length === 0')
+                center No record found
+      md-tab(label='Favourite Jobs')
+        md-content.md-padding
+          .row
+              div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                .input-group
+                  md-input-container.md-block(flex="100")
+                    label Search
+                    input(type='text', ng-model='appliedJobListCtrl.favoriteJobTableFilter.search')
+                  md-icon.srch-icon(md-font-set='fa') &#xf002
+              .col-sm-4.col-md-4.col-xs-6.showMe
+                select(class="selectpicker" ng-model="appliedJobListCtrl.test" ng-change="appliedJobListCtrl.toggle1(clientsCtrl.test11)")
+                  option(ng-model="col.show" value="{{$index}}" ng-repeat="col in appliedJobListCtrl.cols11.slice(1,appliedJobListCtrl.cols11.length) track by $index") {{col.title()}}
+              .col-md-12.col-sm-12.col-xs-12
+                p.text-label(ng-hide='appliedJobListCtrl.favoriteJobList.length < 1') Showing 
+                  span
+                    strong 1-{{appliedJobListCtrl.favoriteJobList.length}}
+                    |  of  
+                    strong
+                     {{appliedJobListCtrl.favoriteJobListCount}}  
+                    |  records                                      
+              table.table-responsive(ng-table='appliedJobListCtrl.favoriteJobTableParams', ng-table-columns-binding="appliedJobListCtrl.cols11", width="100%")
+                tr(ng-repeat='jobs in $data')
+                  td(data="jobs")
+                    md-card.fav-card
+                      md-card-title
+                        md-card-title-text
+                          span.md-headline {{jobs.jobTitle}}
+                          span.md-subhead  
+                            i.fa.fa-building(area-hidden="true")
+                            span
+                              |{{jobs.companyName}}
+                          span.md-subhead
+                            i.fa.fa-map-marker(area-hidden="true")                  
+                            span
+                              |{{jobs.jobLocation}}
+                          span.md-subhead                                    
+                            i.fa.fa-calendar(area-hidden="true")
+                            span Posted :
+                              |{{jobs.jobCreatedDate}}
+                      md-card-actions(layout='row', layout-align='end center')
+                       md-button.md-raised.md-primary(ng-href="{{jobs.jobUrl}}", target="_blank") Apply
+            .row.notification-message(ng-show="appliedJobListCtrl.favoriteJobList.length < 1")
+              center No Favorite  Job !!!               
+ // .panel.panel-default
+    .panel-body 
+      .row
+        .col-md-12.col-xs-12.col-sm-12
+          .col-md-12.col-xs-12.col-sm-12
+            ul.nav.nav-tabs.applied-joblist-nav
+              li#myJobLi.active
+                a(data-toggle='tab', href='#myJob') My Jobs
+              li#favoriteJobLi
+                a(href='#favoriteJob', data-toggle='tab') Favourite Jobs
+            .tab-content.applied-joblist-tab
+              #myJob.tab-pane.fade.in.active
+                .panel-body.body-of-panel 
+                  .row
+                    div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                      .input-group
+                        md-input-container.md-block(flex="100")
+                          label Search
+                          input(type='text', ng-model='appliedJobListCtrl.appliedJobListTableFilter.search')
+                        md-icon.srch-icon(md-font-set='fa') &#xf002
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                      select(class="selectpicker" ng-model="appliedJobListCtrl.test1" ng-change="appliedJobListCtrl.toggle(appliedJobListCtrl.test1)")
+                        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in appliedJobListCtrl.cols.slice(1,appliedJobListCtrl.cols.length) track by $index") {{col.title()}}
+                    .main-table-area
+                      .table-responsive.table-first.hide-overflow
+                        table.tansaction-table.table(ng-table='appliedJobListCtrl.appliedJobListTableParams', ng-table-columns-binding="appliedJobListCtrl.cols")
+                          tr(ng-repeat='jobs in $data')
+                              
+                            td(class='col-sm-2' data-title="'Job Portal'", sortable="'jobPortal'") 
+                              i.fa.fa-eye.appliedJobviewIcon(data-ui-sref='candidateProfile.job-description({jobId:jobs.jobId})', aria-hidden='true')
+                              span.appliedJobPortal {{jobs.jobPortal}} 
+                            td(class='col-sm-2' data-title="'Job Name'", sortable="'jobTitle'", ng-data='jobs.jobTitle') {{jobs.jobTitle | limitTo :30}}
+                            td(class='col-sm-2' data-title="'Company Name'", sortable="'companyName'", ng-data='jobs.companyName') {{jobs.companyName}}
+                            td(class='col-sm-2' data-title="'Applied Date'", sortable="'appliedDate'", ng-data='jobs.appliedDate') {{jobs.appliedDate}}
+                            //td(class='col-sm-2' data-title="'Expiry Date'", sortable="'jobExpiryDate'", ng-data='jobs.jobExpiryDate') {{jobs.jobExpiryDate}}
+                            td(class='col-sm-2' data-title="'Location'", sortable="'jobLocation'", ng-data='jobs.jobLocation') {{jobs.jobLocation}}
+                            
+                            td(class='col-sm-2' data-title="'Status'", sortable="'appliedJobStatus'", ng-data='jobs.appliedJobStatus') {{jobs.appliedJobStatus}}  
+                      .row(data-ng-if='appliedJobListCtrl.appliedJobList.length === 0')
+                        center No record found
+              #favoriteJob.tab-pane.fade.in
+                .panel-body.body-of-panel
+                  .row
+                    div(layout-margin='', layout-gt-sm="row" flex-gt-sm='') 
+                      .input-group
+                        md-input-container.md-block(flex="100")
+                          label Search
+                          input(type='text', ng-model='appliedJobListCtrl.favoriteJobTableFilter.search')
+                        md-icon.srch-icon(md-font-set='fa') &#xf002
+                    .col-sm-4.col-md-4.col-xs-6.showMe
+                      select(class="selectpicker" ng-model="appliedJobListCtrl.test" ng-change="appliedJobListCtrl.toggle1(clientsCtrl.test11)")
+                        option(ng-model="col.show" value="{{$index}}" ng-repeat="col in appliedJobListCtrl.cols11.slice(1,appliedJobListCtrl.cols11.length) track by $index") {{col.title()}}
+                                          
+                    table.table-responsive(ng-table='appliedJobListCtrl.favoriteJobTableParams', ng-table-columns-binding="appliedJobListCtrl.cols11", width="100%")
+                      tr(ng-repeat='jobs in $data')
+                        td(data="jobs")
+                          md-card.fav-card
+                            md-card-title
+                              md-card-title-text
+                                span.md-headline {{jobs.jobTitle}}
+                                span.md-subhead  
+                                  i.fa.fa-building(area-hidden="true")
+                                  span
+                                    |{{jobs.companyName}}
+                                span.md-subhead
+                                  i.fa.fa-map-marker(area-hidden="true")                  
+                                  span
+                                    |{{jobs.jobLocation}}
+                                span.md-subhead                                    
+                                  i.fa.fa-calendar(area-hidden="true")
+                                  span Posted :
+                                    |{{jobs.jobCreatedDate}}
+                              //md-card-content(layout='row', layout-align='space-between')
+                                md-card-actions(layout='column')
+                                  md-button.md-icon-button.md-warn(aria-label='Favorite')
+                                    md-icon
+                                      i.fa.fa-heart-o.fa-lg
+                            md-card-actions(layout='row', layout-align='end center')
+                             md-button.md-raised.md-primary(ng-href="{{jobs.jobUrl}}", target="_blank") Apply
+                          //td(ng-if="true" class='col-sm-2' data-title="'Job Name'", sortable="'jobName'", ng-data='jobs.jobName') {{jobs.jobTitle}}
+                          //td(ng-if="true" class='col-sm-2' data-title="'Company Name'", sortable="'companyName'", ng-data='jobs.companyName') {{jobs.companyName}}
+                          //td(ng-if="true" class='col-sm-2' data-title="'Location'", sortable="'jobLocation'", ng-data='jobs.jobLocation') {{jobs.jobLocation}}
+                          //td(ng-if="true" class='col-sm-2' data-title="'Apply'")
+                            form
+                              .form-group
+                                select.form-control(placeholder="Apply", ng-change="appliedJobListCtrl.appliedJobPortals(jobs.jobId)", ng-model="selected")
+                                  option(value="apply directly") Apply Directly
+                                  option(value="apply directly") Apply Directly
+                                  a(href='javascript:void(0)')
+                                    option(value="apply Manually") Apply Manually
+                          //td(ng-if="true" class='col-sm-2'  data-title="'Description'")
+                            a.btn.btn-primary(data-ui-sref='candidateProfile.favourite-job-description({jobId:jobs.jobId})', role='button') Description
+                  .row.notification-message(ng-show="appliedJobListCtrl.favoriteJobList.length < 1")
+                    center No Favorite  Job !!!                  
+                     
+
+

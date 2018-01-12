@@ -1,0 +1,10 @@
+#place-autocomplete
+  md-autocomplete(md-no-cache='false',md-input-name="autocomplete", required="checkRequired", md-selected-item='location', md-selected-item-change='getLatLng(item)', ng-model-options='{debounce: 600}', md-search-text-change='search(searchText)', md-search-text='searchText', md-items='item in search(searchText)', md-item-text='item.description', md-min-length='2', md-max-length='50', md-floating-label='Location (place, city or region)')
+    md-item-template
+      span(md-highlight-text='searchText', md-highlight-flags='^i') {{item.description}}
+    md-not-found
+      | No matches found for "{{searchText}}".
+    div(ng-messages="{'required': !searchText}", ng-if="checkRequired !== 'required'")
+        div(ng-message='required')
+          | Please Enter 
+          b Location

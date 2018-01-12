@@ -1,0 +1,20 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-industry.canidate-status-icon(aria-hidden='true')
+              span(data-translate='DEPARTMENTWISE-REPORT')
+            #base-chart.panel-body
+              .chart-0
+                .interviews
+                  | Department
+                  canvas#base.barchart.chart-horizontal-bar(chart-colors='departmentwiseCtrl.colors', chart-series='interviewByMonthCtrl.series', chart-data='departmentwiseCtrl.departmentWiseData.data', chart-labels='departmentwiseCtrl.departmentWiseData.labels')
+                .col-sm-12.interviews.show-center
+                  span
+                    i.fa.fa-square.color-box-1(aria-hidden='true')
+                    | No Of Interviews
+                  span
+                    i.fa.fa-square.color-box-2(aria-hidden='true')
+                    | No Of hires

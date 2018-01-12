@@ -1,0 +1,57 @@
+.blog-super-admin.content-wrapper 
+  .row
+    .col-xs-12.col-sm-12.col-md-12
+      .blog-credentials
+        span.candidate-profile-heading BLOG
+  .panel.panel-default
+    .panel-heading.blog-profile-heading Blog
+    .panel-body
+        .row
+          .col-xs-12.col-sm-12.col-md-12
+            .col-xs-12.col-sm-4.col-md-4.pull-right
+              a.client-btn(data-asm-modal='blogPopupModal', btn-class='btn btn-primary header-button blog-btn',  on-close="blogCtrl.onClose()") Add blog
+        .col-md-12.col-sm-12.col-xs-12
+          table(ng-table='blogCtrl.blogTableParams',  ng-table-columns-binding="blogCtrl.cols")
+            tr(ng-repeat='blogs in $data')
+              td(data='blogs')
+                md-card.blog-card
+                  md-card-header
+                    md-card-header-text  
+                      span.md-title.md-title-font(ng-if="blogs.title ==''")
+                        i.fa.fa-rss-square(aria-hidden="true")&nbsp;
+                        | Blog Title : N/A 
+                      span.md-title.md-title-font(ng-if="!blogs.title ==''")
+                        i.fa.fa-rss-square(aria-hidden="true")&nbsp;  
+                        | Blog Title :  {{blogs.title}}
+                    .pull-right
+                      small Created Date : {{blogs.blogCreatedAt | limitTo : 11}} &nbsp;&nbsp;
+                      a(data-asm-modal='blogPopupModal', btn-class='btn btn-primary client-icon-btn', on-close="clientsCtrl.onClose()", data-ng-click="blogCtrl.showUpdateBlogs(blogs)") Edit Blog
+                  md-card-content    
+                    .col-md-4.col-sm-6.col-xs-12
+                      div(ng-if='blogs.blogImagePath==""')                 
+                        .alert.alert-danger
+                          span Image not added yet!
+                      div(ng-if='!blogs.blogImagePath==""')                  
+                        img.img-rounded(ng-src='{{blogs.blogImagePath}}')  
+                    .col-md-8.col-sm-6.col-xs-12
+                      .col-md-4.col-sm-4.col-xs-12
+                        label Meta Name : 
+                        span(ng-if="blogs.metaTag == ''") &nbsp; N/A
+                        span(ng-if="!blogs.metaTag == ''")  &nbsp;{{blogs.metaTag}}
+                      .col-md-4.col-sm-4.col-xs-12
+                        label Meta Title :
+                        span(ng-if="blogs.metaTitle == ''") &nbsp; N/A
+                        span(ng-if="!blogs.metaTitle == ''") &nbsp;{{blogs.metaTitle}}
+                      .col-xs-12.col-sm-4.col-md-4
+                        .div(data-ng-if='blogs.blogStatus == "Active"')
+                          span.label.label-success Active
+                        .div(data-ng-if='blogs.blogStatus == "inActive"')
+                          span.label.label-danger Inactive
+                      .col-md-12.col-sm-12.col-xs-12
+                        label Meta Description :
+                        span(ng-if="blogs.metaDescription ==''") &nbsp; N/A
+                        span(ng-if="!blogs.metaDescription ==''") &nbsp; {{blogs.metaDescription}}  
+                      .col-md-12.col-sm-12.col-xs-12
+                        label Blog Description :
+                        span(ng-if="blogs.description ==''") &nbsp; N/A
+                        span(ng-if="!blogs.description ==''") &nbsp; {{blogs.description}}

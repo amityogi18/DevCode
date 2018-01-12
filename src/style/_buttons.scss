@@ -1,0 +1,18 @@
+.btn-asm-primary {
+  color: $white;
+  background-color: $lightRed;
+  border-color: $lightRed;
+  border-radius: $global-radius;
+  min-width: 140px;
+  height: 40px;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    color: white;
+  }
+}
+
+.btn {
+  border-radius: $global-radius;
+}

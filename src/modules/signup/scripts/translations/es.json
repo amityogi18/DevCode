@@ -1,0 +1,57 @@
+{
+  "SINGUP":"SINGUP",
+  "SINGUP-TITIE":"¿Ya tienes una cuenta? Iniciar sesión",
+  "PRODUCT":"Producto",
+  "INTERVIEW":"Entrevista",
+  "CONFERENCE":"Conferencia",
+  "BUSINESS-EMAIL":"email de negocios",
+  "EMAIL-ERROR":"correo electronico es requerido",
+  "EMAIL-ERROR1":"dirección de email no es válida",
+  "PASSWORD-ERROR":"se requiere contraseña",
+  "PASSWORD-ERROR1":"Contraseña debe contener al menos una letra inferior y una mayúscula y un número y un símbolo",
+  "TERM:ERROR":"Por favor, haga clic para aceptar los Términos y Condiciones",
+  "EMAIL":"Email",
+  "PASSWORD":"Contraseña",
+  "CONFIRM-PASSWORD":"Confirmar contraseña",
+  "CONFIRM-ERROR":"Se requiere confirmar la contraseña",
+  "CAPTCHA":"Captcha",
+  "AGREE-CHECK-BOX": "Al marcar esta casilla, aceptas la evaluación",
+  "TERMS":"Términos de Uso ",
+  "POLICE":"Policía de privacidad",
+  "SUBMIT":"ENVIAR",
+  "COMPANY-ACCOUNT":"Crear su cuenta de empresa",
+  "FIRST-NAME":"Nombre de pila",
+  "NAME-ERROR":"Prénom est requis",
+  "LAST-NAME":"Apellido",
+  "LAST-NAME-EROOR":"Le nom est requis",
+  "JOB-TITLE":"Título profesional",
+  "JOB-ERROR":"Titre du poste est requis.",
+  "CONTACT-NUMBER":"Número de contacto",
+  "CONTACT-ERROR":"Numéro de contact est requis",
+  "COMPANY-NAME" :"nombre de empresa",
+  "COMPANY-ERROR": "Sitio web empresa tiene la obligación",
+  "COMPANY-SIZE" :"Tamaño de la empresa",
+  "COMPANY-SIZE-ERROR" :"Pleace Select Taille de l'entreprise",
+  "COMPANY-WEBSITE":"Página Web de la compañía",
+  "COMPANY-WEB-ERROR":"Site web de l'entreprise est requis",
+  "COMPANY-HQ":"¿Dónde está su HQ de la compañía",
+  "COUNTRY":"País",
+  "STATE":"Estado",
+  "CITY":"Ciudad",
+  "ZIP-CODE":"Código postal",
+  "ZIPCODE-ERROR":"Code postal est requis",
+  "COMPANY-LOGO":"Agregar el logo de la empresa",
+  "COMPANY-URL":"Otro URL de la empresa",
+  "CONTINUE":"CONTINUAR"
+
+
+
+
+
+
+}
+
+
+
+
+

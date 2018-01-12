@@ -1,0 +1,196 @@
+.content-wrapper.video-intro-container
+  .row
+    .col-md-12
+      .video-intro-heading
+        span.video-intro-1 Video Intro
+        .pull-right.wallet-section
+          span
+            i.fa.fa-money(aria-hidden="true")
+            span.wallet-title  Wallet Points 
+              span.badge $ {{candidateHomeCtrl.candidatePoints.points}}  
+  .panel.panel-default.video-intro-panel.row
+    .panel-body
+      .row
+        .col-md-7.col-sm-12.col-xs-12
+          .video-iframe-sec
+            .alert.alert-warning.no-video-msg(data-ng-show='!candidateHomeCtrl.isVideoAvailable') No Video Added Yet, Please Add Intro Video
+            .countDownBox(ng-if='candidateHomeCtrl.countdownStarted', ng-hide='candidateHomeCtrl.isVideoAvailable' )
+              img#candidateprofile-countdown-img(ng-show='candidateHomeCtrl.countdownStarted', src='../../../public/img/countdown.gif')
+            iframe#video-cdiframe.video-iframe(ng-hide='candidateHomeCtrl.recordingOn || candidateHomeCtrl.countdownStarted', ng-src='{{candidateHomeCtrl.trustSrc(candidateHomeCtrl.videoUrl)}}', frameborder='0', allowfullscreen='')
+            video#candidateProfileVideoElement(ng-show='candidateHomeCtrl.recordingOn')
+            .row.recording-controls
+              .col-md-12.col-sm-12.col-xs-12
+                .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                  //- .col-md-2.col-sm-2.col-xs-2.play-icon
+                  //-   i.fa-2x.fa.fa-pause(aria-hidden='true', ng-click='candidateHomeCtrl.onPauseClick()', ng-show='candidateHomeCtrl.recordingOn', data-ng-if='!candidateHomeCtrl.paused', uib-tooltip='Pause')
+                  //-   i.fa-2x.fa.fa-play(aria-hidden='true', ng-click='candidateHomeCtrl.onResumeClick()', ng-show='candidateHomeCtrl.recordingOn', data-ng-if='candidateHomeCtrl.paused')
+                  .col-md-2.col-sm-2.col-xs-2.stop-icon
+                    i.fa-2x.fa.fa-stop-circle-o(uib-tooltip='Stop', aria-hidden='true', ng-show='candidateHomeCtrl.recordingOn', ng-click='candidateHomeCtrl.onStopClick()')
+                  .col-md-2.col-sm-2.col-xs-2.upload-icon
+                    i.fa-2x.fa.fa-upload(uib-tooltip='Upload', aria-hidden='true', ng-show='candidateHomeCtrl.recordingOn', ng-click='candidateHomeCtrl.upload()')
+            .row
+              .col-md-12.col-sm-12.col-xs-12.last-recorded
+                strong(data-translate='LAST-RECORDED')
+                | {{candidateHomeCtrl.twoMinIntro.lastUpdated | date: "MM-dd-yyyy HH:mm:ss Z"}}
+            .col-sm-12
+              .col-md-4.col-sm-4.col-xs-4.text-box
+                .share-view-icon
+                  i.fa.fa-retweet(aria-hidden='true')  
+                .share-view-text
+                  span(data-translate='EMAIL-SHARES')
+                  | :{{candidateHomeCtrl.twoMinIntro.emailSharing}}
+              //.col-md-4.col-sm-4.col-xs-4.text-box
+                .share-view-icon
+                  i.fa.fa-star-o(aria-hidden='true')
+                .share-view-text
+                  span(data-translate='BONUS-POINT-EARNED')
+                  | :{{candidateHomeCtrl.twoMinIntro.bonusPointEarned}}
+              .col-md-4.col-sm-4.col-xs-4.text-box
+                .share-view-icon
+                  i.fa.fa-eye(aria-hidden='true')
+                .share-view-text
+                  span(data-translate='VIEWS')
+                  | :{{candidateHomeCtrl.twoMinIntro.views}}
+          div
+            span
+                b Note: 
+            span.share-view-text Supported Video Formats is .mp4   
+            br(ng-if="$root.mobile")
+        .col-md-5.col-sm-12.col-xs-12
+          span.help
+            | Follow 2 simple steps below to create your own video introduction and impress the recruiters with your video
+          .row
+            .col-md-12.col-sm-12.col-xs-12
+              span.step-1 Step 1: Create your video introduction.
+          .row
+            .col-md-12.col-sm-12.col-xs-12 Choose any 1 option to record or upload your 2 mins video.
+          ul.nav.nav-tabs
+            li.active(uib-tooltip='Record Two Minute Intro')
+              a.pointer(data-toggle='tab', href='#home')
+                i.fa.fa-video-camera.edit-icon(aria-hidden='true')
+            li(uib-tooltip='Upload Video')
+              a.pointer(data-toggle='tab', data-target='#semo')
+                i.fa.fa-arrow-up.edit-icon(aria-hidden='true')
+            li(uib-tooltip='Upload Video From YouTube')
+              a.pointer(data-toggle='tab', href='#menu2')
+                i.fa.fa-youtube.edit-icon(aria-hidden='true')
+          .tab-content
+            #home.tab-pane.fade.in.active
+              .row.record-row.home-first-row
+                .col-md-12
+                  md-button.md-raised.md-primary.on-record(aria-label='record',ng-click='candidateHomeCtrl.onRecordClick()')
+                    span
+                      i.fa.fa-video-camera.fa-lg(aria-hidden='true')
+                .col-md-12 Click to record two mins intro from your device.      
+              .row.record-row
+                .col-md-12
+                  md-button.md-raised.md-primary.on-record(aria-label='music',ng-click='candidateHomeCtrl.addBackgroundMusic()')
+                    span
+                      i.fa.fa-music.fa-lg
+                  audio#background-music(ng-hide='true', controls='', loop='')  
+                .col-md-12
+                  span Optional:Click to Add Background Music
+              .row.record-row.col-md-12
+                .col-md-6.col-xs-6.col-sm-6
+                  md-button.md-raised.md-primary(aria-label='preview' ,ng-disabled='candidateHomeCtrl.videoFile', ng-click='candidateHomeCtrl.preview()', data-translate='PREVIEW')
+                .col-md-6.col-xs-6.col-sm-6
+                  md-button.md-raised.md-primary(aria-label='upload', ng-disabled = '!candidateHomeCtrl.recordingOn', ng-click='candidateHomeCtrl.upload()')
+                    span(data-translate='UPLOAD')
+                      span
+                        i.fa.fa-upload
+            #semo.tab-pane.fade
+              .row.record-row-1
+                .col-md-8.col-sm-8.col-xs-8
+                  .input-group
+                    input#file-upload(type='file', file-modal='candidateHomeCtrl.videoFile', accept="video/mp4, video/*", file-modal-url='candidateHomeCtrl.videoUrl')
+                .col-md-4.col-sm-4.col-xs-4
+                  md-button.md-raised.md-primary(aria-label='uploadfile' ,ng-disabled='!candidateHomeCtrl.videoFile',ng-click='candidateHomeCtrl.upload()')
+                    span.hidden-xs.hidden-sm(data-translate='UPLOAD')
+                    span.hidden-md.hidden-lg
+                      i.fa.fa-upload  
+                .col-md-offset-1.col-md-10.col-sm-12.col-xs-12.upload-text
+                  | Click to upload already recorded video from device.
+            #menu2.tab-pane.fade
+              div.youtube-area(layout='row')
+                md-input-container.md-icon-float.md-block(flex='100')
+                  label Paste your you tube url here
+                  md-icon
+                    i.fa.fa-youtube.fa-2x(area-hidden='true')
+                  input(name ='youtubeurl', type='text', ng-model='candidateHomeCtrl.youtubeLink', data-ng-blur="candidateHomeCtrl.analyzeYoutubeUrl(candidateHomeCtrl.youtubeLink)", data-ng-keyup="candidateHomeCtrl.analyzeYoutubeUrl(candidateHomeCtrl.youtubeLink)"  required='required')
+                  span.error-msg(data-ng-if='candidateHomeCtrl.isYouTubeUrlvalid !== ""') {{candidateHomeCtrl.isYouTubeUrlvalid}}
+              div.pull-right
+                md-button.md-raised.md-primary(aria-label='uploadyoutube' ,ng-disabled='!candidateHomeCtrl.youtubeValid', type='button', ng-click='candidateHomeCtrl.uploadYoutubeLink()')
+                  span.hidden-xs.hidden-sm(data-translate='UPLOAD')
+                  span.hidden-md.hidden-lg
+                    i.fa.fa-upload
+              //.col-sm-12.col-md-12.col-xs-12
+                  .col-sm-12.col-md-12.col-xs-12.input-area.pull-left
+                    i.v-icon.col-sm-5.col-md-5
+                      img.hidden-xs.hidden-sm(src='../../../public/img/v-icon.png', alt='')
+                      span.hidden-md.hidden-lg.you-tube-icon
+                        i.fa.fa-youtube
+                  .row
+                    .col-md-9.col-sm-9.col-xs-9.box
+                      input#youtube.form-control( name ='youtubeurl', type='text', ng-model='candidateHomeCtrl.youtubeLink', data-ng-blur="candidateHomeCtrl.analyzeYoutubeUrl(candidateHomeCtrl.youtubeLink)", data-ng-keyup="candidateHomeCtrl.analyzeYoutubeUrl(candidateHomeCtrl.youtubeLink)"  required='required')
+                      span.error-msg(data-ng-if='candidateHomeCtrl.isYouTubeUrlvalid !== ""') {{candidateHomeCtrl.isYouTubeUrlvalid}}
+                    .col-sm-3.col-md-3.col-xs-3
+                      md-button.md-raised.md-primary(aria-label='uploadyoutube' ,ng-disabled='!candidateHomeCtrl.youtubeValid', type='button', ng-click='candidateHomeCtrl.uploadYoutubeLink()')
+                        span.hidden-xs.hidden-sm(data-translate='UPLOAD')
+                        span.hidden-md.hidden-lg
+                          i.fa.fa-upload
+          .shareable-tabs
+            span.step-1 Step 2: Share Your Profile (Optional)
+            ul.nav.nav-tabs
+              li.active
+                a.pointer(data-toggle='tab', href='#share')
+                  i.fa.fa-share-alt.edit-icon(aria-hidden='true')
+            .tab-content-height
+              #share.tab-pane.fade.in.active
+                span.optional.pull-left
+                .choose-options
+                  .col-md-12.col-sm-12.col-xs-12(ng-hide='candidateHomeCtrl.hideLink===true')
+                    .link-copy-box.pull-left Sharable Link
+                    .text-box-copy
+                      #sharedLink.sharable-link.col-md-10.col-sm-10.col-xs-12(ng-model='candidateHomeCtrl.shareProfileUrl', ng-hide = "!candidateHomeCtrl.shareProfileUrl")
+                        span.link-width {{candidateHomeCtrl.shareProfileUrl}}
+                      .link-box.col-md-2.col-sm-2.col-xs-12
+                        a.link-copy-btn(data-toggle='tab', href='#', ng-click='candidateHomeCtrl.copyLink()')
+                          span
+                            i.fa.fa-files-o.fa-2x(uib-tooltip='Copy',ng-hide = "!candidateHomeCtrl.shareProfileUrl", aria-hidden='true')
+                  .col-md-12.col-sm-10.col-xs-12.last-button-section
+                    .row.third-button-section
+                      .col-md-4.col-sm-8.col-xs-4
+                        button.btn(ng-class="{'btn btn-primary':candidateHomeCtrl.profileStatus==='public','btn btn-default':candidateHomeCtrl.profileStatus!=='public'}", ng-click="candidateHomeCtrl.shareProfile('public')")
+                          span.hidden-xs.hidden-sm PUBLIC
+                          span
+                            i.fa.fa-globe
+                      .col-md-4.col-sm-8.col-xs-4
+                        button.btn(ng-class="{'btn btn-primary':candidateHomeCtrl.profileStatus==='private','btn btn-default':candidateHomeCtrl.profileStatus!=='private'}", data-toggle='collapse', data-target='#priv', ng-click="candidateHomeCtrl.shareProfile('private-toggle')")
+                          span.hidden-xs.hidden-sm PRIVATE
+                          span
+                            i.fa.fa-user-secret
+                      .col-md-4.col-sm-8.col-xs-4
+                        button.btn(ng-class="{'btn btn-primary':candidateHomeCtrl.profileStatus==='off','btn btn-default':candidateHomeCtrl.profileStatus!=='off'}", ng-click="candidateHomeCtrl.shareProfile('off')")
+                          span.hidden-xs.hidden-sm OFF
+                          span
+                            i.fa.fa-lock
+                  #priv.collapse.col-md-12.col-xs-12.col-sm-12(ng-hide="candidateHomeCtrl.profileStatus==='public' || candidateHomeCtrl.profileStatus ==='off'")
+                    .row
+                      .col-md-12.col-sm-12.col-xs-12
+                        label.col-lg-8.col-md-8.col-sm-8.col-xs-12.control-label Enter Email Id's separated by comma
+                    .row
+                      .col-md-9.col-sm-9.col-xs-12
+                        textarea.col-md-12.id-box(placeholder='Add more people...', ng-model='candidateHomeCtrl.sharableEmailId')
+                        .col-md-12.col-xs-12.col-sm-12.sharedEmailBox
+                          .row.email-box
+                            .col-md-12(data-ng-if='candidateHomeCtrl.twoMinIntro.emailIds.length > 0') Shared With :
+                          .row(ng-repeat='ids in candidateHomeCtrl.twoMinIntro.emailIds track by $index')
+                            .col-md-10.col-sm-10.col-xs-12.id-box {{ids}}
+                            .col-md-2.col-sm-2.col-xs-12
+                              i.fa.fa-times.red-cross(data-ng-click='candidateHomeCtrl.removePrivateIds($index)')
+                      .col-md-2.col-sm-2.col-xs-12
+                        button.btn.btn-primary.btn-sm(ng-click="candidateHomeCtrl.shareProfile('private')")
+                          | Share
+                          span(ng-show ="candidateHomeCtrl.profileStatus==='public' || candidateHomeCtrl.profileStatus==='private'")
+                            i.fa.fa-share
+                  .col-md-12.col-sm-12.col-xs-12.note(ng-show ="candidateHomeCtrl.profileStatus==='public'") Feel free to share this link anywhere you want.      

@@ -1,0 +1,299 @@
+.content-wrapper.general-setting
+  .col-md-12.col-sm-12.col-xs-12.position-automation
+    .video-intro-heading
+      span.video-intro-1 Position Automation
+    .panel-body
+      div(ng-cloak='')
+        md-content
+          md-tabs(md-dynamic-height='', md-border-bottom='')
+            md-tab(label='Resume Parsing')
+              md-content.md-padding
+                .col-md-12.col-sm-12.col-xs-12
+                    .col-md-6.col-sm-12.col-xs-6
+                        md-checkbox.md-primary(ng-model='positionAutomationCtrl.isResumeParse', ng-true-value="1", ng-false-value="0", ng-change='positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.isResumeParse, "IsResumeParse"))')
+                        | Do you want to parse resume
+                .col-md-12.col-sm-12.col-xs-12
+                    h4 Additional Criteria from resume
+                    .col-md-12.col-sm-12.col-xs-12
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.experience', ng-true-value="1", ng-false-value="0", disabled)
+                            | Experiences
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.employmentType', ng-true-value="1", ng-false-value="0", ng-disabled='positionAutomationCtrl.isResumeParse === 0', ng-change='positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.employmentType, "EmploymentType")')
+                            | Employment Type
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.education', ng-true-value="1", ng-false-value="0", ng-disabled='positionAutomationCtrl.isResumeParse === 0', ng-change='positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.education, "Education")')
+                            | Education
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.location', ng-true-value="1", ng-false-value="0", disabled)
+                            | Location
+                    .col-md-12.col-sm-12.col-xs-12
+                        h4 Skills
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.primarySkill', ng-true-value="1", ng-false-value="0", disabled)
+                            | Primary Skill
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.secondarySkill', ng-true-value="1", ng-false-value="0", ng-disabled='positionAutomationCtrl.isResumeParse === 0', ng-change='positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.secondarySkill, "SecondarySkill")')
+                            | Secondary Skill
+                        .col-md-4.col-sm-12.com-xs-6
+                            md-checkbox.md-primary(ng-model='positionAutomationCtrl.tertiarySkill', ng-true-value="1", ng-false-value="0", ng-disabled='positionAutomationCtrl.isResumeParse === 0', ng-change='positionAutomationCtrl.checkedAllResumeParse(positionAutomationCtrl.tertiarySkill, "TertiarySkill")')
+                            | Tertiary Skill
+                    .col-md-12.col-sm-12.col-xs-12.margin-space
+                            md-chips(ng-model='positionAutomationCtrl.selectedCertificate', md-autocomplete-snap='', md-transform-chip='positionAutomationCtrl.transformChip($chip)', md-require-match='positionAutomationCtrl.autocompleteDemoRequireMatch')
+                                md-autocomplete(md-selected-item='positionAutomationCtrl.selectedCertificateItem', md-search-text='positionAutomationCtrl.searchCertificate', md-items='certificates in positionAutomationCtrl.getAllCertificate(positionAutomationCtrl.searchCertificate)', md-item-text='certificates.certificateName', placeholder='Select certificate')
+                                  span(md-highlight-text='positionAutomationCtrl.searchCertificate') {{certificates.certificateName}}
+                                md-chip-template
+                                  span {{$chip.certificateName}}
+                    .col-md-12.col-sm-12.col-xs-12
+                        .col-md-8.col-sm-8.col-xs-12
+                            md-input-container.md-block
+                                label.date-tab Resume rating 
+                                md-select(ng-model='positionAutomationCtrl.candidateResumeRatingRatio', required)
+                                  md-option(value='0') 0
+                                  md-option(value='1') 1
+                                  md-option(value='2') 2
+                                  md-option(value='3') 3
+                                  md-option(value='4') 4
+                                  md-option(value='5') 5
+                        .col-md-4.col-sm-4.col-xs-12
+                            md-button.md-raised.md-primary.pull-right(ng-click='positionAutomationCtrl.saveUpdateResumeParsingData("save")',ng-if='positionAutomationCtrl.showSaveButton', ng-disabled='positionAutomationCtrl.isResumeParse === 0') SAVE
+                            md-button.md-raised.md-primary.pull-right(ng-click='positionAutomationCtrl.saveUpdateResumeParsingData("update")',ng-if='!positionAutomationCtrl.showSaveButton', ng-disabled='positionAutomationCtrl.isResumeParse === 0') UPDATE
+            md-tab(label='OnDemand Interview')
+              md-content.md-padding
+                    #accordion.panel-group(aria-multiselectable="true")
+                        .panel.panel-default
+                            #headingOne.panel-heading
+                              h4.panel-title
+                                a(data-toggle='collapse', data-parent='#accordion', href='#collapse1', aria-expanded='true', aria-controls='collapse1') Ondemand Interview Settings
+                            #collapse1.panel-collapse.collapse.in(aria-labelledby='headingOne')
+                              .panel-body
+                                  .row
+                                      .col-md-6.col-sm-12.col-xs-6
+                                          .col-md-9.col-sm-9.col-xs-9
+                                              label.spacing-bottom Enable Share Link/Enable-Disable
+                                          .col-md-3.col-sm-3.col-xs-3
+                                              .switches
+                                                md-switch.md-primary(ng-model='positionAutomationCtrl.shareLink', ng-true-value="1", ng-false-value="0", ng-change='positionAutomationCtrl.toggleSharebleLink(positionAutomationCtrl.shareLink)')
+                                          .col-md-12.col-sm-12.col-xs-12
+                                              .title(data-ng-show="positionAutomationCtrl.welcomeVideoList.length > 0") Choose From Existing Video :
+                                              .title(data-ng-show="positionAutomationCtrl.welcomeVideoList.length < 1")               
+                                              .fields-sec.preview-sec(data-ng-show="positionAutomationCtrl.welcomeVideoList.length > 0")
+                                                  md-input-container.md-block(flex='80')
+                                                    //label Welcome video
+                                                    md-select(ng-model='positionAutomationCtrl.welcomeVideo.fileId', ng-change="positionAutomationCtrl.videoUpdated(1,positionAutomationCtrl.welcomeVideo);", required)
+                                                     md-option(ng-repeat='welcomeVideo in positionAutomationCtrl.welcomeVideoList track by welcomeVideo.fileId',ng-value='{{welcomeVideo.fileId}}', ng-click='positionAutomationCtrl.interviewSettingUpdated()') {{welcomeVideo.name}}
+                                                  a.btn-preview.pull-right(data-toggle='modal', data-target='#welcomeVideoPreview') Preview
+                                          .col-md-12.col-sm-12.col-xs-12
+                                              .title(data-ng-show="positionAutomationCtrl.exitVideoList.length > 0") Choose From Existing Video :
+                                              .title(data-ng-show="positionAutomationCtrl.exitVideoList.length < 1") 
+                                              .fields-sec.preview-sec(data-ng-show="positionAutomationCtrl.exitVideoList.length > 0")
+                                                  md-input-container.md-block(flex="80")
+                                                    //label Exit video
+                                                    md-select(ng-model='positionAutomationCtrl.exitVideo.fileId', ng-change="positionAutomationCtrl.videoUpdated(2,positionAutomationCtrl.exitVideo);", required)
+                                                      md-option(ng-repeat='exitVideo in positionAutomationCtrl.exitVideoList track by exitVideo.fileId',ng-value='{{exitVideo.fileId}}', ng-click='positionAutomationCtrl.interviewSettingUpdated()'){{exitVideo.name}}
+                                                  a.btn-preview(data-toggle='modal', data-target='#exitVideoPreview') Preview
+                                          .col-md-12.col-sm-12.col-xs-12
+                                              div(layout='row')
+                                                  md-input-container.md-block(flex="95")
+                                                      input(type='text', placeholder='Redirect Url',maxlength='150', ng-model='positionAutomationCtrl.redirectUrl', data-ng-blur='positionAutomationCtrl.analyzeUrl(positionAutomationCtrl.redirectUrl)', data-ng-keyup="positionAutomationCtrl.analyzeUrl(positionAutomationCtrl.redirectUrl)", required)
+                                                      span.error-message(data-ng-if='positionAutomationCtrl.errormessageurl !== ""') {{positionAutomationCtrl.errormessageurl}}
+                                      .col-md-6.col-sm-12.col-xs-6
+                                          md-input-container.md-block(flex="100")
+                                              label Response Limit
+                                              md-select.align-select(ng-model='positionAutomationCtrl.responseLimit.id', required)
+                                                md-option(ng-repeat="responseLimitList in positionAutomationCtrl.responseLimitList track by responseLimitList.id", ng-value='{{responseLimitList.id}}', ng-click='positionAutomationCtrl.interviewSettingUpdated()'){{responseLimitList.value}}
+                                          .error-box(data-ng-if='positionAutomationCtrl.isRequiredField') Response limit required
+                                          md-input-container.md-block(flex="100")
+                                              label Retries Per Question
+                                              md-select.align-select(ng-model='positionAutomationCtrl.retryPerQuestion.id', required)
+                                                md-option(ng-repeat="retryPerQuestionList in positionAutomationCtrl.retryPerQuestionList track by retryPerQuestionList.id", ng-value='{{retryPerQuestionList.id}}', ng-click='positionAutomationCtrl.interviewSettingUpdated()'){{retryPerQuestionList.value}}
+                                          .error-box(data-ng-if='positionAutomationCtrl.isRequiredField') Retries per Question required 
+                                          md-input-container.md-block(flex="100")
+                                              label Limit of Questions
+                                              input(type='number', min='0', ng-model='positionAutomationCtrl.questionLimit', maxlength='2', required)
+                                          md-input-container.md-block(flex="100")
+                                              label No of Days for Interview Expiry Date
+                                              input(type='number', min='0' ng-model='positionAutomationCtrl.expDay', maxlength ='2', required)
+                                  .row
+                                      md-button.md-raised.md-primary.pull-right(ng-if='positionAutomationCtrl.showOndemandSaveButton', ng-click='positionAutomationCtrl.saveUpdateOndemandInterview("save")') SAVE
+                                      md-button.md-raised.md-primary.pull-right(ng-if='!positionAutomationCtrl.showOndemandSaveButton', ng-click='positionAutomationCtrl.saveUpdateOndemandInterview("update")') UPDATE     
+                        .panel.panel-default
+                            #headingTwo.panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapse2', aria-expanded='false', aria-controls='collapse2')  Evaluators
+                            #collapse2.panel-collapse.collapse(aria-labelledby='headingTwo')
+                              .panel-body
+                                  .col-md-12.col-sm-12.col-xs-12
+                                    a.pull-right(data-ui-sref='settings.admin-user') Add Default Evaluators
+                                  .col-md-12.col-sm-12.col-xs-12
+                                      .main-table-area.margin-to-table
+                                          .table-responsive.hide-overflow
+                                              table.table.table-first(ng-table='positionAutomationCtrl.userTableParams' ng-table-columns-binding="positionAutomationCtrl.cols")
+                                                tr(ng-repeat='user in $data')
+                                                  td(ng-if="true" data-title="'Name'", sortable="'firstName'", ng-data='user.firstName') {{user.firstName}} {{user.lastName}}
+                                                  td(ng-if="true" data-title="'Email'", sortable="'email'", ng-data='user.email') {{user.email}}
+                                                  td(ng-if="true" data-title="'Department Name'", sortable="'departmentName'", ng-data='user.departmentName') {{user.departmentName}}
+                                              .row(data-ng-if='positionAutomationCtrl.userList.length === 0')
+                                                center No record found
+                        .panel.panel-default
+                            #headingThree.panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#collapse3', aria-expanded='false', aria-controls='collapse3') Questions
+                            #collapse3.panel-collapse.collapse(aria-labelledby='headingThree')
+                              .panel-body
+                                  .col-md-12.col-sm-12.col-xs-12
+                                    a.pull-right(data-ui-sref='settings.custom-question') Add Default Question
+                                  .col-md-12.col-sm-12.col-xs-12
+                                      .main-table-area
+                                          .table-responsive.hide-overflow
+                                            table.table.table-first(ng-table='positionAutomationCtrl.customQuestionTableParams', ng-table-columns-binding="positionAutomationCtrl.cols")
+                                              tr(ng-repeat="questions in $data")
+                                                td
+                                                  i.fa.fa-file-audio-o(data-ng-if="questions.questionType === 'AUDIO' || questions.questionType === 5")
+                                                  i.fa.fa-file-video-o(data-ng-if="questions.questionType === 'VIDEO' || questions.questionType === 1")
+                                                  i.fa.fa-list-ol(data-ng-if="questions.questionType === 'MCQ' || questions.questionType === 4")
+                                                  i.fa.fa-list-ul(data-ng-if="questions.questionType === 'MSQ' || questions.questionType === 3")
+                                                  i.fa.fa-file-code-o(data-ng-if="questions.questionType === 'TEXT' || questions.questionType === 2")
+                                                td(ng-if="true" title="'Question'",  sortable="'question'", ng-data='questions.question', class-name='table-accordian') {{questions.question}}                         
+                                                td(ng-if="true" title="'Skill'",  sortable="'skill'", ng-data='questions.skill', class-name='table-accordian') {{questions.skill}}
+                                                td(ng-if="true"  title="'Response Type'", sortable="'responseType'", ng-data='questions.responseType', class-name='table-accordian')
+                                                  span(data-ng-if="questions.responseTypeId == 1") VIDEO
+                                                  span(data-ng-if="questions.responseTypeId == 5") AUDIO
+                                                  span(data-ng-if="questions.responseTypeId == 2") TEXT
+                                                  span(data-ng-if="questions.responseTypeId == 3") MSQ
+                                                  span(data-ng-if="questions.responseTypeId == 4") MCQ
+                                          .row.notification-message(ng-show="positionAutomationCtrl.customQuestionList.length < 1")
+                                            center No Custom Questions Added Yet !!!
+            md-tab(label='Live Interview')
+              md-content.md-padding
+                    #LiveAccordion.panel-group
+                        .panel.panel-default(aria-multiselectable="true")
+                            #liveheadingOne.panel-heading
+                              h4.panel-title
+                                a(data-toggle='collapse', data-parent='#LiveAccordion', href='#collapse11', aria-expanded='true', aria-controls='collapse11') Live Interview Settings
+                            #collapse11.panel-collapse.collapse.in(aria-labelledby='liveheadingOne')
+                              .panel-body
+                                  .row
+                                    .col-md-6.col-sm-12.col-xs-12
+                                        md-input-container.md-block(flex='100')
+                                            label No of days for starting interview date                                            
+                                            input(type='number', min='0', ng-model='positionAutomationCtrl.startInterviewDay', maxlength='2', required)
+                                    .col-md-6.col-sm-12.col-xs-12
+                                        md-input-container.md-block(flex='100')
+                                            label Interval Time
+                                            md-select(ng-model='positionAutomationCtrl.intervalTime', required)
+                                              md-option(value='5')  5 min
+                                              md-option(value='10') 10 min
+                                              md-option(value='15') 15 min
+                                              md-option(value='30') 30 min
+                                              md-option(value='45') 45 min
+                                              md-option(value='60') 60 min
+                                              md-option(value='75') 75 min
+                                              md-option(value='90') 90 min
+                                              md-option(value='120') 120 min
+                                  .row
+                                    .col-md-6.col-sm-12.col-xs-12           
+                                        md-input-container.md-block(flex='100')
+                                            label No of days for ending date from starting interview date
+                                            input(type='number', min='0', ng-model='positionAutomationCtrl.endInterviewDay', maxlength='2', required)
+                                    .col-md-6.col-sm-12.col-xs-12           
+                                        md-input-container.md-block(flex='100')
+                                                  label No of Slots in a day
+                                                  input(type='number', min='0' ng-model='positionAutomationCtrl.perDaySlot', maxlength='2', required)    
+                                  .row
+                                    .col-md-6.col-sm-12.col-xs-12            
+                                        md-input-container.md-block(flex='100')
+                                            label.date-tab Interview Duration
+                                            md-select(ng-model='positionAutomationCtrl.interviewDuration', required)
+                                              md-option(value='15') 15 min
+                                              md-option(value='30') 30 min
+                                              md-option(value='45') 45 min
+                                              md-option(value='60') 60 min
+                                              md-option(value='75') 75 min
+                                              md-option(value='90') 90 min
+                                              md-option(value='120') 120 min 
+                                    .col-md-6.col-sm-12.col-xs-12
+                                        .col-md-6.col-sm-12.col-xs-12
+                                              label Start Time
+                                              .time-picker-section.space-margin
+                                                  div(uib-timepicker='',name='fromTime', ng-model='positionAutomationCtrl.startTime', min="(positionAutomationCtrl.startTime.toLocaleDateString()==positionAutomationCtrl.minTime.toLocaleDateString())?positionAutomationCtrl.minTime:null", show-meridian='false', required)
+                                        .col-md-6.col-sm-12.col-xs-12
+                                              label End Time
+                                              .time-picker-section.space-margin
+                                                  div(uib-timepicker='',name='toTime', ng-model='positionAutomationCtrl.endTime', show-meridian='false', required)
+                                          span 
+                                              strong Note- 
+                                              span.time-msg Start time should be less than End time (24hrs format)
+                                  .row
+                                      md-button.md-raised.md-primary.pull-right(ng-if='positionAutomationCtrl.showLiveSaveButton', ng-click='positionAutomationCtrl.saveUpdateLiveInterview("save")') SAVE
+                                      md-button.md-raised.md-primary.pull-right(ng-if='!positionAutomationCtrl.showLiveSaveButton', ng-click='positionAutomationCtrl.saveUpdateLiveInterview("update")') UPDATE
+                        .panel.panel-default
+                            #liveheadingTwo.panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#LiveAccordion', href='#collapse12', aria-expanded='false', aria-controls='collapse12')  Evaluators
+                            #collapse12.panel-collapse.collapse(aria-labelledby='liveheadingTwo')
+                              .panel-body
+                                  .col-md-12.col-sm-12.col-xs-12 
+                                    a.pull-right(data-ui-sref='settings.admin-user') Add Default Evaluators
+                                  .col-md-12.col-sm-12.col-xs-12
+                                      .main-table-area.margin-to-table
+                                          .table-responsive.hide-overflow
+                                              table.table.table-first(ng-table='positionAutomationCtrl.userTableParams' ng-table-columns-binding="positionAutomationCtrl.cols")
+                                                tr(ng-repeat='user in $data')
+                                                  td(ng-if="true" data-title="'Name'", sortable="'firstName'", ng-data='user.firstName') {{user.firstName}} {{user.lastName}}
+                                                  td(ng-if="true" data-title="'Email'", sortable="'email'", ng-data='user.email') {{user.email}}
+                                                  td(ng-if="true" data-title="'Department Name'", sortable="'departmentName'", ng-data='user.departmentName') {{user.departmentName}}
+                                              .row(data-ng-if='positionAutomationCtrl.userList.length === 0')
+                                                center No record found
+                        .panel.panel-default
+                            #liveheadingThree.panel-heading
+                              h4.panel-title
+                                a.collapsed(data-toggle='collapse', data-parent='#LiveAccordion', href='#collapse13', aria-expanded='false', aria-controls='collapse13')  Interviewers
+                            #collapse13.panel-collapse.collapse(aria-labelledby='liveheadingThree')
+                              .panel-body
+                                  .col-md-12.col-sm-12.col-xs-12 
+                                    a.pull-right(data-ui-sref='settings.admin-user') Add Default Interviewers
+                                  .col-md-12.col-sm-12.col-xs-12
+                                      .main-table-area.margin-to-table
+                                          .table-responsive.hide-overflow
+                                              table.table.table-first(ng-table='positionAutomationCtrl.userInterviewTableParams' ng-table-columns-binding="positionAutomationCtrl.cols")
+                                                tr(ng-repeat='user in $data')
+                                                  td(ng-if="true" data-title="'Name'", sortable="'firstName'", ng-data='user.firstName') {{user.firstName}} {{user.lastName}}
+                                                  td(ng-if="true" data-title="'Email'", sortable="'email'", ng-data='user.email') {{user.email}}
+                                                  td(ng-if="true" data-title="'Department Name'", sortable="'departmentName'", ng-data='user.departmentName') {{user.departmentName}}
+                                              .row(data-ng-if='positionAutomationCtrl.userInterviewerList.length === 0')
+                                                center No record found
+    #welcomeVideoPreview.modal.fade(role='dialog')
+        .modal-dialog
+            // Modal content
+            .modal-content
+                .modal-body
+                    .col-md-12.col-sm-12
+                      button.close(type='button', data-dismiss='modal',  ng-click='positionAutomationCtrl.closeModal("#wlcm-video")') ×
+                    .col-md-12.col-sm-12
+                        h3 Welcome Video 
+                        .preview-iframe-sec
+                         div(data-ng-show="!positionAutomationCtrl.isYoutubeWelcomeVideo")
+                          video#welcomeVideo.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-bbox(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                         //video(data-ng-if="!positionAutomationCtrl.isYoutubeWelcomeVideo", src='{{positionAutomationCtrl.trustSrc(positionAutomationCtrl.welcomeVideo.videoPath)}}', frameborder='0', allowfullscreen='', controls)
+                         iframe(data-ng-if="positionAutomationCtrl.isYoutubeWelcomeVideo", ng-src='{{positionAutomationCtrl.trustSrc(positionAutomationCtrl.welcomeVideo.videoPath)}}', frameborder='0', allowfullscreen='')
+                    .col-md-12.col-sm-12
+                      div.pull-right
+                        md-button.md-raised.canceldata-btn(data-dismiss='modal', ng-click='positionAutomationCtrl.closeModal("#wlcm-video")') Close
+    #exitVideoPreview.modal.fade(role='dialog')
+        .modal-dialog
+            // Modal content
+            .modal-content
+                .modal-body
+                    .col-md-12.col-sm-12
+                      button.close(type='button', data-dismiss='modal',  ng-click='positionAutomationCtrl.closeModal("#exit-video")') ×
+                    .col-md-12.col-sm-12
+                        h3 Exit video
+                        .preview-iframe-sec
+                          div(data-ng-show="!positionAutomationCtrl.isYoutubeExitVideo")
+                            video#exitVideo.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled.video-bbox(data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+                          //video(data-ng-if="!positionAutomationCtrl.isYoutubeExitVideo", src="{{positionAutomationCtrl.trustSrc(positionAutomationCtrl.exitVideo.videoPath)}}", frameborder='0', allowfullscreen='', controls)
+                          iframe(data-ng-if="positionAutomationCtrl.isYoutubeExitVideo", ng-src="{{positionAutomationCtrl.trustSrc(positionAutomationCtrl.exitVideo.videoPath)}}", frameborder='0', allowfullscreen='')
+                    .col-md-12.col-sm-12
+                      div.pull-right
+                        md-button.md-raised.canceldata-btn(data-dismiss='modal', ng-click='positionAutomationCtrl.closeModal("#exit-video")') Close

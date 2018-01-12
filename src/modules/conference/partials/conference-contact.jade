@@ -1,0 +1,49 @@
+.content-wrapper.conference-home.pad-mobile 
+  .conference-header-div
+    .row
+      .col-md-2.col-sm-2.col-xs-12.conference-header
+        h2 Contacts
+  md-content.md-padding(layout-xs='column', layout='row')
+    md-card.conference-meet-now-section
+      md-card-actions
+        .row.cantact-list
+          .col-md-4.col-sm-4.col-xs-12.btn-position
+              md-input-container.fullWidth 
+                label Search
+                input(type='text', ng-model='conferenceContactCtrl.contactTableFilter.search')
+                span.fa.fa-times.contact-searchIcon(ng-if='conferenceContactCtrl.contactTableFilter.search',ng-click='conferenceContactCtrl.contactTableFilter.search = ""') 
+                md-icon.contact-search-icon(md-font-set='fa') &#xf002 
+          .col-md-4.col-sm-4.col-xs-12  
+          .col-md-4.col-sm-4.col-xs-12.pull-right    
+            .col-md-2.col-sm-2.col-xs-3.add-contact-btn
+                a(type='button', data-asm-modal='contactPopModal', btn-class='md-button md-raised md-primary', on-close="conferenceContactCtrl.onClose()") Add New
+            .col-md-2.col-sm-2.col-xs-3.delete-contact-btn
+                button.btn.btn-danger.delete-btn-pos(type='button', Data-ng-click='conferenceContactCtrl.deleteContact()', data-ng-disabled='!conferenceContactCtrl.selectedContactId.length') Delete
+        .row.cantact-list 
+          .col-xs-12
+              .col-sm-4.col-md-4.col-xs-6.showMe
+                select(class="selectpicker" ng-model="conferenceContactCtrl.test" ng-change="conferenceContactCtrl.toggle()")
+                  option(ng-model="col.show" value="{{$index}}" ng-repeat="col in conferenceContactCtrl.cols.slice(1,conferenceContactCtrl.cols.length) track by $index") {{col.title()}}                     
+              .main-table-area
+                .table-responsive(data-ng-show="conferenceContactCtrl.contactListCount > 0")
+                  table.table.table-condensed.table-bordered.table-striped.conference-contact-table(ng-table='conferenceContactCtrl.contactTableParams', ng-table-columns-binding="conferenceContactCtrl.cols")
+                    tr(data-ng-repeat='contact in $data')
+                      td.coloumn-set
+                        input(type='checkbox', data-ng-click='conferenceContactCtrl.addContactId($event, contact.id)')
+                      td.coloumn-set(ng-if="true" class='col-sm-2' title="'Actions'")
+                        a(btn-class='contact-view-icon', data-asm-modal='contactPopModal', data-ng-click='conferenceContactCtrl.showUpdateContact(contact)',on-close="conferenceContactCtrl.onClose()")
+                          i.fa.fa-edit
+                      td(ng-if="true" class='col-sm-2' title="'Name'", sortable="'name'", ng-data='contact.name') {{contact.name}}
+                      td(ng-if="true" class='col-sm-2' title="'Email'", sortable="'email'", ng-data='contact.email') {{contact.email}}
+                    tr(ng-repeat-end='ng-repeat-end')
+                .col-md-12.col-sm-12.col-xs-12(data-ng-show="conferenceContactCtrl.contactListCount == 0")
+                  .alert.alert-success.candidate-data-info No Data Found
+        .row.import-contact-list
+          .col-md-12.col-sm-12.col-xs-12
+            .col-md-3.col-sm-4.col-xs-12.btn-position
+              p
+                a(href='https://jottp.com/templates/contact_template.xlsx' download) Download Contact Template
+          .col-md-12.col-sm-12.col-xs-12
+            .col-md-3.col-sm-4.col-xs-12
+              md-button.md-raised.md-primary(type='file', ngf-max-size='1MB' name="file", ngf-select='conferenceContactCtrl.uploadAttachment($files);conferenceContactCtrl.isFileAdded($files)', ngf-model-invalid="errorFile" data-ng-model='conferenceContactCtrl.attachment', accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel', on-close="conferenceContactCtrl.onClose()") Import Contact
+            

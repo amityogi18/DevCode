@@ -1,0 +1,38 @@
+hheader.main-header
+  .col-md-2
+    .logo
+      a(href='index2.html')
+        img(src='../../../public/img/logo.png', alt='')
+  .col-md-6
+    .row
+      nav.navbar.navbar-default(role='navigation')
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-target='#navbarCollapse', data-toggle='collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        // Collection of nav links and other content for toggling
+        #navbarCollapse.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='#') Dashboard
+            li
+              a(href='#/position') Positions
+            li.active
+              a(href='#') Candidates
+            li
+              a(href='#') Analytics
+            li
+              a(href='#') Admin
+  .col-md-4
+    .user-login
+      a.small-logo(href='#')
+        img(src='../../../public/img/small-logo.png', alt='')
+      ul
+        li Welcome John
+        li
+          a(href='#')
+            i.fa.fa-user(aria-hidden='true')
+            | Sign Out

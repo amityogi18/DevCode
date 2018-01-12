@@ -1,0 +1,109 @@
+.panel.panel-default.schedule-container
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion3', href='#item10') Schedule
+  #item10.panel-collapse.collapse
+    .panel-body
+      .col-md-12.col-sm-12.col-xs-12.schedule-data
+        form
+          .col-md-4.col-sm-4.col-xs-12.form-group
+            md-input-container.md-block.col-sm-12.col-md-12.col-xs-12
+              label.date-tab From Date: 
+              md-datepicker(ng-model='vm.searchFilter.fromDate',md-min-date="vm.dateOptions.minDate", md-max-date="vm.dateOptions.maxDate", md-hide-icons = 'triangle')
+            md-input-container.md-block.col-sm-12.col-md-12.col-xs-12
+              label.date-tab To Date: 
+              md-datepicker(ng-model='vm.searchFilter.toDate', md-min-date="vm.dateOptions.minDate && vm.searchFilter.fromDate", md-max-date="vm.dateOptions.maxDate", md-hide-icons = 'triangle')
+          .col-md-4.col-sm-4.col-xs-12.schedule-time-picker-section.form-group
+            .col-md-6.col-sm-6.col-xs-12(for='starttime') 
+              small Start Time:              
+              .date-box(uib-timepicker='',name='starttime', ng-model='vm.searchFilter.startTime', min="(vm.searchFilter.fromDate.toLocaleDateString()==vm.minTime.toLocaleDateString())?vm.minTime:null",show-meridian='false')
+            .col-md-6.col-sm-6.col-xs-12.end-time(for='endtime') 
+              small End Time:              
+              .date-box(uib-timepicker='',name='endtime', ng-model='vm.searchFilter.endTime',show-meridian='false')
+            .col-md-12.col-sm-12.col-xs-12 
+              small Note: Local Time / 24hrs Format..
+          .col-md-4.col-sm-4.col-xs-12.form-group
+            md-input-container.md-block.interview-duration
+              label.date-tab Interview Duration
+              md-select(ng-model='vm.searchFilter.duration')
+                md-option(value='15min') 15min
+                md-option(value='30min') 30min
+                md-option(value='45min') 45min
+                md-option(value='60min') 60min
+                md-option(value='75min') 75min
+                md-option(value='90min') 90min
+                md-option(value='120min') 120min
+            md-input-container.md-block
+              label.date-tab Interval
+              md-select(ng-model='vm.searchFilter.interval')
+                md-option(value='5min')  5min
+                md-option(value='10min') 10min
+                md-option(value='15min') 15min
+                md-option(value='30min') 30min
+                md-option(value='45min') 45min
+                md-option(value='60min') 60min
+                md-option(value='75min') 75min
+                md-option(value='90min') 90min
+                md-option(value='120min') 120min
+          .form-group
+            md-button.md-primary.md-raised.pull-right.btn-margin(ng-click='vm.resetData()') Reset
+            md-button.md-primary.md-raised.get-slot.pull-right(ng-click='vm.getSlotsData()') Get Slots
+      .col-xs-12.col-sm-12.col-md-12.calender
+        .calender-sec
+          h2.text-center {{ vm.calendarTitle }}
+          .row
+            //- .col-md-2.text-center
+            //-     md-button.md-primary.md-raised(ng-click='vm.loginGoogleCalender()') {{vm.isSignedIn ? 'Remove ' : 'Add '}} Google Calender
+            .col-md-6.text-center
+              .btn-group
+                md-button.md-primary.md-raised(mwl-date-modifier='', date='vm.viewDate', decrement='vm.calendarView') Previous
+                md-button.md-raised.btn-margin-day(mwl-date-modifier='', date='vm.viewDate', set-to-today='') Today
+                md-button.md-primary.md-raised(mwl-date-modifier='', date='vm.viewDate', increment='vm.calendarView') Next
+            br.visible-xs.visible-sm
+            .col-md-6.text-center
+              .btn-group
+                md-button.md-primary.md-raised(ng-model='vm.calendarView', uib-btn-radio="'year'") Year
+                md-button.md-primary.md-raised.btn-margin-day(ng-model='vm.calendarView', uib-btn-radio="'month'") Month
+                md-button.md-primary.md-raised.btn-margin-day(ng-model='vm.calendarView', uib-btn-radio="'week'") Week
+                md-button.md-primary.md-raised(ng-model='vm.calendarView', uib-btn-radio="'day'") Day
+          br
+          .row
+            mwl-calendar(events='vm.events', view='vm.calendarView', view-title='vm.calendarTitle', view-date='vm.viewDate', on-event-click='vm.eventClicked(calendarEvent)', on-event-times-changed='vm.eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd', cell-is-open='vm.isCellOpen', day-view-start='06:00', day-view-end='22:59', day-view-split='30', cell-modifier='vm.modifyCell(calendarCell)')
+          br
+        .save-cancel-btns
+            md-button.md-raised.savedata-btn(href='javascript:void(0)',ng-click='vm.confirmDelete()', ng-show='vm.scheduleAvailable') Delete
+            //a.btn-green(href='javascript:void(0)',ng-click='vm.saveScheduleInterviewSlots()') SAVE
+            md-button.md-primary.md-raised(ng-click='vm.cancelSelection()') Reset Selection
+// popup add candidate
+#reschedule-slot.modal.fade.adcandidate-form(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal')
+          img(src='../../../public/img/popup-cross.png', alt='')
+        h4 Re-Schedule Slot
+      .modal-body
+        .candidate-body-area
+          form
+            ul.all-fields-module
+              li
+                .all-fields-wrapper
+                  input.email.form-control(type='date', ng-model='vm.refromDate')
+                  input.name.form-control(type='date', ng-model='vm.retoDate')
+                  input.name.form-control(type='time', ng-model='vm.refromTime')
+                  input.name.form-control(type='time', ng-model='vm.retoTime')
+        .modal-footer
+          .pull-right.submit-btns
+            a.btn-save(href='javascript:void(0)', ng-click='vm.reScheduleSlot()') Edit
+            a.btn-blue(href='javascript:void(0)',  data-dismiss='modal') Cancel
+#confirmDeleteModal.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal') ×
+        .modal-body
+          p.discard-msg Are you sure you want to delete the schedule ??
+        .modal-footer
+          button.btn.btn-primary.bottom-btn(type='button', data-dismiss='modal', data-ng-click='vm.markForDelete()', data-translate='OK')
+          button.btn.btn-primary.bottom-btn(type='button', data-dismiss='modal', data-translate='CANCEL')
+// popup end

@@ -1,0 +1,114 @@
+.content-wrapper.notification-setting.payment-plan
+  .video-intro-heading
+    span.video-intro-1 My Plan
+    md-button.md-raised.md-primary.cipher-margin.pull-right(ng-click='AdminPlanCtrl.showBrowsingPlan()') Browse Plans
+  .panel-body
+    .row
+        .col-md-12.col-sm-12.col-xs-12.payment-error(ng-if="AdminPlanCtrl.isPaymentError")
+            .alert.alert-danger
+             center
+                 p Transaction Failed !! 
+                 p {{AdminPlanCtrl.paymentError}}
+    .row(data-ng-if="AdminPlanCtrl.intPlanDetails")
+      .panel.panel-default
+        .panel-heading
+          .confrence-heading Interview
+        .panel-body
+          .row
+            .table-responsive
+              .col-md-1
+              .col-md-4.plan-detalis
+                ul.list-group
+                  li.list-group-item.plan-details-heading Plan Details                  
+                  li.list-group-item Users
+                  li.list-group-item Positions
+                  li.list-group-item Interviews(per Position)
+                  li.list-group-item Candidates
+                  li.list-group-item Storage
+                  li.list-group-item Live now
+                  li.list-group-item Recording
+                  li.list-group-item Duration                  
+                  li.list-group-item Registration & Fee
+                  li.list-group-item Plan Expiry Date
+              .col-md-3.my-payment-plan
+                ul.list-group
+                  li.list-group-item.plan-heading.select-heading
+                    h4 {{AdminPlanCtrl.intPlanDetails.planName}}
+                    h5.price-color ${{AdminPlanCtrl.intPlanDetails.price}}                  
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.noOfUsers}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.noOfPosition}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.noOfInterviewInEachPosition}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.noOfCandidate}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.totalStorage}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.noOfLivenowInterviewInEachPosition}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.recording}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.validity}}                  
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.registrationAndFee}}
+                  li.list-group-item {{AdminPlanCtrl.intPlanDetails.companyPlanDetail[0].planExpireDate}}
+              .col-md-3.my-payment-plan
+                ul.list-group
+                  li.list-group-item.sub-heading
+                    h5.price-color Remaining Data                 
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.noOfUsersRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.noOfPositionsRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.noOfInterviewsRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.noOfCandidateRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.totalStorageRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.noOfLivenowInterviewsRemaining}}
+                  li.list-group-item NA
+                  li.list-group-item {{AdminPlanCtrl.interviewDataUsage.planRemainingDay}}                  
+                  li.list-group-item NA
+                  li.list-group-item NA
+              .col-md-1
+    .row(data-ng-if="AdminPlanCtrl.confPlanDetails")
+      .panel.panel-default
+        .panel-heading
+          .confrence-heading Conference
+        .panel-body
+          .row
+            .table-responsive
+              .col-md-1
+              .col-md-4.plan-detalis
+                ul.list-group
+                  li.list-group-item.plan-details-heading Plan Details
+                  li.list-group-item Users
+                  li.list-group-item Meetings
+                  li.list-group-item No of participants(per meeting)
+                  li.list-group-item Recording
+                  li.list-group-item Storage
+                  li.list-group-item Duration                  
+                  li.list-group-item Registration & Fee
+                  li.list-group-item Plan Expiry Date
+              .col-md-3.my-payment-plan
+                ul.list-group
+                  li.list-group-item.plan-heading.select-heading
+                    h4 {{AdminPlanCtrl.confPlanDetails.planName}}
+                    h5.price-color ${{AdminPlanCtrl.confPlanDetails.price}}                  
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.noOfUsers}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.noOfMeetings}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.noOfParticipantsInConfrence}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.recording}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.totalStorage}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.validity}}                  
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.registrationAndFee}}
+                  li.list-group-item {{AdminPlanCtrl.confPlanDetails.companyPlanDetail[0].planExpireDate}}
+              .col-md-3.my-payment-plan
+                ul.list-group
+                  li.list-group-item.sub-heading
+                    h5.price-color Remaining Data                  
+                  li.list-group-item {{AdminPlanCtrl.conferenceDataUsage.noOfUsersRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.conferenceDataUsage.noOfMeetingsRemaining}}
+                  li.list-group-item {{AdminPlanCtrl.conferenceDataUsage.noOfParticipantsRemaining}}
+                  li.list-group-item NA
+                  li.list-group-item {{AdminPlanCtrl.conferenceDataUsage.totalStorage}}
+                  li.list-group-item {{AdminPlanCtrl.conferenceDataUsage.planRemainingDay}}                  
+                  li.list-group-item NA
+                  li.list-group-item NA
+              .col-md-1
+        .panel-footer
+                .alert.alert-warning
+                  strong After Trial Period Ends!
+                  |  No upload video, no question upload video,no update question in interview,only standard question get added with disabled question bank.
+                .alert.alert-info
+                  | If you need some personalized plan then please contact:
+                  strong 568465123

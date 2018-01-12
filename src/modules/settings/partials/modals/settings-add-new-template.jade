@@ -1,0 +1,100 @@
+.modal-content-addTemplate
+  .modal-content
+    .modal-header.margin-to-header
+      button.close(type='button',data-ng-click='close()') ×
+      h4.modal-title(data-translate='ADD-NEW-TEMPLATE',data-ng-show='customQuestionControllerCtrl.isAdd')
+      h4.modal-title(data-translate='UPDATE-TEMPLATE',data-ng-show='customQuestionControllerCtrl.isEdit')
+      
+    .modal-body(data-ng-hide='customQuestionControllerCtrl.isView')
+      .row
+        .col-md-12
+          form(role='form',name='customQuestionControllerCtrl.templateForm' , novalidate)
+            .form-group.row
+              .col-md-7
+                md-input-container.md-block(flex="100")
+                  label Enter Template Name
+                  input(type='text', name='templateName', maxlength='20',ng-model='customQuestionControllerCtrl.templateDetail.name', value='{{customQuestionControllerCtrl.templateDetail.name}}' required)
+                  span.error-msg(data-ng-show='customQuestionControllerCtrl.templateForm.$submitted || customQuestionControllerCtrl.templateForm.templateName.$touched')
+                    span(data-ng-show='customQuestionControllerCtrl.templateForm.templateName.$dirty && customQuestionControllerCtrl.templateForm.templateName.$invalid')
+                    span.error-msg(data-ng-show='customQuestionControllerCtrl.templateForm.templateName.$error.required') Please Enter Template Name
+        .row
+          .col-md-8.tab-position
+            .left-panel-area.full-border
+              .written-tab-sec
+                ul.nav.nav-tabs.question-bank-tabs
+                  li.active
+                    a(data-toggle='tab', href='#tab1', data-translate='Choose Template')
+                  li
+                    a(data-toggle='tab', href='#tab2',data-translate='CUSTOM-QB')
+                .tab-content
+                  #tab1.tab-pane.fade.in.active
+                    .category-panel
+                      .col-md-4.col-xs-6
+                        .row
+                          .category-part
+                            .panel-heading Choose Template
+                            ul
+                              li(ng-repeat='template in customQuestionControllerCtrl.selectedCustomQuestionTemplateList', ng-class="{'active':template.id==customQuestionControllerCtrl.activeTemplate}",data-ng-click = 'customQuestionControllerCtrl.getExistingTemplateQuestion(template.id)') {{template.name}}
+                            
+                      .col-md-8.col-xs-6
+                        .row
+                          .category-part
+                            .panel-heading Choose Question
+                            ul
+                              li(ng-repeat='templQues in customQuestionControllerCtrl.existingTemplateQuestionList',ng-click='customQuestionControllerCtrl.selectQuestions(templQues, "Q")') {{templQues.name}}
+                    
+                    .row.notification-message(ng-show="customQuestionControllerCtrl.selectedCustomQuestionTemplateList.length < 1")
+                      center No Template Added Yet !!!
+                    
+                  #tab2.tab-pane.fade
+                    .category-panel
+                      .col-md-4.col-xs-4
+                        .row
+                          .category-part
+                            .panel-heading Choose Category
+                            ul.scroll-list
+                              li(ng-repeat='c in customQuestionControllerCtrl.questionBankList', ng-click='customQuestionControllerCtrl.selectCategory(c.id)') {{c.name}}
+                                 
+                      .col-md-4.col-xs-4
+                        .row
+                          .category-part
+                            .panel-heading Choose Sub-Category
+                            ul.scroll-list
+                              li(ng-repeat='s in customQuestionControllerCtrl.subCategory', ng-click='customQuestionControllerCtrl.selectSubCategory($index,"company")') {{s.skillsetName}}
+                                
+                      .col-md-4.col-xs-4
+                        .row
+                          .category-part
+                            .panel-heading Choose Question
+                            ul.scroll-list
+                              li(ng-repeat='q in customQuestionControllerCtrl.question', ng-click='customQuestionControllerCtrl.selectQuestions(q, "T")') 
+                                span {{q.question | limitTo : 15}}
+                                span(ng-if='q.question.length > 15') ...
+                    
+                                
+          .col-md-4.template-section
+            .alert.alert-warning(ng-if='customQuestionControllerCtrl.errorcmsg')
+              |  {{customQuestionControllerCtrl.errorcmsg}}
+            .right-panel-area(ng-show='customQuestionControllerCtrl.showSelectedQuestions')
+              h5 Selected Questions
+              .gray-bg-sec
+                ul.list-group.listing.panel.panel-default.question-bar
+                  li.list-group-item.multiple-input-area(ng-repeat-start='q in customQuestionControllerCtrl.selectedquestionId', data-toggle='collapse', data-parent='#accordion', href="{{'#question-row'+$index}}")
+                    span(ng-bind='q.question | limitTo:30')
+                    span(ng-if='q.question.length > 30') ...
+                    button.remove-button(type="button", ng-show='q.question.length > 35')
+                      i.fa.fa-chevron-circle-down(aria-hidden='true')
+                    button.remove-button.pull-right(type='button', title='delete', ng-click='customQuestionControllerCtrl.removeSelectedQuestion($index)')
+                      i.fa.fa-times.remove-icon(aria-hidden='true')
+                  .panel-collapse.collapse(ng-repeat-end='ng-repeat-end', id="{{'question-row'+$index}}", ng-show='q.question.length > 35')
+                    .panel-body.question-body {{q.question}}  
+                      
+    .modal-footer
+      .pull-right
+        .row
+          md-button.md-raised.savedata-btn(type='button', data-ng-click='customQuestionControllerCtrl.saveNewQuesstionTemplate()',data-ng-show='customQuestionControllerCtrl.isAdd', data-translate='SAVE')
+          md-button.md-raised.savedata-btn.custom-que-btn(type='button', data-ng-click='customQuestionControllerCtrl.updateTemplate(customQuestionControllerCtrl.templateDetail.id)',data-ng-show='customQuestionControllerCtrl.isEdit') Update
+          md-button.md-raised.canceldata-btn(type='button',data-ng-click='close()', data-translate='CANCEL')
+
+
+    

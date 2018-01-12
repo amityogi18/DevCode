@@ -1,0 +1,30 @@
+.row.text-response-question.hidden-sm.hidden-xs
+   .col-md-6.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 1 ", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      video#questionFileVideo.custom-video-player.video-js.vjs-default-skin.vjs-controls-enabled.vjs-big-play-centered(data-setup='{"autoplay": true, "controls" : true}', style='border-radius: 5px;')
+   .col-md-6.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 5", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      audio#questionFileAudio(controls="true", autoplay="true", width="100%")
+        source(src="{{textResponseQuestionCtrl.question.questionFile}}", type="audio/ogg")
+   .col-md-6.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 2", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      h3(style='color:#006EAE;')
+        span Q. {{textResponseQuestionCtrl.question.question}}
+   .col-md-6
+      textarea#question.form-control(rows='18', cols='50', maxlength='4000', ng-model='textResponseQuestionCtrl.answerGiven',ng-change="textResponseQuestionCtrl.textResponse()", placeholder='Type your answer here..', style="max-width:618px;max-height:380px;")
+      span ({{4000 - textResponseQuestionCtrl.question.answer.length}}/4000)
+//Mobile and Tablet View  
+.row.text-response-question.hidden-lg.hidden-md
+   .col-sm-12.col-xs-12.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 1 ", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      video#questionFileVideo.custom-video-player.video-js.vjs-default-skin.vjs-controls-enabled.vjs-big-play-centered(data-setup='{"autoplay": true, "controls" : true}', style='border-radius: 5px;')
+   .col-sm-12.col-xs-12.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 5", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      audio#questionFileAudio(controls="true", autoplay="true", width="100%")
+        source(src="{{textResponseQuestionCtrl.question.questionFile}}", type="audio/ogg")
+   .col-sm-12.col-xs-12.question-text.video-container(data-ng-show="textResponseQuestionCtrl.question.questionTypeId === 2", style="margin-top: -8px !important; margin-left: 10px !important; width: 48%; margin-right: 10px !important;")
+      h3(style='color:#006EAE;')
+        span Q. {{textResponseQuestionCtrl.question.question}}
+   //This Button For record response     
+   .col-sm-12.col-xs-12
+      button.btn.btn-warning(style="margin-top:65px;" data-ng-click='textResponseQuestionCtrl.init()' data-ng-show='textResponseQuestionCtrl.isShowNext') Next
+   .col-sm-12.col-xs-12
+      textarea#question.form-control(rows='18', cols='50', maxlength='4000', ng-model='textResponseQuestionCtrl.answerGiven',ng-change="textResponseQuestionCtrl.textResponse()", placeholder='Type your answer here..', style="max-width:618px;max-height:380px;")
+      span ({{4000 - textResponseQuestionCtrl.question.answer.length}}/4000)
+      //This Button For Back to video or Audio Question
+      button.btn.btn-warning Back to Question

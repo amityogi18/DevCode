@@ -1,0 +1,311 @@
+#candidate-profile-container.candidate-review(ng-cloak='')
+  .col-md-12.col-sm-12.col-xs-12.candidate-profile-view
+    md-content.md-padding
+        .filter
+          md-card
+            md-card-actions
+              button.btn.btn-primary.candidate-btn.col-xs-2.hidden-lg.hidden-md.visible-xs(type='button',id='backbtn',ng-click='adminCandidateProfileCtrl.showList()', ng-show='adminCandidateProfileCtrl.shownone') 
+                i.fa.fa-arrow-left(aria-hidden='true')
+              .search-filter(ng-class="{'no-candidate':adminCandidateProfileCtrl.shownone}")
+                .col-md-12.col-sm-12.col-xs-12.section
+                  div(layout='row',layout-sm='row' , layout-xs ='column')
+                    md-autocomplete(flex-lg='35', flex-sm="35", flex-xs='100', flex-offset-sm='5', md-input-name='autocompleteField', md-no-cache='true', md-selected-item='adminCandidateProfileCtrl.selectedItem', md-search-text='adminCandidateProfileCtrl.searchText', md-items='item in adminCandidateProfileCtrl.querySearch(adminCandidateProfileCtrl.searchText)', md-item-text='item', md-require-match='', md-floating-label='What ? (keywords or company name)')
+                      md-item-template
+                        span(md-highlight-text='adminCandidateProfileCtrl.searchText') {{item}}
+                    md-content.geo-section(flex-lg="35", flex-offset-lg="5", flex-sm="35",flex-offset-sm='5', flex-xs='100')
+                      place-autocomplete(data-ng-model='adminCandidateProfileCtrl.locationName', on-clear='adminCandidateProfileCtrl.clearSuggestions(clearFn)', check-required='required', search-type='1')
+                    md-input-container.md-block(flex-lg="10", flex-offset-lg="5" ,flex-offset-sm='5', flex-sm="20", flex-xs='100')
+                      md-button.md-raised.btn-information(ng-click='adminCandidateProfileCtrl.filter()', ng-hide='adminCandidateProfileCtrl.searchBtnHide') Search
+                      .filter-btn
+                        a(data-toggle="collapse", data-parent="#accordion", href="#collapsefilters", ng-click ='adminCandidateProfileCtrl.hideSearchBtn()') Advance Filters
+                    md-input-container.md-block(flex-lg="10", flex-offset-lg="",flex-xs='20', flex-offset-xs='5',flex-offset-sm='10')
+                      md-button.md-raised.btn-information(ng-click='adminCandidateProfileCtrl.resetSearch()', ng-hide='adminCandidateProfileCtrl.searchBtnHide') Reset All
+                  #collapsefilters.col-md-12.col-sm-12.col-xs-12.panel-collapse.collapse
+                    .panel-body
+                      div(layout='row',layout-xs ='column')
+                        md-input-container.md-block(flex-lg="20", flex-offset-lg="", flex-xs='100')
+                          md-select(placeholder='Distance', ng-model='adminCandidateProfileCtrl.distance')
+                            md-option(value='') None
+                            md-option(value='5') within 5 miles
+                            md-option(value='10') within 10 miles 
+                            md-option(value='15') within 15 miles
+                            md-option(value='25') within 25 miles 
+                            md-option(value='50') within 50 miles
+                            md-option(value='100') within 100 miles
+                        md-input-container.md-block.min-width(flex-lg="20", flex-offset-lg="5", flex-xs='25')
+                          md-select(placeholder='Education', ng-model='adminCandidateProfileCtrl.education')
+                            md-option(value='') None
+                            md-option(value='Associate Degree') Associate Degree
+                            md-option(value='Bachelor Degree') Bachelor Degree
+                            md-option(value='advanced study') Certificate of advanced study
+                            md-option(value='Doctorate') Doctorate
+                            md-option(value='Engineer Degree') Engineer Degree
+                            md-option(value='Professional Degree') Professional Degree
+                            md-option(value='Master Degree') Master Degree
+                        md-input-container.md-block.min-width(flex-lg="20", flex-offset-lg="5", flex-xs='25')
+                          md-select(placeholder='Salary', ng-model='adminCandidateProfileCtrl.salary')
+                            md-option(value='') None
+                            md-option(value='0 To 300000') 0 To 300000
+                            md-option(value='300000 To 500000') 300000 To 500000
+                            md-option(value='500000 To 700000') 500000 To 700000
+                            md-option(value='700000 To 1000000') 700000 To 1000000
+                            md-option(value='above 1000000') above 1000000
+                        md-input-container.md-block(flex-lg="20", flex-offset-lg="5", flex-xs='100')
+                          md-select(placeholder='last Updated', ng-model='adminCandidateProfileCtrl.lastUpdated')
+                            md-option(value='') All
+                            md-option(value='1') 1 month
+                            md-option(value='2') 2 month 
+                            md-option(value='3') 3 month
+                      div(layout='row',layout-xs ='column')
+                        md-autocomplete(flex-lg='20', flex-offset-lg="", flex-xs='15', md-input-name='autocompleteField', md-no-cache='true', md-selected-item='adminCandidateProfileCtrl.selectedJobItem', md-search-text='adminCandidateProfileCtrl.searchJobText', md-items='item in adminCandidateProfileCtrl.getJobTitle(adminCandidateProfileCtrl.searchJobText)', md-item-text='item.jobTitle', md-require-match='', md-floating-label='Job Title')
+                          md-item-template
+                            span(md-highlight-text='adminCandidateProfileCtrl.searchjobText') {{item.jobTitle}}
+                        md-input-container.md-block(flex="20", flex-offset-lg="5", flex-xs='100')
+                          md-select(placeholder='Rating', ng-model='adminCandidateProfileCtrl.overallRating')
+                            md-option(value='') None
+                            md-option(value='1') 1
+                            md-option(value='2') 2
+                            md-option(value='3') 3
+                            md-option(value='4') 4
+                            md-option(value='5') 5 
+                        md-input-container.md-block(flex="20", flex-offset-lg="5", flex-xs='100')
+                          md-select(placeholder='Job Type', ng-model='adminCandidateProfileCtrl.jobType')
+                            md-option(value='') All
+                            md-option(value='Full time') Full time
+                            md-option(value='Part time') Part time
+                            md-option(value='Contract') Contract                 
+                        div(flex-lg="20", flex-offset-lg="5", flex-xs='20')
+                          div(layout='row',layout-xs ='column') 
+                            md-input-container.md-block(flex-lg="50", flex-sm='35', flex-xs='100')
+                              input(type='text', name='totalYears', placeholder='From (year)', ng-model='adminCandidateProfileCtrl.fromExperience', data-ng-blur="adminCandidateProfileCtrl.analyzeFromYearExp(adminCandidateProfileCtrl.advancedFilter.fromExperience)", data-ng-keypress= "adminCandidateProfileCtrl.analyzeFromYearExp(adminCandidateProfileCtrl.advancedFilter.fromExperience)", data-ng-keyup = "adminCandidateProfileCtrl.analyzeYearExp(adminCandidateProfileCtrl.advancedFilter.fromExperience)", maxlength='2')
+                              span.error-msg(data-ng-if='adminCandidateProfileCtrl.fromYearErrormessage !== ""') {{adminCandidateProfileCtrl.fromYearErrormessage}}.
+                            md-input-container.md-block(flex-lg="50", flex-sm='35', flex-xs='100')
+                              input(type='text', name='totalMonths', placeholder='To (year)', ng-model='adminCandidateProfileCtrl.toExperience', data-ng-blur="adminCandidateProfileCtrl.analyzeToYearExp(adminCandidateProfileCtrl.advancedFilter.toExperience)",  data-ng-keypress= "adminCandidateProfileCtrl.analyzeToYearExp(adminCandidateProfileCtrl.advancedFilter.toExperience)", data-ng-keyup = "adminCandidateProfileCtrl.analyzeYearExp(adminCandidateProfileCtrl.advancedFilter.toExperience)", maxlength='2')
+                              span.error-msg(data-ng-if='adminCandidateProfileCtrl.toYearErrormessage !== ""') {{adminCandidateProfileCtrl.toYearErrormessage}}.
+                      div(layout='row')
+                        md-input-container.md-block(flex="15", flex-offset-lg="40",flex-xs='40', flex-offset-xs='5',flex-offset-sm='40')
+                          md-button.md-raised.btn-information(ng-click='adminCandidateProfileCtrl.filter()') Search
+                        md-input-container.md-block(flex="15", flex-offset-lg="",flex-xs='40', flex-offset-xs='5',flex-offset-sm='10')
+                          md-button.md-raised.btn-information(ng-click='adminCandidateProfileCtrl.resetSearch()') Reset All
+        .col-md-12.col-sm-12.col-xs-12.admin-candidate-profile
+            .col-md-4.col-sm-4.col-xs-12.no-marg.listing-user(ng-class="{'no-candidate':adminCandidateProfileCtrl.shownone}")
+                md-card(ng-hide='adminCandidateProfileCtrl.hideSection')
+                  md-card-actions
+                    .candidate-header
+                      div(layout='row',layout-xs ='column', flex-order-xs='100')
+                        md-input-container.md-block(flex="60", md-no-float='', flex-xs="100", flex-order-xs='100')
+                          input(type='text',ng-model='adminCandidateProfileCtrl.advancedFilter.name', ng-change='adminCandidateProfileCtrl.filter()', placeholder='Search by name')
+                          md-icon(md-font-set='fa') &#xf002
+                        md-input-container.md-block(flex="40", flex-offset="", flex-xs="100", flex-gt-sm='',flex-offset-xs="100", ng-hide='adminCandidateProfileCtrl.hideSection')
+                          md-select(placeholder='SortBy', ng-model='adminCandidateProfileCtrl.sortBy', ng-change='adminCandidateProfileCtrl.sortFields()')
+                            md-option(value='') All
+                            md-option(value='name') Name
+                            md-option(value='rating') Overall Rating
+                            md-option(value='likeCount') Likes
+                            md-option(value='dislikeCount') Dislikes
+                            md-option(value='maybeCount') May Be
+                      div(layout='row')                        
+                        span.text-label(ng-hide='adminCandidateProfileCtrl.candidateList.length < 1') 
+                            | showing 
+                            b 1
+                            | -
+                            b {{adminCandidateProfileCtrl.candidateList.length}} 
+                            |  of 
+                            b {{adminCandidateProfileCtrl.candidateCount}} 
+                            | records
+                        //md-button.md-raised.savedata-btn.link-to-favourite.show-text.pull-right(data-ng-if="adminCandidateProfileCtrl.candidateList.length>0 && adminCandidateProfileCtrl.candidateCount > 10",ng-hide='adminCandidateProfileCtrl.candidateList.length === adminCandidateProfileCtrl.candidateCount', data-ng-click='adminCandidateProfileCtrl.showMoreData()') Show More
+                      #sorting.col-md-12.col-sm-12.col-xs-12.panel-collapse.collapse
+                        .panel-body
+                          input(type='text')
+                    .candidate-bar  
+                      .candidate
+                        table.table.table-first(ng-table='adminCandidateProfileCtrl.tableParams',ng-table-columns-binding="adminCandidateProfileCtrl.cols")
+                          tr(ng-repeat='candidate in $data', ng-click='adminCandidateProfileCtrl.selectCandidate(candidate.id)', ng-class="{'active':candidate.candidateId==adminCandidateProfileCtrl.selectedCandidate.candidateId,'newStatus':candidate.candidateStatus==='New','inProgress':candidate.candidateStatus==='In Progress','completed':candidate.candidateStatus==='Completed','inReviewStatsus':candidate.candidateStatus==='Inreview','hiredStatus':candidate.candidateStatus==='Hired','onhold':candidate.candidateStatus==='on hold','rejected':candidate.candidateStatus==='rejected','grey':candidate.candidateStatus==='Archived'}")
+                            td.col-md-12.col-sm-12.col-xs-12.candidate-info(ng-if="true", data='candidate', id='candidateListBar',ng-click='adminCandidateProfileCtrl.hideList()')
+                              .col-md-3.col-sm-3.col-xs-3.candidate-img
+                                img.img-box(ng-src="{{candidate.profilePicUrl?candidate.profilePicUrl:'./img/user.png'}}", alt='')
+                              .col-md-8.col-sm-8.col-xs-8.user-details
+                                .title {{candidate.fullName}}
+                                .pull-right(ng-if='candidate.companyCandidatePaymentStatus')
+                                  i.fa.fa-check.green(uib-tooltip='paid',aria-hidden='true')
+                                .designation {{candidate.candidateDesignation}}
+                                span.stars(star-rating='', rating-value='candidate.overallRating', max='5')
+                                span.like-sec
+                                  a(uib-tooltip='Yes')
+                                    md-button.md-icon-button(aria-label='Recommended')
+                                      md-icon(md-font-set='fa') &#xf087
+                                    | {{candidate.yes}}
+                                  a(uib-tooltip='No')
+                                    md-button.md-icon-button(aria-label='Not Recommended')
+                                      md-icon(md-font-set='fa') &#xf088
+                                    | {{candidate.no}}
+                                  a(uib-tooltip='Maybe')
+                                    md-button.md-icon-button(aria-label='Maybe')
+                                      md-icon(md-font-set='fa') &#xf256
+                                    | {{candidate.maybe}}
+                          tr(data-ng-if='adminCandidateProfileCtrl.candidateList.length>0 && adminCandidateProfileCtrl.candidateCount > 10')
+                            td.show-text(ng-if="true",ng-hide='adminCandidateProfileCtrl.candidateList.length === adminCandidateProfileCtrl.candidateCount', data-ng-click='adminCandidateProfileCtrl.showMoreData()') Show More
+            #details.col-md-8.col-sm-8.col-xs-12.detail-of-candidate(ng-hide='adminCandidateProfileCtrl.candidateList.length < 0 || adminCandidateProfileCtrl.hideSection') 
+              .candidate-Profile
+                md-card
+                  md-card-actions
+                    .col-md-12.col-sm-12.col-xs-12.basic-info
+                      .row.payment-error(ng-if="adminCandidateProfileCtrl.isPaymentError")
+                          .col-md-12.col-sm-12.col-xs-12
+                             .alert.alert-danger
+                              center
+                                  p Transaction Failed !! 
+                                  p {{adminCandidateProfileCtrl.paymentError}}
+                      .row.color-section
+                        .col-md-2.col-sm-2.col-xs-4.profile.resume.no-marg
+                          .user-img-section
+                            img.img-box(ng-src="{{adminCandidateProfileCtrl.selectedCandidateData.profilePicUrl?adminCandidateProfileCtrl.selectedCandidateData.profilePicUrl:'./img/user.png'}}", alt='')
+                          md-button.md-fab(aria-label='play', data-toggle="modal", data-target="#twoMinIntro" , ng-show='adminCandidateProfileCtrl.showVideo')
+                            md-icon.play(md-font-set='fa') &#xf04b
+                          #twoMinIntro.modal.fade(role="dialog")
+                            .modal-dialog
+                              .modal-content
+                                .modal-body
+                                  .cross-btn
+                                    .close-modal(data-dismiss="modal", ng-click="adminCandidateProfileCtrl.stopVideo()") &times
+                                  .candidate-video-section(ng-hide='adminCandidateProfileCtrl.selectedCandidateData.twoMinIntroVideo === null || adminCandidateProfileCtrl.selectedCandidateData.twoMinIntroVideo === ""')
+                                      div(data-ng-if='!adminCandidateProfileCtrl.isVideo')
+                                        video#candidateVideo.meet-video.video-js.vjs-default-skin.vjs-big-play-centered.vjs-controls-enabled(data-setup='{"autoplay": false, "controls" : true}')
+                                    iframe(data-ng-if='adminCandidateProfileCtrl.isVideo', ng-src='{{adminCandidateProfileCtrl.trustSrc(adminCandidateProfileCtrl.videoPath)}}', frameborder='0', allowfullscreen='')
+                        .resume(ng-class="{'col-md-10 col-sm-10 col-xs-8':(user.userRoles == 7 || adminCandidateProfileCtrl.selectedCandidateData.companyCandidatePaymentStatus), 'col-md-6 col-sm-6 col-xs-8':!adminCandidateProfileCtrl.selectedCandidateData.companyCandidatePaymentStatus}")
+                          .candidate-profile-name(ng-class="{'margin-0':adminCandidateProfileCtrl.selectedCandidateData.companyCandidatePaymentStatus}") {{adminCandidateProfileCtrl.selectedCandidateData.candidateInfo.firstName}} {{adminCandidateProfileCtrl.selectedCandidateData.candidateInfo.lastName}}  
+                          .designation {{adminCandidateProfileCtrl.selectedCandidateData.candidateInfo.designationName}}
+                          span(data-ng-if='user.userRoles == 7 || adminCandidateProfileCtrl.selectedCandidateData.companyCandidatePaymentStatus')
+                            .designation.info-section 
+                              md-button.md-icon-button(aria-label='email')
+                                md-icon(md-font-set='fa') &#xf003
+                              |{{adminCandidateProfileCtrl.selectedCandidateData.contactInfo.email}}
+                            .designation.info-section(ng-if="adminCandidateProfileCtrl.selectedCandidateData.contactInfo.phone")
+                              md-button.md-icon-button(aria-label='phone')
+                                md-icon(md-font-set='fa') &#xf095
+                              span {{adminCandidateProfileCtrl.selectedCandidateData.contactInfo.phone}}
+                            .designation.info-section
+                              md-button.md-icon-button(aria-label='address')
+                                md-icon(md-font-set='fa') &#xf129
+                              span {{adminCandidateProfileCtrl.selectedCandidateData.contactInfo.address}}
+                            .designation.info-section 
+                              md-button.md-icon-button(aria-label='resume')
+                                md-icon(md-font-set='fa') &#xf0f6
+                              a(href='{{adminCandidateProfileCtrl.selectedCandidateData.contactInfo.resume}}',ng-hide='adminCandidateProfileCtrl.selectedCandidateData.contactInfo.resume === ""') Resume
+                              span(ng-if='adminCandidateProfileCtrl.selectedCandidateData.contactInfo.resume === ""') N/A
+                        .col-md-4.col-sm-4.col-xs-12.resume(data-ng-if='user.userRoles == 1 && !adminCandidateProfileCtrl.selectedCandidateData.companyCandidatePaymentStatus')  
+                          .resume-section.candidate-list-info
+                            .card-payment-info
+                              md-button.md-icon-button(aria-label='download resume')
+                                md-icon(md-font-set='fa') &#xf0f3
+                              span You will be charged $1
+                            md-input-container.md-block(flex='')
+                              md-button.md-raised.btn-information(type='button', ng-click='adminCandidateProfileCtrl.getCardDetail()', data-toggle="modal", data-target="#candidatePaymentModal") Download Resume
+                              //a(href='javascript:void(0)')
+                      .col-md-12.col-sm-12.col-xs-12.candidate-section  
+                        .col-md-12.col-sm-12.col-xs-12.about-candidate.candidate-list-info
+                          h4
+                            md-button.md-icon-button(aria-label='about me')
+                              md-icon(md-font-set='fa') &#xf007
+                            span ABOUT ME
+                          .col-md-12.col-sm-12.col-xs-12.candidate-text {{adminCandidateProfileCtrl.selectedCandidateData.candidateInfo.aboutMe}}
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.experience-section.candidate-list-info
+                          h4
+                            md-button.md-icon-button(aria-label='work experence')
+                              md-icon(md-font-set='fa') &#xf0f2
+                            span WORK EXPERIENCE
+                          .col-md-12.col-sm-12.col-xs-12(ng-repeat='exp in adminCandidateProfileCtrl.selectedCandidateData.candidateExperiences')
+                            .col-md-4.col-sm-4.no-marg{{exp.startDate}} - {{exp.endDate}}
+                            .col-md-8.col-sm-8.no-marg{{exp.jobTitle}} in {{exp.companyName}}
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.skill-section.candidate-list-info
+                          h4
+                            md-button.md-icon-button(aria-label='skills')
+                              md-icon(md-font-set='fa') &#xf234
+                            span SKILLS
+                          .col-md-12.col-sm-12.col-xs-12.skill.no-marg(ng-repeat='skill in adminCandidateProfileCtrl.selectedCandidateData.candidateSkills') 
+                            .col-md-12.col-sm-12.col-xs-12{{skill.skillsetName}} 
+                              span(ng-if='skill.yearsOfExperience') ({{skill.yearsOfExperience}} yrs)
+                              span(ng-if='skill.lastUse') - {{skill.lastUse}} 
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.education-section.candidate-list-info
+                          h4
+                            md-button.md-icon-button(aria-label='education')
+                              md-icon(md-font-set='fa') &#xf19d
+                            span EDUCATION
+                          .col-md-12.col-sm-12.col-xs-12.education.candidate-list-info
+                            label.col-md-4.col-sm-4.col-xs-4 Qualification
+                            label.col-md-8.col-sm-8.col-xs-4 Specialization
+                          .col-md-12.col-sm-12.col-xs-12.education.candidate-list-info(ng-repeat='row in adminCandidateProfileCtrl.selectedCandidateData.candidateEducation')
+                            .col-md-4.col-sm-4.col-xs-8 {{row.qualification}}
+                            .col-md-8.col-sm-8.col-xs-8 {{row.specialization}} from 
+                              span.text {{row.university}} 
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.certification-section.candidate-list-info
+                          h4
+                            md-button.md-icon-button(aria-label='certification')
+                              md-icon(md-font-set='fa') &#xf0a3
+                            span CERTIFICATION
+                          .col-md-6.col-sm-6.col-xs-12.certificate(ng-repeat='row in adminCandidateProfileCtrl.selectedCandidateData.candidateCertifications')
+                            span.certificate-text {{row.certificateType}}
+                            span  certified in 
+                            span.text {{row.name}} 
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.certification-section
+                            h4
+                              md-button.md-icon-button(aria-label='notification')
+                                md-icon(md-font-set='fa') &#xf15c
+                              span COVER LETTER
+                            .col-md-12.col-sm-6.col-xs-12
+                              span.certificate-text {{adminCandidateProfileCtrl.selectedCandidateData.coverLetter}}
+                              span(ng-if='adminCandidateProfileCtrl.selectedCandidateData.coverLetter == null') N/A
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.certification-section
+                            h4
+                              md-button.md-icon-button(aria-label='notification')
+                                i.fa.fa-briefcase(aria-hidden='true')
+                              span Portfolio
+                            .col-md-12.col-sm-6.col-xs-12
+                              .table-responsive(ng-if='adminCandidateProfileCtrl.selectedCandidateData.candidatePortfolios.length > 0')
+                                table.table.table-striped.table-bordered.table-hover
+                                  thead
+                                    tr
+                                      th Sr. No.
+                                      th Title
+                                      th Description
+                                      th Url
+                                  tbody
+                                    tr(ng-repeat='candidatePortfolio in adminCandidateProfileCtrl.selectedCandidateData.candidatePortfolios')
+                                      td 
+                                        span ({{$index+1}})
+                                      td 
+                                        span {{candidatePortfolio.title}}
+                                      td 
+                                        span {{candidatePortfolio.description}}
+                                      td 
+                                        a(href='{{candidatePortfolio.url}}' title='{{candidatePortfolio.url}}' target='_blank') Click&nbsp;To&nbsp;Visit&nbsp;Url                             
+                              .table-responsive(ng-if='adminCandidateProfileCtrl.selectedCandidateData.candidatePortfolios.length === 0') N/A
+                        .col-md-12.col-sm-12.col-xs-12.line-section
+                        .col-md-12.col-sm-12.col-xs-12.certification-section
+            .col-md-12.col-sm-12.col-xs-12.alert.alert-info(ng-show= 'adminCandidateProfileCtrl.hideSection')
+              h4 No candidate available.. 
+#payment-candidate-iframe  
+#candidatePaymentModal.modal.fade(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header.header-modal-tc
+        button.close(type='button', data-dismiss='modal') ×
+        h3.modal-title Download Resume
+      .modal-body
+       p(ng-if='adminCandidateProfileCtrl.cardDetails.status')
+        | you will be charged $1 from the card ending with {{adminCandidateProfileCtrl.cardDetails.cardLast4digit}}
+       p
+        a(href='javascript:void(0);', ng-if='adminCandidateProfileCtrl.cardDetails.status', ng-click='adminCandidateProfileCtrl.updateCardDetails()')  Click here
+        span(ng-if='adminCandidateProfileCtrl.cardDetails.status')  to update the card information
+       p(ng-if='!adminCandidateProfileCtrl.cardDetails.status')
+        | you will be charged $1, click OK to continue
+      .modal-footer
+        md-button.md-raised.md-primary(type='button', ng-click='adminCandidateProfileCtrl.goToPayment()', data-dismiss='modal') OK
+        md-button.md-raised.md-primary(type='button',data-dismiss='modal') Cancel
+        a#downloadResumeLink.hide-resume-link

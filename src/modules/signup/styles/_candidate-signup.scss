@@ -1,0 +1,369 @@
+.candidate-profile-signup{
+
+   max-width:1332px;
+   margin-top:-60px;
+   .from-group{
+     margin-bottom:0px
+    }
+    .text-of-agreement {
+      margin-left: 8px;
+    }
+     //rohit css//
+    .landing-page {
+      //position: relative;
+      //min-height: 612px;
+      opacity: 1.5;
+      height:100%;
+     }
+    
+     .sep-dev {
+      border-top: 1px dotted #aaa;
+      margin-top: 10px;
+      margin-bottom: 20px;
+  }
+  .user-login {
+    width: 100%;
+    float: left;
+    padding-top: 35px;
+    padding-bottom: 80px;
+}
+  .md-signup {
+    background: rgb(32, 75, 97) !important;
+    color: white !important;
+}
+    .content-bg:before, blockquote p:before {
+      content: ""}
+    .landing-page .content-bg:before {
+      background: url(#{$imgPath}/bg-screen.jpg);
+      //background: url(#{$imgPath}/landing-users.png);
+     }
+    .landing-page .content-bg {
+      //background-color: rgba(255, 94, 58, .95);
+      -webkit-animation-name: sidedownscroll;
+      animation-name: sidedownscroll;
+     }
+    .landing-content{    z-index: 999999;
+      position: absolute;
+      color: white;
+     }
+    .h1, h1 {
+    
+    font-size: 4rem;
+    margin-bottom: .5rem;
+    font-family: inherit;
+    font-weight: 700;
+    line-height: 1.3; 
+     }
+    @-webkit-keyframes sidedownscroll {
+      0% {
+      -webkit-transform: translate3D(0, 0, 0);
+      transform: translate3D(0, 0, 0);
+     }
+    50% {
+      -webkit-transform: translate3D(-50%, 100%, 0);
+      transform: translate3D(-50%, 100%, 0);
+     }
+    100% {
+      -webkit-transform: translate3D(-100%, 200%, 0);
+      transform: translate3D(-100%, 200%, 0);
+     }
+     }@keyframes sidedownscroll {
+      0% {
+      -webkit-transform: translate3D(0, 0, 0);
+      transform: translate3D(0, 0, 0);
+     }
+    50% {
+      -webkit-transform: translate3D(-50%, 100%, 0);
+      transform: translate3D(-50%, 100%, 0);
+     }
+    100% {
+      -webkit-transform: translate3D(-100%, 200%, 0);
+      transform: translate3D(-100%, 200%, 0);
+      }
+      }.landing-page .header-spacer--standard {
+      margin-bottom: 40px;
+      }
+    .content-bg-wrap {
+      position: absolute;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+     }
+    .content-bg:before {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 400%
+     }
+    .content-bg {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      -webkit-animation-name: sideupscroll;
+      animation-name: sideupscroll;
+      -webkit-animation-duration: 30s;
+      animation-duration: 30s;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      will-change: transform;
+      z-index: 1;
+     }
+    .without-animation {
+      -webkit-animation: none;
+      animation: none;
+     }
+    .tag-label {
+      display: inline-block;
+      border-radius: 3px;
+      padding: 4px;
+      color: #fff;
+      font-size: 8px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-left: 12px;
+      top: -3px;
+      position: relative;
+     }
+    .animated {
+      -webkit-animation-duration: .5s;
+      animation-duration: .5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      will-change: transform, opacity;
+     }
+    .animated.swingInX {
+      -webkit-transform-origin: top;
+      -ie-transform-origin: top;
+      transform-origin: top;
+      -webkit-backface-visibility: visible!important;
+      -webkit-animation-name: swingInX;
+      -moz-backface-visibility: visible!important;
+      -moz-animation-name: swingInX;
+      -o-backface-visibility: visible!important;
+      -o-animation-name: swingInX;
+      backface-visibility: visible!important;
+      animation-name: swingInX;
+     }
+    .animated.flipInX, .animated.swingOutX {
+      -webkit-backface-visibility: visible!important;
+      -moz-backface-visibility: visible!important;
+      -o-backface-visibility: visible!important;
+     }
+    .c-white {
+      color: #fff;
+      border: 1px solid;
+     }
+    .more-dropdown {
+      display: block;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 180px;
+      box-shadow: 0 0 34px 0 rgba(63, 66, 87, .1);
+      background-color: #fff;
+      border-radius: 4px;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear .3s, opacity .3s linear;
+      text-align: left;
+      padding: 15px 20px;
+      z-index: 5;
+     }
+    .more-dropdown ul {
+      padding: 15px 25px;
+      margin-bottom: 0;
+     }
+    .more-dropdown li a>* {
+      display: inline-block;
+      vertical-align: middle;
+     }
+     .candidate-center{
+      text-align:center; 
+    }
+     .second-section {
+      z-index: 999999;
+     }
+    .oda-image-header {
+    padding: 10px;
+    margin-top:0px;
+    text-align: center;
+     }
+    .container {
+    box-shadow: none;
+     }
+    .registration-login-form{    
+    background-color: #fff;
+    margin-left: 60px;
+    margin-top:30px;
+    
+     }
+    .error-msg{
+    font-size:12px;
+    color: red;
+     }
+
+
+    //end rohit css//
+
+
+  @media only screen and (max-width: 992px) {
+    .text-of-agreement {
+      margin-top: -21px;
+      margin-left: 24px;
+    }
+  }
+  .selectdemoSelectHeader {
+    .demo-header-searchbox {
+      border: none;
+      outline: none;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+    }
+    .demo-select-header {
+      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+      padding-left: 10.667px;
+      height: 48px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: auto;
+    }
+    md-content._md {
+      max-height: 240px;
+    }
+  }
+  md-radio-button {
+    display: inline-block;
+    margin-left: 15px;
+  }
+  .captcha-field{
+    transform:scale(0.78);
+    -webkit-transform:scale(0.78);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
+  .terms-condition-link{
+    margin-left: 6px;
+  }
+  .agree-ondemand{
+    margin-left:6px;
+    margin-right: 0px;
+  }
+  .red-star{
+    color:red !important;  
+  }
+.login-link{
+  color: rgba(56, 63, 91, 0.929412) !important;
+  font-weight: 600;
+  font-size:12px;
+}
+.candidate-heading1{
+  padding-top:10px;
+}
+.login-link:hover {
+  text-decoration: underline;
+  color: #fff;
+  cursor: pointer;
+}
+  .candidate-submit-btn{
+    border-radius: 0px;
+    padding: 10px;
+    line-height: 10px;
+    width: 100px;
+  }
+
+  .mandatory-filed{
+    color: $red;
+    font-size: 18px;
+  }
+
+  .already-user{
+    float: right;
+  }
+  .candidate-heading{
+      margin-top: 45px;
+  }
+  .mandatory-star-note{
+      margin-left:-15px;
+      font-size: 12px;
+  }
+  
+  .note-mandatory{
+      font-size: 12px;
+      color:grey;
+  }
+  .panel-heading{
+    color:$white !important;
+
+    .panel-title{
+      color: $white;
+    }
+  }
+  .login-heading1 {
+    color: rgba(56, 63, 91, 0.929412) !important;
+    font-size: 18px;
+    font-weight: 600;
+}
+  
+ // a{
+    //  color:$green;
+    //  margin-left: 8px;
+  //}
+  
+ // a:hover{
+  //    color:$green;
+ // }
+  
+   .error-msg{
+    font-size:11px;
+    color: $red;
+  }
+  
+  .error-lbl{
+    color:$red;
+    font-size:11px;
+    font-weight:normal;
+    word-spacing:1px;
+    margin-left:20px;
+  }
+
+  .ui-select-container .ui-select-placeholder{
+    line-height:0px;
+  }
+
+ .ui-select-bootstrap > .ui-select-match > .btn {
+    text-align: left !important;
+    border-radius: 0px;
+  }
+  .ui-select-match-text {
+    line-height: 1.444;
+  }
+  .ui-select-search{
+    width:100% !important;
+  }
+  .content-justify{
+    text-align:justify;
+  }
+  .modal-body{
+    font-size:12px;
+  }
+}
+.terms-conditions-modal{
+  .modal-header{
+    color:$white;
+    padding: 8px;
+  }
+  .modal-header .close {
+    margin-top: 5px;
+  }
+}

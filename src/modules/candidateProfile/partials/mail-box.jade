@@ -1,0 +1,75 @@
+.content-wrapper.mail-box-container
+  .video-intro-heading(ng-if="!$root.mobile")
+    span.video-intro-1 INBOX
+  .col-md-12.my-mail-box(ng-show="mailBoxCtrl.isLoaded")     
+    .col-md-4.col-sm-4.col-xs-12.mail-box-table(ng-hide="mailBoxCtrl.mailList.length < 1 || mailBoxCtrl.mailList === undefined")    
+      .inbox-section
+        h4 Inbox        
+        .form-group          
+          input#usr.form-control.searchMail(type='text', placeholder="Search here...", ng-model="mailBoxCtrl.searchFilter.search")
+          md-button.md-raised.md-primary.backToInbox(aria-label='backToInbox', type='button', data-ng-click='mailBoxCtrl.backToInbox()') Back
+      .inbox-warapper
+        .inbox-list
+          table.table.table-first(ng-table='mailBoxCtrl.mailTableParams', ng-table-columns-binding="mailBoxCtrl.cols")
+            tr.inbox-item(ng-repeat='mails in $data | filter : mailBoxCtrl.searchFilter.search', ng-click="mailBoxCtrl.getMailById(mails)")
+              td   
+                 a(href='#')
+                  .leftist
+                    i.fa.fa-star                 
+                  span.inbox-item-subject  {{mails.fromName}}                 
+                  span.date-class.text-muted.pull-right
+                    //i.fa.fa-paperclip
+                    span.mail-date&nbsp;{{mails.date | limitTo : 16}}
+                  span.inbox-item-content
+                    p 
+                      span.mail-subject {{mails.subject | limitTo:20}}
+                      span.mail-subject(ng-if='mail.subject.length>40') ... 
+    .col-md-8.col-sm-8.col-xs-12.inbox-mail-list(ng-hide="mailBoxCtrl.mailList.length < 1 || mailBoxCtrl.mailList === undefined")
+      .mail-description-box
+        .mail-subject
+          label {{mailBoxCtrl.getMailDetail.subject}} 
+        .col-md-12
+          .col-md-1.inbox-img
+            i.fa.fa-user.fa-lg(aria-hidden='true')
+          .col-md-8
+            label.email-title {{mailBoxCtrl.getMailDetail.headers.fromaddress}}
+            p 
+              small to me
+          .col-md-3
+            small {{mailBoxCtrl.getMailDetail.headers.date | limitTo : 16}}
+        .col-md-12
+           p(ng-bind-html= "mailBoxCtrl.getMailDetail.textHtml")         
+        .col-md-12
+          hr
+          h5(ng-repeat="file in mailBoxCtrl.getMailDetail.attachment.files")
+            i.fa.fa-paperclip(aria-hidden='true')
+              &nbsp;
+            a(href='{{file.path}}', download='')  {{file.name}}  
+  .col-md-12.my-mail-box(ng-if="!mailBoxCtrl.isLoaded")
+    h4 
+      span Loading...
+      i.fa.fa-cog.fa-spin.fa-lg.fa-fw
+    span   
+  .col-md-12.col-sm-12.col-xs-12(ng-if="mailBoxCtrl.mailList.length < 1 || mailBoxCtrl.mailList === undefined") 
+    .alert.alert-info
+      p {{mailBoxCtrl.mailInfoMessage}}     
+    .count-box.mail-help-box(ng-show="!mailBoxCtrl.hideMailBox", ng-class="{'fade': mailBoxCtrl.hideMailBox}")
+      h4 SYNCH YOUR PERSONAL EMAIL ACCOUNT NOW
+      label Enjoy the benefits:
+      p 1. Don't miss out any opportunity
+      p 2. Easy Communication with your employers
+      p 3. Don't switch windows to check out emails again and again.
+      h5 Follow two simple steps to integrate you email here:
+      label Two step verification:
+      p Step 1 : Access the following link first&nbsp;&nbsp;
+        span
+          a(href='https://www.google.com/settings/security/lesssecureapps', target='_blank')   https://www.google.com/settings/security/lesssecureapps
+      p Step 2: Go to:&nbsp;  
+        span
+          a(href="https://accounts.google.com/b/0/DisplayUnlockCaptcha", target='_blank')   https://accounts.google.com/b/0/DisplayUnlockCaptcha
+        span &nbsp;and enable access.
+      .col-md-12.col-xs-12.col-sm-12  
+        .pull-right.hide-link
+          a(href='javascript:void(0)', ng-click='mailBoxCtrl.hideMailBox = true') Hide this box   
+    
+

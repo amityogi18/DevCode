@@ -1,0 +1,95 @@
+#job-portal-container
+    include position-navbar
+    .add-position-page.position-content-wrapper 
+        .col-md-12.col-sm-12.col-xs-12.help-box(ng-show="!newPositionCtrl.hideHelpBox", ng-class="{'fade': newPositionCtrl.hideHelpBox}")
+          .alert.alert-warning Distribute your job to popular job boards like Dice, Indeed etc to get the large pool of candidates applied to your job.
+              br
+              .cross-icon 
+                i.fa.fa-times-circle.fa-lg(ng-click='newPositionCtrl.hideHelpBox = true')
+        .multiapply-board.col-md-12.col-sm-12.col-xs-12
+          .panel-body
+            .col-md-12.col-sm-12.col-xs-12 
+              .col-md-7.col-sm-7.col-xs-12
+                ul.nav.nav-pills.pull-right 
+                  li.active
+                    a(data-toggle='pill', href='#paidJobBoard') Premium Job Boards
+                  //li
+                    a(data-toggle='pill', href='#freeJobBoard') Upcoming Job Boards
+              .tab-content 
+
+                #paidJobBoard.row.tab-pane.fade.in.active
+                  .col-md-12.col-sm-12.col-xs-12.payment-error(ng-if="newPositionCtrl.isPaymentError")
+                     .alert.alert-danger
+                      center
+                          p Transaction Failed !! 
+                          p {{newPositionCtrl.paymentError}}
+                  .col-md-8.col-sm-8.col-xs-12(ng-class='{"col-md-8":user.userRoles == 1 || user.userRoles == 2, "col-md-12":user.userRoles != 1 || user.userRoles != 2}', layout='row', layout-padding='', layout-wrap='', style='padding-bottom: 32px;', ng-cloak='')                  
+                    md-whiteframe.md-whiteframe-6dp(ng-class="{dotted:product.status === 1}", flex-sm="45", flex-gt-sm="35", flex-gt-md="25" ,layout='' , layout-align="center center", ng-repeat='product in newPositionCtrl.portalList', ng-show="product.isJobposted == true", ng-disabled='newPositionCtrl.hideboard')
+                      .col-md-12.col-sm-12.col-xs-12.btn-section
+                          span(ng-if='product.isJobPostedOnPortalStatus === true')
+                              md-checkbox(ng-disabled="true", ng-model='product.isJobPostedOnPortalStatus', ng-init="product.isJobPostedOnPortalStatus=true")
+                          span(ng-hide='product.isJobPostedOnPortalStatus === true')
+                              md-checkbox.md-primary(ng-disabled="product.status !== 1", ng-model="newPositionCtrl.isChecked[product.portalId].isSelected" ng-change="newPositionCtrl.addPortalToList(product, newPositionCtrl.isChecked[product.portalId].isSelected)")
+                          span.pull-right(ng-if="product.postedJobStatusByAdmin === 'unapproved'")
+                              md-button.md-icon-button.red-cross(aria-label='incorrect')
+                                md-icon(md-font-set='fa') &#xf00d
+                          span.pull-right(ng-if="product.postedJobStatusByAdmin === 'approved'")
+                              md-button.md-icon-button.green-check(aria-label='correct')
+                                md-icon(md-font-set='fa') &#xf00c
+                          img.img-box(ng-src="{{product.portalImagePath?product.portalImagePath:'./img/times.jpg'}}", alt='')
+                          .col-md-12.col-sm-12.col-xs-12
+                            label ${{product.price}}
+                            span.pull-right
+                              a(data-asm-modal='jobPortalModal', modal-data='product', uib-tooltip='Portal plans') More plans
+                          md-button.md-warn.pull-right(ng-if='user.userRoles == 1 || user.userRoles == 2', ng-click='newPositionCtrl.addItemToCart(product)') Add
+                  .col-md-4.col-sm-4.col-xs-12.ur-cart-section(ng-if='user.userRoles == 1 || user.userRoles == 2')
+                    label.col-md-12.col-sm-12.ur-cart
+                      i.fa.fa-shopping-cart.fa-2x(aria-hidden='true')
+                      span Your Cart
+                    .col-md-12.col-sm-12.ur-cart-txt
+                      .msg-text-section(ng-show='newPositionCtrl.cart.length == 0')
+                        label Your cart is curently empty !
+                        .msg-text choose job posting from one or more boards to add them to your cart.
+                      .cart-total(ng-show="newPositionCtrl.cart.length !== 0")
+                        ul.list-group
+                          li.col-md-12.col-sm-12.list-group-item(ng-repeat="site in newPositionCtrl.cart  track by $index")
+                            .col-md-12.col-sm-12.item-no Item: {{site.count}}
+                            .col-md-6.col-sm-6 
+                              label {{site.portalName}}
+                            .col-md-3.col-sm-3.item-no {{site.price | currency}}
+                            .col-md-3.col-sm-3
+                              md-button.md-icon-button.pull-right(aria-label='share', ng-click="newPositionCtrl.deletCartPortal(site)")
+                                md-icon(md-font-set='fa') &#xf00d
+                        .total
+                          label Total : {{newPositionCtrl.subTotal | currency}}
+                        button.btn.btn-primary.save-btn.pull-right(type='button', ng-click='newPositionCtrl.getCardDetail()', , data-toggle="modal", data-target="#portalPaymentModal") Pay
+                #freeJobBoard.tab-pane.fade
+                  .col-md-12.col-sm-12.col-xs-12(layout='row', layout-padding='', layout-wrap='', layout-fill='', style='padding-bottom: 32px; margin-left:15px;', ng-cloak='')
+                    md-whiteframe.md-whiteframe-6dp(flex-sm="45", flex-gt-sm="35", flex-gt-md="20" ,layout='' , layout-align="center center", ng-repeat='product in newPositionCtrl.portalList', ng-show="product.isJobposted == false")
+                      div(data-ng-if="product.portalType === 'Free'")
+                        span.label.label-success.free-job-board free 
+                      div(data-ng-if="product.portalType === 'Paid'")
+                        span.label.label-danger.free-job-board Paid
+                      .col-md-12.col-sm-12.col-xs-12.btn-section
+                        img.img-box(ng-src="{{product.portalImagePath?product.portalImagePath:'./img/times.jpg'}}", alt='')
+                        label.col-md-12.col-sm-12.col-xs-12 {{product.discription}}
+script#multiapply-popup(type='text/ng-template')
+    include jobPortal-details
+#payment-portal-iframe
+#portalPaymentModal.modal.fade(role='dialog')
+  .modal-dialog
+    .modal-content
+      .modal-header.header-modal-tc
+        button.close(type='button', data-dismiss='modal') ×
+        h3.modal-title Payment Confirmation 
+      .modal-body
+       p(ng-if='newPositionCtrl.cardDetails.status')
+        | Payment of {{newPositionCtrl.subTotal | currency}} will be deducted from your account ending with {{newPositionCtrl.cardDetails.cardLast4digit}} Please click Ok to proceed, if you wish to go back click on Cancel.
+       p
+        a(href='javascript:void(0);', ng-if='newPositionCtrl.cardDetails.status', ng-click='newPositionCtrl.updateCardDetails()', data-dismiss="modal")  Click here
+        span(ng-if='newPositionCtrl.cardDetails.status')  to update the card information.
+       p(ng-if='!newPositionCtrl.cardDetails.status')
+        | Payment of {{newPositionCtrl.subTotal | currency}} will be deducted from your account.Please click Ok to proceed, if you wish to go back click on Cancel.
+      .modal-footer
+        md-button.md-raised.md-primary(type='button', ng-click='newPositionCtrl.goToPayment()', data-dismiss="modal") OK
+        md-button.md-raised.md-primary(type='button',data-dismiss='modal') Cancel

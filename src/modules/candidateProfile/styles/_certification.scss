@@ -1,0 +1,150 @@
+.certification-container {
+     .edit-icon{
+      margin-right: -17px!important;
+      margin-top:-9px;
+      color: white;
+      border-radius: 50%;
+      border-style: double;
+      border-width: 4px;
+      border-color:lightgrey;
+      padding:7px;
+      font-size:20px;
+      //background: -webkit-linear-gradient($blue, $desatDarkBlue); /* For Safari 5.1 to 6.0 */
+      //background: -moz-linear-gradient($blue, $desatDarkBlue); /* For Firefox 3.6 to 15 */
+   }
+  .share-profile {
+    margin-left: 10px;
+    margin-right: 36px!important;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .logo-image-position{
+    margin-left: 200px;
+  }
+
+  .btn-sm{
+   margin-right: 54px;
+   margin-top: 4px !important;
+}
+.video-intro-heading{
+  font-size:$font-size-large;
+  width:100%;
+  border-bottom:1px solid $lightGrey;
+  margin-bottom: 15px;
+  margin-left: -1px;
+  padding: 0px 10px 10px 10px;
+  .video-intro-1{
+  margin-left:5px;
+  text-transform: uppercase;
+  color:#333;
+
+  }
+}
+.certificate-list{
+font-size:18px;
+font-weight:600;
+margin-left: 16px;
+color:$darkGrey;
+margin-top:-10px !important;
+}
+  .logo-image{
+    width: 20px;
+    height: 30px;
+  }
+
+   h3 {
+    margin-top:25px;
+    margin-bottom: 25px;
+    }
+    ul, li {
+      font-size:$font-size-normal;
+    }
+    .list-group-item:first-child {
+      border-radius: $global-radius;
+    }
+
+    .list-group-item:last-child {
+      border-radius: $global-radius;
+    }
+    .list-group-item{
+        border: none;
+        box-shadow: 0px 0px 1px 0px $mediumGrey;
+        font-weight: 600;
+        line-height: 52px;
+    }
+     .btn-sm {
+      border-radius:$global-radius;
+      margin-top:-6px;
+    }
+     .btn{
+      margin-top:-3px;
+    } border-radius:$global-radius;
+    p {
+      font-size:$font-size-small;
+      font-weight:500;
+    }
+
+.well{
+  border-radius: $global-radius;
+  .certification-level {
+
+    .panel-default {
+      border-radius:0px;
+    }
+
+    .gold-panel {
+      .panel-footer {
+        background-color:#DAA520;
+      }
+      .text-center {
+        color:$white;
+      }
+    }
+    .silver-panel {
+      .panel-footer {
+        background-color:#C0C0C0;
+      }
+      .text-center {
+        color:$white;
+      }
+    }
+    .bronze-panel {
+      .panel-footer {
+        background-color:#A67D3D;
+      }
+      .text-center {
+        color:$white;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 780px) {
+    .certificate-panel{
+        margin-top:40px;
+    }
+    .list-group-item {
+    word-wrap: break-word;
+    }
+    
+   }
+   @media only screen and (max-width: 450px) {
+    .certificate-panel{
+        margin-top:40px;
+    }
+    .list-group-item {
+    word-wrap: break-word;
+    padding:7px;
+    }
+    .btn-sm {
+    margin-top:-20px;
+    margin-right:-10px;
+    }
+   }
+
+}
+@media only screen and (max-width: 450px) {
+    .padding-mobile{
+        padding:2px;
+    }
+}

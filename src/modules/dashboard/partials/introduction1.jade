@@ -1,0 +1,38 @@
+.introduction-container
+  #myNav.overlay
+    .col-md-12
+      .col-sm-2
+      .col-sm-8.heading-alignment
+        h2 Hello,Welcome to jottp !!
+        h3.h3-responsive What you can do at jottp !!
+      .col-sm-2
+        a.closebtn(ng-click ='ConferenceCtrl.closeIntro()') ×
+    .overlay-content
+      .container.fixed-width
+        br
+        .col-md-12(data-ng-show="ConferenceCtrl.user.products[0]=== 2")
+          #myCarousel2.carousel.slide(data-ride='carousel')
+            // Indicators
+            ol.carousel-indicators
+              li.active(data-target='#myCarousel2', data-slide-to='0')
+              li(data-target='#myCarousel2', data-slide-to='1')
+              li(data-target='#myCarousel2', data-slide-to='2')
+              li(data-target='#myCarousel2', data-slide-to='3')
+              // Wrapper for slides
+            .carousel-inner.div-margin.slide(role='listbox')
+              .item.active
+                img(alt='conference_0', src='../../../public/img/conference_0.png')
+              .item
+                img(src='../../../public/img/conference_1.png', alt='conference_1')
+              .item
+                img(src='../../../public/img/conference_2.png', alt='conference_2 ')
+              .item
+                img(src='../../../public/img/conference_3.png', alt='conference_3')
+             // Left and right controls
+            a.left.carousel-control.change-color(href='#myCarousel2', role='button', data-slide='prev', target='_self')
+              i.fa.fa-arrow-circle-o-left.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Previous
+            a.right.carousel-control.change-color(href='#myCarousel2', role='button', data-slide='next', target='_self')
+              i.fa.fa-arrow-circle-o-right.fa-2x.arrow-position(aria-hidden='true')
+              span.sr-only Next
+          

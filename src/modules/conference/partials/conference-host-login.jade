@@ -1,0 +1,73 @@
+.content-wrapper.conference-startMeet
+  .row
+    .col-md-10.col-md-offset-1
+      .well.box-left
+        .row(ng-show="conferenceLoginCtrl.waitForMeetingInfo")
+           .col-md-4.col-md-offset-5
+              p Wait... we are loading you meeting
+              .waitloader
+        .row(ng-show="!conferenceLoginCtrl.waitForMeetingInfo")
+          .col-md-8.first-col-div
+            .row
+              h3.first-div-header {{conferenceLoginCtrl.meetingDetail.name}}
+            .row
+              .col-md-1
+                 b| When:
+               .col-md-offset-1.col-md-10
+                 p {{conferenceLoginCtrl.meetingScheduledDate}} {{conferenceLoginCtrl.meetingScheduleTime}}
+            .row
+               .col-md-1
+                 b| Duration:
+               .col-md-offset-1.col-md-10
+                 p {{conferenceLoginCtrl.meetingDetail.meetingDurationHr}} hr {{conferenceLoginCtrl.meetingDetail.meetingDurationMin}} Min     
+            .row
+              .col-md-1
+                b| Host:
+              .col-md-offset-1.col-md-10
+                p {{conferenceLoginCtrl.meetingDetail.hostName}}
+          .col-md-4.second-col-div(ng-show="!conferenceLoginCtrl.isLogin  && conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired")
+              .row
+                .col-md-offset-4.col-md-8
+                  h4.second-div-header-1 Hey It's time to join
+              .row
+                .col-md-offset-5.col-md-7
+                  h3.second-div-header-2 Login
+              .row
+                .col-md-offset-5.col-md-7
+                  i.fa.fa-users.guest-icon(aria-hidden='true')
+              .row
+                form
+                  .form-group.row
+                    .col-md-offset-2.col-md-9
+                      input.form-control(type='email', placeholder='Enter Email Address', ng-model='conferenceLoginCtrl.username')
+                  .form-group.row
+                    .col-md-offset-2.col-md-9
+                      input.form-control(type='password', placeholder='Enter Password', ng-model='conferenceLoginCtrl.password')
+                  .row
+                    .col-md-offset-4.col-md-offset-8
+                      button.btn.btn-primary.join-button(type='submit', data-ng-click="conferenceLoginCtrl.login()") Login     
+          .col-md-4.second-col-div(ng-show="conferenceLoginCtrl.isLogin   && conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 Hey It's time to join
+             .row
+               .col-md-offset-4.col-md-offset-8
+                      button.btn.btn-primary.join-button(type='button', data-ng-click="conferenceLoginCtrl.joinAsLogin()") Enter Meeting                   
+          .col-md-4.second-col-div(ng-show="!conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired && !conferenceLoginCtrl.IsMeetNow")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 Meeting Have not been started please wait    
+          .col-md-4.second-col-div(ng-show="conferenceLoginCtrl.meetingExpired")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 This is meeting expired.               
+    .row
+      .col-md-offset-3.col-md-9
+        | By joining this meeting,you agree to the OnDemand
+        a.margin-left-7(href="#") Terms of service
+        | &
+        a.margin-left-7(href="#")  Privacy Statement
+
+
+
+

@@ -1,0 +1,144 @@
+.payment-plan.super-admin {
+  
+  .add-user-btn{
+    background-color: #3f51b5;
+    color:#ffff
+ }
+  
+  .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+
+  .plan-detalis .plan-details-heading {
+    padding-top: 10px;
+  }
+
+  .panel.panel-default .panel-heading {
+    border-radius: 0px;
+    font-weight: 500 !important;
+  }
+
+  .filter-position{
+    margin-left: -15px;
+  }
+  .position-label{
+      margin-left: 10px;
+      font-size: 13px;
+  }
+  .product-recording-field{
+    margin-top: -8px;
+    .label-text{
+        margin-right: 20px;
+    }
+  }
+
+  .plan-tab-position{
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-top: none;
+  }
+
+  a{
+    cursor: pointer;
+  }
+
+  .payments-plan{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .payments-plan-heading{
+        //margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        font-weight: 500 !important;
+        }
+    }
+    
+    .candidate-data-info{
+        margin-top: 30px;
+    }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+    
+    .mandatory-filed {
+        color: #ed1c24;
+        font-size: 12px;
+    }
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+         background: #3f51b5 !important;
+    }
+    
+    .add-plan-btn{
+        background: transparent!important;
+        border: none!important;
+    }
+     
+    th{
+             text-align: left!important;
+     }
+     
+     .description-area{
+        min-height: 30px;
+        height:auto;
+        max-height: 90px;
+/*        max-width: 259px !important;
+        min-width: 258px !important;*/
+     }
+     .add-custom-plan-btn{
+        margin-right: 15px;
+     }
+     
+    @media only screen and (max-width : 765px) {
+    
+    .company-filter-dropdown{
+      margin-bottom: 15px;
+    }
+    
+    .add-user-btn{
+      margin-left: -14px;
+    }
+    
+    .description-area{
+        min-height: 85px;
+        max-height: 90px;
+        min-width: 171px !important;
+     }
+   }
+   
+   @media only screen and (min-width : 992px) {
+    
+     .description-area{
+        min-width: 255px !important;
+     }
+    
+   }
+   
+   md-input-container {
+    margin: 6px;
+  }
+}

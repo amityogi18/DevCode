@@ -1,0 +1,55 @@
+.candidate-review(style= "margin-top :0px")
+  .modal-content
+    .modal-header.bg-primary
+      button.close(type='button', ng-click='close()') ×
+      h4.modal-title(data-translate='PROFILE-DETAILS')
+    .modal-body
+      md-content.md-padding
+        md-card
+          md-card-actions
+            .row.profile-section
+              .col-md-1.col-sm-1.col-xs-1
+              .col-md-10.col-sm-10.col-xs-10.profile-box(data-ng-if='CandidateReviewCtrl.selectedCandidate.profile.firstName !== 0')
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3(data-translate='EXPERIENCE')
+                  span.col-md-9.col-sm-9.col-xs-9
+                    span(ng-if='ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience !== 0 && ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience !=="" ') {{ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience}} years
+                    span(ng-if='ProfilePopupCtrl.selectedCandidate.profile.totalMonths !== 0 && ProfilePopupCtrl.selectedCandidate.profile.totalMonths !== "" && ProfilePopupCtrl.selectedCandidate.profile.totalMonths !== null')  {{ProfilePopupCtrl.selectedCandidate.profile.totalMonths}} Months
+                  span.col-md-8.col-sm-8.col-xs-8(ng-if='(ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience === "" || ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience === 0 || ProfilePopupCtrl.selectedCandidate.profile.totalyearsOfExperience === null) && (ProfilePopupCtrl.selectedCandidate.profile.totalMonths === null || ProfilePopupCtrl.selectedCandidate.profile.totalMonths === "" || ProfilePopupCtrl.selectedCandidate.profile.totalMonths === 0)') NA
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3 Name
+                  span.col-md-9.col-sm-9.col-xs-9
+                    | {{ProfilePopupCtrl.selectedCandidate.profile.firstName}} {{ProfilePopupCtrl.selectedCandidate.profile.lastName}}
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3 Email
+                  span.col-md-9.col-sm-9.col-xs-9 {{ProfilePopupCtrl.selectedCandidate.profile.emailId}} 
+                .col-md-12.col-sm-12.col-xs-12.profile-detail(ng-show='!ProfilePopupCtrl.selectedCandidate.profile.companyName == ""' )
+                  label.col-md-3.col-sm-3.col-xs-3 Organization
+                  span.col-md-9.col-sm-9.col-xs-9 {{ProfilePopupCtrl.selectedCandidate.profile.companyName}}    
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3(data-translate='SKILLS')
+                  .col-md-9.col-sm-9.col-xs-9
+                    div(ng-repeat='skill in ProfilePopupCtrl.selectedCandidate.profile.skillsets', ng-if="ProfilePopupCtrl.selectedCandidate.profile.skillsets.length > 0")
+                      span(data-translate='SKILL')
+                      |  {{$index+1}} : {{skill.skillsetName}}
+                    div(ng-if="ProfilePopupCtrl.selectedCandidate.profile.skillsets.length < 1") NA
+                .col-md-12.col-sm-12.col-xs-12.profile-detail(ng-show='!ProfilePopupCtrl.selectedCandidate.profile.country == ""' )
+                  label.col-md-3.col-sm-3.col-xs-3(data-translate='LOCATION')
+                  span.col-md-9.col-sm-9.col-xs-9 {{ProfilePopupCtrl.selectedCandidate.profile.address}}
+                  span.col-md-9.col-sm-9.col-xs-9(ng-if="ProfilePopupCtrl.selectedCandidate.profile.address === '' || ProfilePopupCtrl.selectedCandidate.profile.address === null") N/A
+                .col-md-12.col-sm-12.col-xs-12.profile-detail(data-ng-repeat='advanceCrieteria in ProfilePopupCtrl.selectedCandidate.profile.criterias')           
+                  label.col-md-3.col-sm-3.col-xs-3 {{advanceCrieteria.criteria}} 
+                  span.col-md-9.col-sm-9.col-xs-9  
+                    | {{advanceCrieteria.criteriaValue}}                                                                             
+            .row(data-ng-if='CandidateReviewCtrl.selectedCandidate.profile.firstName < 0')
+              .col-md-1.col-sm-1.col-xs-1 
+              .col-md-10.col-sm-10.col-xs-10.profile-box
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3 Email 
+                  span.col-md-9.col-sm-9.col-xs-9{{ProfilePopupCtrl.selectedCandidate.email}}          
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3 Full Name
+                  span.col-md-9.col-sm-9.col-xs-9 {{ProfilePopupCtrl.selectedCandidate.fullName}}
+                .col-md-12.col-sm-12.col-xs-12.profile-detail
+                  label.col-md-3.col-sm-3.col-xs-3(data-translate='SKILLS')
+                  .col-md-9.col-sm-9.col-xs-9 {{ProfilePopupCtrl.selectedCandidate.primarySkill}}   

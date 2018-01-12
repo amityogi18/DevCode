@@ -1,0 +1,284 @@
+script(src='https://www.google.com/recaptcha/api.js?hl=en')
+.job-openings-container
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-md-10
+          h3 {{jobApplyCtrl.jobDescription.jobTitle}}
+        .col-md-2
+          a.btn.btn-success.go-back-btn(data-ui-sref='public.applied-job-description({jobId: jobOpeningsCtrl.jobId})')
+              i.fa.fa-arrow-left(aria-hidden='true')
+              span   Go back
+          i.fa.fa-chevron-down.toggle-icon( ng-click ='jobOpeningsCtrl.toggleIcon()',aria-hidden='true',data-toggle="collapse", data-target="#Jobdescription",ng-show='!jobOpeningsCtrl.isUp')
+          i.fa.fa-chevron-up.toggle-icon(ng-click ='jobOpeningsCtrl.toggleIcon()',aria-hidden='true',data-toggle="collapse", data-target="#Jobdescription",ng-show='jobOpeningsCtrl.isUp')
+      .row
+        .col-md-4
+          span
+            i.fa.fa-map-marker(aria-hidden='true')
+          span.loc-margin {{jobApplyCtrl.jobDescription.location}}
+        .col-md-3
+          span
+            i.fa.fa-calendar-o(aria-hidden='true')
+          span.loc-margin  Expiry Date 22/11/2017
+      hr
+      div#Jobdescription.collapse
+        .row
+          .col-md-6
+            | Position Name
+          .col-md-6
+            | {{jobApplyCtrl.jobDescription.jobTitle}}
+        hr
+        .row
+          .col-md-6
+            | Position Code
+          .col-md-6
+            | {{jobApplyCtrl.jobDescription.jobCode}}
+        hr
+      .row(data-ng-hide='jobApplyCtrl.isApplied')
+        .col-md-offset-2.col-md-8(ng-show='jobApplyCtrl.isLoginShow')
+          .panel.panel-default
+            .panel-heading.candidate-public-login Please login to apply...
+            .panel-body
+              form
+                .form-group.row(ng-hide='jobApplyCtrl.additionalSection')
+                  .col-sm-6
+                    md-input-container.md-block(flex='100')
+                      label Email
+                      input(type='email', name='email', data-ng-model='jobApplyCtrl.loginData.username', required)
+                  .col-sm-6
+                    md-input-container.md-block(flex='100')
+                      label Password
+                      input(type='password', name='pwd', data-ng-model='jobApplyCtrl.loginData.password', required)
+                .form-group.row(ng-show='jobApplyCtrl.additionalSection')
+                  .col-sm-12(ng-hide='jobApplyCtrl.isApplied')
+                    #demo
+                      .form-group.row
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.coverLetter === 1 ")
+                          md-input-container.md-block(flex='100')
+                            label Cover Letter
+                            textarea(ng-model='jobApplyCtrl.loginAdditionalData.coverLetter', maxlength='1000', rows='5', required)
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.coverLetter === 2 ")
+                          md-input-container.md-block(flex='100')
+                            label Cover Letter
+                            textarea(ng-model='jobApplyCtrl.loginAdditionalData.coverLetter', maxlength='1000', rows='5')
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.phoneNumber === 1 ")
+                          md-input-container.md-block(flex='100')
+                            label Contact Number
+                            input(type='text', name='contactNumber', data-ng-model='jobApplyCtrl.loginAdditionalData.contactNumber',onkeypress='return event.charCode <= 57',maxlength='14',data-ng-blur='jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)', data-ng-keyup="jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)", required)
+                            span.error-msg(data-ng-if='jobApplyCtrl.errmsgcon !== ""') {{jobApplyCtrl.errmsgcon}}
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.phoneNumber === 2 ")
+                          md-input-container.md-block(flex='100')
+                            label Contact Number
+                            input(type='text', name='contactNumber', data-ng-model='jobApplyCtrl.loginAdditionalData.contactNumber',onkeypress='return event.charCode <= 57',maxlength='14',data-ng-blur='jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)', data-ng-keyup="jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)")
+                            span.error-msg(data-ng-if='jobApplyCtrl.errmsgcon !== ""') {{jobApplyCtrl.errmsgcon}}
+                      .form-group.row
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.photo === 1 ")
+                          md-input-container.md-block(flex='100')
+                            label Photo
+                            .image-box
+                              .row.image-box-row
+                                input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.loginAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadLoginFile($files); jobApplyCtrl.isLoginFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile" required)
+                                img(alt='', class='thumbnail' ng-src="{{jobApplyCtrl.loginAdditionalData.candidateLogo?jobApplyCtrl.loginAdditionalData.candidateLogo:'./img/user.png'}}")
+                                img(alt='', class='thumbnail' ngf-src="jobApplyCtrl.loginAdditionalData.candidateLogo", style='position:relative; bottom: 150px')
+                            //input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.loginAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadLoginFile($files); jobApplyCtrl.isLoginFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile" required)
+                        .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.photo === 2 ")
+                          md-input-container.md-block(flex='100')
+                            label Photo
+                            .image-box
+                              .row.image-box-row
+                                input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.loginAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadLoginFile($files); jobApplyCtrl.isLoginFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile")
+                                img(alt='', class='thumbnail' ng-src="{{jobApplyCtrl.loginAdditionalData.candidateLogo?jobApplyCtrl.loginAdditionalData.candidateLogo:'./img/user.png'}}")
+                                img(alt='', class='thumbnail' ngf-src="jobApplyCtrl.loginAdditionalData.candidateLogo", style='position:relative; bottom: 150px')
+                            //input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.loginAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadLoginFile($files); jobApplyCtrl.isLoginFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile" required)
+                        .col-xs-12.col-sm-6.col-md-6
+                          md-input-container.md-block(flex='100')
+                            label CV/Resume
+                            input(type='file', ngf-max-size='512KB' name='resume', data-ng-model='jobApplyCtrl.candidateResume', ngf-select='jobApplyCtrl.uploadLoginResumeFile($files); jobApplyCtrl.isLoginResumeFileAdded($files)', accept=".doc", ngf-model-invalid='errorFile', required)
+                          div(data-ng-show = "jobApplyCtrl.loginAdditionalData.resume && !jobApplyCtrl.candidateResume" ) 
+                            a(href='{{jobApplyCtrl.loginAdditionalData.resume}}', download='download', title='Click here to download resume')
+                              i.fa.fa-download.fa-3x(aria-hidden='true')
+                md-button.md-raised.savedata-btn(type='submit',ng-hide='jobApplyCtrl.additionalSection', data-ng-click='jobApplyCtrl.loginToApplyForJob()') Login
+                md-button.md-raised.savedata-btn(type='submit',ng-show='jobApplyCtrl.additionalSection', data-ng-click='jobApplyCtrl.updateCandidateDetails()') Apply
+                a.link-float(ng-click='jobApplyCtrl.toggleUI()') Click here to register
+        .col-md-offset-2.col-md-8(ng-show='jobApplyCtrl.isRegisterShow')
+          .panel.panel-default
+            .panel-heading.candidate-public-login Register
+            .panel-body
+              form(role='form', name='jobApplyCtrl.candidateSignupForm' novalidate)
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex='100')
+                      label First Name
+                      input(type='text', name='firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25',ng-blur='jobApplyCtrl.removeInvalidFirstName(jobApplyCtrl.registerData.firstName)',data-ng-model='jobApplyCtrl.registerData.firstName',required)
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.firstName.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.firstName.$dirty && jobApplyCtrl.candidateSignupForm.firstName.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.firstName.$error.required') Please Enter First Name
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex='100')
+                      label Last Name
+                      input(type='text', name='lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',maxlength='25', ng-blur='jobApplyCtrl.removeInvalidLastName(jobApplyCtrl.registerData.lastName)', data-ng-model='jobApplyCtrl.registerData.lastName',required)
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.lastName.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.lastName.$dirty && jobApplyCtrl.candidateSignupForm.lastName.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.lastName.$error.required') Please Enter Last Name
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex='100')
+                      label Email
+                      input(type='text', name='email',maxlength='50', data-ng-model='jobApplyCtrl.registerData.email', data-ng-blur='jobApplyCtrl.isInvalidEmail(jobApplyCtrl.registerData.email)', data-ng-keyup="jobApplyCtrl.isInvalidEmail(candidateSignupCtrl.registerData.email)",  required)
+                      span.error-msg(data-ng-if='jobApplyCtrl.errormessage !== ""') {{jobApplyCtrl.errormessage}}
+                  .col-xs-12.col-sm-6.col-md-6()
+                    md-input-container.md-block(flex='100')
+                      label Contact Number
+                      input(type='text', name='contactNumber', data-ng-model='jobApplyCtrl.registerData.contactNumber',onkeypress='return event.charCode <= 57',maxlength='14',data-ng-blur='jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)', data-ng-keyup="jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)", required)
+                      span.error-msg(data-ng-if='jobApplyCtrl.errmsgcon !== ""') {{jobApplyCtrl.errmsgcon}}
+                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.phoneNumber === 2 ")
+                    md-input-container.md-block(flex='100')
+                      label Contact Number
+                      input(type='text', name='contactNumber', data-ng-model='jobApplyCtrl.registerData.contactNumber',onkeypress='return event.charCode <= 57',maxlength='14',data-ng-blur='jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)', data-ng-keyup="jobApplyCtrl.analyzePhoneNumber(jobApplyCtrl.registerData.contactNumber)")
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex='100')
+                      label Password
+                      input(type='password', name='password', data-ng-model='jobApplyCtrl.registerData.password', minlength="6", maxlength="15", data-ng-blur='jobApplyCtrl.analyzePassword(jobApplyCtrl.registerData.password)', data-ng-keypress="jobApplyCtrl.analyzePassword(jobApplyCtrl.password)", data-ng-keyup="jobApplyCtrl.analyzePassword(jobApplyCtrl.registerData.password)",ng-change="jobApplyCtrl.checkPasswordEquality()",required)
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.password.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.password.$dirty && jobApplyCtrl.candidateSignupForm.password.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.password.$error.required') Please Enter Password.
+                        span.error-msg(data-ng-if='!jobApplyCtrl.isPasswordRight') Password Should Contain Atleast 6 And Maximum 15 Characters That Contains At Least One Lowercase And One Uppercase Character And One Special Character And One Number.
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex='100')
+                      label Confirm Password
+                      input(type='password', maxlength="15", name="confirmPassword", data-ng-model="jobApplyCtrl.confirmPassword", data-ng-blur="jobApplyCtrl.confirmPasswords(jobApplyCtrl.confirmPassword)",ng-change="jobApplyCtrl.checkPasswordEquality()", required)
+                      span.error-msg {{jobApplyCtrl.message}}
+                .form-group.row
+                  .col-xs-12.col-sm-12.col-md-12
+                    md-content.geo-section(flex='100')
+                      place-autocomplete(data-ng-model='jobApplyCtrl.geoAddress',search-type='1')
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex="100")
+                      label Functional Area
+                      md-select(data-ng-model='jobApplyCtrl.registerData.departmentId', data-ng-change='jobApplyCtrl.getDesignation(jobApplyCtrl.registerData.departmentId)', name='departmentList', md-on-close="jobApplyCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader', required)
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='jobApplyCtrl.searchDepartment', type='search', placeholder='Search Functional Area', ng-keydown="$event.stopPropagation()")
+                        md-optgroup(label='Department')
+                        md-option(ng-value='department.id', ng-repeat='department in jobApplyCtrl.departmentList | filter: jobApplyCtrl.searchDepartment') {{department.name}}
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.departmentList.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.departmentList.$dirty && jobApplyCtrl.candidateSignupForm.departmentList.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.departmentList.$error.required') Please Select Functional Area
+                  .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex="100")
+                      label Role
+                      md-select(data-ng-model='jobApplyCtrl.registerData.designationId', ng-disabled='jobApplyCtrl.isDesignationDisabled', name='designation', md-on-close="jobApplyCtrl.clearSearchDesignation()", data-md-container-class='selectdemoSelectHeader', required)
+                        md-select-header.demo-select-header
+                          input.demo-header-searchbox.md-text(ng-model='jobApplyCtrl.searchRole', type='search', placeholder='Search Role', ng-keydown="$event.stopPropagation()")
+                        md-optgroup(label='Department')
+                        md-option(ng-value='designation.id', ng-repeat='designation in jobApplyCtrl.designationList | filter: jobApplyCtrl.searchRole') {{designation.candidateDesignation}}
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.designation.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.designation.$dirty && jobApplyCtrl.candidateSignupForm.designation.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.designation.$error.required') Please Select Designation
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6()
+                    md-input-container.md-block(flex='100')
+                      label Photo
+                      input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.registerAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadRegisterFile($files); jobApplyCtrl.isRegisterFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile", required)
+                    span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.candidateLogo.$touched')
+                      span(data-ng-show='jobApplyCtrl.candidateSignupForm.candidateLogo.$dirty && jobApplyCtrl.candidateSignupForm.candidateLogo.$invalid')
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.candidateLogo.$error.required') Please Select Photo
+                  .col-xs-12.col-sm-6.col-md-6(data-ng-if="jobApplyCtrl.jobDescription.photo === 2 ")
+                    md-input-container.md-block(flex='100')
+                      label Photo
+                      input(type='file', ngf-max-size='512KB' name='candidateLogo', data-ng-model='jobApplyCtrl.registerAdditionalData.candidateLogo', ngf-select="jobApplyCtrl.uploadRegisterFile($files); jobApplyCtrl.isRegisterFileAdded($files)", accept="image/*", ngf-model-invalid="errorFile")
+                  .col-xs-12.col-sm-6.col-md-6(data-ng-hide="jobApplyCtrl.jobDescription.cvResume === 3 ")
+                    md-input-container.md-block(flex='100')
+                      label CV/Resume
+                      input(type='file', ngf-max-size='1MB' name='resume', data-ng-model='jobApplyCtrl.registerAdditionalData.resume', ngf-select='jobApplyCtrl.uploadRegisterResumeFile($files); jobApplyCtrl.isRegisterResumeFileAdded($files)', accept=".doc", ngf-model-invalid='errorFile', required)
+                    span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.resume.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.resume.$dirty && jobApplyCtrl.candidateSignupForm.resume.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.resume.$error.required') Please Select Resume
+                .form-group.row
+                  .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobApplyCtrl.jobDescription.coverLetter === 1 ")
+                    md-input-container.md-block(flex='100')
+                      label Cover Letter
+                      textarea(ng-model='jobApplyCtrl.registerAdditionalData.coverLetter', maxlength='1000', rows='5', name='coverLetter', required)
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.coverLetter.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.coverLetter.$dirty && jobApplyCtrl.candidateSignupForm.coverLetter.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.coverLetter.$error.required') Please Enter Cover Letter
+                  .col-xs-12.col-sm-12.col-md-12(data-ng-if="jobApplyCtrl.jobDescription.coverLetter === 2 ")
+                    md-input-container.md-block(flex='100')
+                      label Cover Letter
+                      textarea(ng-model='jobApplyCtrl.registerAdditionalData.coverLetter', maxlength='1000', rows='5', name='coverLetter')
+                      span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.coverLetter.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.coverLetter.$dirty && jobApplyCtrl.candidateSignupForm.coverLetter.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.coverLetter.$error.required') Please Enter Cover Letter
+                .form-group.row
+                    span.col-sm-1.col-form-label
+                      |  CAPTCHA
+                    .col-sm-6.col-xs-12
+                      .g-recaptcha.captcha-field(data-sitekey='{{jobApplyCtrl.SITEKEY}}')
+                .form-group.row
+                  span.col-sm-10.col-xs-12
+                    input#squaredTwo.icheckbox_square-blue(type='checkbox', name='agree', data-ng-model='jobApplyCtrl.isAgree',  required='required')
+                    label.lbl-head.text-of-agreement(for='squaredTwo')
+                        span.agree-ondemand
+                          | By clicking on this box you agree with OnDemand
+                        a.privacy-policy-link(data-toggle="modal", data-target="#termsConditionModalCandidate") Terms & Conditions
+                  .row
+                    .col-md-10.col-sm-10.col-xs-12
+                      span.error-message.term-condition(data-ng-show='jobApplyCtrl.candidateSignupForm.$submitted || jobApplyCtrl.candidateSignupForm.agree.$touched')
+                        span(data-ng-show='jobApplyCtrl.candidateSignupForm.agree.$dirty && jobApplyCtrl.candidateSignupForm.agree.$invalid')
+                        span.error-msg(data-ng-show='jobApplyCtrl.candidateSignupForm.agree.$error.required') Please Click To Agree To The Terms And Conditions
+                .form-group.row
+                  span.col-sm-offset-1.col-sm-3
+                  .col-sm-6.col-xs-6
+                    md-button.md-raised.md-primary.candidate-submit-btn(data-ng-click='jobApplyCtrl.registerToApplyForJob()') Submit
+                    label.error-lbl {{jobApplyCtrl.errorLblTxt}}
+                .col-sm-offset-1.col-sm-11
+                    span.mandatory-star-note
+                     b Note :
+                    span.note-mandatory
+                     |  Fields marked with asterisk (
+                    span.red-star  *
+                    span.note-mandatory
+                     |   ) are mandatory.
+            #termsConditionModalCandidate.modal.fade(role='dialog')
+              .modal-dialog.modal-lg
+                .modal-content
+                  .modal-header.header-modal-tc
+                    button.close(type='button', data-dismiss='modal') ×
+                    h3.modal-title Terms & Conditions
+                  .modal-body.content-justify
+                    p
+                      | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                    p
+                      | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+                    p The use of this website is sub  ject to the following terms of use:
+                    ul
+                      li
+                        | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                      li
+                        | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+                      li
+                        | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                      li
+                        | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+                      li
+                        | This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+                      li
+                        | All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.
+                      li
+                        | Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+                      li
+                        | From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+                      li
+                        | Your use of this website and any dispute arising out of such use of the website is subject to the laws of India, USA, England, Northern Ireland, Scotland and Wales.
+                  .modal-footer
+                    md-button.md-raised.md-primary(type='button',data-dismiss='modal') OK
+
+                a.link-float(data-ng-click='jobApplyCtrl.toggleUI()') Click here to Login
+      .row(data-ng-show='jobApplyCtrl.isApplied')
+        .col-md-offset-2.col-md-8(style='color:green;')
+          h3.link-display(style='text-align: center; border: 1px solid; border-radius: 5px; padding: 30px;')
+             i.fa.fa-check-circle-o(aria-hidden='true')
+             span      {{jobApplyCtrl.message}}
+
+

@@ -1,0 +1,21 @@
+.analytics-box-section.analytics-section
+    div(ng-cloak='')
+      md-content.md-padding(layout-xs='column', layout='row')
+        md-card.candidate-status-report-section
+          md-card-actions
+            .candidate-status-heading
+              i.fa.fa-pie-chart.canidate-status-icon(aria-hidden='true')
+              span(data-translate='CANDIDATE-RATING')
+            #pie-chart.panel-body.pie-height
+              .pie-dec-chart_01.chart-0.col-sm-8.col-md-8.col-xs-12
+                canvas#pie.chart.chart-pie.chart-xs(chart-colors='candidateRatingCtrl.colors',chart-data='candidateRatingCtrl.candidateRatingData.candidateStatusReport.data', chart-labels='candidateRatingCtrl.candidateRatingData.candidateStatusReport.labels', chart-options='candidateRatingCtrl.options')
+              .labl-box.managing.col-sm-4.col-md-4.col-xs-12
+                ul.col-sm-8.col-md-8.col-xs-6.managing
+                  li(ng-repeat='row in candidateRatingCtrl.candidateRatingData.candidateStatusReport.labels')
+                    i.fa.fa-square(aria-hidden='true', ng-class= "{'label_1':row == 'Best','label_2':row == 'Better','label_3':row == 'Average'}")
+                    span
+                      strong {{row}}
+                ul.col-sm-4.col-md-4.col-xs-6.managing
+                  li(ng-repeat='x in candidateRatingCtrl.candidateRatingData.candidateStatusReport.data track by $index')
+                    span
+                      strong {{x}}

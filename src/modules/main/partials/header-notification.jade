@@ -1,0 +1,26 @@
+.badge-section.dropdown.pull-right(ng-click='headerNotificationCtrl.fetchNotification()')
+    a.dropdown-toggle(data-toggle='dropdown', href='#')
+      .notify.notification-bell 
+          md-button.md-icon-button(aria-label='General', ng-click='headerNotificationCtrl.fetchNotification()')
+            md-icon(md-font-set='fa') &#xf0e7
+          span.icon-text(ng-if='headerNotificationCtrl.notificationCount > 0', ng-class='{"icon-text1": headerNotificationCtrl.notificationCount > 99, "icon-text2": headerNotificationCtrl.notificationCount < 99}') 
+              span.inside-text {{headerNotificationCtrl.notificationCount}}
+    ul.settings-content.dropdown-menu(role='menu', aria-labelledby='menu1')
+        .notification-tab
+            h5 Notifications
+              span(ng-if='headerNotificationCtrl.isLoading')
+                i.fa.fa-refresh.fa-spin.fa-2x.fa-fw(style='margin: 5px !important; color: #0076B6; font-size: 20px;')
+                span.sr-only Loading...
+            li.col-md-12.col-sm-12.col-xs-12.list-group-item(ng-hide='headerNotificationCtrl.isLoading' ng-if='headerNotificationCtrl.notificationList2.length > 0' ng-repeat='notification in headerNotificationCtrl.notificationList2 | limitTo: 5')
+                .notifiy-heading
+                    .show-notify {{notification.message}} 
+                    .show-time
+                      i.fa.fa-clock-o(aria-hidden='true')
+                      span &nbsp;{{notification.duration}} ago.
+            
+            div.no-notifictn(ng-hide='headerNotificationCtrl.isLoading' ng-if='headerNotificationCtrl.notificationList2.length == 0')
+              center No new notification to show !
+        .col-md-12.col-sm-12.col-xs-12.view-box(ng-hide='headerNotificationCtrl.isLoading' ng-if='headerNotificationCtrl.notificationList2.length > 0')
+            a(data-ng-click='headerNotificationCtrl.showAllNotifications()') View All  
+    
+     

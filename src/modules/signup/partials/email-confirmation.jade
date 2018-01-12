@@ -1,0 +1,10 @@
+.container.email-confirmation-page
+  i.fa.fa-envelope-o.fa-3x.confirm-icon(aria-hidden="true")
+  i.fa.fa-angle-double-right.fa-3x.confirm-icon-aero
+  .email-confirm-message
+    p
+      span(data-ng-hide="companySignupCtrl.isEmailReSent", data-translate="EMAIL-LINE-SENT")
+      span(data-ng-show="companySignupCtrl.isEmailReSent", data-translate="EMAIL-LINE-RESENT")
+      b  {{registrationCtrl.user.email}}
+    p(data-translate="RESEND-LINK")
+    a.btn.btn-email-resend(data-ng-click="companySignupCtrl.resendEmail()", data-translate="RESEND")

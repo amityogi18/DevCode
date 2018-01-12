@@ -1,0 +1,210 @@
+.content-wrapper
+  .col-md-12
+    nav.navbar.navbar-default(role='navigation')
+      // Collection of nav links and other content for toggling
+      div
+        ul.nav.navbar-nav
+          li.instruction-menu
+            a.active(href='#')
+              | 1.Welcome
+              i.fa.fa-angle-double-right(aria-hidden='true')
+          li.instruction-menu
+            a(href='#')
+              | 2.Prepare & Practice
+              i.fa.fa-angle-double-right(aria-hidden='true')
+          li.instruction-menu
+            a(href='#')
+              | 3.Test
+              i.fa.fa-angle-double-right(aria-hidden='true')
+    .col-md-12
+      .col-md-4
+      .col-md-6
+        .main-body-wrapper
+          .default-form
+            .col-md-12
+              .upper-form-wrapper
+                #accordion.panel-group
+                  .panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseOne')
+                          span.fa.fa-minus
+                          |                             Connection Test Check
+                    #collapseOne.panel-collapse.collapse.in
+                      .panel-body
+                        .col-md-12.loading-gif(ng-if='!CertificationInstructionCtrl.speed')
+                          img(src='../../../public/img/loader.gif')
+                        .col-md-12(ng-if='CertificationInstructionCtrl.speed')
+                          .col-md-12
+                            button.btn.btn-circle(type='button', ng-class='{"btn-warning": CertificationInstructionCtrl.connectionStatus == "Bad", "btn-success": CertificationInstructionCtrl.connectionStatus == "Fine" }')
+                              span(ng-if='CertificationInstructionCtrl.connectionStatus == "Fine"', class='fa fa-check')
+                            | Your Upload Link is {{CertificationInstructionCtrl.connectionStatus}}
+                          .col-md-12
+                            button.btn.btn-circle(type='button', ng-class='{"btn-warning": CertificationInstructionCtrl.connectionStatus == "Bad", "btn-success": CertificationInstructionCtrl.connectionStatus == "Fine" }')
+                              span(ng-if='CertificationInstructionCtrl.connectionStatus == "Fine"', class='fa fa-check')
+                            | Your Download Speed is {{CertificationInstructionCtrl.connectionStatus}}
+                          .col-md-12
+                            div(align='center') Warning
+                          .col-md-12(ng-if='CertificationInstructionCtrl.speed < CertificationInstructionCtrl.acceptedSpeed')
+                          | Your Connection is below our recommended speed you may experience chappy video
+                          .col-md-12(ng-if='CertificationInstructionCtrl.speed < CertificationInstructionCtrl.acceptedSpeed')
+                            a Click here to  red our tips on connection issues
+                    .panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', ng-click='CertificationInstructionCtrl.startRecording()')
+                          span.fa.fa-plus
+                          |                             Webcam
+                    #collapseTwo.panel-collapse.collapse
+                      .panel-body
+                        .col-md-12
+                          .col-md-5
+                          .col-md-7
+                            | Logitech(HD webcam C270)
+                          .col-md-12
+                            .col-md-4
+                              | When your video appears on the screen and you can see  yourself. click next to proceed to the microphone text
+                            .col-md-7
+                              .video-iframe-sec
+                                iframe(ng-show="!CertificationInstructionCtrl.recordingMode" ng-src='{{CertificationInstructionCtrl.trustSrc(CertificationInstructionCtrl.videoUrl)}}')
+                                video(id='videoTestElementCertIns' ng-show="CertificationInstructionCtrl.recordingMode")
+                  .panel.panel-default
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseThree', ng-click='CertificationInstructionCtrl.startRecordingAudio()')
+                          span.fa.fa-plus
+                          |                             Microphone Check
+                    #collapseThree.panel-collapse.collapse
+                      .panel-body
+                        .col-md-12
+                          .col-md-6
+                          .col-md-6
+                            | Microphone(HD webcam C270)
+                          .col-md-12
+                            .col-md-6
+                              p(align='justify')
+                                | Test your Microphone and adjust the volume to ensure the best sound quality for your interview mic level must reach (but  should just peak above) the red line to  continue. To do This
+                              p(align='justify') 1.Speak out in normal voice -the mic level will  move as u speack
+                              p(align='justify')
+                                | 2.if you do  reach the red  line, raise the volume level  by  graduaily dragging the  grey  slider on the bar.
+                              p(align='justify') After you complete  the test ,next button will be appear
+                            .col-md-5
+                              .volume-meter
+                                canvas(id='volume-meter' height='6')
+                                input(type='range', min='0', max='1', step='0.1', ng-model='selectedVolume', class='volume-slider')
+
+    .col-md-12
+      .col-md-4
+      .col-md-6(style='margin-top:12px;')
+        a.btn.btn-success.pull-left(data-ui-sref="app.test-instruction") Take Practise Test
+        a.btn.btn-success.pull-right skip Practise Test
+    // Instruction Popup
+    #instructionModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Instruction
+          .modal-body
+            ul
+              li Total No. of question: 30
+              li Time Alloted : 30 minutes
+              li Each question carry 1 mark and No negative marking
+              li Do not refersh the page
+              li All the best :)
+          center
+            a.btn.btn-success(data-toggle='modal', data-target='#questionModal') Start Test
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Close
+    // Question Model popup
+    #questionModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Job Position:Software Engineer
+            span.pull-right Time Alloted:02:00 min
+          .modal-body
+            .question
+              p
+                | 1. The word which means "house" is:
+                br
+                input(type='radio', name='1.The word which means house is', value='maison')
+                | maison
+                br
+                input(type='radio', name='1.The word which means house is', value='quatre')
+                | quatre
+                br
+                input(type='radio', name='1.The word which means house is', value='soleil')
+                | soleil
+                br
+                input(type='radio', name='1.The word which means house is', value='poisson')
+                | poisson
+                br
+            .row.pull-right.test-buttons
+              a.btn.btn-success(disabled='') Previous
+              a.btn.btn-success Save & Next
+              a.btn.btn-success(data-toggle='modal', data-target='#testCompletionModal') End Test
+          .modal-footer
+    // Test Completion popup
+    #testCompletionModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Thanks For Taking Certification
+          .modal-body
+            center
+              h3 Markes : 0/20
+            ul.list-group
+              li.list-group-item
+                | Total No. of question :
+                span.pull-right 20
+              li.list-group-item
+                | Number of answered question :
+                span.pull-right 0
+              li.list-group-item
+                | Number of answered question :
+                span.pull-right 0
+            .row.pull-right.certificate-buttons
+              a.btn.btn-success(data-toggle='modal', data-target='#CertificateModal')
+                i.fa.fa-eye
+                |  View Certificate
+              a.btn.btn-success
+                i.fa.fa-upload
+                |  Download Certificate
+          .modal-footer
+    // Certicate popup
+    #CertificateModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-body.certificate-template
+            .col-lg-8.col-md-8.col-sm-4.col-xs-4
+              .col-lg-8.col-md-8.col-sm-4.col-xs-4.inner-section
+                .innermost-section
+                  h1 Certificate of On-Demand
+                  p This is to certify that
+                .certificate-name-section
+                  h1 Shubam Namdev
+                  p has completed the Certification for the post of
+                  h3 Software Engineer
+                .date-section
+                  p with score of
+                  |  85
+                  p dated : 29-08-2016
+                .pull-right
+                  img(src='../../../public/img/gold2.png')
+                |                   `
+            .row.pull-right.btn-footer
+              a.btn.btn-success
+                i.fa.fa-upload
+                |  Downoad
+              a.btn.btn-success(data-ui-sref='candidateProfile.certification')
+                i.fa.fa-close
+                |  Close
+          .modal-footer
+

@@ -1,0 +1,20 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-bar-chart.canidate-status-icon(aria-hidden='true')
+              span(data-translate='RECRUITERWISE-REPORT')
+            #base-chart.panel-body
+              .chart-0
+                .interviews 
+                  |Recruiter Name
+                  canvas#base.barchart.chart-horizontal-bar(chart-colors='recruiterwiseReportCtrl.colors', chart-series='recruiterwiseReportCtrl.series', chart-data='recruiterwiseReportCtrl.recruiterWiseReport.data', chart-labels='recruiterwiseReportCtrl.recruiterWiseReport.labels')
+                .col-sm-12.interviews.show-center
+                    span
+                      i.fa.fa-square.color-box-1(aria-hidden='true')
+                      | No Of Interviews
+                    span
+                      i.fa.fa-square.color-box-2(aria-hidden='true')
+                      | No Of hires

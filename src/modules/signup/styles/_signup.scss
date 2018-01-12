@@ -1,0 +1,536 @@
+﻿.singup-header {
+  position: fixed;
+  top: 0px;
+  z-index: 9999;
+  height: 50px;
+  width: 100%;
+  float: left;
+  padding: 5px;
+  background:transparent!important;
+  font-family: "Open Sans", Arial, sans-serif;
+}
+ 
+.content-wrapperm.singuphome {
+  padding: 0px 5px 0px;
+  margin-top:-60px;
+  .modal-body{
+    padding: 10px 20px;
+  }
+  
+  .user-login {
+    width: 100%;
+    float: left;
+    padding-top: 35px;
+    padding-bottom:80px;
+    
+}
+h1 {
+  font-size: 4rem;
+  margin-bottom: .5rem;
+  font-family: inherit;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+
+  .modal-footer .btn{
+    margin:0px;
+  }
+ .content-justify{
+  font-size: 12px;
+  text-align:justify;
+ }
+ .text-of-agreement {
+  margin-left:0px;
+ }
+ .md-signup{
+  background: rgb(32, 75, 97) !important;
+  color: white !important;
+
+ }
+ 
+ .mandatory-star-note{
+      margin-left:-15px;
+      font-size: 12px;
+  }
+  
+  .note-mandatory{
+      font-size: 12px;
+      color:grey;
+  }   
+  .red-star{
+    color:red !important;  
+  }
+ .save-resend-btns a.btn-green {
+  background: $green;
+ }
+ .save-resend-btns a {
+  width: 100%;
+  max-width: 108px;
+  text-align: center;
+  height: 35px;
+  line-height: 36px;
+  display: inline-block;
+  vertical-align: middle;  
+  font-size: $font-size-small;
+  color: $white;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  margin-left: 90px;
+ }
+ .save-mid-btns{
+   padding-top:20px;
+   text-align:center;
+  }
+ .save-mid-btns a.btn-green {
+  background: $green;
+ }
+ .save-mid-btns a {
+  width: 100%;
+  max-width: 108px;
+  text-align: center;
+  height: 35px;
+  line-height: 36px;
+  display: inline-block;
+  vertical-align: middle;  
+  font-size: $font-size-small;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  margin-left: 70px;
+ }
+ .resend-icon {
+  color: $blue;
+ }
+ .label1 {
+  font-size: $font-size-normal!important;
+  color: $mediumDarkGrey;  
+  margin-right: 5px !important;
+ }
+ .fields-location {
+  display: block;
+  overflow: visible;
+  width: 100%;
+  margin-left: -5px;
+ }
+ .default-form-instruction {
+  width: 100%;
+  float: left;
+  padding: 12px 0;
+  height: 260px !important;
+ }
+ .default-form-instruction1 {
+  width: 100%;
+  float: left;
+  padding: 12px 0;
+  height: 400px !important;
+ }
+ .instruction-menu {
+  width: 320px;
+  padding-left: 15px;
+ }
+ .icheckbox_square-blue {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 1px !important;
+  padding: 0 !important;
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+  border-radius:none;
+ }
+
+
+ .sep-dev {
+  border-top: 1px dotted $mediumGrey;
+  margin-top: 10px;
+  margin-bottom: 20px;
+ }
+
+ .lbl-head {
+  font-weight: normal;
+ }
+
+ .mandatory {
+  color: $red;
+ }
+
+ .login-link {
+  color: rgba(56, 63, 91, 0.929412)!important;
+   font-weight: 600;
+ }
+ .md-ink-ripple {
+  color: rgba(56, 63, 91, 0.929412)!important;
+  color:white!important;
+
+ }
+ .panel {
+  margin-bottom: 10px;
+ }
+
+
+ .login-link:hover {
+  text-decoration: underline;
+  color: $white;
+  cursor: pointer;
+ }
+
+ .margin-bottom-5 {
+  margin-bottom: 5px
+ }
+
+ .login-box {
+  margin-top: 30px;
+  font-size: 14px;
+ }
+
+ .panel-heading{
+    color:white;
+    //background-color: #13445f;
+
+    .panel-title{
+      color: $white;
+    }
+  }
+
+ .login-body {
+  float: right;
+  font-size: 80%;
+  position: relative;
+  top: -20px;
+ }
+
+ .padding-top-30 {
+  padding-top: 30px
+ }
+
+ .error-message {
+  color: $red !important;
+  font-size: 11px !important;
+ }
+
+ .product-msg{
+  margin-left:17px;
+ }
+
+ .login-pannel-heading {
+  background-color: $blue !important;
+  color: white !important;
+ }
+
+ .login-heading1 {
+  color: rgba(56, 63, 91, 0.929412)!important;
+  font-size: 18px;
+   font-weight: 600;
+ }
+ .left{
+  float:left;
+ }
+ .clear{
+  clear:both;
+  display: block;
+ }
+ .captcha-field{
+  transform:scale(0.78);
+  -webkit-transform:scale(0.78);
+  transform-origin:0 0;
+  -webkit-transform-origin:0 0;
+ }
+ @media only screen and (max-width: 770px) {
+  .text-of-agreement {
+   margin-top: -21px;
+   margin-left: 24px;
+  }
+ }
+
+ //rohit css //
+ 
+.landing-page {
+  //position: relative;
+  //min-height: 612px;
+  opacity: 1.5;
+  height:100%;
+}
+/* .landing-page:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(56,63,91,0.9294117647058824);
+  opacity: 1;
+  z-index: 999999;
+}*/
+.content-bg:before, blockquote p:before {
+  content: ""}
+.landing-page .content-bg:before {
+  background: url(#{$imgPath}/bg-screen.jpg);
+  //background: url(#{$imgPath}/landing-users.png);
+}
+.landing-page .content-bg {
+  //background-color: rgba(255, 94, 58, .95);
+  -webkit-animation-name: sidedownscroll;
+  animation-name: sidedownscroll;
+}
+.landing-content{    z-index: 999999;
+  position: absolute;
+  color: white;
+}
+.h1, h1 {
+
+font-size: 4rem;
+margin-bottom: .5rem;
+font-family: inherit;
+font-weight: 700;
+line-height: 1.3; 
+}
+@-webkit-keyframes sidedownscroll {
+  0% {
+  -webkit-transform: translate3D(0, 0, 0);
+  transform: translate3D(0, 0, 0);
+}
+50% {
+  -webkit-transform: translate3D(-50%, 100%, 0);
+  transform: translate3D(-50%, 100%, 0);
+}
+100% {
+  -webkit-transform: translate3D(-100%, 200%, 0);
+  transform: translate3D(-100%, 200%, 0);
+}
+}@keyframes sidedownscroll {
+  0% {
+  -webkit-transform: translate3D(0, 0, 0);
+  transform: translate3D(0, 0, 0);
+}
+50% {
+  -webkit-transform: translate3D(-50%, 100%, 0);
+  transform: translate3D(-50%, 100%, 0);
+}
+100% {
+  -webkit-transform: translate3D(-100%, 200%, 0);
+  transform: translate3D(-100%, 200%, 0);
+}
+}.landing-page .header-spacer--standard {
+  margin-bottom: 40px;
+}
+.content-bg-wrap {
+  position: absolute;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.content-bg:before {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 400%}
+.content-bg {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  -webkit-animation-name: sideupscroll;
+  animation-name: sideupscroll;
+  -webkit-animation-duration: 30s;
+  animation-duration: 30s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  will-change: transform;
+  z-index: 1;
+}
+.without-animation {
+  -webkit-animation: none;
+  animation: none;
+}
+.tag-label {
+  display: inline-block;
+  border-radius: 3px;
+  padding: 4px;
+  color: #fff;
+  font-size: 8px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-left: 12px;
+  top: -3px;
+  position: relative;
+}
+.animated {
+  -webkit-animation-duration: .5s;
+  animation-duration: .5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  will-change: transform, opacity;
+}
+.animated.swingInX {
+  -webkit-transform-origin: top;
+  -ie-transform-origin: top;
+  transform-origin: top;
+  -webkit-backface-visibility: visible!important;
+  -webkit-animation-name: swingInX;
+  -moz-backface-visibility: visible!important;
+  -moz-animation-name: swingInX;
+  -o-backface-visibility: visible!important;
+  -o-animation-name: swingInX;
+  backface-visibility: visible!important;
+  animation-name: swingInX;
+}
+.animated.flipInX, .animated.swingOutX {
+  -webkit-backface-visibility: visible!important;
+  -moz-backface-visibility: visible!important;
+  -o-backface-visibility: visible!important;
+}
+.c-white {
+  color: #fff;
+  border: 1px solid;
+}
+.more-dropdown {
+  display: block;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 180px;
+  box-shadow: 0 0 34px 0 rgba(63, 66, 87, .1);
+  background-color: #fff;
+  border-radius: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear .3s, opacity .3s linear;
+  text-align: left;
+  padding: 15px 20px;
+  z-index: 5;
+}
+.more-dropdown ul {
+  padding: 15px 25px;
+  margin-bottom: 0;
+}
+.more-dropdown li a>* {
+  display: inline-block;
+  vertical-align: middle;
+}
+ .second-section {
+  z-index: 999999;
+}
+.oda-image-header {
+padding: 10px;
+margin-top:0px;
+text-align: center;
+}
+.container {
+box-shadow: none;
+}
+.registration-login-form{    
+
+background-color: #fff;
+margin-left: 60px;
+margin-top:60px;
+
+}
+.error-msg{
+font-size:12px;
+color: red;
+}
+.savedata-btn {
+background: rgba(56,63,91,0.9294117647058824) !important;
+color: white !important;
+}
+.signin-tabs {
+margin-top: 10px;
+background: #fff;
+}
+.signin-tabs > li {
+width: 50% !important;
+margin-left: 0px !important;
+border-radius: 0px;
+font-weight: 600;
+color: #484848;
+}
+.signin-tabs > li a {
+border-radius: 0px;
+color: #2e6da4;
+margin-right: -1px;
+font-size: 14px;
+text-align: center;
+border-top: 5px solid transparent;
+}
+.login-panel-tab {
+padding: 10px;
+border: 1px solid lightgrey;
+border-top: none;
+background: #fff;
+}
+.loginbox {
+margin-top: 10px;
+border-radius: 0;
+}
+.login-page-container .second-text-box {
+margin-top: 16px;
+}
+.recaptca-dimension {
+transform: scale(0.77);
+-webkit-transform: scale(0.77);
+transform-origin: 0 0;
+-webkit-transform-origin: 0 0;
+}
+.form-group {
+margin-bottom: 0px;
+}
+.submit-button {
+margin: 0px;
+}
+.loginbox .error-lbl {
+color: red;
+font-size: 12px;
+font-weight: normal;
+word-spacing: 1px;
+margin-left: 20px;
+}
+.loginbox .bottom-link {
+text-align: center;
+font-size: 12px;
+}
+.pipe-char {
+padding: 3px;
+}
+.loginbox {
+margin-top: 10px;
+border-radius: 0;
+}
+
+}
+.password-error{
+ margin-left:7px;
+}
+.btn-terms{
+    border: none;
+    background: transparent;
+}
+.privacy-policy-link{
+ margin-left: 6px;
+}
+
+
+ //----rohit css for ipad----//
+@media screen and (-webkit-min-device-pixel-ratio: 2)  and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: landscape)
+{
+ 
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 2)  and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: portrait)
+{
+  .content-wrapperm.singuphome .text-of-agreement {
+    margin-top: -38px;
+    margin-left: 24px;
+}
+
+}

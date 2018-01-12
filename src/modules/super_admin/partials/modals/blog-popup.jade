@@ -1,0 +1,60 @@
+.blog-super-admin 
+    .modal-header.blog-profile-heading
+        button.close(type='button', data-ng-click='close()') ×
+        h4.modal-title(data-ng-if='blogCtrl.isAdd') Add Blog
+        h4.modal-title(data-ng-if='blogCtrl.isEdit') Update Blog
+    .modal-body
+      form.form-section(role='form', name='blogCtrl.blogForm', novalidate='novalidate')
+          .row
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")          
+                  label Blog Title
+                  input(type='text', name='title', maxlength='80', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='blogCtrl.blogs.title' required)
+                  span.error-msg(data-ng-show='blogCtrl.blogForm.$submitted || blogCtrl.blogForm.title.$touched')
+                    span(data-ng-show='blogCtrl.blogForm.title.$dirty && blogCtrl.blogForm.title.$invalid')
+                    span.error-msg(data-ng-show='blogCtrl.blogForm.title.$error.required') Blog Title Required
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")           
+                label Blog Description
+                textarea(type='text', name='description', maxlength='1000', data-ng-model='blogCtrl.blogs.description' required)
+                span.error-msg(data-ng-show='blogCtrl.blogForm.$submitted || blogCtrl.blogForm.description.$touched')
+                  span(data-ng-show='blogCtrl.blogForm.description.$dirty && blogCtrl.blogForm.description.$invalid')
+                  span.error-msg(data-ng-show='blogCtrl.blogForm.description.$error.required') Blog Description Required
+          .row
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")          
+                  label Metatag Name
+                  input(type='text', name='metaTag', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', data-ng-model='blogCtrl.blogs.metaTag' required)
+                  span.error-msg(data-ng-show='blogCtrl.blogForm.$submitted || blogCtrl.blogForm.metaTag.$touched')
+                    span(data-ng-show='blogCtrl.blogForm.metaTag.$dirty && blogCtrl.blogForm.metaTag.$invalid')
+                    span.error-msg(data-ng-show='blogCtrl.blogForm.metaTag.$error.required') Metatag Name Required
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")
+                  label Meta Title   
+                  input(type='text', name='metaTitle', maxlength='80',data-ng-model='blogCtrl.blogs.metaTitle' required)
+                  span.error-msg(data-ng-show='blogCtrl.blogForm.$submitted || blogCtrl.blogForm.metaTitle.$touched')
+                      span(data-ng-show='blogCtrl.blogForm.metaTitle.$dirty && blogCtrl.blogForm.metaTitle.$invalid')
+                      span.error-msg(data-ng-show='blogCtrl.blogForm.metaTitle.$error.required') Meta Title Required
+          .row
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100") 
+                  label Meta Description 
+                  textarea(type='text', name='metaDescription', maxlength='1000', data-ng-model='blogCtrl.blogs.metaDescription' required)        
+                  span.error-msg(data-ng-show='blogCtrl.blogForm.$submitted || blogCtrl.blogForm.metaDescription.$touched')
+                      span(data-ng-show='blogCtrl.blogForm.metaDescription.$dirty && blogCtrl.blogForm.metaDescription.$invalid')
+                      span.error-msg(data-ng-show='blogCtrl.blogForm.metaDescription.$error.required') Meta Description Required
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")
+                  label Blog Image
+                  .image-box
+                      .row.image-box-row
+                        input(type="file", ngf-select="blogCtrl.uploadFile($files); blogCtrl.isFileAdded($files)", name="file", accept="image/*", ngf-max-size="2MB", ngf-model-invalid="errorFile")
+                        img(alt='', class='thumbnail' ng-src="{{blogCtrl.blogs.blogImagePath}}")
+    .modal-footer
+      .form-group.row
+        .col-xs-12.col-sm-6.col-md-6
+          label
+        .col-xs-12.col-sm-6.col-md-6
+          md-button.md-raised.savedata-btn(aria-label="save", type='button', data-ng-click='blogCtrl.addBlog()', data-ng-if='blogCtrl.isAdd') Add Blog
+          md-button.md-raised.md-primary(type='button', data-ng-click='blogCtrl.updateBlog()', data-ng-if='blogCtrl.isEdit') Update
+          md-button.md-raised.canceldata-btn(aria-label="save", type='button', data-ng-click='close()') Cancel

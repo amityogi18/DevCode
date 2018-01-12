@@ -1,0 +1,56 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title
+      a.collapsed(data-toggle='collapse', data-parent='#accordion', href='#three') Audio / Video Interview
+  #three.panel-collapse.collapse
+    .panel-body
+      .row.mg-b-10
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='audioVideoAccordionCtrl.openNewQuestion($event,"new")') New Question
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='audioVideoAccordionCtrl.openQuestionBank($event,"bank")') From Question Bank
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='audioVideoAccordionCtrl.openExistingTemplate($event,"template")') Use existing Template
+        .col-md-3
+          a.btn-gray(href='javascript:void(0)', ng-click='audioVideoAccordionCtrl.openPreviousPosition($event,"template")') From Previous Position
+        .down-btns
+      .audio-table-sec
+        .table-responsive
+          table.table
+            tbody
+              tr(ng-repeat='q in audioVideoAccordionCtrl.defaultQuestions')
+                td
+                    i.fa.fa-file-audio-o.fa-lg(data-ng-if="q.questionType === 'AUDIO' || q.questionType === 5")
+                    i.fa.fa-file-video-o.fa-lg(data-ng-if="q.questionType === 'VIDEO' || q.questionType === 1")
+                    i.fa.fa-list-ol.fa-lg(data-ng-if="q.questionType === 'MCQ' || q.questionType === 4")
+                    i.fa.fa-list-ul.fa-lg(data-ng-if="q.questionType === 'MSQ' || q.questionType === 3")
+                    i.fa.fa-file-code-o.fa-lg(data-ng-if="q.questionType === 'TEXT' || q.questionType === 2")
+                    | {{q.question}}
+                td 
+                    span(data-ng-if="q.responseType == 1") VIDEO
+                    span(data-ng-if="q.responseType == 5") AUDIO
+                    span(data-ng-if="q.responseType == 2") TEXT
+                    span(data-ng-if="q.responseType == 3") MSQ
+                    span(data-ng-if="q.responseType == 4") MCQ
+                    
+                td {{q.skill}}
+                td.trash-box
+                  a(href='javascript:void(0)', ng-click='audioVideoAccordionCtrl.removeQuestion($index)')
+                    i.fa.fa-trash
+      .no-qstn-sec(data-ng-if="audioVideoAccordionCtrl.defaultQuestions.length < 1") No Questions Added Yet !
+      
+script#questionbank-popup(type='text/ng-template')
+    include question-bank
+   
+  
+#myAudioVideoImage.modal.fade(role='dialog')
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal') ×
+      .modal-body
+        ul.list-group
+          li.list-group-item
+            img(ng-src='{{audioVideoImagePath}}')
+      .modal-footer
+        md-button.md-raised.canceldata-btn(type='button', data-dismiss='modal') Close 

@@ -1,0 +1,27 @@
+.container-fluid
+  .row.assessment-result
+    .col-md-12
+      .assessment-result-header
+        .candidate.pull-right
+          span
+          span John Smith
+      hr
+      .assessment-result-content
+        h4.exam-summary Exam Summary
+        table.table.table-bordered
+          thead
+            tr.info
+              th  Section Name
+              th No. of Questions
+              th Answered
+              th Not Answered
+              th Marked for Review
+              th Not Visited
+          tbody
+            tr(ng-repeat='section in assessmentResultController.examSummary.sections')
+              td {{section.title}}
+              td {{section.numberOfQuestions}}
+              td {{section.answered}}
+              td {{section.notAnswered}}
+              td {{section.marked}}
+              td {{section.notVisited}}

@@ -1,0 +1,171 @@
+script(src='https://www.google.com/recaptcha/api.js?hl=en')     
+.content-wrapperm.singuphome
+  .landing-page
+    .content-bg-wrap
+      .content-bg
+    .nav.navbar.navbar-default.singup-navebar.navbar-fixed-top.hidden-lg.hidden-sm.hidden-md
+    .header-spacer--standard
+    .container
+      .row.display-flex
+        .col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+          .landing-content
+            .user-login
+              a.small-logo1(data-ui-sref='app.user-login')
+                img(src='../../../public/img/bigoda-logo.png', alt='')
+            h1 Welcome to OnDemand
+            h4 Automate your hiring and speed up the recruitment process today
+            h4 Things you will love about OnDemand
+            p
+              | Automate the hiring process, One time set up and your hiring process will be automatic and as smooth than ever before.  
+              | OnDemand Interview, Beat the time zone and sent OnDemand interview invites to candidates through social media and personal emails and get immediate responses.  
+              | Video Interviews, Assess the candidate live with the best video interviewing experience.  
+              | Access to millions of candidates in the vast set of skills. OnDemand Conference meetings, Get the best experience of OnDemand conference meetings with all trending features and best user experience.  
+         
+        .col-xl-5.col-lg-6.col-md-6.col-sm-12.col-xs-12.second-section  
+          .col-md-12.col-sm-10.col-xs-12.registration-login-form
+            .panel.panel-info1
+            .panel-heading
+              .panel-title.login-heading1(data-translate='SIGNUP')
+              .login-body
+                a.login-link(data-ui-sref='app.user-login', data-translate='SIGNUP-TITIE')
+            .sep-dev    
+            .panel-body
+              form(role='form', name='companySignupCtrl.loginForm')
+                
+                .form-group.row
+                  label.col-md-4.col-sm-4.col-xs-12.control-label.lbl-head
+                    span.left(data-translate='PRODUCT')
+                    span.left.mandatory *
+                  .col-md-8.col-sm-8.col-xs-12
+                    div(layout-wrap='', layout-gt-sm='row')
+                      div(flex-gt-sm='50')
+                        md-checkbox.md-primary.md-singup(area-label='Interview', data-ng-model='companySignupCtrl.isInterview', ng-change='companySignupCtrl.checkProductSelection()')
+                        span(data-translate='INTERVIEW')
+                      div(flex-gt-sm='50')
+                        md-checkbox.md-primary.md-singup(area-label='Conference', data-ng-model='companySignupCtrl.isConference', ng-change='companySignupCtrl.checkProductSelection()')
+                        span(data-translate='CONFERENCE')
+                    .row
+                      span.error-message.product-msg {{companySignupCtrl.productMsg}}
+                md-input-container.md-block(flex="100")
+                  label(data-translate='BUSINESS-EMAIL')
+                  input(type='text', name='email', data-ng-model='companySignupCtrl.email', data-ng-blur='companySignupCtrl.isInvalidEmail(companySignupCtrl.email)', data-ng-keyup="companySignupCtrl.isInvalidEmail(companySignupCtrl.email)",maxlength='50', required)
+                  span.error-message(data-ng-if='companySignupCtrl.errormessage !== ""') {{companySignupCtrl.errormessage}}
+                md-input-container.md-block(flex="100")
+                  label(data-translate='PASSWORD')                  
+                  input(type='password', placeholder='******', data-ng-model='companySignupCtrl.password', name='password', maxlength='15', minlength='6',data-ng-blur='companySignupCtrl.analyzePassword(companySignupCtrl.password)', data-ng-keypress="companySignupCtrl.analyzePassword(companySignupCtrl.password)", data-ng-keyup="companySignupCtrl.analyzePassword(companySignupCtrl.password)",ng-change="companySignupCtrl.checkPasswordEquality()", required='required')
+                  span.error-message(data-ng-show='companySignupCtrl.loginForm.$submitted || companySignupCtrl.loginForm.password.$touched')
+                    span(data-ng-show='companySignupCtrl.loginForm.password.$dirty && companySignupCtrl.loginForm.password.$invalid')
+                    span(data-ng-show='companySignupCtrl.loginForm.password.$error.required', data-translate='PASSWORD-ERROR')
+                    p(data-ng-if='!companySignupCtrl.isPasswordRight', data-translate='PASSWORD-ERROR1')
+                md-input-container.md-block(flex="100")
+                  label(data-translate='CONFIRM-PASSWORD')                  
+                  input(type='password', placeholder='******', name='confirmPassword', data-ng-model='companySignupCtrl.confirmPassword', minlength='6',maxlength='15',data-ng-blur="companySignupCtrl.confirmPasswords(companySignupCtrl.confirmPassword)",ng-change="companySignupCtrl.checkPasswordEquality()", required='required')
+                  span.error-msg(data-ng-show="companySignupCtrl.loginForm.confirmPassword.$error.required && companySignupCtrl.loginForm.confirmPassword.$dirty")
+                    span(data-ng-show='companySignupCtrl.loginForm.confirmPassword.$dirty && companySignupCtrl.loginForm.confirmPassword.$invalid')
+                  span.error-message {{companySignupCtrl.message}}
+                //.form-group.row
+                  label.col-md-4.col-sm-4.col-xs-12.control-label.lbl-head
+                    span.left(data-translate='BUSINESS-EMAIL')
+                    span.left.mandatory *
+                  .col-md-8.col-sm-8.col-xs-12
+                    input.form-control.input__field(type='text', name='email', data-ng-model='companySignupCtrl.email', placeholder='Business Email Address', data-ng-blur='companySignupCtrl.isInvalidEmail(companySignupCtrl.email)', data-ng-keyup="companySignupCtrl.isInvalidEmail(companySignupCtrl.email)",maxlength='50', required)
+                    span.error-message(data-ng-if='companySignupCtrl.errormessage !== ""') {{companySignupCtrl.errormessage}}
+                //.form-group.row
+                  label.col-md-4.col-sm-4.col-xs-12.control-label.lbl-head
+                    span.left(data-translate='PASSWORD')
+                    span.left.mandatory *
+                  .col-md-8.col-sm-8.col-xs-12
+                    input.form-control.input__field(type='password', placeholder='******', data-ng-model='companySignupCtrl.password', name='password', maxlength='15', minlength='6',data-ng-blur='companySignupCtrl.analyzePassword(companySignupCtrl.password)', data-ng-keypress="companySignupCtrl.analyzePassword(companySignupCtrl.password)", data-ng-keyup="companySignupCtrl.analyzePassword(companySignupCtrl.password)",ng-change="companySignupCtrl.checkPasswordEquality()", required='required')
+                    span.error-message(data-ng-show='companySignupCtrl.loginForm.$submitted || companySignupCtrl.loginForm.password.$touched')
+                      span(data-ng-show='companySignupCtrl.loginForm.password.$dirty && companySignupCtrl.loginForm.password.$invalid')
+                      span(data-ng-show='companySignupCtrl.loginForm.password.$error.required', data-translate='PASSWORD-ERROR')
+                      span.password-error(data-ng-if='!companySignupCtrl.isPasswordRight', data-translate='PASSWORD-ERROR1')
+                //.form-group.row
+                  label.col-md-4.col-sm-4.col-xs-12.control-label.lbl-head
+                    span.left(data-translate='CONFIRM-PASSWORD')
+                    span.left.mandatory *
+                  .col-md-8.col-sm-8.col-xs-12
+                    input.form-control.input__field(type='password', placeholder='******', name='confirmPassword', data-ng-model='companySignupCtrl.confirmPassword', minlength='6',maxlength='15',data-ng-blur="companySignupCtrl.confirmPasswords(companySignupCtrl.confirmPassword)",ng-change="companySignupCtrl.checkPasswordEquality()", required='required')
+                    span.error-msg(data-ng-show="companySignupCtrl.loginForm.confirmPassword.$error.required && companySignupCtrl.loginForm.confirmPassword.$dirty")
+                      span(data-ng-show='companySignupCtrl.loginForm.confirmPassword.$dirty && companySignupCtrl.loginForm.confirmPassword.$invalid')
+                    span.error-message {{companySignupCtrl.message}}
+                      //span.error-message(data-ng-show="companySignupCtrl.passwordMismatch") Password Mismatch
+                .form-group.row
+                  label.col-md-4.col-sm-4.col-xs-12.control-label.lbl-head
+                    span.left(data-translate='CAPTCHA')
+                    span.left.mandatory *
+                  .col-md-8.col-sm-8.col-xs-12
+                    .g-recaptcha.captcha-field(data-sitekey='{{companySignupCtrl.SITEKEY}}')
+                .row
+                  .squaredTwo.col-md-1.col-sm-1.col-xs-12
+                     md-checkbox.md-primary(area-label='terms',  name='agree', data-ng-model='companySignupCtrl.isAgree', required='required')
+                  .col-md-11.col-sm-11.col-xs-12.text-of-agreement
+                    span.lbl-head(data-translate='AGREE-CHECK-BOX')
+                    a.terms-condition-link(href='javascript:void(0)',data-toggle="modal", data-target="#termsConditionModal") Terms & Conditions
+                    | &
+                    a.privacy-policy-link(href='javascript:void(0)',data-toggle="modal", data-target="#privacyPolicy") Privacy Policy
+                    span.error-message(data-ng-show='companySignupCtrl.loginForm.$submitted || companySignupCtrl.loginForm.agree.$touched')
+                      span(data-ng-show='companySignupCtrl.loginForm.agree.$dirty && companySignupCtrl.loginForm.agree.$invalid')
+                      span.error-message.clear(data-ng-show='companySignupCtrl.loginForm.agree.$error.required', data-translate='TERM-ERROR')
+                .sep-dev              
+                  .fields
+                    .save-mid-btns
+                      md-button.md-raised.md-primary.md-signup(type='button', data-ng-click='companySignupCtrl.doSignup()', data-translate='SUBMIT')
+                        i.fa.fa-arrow-circle-right(aria-hidden='true')
+                        
+          #termsConditionModal.modal.fade(role='dialog')
+            .modal-dialog.modal-lg
+              .modal-content
+                .modal-header.header-modal-tc
+                  button.close(type='button', data-dismiss='modal') ×
+                  h3.modal-title Terms & Conditions
+                .modal-body.content-justify
+                  p
+                    | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                  p
+                    | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+                  p The use of this website is sub  ject to the following terms of use:
+                  ul
+                    li
+                      | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                    li
+                      | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+                    li
+                      | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                    li
+                      | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+                    li
+                      | This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+                    li
+                      | All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.
+                    li
+                      | Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+                    li
+                      | From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+                    li
+                      | Your use of this website and any dispute arising out of such use of the website is subject to the laws of India, USA, England, Northern Ireland, Scotland and Wales.
+                .modal-footer
+                  md-button.md-primary.md-raised(type='button',data-dismiss='modal') OK
+          #privacyPolicy.modal.fade(role='dialog')
+            .modal-dialog
+              .modal-content
+                .modal-header.header-modal-tc
+                  button.close(type='button', data-dismiss='modal') ×
+                  h3.modal-title Privacy Policy
+                .modal-body.content-justify
+                  p
+                    | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+                  p
+                    | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+                  p The use of this website is sub  ject to the following terms of use:
+                  ul
+                    li
+                      | The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+                    li
+                      | This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+                    li
+                      | Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+                    li
+                      | Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+                .modal-footer
+                  md-button.md-primary.md-raised(type='button',data-dismiss='modal') OK

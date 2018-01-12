@@ -1,0 +1,91 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .row
+      .candidate-view-steps.step
+        ul.step-tab
+          li
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate="PREPARE")
+          li.active
+            figure.step-icons
+              span
+                img.welcome-image(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate="CERTIFICATE")
+        .step-body(style='padding: 15px 0px; !important')
+          .col-md-12
+            .col-md-1
+            .col-md-12.col-xs-12
+              .main-body-wrapper.row
+                .default-form
+                  .col-md-12.whte-bg
+                    .col-md-12
+                        div.scroll-instruction.instruction-heading
+                            .row
+                                .col-xs-8
+                                    h4 General Instructions
+                    .col-md-12
+                        div.scroll-instruction.instruction-inner-body
+                            .row
+                                .col-xs-12
+                                    p
+                                      | Total number of questions :
+                                      | 20
+                                    p
+                                      | Time Duration of examination is :
+                                      | 30 Minutes.
+                                    p Each question carry 1 mark, no negative marks.
+                                    p Do not Minimize/Refresh/close the test window else your certification will be cancelled.
+                                    p After clicking on the 'Start Button' the actual test time will begin.
+                                    p The clock will be set at the server.The count down timer in the top left of corner of screen will display the remaining time available for you to complete the examination.When the timer reaches zero, the examination end by itself.You will not be required to end or submit your examination.
+                                    p The Question palette displayed on the right side of the screen will show the status of each question using one of the following symbols:
+                                    div
+                                        .row.not-visited
+                                            .col-xs-2 
+                                                .not-visited-palette
+                                            p You have not visited the question yet
+                                        .row.not-answer
+                                            .col-xs-2 
+                                                .not-answer-palette
+                                            p You have not answered the question.
+                                        .row.answer-success
+                                            .col-xs-2 
+                                                .answer-palette
+                                            p You have answered the question.
+                                        .row.answer-review
+                                            .col-xs-2 
+                                                .review-palette
+                                            p You have marked the question for review.
+                                    p There are 10 questions and each question is followed by 4 alternatives/ options.
+                            .row
+                                .col-xs-8
+                                    h4 Navigating to a Question:
+                            hr(style='margin-top: 10px; margin-bottom: 10px;')
+                            .row
+                                .col-xs-12
+                                    p  Click on the question number on question palette at right of your screen to go to that numbered question directly.Note that using this option does not SAVE your answer to the current question. 
+                                    p  Click on Save & Next to save your answer for the current question and then go to the next question.
+                            .row
+                                .col-xs-8
+                                    h4 Answering a Question:
+                            hr(style='margin-top: 10px; margin-bottom: 10px;')
+                            .row
+                                .col-xs-12
+                                    p  To select your answer, click on the button of one of the options.
+                                    p  To deselect your choosen answer, click on the button of the choosen option again.
+                                    p  To change your choosen option, click on the button of another option.
+                                    p To save your answer, You must click on the Save & Next button.
+                                    p Questions which are "Marked for Review" will be considered as "save" at the end of evaluation.
+                                    p All the best
+                    .col-md-12
+                      div(style='width:100%; margin:0 auto; margin-top:10px;text-align:center;')
+                        .btn-sec
+                          md-button.md-raised.savedata-btn(data-ng-click="candidateCertificateInstructionCtrl.startCertificateQuestion()",data-translate="START-CERTIFICATION")
+                    
+sidebar-help-component
+                  
+
+
+
+

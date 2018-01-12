@@ -1,0 +1,216 @@
+.super_admin{
+  
+  .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+  
+  md-input-container {
+      margin: 5px !important;
+  }
+  
+
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+
+
+    .panel.panel-default .panel-heading {
+      border-radius: 0px;
+    }
+    
+    th{
+       text-align: left!important;
+     }
+
+  .pull-right {
+    float: right !important;
+    margin-left: 10px;
+  }
+  
+  .candidate-data-info{
+      margin-top: 30px;
+  }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+  
+  .company-filter-position{
+      margin-top: 8px;
+  }
+
+  .add-candidate-btn{
+    margin-top: 2px;
+    background-color: #3f51b5;
+  }
+    
+    .company-candidate{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .company-candidate-heading{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+
+    }
+    
+     .ui-select-container .ui-select-placeholder {
+            line-height: 0px!important;
+     }
+    .top-btn-popup{
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        background: $btnPrimaryColor;
+        padding: 8px 20px;
+        color: $white;
+        font-size: 11px;
+        text-transform: uppercase;
+    }
+    
+    .btn-position{
+        margin-top: -5px;
+    }
+    
+    .client-view-btn{
+        float: right;
+        margin-top: -26px;
+    }
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        //background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+        background: #3f51b5 !important;
+    }
+  .active-btn-cc{
+    margin-left:4px;
+  }
+  .btn-eye{
+    background:transparent !important;
+    border:none !important;
+  }
+  
+  @media only screen and (max-width : 765px) {
+    
+    .company-filter-dropdown{
+      margin-top: 15px;
+    }
+    
+    .active-btn-cc{
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .company-filter-position{
+      margin-top: 15px;
+      margin-bottom: 8px;
+    }
+  }
+  
+  @media only screen and (max-width : 992px) { 
+  
+    .active-btn-cc{
+      margin-top: 15px;
+    }
+  }
+  
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+      border:0;
+      background:transparent;
+  }
+
+}
+    .error-msg-cmn{
+      color:$red;
+      font-size:13px;
+    }
+    .mandatory-field{
+      color:$red;
+    }
+    .add-candidate-cls-btn {
+      margin-bottom: 10px !important;
+    }
+
+  .modal-company-candidate {
+    
+    .form-group >input{
+      min-width: 85%;
+    }
+
+    input[type="search"] {
+      color:$black !important;
+    }
+  
+    .error-msg-cmn{
+      color:$red;
+      font-size:13px;
+    }
+    
+    .form-section{
+      background-color: $white;
+    }
+  
+    md-input-container {
+      margin: 12px !important;
+    }
+
+    .md-select-value{
+      ::after {
+        content: '';
+      }
+    }
+    
+    .dashboard-profile-heading{
+      padding: 6px!important;
+      //background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+      color: $white!important;
+      font-size: 18px!important;
+      background: #3f51b5 !important;
+  }
+
+    // .candidate-close-btn{
+    //   //margin-bottom: 9px!important;
+    // }
+    .ui-select-container .ui-select-placeholder {
+      line-height: 2.2 !important;
+    }
+    .ui-select-multiple.ui-select-bootstrap {
+      border-radius: 0px;
+      min-height:33px;
+    }
+    .company-size {
+        font-size: 14px;
+        color: rgba(0,0,0,0.54);
+    }
+    .comapny-location {
+        margin-left: 35px;
+    }
+  }

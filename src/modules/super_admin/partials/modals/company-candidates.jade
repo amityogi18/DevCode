@@ -1,0 +1,120 @@
+.modal-company-candidate 
+  .modal-header.dashboard-profile-heading
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-ng-if='editCandidateCtrl.addMode') Candidate
+    h4.modal-title(data-ng-if='editCandidateCtrl.editMode') Update Candidate
+    h4.modal-title(data-ng-if='editCandidateCtrl.viewMode') Candidate Details
+  .modal-body
+      form.form-horizontal.form-section(name='editCandidateCtrl.candidateForm', role='form', novalidate='novalidate', data-ng-hide='editCandidateCtrl.viewMode')
+        .form-group.row
+           .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label First Name
+                input(type='text', name='firstName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',ng-model='editCandidateCtrl.editCandidateData.firstName', required='required')
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.firstName.$touched')
+                  span(data-ng-show='editCandidateCtrl.candidateForm.firstName.$dirty && interviewerForm.firstName.$invalid')
+                  span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.firstName.$error.required') Please Enter First Name
+           .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label Last Name
+                input(type='text', name='lastName', maxlength='25', onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32',ng-model='editCandidateCtrl.editCandidateData.lastName', required='required')
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.lastName.$touched')
+                  span(data-ng-show='editCandidateCtrl.candidateForm.lastName.$dirty && editCandidateCtrl.candidateForm.lastName.$invalid')
+                  span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.lastName.$error.required') Please Enter Last Name
+        .form-group.row
+           .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label(for='email', data-translate='EMAIL')
+                input#email(type='text',name='email' maxlength='50', ng-model='editCandidateCtrl.editCandidateData.emailId',data-ng-blur='editCandidateCtrl.isInvalidEmail(editCandidateCtrl.editCandidateData.emailId)', data-ng-keypress="editCandidateCtrl.isInvalidEmail(editCandidateCtrl.editCandidateData.emailId)", data-ng-keyup="editCandidateCtrl.isInvalidEmail(editCandidateCtrl.editCandidateData.emailId)" required)
+                span.error-msg-cmn(data-ng-if='editCandidateCtrl.errormessage !== ""') {{editCandidateCtrl.errormessage}}
+           .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label(for='contact', data-translate='PHN-NO')
+                input#contact(type='text',name='contactNumber',ng-model='editCandidateCtrl.editCandidateData.contactNumber',maxlength='14', onkeypress='return event.charCode <= 57', data-ng-blur='editCandidateCtrl.analyzePhoneNumber(editCandidateCtrl.editCandidateData.contactNumber)', data-ng-keypress="editCandidateCtrl.analyzePhoneNumber(editCandidateCtrl.editCandidateData.contactNumber)", data-ng-keyup="editCandidateCtrl.analyzePhoneNumber(editCandidateCtrl.editCandidateData.contactNumber)" required)
+                span.error-msg-cmn(data-ng-if='editCandidateCtrl.errmsgcon !== ""') {{editCandidateCtrl.errmsgcon}}
+        .form-group.row
+          .col-xs-12.col-sm-12.col-md-12
+            md-input-container.md-block(flex="100")
+              place-autocomplete(data-ng-model='editCandidateCtrl.geoAddress' on-address='editCandidateCtrl.setAddressValue(addressFn)', md-input-maxlength="250", md-input-minlength ="5" search-type='1') 
+        .form-group.row
+          .col-xs-12.col-sm-6.col-md-6
+            md-input-container.md-block(flex="100")
+              label(data-translate='DEPARTMENT')
+              md-select(data-ng-model='editCandidateCtrl.editCandidateData.department.id', data-ng-change='editCandidateCtrl.getSkillSet(editCandidateCtrl.editCandidateData.department.id, true)', name='department', md-on-close="editCandidateCtrl.clearSearchDepartment()", data-md-container-class='selectdemoSelectHeader',required)
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='editCandidateCtrl.searchDepartment', type='search', placeholder='Search Department', ng-keydown="$event.stopPropagation()")
+                md-optgroup(label='Department')
+                md-option(ng-value='department.id', data-ng-repeat='department in editCandidateCtrl.departmentList | filter: editCandidateCtrl.searchDepartment') {{department.name}}
+              span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.department.$touched')
+                span(data-ng-show='editCandidateCtrl.candidateForm.department.$dirty && editCandidateCtrl.candidateForm.department.$invalid')
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.department.$error.required') Please Select Functional Area
+          .col-xs-12.col-sm-6.col-md-6
+            md-input-container.md-block(flex="100")
+              label(data-translate='SKILL')
+              md-select(data-ng-model='editCandidateCtrl.editCandidateData.skillsets', name='skill', multiple='', md-on-close="editCandidateCtrl.clearSkillInput()",  data-md-container-class='selectdemoSelectHeader', required)
+                md-select-header.demo-select-header
+                  input.demo-header-searchbox.md-text(ng-model='editCandidateCtrl.searchSkill', type='search', placeholder='Search Skillset', ng-keydown="$event.stopPropagation()")
+                md-optgroup(label='Skill')
+                md-option(ng-value='skillset.id', ng-repeat='skillset in editCandidateCtrl.skillsetList | filter: editCandidateCtrl.searchSkill') {{skillset.skillsetName}}
+              span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.skill.$touched')
+                span(data-ng-show='editCandidateCtrl.candidateForm.skill.$dirty && editCandidateCtrl.candidateForm.skill.$invalid')
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.skill.$error.required') Please Select Skill
+        .form-group
+          .col-md-6
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label Total Year
+                input(type='text', name='totalYears', ng-model='editCandidateCtrl.editCandidateData.totalyearsOfExperience',maxlength='2',onkeypress='return event.charCode <= 57', required='required')
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.totalYears.$touched')
+                  span(data-ng-show='editCandidateCtrl.candidateForm.totalYears.$dirty && editCandidateCtrl.candidateForm.totalYears.$invalid')
+                  span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.totalYears.$error.required') Please Enter Experience In Years
+            .col-xs-12.col-sm-6.col-md-6
+              md-input-container.md-block(flex="100")   
+                label Total Month
+                md-select(name='totalMonths', ng-model='editCandidateCtrl.editCandidateData.totalMonths',maxlength='2',onkeypress='return event.charCode <= 57',required='required')
+                  md-option(ng-repeat="n in editCandidateCtrl.months track by $index" ng-value="n") {{n}}
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.totalMonths.$touched')
+                  span(data-ng-show='editCandidateCtrl.candidateForm.totalMonths.$dirty && editCandidateCtrl.candidateForm.totalMonths.$invalid')
+                  span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.totalMonths.$error.required') Please Enter Experience In Months
+          .col-md-6
+            .col-xs-12.col-sm-12.col-md-12
+              md-input-container.md-block(flex="100")
+                label Company
+                md-select(data-ng-model='editCandidateCtrl.editCandidateData.companyId', name='company', md-on-close="editCandidateCtrl.clearSearchCompany()", data-md-container-class='selectdemoSelectHeader',required)
+                  md-select-header.demo-select-header
+                    input.demo-header-searchbox.md-text(ng-model='editCandidateCtrl.searchCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+                  md-optgroup(label='Company')
+                  md-option(ng-value='company.id', data-ng-repeat='company in editCandidateCtrl.companyList | filter: editCandidateCtrl.searchCompany') {{company.name}}
+                span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.$submitted || editCandidateCtrl.candidateForm.company.$touched')
+                  span(data-ng-show='editCandidateCtrl.candidateForm.company.$dirty && editCandidateCtrl.candidateForm.company.$invalid')
+                  span.error-msg-cmn(data-ng-show='editCandidateCtrl.candidateForm.company.$error.required') Please Select Company
+      table.table(data-ng-if='editCandidateCtrl.viewMode')
+            tbody
+              tr
+                td  Name
+                td  {{editCandidateCtrl.editCandidateData.firstName}} {{editCandidateCtrl.editCandidateData.lastName}}
+              tr
+                td Email
+                td  {{editCandidateCtrl.editCandidateData.emailId}}
+              tr
+                td Company
+                td  {{editCandidateCtrl.editCandidateData.companyName}}
+              tr
+                td Department
+                td  {{editCandidateCtrl.editCandidateData.departmentName}}
+              tr
+                td Contact Number
+                td  {{editCandidateCtrl.editCandidateData.contactNumber}}
+              tr
+                td Total Experience
+                td  {{editCandidateCtrl.editCandidateData.totalyearsOfExperience}} Year(s) {{editCandidateCtrl.editCandidateData.totalMonths}} Month(s)
+              tr
+                td Location
+                td  {{editCandidateCtrl.editCandidateData.country}} | {{editCandidateCtrl.editCandidateData.state}} | {{editCandidateCtrl.editCandidateData.city}}
+    .modal-footer.col-sm-12(data-ng-hide='editCandidateCtrl.viewMode')
+        .col-xs-12.col-sm-6.col-md-6
+        .col-xs-12.col-sm-6.col-md-6
+          md-button.md-raised.md-primary(aria-label="save", type='button', data-translate='SAVE', data-ng-click='editCandidateCtrl.addCandidate()', data-ng-hide='editCandidateCtrl.editMode')
+          md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='editCandidateCtrl.updateCandidate()', data-ng-if='editCandidateCtrl.editMode') Update
+          md-button.md-raised.canceldata-btn(aria-label="save", type='button', data-ng-click='close()', data-translate='CLOSE')
+

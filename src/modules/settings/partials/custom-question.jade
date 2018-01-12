@@ -1,0 +1,290 @@
+.content-wrapper.custom-question-setting
+  .video-intro-heading
+    span.video-intro-1 Custom Question
+  .panel-body
+      div(ng-cloak='')
+        md-content
+            md-tabs(md-dynamic-height='', md-border-bottom='')
+                md-tab(label='Custom Question')
+                  md-content.md-padding
+                    .col-md-12.col-sm-12.col-xs-12
+                      span.pull-right.btn-sec
+                        a(data-asm-modal='settingsAddCustomQuestionsModal', info-data="add", btn-class='md-button md-raised md-primary', on-close="CustomQuestionListingCtrl.onClose()")
+                          span(data-translate='ADD-CUSTOM-QUE')
+                        md-button.md-raised.md-primary.default-question-btn(aria-label="default question", ng-click= "CustomQuestionListingCtrl.setDefaultQuestion()", ng-disabled='!CustomQuestionListingCtrl.isDefaultChecked') Set as Default Question    
+                      .col-xs-12.showMe
+                        .form-group
+                          select.form-control(class="selectpicker" ng-model="CustomQuestionListingCtrl.test" ng-change="CustomQuestionListingCtrl.toggle()")
+                            option(ng-model="col.show" value="{{$index}}" ng-repeat="col in CustomQuestionListingCtrl.cols.slice(1,CustomQuestionListingCtrl.cols.length) track by $index") {{col.title()}}
+                      .col-md-12.col-sm-12.col-xs-12
+                        p.text-label(ng-hide='CustomQuestionListingCtrl.customQuestionList.length < 1') Showing 
+                          span
+                            strong 1-{{CustomQuestionListingCtrl.customQuestionList.length}}
+                            |  of  
+                            strong
+                            |  {{CustomQuestionListingCtrl.customQuestionCount}}     
+                            |  records
+                                  
+                      .main-table-area
+                        .table-responsive.table-first.hide-overflow
+                          table.tansaction-table.table(ng-table='CustomQuestionListingCtrl.customQuestionTableParams', ng-table-columns-binding="CustomQuestionListingCtrl.cols")
+                            tr(ng-repeat='questions in $data')
+                              td
+                                //input(type='checkbox', ng-checked ="questions.isDefault === 1" data-ng-click='CustomQuestionListingCtrl.addDefaultQuestion($event, questions.questionId)')
+                                md-checkbox.md-primary(ng-model="questions.isDefault", data-ng-click='CustomQuestionListingCtrl.addDefaultQuestion(questions.questionId)', aria-label="addcheckbox", style="margin-bottom: -15px;")
+                              td
+                                i.fa.fa-file-audio-o(data-ng-if="questions.questionType === 'AUDIO' || questions.questionType === 5")
+                                i.fa.fa-file-video-o(data-ng-if="questions.questionType === 'VIDEO' || questions.questionType === 1")
+                                i.fa.fa-list-ol(data-ng-if="questions.questionType === 'MCQ' || questions.questionType === 4")
+                                i.fa.fa-list-ul(data-ng-if="questions.questionType === 'MSQ' || questions.questionType === 3")
+                                i.fa.fa-file-code-o(data-ng-if="questions.questionType === 'TEXT' || questions.questionType === 2")
+                              td.text-center.icon-width(ng-if="true" class='col-sm-2' title="'Action'")
+                                a(data-asm-modal='settingsAddCustomQuestionsModal', modal-data="questions.questionId",  info-data="edit", btn-class='edit-button', on-close="CustomQuestionListingCtrl.onClose()")
+                                  i.fa.fa-pencil(aria-hidden='true',uib-tooltip="Edit")
+                                a.hover-pointer(data-toggle='modal',data-target='#myCustomQuestionModal',data-ng-click="CustomQuestionListingCtrl.getQuestionDetailsById(questions.questionId)")
+                                  i.fa.fa-eye(aria-hidden='true',uib-tooltip='View')
+                                a.hover-pointer(data-ng-click='CustomQuestionListingCtrl.deleteCustomQuestion(questions.questionId)')
+                                  i.fa.fa-times(aria-hidden='true',uib-tooltip="Delete")
+                                td(ng-if="true" class='col-sm-2' title="'Question'",  sortable="'question'", ng-data='questions.question', class-name='table-accordian', style="width:42%;") 
+                                  span {{questions.question | limitTo :60}}
+                                  span(ng-if='questions.question.length>60') ...
+                              td(ng-if="true" class='col-sm-2' title="'Skill'",  sortable="'skill'", ng-data='questions.skill', class-name='table-accordian') {{questions.skill}}
+                              td(ng-if="true" class='col-sm-2' title="'Response Type'", sortable="'responseType'", ng-data='questions.responseType', class-name='table-accordian')
+                                span(data-ng-if="questions.responseTypeId == 1") VIDEO
+                                span(data-ng-if="questions.responseTypeId == 5") AUDIO
+                                span(data-ng-if="questions.responseTypeId == 2") TEXT
+                                span(data-ng-if="questions.responseTypeId == 3") MSQ
+                                span(data-ng-if="questions.responseTypeId == 4") MCQ
+                        .row.notification-message(ng-show="CustomQuestionListingCtrl.customQuestionList.length < 1")
+                          center No Custom Questions Added Yet !!!
+                    .col-md-12.col-sm-12.col-xs-12.download-section
+                      span.col-md-12.col-sm-12.col-xs-12.pull-left
+                        a(href="https://jottp.com/templates/custom_question_template.xlsx" , download="download" ) Download Question Template
+                        md-button.md-raised.md-cornered.savedata-btn(type='file', ngf-max-size='1MB' name="file", ngf-select='CustomQuestionListingCtrl.uploadAttachment($files);CustomQuestionListingCtrl.isFileAdded($files)', ngf-model-invalid="errorFile" data-ng-model='CustomQuestionListingCtrl.attachment',accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel") Import Question
+                md-tab(label='Default Question')
+                  md-content.md-padding
+                    .col-md-12.col-sm-12.col-xs-12
+                      p.text-label(ng-hide='CustomQuestionListingCtrl.defaultCustomQuestionList.length < 1') Showing 
+                          span
+                            strong 1-{{CustomQuestionListingCtrl.defaultCustomQuestionList.length}}
+                            |  of  
+                            strong
+                              {{CustomQuestionListingCtrl.defaultCustomQuestionCount}}     
+                            |  records                         
+                    .main-table-area
+                       .table-responsive.table-first.hide-overflow
+                         table.tansaction-table.table(ng-table='CustomQuestionListingCtrl.defaultCustomQuestionTableParams', ng-table-columns-binding="CustomQuestionListingCtrl.cols")
+                           tr(ng-repeat="questions in $data")
+                             td
+                               i.fa.fa-file-audio-o(data-ng-if="questions.questionType === 'AUDIO' || questions.questionType === 5")
+                               i.fa.fa-file-video-o(data-ng-if="questions.questionType === 'VIDEO' || questions.questionType === 1")
+                               i.fa.fa-list-ol(data-ng-if="questions.questionType === 'MCQ' || questions.questionType === 4")
+                               i.fa.fa-list-ul(data-ng-if="questions.questionType === 'MSQ' || questions.questionType === 3")
+                               i.fa.fa-file-code-o(data-ng-if="questions.questionType === 'TEXT' || questions.questionType === 2")
+                             td(ng-if="true" class='col-sm-2' title="'Question'",  sortable="'question'", ng-data='questions.question', class-name='table-accordian', style="width:42%;") 
+                               span {{questions.question | limitTo :60}}
+                               span(ng-if='questions.question.length>60') ...                        
+                             td(ng-if="true" class='col-sm-2' title="'Skill'",  sortable="'skill'", ng-data='questions.skill', class-name='table-accordian') {{questions.skill}}
+                             td(ng-if="true" class='col-sm-2' title="'Response Type'", sortable="'responseType'", ng-data='questions.responseType', class-name='table-accordian')
+                               span(data-ng-if="questions.responseTypeId == 1") VIDEO
+                               span(data-ng-if="questions.responseTypeId == 5") AUDIO
+                               span(data-ng-if="questions.responseTypeId == 2") TEXT
+                               span(data-ng-if="questions.responseTypeId == 3") MSQ
+                               span(data-ng-if="questions.responseTypeId == 4") MCQ
+                       .row.notification-message(ng-show="CustomQuestionListingCtrl.defaultCustomQuestionList.length < 1")
+                         center No Default Questions Added Yet !!!
+                md-tab(label='Template')
+                  md-content.md-padding
+                      span.pull-right.btn-sec
+                        a(data-asm-modal='settingsAddNewTemplateModal', info-data="add-template", btn-class='md-button md-raised md-primary header-button', on-close="CustomQuestionListingCtrl.onClose()")
+                          span(data-translate='ADD-NEW-TEMPLATE')
+                      .col-md-12.col-sm-12.col-xs-12
+                        p.text-label(ng-hide='CustomQuestionListingCtrl.customQuestionTemplateList.length < 1') Showing 
+                          span
+                            strong 1-{{CustomQuestionListingCtrl.customQuestionTemplateList.length}}
+                            |  of  
+                            strong
+                              {{CustomQuestionListingCtrl.customQuestionTemplateCount}}      
+                            |  records                                
+                      .main-table-area
+                        .table-responsive.table-first.hide-overflow
+                          table.table(ng-table='CustomQuestionListingCtrl.customQuestionTemplatetableParams')
+                            tr(ng-repeat='template in $data')
+                              td.text-center(ng-if="true" class='col-sm-2')
+                                a(data-asm-modal='settingsAddNewTemplateModal', modal-data="template.id", info-data="edit-template",btn-class='edit-button', on-close="CustomQuestionListingCtrl.onClose()")
+                                  i.fa.fa-pencil(aria-hidden='true',uib-tooltip="Edit")
+                                a.icon-hover(data-toggle='modal',data-target='#myCustomQuestionTemplateModal', data-ng-click="CustomQuestionListingCtrl.getTemplateDetailsById(template.id)")
+                                  i.fa.fa-eye(aria-hidden='true',uib-tooltip="View")
+                                a.icon-hover(data-ng-click='CustomQuestionListingCtrl.deleteQuesstionTemplate(template.id)')
+                                  i.fa.fa-times(aria-hidden='true',uib-tooltip="Delete")
+                              td(ng-if="true" class='col-sm-2' title="'Question Template'", sortable="'name'", ng-data='template.name', class-name='table-accordian') {{template.name}}
+                        .row.notification-message(ng-show="CustomQuestionListingCtrl.customQuestionTemplateList.length < 1")
+                          center No Template Added Yet !!!
+  #myCustomQuestionModal.modal.fade.viewCustomQuestionModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', ng-click='CustomQuestionListingCtrl.stopMedia()') ×
+          h4.modal-title(data-translate='VIEW-QUE')
+        .modal-body
+          .col-md-12.col-sm-12.col-xs-12
+            .row.mg-b-10.category-controls
+              .col-md-12.col-sm-12.col-xs-12.row_padding
+                .col-md-2.col-sm-2.col-xs-12.select_tab.drop_box.box_padding
+                  label Question Type :
+                  p {{CustomQuestionListingCtrl.question.questionTypeName}}
+                .col-md-3.col-sm-3.col-xs-12.select_tab.drop_box.box_padding
+                  label Function Area :
+                  p {{CustomQuestionListingCtrl.question.departmentName}}
+                .col-md-2.col-xs-12.col-sm-2
+                  label Skill :
+                  p {{CustomQuestionListingCtrl.question.skillsetName}}
+                .col-md-2.col-xs-12.col-sm-2
+                  label Response Type
+                  p(data-ng-if='CustomQuestionListingCtrl.question.selectedResponseType == 1') VIDEO
+                  p(data-ng-if='CustomQuestionListingCtrl.question.selectedResponseType == 2') TEXT
+                  p(data-ng-if='CustomQuestionListingCtrl.question.selectedResponseType == 3') MSQ
+                  p(data-ng-if='CustomQuestionListingCtrl.question.selectedResponseType == 4') MCQ
+                  p(data-ng-if='CustomQuestionListingCtrl.question.selectedResponseType == 5') AUDIO
+                //.col-md-3
+                  img(src='{{CustomQuestionListingCtrl.question.imagePath}}', class="img-thumbnail" style='width:100%;height:100px')
+
+          .row.mg-b-10.category-controls
+            .col-md-12.col-sm-12.col-xs-12
+              .row.mg-b-10.category-controls
+                .col-md-12.col-sm-12.col-xs-12.question-div.question-area(ng-show='CustomQuestionListingCtrl.question.selectedQuestionType === 2')
+                  p
+                    strong Question :
+                    | {{CustomQuestionListingCtrl.question.enteredQuestion}}
+              .row.mg-b-10.category-controls(ng-show='CustomQuestionListingCtrl.question.selectedQuestionType === 3')
+                .col-md-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{CustomQuestionListingCtrl.question.enteredQuestion}}
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 1.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option1}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='checkbox', name='checkbox', data-ng-checked='CustomQuestionListingCtrl.question.answerOption1 == 1', data-ng-model='CustomQuestionListingCtrl.question.answerOption1', disabled )
+
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 2.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option2}}
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    input#option3(type='checkbox', name='checkbox', data-ng-checked='CustomQuestionListingCtrl.question.answerOption2 == 1', data-ng-model='CustomQuestionListingCtrl.question.answerOption2', disabled )
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 3.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span#cbOption3 {{CustomQuestionListingCtrl.question.option3}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='checkbox', name='checkbox', data-ng-checked='CustomQuestionListingCtrl.question.answerOption3 == 1', data-ng-model='CustomQuestionListingCtrl.question.answerOption3', disabled )
+
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 4.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span#cbOption4 {{CustomQuestionListingCtrl.question.option4}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='checkbox', name='checkbox', data-ng-checked='CustomQuestionListingCtrl.question.answerOption4 == 1', data-ng-model='CustomQuestionListingCtrl.answerOption4', disabled )
+
+              .row.mg-b-10.category-controls(ng-show='CustomQuestionListingCtrl.question.selectedQuestionType === 4')
+                .col-md-12.col-sm-12.col-xs-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{CustomQuestionListingCtrl.question.enteredQuestion}}
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 1.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option1}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='radio', name='chooseone', value='CustomQuestionListingCtrl.question.answerOption1', data-ng-model='CustomQuestionListingCtrl.question.answerOption1' , ng-value="2",disabled)
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 2.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option2}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='radio', name='chooseone',value='CustomQuestionListingCtrl.question.answerOption2', data-ng-model='CustomQuestionListingCtrl.question.answerOption2' , ng-value="3", disabled)
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 3.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option3}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='radio', name='chooseone', value='CustomQuestionListingCtrl.question.answerOption3',data-ng-model='CustomQuestionListingCtrl.question.answerOption3' , ng-value="4",disabled)
+                .col-md-12.col-sm-12.col-xs-12.text-left
+                  .col-md-1.col-sm-1.col-xs-2.text-left
+                    label 4.
+                  .col-md-10.col-sm-10.col-xs-8.text-left
+                    span {{CustomQuestionListingCtrl.question.option4}}
+                  .col-md-1.col-sm-1.col-xs-2.text-right
+                    input(type='radio', name='chooseone', value='CustomQuestionListingCtrl.question.answerOption4', data-ng-model='CustomQuestionListingCtrl.question.answerOption4' , ng-value="5", disabled)
+              .row.mg-b-10(ng-show='CustomQuestionListingCtrl.question.selectedQuestionType === 1')
+                .col-md-12.col-sm-12.col-xs-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{CustomQuestionListingCtrl.question.enteredQuestion}}
+                .video-area.col-md-12
+                  .video-border
+                    video#questionBankVideoElement.video-js.vjs-default-skin.meet-video.vjs-big-play-centered.video-field-position.vjs-controls-enabled(poster="./img/video-player-background.jpg",  data-setup='{ "controls": true, "autoplay": false, "preload": "auto", "aspectRatio":"640:267", "playbackRates": [1, 1.5, 2, 2.5, 3, 3.5, 4] }')
+              .row.mg-b-10(ng-if='CustomQuestionListingCtrl.question.selectedQuestionType === 5')
+                .col-md-12.col-sm-12.col-xs-12.question-div.question-area
+                  p
+                    strong Question :
+                    | {{CustomQuestionListingCtrl.question.enteredQuestion}}
+                audio#questionBankAudioElement(autoplay='autoplay', controls='controls', ng-src='{{CustomQuestionListingCtrl.trustSrc(CustomQuestionListingCtrl.question.filePath)}}')
+                  .btn-sec
+              .row
+                //img(src='{{CustomQuestionListingCtrl.question.imagePath}}', style='width:200px;height:200px')
+              .row.mg-b-10.pull-right
+                button.btn.btn-danger(type='button',data-dismiss='modal',ng-click='CustomQuestionListingCtrl.stopMedia();') Close
+
+  #myCustomQuestionTemplateModal.modal.fade.viewCustomQuestionTemplateModal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal') ×
+          h4.modal-title(data-translate='VIEW-TEMPLATE')
+        .modal-body
+          .row
+            .col-md-12.temp-parent
+              .col-md-12.temp-div
+                .form-group.row.temp-section
+                  label.col-md-4.col-sm-4.col-xs-12.col-form-label Template Name :
+                  .col-md-8.col-xs-8.col-sm-8
+                    p {{CustomQuestionListingCtrl.templateDetail.name}}
+            .col-md-12.col-sm-12.col-xs-12
+              .form-group.row
+                table.table
+                  thead
+                    tr
+                      th
+                        label Question Type
+                      th
+                        label Question
+                  tbody
+                    tr(data-ng-repeat="question in CustomQuestionListingCtrl.templateDetail.questions")
+                      td
+                        span {{question.type}}
+                      td
+                        span {{question.name}}
+          .row.mg-b-10.pull-right
+            button.btn.btn-danger(type='button',data-dismiss='modal') Close
+
+//- #myImage.modal.fade(role='dialog')
+//-   .modal-dialog.modal-md
+//-     .modal-content
+//-       .modal-header
+//-         button.close(type='button', data-dismiss='modal') ×
+//-       .modal-body
+//-         ul.list-group
+//-           li.list-group-item
+//-             img(src='{{videoImagePath}}')
+//-       .modal-footer
+//-         button.btn.btn-default(type='button', data-dismiss='modal') Close

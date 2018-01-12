@@ -1,0 +1,33 @@
+.ticketing-system-super-admin
+  .modal-header
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title {{ticketingSystemCtrl.selectedTicket.ticketCode}}({{ticketingSystemCtrl.selectedTicket.status}})
+  .modal-body
+      div
+        p Issue Description :{{ticketingSystemCtrl.selectedTicket.description}}
+        .conversation(data-ng-hide='ticketingSystemCtrl.isChange')
+          .row
+            .col-md-12.alert.alert-success(data-ng-repeat="ticketComment in ticketingSystemCtrl.ticketCommentList")
+              b {{ticketComment.user.fullName}} :
+              span {{ticketComment.comment}}
+              br
+              | {{ticketComment.date | date:'MM/dd/yyyy HH:mm:ss'}}
+        form(name='commentForm')
+          .form-group
+            .row
+              label.comment-label.col-sm-3( data-translate='COMMENT')
+                span.mandatory-field *
+            .row
+              .col-sm-12
+                textarea.form-control.textarea-dimen(name='comment' ,data-ng-model='ticketingSystemCtrl.comment',rows='6', col='5')
+          .form-group
+            label Status
+            select.form-control#ddlQuestionType(ng-model='ticketingSystemCtrl.selectedStatus', ng-options='status.statusId as status.statusName for status in ticketingSystemCtrl.statusList', data-ng-change='ticketingSystemCtrl.changeStatus(ticketingSystemCtrl.selectedTicket.id, ticketingSystemCtrl.selectedStatus)',  name='statusType')
+              option(selected='select Status')
+  .modal-footer
+    .form-group.row
+        .col-sm-9.col-xs-9
+        .col-sm-3.col-xs-3.col-form-label
+          md-button.md-raised.md-primary(type='button', data-ng-click='ticketingSystemCtrl.createComment()') Save
+          md-button.md-raised.md-primary(type='button', data-ng-click='close()') Cancel
+

@@ -1,0 +1,159 @@
+//colors
+$color_outer_space_approx: #f4f5f7;
+$color_baby_blue_approx: #181c20;
+$color_tussock_approx: #337AB7;
+$color_scarpa_flow_approx: #e9eaee;
+$color_mirage_approx: #fff;
+$color_shark_approx: #ccc;
+$color_black_approx: #337AB7;
+
+.sidebar-box {
+    //position: absolute;
+    top: 78px;
+    z-index: 99;
+    background: $white;
+    left: 0px;
+    min-width: 16%;
+}
+.nav-side-menu {
+    overflow: auto;
+    font-size: $font-size-small;
+    font-weight: 200;
+    position: relative;
+    top: 0px;
+    width: 100%;
+    height: calc(100% - 80px);
+    color: $color_baby_blue_approx;
+    //border-left: 5px solid $color_tussock_approx;
+    font-family: $font-family;
+    .brand {
+        line-height: 50px;
+        display: block;
+        text-align: left;
+        font-size: $font-size-large + 2;
+        font-weight: 500;
+        padding-left: 10px;
+    }
+    .toggle-btn {
+        display: none;
+    }
+    ul, li {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        line-height: 35px;
+        cursor: pointer;
+
+        .collapsed{
+            .arrow:before{
+                font-family: FontAwesome;
+                content: "\f053";
+                display: inline-block;
+                padding-left:10px;
+                padding-right: 10px;
+                vertical-align: middle;
+                float:right;
+                font-size: $font-size-xsmall;
+                font-weight: 100;
+            }
+        }
+
+    }
+    ul :not(collapsed) .arrow:before, li :not(collapsed) .arrow:before {
+        font-family: FontAwesome;
+        content: "\f078";
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+        vertical-align: middle;
+        float: right;
+        font-size: $font-size-xsmall;
+        font-weight: 100;
+    }   
+    ul .sub-menu li.active, li .sub-menu li.active, ul .sub-menu li.active a, li .sub-menu li.active a {
+        color: $white;
+        background-color: $color_black_approx;
+        font-weight: 700;
+        font-size: $font-size-small + 1;
+    }
+    ul .sub-menu li, li .sub-menu li {
+        background-color: $color_mirage_approx;
+        border: none;
+        line-height: 28px;
+        margin-left: 0px;
+    }
+    ul .sub-menu li:hover, li .sub-menu li:hover {
+        background-color: $color_black_approx;
+        -webkit-transition: all 1s ease;
+        -moz-transition: all 1s ease;
+        -o-transition: all 1s ease;
+        -ms-transition: all 1s ease;
+        transition: all 1s ease;
+        a {
+            color: $color_mirage_approx;
+            font-weight: 700;
+            font-size: $font-size-small + 1;
+        } 
+    }   
+    li {        
+        padding-left: 0px;
+        a {
+            text-decoration: none;
+            padding-left: 10px;
+            font-weight: 500;
+            font-size: $font-size-small;
+            display: block;
+            i {
+                padding-left: 10px;
+                width: 20px;
+                padding-right: 20px;
+            }
+        }
+        &:hover {
+            background-color: $color_scarpa_flow_approx;            
+        }
+        &:active {
+            background-color: $color_scarpa_flow_approx;            
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar-box {
+        width: 100%;
+    }
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+        .toggle-btn {
+            display: block;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 10 !important;
+            padding: 3px;
+            background-color: $color_mirage_approx;
+            color: $black;
+            width: 40px;
+            text-align: center;
+        }
+    }
+    .brand {
+        text-align: left !important;
+        padding-left: 10px;
+        line-height: 50px !important;
+        font-size: $font-size-large + 2;
+        font-weight: 500;
+    }
+}
+
+@media (min-width: 767px) {
+    .app-section{
+      padding: 0px 29px;
+    }
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}

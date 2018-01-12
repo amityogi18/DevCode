@@ -1,0 +1,10 @@
+section.col-md-12.col-sm-12.col-xs-12.candidate-profile  
+  include includes/header
+  .hidden-xs.col-sm-3.col-md-1 
+  .sidebar-box(ng-if='!isSettingPath')
+    include includes/sidebar-candidate-profile-menu    
+  .sidebar-box(ng-if='isSettingPath')           
+    include includes/sidebar-settings-menu     
+  .col-xs-12.col-sm-10.col-md-11.app-section.pull-right
+    include includes/content
+  include includes/footer  

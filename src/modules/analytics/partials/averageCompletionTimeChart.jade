@@ -1,0 +1,15 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-clock-o.canidate-status-icon(aria-hidden='true')
+              span(data-translate='AVERAGE-COMPLETION-REPORT')
+            #pie-chart.panel-body.time-graph
+              .col-sm-12
+                .interviews No Of Days
+              .chart-0.avg-graph
+                canvas.chart.chart-bar.chart-xs(chart-data='averageCompletionTimeCtrl.completionTimeData.data', chart-labels='averageCompletionTimeCtrl.completionTimeData.labels', chart-series='averageCompletionTimeCtrl.series')
+              .col-sm-12  
+                .interviews Position Name

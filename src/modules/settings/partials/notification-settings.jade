@@ -1,0 +1,14 @@
+.content-wrapper.notification-setting
+    .video-intro-heading
+      span.video-intro-1(data-translate='NOTIFICATION-SETTINGS') Notification Settings     
+    .panel-body
+      .row
+        .col-md-12.col-xs-12.col-sm-12.margin-to-row
+            div.row-content.col-md-12.col-xs-12.col-sm-12(ng-repeat='notification in NotificationSettingsCtrl.notifications')
+                    .col-md-8.col-xs-8.col-sm-8 {{notification.message}}
+                    .col-md-4.col-xs-4.col-sm-12
+                      .pull-right.switches
+                        md-switch.md-primary(id="mdNotification" ng-model="notification.isNotificationEnable",aria-label='Switch 1', ng-true-value="1", ng-false-value="0", ng-click='NotificationSettingsCtrl.toggleNotification($event,notification.id, "mdNotification")')
+                      //label.switch.pull-right
+                        input(type='checkbox', ng-checked='notification.isNotificationEnable', ng-click='NotificationSettingsCtrl.toggleNotification($event, notification.id)')
+                        .slider.round

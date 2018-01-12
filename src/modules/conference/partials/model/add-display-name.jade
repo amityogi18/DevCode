@@ -1,0 +1,7 @@
+.row.display-name-container
+    p Set display name
+.row.display-form
+  .input-group
+    input.form-control(type='text', name='displayName', maxlength='15', ng-model='ConferenceWebrtcCtrl.displayName', ng-change='ConferenceWebrtcCtrl.updateDisplayName()', style="width:180px;")
+    span.input-group-btn
+      button.btn.btn-primary(type="button", ng-click="ConferenceWebrtcCtrl.addDisplayNamePopup.popoverIsOpen = !ConferenceWebrtcCtrl.addDisplayNamePopup.popoverIsOpen") ok

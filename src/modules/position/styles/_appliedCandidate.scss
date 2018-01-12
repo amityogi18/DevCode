@@ -1,0 +1,392 @@
+.applied-job-container {
+
+  .shortlist-icon{
+    color:green;
+    font-size:18px;
+  }
+  .reject-icon{
+    color:red;
+    font-size:18px;
+  }
+  
+  .candidate-list{          
+    max-height: 1342px;
+    overflow: auto;
+    
+  .candidate-img {
+    width:65px;
+    height:65px;
+    position: relative;
+    background: #f5f5f5;
+    border: $blue 1px solid;
+    overflow: hidden;
+    border-radius: 100%;
+    margin: 2px 10px;
+    
+      img {
+         height: 65px;
+         width: 100%;
+         position: absolute;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         margin: 0 auto;
+      } 
+  }
+  .show-text{ 
+    background: #009788; 
+    padding: 5px 10px;
+    color: $blue;
+    font-size: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 30px;
+  }            
+  .table{
+    border:none !important;
+    thead{
+      display: none;
+    }
+    td { 
+        background: #fdfdfd;
+        font-size:12px;
+        outline:none;
+        .title{
+          color:$blue;
+          font-weight:bold;
+          font-size:14px;
+          text-transform:uppercase;
+          .applied-icon {
+            .shortlist-icon{
+              color:green;
+              font-size:18px;
+            }
+            .reject-icon{
+              color:red;
+              font-size:18px;
+            }
+          }
+        }
+        .designation{
+          i {
+            margin-right:5px;
+            font-size:14px;
+          }
+        }
+        .location{
+          i {
+            margin-right:5px;
+            font-size:14px;
+          }
+        }
+      }
+    tr {      
+        outline: none;
+        border: 1px solid #cbcbcb;        
+      }
+  }
+}      
+  .candidate-list {
+    border: 1px solid #ddd;
+    margin: auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+
+  .resume-rating{
+    font-size:9px;
+  }
+
+  #candidate-info {
+    height:auto;
+    //max-height:700px;
+    //min-height:620px;
+  }
+  .candidate-details-section {
+    border: 1px solid #ddd;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 0px;
+    margin-left:0px;
+    border-left: transparent;
+    border-right: transparent;
+    label{
+      color:#3f7dab;
+    }
+    p{
+      line-height: 0.7em; 
+      color:grey;
+      font-size:12px;
+    }
+    small{
+      color:grey;
+    }
+    input{
+      margin-right: 5px;
+    }
+  }
+  .candidate-info-header {   
+    background-color: #eee;
+    padding-bottom:37px;
+    .action-row {
+      margin-right:-10px;
+      margin-top:-7px;
+      .btn{
+        margin:5px;
+      }
+      i{
+        margin-right:5px;
+      }
+    }
+    .dropdown-menu{
+      width:300px;
+      
+      i{
+        margin-right:5px;
+      }
+    }
+  }
+  .candidate-img-section {
+    height:145px;
+    background-color:#009788;
+    color:#fff;
+    text-align:center;
+    max-height:150px;
+    
+    img {
+      width:80px;
+      height:80px;
+      margin-top:-40px;
+      border:2px solid #ddd;
+      background: #fff;
+    }
+    .applied-candidate-title{
+      text-transform: uppercase;
+    }
+    p{
+      font-size: 14px;
+      line-height: 0.8;
+      padding: 0px 20px;
+      i{
+        margin-right:10px;
+      }
+    }
+    
+  }
+  .candidate-profile-header {
+    background-color: transparent;
+    font-weight:600;
+    padding:10px 15px;
+    border:1px solid #ddd;
+    i{
+     color:grey;
+     cursor:pointer 
+    }    
+  }
+  .comment-section-header{
+    font-weight:600;
+    padding:10px 15px;
+    border:1px solid #ddd;
+  }
+  .candidate-profile-section {
+    border:1px solid #ddd;
+    padding-top: 15px;
+    padding-bottom:60px;
+    h4{
+      color:grey;
+      font-weight:600;
+      text-transform: uppercase;
+    }
+    p{
+      font-size:12px;
+    }
+    .candidate-profile-area {
+      margin-bottom: 15px;
+      border-bottom:1px solid #ddd;
+      padding: 15px;
+      .experience-section {
+        box-shadow:2px 2px 2px #eee;
+        .table{
+          tr{
+            border:1px solid #ddd;
+            td{
+              font-size: 12px;
+            }
+          }
+        }
+      }
+      .education-section {
+        box-shadow:2px 2px 2px #eee;
+        .table{
+          tr{
+            border:1px solid #ddd;
+            td{
+              font-size: 12px;
+            }
+          }
+
+        }
+      }
+    }
+    .candidate-contact-area{
+      padding-left:15px;
+      padding-right:15px;
+      .table{
+        tr{
+          border:1px solid #ddd;
+          td{
+            font-size: 12px;
+          }
+        }
+
+      }
+    }
+    
+  }
+  .candidate-comment-header{
+      //margin-top: 127px;
+      background-color: transparent;
+      border:1px solid #ddd;
+      padding:10px 15px;
+      position: relative;
+    }
+  .comment-section {
+    border:1px solid #ddd;
+    max-height:400px;
+    padding:10px 15px;
+    .chat-area{
+      list-style: none;
+      margin: 0;
+      overflow-y: auto; 
+      .primary-font{
+        font-size:12px;
+        margin-top: 10px;
+      }   
+      
+    li{
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted #B3A9A9;
+    }
+    li.right .chat-body{
+      margin-right: 60px;
+    }
+    li .chat-body p{
+      margin: 0;
+      color: #777777;
+      font-size: 12px;
+    }
+    .text-muted i{
+      margin-right: 5px;
+    }
+   }
+  }
+  
+  .arrow-cmt{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 9px solid #fff;
+    margin-left: 250px;
+    margin-top: -14px;
+    position: absolute;
+  }
+  
+}
+
+/*------custom-css-for-radio-button-------*/
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 6.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  transition: all 0.15s ease-out 0s;
+  background: #fff;
+  border: 2px solid $materialGrey;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+  &:hover {
+    background: #fff;
+  }
+  &:checked {
+    background: #fff;
+    border: 2px solid rgba(16, 108, 200, 0.87);
+    &::before {
+      height: 20px;
+      width: 20px;
+      position: absolute;
+      display: inline-block;
+      font-size: 12px;
+      line-height: 17px;
+      content: "\f111";
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      color: rgba(16, 108, 200, 0.87);
+      margin-left: 3px;
+    }
+    &::after {
+      -webkit-animation: click-wave 0.65s;
+      -moz-animation: click-wave 0.65s;
+      animation: click-wave 0.65s;
+      background: #40e0d0;
+      content: '';
+      display: block;
+      position: relative;
+      z-index: 100;
+    }
+  }
+  &.radio {
+    border-radius: 50%;
+    &::after {
+      border-radius: 50%;
+    }
+  }
+}
+
+input {
+  &[type="radio"]:focus {
+    outline: none;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .candidate-detail-section{
+    padding-left:0px;
+    padding-right:0px;
+    margin-top:15px;
+  }
+}
+
+.jobdescripbtionHtml {
+  text-align:justify;
+}
+
+// rohit css for ipad //
+
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 1024px) and (min-device-width: 768px)and (orientation: portrait)
+{
+  .applied-job-container .candidate-img-section img {
+    width: 65px;
+    height: 65px;
+    margin-top:0px;
+    border: 2px solid #ddd;
+    background: #fff;
+}
+
+}

@@ -1,0 +1,25 @@
+.content-wrapper.my-profile.manage-profile-page
+    .panel.panel-default.manage-profile-panel
+        .panel-heading(data-translate='AVAILABLE PROFILES')
+        md-button.md-raised.md-primary.pull-right.create-profile-button(ng-click="manageProfileCtrl.maxProfile()", data-translate='CREATE-NEW-PROFILE')
+        .panel-body
+          .alert.alert-danger(data-ng-if='!manageProfileCtrl.isProfileAvailable') No Profile Found!! Please Add Profile
+          .alert.alert-danger(ng-show='manageProfileCtrl.maxprofileadded') You can add up to 4 profile max
+          .row
+            .col-sm-12
+              table.table.table-bordered
+                tbody
+                  tr(ng-repeat='profileData in manageProfileCtrl.profileList track by $index')
+                    td
+                      i.fa.fa-pencil-square.action-icon(aria-hidden='true', data-ng-click='manageProfileCtrl.editProfile(profileData.id)')
+                      i.fa.fa-eye.action-icon(aria-hidden='true', data-ng-click='manageProfileCtrl.viewProfile(profileData.id)')
+                    td {{profileData.name}}
+                    td
+                      span(data-ng-if="profileData.statusId=='1'") Searchable
+                      span(data-ng-if="profileData.statusId=='2'") Non-Searchable
+                    td
+                      label.switch
+                        input(type='checkbox',ng-checked="profileData.active", ng-model='profileData.checked', ng-click='manageProfileCtrl.setActiveProfile(profileData)',ng-disabled="profileData.active") 
+                        .slider.round
+            
+                        

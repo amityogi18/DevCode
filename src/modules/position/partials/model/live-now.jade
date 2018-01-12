@@ -1,0 +1,11 @@
+#popover-content-meeting
+    .col-sm-12.col-md-12.height-box
+        md-input-container.md-block(flex="100")
+          label WHAT
+          input(type='text', name='interviewName', ng-model='liveNowInterviewCtrl.liveNowInterview.name', maxlength='25', required='required')
+        md-autocomplete(flex='', required='required', md-input-name='autocompleteField', md-input-minlength='2', md-no-cache='liveNowInterviewCtrl.noCache', md-selected-item='liveNowInterviewCtrl.selectedItem', md-search-text='liveNowInterviewCtrl.searchText', md-items='item in liveNowInterviewCtrl.getliveNowEmail(liveNowInterviewCtrl.searchText)', md-item-text='item.candidateInfo', md-require-match='', md-floating-label='Who')
+          md-item-template
+            span(md-highlight-text='liveNowInterviewCtrl.searchText') {{item.candidateInfo}}
+    .col-sm-12.text-bx        
+        button.meetingbtn.btn.btn-default(type='button', ng-click="liveNowInterviewCtrl.saveLiveNowInterview()") Start Now
+           

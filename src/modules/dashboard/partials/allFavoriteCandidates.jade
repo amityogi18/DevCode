@@ -1,0 +1,49 @@
+.content-wrapper.dashboard-page
+  .default-tab-module.interview-tabs
+    .tab-content
+      .row
+        .col-sm-10
+          h3.dashboard-heading Favorite Candidates
+        a.btn.btn-primary.compare-btn-position(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false', data-ng-show ='viewAllFavoriteCtrl.compareList.length > 1')
+          i.fa.fa-th.compare-icon(aria-hidden='true')
+          | Compare
+          span.caret.compare-drop-icon
+        ul.dropdown-menu(ng-if='viewAllFavoriteCtrl.compareList.length > 1')
+          h6.text-center Compare Candiate List
+          .col-md-12.name-section(ng-repeat='selected in viewAllFavoriteCtrl.compareList track by $index')
+            input.col-md-2(type='checkbox', ng-click='viewAllFavoriteCtrl.addSelectedCandidate(selected)', ng-checked='selected.ischecked')
+            span.col-md-10 {{selected.candidateName}}
+          .btn-compare
+            button.btn.btn-primary.compare-btn(ng-click='viewAllFavoriteCtrl.compareCandidates()') Compare 
+        .col-sm-4.col-md-4.col-xs-6.showMe
+          select(class="selectpicker" ng-model="viewAllFavoriteCtrl.test" ng-change="viewAllFavoriteCtrl.toggle()")
+            option(ng-model="col.show" value="{{$index}}" ng-repeat="col in viewAllFavoriteCtrl.cols.slice(1,viewAllFavoriteCtrl.cols.length) track by $index") {{col.title()}}
+        .col-md-12.col-sm-12.col-xs-12
+          .col-md-12.col-sm-12.col-xs-12
+            p.text-label(ng-hide='viewAllFavoriteCtrl.favoriteCandidateList.length < 1') Showing 
+              span
+                strong 1- {{viewAllFavoriteCtrl.favoriteCandidateList.length}}
+                |  of  
+                strong
+                 | {{viewAllFavoriteCtrl.favoriteCandidateListCount}}   
+                |  records    
+        .col-md-12.col-sm-12.col-xs-12                         
+          .col-md-12.col-sm-12.col-xs-12
+            .row(data-ng-show="viewAllFavoriteCtrl.favoriteCandidateList.length > 0")
+              .table-responsive
+                table.table.table-condensed.table-bordered.table-striped.table-responsive.active-clients-table(ng-table='viewAllFavoriteCtrl.favoriteTableParams', ng-table-columns-binding="viewAllFavoriteCtrl.cols")
+                  tr(ng-repeat='favorite in $data')
+                    td.coloumn-set
+                      input(type='checkbox', ng-checked='favorite.ischecked', ng-click='viewAllFavoriteCtrl.addSelectedCandidate(favorite)')
+                    td.coloumn-set(title="'View'")
+                      a.hover-pointer(data-ng-click="viewAllFavoriteCtrl.viewCandidate(favorite.candidateId)")
+                        i.fa.fa-eye  
+                    td.cust-name(ng-if="true" class='col-sm-2',title="'Candidate Name'",  sortable="'candidateName'", ng-data='favorite.candidateName', class-name='table-accordian') {{favorite.candidateName}}                
+                    td.cust-name(ng-if="true" class='col-sm-2',title="'Designation'",  sortable="'candidateDesignation'", ng-data='favorite.candidateDesignation', class-name='table-accordian') {{favorite.candidateDesignation}}                
+                    td.cust-name(ng-if="true" class='col-sm-2',title="'Skills'",  sortable="'candidateSkills'", ng-data='favorite.candidateSkills', class-name='table-accordian')
+                        span(ng-repeat='skill in favorite.candidateSkills') {{skill.skillsetName}} 
+                        span(ng-if='favorite.candidateSkills.length < 1') N/A
+                    td(ng-if="true" class='col-sm-2',title="'OverAll Rating'",  data='favorite.overAllRating', class-name='table-accordian')
+                      span.all-star(uib-rating='', ng-model='favorite.overAllRating', max='5', read-only='true',  aria-labelledby='default-rating')
+            .row(data-ng-show="viewAllFavoriteCtrl.favoriteCandidateList.length === 0") 
+              .p.view-all-favorite  No Favorite Candidate as of Now !!! 

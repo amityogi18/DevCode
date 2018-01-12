@@ -1,0 +1,374 @@
+.preview-iframe-sec {
+  width: 100%;
+  float: left;
+  background: #ececec;
+  border: #cbcbcb 1px solid;
+  padding: 10px 10px;
+  .video-bbox{
+    border-radius: 5px; 
+    height: 300px !important;
+    width: 495px !important;
+    margin:0 auto;
+  }
+  iframe {
+    width: 100%;
+    height: 250px;
+  }
+  video {
+    width: 100%;
+    height: 250px;
+  }
+  .btn-primary {
+    margin-top:10px;
+  }
+}
+@media only screen and (max-width: 500px){
+  .video-upload-sec{
+    input{
+      width: 230px !important;
+    }
+  }
+  .welcome-video{
+    .modal-footer{
+      .btn-success{
+        float:right !important;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px){
+  .modal-content {
+    //margin-top: 15px !important;
+    //width: 94% !important;
+  }
+  .modal-footer {
+    text-align: left !important;
+    button {
+      margin: 10px 0px !important;
+    }
+  }
+  .visible-xs{
+    display: inline !important;
+  }
+  .record-btn-section {
+    padding: 0px !important;
+    margin-left:0px !important;
+    a{
+      padding: 0px !important;
+      margin-left: 10px !important;
+    }
+    .input-area{
+        display: -webkit-inline-box;      
+    }
+    .input-group {
+        padding-top: 10px;
+        display: -webkit-inline-box;
+        padding-left: 0px !important;
+    }
+    .file-load {
+        margin-top: 0px !important;
+        width: 85% !important;
+    }
+    .third-btn{
+        margin-left: -43px;
+    }
+    input[type=file]::before {
+        margin-left: 155px !important;
+    }
+    .interview-section .upload-video-button {
+        margin-left: 0px !important;
+    }
+    .btn-record{
+      max-width: 120px !important;
+    }
+  }
+  .video-upload-sec{
+    .you-tube{
+        margin-left: -10px;
+        width: 38px !important;
+        margin-bottom: -39px !important;
+    }
+    .upload-btn {
+        position: relative !important;
+        max-width: 272px !important;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  /*welcome*/
+  .welcome-video .modal-dialog {
+    width: 100%;
+    max-width: 620px;
+  }
+  .welcome-video .video-iframe-sec {
+    padding: 10px 20px;
+  }
+  .choose-video-sec .row {
+    margin: 0 -15px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  /**/
+  .welcome-video .video-upload-sec .input-area {
+    padding: 0 117px;
+    a:hover, a:focus {
+        text-decoration: none !important;
+    }
+  }
+  .welcome-video .video-upload-sec .v-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-bottom: 0;
+  }
+  .choose-video-sec .btns-area {
+    text-align: right;
+    margin-top: 20px;
+  }
+}
+
+#welcomeVideoPreview {
+  //top:35px;
+  .btn-primary {
+    margin-top:10px;
+  }
+}
+
+#exitVideoPreview {
+  //top:35px;
+  .btn-primary {
+    margin-top:10px;
+  }
+}
+
+#wlcm-video.modal {
+  //top:35px;
+}
+#exit-video.modal {
+  //top:35px;
+}
+
+/*welcome video popup*/
+
+.welcome-video {
+  .video-iframe-sec {
+    width: 100%;
+    float: left;
+    background: #ececec;
+    border: #cbcbcb 1px solid;
+    padding: 10px 10px;
+    iframe {
+      width: 100%;
+      height: 250px;
+    }
+    video {
+      width: 100%;
+      height: 250px;
+    }
+
+  }
+  .video-upload-sec {
+    width: 100%;
+    float: left;
+    margin: 20px 0 20px 0;
+    .input-area {
+      width: 100%;
+      float: left;
+      position: relative;
+      padding: 0 0;
+    }
+    .v-icon {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 105px;
+      height: 35px;
+      display: block;
+      margin-bottom: 10px;
+    }
+  }
+  .upload-btn {
+    cursor: pointer;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 100%;
+    max-width: 105px;
+    text-align: center;
+    height: 35px;
+    background: #a1a1a1;
+    &:hover {
+      background: #5497ba;
+    }
+    input[type="file"] {
+      width: 105px;
+      height: 35px;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    span {
+      font-size: 12px;
+      color: #ffffff;
+      font-weight: 600;
+      margin: 10px 0px;
+      display: block;
+      text-transform: uppercase;
+      i {
+        margin: 0 4px;
+      }
+    }
+  }
+}
+
+.choose-video-sec {
+  width: 100%;
+  float: left;
+  .slct-area {
+    width: 100%;
+    float: left;
+    text-align: left;
+    .lebel {
+      display: block;
+      font-size: 16px;
+      color: #666666;
+      margin: 0 0 5px 0;
+    }
+    .select-field {
+      width: 100%;
+      float: left;
+      padding-right: 65px;
+      position: relative;
+      a {
+        position: absolute;
+        right: 0;
+        top: 8px;
+        font-size: 13px;
+        color: #0078f0;
+        &:hover {
+          color: #666666;
+        }
+      }
+    }
+  }
+  .btns-area {
+    width: 100%;
+    float: left;
+    text-align: center;
+    .browse-btn {
+      width: 121px;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      background: #5497ba;
+      position: relative;
+      color: #FFF;
+      font-size: 12px;
+      line-height: 34px;
+      text-transform: uppercase;
+      input[type="file"] {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+      &:hover {
+        background: #a1a1a1;
+      }
+    }
+    .btn-upld {
+      width: 100%;
+      max-width: 106px;
+      height: 35px;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+      background: #a1a1a1;
+      line-height: 35px;
+      font-size: 12px;
+      color: #ffffff;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin: 0 10px;
+      &:hover {
+        background: #5497ba;
+      }
+      i {
+        margin-right: 7px;
+      }
+    }
+
+  }
+}
+/**/
+
+.btn-record {
+  width: 100%;
+  max-width: 120px;
+  height: 35px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  background: #5497ba;
+  line-height: 35px;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  &:hover {
+    background: #a1a1a1;
+  }
+
+  .fa {
+    margin-left: 10px;
+  }
+}
+
+.btn-upload {
+  width: 100%;
+  max-width: 110px;
+  height: 35px;
+  margin-left:60px;
+  padding-right: 10px;
+  padding-left: 10px;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  background: #5497ba;
+  line-height: 35px;
+  color: #FFF;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  &:hover {
+    background: #a1a1a1;
+  }
+}
+
+#countdown-img {
+  margin-top: 0px;
+  margin-left:100px;
+  margin-right:50px;
+  position: absolute;
+}
+#countdown-img2{
+  margin: 0px 50px;
+  position: absolute;
+}
+.record-btn-section {
+  margin-left:-31px;
+  .file-load{
+    margin-top:10px;
+  }
+}
+.audio-vedio-rt{
+  border-radius:0px !important;
+}

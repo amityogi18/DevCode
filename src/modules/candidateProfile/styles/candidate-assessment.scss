@@ -1,0 +1,191 @@
+.assessment-header{
+  text-align: center;
+  margin: 10px;
+  padding-top:15px;
+  padding-bottom:15px;
+  //background-color:#d43f3a;
+  border:1px solid #ddd;
+  //color:#fff;
+  h4{
+    display: inline;
+    font-weight: bold;
+  }
+  h4:first-child{
+    margin-right: 20px;
+  }
+}
+// @media only screen and(min-width:767px){
+//   .candidate-profile{
+//     .app-section{
+//         padding: 0px 35px;
+//     }
+//   }
+// }
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .candidate-profile{
+    .app-section{
+        padding: 0px !important;
+    }
+  }
+}
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .candidate-profile{
+    .app-section{
+        padding: 0px !important;
+    }
+  }
+}
+
+/* ----------- iPhone 6+ ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3) { 
+     .candidate-profile{
+    .app-section{
+        padding: 0px !important;
+    }
+  }
+}
+
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 320px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 2) {
+    .candidate-profile{
+    .app-section{
+        padding: 0px !important;
+    }
+  }
+}
+
+.section-header{
+  height: 55px;
+  border: 1px solid #aaa;
+  position: relative;
+
+  .sections{
+    position: absolute;
+    top: -12px;
+    background: white;
+    padding: 0 5px;
+    margin-left: 10px;
+  }
+
+  .section-title{
+    margin-top: 12px;
+    margin-left: 15px;
+    font-size: 13px;
+    background: #3879d9;
+    display: inline-block;
+    color: white;
+    padding: 5px;
+  }
+}
+
+.question-container {
+  border-top: 1px dotted #aaa;
+  margin: 15px 0px;
+  padding: 10px;
+  min-height: 300px;
+
+  hr {
+    margin: 10px 0px;
+    border-top: 1px solid rgba(0, 0, 0, 0.22);
+  }
+
+  .question{
+    min-height: 300px;
+    border: 1px solid #aaa;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .save-and-next-btn{
+    float:right;
+  }
+
+}
+
+.question-palette{
+  background: skyblue;
+  padding: 10px;
+
+  .question-numbers{
+    width: 210px;
+    margin: 0px auto;
+    max-height: 275px;
+    overflow-y: auto;
+
+    .btn{
+      margin: 5px;
+      min-width: 42px;
+    }
+  }
+}
+
+.candidate-profile{
+  background: #edf2f6;
+  .app-section{
+      padding: 0px 35px;
+  }
+  .candidate-name-container{
+    line-height: 75px;
+  }
+}
+
+.legend-container{
+  margin: 10px 5px;
+
+  .legend-marked, .legend-answered{
+    display:inline-block;
+    width: 130px;
+  }
+}
+.palette-footer{
+  text-align: right;
+  .btn{
+    width: 130px;
+    margin: 3px;
+    background-color: #BEE6E5;
+  }
+}
+
+.assessment-result-header{
+  height: 60px;
+}
+
+.assessment-result{
+  hr{
+    border-top: 1px solid black;
+  }
+}
+.assessment-result-content{
+  .exam-summary{
+    text-align: center;
+    margin: 15px 0px 40px 0px;
+    font-weight: bold;
+  }
+
+  table{
+    min-height: 300px;
+  }
+}
+

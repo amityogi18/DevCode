@@ -1,0 +1,207 @@
+include position-navbar
+#add-position-page.add-position-page.applied-job-container.position-content-wrapper
+  .col-md-12.col-sm-12.col-xs-12.help-box(ng-show="!newPositionCtrl.hideHelpBox", ng-class="{'fade': newPositionCtrl.hideHelpBox}")
+    .alert.alert-warning
+      | Candidate applied on the position will appear on left hand side(with a green tick/cross signifies auto shortlisted/auto rejected), but still recruiter can shortlist and reject any candidate out of the list.
+      br
+      span
+        i.fa.fa-check-circle.shortlist-icon 
+      |   Auto Selected(Based on position criteria)
+      br
+      span
+        i.fa.fa-times-circle.reject-icon      
+      |   Auto Rejected(Based on position criteria)
+      br
+      |Shortlist - Manual shortlist
+      br
+      |Reject - Manual Reject
+      br
+      .cross-icon 
+          i.fa.fa-times-circle.fa-lg(ng-click='newPositionCtrl.hideHelpBox = true')
+  .col-md-12.col-sm-12.col-xs-12(data-ng-if="newPositionCtrl.PositionCount.appliedCandidateCount === 0 ")
+    div.alert.alert-info
+      span No candidate applied for this position   
+  .col-md-4.col-sm-4.col-xs-12.candidate-list(data-ng-if="newPositionCtrl.PositionCount.appliedCandidateCount > 0 ")
+    div(layout='row')
+      md-input-container.md-block(flex='100')
+        label Filter Candidate
+        md-select(ng-model='newPositionCtrl.candidateStatus' data-ng-change='newPositionCtrl.getCandidateStatus()')
+          md-option(value='All') All
+          md-option(value='approved') Shortlist
+          md-option(value='rejected') Reject
+    table.table.table-first(ng-table='newPositionCtrl.getAllAppliedCandidatesTableParams',ng-table-columns-binding="newPositionCtrl.cols")
+      tr(ng-repeat='candidate in $data', ng-click='newPositionCtrl.candidateAppliedDetailsById(candidate.candidateId, candidate.appliedJobStatus, candidate.appliedJobId)')
+        td.col-md-12.col-sm-12.col-xs-12( data='candidate')
+          .col-md-2.col-sm-2.col-xs-3.candidate-img
+            img.img-circle(ng-src="{{candidate.candidateProfilePicUrl?candidate.candidateProfilePicUrl:'./img/user.png'}}", alt='')
+          .col-md-9.col-sm-9.col-xs-7
+            .title {{candidate.candidateName}}
+               .applied-icon.pull-right(data-ng-hide='candidate.appliedJobStatus === "Active" || candidate.appliedJobStatus === "INITIATED"')
+                  i.fa.fa-check-circle.shortlist-icon(data-ng-hide='candidate.appliedJobStatus === "rejected"')
+                  i.fa.fa-times-circle.reject-icon(data-ng-hide='candidate.appliedJobStatus === "approved"')
+            .designation
+              i.fa.fa-briefcase(aria-idden='true')
+              | {{candidate.designation}}
+            .location
+              i.fa.fa-map-marker(aria-hidden='true')
+              | {{candidate.country}}, {{candidate.state}} , {{candidate.city}}
+            .location
+              .col-sm-12.all-star
+                span(aria-hidden='true', uib-rating='', ng-model='candidate.candidateResumeRating', max='5', read-only='true', aria-labelledby='default-rating')
+                span.resume-rating (Resume ratings)
+      tr(data-ng-if='newPositionCtrl.candidateList.length > 0 && newPositionCtrl.appliedCandidatesCount > 10')
+        td.show-text(ng-if="true" class='col-sm-2' data-ng-click='newPositionCtrl.showMoreData()') Show More            
+       
+  .col-md-8.col-sm-8.col-xs-12.candidate-detail-section(data-ng-if="newPositionCtrl.PositionCount.appliedCandidateCount > 0 ")
+    ul.list-group
+      li.list-group-item.candidate-info-header
+        .row.pull-right.action-row.hidden-xs
+          md-button.md-raised.md-primary(type='button', aria-label='shortlisted', data-ng-click='newPositionCtrl.addCommentForRejected(26,newPositionCtrl.candidateData.candidateInfo.id)')
+            i.fa.fa-check(aria-hidden='true')
+            |Shortlist
+          md-button.md-raised.canceldata-btn(type='button',aria-label='rejected', data-toggle='dropdown' )
+            i.fa.fa-times(aria-hidden='true')
+            |Reject
+          ul.dropdown-menu
+              .arrow-cmt
+              h3.popover-title
+                i.fa.fa-comments
+                | Add comment
+              .popover-content
+                md-input-container.md-block(flex=80)
+                  label Type your comment here
+                  input(ng-model='newPositionCtrl.addComment', type='text')
+                button.btn.btn-warning(type='button', ng-click='newPositionCtrl.addCommentForRejected(12,newPositionCtrl.candidateData.candidateInfo.id)') Ok  
+        .row.pull-right.action-row.hidden-lg.hidden-sm.hidden-md
+          button.btn-sm.btn-primary(type='button', data-ng-click='newPositionCtrl.addCommentForRejected(26,newPositionCtrl.candidateData.candidateInfo.id)')
+            i.fa.fa-check(aria-hidden='true')
+          button.btn-sm.btn-danger(type='button',data-toggle='dropdown' )
+            i.fa.fa-times(aria-hidden='true')
+          ul.dropdown-menu
+              .arrow-cmt
+              h3.popover-title
+                i.fa.fa-comments
+                | Add comment
+              .popover-content
+                md-input-container.md-block(flex=80)
+                  label Type your comment here
+                  input(ng-model='newPositionCtrl.addComment', type='text')
+                button.btn.btn-warning(type='button', ng-click='newPositionCtrl.addCommentForRejected(12,newPositionCtrl.candidateData.candidateInfo.id)') Ok
+      li.list-group-item.candidate-img-section
+        .col-md-4.col-md-offset-4.col-sm-4.col-sm-offset-4.col-xs-5.col-xs-offset-4
+          img.img-circle(ng-src="{{newPositionCtrl.candidateData.profilePicUrl}}", alt='')
+        .col-md-12.col-sm-12.col-sm-12.applied-candidate-title
+          h3 {{newPositionCtrl.candidateData.candidateInfo.firstName}} {{newPositionCtrl.candidateData.candidateInfo.lastName}}
+          p
+            i.fa.fa-briefcase(aria-hidden='true')
+            | {{newPositionCtrl.candidateData.candidateInfo.designationName}}
+      li.list-group-item.candidate-profile-header(data-toggle='collapse', href='#candidate-info')
+        | Candidate Profile
+        span.pull-right
+          i.fa.fa-chevron-circle-down(aria-hidden='true')      
+      #candidate-info.panel-collapse.collapse
+        .col-md-12.col-sm-12.col-xs-12.candidate-profile-section
+          .row.candidate-profile-area
+            h4
+              i.fa.fa-user(aria-hidden='true')
+              |  About Me
+            p(ng-if='!newPositionCtrl.candidateData.candidateInfo.aboutMe == ""') {{newPositionCtrl.candidateData.candidateInfo.aboutMe}}
+            p.text-center(ng-if='newPositionCtrl.candidateData.candidateInfo.aboutMe == ""') Not Disclosed
+          .row.candidate-profile-area
+            h4
+              i.fa.fa-briefcase(aria-hidden='true')
+              |  Work Experience
+            div.experience-section
+              table.table
+                tr
+                  th Company Name
+                  th Start Date
+                  th End Date
+                  th Job title
+                tr(ng-repeat='experienceData in newPositionCtrl.candidateData.candidateExperiences')
+                  td {{experienceData.companyName}}
+                  td {{experienceData.startDate}}
+                  td {{experienceData.endDate}}
+                  td {{experienceData.jobTitle}}
+              .row(ng-show='newPositionCtrl.candidateData.candidateExperiences.length < 1')
+                p.text-center Not Disclosed !!!
+          .row.candidate-profile-area
+            h4
+              i.fa.fa-briefcase(aria-hidden='true')
+              |  Portfolio
+            md-card(ng-repeat="portfolioData in newPositionCtrl.candidateData.candidatePortfolios")
+              md-card-title
+                md-card-title-text
+                  label {{portfolioData.title}}
+                  p {{portfolioData.description}}
+                  a(title="_blank") {{portfolioData.url}}
+            md-card(ng-show="newPositionCtrl.candidateData.candidatePortfolios.length < 1")
+              md-card-title
+                md-card-title-text
+                  p.text-center Not Disclosed !!!
+                                        
+          .row.candidate-profile-area
+            h4
+              i.fa.fa-university(aria-hidden='true')
+              |  Education
+            div.education-section
+              table.table
+                tr
+                  th Qualification
+                  th Specialization
+                  th University
+                  th Location
+                tr(ng-repeat='educationData in newPositionCtrl.candidateData.candidateEducation')
+                  td {{educationData.qualification}}
+                  td {{educationData.specialization}}
+                  td {{educationData.university}}
+                  td {{educationData.country}} | {{educationData.state}} |{{educationData.city}}
+              .row(ng-show="newPositionCtrl.candidateData.candidateEducation.length < 1")
+                p.text-center Not Disclosed !!!
+          .row.candidate-contact-area
+            h4
+              i.fa.fa-envelope(aria-hidden='true')
+              |  Contact
+            table.table
+              tr
+                th Email
+                th Address
+                th Phone
+              tr
+                td
+                  span(ng-if='newPositionCtrl.candidateData.contactInfo.email == ""') N/A
+                  span(ng-if='!newPositionCtrl.candidateData.contactInfo.email == ""') {{newPositionCtrl.candidateData.contactInfo.email}}
+                td
+                  span(ng-if='newPositionCtrl.candidateData.contactInfo.address == ""') N/A
+                  span(ng-if='!newPositionCtrl.candidateData.contactInfo.address == ""') {{newPositionCtrl.candidateData.contactInfo.address}}
+                td
+                  span(ng-if='newPositionCtrl.candidateData.contactInfo.phone == ""') N/A
+                  span(ng-if='!newPositionCtrl.candidateData.contactInfo.phone == ""') {{newPositionCtrl.candidateData.contactInfo.phone}}
+       //div(data-ng-hide='newPositionCtrl.candidateData.appliedStatus  === "approved"') 
+    .col-md-12(data-ng-hide='newPositionCtrl.candStatus === "approved"')  
+      .row.candidate-comment-header
+         label
+           | Comment
+      .row.comment-section
+        .chat-section
+          ul.chat-area(data-ng-hide='newPositionCtrl.commentData.comment ==="" || newPositionCtrl.commentData.comment === null ')
+            li.right.clearfix              
+              span.chat-img.pull-right
+                img.img-circle(src='http://placehold.it/50/FA6F57/fff&text=ME', alt='User Avatar')
+                strong.pull-left.primary-font {{newPositionCtrl.commentData.commentedBy}}   
+              .chat-body.clearfix
+                .header
+                  .row
+                    .col-md-10.col-sm-10.col-xs-10
+                      p
+                        small.text-muted
+                          i.fa.fa-clock-o
+                          | {{newPositionCtrl.commentData.commentDate}}
+                        {{newPositionCtrl.commentData.comment}} 
+               
+          ul.chat-area(data-ng-show='newPositionCtrl.commentData.comment ==="" || newPositionCtrl.commentData.comment === null ', style='color:red')
+            li.right.clearfix
+              .chat-body.clearfix
+                .alert.alert-info                 
+                  p no comment added yet!!!!!!!!!!!        
+          

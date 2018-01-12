@@ -1,0 +1,50 @@
+.container-fluid.practice-test-question
+  .row(ng-show='PracticeTestQuestionCtrl.showQuestionPaper && !PracticeTestQuestionCtrl.isQuestionFinished')
+    .col-md-11.col-sm-11.col-xs-12.section-header-area
+      div.alignment-div
+        .assessment-header
+            h2.hidden-xs
+             span Practice Video Test
+             button.btn.btn-danger.pull-right(ng-click='PracticeTestQuestionCtrl.goBack()' style="margin-right:5px") Close Test
+            h4.hidden-lg.hidden-md.hidden-sm.video-heading-section
+              i.fa.fa-video-camera
+              span &nbsp; Practice Video Test
+              i.fa.fa-times-circle-o.pull-right(aria-hidden='true' ng-click='PracticeTestQuestionCtrl.goBack()' style="margin-right:5px; color:red;" title='Close Test') 
+            hr
+            .row
+              .col-md-6.col-sm-6.col-xs-6
+                 i.fa.fa-clock-o.position-of-timer(aria-hidden='true')
+                 #clock.clock-style
+              .col-md-6.col-sm-6.col-xs-6.user-icon-style
+                 i.fa.fa-user
+                 span    {{user.fullName}}
+        .question-container(data-ng-if='!PracticeTestQuestionCtrl.isInterviewFinish')
+          .question
+            h4.hidden-xs Question No: {{PracticeTestQuestionCtrl.quesNumber }}
+            h5.hidden-lg.hidden-md-.hidden-sm Question No: {{PracticeTestQuestionCtrl.quesNumber }}
+            h3.hidden-xs {{PracticeTestQuestionCtrl.activeQuestion.question }}
+            h5.hidden-lg.hidden-md-.hidden-sm {{PracticeTestQuestionCtrl.activeQuestion.question }}
+            hr
+            audio-response-question(question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.questionType === 'AUDIO'")
+            audio-response-question(is-new-question='PracticeTestQuestionCtrl.isNext', question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', trigger-stop-recording='{{PracticeTestQuestionCtrl.finishRecording}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.responseTypeId === 5")
+            video-response-question(is-new-question='PracticeTestQuestionCtrl.isNext', question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', trigger-stop-recording='{{PracticeTestQuestionCtrl.finishRecording}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.responseTypeId === 1")
+            text-response-question(is-new-question='PracticeTestQuestionCtrl.isNext', disable-previous-button='PracticeTestQuestionCtrl.disablePreviousButton', question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.responseTypeId === 2")
+            multiple-choice-question(question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.responseTypeId === 4")
+            multiple-select-question(question='PracticeTestQuestionCtrl.activeQuestion', number-of-questions='{{::PracticeTestQuestionCtrl.questions.length}}', ng-if="PracticeTestQuestionCtrl.activeQuestion.responseTypeId === 3")
+          .question-footer
+            md-button.md-raised.savedata-btn.pull-right.saveNextMobile(type='button', ng-hide='PracticeTestQuestionCtrl.activeQuestion.isLastQuestion', ng-click='PracticeTestQuestionCtrl.saveAndGetNextQuestion()') Save & Next
+            button.btn.btn-default(type='button', ng-show='PracticeTestQuestionCtrl.activeQuestion.isLastQuestion', ng-click='PracticeTestQuestionCtrl.submitInterview()') Submit
+        .question-container(data-ng-if='PracticeTestQuestionCtrl.isInterviewFinish')
+           h4 You have successfully completed you interview process.
+           md-button.md-raised.md-primary(data-ng-click='PracticeTestQuestionCtrl.submitInterview()') Submit
+  .row(ng-hide='PracticeTestQuestionCtrl.showQuestionPaper')
+     div.question-message
+       h4 No question available in question bank.
+       md-button.md-raised.md-primary(data-ng-click='PracticeTestQuestionCtrl.goBack()') Go Back
+  .row(ng-show='PracticeTestQuestionCtrl.isQuestionFinished')
+     div.question-message
+       h4 Practice video test finished.
+       md-button.md-raised.md-primary(data-ng-click='PracticeTestQuestionCtrl.goBack()') Go Back
+sidebar-help-component
+
+

@@ -1,0 +1,37 @@
+.quick-stastics-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                .card-box
+                    div(layout='row')
+                        .widget-inline-box.widget-box
+                            h3
+                                md-button(aria-label='on demand')
+                                    md-icon(md-font-set='fa') &#xf0c1 
+                                strong.green-text {{quickStasticsCtrl.allStastics.onDemand}}
+                            p On Demand Interviews
+                        .widget-inline-box.widget-box
+                            h3
+                                md-button(aria-label='Live')
+                                    md-icon(md-font-set='fa') &#xf1e9 
+                                strong.yellow-text {{quickStasticsCtrl.allStastics.live}}
+                            p Live Interviews
+                        .widget-inline-box.widget-box
+                            h3
+                                md-button(aria-label='On Site')
+                                    md-icon(md-font-set='fa') &#xf22c 
+                                strong.blue-text {{quickStasticsCtrl.allStastics.onSite}}
+                            p On Site Interviews
+                        .widget-inline-box.widget-box
+                            h3
+                                md-button(aria-label='live Now')
+                                    md-icon(md-font-set='fa') &#xf0a3 
+                                strong.pink-text {{quickStasticsCtrl.allStastics.liveNow}}
+                            p Live Now 
+                        .widget-inline-box.widget
+                            h3
+                                md-button(aria-label='Total Interviews')
+                                    md-icon(md-font-set='fa') &#xf18b 
+                                strong.red-text {{quickStasticsCtrl.allStastics.totalNumberOfCompletedInterviews}}
+                            p Total Interviews Completed

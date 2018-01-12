@@ -1,0 +1,224 @@
+.profile-public(data-ng-show='candidateProfilePublicCtrl.isShowPage')
+  .slider-area
+    .single-slider
+      .fullwidth-bg.slide-bg-dark
+      .slider-area-table
+        .slider-area-cell
+          .container
+            .logo
+              a(href='dashboard')
+                img(src='../../../public/img/logo-oda.png', alt='')
+            .row
+              .col-md-12.text-center
+                .bannerText
+                  h1
+                    | Hi! I'm
+                    span
+                      |  {{candidateProfilePublicCtrl.viewCandidateData.candidate.firstName}} {{candidateProfilePublicCtrl.viewCandidateData.candidate.lastName}}
+                  #typed-strings
+                    typer(words='candidateProfilePublicCtrl.skillTyper', type-time='100', highlight-color='#ffffff')                    
+                  span#typed  
+  section#about.about-area.section_padding.bg-gray
+    .container
+      .row
+        .col-md-12.text-center
+          .section-title
+            h2 About Me
+        .col-sm-12.col-xs-12.about-me-heading
+          span  {{candidateProfilePublicCtrl.viewCandidateData.candidate.aboutMe}}
+      .row.candidate-details-heading
+        .about-containt
+          .col-md-4.col-sm-12.col-xs-12.col-lg-4
+            h3
+              |  {{candidateProfilePublicCtrl.viewCandidateData.candidate.firstName}} {{candidateProfilePublicCtrl.viewCandidateData.candidate.lastName}}
+            h5 {{candidateProfilePublicCtrl.viewCandidateData.candidate.designationName}}
+            div.cover-letter-content.length-content(style='word-wrap: break-word!important') {{candidateProfilePublicCtrl.viewCandidateData.coverLetter}}
+            p.hidden-sm
+          .col-md-8.col-sm-12.col-xs-12.col-lg-8.text-center
+            .choose-monitor.details-content
+              iframe#intro_video.video-iframe(ng-src='{{candidateProfilePublicCtrl.trustSrc(candidateProfilePublicCtrl.videoUrl)}}', frameborder='0', allowfullscreen='')
+  section#choose.why-do-you-choose-area.section_padding.bg-gray.hidden-xs
+    .container
+      .row
+        .col-md-12.text-center
+          .section-title
+            h2 Why Do You Choose Me
+            p I’m driven to deliver high-quality work 
+      .row.option-choose-me-list
+        .col-md-12.col-xs-12.col-sm-12.col-lg-12
+          .single-option.row
+            .col-lg-4.col-md-4.col-sm-4.col-xs-12
+              .membet-table
+                .myPic
+                  img(alt='', src='{{candidateProfilePublicCtrl.profilePic}}')
+                  .imgshape
+            .col-lg-8.col-md-8.col-sm-8.col-xs-12
+              .choose-options
+                #accordion.panel-group
+                  .panel
+                    .panel-heading
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseOne')
+                          | PERSONAL INFORMATION 
+                          i.indicator.fa.fa-angle-down.pull-right
+                    #collapseOne.panel-collapse.collapse.in
+                      .panel-body
+                        .row
+                          label.col-sm-6 Name :
+                          .col-sm-6 {{candidateProfilePublicCtrl.viewCandidateData.candidate.firstName}} {{candidateProfilePublicCtrl.viewCandidateData.candidate.lastName}}
+                        //.row
+                          label.col-sm-6 Contact Number :
+                          .col-sm-6 {{candidateProfilePublicCtrl.viewCandidateData.candidate.contactNumber}}
+                        .row
+                          label.col-sm-6 Address :
+                          .col-sm-6 {{candidateProfilePublicCtrl.viewCandidateData.candidate.address}}
+                  .panel
+                    .panel-heading(data-ng-if='candidateProfilePublicCtrl.viewCandidateData.candidateCertifications.length>0')
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseTwo')
+                          | CERTIFICATIONS 
+                          i.indicator.fa.fa-angle-down.pull-right
+                    #collapseTwo.panel-collapse.collapse
+                      .panel-body
+                        div(ng-repeat='certificate in candidateProfilePublicCtrl.viewCandidateData.candidateCertifications')
+                          .row
+                            label.col-sm-6 Name :
+                            .col-sm-6 {{certificate.name}}
+                          .row
+                            label.col-sm-6 Certificate Type :
+                            .col-sm-6 {{certificate.certificateType}}
+                        hr
+                  .panel
+                    .panel-heading(data-ng-if='candidateProfilePublicCtrl.viewCandidateData.candidateEducation.length>0')
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseThree')
+                          | EDUCATION 
+                          i.indicator.fa.fa-angle-down.pull-right
+                    #collapseThree.panel-collapse.collapse
+                      .panel-body
+                        div(ng-repeat='education in candidateProfilePublicCtrl.viewCandidateData.candidateEducation')
+                          .row
+                            label.col-sm-6 Degree :
+                            .col-sm-6 {{education.qualification}}
+                           .row
+                            label.col-sm-6 University :
+                            .col-sm-6 {{education.university}}
+                          .row
+                            label.col-sm-6 City :
+                            .col-sm-6 {{education.city}}
+                          .row
+                            label.col-sm-6 State :
+                            .col-sm-6 {{education.state}}
+                          .row
+                            label.col-sm-6 Country :
+                            .col-sm-6 {{education.country}}
+                          hr
+                  .panel
+                    .panel-heading(data-ng-if='candidateProfilePublicCtrl.viewCandidateData.candidateExperiences.length>0')
+                      h4.panel-title
+                        a.accordion-toggle(data-toggle='collapse', data-parent='#accordion', href='#collapseFour')
+                          | EXPERIENCE 
+                          i.indicator.fa.fa-angle-down.pull-right
+                    #collapseFour.panel-collapse.collapse
+                      .panel-body
+                        div(ng-repeat='experience in candidateProfilePublicCtrl.viewCandidateData.candidateExperiences')
+                          .row
+                            label.col-sm-6 Company Name :
+                            .col-sm-6 {{experience.companyName}}
+                          .row
+                            label.col-sm-6 Start Date :
+                            .col-sm-6 {{experience.startDate | date: "dd-MM-yyyy" }}
+                          .row
+                            label.col-sm-6 End Date :
+                            .col-sm-6 {{experience.endDate | date:'dd-MM-yyyy' }}
+                          .row
+                            label.col-sm-6 Job Title :
+                            .col-sm-6 {{experience.jobTitle}}
+                          hr
+  section#skill.skill-arae.section_padding.bg-gray
+    .container(data-ng-if='candidateProfilePublicCtrl.candidateSkillsSet.length>0')
+      .row
+        .col-md-12.text-center
+          .section-title.wow.fadeIn(style='visibility: visible; animation-name: fadeIn;')
+            h2 Skills
+            p when love and skills work together,expect a masterpiece
+      .row(ng-repeat='skill in candidateProfilePublicCtrl.candidateSkillsSet')
+        //- .col-md-6
+        //-   .skill-content-area
+        //-     div
+        //-       .row
+        //-         .col-sm-6(data-ng-if ='skill.skillsetName') {{skill.skillsetName}}
+        //-         .col-sm-6(data-ng-if ='!skill.skillsetName') {{skill.SkillsetText}}
+        .col-md-9(style='margin-left:100px')
+          .skill-wrap
+            // PROGRESS START
+            .skill(ng-model='candidateProfilePublicCtrl.percentageSkill')
+              span.progress-bar-label(data-ng-if ='skill.skillsetName') {{skill.skillsetName}}
+              span.progress-bar-label(data-ng-if ='!skill.skillsetName') {{skill.SkillsetText}}
+              .progress-bar
+                .progress-bar-L1.wow.fadeInLeft.animated(data-progress='{{skill.percentageSkill}}%', style='width: {{skill.percentageSkill}}%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;', data-wow-duration='1.5s', data-wow-delay='1.2s')
+                  .progress-conunt
+                    span.pr-pg {{skill.percentageSkill}}%
+  section#candidatePortfolio.skill-arae.section_padding.bg-gray
+    .container(data-ng-if='candidateProfilePublicCtrl.viewCandidateData.candidateProfilePortfolios.length>0')
+      .row
+        .col-md-12.col-xs-12.col-sm-12.text-center
+          .section-title.wow.fadeIn(style='visibility: visible; animation-name: fadeIn;')
+            h2 Candidate Portfolio
+      .rows
+        md-card
+          .col-md-12.col-sm-12.col-xs-12
+            div.education-section(ng-repeat='portfolio in candidateProfilePublicCtrl.viewCandidateData.candidateProfilePortfolios')
+              h4 {{portfolio.title}}
+              p Description - {{portfolio.description}}
+              a(target = "_blank", title='Project Url', href='{{portfolio.url}}') {{portfolio.url}}                  
+  section#join.join-us-area.section_padding
+    .container
+      .row
+        .col-md-12.text-center
+          .section-title
+            h2 Join Me
+            p Can't find what you need?
+        .row
+          .col-md-12.text-center
+            .social-link-list
+              .s-link.facebook(ng-repeat='socialUrl in candidateProfilePublicCtrl.viewCandidateData.candidateUrl')
+                a(target='_blank', data-ng-if="socialUrl.urlTypeName==='Facebook'", href='https://{{socialUrl.urlName}}')
+                  i.fa.fa-facebook
+                a(target='_blank', data-ng-if="socialUrl.urlTypeName==='Twitter'", href='https://{{socialUrl.urlName}}')
+                  i.fa.fa-twitter
+                a(target='_blank', data-ng-if="socialUrl.urlTypeName==='google-plus'", href='https://{{socialUrl.urlName}}')
+                  i.fa.fa-google-plus
+                a(target='_blank', data-ng-if="socialUrl.urlTypeName==='LinkedIn'", href='https://{{socialUrl.urlName}}')
+                  i.fa.fa-linkedin
+                a(data-ng-if="socialUrl.urlTypeName==='Others'", target = "_blank", href='https://{{socialUrl.urlName}}')
+                  i.fa.fa-link
+              //.s-link.twitter
+                
+              //.s-link.google-plus
+                
+              //.s-link.tumblr
+                
+  .footer-area.section_padding
+    .row
+      .col-md-12.text-center
+        .footer-text
+          p
+            | Designed & Developed By 
+            a(href='#') On-Demand
+#emailId(role='dialog', data-ng-show='candidateProfilePublicCtrl.isShowModel')
+  .modal-dialog.modal-sm
+    .modal-content.email-model
+      .modal-header
+        button.close(type='button', data-ng-click='candidateProfilePublicCtrl.cancel()') ×
+        h4.modal-title Enter Email Id
+      .modal-body
+        .row
+          .col-sm-12
+            .col-sm-4.control-label Email Id
+            .col-sm-8
+              input#email.form-control(type='text', ng-model='candidateProfilePublicCtrl.candidateEmailId', placeholder='Email Id', name='email',data-ng-blur="candidateProfilePublicCtrl.analyzeEmailId(candidateProfilePublicCtrl.candidateEmailId)",  required='required')
+              span.error-msg.alert-error-message(data-ng-if='candidateProfilePublicCtrl.isEmailIdvalid !== ""', style='color:red') {{candidateProfilePublicCtrl.isEmailIdvalid}}
+        .modal-footer
+          button.btn.btn-primary(type='button', data-ng-click='candidateProfilePublicCtrl.viewPrivateProfile()') SUBMIT
+          button.btn.btn-default(type='button', data-ng-click='candidateProfilePublicCtrl.cancel()') CANCEL

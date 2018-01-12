@@ -1,0 +1,85 @@
+.popover-content-call1(style='width:230px !important; background: white;')
+  .form-group
+    table.call-table(cellpadding='4', cellspacing='4')
+      tr.copylink(ng-click='ConferenceWebrtcCtrl.copyfun()', data-ng-show="!ConferenceWebrtcCtrl.isSendMailShow")
+        td
+          i.fa.fa-files-o(aria-hidden='true')
+        td.black
+          | Copy meeting link
+      tr(data-ng-show="!ConferenceWebrtcCtrl.isSendMailShow")
+        td(colspan='2')
+           hr
+      tr.sendinvite(data-ng-show="!ConferenceWebrtcCtrl.isSendMailShow")
+        td
+          i.fa.fa-envelope(aria-hidden='true')
+        td
+          span(data-ng-click="ConferenceWebrtcCtrl.showHideShareMail()" style="cursor:pointer;") Send email Invitation
+      tr(data-ng-show="!ConferenceWebrtcCtrl.isSendMailShow")
+        td(colspan='2')
+           hr  
+      tr(data-ng-show="ConferenceWebrtcCtrl.isSendMailShow")
+        td(colspan='2')
+          i.fa.fa-envelope(aria-hidden='true', style="color:grey;")
+          span(style="margin-left:8px;") Enter Email to share link
+          i.fa.fa-times-circle-o.fa-lg(aria-hidden='true', data-ng-click="ConferenceWebrtcCtrl.showHideShareMail()", style="color: rgba(202, 38, 38, 0.84); float: right; cursor: pointer; margin-right: 10px; margin-top: 7px; font-size: 18px;")
+      tr(data-ng-show="ConferenceWebrtcCtrl.isSendMailShow")
+        td(colspan='2')
+           hr(style="margin-right:15px;")
+      tr(data-ng-show="ConferenceWebrtcCtrl.isSendMailShow")
+        td(colspan='2')
+           textarea#addpart(style="height: 100px; width: 185px; border-radius:5px;", name="txtEmail", placeholder="Please enter email id", ng-list="", ng-model="ConferenceWebrtcCtrl.inviteParticipant", ng-click="ConferenceWebrtcCtrl.setFocus('addpart')")
+           hr
+           button.btn.btn-sm.invitebtn(type='button',ng-disabled='!ConferenceWebrtcCtrl.inviteParticipant.length', ng-click="ConferenceWebrtcCtrl.inviteparticipants()") Send Invitation Now
+
+
+style(type='text/css').
+  .popover{
+     max-height : 310px !important;
+     left: -221px !important;
+  }
+  .popover-content-call {
+    width: 500px;
+  }
+  .call-table {
+    padding: 20px;
+  }
+  .call-table-heading {
+    font-weight: bold;
+    margin: 20px 0px 20px 0px;
+    width: 100%;
+    text-align: center;
+  }
+  .btn-call {
+    width: 100%;
+    background: #FF8E00;
+    border: none;
+    color: white;
+    border-radius: 0px;
+  }
+  .p-black {
+    color: black;
+  }
+  .copylink {
+    cursor : pointer;
+  }
+  .i.fa.fa-times-circle-o.fa-lg:hover {
+    color: #2e86d2;
+  }
+  .copylink:hover .fa-files-o {
+    color: #2e86d2;
+  }
+  .sendinvite:hover .fa-envelope {
+    color: #2e86d2;
+  }
+  .invitebtn {
+    margin-left: 35px !important;
+    margin-bottom: 20px;
+    background: #5e9cd2;
+    border-color : #5e9cd2;
+    color: #fff;
+  }
+  .invitebtn:hover {
+    background: #2e86d2;
+    border-color : #2e86d2;
+    color: #fff;
+  }

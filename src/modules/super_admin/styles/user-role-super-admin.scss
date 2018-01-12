@@ -1,0 +1,243 @@
+.user-role-super-admin {
+
+  .add-user-btn{
+     background-color: #3f51b5;
+     color:#ffff
+  }
+  .showMe {
+    display: none;
+ }
+ 
+ .showColumn {
+    display: block;
+  }
+
+@media only screen and (max-width: 480px) {
+  .showMe {
+    display: block;
+  }
+  .showColumn {
+    display: none;
+  }
+}
+  md-input-container{
+    label{
+      left: 0px !important;      
+    }
+    .md-datepicker-input-container{
+      margin-left: 0px!important;
+      .md-datepicker-input{
+          min-width: 160px;
+      }
+    }
+    .md-datepicker-button{
+        padding: 0px;
+        margin: 0px;
+        height: 30px !important;
+        width: 30px !important;
+        margin-top: -10px !important;
+        float: right !important;
+    }
+  }
+  
+/*  .interview-expiry-pos{
+    left: 0px!important;
+  }*/
+    .panel.panel-default .panel-heading {
+      border-radius: 0px;
+    }
+
+    .user-role-btn{
+        width: 120px;
+        border-radius: 0px;
+        margin-right: 20px;
+        float:right;
+    }
+
+  .ui-select-match-text{
+    line-height: 1.666;
+  }
+    
+     .candidate-data-info{
+        margin-top: 30px;
+    }
+    
+    .user-data-info{
+        margin-top: 30px;
+    }
+    
+    a:hover{
+        text-decoration: none;
+    }
+    
+    .trash-icon{
+        margin-left: 5px;
+    }
+    
+    .add-save-btn{
+        float: right;
+    }
+
+    .pull-right {
+        float: right !important;
+        margin-left: 10px;
+    }
+    
+    .user-roles{
+        font-size:$font-size-large;
+        width:100%;
+        border-bottom:1px solid $lightGrey;
+        margin-bottom: 15px;
+        margin-left: -14px;
+        padding: 0px 10px 5px 10px;
+        
+        .user-roles-heading{
+        margin-left:10px;
+        text-transform: uppercase;
+        color:#333;
+        }
+    }
+    
+    .evaluator-filter-dropdown{
+        margin-left: -248px;
+        border-radius: 0px;
+        margin-top: 0px;
+        width: 313px;
+    }
+    
+    .header-button{
+        margin-top: 8px!important;
+      
+    }
+    
+    .payment-details-table{
+        margin-top: 20px!important;
+    }
+    
+    .error-msg{
+        font-size:12px;
+        color: $red;
+        float: left;
+     }
+     
+     .error-msg-email{
+        font-size:12px;
+        color: $red;
+        float: left;
+        margin-left: 15px;
+     }
+  
+    .error-lbl{
+        color:$red;
+        font-size:12px;
+        font-weight:normal;
+        word-spacing:1px;
+    }
+    
+    .mandatory-filed {
+        color: $red;
+        font-size: 18px;
+    }
+    
+    .dashboard-profile-heading{
+        padding: 6px!important;
+        // background: linear-gradient(to bottom, $navColor 0%, $navDarkColor 46%, $navDarkColor 46%, $navDarkerColor 100%) !important;
+        color: $white!important;
+        font-size: 18px!important;
+        background: #3f51b5 !important;
+    }
+
+    
+    
+    .client-icon-btn{
+        background: transparent!important;
+        border: none!important;
+        cursor:pointer;
+     }
+     
+     th{
+             text-align: left!important;
+     }
+     
+/*     .user-add-btn{
+        margin-top: 21px;
+     }*/
+
+  .ui-select-container .ui-select-placeholder{
+    line-height:0.6;
+  }
+  
+  @media only screen and (max-width : 765px) {
+    
+    .company-filter-dropdown{
+      margin-top: 15px;
+    }
+    
+    .company-filter-dropdown-payment-dashboard{
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .disable-level{
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+    
+    .add-user-btn{
+      margin-bottom: 10px;
+      background-color: #3f51b5;
+    }
+    
+    .end-date-level{
+      margin-bottom: 15px;
+    }
+  }
+  
+  @media only screen and (max-width : 992px) { 
+  
+    .end-date-level{
+      margin-top: 15px;
+    }
+    
+    .start-date-level{
+      margin-top: 15px;
+    }
+    
+    .disable-level{
+      margin-top: 15px;
+    }
+  }
+  
+  .stylish-input-group .input-group-addon{
+    background: white !important; 
+    border-radius:0px;
+  }
+  .stylish-input-group .form-control{
+    border-right:0; 
+    box-shadow:0 0 0; 
+    border-color:#ccc;
+  }
+  .stylish-input-group button{
+      border:0;
+      background:transparent;
+  }
+  
+  md-input-container {
+    margin: 5px;
+  }
+}
+
+  .user-role-super-admin.usr-role-modal{
+    .ui-select-container .ui-select-placeholder{
+      line-height:2.6;
+    }
+
+    .ui-select-match-text{
+      line-height: 2.666;
+    }
+
+    .ui-select-multiple.ui-select-bootstrap {
+      border-radius: 0px;
+      min-height:33px;
+    }
+  }

@@ -1,0 +1,114 @@
+#popover-content-call
+  table#table-btn.table-btn
+    tr
+      td(colspan='2')
+    tr
+      td(colspan='2')
+        div(style='height:50px;')
+    tr
+      td
+        .circle(onclick="ShowHideCallDiv('internet')")
+          i.fa.fa-phone.call-icon(aria-hidden='true')
+    tr
+      td(colspan='2')   
+         
+    tr
+      td.call-heading
+        span.margin-left-15 Call Via Phone
+  
+  #internet(style='display:none;width:95%; margin:0 auto;')
+    .form-group
+      table.call-table.call-table(cellpadding='4', cellspacing='4', style='width:100%;')
+        tr
+          th
+            .call-table-heading Call Via Phone
+            button.btn-close.close-btn(style='', onclick="ShowHideCallDiv('internet')") X
+        tr
+          td
+            span.gray-span(style='line-height:30px;') Call This No. :
+            br
+            | +245-657-654
+        tr
+          td
+            span.gray-span(style='line-height:30px;') Or Call This No.
+            br
+            | +678-657-754
+
+script(type='text/javascript').
+      $('#circle').hover(
+      function () {
+      $('.down-aerrow-img').fadeIn();
+      }, function () {
+      $('.down-aerrow-img').fadeOut();
+      }
+      );
+      $('.control').click(function () {
+      $(this).find('i').toggleClass('fa-pause fa-play')
+      });
+      function ShowHideCallDiv(element) {
+      var speed = 100;
+      var div = $("#" + element);
+      var table = $("#table-btn");
+      var heading = $("#heading-div");
+      doAnimation(div);
+      doAnimation(heading);
+      doAnimation(table);
+      };
+      function doAnimation(e) {
+      e.animate({
+      width: ["toggle", "swing"],
+      height: ["toggle", "swing"],
+      opacity: "toggle"
+      }, 300, function () {
+      // Animation complete.
+      });
+      }
+
+
+style.
+  .circle {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: #F48700;
+    text-align: center;
+    margin-left: 20px;
+    cursor:pointer;
+    margin-bottom: 15px;
+  }
+  .nav-tabs > li > a {
+    position: relative;
+    display: block;
+    padding: 8px 7px;
+    color: black !important;
+    font-size: 13px;
+    font-family: 'Malgun Gothic';
+    margin: 0 auto;
+    text-align: center;
+  }
+  .call-table {
+    padding: 20px;
+  }
+
+  .btn-call {
+    width: 100%;
+    background: #FF8E00;
+    border: none;
+    color: white;
+    border-radius: 0px;
+  }
+  .btn-close {
+    float: right;
+    padding: 3px;
+    background-color: black;
+    color: white;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    border: none;
+  }
+
+  .call-table tr td{
+   padding:5px;
+  }

@@ -1,0 +1,67 @@
+.dashboard-position-section
+    div(ng-cloak='')
+        md-content.md-padding(layout-xs='column', layout='row')
+          md-card
+            md-card-actions
+                div.position-heading
+                    i.fa.fa-list.position-icon(aria-hidden='true')
+                    span(data-translate="POSITIONS")
+                    .dashboard-btn-position.hidden-xs.hidden-sm
+                        md-button.md-raised.savedata-btn.create-position-btn(data-ui-sref='app.create-position({positionId : "new"})',ng-show='user.userRoles !== 3', data-translate="CREATE-NEW-POSITION")
+                        md-button.md-raised.savedata-btn.position-view-all(data-ui-sref="app.position", data-translate="VIEW-ALL")
+                .table-responsive
+                  .row.position-data(data-ng-show="positionDashboardCtrl.latestPositionList.length > 0")
+                    table.table.table-first.table-hover.table-responsive
+                      thead.position-head
+                        tr
+                          th Actions
+                          th Position Code
+                          th Position Name
+                          th Department
+                          th Recruiter 
+                          th Portals
+                          th
+                            | Responses            
+                          th Status
+                      tbody(ng-repeat='latestPosition in positionDashboardCtrl.latestPositionList')
+                        tr
+                          td(ng-if="true" title="'Action'")
+                            .dropdown
+                              i.fa.fa-cog.dropdown-toggle(data-toggle='dropdown', aria-hidden='true')
+                              ul.dropdown-menu
+                                li(data-ng-hide="latestPosition.status == 'CLOSED'")
+                                  a(data-ui-sref="app.update-position({ positionId: latestPosition.id })", data-ng-if='positionDashboardCtrl.Roles !== 3')
+                                    i.fa.fa-pencil-square-o Edit
+                                li
+                                  a(data-ui-sref="app.view-position({ positionId: latestPosition.id })")
+                                    i.fa.fa-eye View
+                                li
+                                  a.hover-pointer(data-ng-click="positionDashboardCtrl.compareCandidates(latestPosition.id)")
+                                    i.fa.fa-users All Candidates
+                          td.set-table {{latestPosition.positionCode}}
+                          td.set-table {{latestPosition.name}}
+                          td.set-table {{latestPosition.departmentName}}
+                          td.set-table {{latestPosition.recruiterName}}
+                          td.portal-pointer(data-title="'Portals'")
+                            span(ng-repeat ="portals in latestPosition.Portals| limitTo:2", ng-if="true" class='portal-position' data-title="'Portals'", sortable="'Portals'", ng-data='portals.portalName') {{portals.portalName}}{{$last ? '' : ($index==position.Portals.length-2) ? ' and ' : ', '}}        
+                            .dropdown.display-dropdown    
+                              span(ng-if ="latestPosition.Portals.length>2",data-toggle="dropdown",data-hover="dropdown") ...
+                              ul.dropdown-menu
+                                li(ng-repeat ="portals in latestPosition.Portals", ng-data='portals.portalName') {{portals.portalName}}                        
+                          td.set-table
+                             .multiple-color-box
+                              ul
+                                li(uib-tooltip='New', tooltip-placement='top')
+                                  | {{latestPosition.response.new}}
+                                li(uib-tooltip='Applied', tooltip-placement='top')
+                                  | {{latestPosition.response.applied}}
+                                li(uib-tooltip='Completed', tooltip-placement='top')
+                                  | {{latestPosition.response.completed}}
+                                li(uib-tooltip='Shortlisted', tooltip-placement='top')
+                                  | {{latestPosition.response.shortlisted}}
+                                li(uib-tooltip='Hired', tooltip-placement='top')
+                                  | {{latestPosition.response.hired}}
+                          td.set-table {{latestPosition.status}}
+                  .row(data-ng-show="positionDashboardCtrl.latestPositionList.length == 0")
+                    center 
+                      p  No Position Found 

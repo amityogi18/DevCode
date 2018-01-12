@@ -1,0 +1,219 @@
+.question-bank-super-admin
+  .modal-header.dashboard-profile-heading
+    button.close(type='button', data-ng-click='close()') ×
+    h4.modal-title(data-translate='WRT-QUE',data-ng-show='questionBankCtrl.isAdd')
+    h4.modal-title(data-translate='UPDATE-QUE',data-ng-show='questionBankCtrl.isEdit')
+  .modal-body
+    form(role='form', name='questionBankCtrl.clientForm', novalidate='novalidate')
+      .form-group.row
+        .col-md-3.col-sm-6.col-xs-12
+          md-input-container.md-block(flex="100")
+            label Question Type       
+            md-select#ddlQuestionType(ng-change='questionBankCtrl.questionTypeChanged()', ng-model='questionBankCtrl.selectedQuestionType',  name='questionType', ng-disabled="!questionBankCtrl.isAdd" required)
+              md-option(ng-repeat='item in questionBankCtrl.questionTypeList',ng-value='item.id ') {{item.questionType}}
+            span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.questionType.$touched')
+              span(data-ng-show='questionBankCtrl.clientForm.questionType.$dirty && questionBankCtrl.clientForm.questionType.$invalid')
+              span.error-msg(data-ng-show='questionBankCtrl.clientForm.questionType.$error.required') Please Select Question Type
+        .col-md-3.col-sm-6.col-xs-12
+          md-input-container.md-block(flex="100")
+            label Functional Area       
+            md-select#ddlQuestionType(ng-change='questionBankCtrl.getSkillSet(questionBankCtrl.departmentId)', ng-model='questionBankCtrl.departmentId', name='department' required )
+              md-option(ng-repeat='department in questionBankCtrl.departmentList',ng-value='department.id ') {{department.name}}
+            span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.department.$touched')
+              span(data-ng-show='questionBankCtrl.clientForm.department.$dirty && questionBankCtrl.clientForm.department.$invalid')
+              span.error-msg(data-ng-show='questionBankCtrl.clientForm.department.$error.required') Please Select Function Area
+        .col-md-3.col-sm-6.col-xs-12
+          md-input-container.md-block(flex="100")
+            label Skillset       
+            md-select(ng-model='questionBankCtrl.skillsetId', name='skillset', required)
+              md-option(ng-repeat='skillset in questionBankCtrl.skillsetList', ng-value='skillset.id ') {{skillset.skillsetName}}
+            span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.skillset.$touched')
+              span(data-ng-show='questionBankCtrl.clientForm.skillset.$dirty && questionBankCtrl.clientForm.skillset.$invalid')
+              span.error-msg(data-ng-show='questionBankCtrl.clientForm.skillset.$error.required') Please Select Skillset
+        .col-md-3.col-sm-6.col-xs-12
+          md-input-container.md-block(flex="100")
+            label Response Type       
+            md-select(name='responseType',ng-disabled='questionBankCtrl.responseTypeList.length < 1', ng-model='questionBankCtrl.selectedResponseType', required)
+              md-option(ng-repeat='item in questionBankCtrl.responseTypeList',ng-value='item.id ') {{item.responseType}}
+            span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.responseType.$touched')
+              span(data-ng-show='questionBankCtrl.clientForm.responseType.$dirty && questionBankCtrl.clientForm.responseType.$invalid')
+              span.error-msg(data-ng-show='questionBankCtrl.clientForm.responseType.$error.required') Please Select Response Type
+      .form-group.row
+        .col-md-4.col-sm-6.col-xs-12
+          md-input-container.md-block(flex="100")
+            label Company
+            md-select(data-ng-model='questionBankCtrl.id', name='companyName', data-ng-change='questionBankCtrl.getCompanyData(questionBankCtrl.id)', md-on-close="questionBankCtrl.clearSearchCompany()", data-md-container-class='selectdemoSelectHeader',required)
+              md-select-header.demo-select-header
+                input.demo-header-searchbox.md-text(ng-model='questionBankCtrl.searchCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+              md-optgroup(label='Company')
+              md-option(ng-value='company.id', data-ng-repeat='company in questionBankCtrl.companyList | filter: questionBankCtrl.searchCompany') {{company.name}}
+      .row.mg-b-10.category-controls
+        .col-md-12.col-sm-12.col-xs-12
+         .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showText && !questionBankCtrl.showAudio && !questionBankCtrl.showVideo && !questionBankCtrl.showMCQ && !questionBankCtrl.showMSQ' )
+                .col-xs-12.col-sm-6.col-md-6
+                  md-input-container.md-block(flex="100") 
+                    label Question:
+                    textarea.form-field.textarea-dimension-qb(rows='2', name ='textQuestion', ng-model='questionBankCtrl.enteredQuestion', required)
+                    span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.textQuestion.$touched')
+                      span(data-ng-show='questionBankCtrl.clientForm.textQuestion.$dirty && questionBankCtrl.clientForm.textQuestion.$invalid')
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.textQuestion.$error.required') Enter Question
+              .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showMSQ')
+                .col-xs-12.col-sm-6.col-md-6
+                  md-input-container.md-block(flex="100") 
+                    label Question:
+                    textarea.form-field.textarea-dimension-qb(rows='2',name='msqQuestion', placeholder='Type Your Question Here', ng-model='questionBankCtrl.enteredQuestion', required)
+                    span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.msqQuestion.$touched')
+                      span(data-ng-show='questionBankCtrl.clientForm.msqQuestion.$dirty && questionBankCtrl.clientForm.msqQuestion.$invalid')
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.msqQuestion.$error.required') Enter Question
+                .col-md-12.margin-of-options
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 1
+                      input.form-field#cbOption1(type='text', name='msqOption1', ng-model='questionBankCtrl.option1', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.msqOption1.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.msqOption1.$dirty && questionBankCtrl.clientForm.msqOption1.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.msqOption1.$error.required') Enter Option
+                  .col-md-2
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption1',ng-disabled='!questionBankCtrl.option1',ng-click ='questionBankCtrl.checkMsqAnswerSelection()')
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 2
+                      input.form-field#cbOption2(type='text',name='msqOption2', ng-model='questionBankCtrl.option2', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.msqOption2.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.msqOption2.$dirty && questionBankCtrl.clientForm.msqOption2.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.msqOption2.$error.required') Enter Option
+                  .col-md-2
+                    input#option3(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption2',ng-disabled='!questionBankCtrl.option2',ng-click ='questionBankCtrl.checkMsqAnswerSelection()')
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 3
+                      input.form-field#cbOption3(type='text',name='msqOption3', ng-model='questionBankCtrl.option3', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.msqOption3.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.msqOption3.$dirty && questionBankCtrl.clientForm.msqOption3.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.msqOption3.$error.required') Enter Option
+                  .col-md-2
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption3',ng-disabled='!questionBankCtrl.option3',ng-click ='questionBankCtrl.checkMsqAnswerSelection()')
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 4
+                      input.form-field#cbOption4(type='text', name='msqOption4' ng-model='questionBankCtrl.option4', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.msqOption4.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.msqOption4.$dirty && questionBankCtrl.clientForm.msqOption4.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.msqOption4.$error.required') Enter Option
+                  .col-md-2
+                    input(type='checkbox', name='checkbox', data-ng-model='questionBankCtrl.answerOption4',ng-disabled='!questionBankCtrl.option4',ng-click ='questionBankCtrl.checkMsqAnswerSelection()')
+                    span.error-msg {{questionBankCtrl.answerMsg}}
+              .row.mg-b-10.category-controls(ng-show='questionBankCtrl.showMCQ')
+                .form-group.row
+                  .col-xs-12.col-sm-6.col-md-6(style='margin-left:15px')
+                    md-input-container.md-block(flex="100") 
+                      label Question:
+                      textarea.form-field.textarea-dimension-qb(rows='2', name='mcqQuestion', placeholder='Type Your Question Here', ng-model='questionBankCtrl.enteredQuestion',required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.mcqQuestion.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.mcqQuestion.$dirty && questionBankCtrl.clientForm.mcqQuestion.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.mcqQuestion.$error.required') Enter Question
+                .col-md-12.margin-of-options
+                  .col-md-10
+                     md-input-container.md-block(flex="100")   
+                      label Option 1
+                      input(type='text',name='mcqOption1', ng-model='questionBankCtrl.option1', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.mcqOption1.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.mcqOption1.$dirty && questionBankCtrl.clientForm.mcqOption1.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.mcqOption1.$error.required') Enter Option
+                  .col-md-2
+                    input(type='radio', name='chooseone', data-ng-model='questionBankCtrl.answerOption1', data-ng-click="questionBankCtrl.optionsChanged(questionBankCtrl.answerOption1); questionBankCtrl.checkAnswerSelection()",ng-disabled='!questionBankCtrl.option1',  ng-value="2")
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 2
+                      input(type='text', name='mcqOption2',ng-model='questionBankCtrl.option2', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.mcqOption2.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.mcqOption2.$dirty && questionBankCtrl.clientForm.mcqOption2.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.mcqOption2.$error.required') Enter Option
+                  .col-md-2
+                    input(type='radio', name='chooseone', data-ng-model='questionBankCtrl.answerOption2', data-ng-click="questionBankCtrl.optionsChanged(questionBankCtrl.answerOption2); questionBankCtrl.checkAnswerSelection()",ng-disabled='!questionBankCtrl.option2',  ng-value="3")
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 3
+                      input(type='text', name='mcqOption3' ng-model='questionBankCtrl.option3', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.mcqOption3.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.mcqOption3.$dirty && questionBankCtrl.clientForm.mcqOption3.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.mcqOption3.$error.required') Enter Option
+                  .col-md-2
+                    input(type='radio', name='chooseone', data-ng-model='questionBankCtrl.answerOption3', data-ng-click="questionBankCtrl.optionsChanged(questionBankCtrl.answerOption3); questionBankCtrl.checkAnswerSelection()",ng-disabled='!questionBankCtrl.option3',  ng-value="4")
+                .col-md-12
+                  .col-md-10
+                    md-input-container.md-block(flex="100")   
+                      label Option 4
+                      input(type='text',name='mcqOption4', ng-model='questionBankCtrl.option4', required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.mcqOption4.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.mcqOption4.$dirty && questionBankCtrl.clientForm.mcqOption4.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.mcqOption4.$error.required') Enter Option
+                  .col-md-2
+                    input(type='radio', name='chooseone', data-ng-model='questionBankCtrl.answerOption4', data-ng-click="questionBankCtrl.optionsChanged(questionBankCtrl.answerOption4); questionBankCtrl.checkAnswerSelection()",ng-disabled='!questionBankCtrl.option4',  ng-value="5")
+                    span.error-msg {{questionBankCtrl.productMsg}}
+              .row.recordVideoSection(ng-show='questionBankCtrl.showVideo')
+                .col-xs-12.col-sm-6.col-md-6
+                    md-input-container.md-block(flex="100") 
+                      label Question:
+                      textarea.form-field.textarea-dimension-qb(rows='2', name='videoQuestion',placeholder='Please Type Question Related Information Here', ng-model='questionBankCtrl.enteredQuestion',required)
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.videoQuestion.$touched')
+                        span(data-ng-show='questionBankCtrl.clientForm.videoQuestion.$dirty && questionBankCtrl.clientForm.videoQuestion.$invalid')
+                        span.error-msg(data-ng-show='questionBankCtrl.clientForm.videoQuestion.$error.required') Enter Question
+                .video-area.col-md-12
+                  .video-border
+                    .countDownBox(ng-if='questionBankCtrl.countdownStarted')
+                      img#questionBank-countdown-img(ng-if='questionBankCtrl.countdownStarted', src='../../../../public/img/countdown.gif')
+                    iframe#video-iframe.video-iframe(ng-hide='questionBankCtrl.recordingOn || questionBankCtrl.countdownStarted', ng-src='{{questionBankCtrl.trustSrc(questionBankCtrl.filePath)}}', frameborder='0', allowfullscreen='')
+                    video#questionBankVideoElement(ng-show='questionBankCtrl.recordingOn')
+                    .row.recording-controls(ng-show='questionBankCtrl.recordingOn')
+                      .col-md-12
+                        .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                          .col-md-2.col-sm-2.col-xs-2.play-icon
+                            i.fa-2x.fa.fa-pause(aria-hidden='true',title='pause', data-ng-click='questionBankCtrl.onPauseClick()', data-ng-if='!questionBankCtrl.paused')
+                            i.fa-2x.fa.fa-play(aria-hidden='true',title='play', data-ng-click='questionBankCtrl.onResumeClick()', data-ng-if='questionBankCtrl.paused')
+                          .col-md-2.col-sm-2.col-xs-2.stop-icon
+                            i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true',title='stop', data-ng-click='questionBankCtrl.onStopClick()')
+                .btn-sec
+                  .row
+                      .col-sm-3
+                      .col-sm-2
+                          input(type='button', class='btn btn-primary', value='Record', ng-click="questionBankCtrl.onRecordClick('video')")
+                      .col-sm-2
+                          input(type='button', class='btn btn-primary', value='Preview', ng-click="questionBankCtrl.preview('video')")
+                      .col-sm-2
+                          input(type='button', class='btn btn-primary', value='Re-record', ng-click="questionBankCtrl.onRecordClick('video')")
+              .row.mg-b-10(ng-show='questionBankCtrl.showAudio')
+                .col-xs-12.col-sm-6.col-md-6(style='margin-left:15px')
+                  md-input-container.md-block(flex="100") 
+                    label Question:
+                    textarea.form-field.textarea-dimension-qb(rows='2', name='audioQuestion', placeholder='Please Type Question Related Information Here..', ng-model='questionBankCtrl.enteredQuestion', required)
+                    span.error-msg(data-ng-show='questionBankCtrl.clientForm.$submitted || questionBankCtrl.clientForm.audioQuestion.$touched')
+                      span(data-ng-show='questionBankCtrl.clientForm.audioQuestion.$dirty && questionBankCtrl.clientForm.audioQuestion.$invalid')
+                      span.error-msg(data-ng-show='questionBankCtrl.clientForm.audioQuestion.$error.required') Enter question
+                .col-md-12      
+                  audio#questionBankAudioElement(controls='controls', ng-src='{{questionBankCtrl.trustSrc(questionBankCtrl.filePath)}}')
+                .row.recording-controls(ng-show='questionBankCtrl.recordingOn')
+                  .col-md-12
+                    .col-md-5.col-sm-5.col-xs-5.col-md-offset-5
+                      .col-md-2.col-sm-2.col-xs-2.play-icon
+                        i.fa-2x.fa.fa-pause(aria-hidden='true', data-ng-click='questionBankCtrl.onPauseClick()', data-ng-if='!questionBankCtrl.paused')
+                        i.fa-2x.fa.fa-play(aria-hidden='true', data-ng-click='questionBankCtrl.onResumeClick()', data-ng-if='questionBankCtrl.paused')
+                      .col-md-2.col-sm-2.col-xs-2.stop-icon
+                        i.fa-2x.fa.fa-stop-circle-o(aria-hidden='true', data-ng-click='questionBankCtrl.onStopAudio()')
+                .btn-sec.col-md-12
+                  .center
+                    button.btn.btn-primary(type='button', title='record', ng-click="questionBankCtrl.onRecordClick('audio')") Record
+                    button.btn.btn-primary(type='button', title='preview',ng-click="questionBankCtrl.preview('audio')") preview
+
+            .row.mg-b-10.action-buttons
+                .col-xs-6.col-sm-6.col-md-8
+                  label
+                .col-xs-6.col-sm-6.col-md-4
+                    button.btn.btn-primary.save-update-btn(type='button', data-ng-click='questionBankCtrl.saveNewCustomeQuesstion();questionBankCtrl.onStopClick()', data-ng-show='questionBankCtrl.isAdd') Save
+                    button.btn.btn-warning.save-update-btn(type='button', data-ng-click='questionBankCtrl.updateCustomQuestion()', data-ng-show='questionBankCtrl.isEdit') Update
+                    button.btn.btn-danger(type='button',data-ng-click='questionBankCtrl.cameraOffButton()') Cancel

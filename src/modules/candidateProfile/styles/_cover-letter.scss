@@ -1,0 +1,166 @@
+.cover-letter-container {
+  
+  .alert-error-message{
+    color : red;
+    font-size: 12px;
+  }
+.video-intro-heading{
+  font-size:$font-size-large;
+  width:100%;
+  border-bottom:1px solid $lightGrey;
+  margin-bottom: 15px;
+  margin-left: -1px;
+  padding: 0px 10px 10px 10px;
+  .video-intro-1{
+  margin-left: 19px;
+  text-transform: uppercase;
+  color:#333;
+
+  }
+}
+
+ .cover-para {
+    font-size: $font-size-normal;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: black;
+    font-weight:bold;
+    margin-left: 4px;
+  }
+  .cover-letter{
+      padding: 0px 17px;
+  }
+  textarea{
+    border-color: #cbcbcb;
+    //color: #a5a5a5;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    height: 200px;
+    padding: 15px 10px;
+  }
+  .char-limit{
+  float:right;
+  margin-right: -34px;
+  margin-top: 180px;
+  background: $lightGrey;
+}
+  
+  .character-limit{
+    float:right;
+    margin-right: 77px; 
+  }
+  label {
+    font-weight: 500 !important;
+  }
+   @media only screen and (max-width: 780px) {
+    .cover-letter-panel{
+        margin-top:40px;
+    }
+   }
+   @media only screen and (max-width: 480px) {     
+     .panel-body{
+       padding-left: 0px;
+       padding-right: 0px;
+     }
+     .modal-body{
+           padding-left: 0px;
+           padding-right: 0px;
+         }
+    }
+   
+  .edit-icon {
+    margin-right: 3px !important;
+    color: white;
+    border-radius: 50%;
+    border-style: double;
+    border-width: 4px;
+    border-color: lightgrey;
+    padding: 7px;
+    font-size: 16px;
+    background: $blue;
+  }
+  .cover-letter-list{
+    border: 5px solid $lightestGrey;
+    padding: 5px;
+  }
+  .save-letter-btn{
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 3px !important;
+    border: 1px solid #337AB7;
+    background:white;
+    color:#337AB7;
+    font-weight: 600;
+  }
+  .cover-letter-content{
+   /* border: 7px solid $lightestGrey; */
+    padding: 10px;
+    border-top: 1px solid $lightestGrey;
+  }
+  .cover-title  {
+    padding: 10px;
+  }
+  .align-middle{
+    margin-top: 7px;
+    .lastUpdateDate{
+      margin-left: -15px;
+    }
+
+  }
+
+  .header-of-cl{
+    margin-left: 31px;
+
+  }
+  .tool-tip{
+    width: 60px;
+    background-color:$lightestGrey;
+    color:$black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 8px;
+    z-index: 1;
+    margin-top: -75px;
+    position:absolute;
+  }
+  .view{
+    margin-top:90px;
+  }
+  .body-of-modal{
+    border:14px solid $lightGrey;
+  }
+  .cl-content{
+    height:220px !important;
+  }
+  .add-cover-letter{
+    margin-left: 16px;
+    color: white;
+    font-size: 16px;
+  }
+  .modal-header {
+    color: $white;
+    .close {
+      color: $white;
+    }
+  }
+  .modal-content{
+    border-radius:0px;
+  }
+  .cover-letter-state{
+   // margin-left: -20px;
+    color:$green;
+  }
+
+  .cover-letter-content{
+    white-space: normal;
+    text-align: justify;
+    word-wrap:break-word;
+    font-size:13px;
+  }
+  .save-btn-display{
+    display:none;
+  }
+
+}

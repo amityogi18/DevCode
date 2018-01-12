@@ -1,0 +1,26 @@
+#popover-content-video(ng-if="!$root.mobile",style='margin-left: -15px;height: 332px;width: 274px;background: #fff;border-radius: 4px;')
+  .form-group(style='margin-left:15px;')
+    table(style='padding:5px;', cellpadding='7', cellspacing='7')
+      tr
+        th(colspan='3', style='text-align:center;')
+          div(style='font-weight:bold;')  Video
+      tr
+        td
+          select#videoSource.form-control(ng-model='ConferenceWebrtcCtrl.videosourceselect' ng-change='ConferenceWebrtcCtrl.changeVideoFeed()' ng-options="device.text for device in ConferenceWebrtcCtrl.deviceListVideo track by device.deviceId", style='width: 238px; border-radius:4px;')
+      tr
+        td
+          div
+            video(id='videoTestElementCertIns' ng-show="ConferenceWebrtcCtrl.isVideoFeed", autoplay='', style='width: 237px;margin-top: 15px;')
+      tr
+        th(colspan='3', style='text-align:center;')
+          div(style='font-weight:bold;')  Audio      
+      tr
+        td
+          select#audioSource.form-control(ng-model='ConferenceWebrtcCtrl.audiosourceselect' ng-change='ConferenceWebrtcCtrl.changeAudioFeed()' ng-options="device.text for device in ConferenceWebrtcCtrl.deviceListAudio track by device.id", style='width: 238px;border-radius:4px;')
+
+style(type='text/css').
+  .popover{
+    left: 1070px !important;
+  }
+
+

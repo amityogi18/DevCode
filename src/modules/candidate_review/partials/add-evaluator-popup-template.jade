@@ -1,0 +1,94 @@
+.candidate-review
+  .modal-content
+    .add-evaluator-popup
+      .modal-header
+        button.close(type='button', ng-click='close()')
+          i.fa.fa-times
+        h4 Add {{addEvaluatorPopupCtrl.headerName}}{{user}}
+        button(class='hidden', id='hiddenInterview', ng-click='addEvaluatorPopupCtrl.controlInterviewerDisplay()')
+        button(class='hidden', id='hiddenCandidate', ng-click='addEvaluatorPopupCtrl.controlCandidateDisplay()')
+      .modal-body
+        .interviewer-sec
+          .search-bar.md-block
+            md-input-container.col-md-4.col-sm-6.col-xs-12
+              label.position-search-lebel Search...
+              input(type='text', ng-model='addEvaluatorPopupCtrl.searchEvaluatorFilter.search')
+              md-icon.position-search(md-font-set='fa') &#xf002
+            md-input-container.md-block.col-md-3.col-sm-4.col-xs-12
+              md-button.md-primary.md-raised.addEvaluator(data-toggle="collapse", data-target="#demo") Add Evaluator
+          #demo.multiple-inputs.collapse(data-ng-if='addEvaluatorPopupCtrl.role')
+            form(role='form', name='addEvaluatorPopupCtrl.evalatorForm', novalidate)
+              div(layout='row',layout-xs ='column', flex-order-xs='100', flex-offset-xs='10')
+                md-input-container.md-block(flex="25",flex-offset="0", flex-xs="100", flex-offset-xs="0")
+                  input(type='text', name='email', placeholder='Email Address', ng-model='addEvaluatorPopupCtrl.email', data-ng-blur="addEvaluatorPopupCtrl.analyzeEmailId(addEvaluatorPopupCtrl.email)", data-ng-keypress= "addEvaluatorPopupCtrl.analyzeEmailId(addEvaluatorPopupCtrl.email)", data-ng-keyup = "addEvaluatorPopupCtrl.analyzeEmailId(addEvaluatorPopupCtrl.email)", required)
+                  span.error-msg(data-ng-if='addEvaluatorPopupCtrl.errormessage !== ""') {{addEvaluatorPopupCtrl.errormessage}}.
+                md-input-container.md-block(flex="15",flex-offset="0", flex-xs="100", flex-offset-xs="0")
+                  input(type='text',name='firstName', placeholder='First Name', maxlength='25', ng-model='addEvaluatorPopupCtrl.firstName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', required)
+                  span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.$submitted || addEvaluatorPopupCtrl.evalatorForm.firstName.$touched')
+                    span(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.firstName.$dirty && addEvaluatorPopupCtrl.evalatorForm.firstName.$invalid')
+                    span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.firstName.$error.required') Please Enter First Name
+                md-input-container.md-block(flex="15",flex-offset="0", flex-xs="100", flex-offset-xs="0")
+                  input.lastName(type='text', name='lastName', placeholder='Last Name', ng-model='addEvaluatorPopupCtrl.lastName',onkeypress='return event.charCode >= 65 && event.charCode <= 90 ||  event.charCode >= 97 && event.charCode <= 122 || event.charCode == 32', maxlength="25", required)
+                  span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.$submitted || addEvaluatorPopupCtrl.evalatorForm.lastName.$touched')
+                    span(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.lastName.$dirty && addEvaluatorPopupCtrl.evalatorForm.lastName.$invalid')
+                    span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.lastName.$error.required') Please Enter Last Name
+                md-input-container.md-block(flex="25",flex-offset="0", flex-xs="100", flex-offset-xs="0")
+                  label department
+                  md-select(data-ng-model='addEvaluatorPopupCtrl.departmentId', md-on-close="addEvaluatorPopupCtrl.clearSearchDeptTerm()", data-ng-change='addEvaluatorPopupCtrl.getSkillSet(addEvaluatorPopupCtrl.departmentId, true)', placeholder='Select Department', name='department', data-md-container-class='selectdemoSelectHeader', required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='addEvaluatorPopupCtrl.searchDepartment', ng-keydown="$event.stopPropagation()", type='search', placeholder='Search for a department..')
+                    md-optgroup(label='department')
+                    md-option(ng-value='{{department.id}}', ng-repeat='department in addEvaluatorPopupCtrl.departmentList | filter:addEvaluatorPopupCtrl.searchDepartment') {{department.name}}
+                  span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.$submitted || addEvaluatorPopupCtrl.evalatorForm.department.$touched')
+                    span(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.department.$dirty && addEvaluatorPopupCtrl.evalatorForm.department.$invalid')
+                    span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.department.$error.required') Please Select Functional Area         
+                md-input-container.md-block(flex="20",flex-offset="0", flex-xs="100", flex-offset-xs="0")
+                  label Skills
+                  md-select(data-ng-model='addEvaluatorPopupCtrl.skillsetId', md-on-close="addEvaluatorPopupCtrl.clearSearchSkillTerm()", placeholder='Select skills', multiple='', name='skills', data-md-container-class='selectdemoSelectHeader', required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='addEvaluatorPopupCtrl.searchSkill', ng-keydown="$event.stopPropagation()", type='search', placeholder='Search for a skills..')
+                    md-optgroup(label='skill')
+                    md-option(ng-value='{{skill.id}}', ng-repeat='skill in addEvaluatorPopupCtrl.skillsetList | filter:addEvaluatorPopupCtrl.searchSkill') {{skill.skillsetName | limitTo:25}}
+                  span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.$submitted || addEvaluatorPopupCtrl.evalatorForm.skills.$touched')
+                    span(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.skills.$dirty && addEvaluatorPopupCtrl.evalatorForm.skills.$invalid')
+                    span.error-msg(data-ng-show='addEvaluatorPopupCtrl.evalatorForm.skills.$error.required') Please Select Skill   
+            a.btn-plus(ng-disabled='addEvaluatorPopupCtrl.evalatorForm.$valid', uib-tooltip='Add New Evaluator', tooltip-placement ='top', data-ng-click='addEvaluatorPopupCtrl.addEvaluator()')
+              i.fa.fa-plus-circle.fa-2x
+          .row
+            .col-xs-12.showMe
+              md-input-container.md-block(flex-xs="100")
+                label Select
+                md-select(class="selectpicker", ng-model="addEvaluatorPopupCtrl.test", ng-change="addEvaluatorPopupCtrl.toggle()")
+                  md-option(ng-model="col.show" value="{{$index}}" ng-repeat="col in addEvaluatorPopupCtrl.cols.slice(1,addEvaluatorPopupCtrl.cols.length) track by $index")
+                   | {{col.title()}}
+            .col-md-12.col-sm-12.col-xs-12
+                .col-md-12.col-sm-12.col-xs-12
+                  p.text-label(ng-hide='addEvaluatorPopupCtrl.evaluatorList.length < 1') Showing 
+                    span
+                      strong 1-{{addEvaluatorPopupCtrl.evaluatorList.length}}
+                      |  of  
+                      strong
+                        {{addEvaluatorPopupCtrl.evaluatorListCount}}   
+                      |  records       
+            .main-table-area
+              .table-responsive
+                table.table.table-first(ng-table='addEvaluatorPopupCtrl.evaluatorTableParams', ng-table-columns-binding="addEvaluatorPopupCtrl.cols")
+                  tr(ng-repeat='evaluator in $data')
+                    td(ng-if="true" class='col-sm-1')
+                      input(type='checkbox', data-ng-click='addEvaluatorPopupCtrl.addEvaluatorUserId($event, evaluator.evaluatorId)')
+                    td(ng-if="true" class='col-sm-2' data-title="'Email'", sortable="'email'", ng-data='evaluator.email') {{evaluator.email}}
+                    td(ng-if="true" class='col-sm-2' data-title="'Name'",sortable="'firstName'", ng-data='evaluator.firstName') {{evaluator.firstName}} {{evaluator.lastName}}
+                    td(ng-if="true" class='col-sm-2' data-title="'Department'", sortable="'departmentName'", ng-data='evaluator.departmentName') {{evaluator.departmentName}}
+                    td(ng-if="true" class='col-sm-3' data-title="'Skills'", sortable="'skillsets'", ng-data='evaluator.skillsets') 
+                      span(data-ng-repeat="skill in evaluator.skillsets") 
+                        span{{skill.name}} 
+                        span(ng-if="($index + 1) < evaluator.skillsets.length") ,
+              .col-sm-12(data-ng-show='addEvaluatorPopupCtrl.evaluatorList.length < 1')
+                .candidate-text No Evaluator Found
+        .modal-footer  
+          .pull-right.save-section
+            div(layout='row')
+              md-input-container.md-block
+                md-button.md-primary.md-raised(ng-click='addEvaluatorPopupCtrl.linkEvaluatorToInterview()', ng-disabled="addEvaluatorPopupCtrl.selectedEvaluatorId.length <1") Finish
+              md-input-container.md-block
+                md-button.md-primary.cancel-bottom-btn(ng-click='close()') Cancel

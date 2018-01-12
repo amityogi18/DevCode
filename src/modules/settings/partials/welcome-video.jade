@@ -1,0 +1,52 @@
+.company-information
+    md-card 
+        .video-intro-heading.welcome-video
+            span.video-intro-1(data-translate="WELCOME-VIDEO")
+        .panel-body.padding-of-panel
+            .form-body
+              video-recorder(default-url='https://www.youtube.com/embed/mcixldqDIEQ')
+            // welcome video popup
+            #wlcm-video.modal.fade.welcome-video(role='dialog')
+              .modal-dialog
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal')
+                      img(src='../../../public/img/popup-cross.png', alt='')
+                    h4(data-translate="WELCOME-VIDEO")
+                  .modal-body
+                    p.sub-title(data-translate="PREVIEW-BTN")
+                    .video-iframe-sec
+                      iframe.exit-video-frame(src='https://www.youtube.com/embed/mcixldqDIEQ', frameborder='0', allowfullscreen='')
+                  .modal-footer
+                    .video-upload-sec
+                        .input-area
+                          i.fa.fa-youtube(aria-hidden='true')
+                          input.form-control(type='text')
+                          .upload-btn
+                            input(type='file')
+                            span
+                              i.fa.fa-cloud-upload(aria-hidden='true')
+                              span(data-translate="UPLOAD-BTN")
+                              i.fa.fa-sort-desc(aria-hidden='true')
+                        //
+                    .choose-video-sec
+                        .col-md-5
+                          .row
+                            .slct-area
+                              span.lebel(data-translate="CHOOSE-VIDEO")
+                              .select-field
+                                select.form-control
+                                  option Danny Smith
+                                a(href='#',data-translate="PREVIEW-LINK")
+                        //
+                        .col-md-7
+                          .row
+                            label(data-translate="BROWSE")
+                            .btns-area
+                              .browse-btn
+                                input(type='file')
+
+                              a.btn-upld(href='#')
+                                i.fa.fa-cloud-upload(aria-hidden='true')
+                                span(data-translate="UPLOAD-BTN")
+                              button.btn-record(type='button',data-translate="RECORD-BTN")

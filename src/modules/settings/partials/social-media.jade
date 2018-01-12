@@ -1,0 +1,18 @@
+.company-profile
+    md-card
+        .video-intro-heading.welcome-video
+            span.video-intro-1(data-translate="SOCIAL-MEDIA-TITLE")
+            
+        .panel-body
+            table.table.table-bordered1
+                tbody
+                    tr(data-ng-repeat='portal in socialMediaCtrl.portalList')
+                        td
+                            md-checkbox.md-primary(ng-model="portal.status", ng-disabled='portal.shareUrl === ""', data-ng-click='socialMediaCtrl.addPortalId(portal.status, portal)', aria-label="addcheckbox", data-ng-blur='socialMediaCtrl.analyzeUrl(portal)')
+                        td  {{portal.portalName}}  
+                        td
+                            md-input-container.md-block.zero-margin(flex="100")
+                                label
+                                input#url(type='text', maxlength='150', placeholder='Enter Url', ng-model='portal.shareUrl', data-ng-blur='socialMediaCtrl.analyzeUrl(portal)')
+            md-button.md-raised.md-primary(type='button', data-ng-click='socialMediaCtrl.savePortal()', ng-disabled='socialMediaCtrl.hideSaveBtn') Save
+

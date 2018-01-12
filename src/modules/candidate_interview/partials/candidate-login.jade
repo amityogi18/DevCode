@@ -1,0 +1,80 @@
+.content-wrapper.candidate-view
+  .content-wrapper(style='margin-top:0px;')
+    .col-md-12
+      .candidate-view-steps.step
+        ul.step-tab
+          li.active
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon1.png', alt='')
+            .step-name(data-translate="WELCOME")
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon2.png', alt='')
+            .step-name(data-translate="YOUR-PROFILE")
+          li
+            figure.step-icons
+              span
+                img(src='../../../public/img/icon3.png', alt='')
+            .step-name(data-translate="PREPARE")
+          li
+            figure.step-icons
+              span
+                img.img-icon(src='../../../public/img/icon4.png', alt='')
+            .step-name(data-translate="INTERVIEW")
+        .step-body
+          ul
+            li.loginli
+              .whte-bg
+                .user-all-details
+                  p.title Hie! Shubham Namdev
+                  p.sub-title
+                    span project Manager :
+                    |  Live Phone Interview
+                  p.date
+                    span Dec 5, 2016
+                    span 2:00pm
+                  p.sub-title
+                    span project Manager :
+                    |  Live Phone Interview
+                  p.sub-title
+                    span(data-translate="AUDIO-CONNECTION")
+                  ol
+                    li(data-translate="CALL")
+                    li(data-translate="ACCESS-CODE")
+                    li(data-translate="ATTENDEES-ID")
+                  p(data-translate="INTERVIEWD-BY")
+                  a(href='') www.clientwebsite.com
+            li.loginli
+              .whte-bg
+                .user-all-details
+                  p.title Introduction
+                  p(data-translate="CALL-CONTENT")
+                  .watch-sec
+                    p.hdng(data-translate="WATCH-VEDIO")
+                    a(href='#') http//:watchvideo.com
+                  .watch-sec
+                    p.hdng(data-translate="PRACTICES")
+                    a(href='#') http//:bestvideo.com
+            li.loginli
+              .whte-bg
+                .user-all-details
+                  p.title Register Now
+                  .rgstr-form
+                    form
+                      .input-fld
+                        label(data-translate="EMAIL")
+                          sup *
+                        input.form-control(type='text', placeholder='Email Address')
+                      .input-fld
+                        label(data-translate="PASSWORD")
+                          sup *
+                        input.form-control(type='text', placeholder='*****')
+                      p
+                        input(type='checkbox')
+                        span(data-translate="REMEMBER-ME")
+                      p
+                        a(href='#' data-translate="FORGET-PASSWORD")
+                      .btn-sec
+                        a.btn-next(data-ui-sref='ci.profile' ,data-translate="NEXT")

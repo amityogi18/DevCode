@@ -1,0 +1,97 @@
+.content-wrapper.view-profile-page
+    .row
+        .col-xs-12.well.instruction-heading  
+            h2 Instruction
+    .row
+        .col-xs-12
+            center
+                h3 Please Read The Instruction Carefully 
+    hr
+    .row
+        .col-xs-1
+        .col-xs-4
+            h4.instruction-head General Instruction:
+    .row
+        .col-xs-2
+        .col-xs-9
+            ul(style='list-style-type:disc')
+                li.instruction-text
+                  | Total number of questions :
+                  | 20
+                li.instruction-text
+                  | Time Duration of examination is :
+                  | 30 Minutes.
+                li.instruction-text Each question carry 1 mark, no negative marks.
+                li.instruction-text Do not Minimize/Refresh/close the test window else your interview will be cancelled.
+                li.instruction-text After clicking on the 'Start Button' the actual test time will begin.
+                li.instruction-text The clock will be set at the server.The count down timer in the top left of corner of screen will display the remaining time available for you to complete the examination.When the timer reaches zero, the examination end by itself.You will not be required to end or submit your examination.
+                li.instruction-text The Question palette displayed on the right side of the screen will show the status of each question using one of the following symbols:
+                div
+                    .row.not-visited
+                        .col-xs-1 
+                            .not-visited-palette
+                        .col-xs-4
+                            p You have not visited the question yet
+                    .row.not-answer
+                        .col-xs-1 
+                            .not-answer-palette
+                        .col-xs-4
+                            p You have not answered the question.
+                    .row.answer-success
+                        .col-xs-1 
+                            .answer-palette
+                        .col-xs-4
+                            p You have answered the question.
+                    .row.answer-review
+                        .col-xs-1 
+                            .review-palette
+                        .col-xs-4
+                            p You have marked the question for review.
+                li.instruction-text There are 10 questions and each question is followed by 4 alternatives/ options.
+    .row
+        .col-xs-1
+        .col-xs-4
+            h4.instruction-head Navigating to a Question:
+    .row    
+        .col-xs-2
+        .col-xs-9
+            ul(style='list-style-type:disc')
+                li.instruction-text  Click on the question number on question palette at right of your screen to go to that numbered question directly.Note that using this option does not SAVE your answer to the current question. 
+                li.instruction-text   Click on Save & Next to save your answer for the current question and then go to the next question.
+    .row
+        .col-xs-1
+        .col-xs-4
+            h4.instruction-head Answering a Question:
+    .row    
+        .col-xs-2
+        .col-xs-9
+            ul(style='list-style-type:disc')
+                li.instruction-text  To select your answer, click on the button of one of the options.
+                li.instruction-text  To deselect your choosen answer, click on the button of the choosen option again.
+                li.instruction-text  To change your choosen option, click on the button of another option.
+                li.instruction-text  To save your answer, You must click on the Save & Next button.
+                li.instruction-text  Questions which are "Marked for Review" will be considered as "save" at the end of evaluation.
+                li.instruction-text  All the best
+    hr
+    .row
+        .col-xs-6
+        .col-xs-6
+            button.btn.btn-primary(type='submit', data-ng-click='testInstructionController.startTest()') Start Test
+    .row
+        .col-xs-12
+            div(data-ng-show='testInstructionController.isTestStart')
+              .row
+                .col-md-4
+                  | Position : {{position}}
+                .col-md-4
+                  | {{testInstructionController.currentPage}} of {{testInstructionController.totalItems}}
+                .col-md-4.pull-right
+                  | Time Left : {{testInstructionController.hour}}:{{testInstructionController.minute}}:{{testInstructionController.second}}
+              .row
+                | table
+                |  tr(data-ng-repeat='question in testInstructionController.allQuestions')
+                |    th {{question}}
+              .row.pull-right
+                ul(uib-pager='', total-items='totalItems', ng-model='currentPage')
+
+

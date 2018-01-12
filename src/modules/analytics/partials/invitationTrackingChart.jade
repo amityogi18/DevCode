@@ -1,0 +1,32 @@
+.analytics-box-section.analytics-section
+  div(ng-cloak='')
+    md-content.md-padding.invitation-section(layout-xs='column', layout='row')
+      md-card.candidate-status-report-section
+        md-card-actions
+            .candidate-status-heading
+              i.fa.fa-tasks.canidate-status-icon(aria-hidden='true')
+              span Invitation Tracking
+            #chart-container.chart-container
+              .funnel-chart
+                .trapezoid_01
+                  .text-box
+                    label Sent: {{invitationTrackingCtrl.chartData.Sent}}
+                .trapezoid_02
+                  .text-box
+                    label Clicked Invite: {{invitationTrackingCtrl.chartData.Invite}}
+                .trapezoid_03
+                  .text-box
+                    label Started: {{invitationTrackingCtrl.chartData.Started}}
+                .trapezoid_04
+                  .text-box
+                    label Completed: {{invitationTrackingCtrl.chartData.Completed}}
+                .trapezoid_05
+                  .text-box
+                    label Evaluated: {{invitationTrackingCtrl.chartData.Evaluated}}
+                .trapezoid_06
+                  .text-box
+                    label Hired: {{invitationTrackingCtrl.chartData.Hired}}
+            .col-sm-12
+              span.note-section
+                strong NOTE:
+                span.note-text Based on last one month data

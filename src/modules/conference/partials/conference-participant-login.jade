@@ -1,0 +1,110 @@
+.content-wrapper.conference-schedule
+  .row
+    .col-md-offset-1.col-md-10.col-sm-offset-1.col-sm-10.col-xs-12
+       .well.box-left
+         .row(ng-show="conferenceLoginCtrl.waitForMeetingInfo")
+            .col-md-offset-5.col-md-4.col-sm-offset-4.col-sm-5
+                h4.loader Wait... we are loading you meeting
+                .waitloader
+         .row(ng-show="!conferenceLoginCtrl.waitForMeetingInfo")
+           .col-md-6.col-sm-6.col-xs-12.first-col-div
+             .row
+               h3.first-div-header {{conferenceLoginCtrl.meetingDetail.name}}
+             .row(ng-hide="conferenceLoginCtrl.meetingDetail.meetingType==='MEETNOW'")
+               .col-md-1
+                 b| When:
+               .col-md-offset-1.col-md-10
+                 p {{conferenceLoginCtrl.meetingScheduledDate}}
+             .row(ng-hide="conferenceLoginCtrl.meetingDetail.meetingType==='MEETNOW'")
+               .col-md-1
+                 b| Duration:
+               .col-md-offset-1.col-md-10
+                 p {{conferenceLoginCtrl.meetingDetail.meetingDurationHr || 0}} hr {{conferenceLoginCtrl.meetingDetail.meetingDurationMin || 0}} Min    
+             .row
+               .col-md-1
+                 b| Host:
+               .col-md-offset-1.col-md-10
+                 p {{conferenceLoginCtrl.meetingDetail.hostName}}
+           .col-md-6.col-sm-6.col-xs-12.second-col-div.col-border(ng-show="conferenceLoginCtrl.isSignup && !conferenceLoginCtrl.isLogin && conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 Hey It's time to join
+             .row
+               .col-md-offset-2.col-md-10
+                 h3.second-div-header-2 Don't have an account?
+             .row
+               .col-md-offset-5.col-md-7
+                 i.fa.fa-users.guest-icon(aria-hidden='true')
+             .row
+               .col-md-offset-5.col-md-7
+                 h4 Guest
+             .row
+               form(role='form',name='participantloginForm', novalidate)
+                 .form-group.row
+                   .col-md-offset-2.col-md-9
+                     span.mandatory-field *
+                     input.form-control(type='text', placeholder='Enter Display Name',name='displayName',ng-model="conferenceLoginCtrl.participantName" style='margin-top:-9px;', ng-maxlength=30, required)
+                     span.error-msg(data-ng-show='participantloginForm.$submitted || participantloginForm.displayName.$touched')
+                       span(data-ng-show='participantloginForm.displayName.$dirty && participantloginForm.displayName.$invalid')
+                       span.error-msg(data-ng-show='participantloginForm.displayName.$error.required') Please Enter Name
+                         |  
+                       span.error-msg(data-ng-show='participantloginForm.displayName.$invalid') allowed max length is 30
+                 .form-group.row
+                   .col-md-offset-2.col-md-9
+                     input.form-control(type='email', placeholder='Enter Email Address')
+                 .row
+                    .col-md-offset-4.col-md-offset-8
+                      button.btn.btn-primary.join-button(type='submit',data-ng-disabled='participantloginForm.$invalid', data-ng-click="conferenceLoginCtrl.joinMeeting(conferenceLoginCtrl.participantName)") Join as Guest
+             .row
+               .col-md-offset-2.col-md-10
+                 h3.second-div-header-2 Already have an account?
+             .row
+               .col-md-offset-3.col-md-9
+                 a(href="" ng-click="conferenceLoginCtrl.isSignup =!conferenceLoginCtrl.isSignup") Sign in
+                 |  and Join the conference
+           .col-md-6.second-col-div.col-border(ng-show="!conferenceLoginCtrl.isSignup && !conferenceLoginCtrl.isLogin && conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired")
+              .row
+                .col-md-offset-4.col-md-8
+                  h4.second-div-header-1 Hey It's time to join
+              .row
+                .col-md-offset-5.col-md-7
+                  h3.second-div-header-2 Login
+              .row
+                .col-md-offset-5.col-md-7
+                  i.fa.fa-users.guest-icon(aria-hidden='true')
+              .row
+                form
+                  .form-group.row
+                    .col-md-offset-2.col-md-9
+                      input.form-control(type='email', placeholder='Enter Email Address', ng-model='conferenceLoginCtrl.username')
+                  .form-group.row
+                    .col-md-offset-2.col-md-9
+                      input.form-control(type='password', placeholder='Enter Password', ng-model='conferenceLoginCtrl.password')
+                  .row
+                    .col-md-offset-4.col-md-offset-8
+                      button.btn.btn-primary.join-button(type='submit', data-ng-click="conferenceLoginCtrl.login()") Login     
+           .col-md-6.second-col-div.col-border(ng-show="conferenceLoginCtrl.isLogin && conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 Hey It's time to join
+             .row
+               .col-md-offset-4.col-md-offset-8
+                      button.btn.btn-primary.enter-button(type='button', data-ng-click="conferenceLoginCtrl.joinAsLogin()") Enter Meeting
+           .col-md-6.second-col-div.col-border(ng-show="!conferenceLoginCtrl.meetingStart && !conferenceLoginCtrl.meetingExpired && !conferenceLoginCtrl.IsMeetNow")
+             .row
+               .col-md-12.col-sm-12.col-xs-12
+                 h4.second-div-header-1 Meeting Has Not Been Started Please Wait
+           .col-md-6.second-col-div(ng-show="conferenceLoginCtrl.meetingExpired")
+             .row
+               .col-md-offset-3.col-md-9
+                 h4.second-div-header-1 This is meeting expired.    
+  .row
+    .col-md-offset-3.col-md-9
+      |By joining this meeting,you agree to the OnDemand
+      a.margin-left-7(href="#") Terms Of Service
+      | &
+      a.margin-left-7(href="#")  Privacy Statement
+
+
+
+

@@ -1,0 +1,38 @@
+.refer-earn-page {
+
+  .refrence-details {
+    margin-top: 0px;
+    border: 2px $mediumDarkGrey;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 1px 1px;
+  }
+
+  .refrence-label {
+    color: $mediumDarkGrey;
+    font-size: 12px;
+  }
+
+  .refrence-deatils-heading {
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .save-cancel-btns {
+    margin-left: -65px;
+    margin-top: 30px;
+  }
+
+  .refferal-code {
+    border: 1px solid $mediumDarkGrey;
+    width: 140px;
+    height: 45px;
+    border-radius: 5px;
+    margin-left:155px;
+  }
+  .save-btn{
+    margin-right: 10px;
+  }
+
+}

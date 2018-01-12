@@ -1,0 +1,163 @@
+script(type='text/javascript', src='https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit', async='', defer='')
+
+
+script.
+  var recaptcha1;
+  var recaptcha2;
+  var myCallBack = function() {
+
+    recaptcha1 = grecaptcha.render('recaptcha1', {
+      'sitekey' : '6LcLSw8UAAAAAOHfseEkWtJjs6-cJfndNJOaOv6i', // Local Recaptcha Key
+      //'sitekey' : '6LcPmxEUAAAAANMnCuTQMDkGhHeccaeAOhnLFNUW', // Production Recaptcha Key
+      'theme' : 'light'
+    });
+
+    recaptcha2 = grecaptcha.render('recaptcha2', {
+      'sitekey' : '6LcLSw8UAAAAAOHfseEkWtJjs6-cJfndNJOaOv6i', // Local Recaptcha Key
+      //'sitekey' : '6LcPmxEUAAAAANMnCuTQMDkGhHeccaeAOhnLFNUW', // Production Recaptcha Key
+      'theme' : 'light'
+    });
+  };
+
+    
+    
+.loginnew
+  .landing-page
+    .content-bg-wrap
+      .content-bg
+    .nav.navbar.navbar-default.singup-navebar.navbar-fixed-top.hidden-lg.hidden-sm.hidden-md
+      .container
+        .navbar-header
+          i.fa.fa-bars.Show.navbar-toggle.collapsed.signup-toggle( data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+          a.navbar-brand.singup-logo(href='#')
+            img(src='../../../public/img/bigoda-logo.png',alt='oda-logo')
+        #navbar.navbar-collapse.collapse.singup-collapse(aria-expanded='false', style='height: 1px;')
+          ul.nav.navbar-nav
+            li.active
+              a(href='https://jottp.com/site/candidate-login') Candidate
+            li
+              a(href='https://jottp.com/site/about-us.html') Company
+            li
+              a(href='https://jottp.com/site/features.html') Features              
+            li
+              a(href='https://jottp.com/site/pricing-interview.html') Pricing    
+            li
+              a(href='https://jottp.com/site/contact-us.html') Contact Us
+            li
+              a(href='https://jottp.com/site/blog.html') Blog
+            li
+              a(href='https://jottp.com/site/team.html') Team    
+            
+          
+    #header--standard.header--standard.header--standard-landing.hidden-xs
+      .container
+        .header--standard-wrap
+          .oda-image-header
+              img(src='../../../public/img/bigoda-logo.png',alt='oda-logo')
+          .nav.nav-pills.nav1.header-menu
+            .mCustomScrollbar#target(ng-show='loginCtrl.showHeaderContain')
+
+              ul
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/candidate-login') Candidate
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/about-us.html') Company
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/features.html') Features              
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/pricing-interview.html') Pricing    
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/contact-us.html') Contact Us
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/blog.html') Blog
+                li.nav-item
+                  a.nav-link(href='https://jottp.com/site/team.html') Team
+                li.nav-item                 
+                  i.fa.fa-times(ng-show='loginCtrl.showHeaderContain', aria-hidden='true',ng-click='loginCtrl.showHeaderContain = !loginCtrl.showHeaderContain')  
+           i.fa.fa-bars.Show(ng-hide='loginCtrl.showHeaderContain' ng-click='loginCtrl.showHeaderContain = !loginCtrl.showHeaderContain') 
+               
+    .header-spacer--standard
+    .container
+      .row.display-flex
+        .col-xl-6.col-lg-6.col-md-6.col-sm-12.col-xs-12
+          #usertext.landing-content
+            h1 Welcome to  OnDemand
+            p
+              | The world of automation, the fastest recruiting platform ever, the revolutionary change in the current recruitment process.
+              | Today’s fastest-growing companies use applicant tracking, target the right talent and build the best teams with us.
+              | Login to experience the mind boggling features of latest trend in the market.
+            a.btn.btn-md.btn-border.c-white(data-ui-sref='signup.company-signup') Get Free Trial !
+          #cantext.landing-content.candidate-opacity
+            h1 Welcome to OnDemand
+            h4 an easiest way to get hired
+            h4 New to OnDemand?
+            p
+              | Record your video introduction, Create the profile and enable sharing to get interview invites,
+              | Track your application, Take the practice test, Take certification test,
+              | Apply on thousands of opportunities for free.  
+            a.btn.btn-md.btn-border.c-white(data-ui-sref='signup.candidate-signup') Get Free Trial !  
+        .col-xl-5.col-lg-6.col-md-6.col-sm-12.col-xs-12.second-section         
+          .col-md-10.col-sm-10.col-xs-12.registration-login-form
+            ul.nav.nav-tabs.signin-tabs
+              li.active
+                a(data-toggle='tab', href='#companylogin',ng-click='loginCtrl.clearFormValue();loginCtrl.showUserImage()') Company Sign In
+              li
+                a(data-toggle='tab', href='#candidatelogin',ng-click='loginCtrl.clearFormValue();loginCtrl.showCandidateImage()') Candidate Sign In
+            .tab-content.login-panel-tab
+              #companylogin.tab-pane.fade.in.active
+                .loginbox.login-panel
+                  form.css-form(role='form', name='loginCtrl.form',  method='post', novalidate)
+                    md-input-container.md-block(flex="100")
+                      label User Email
+                      input(type='text', name='email',maxlength='50',  value='', data-ng-model='loginCtrl.email',data-ng-blur='loginCtrl.isInvalidEmailUser(loginCtrl.email)', data-ng-keyup="loginCtrl.isInvalidEmailUser(loginCtrl.email)",required)
+                      span.error-msg(data-ng-if='loginCtrl.errormessageUser !== ""') {{loginCtrl.errormessageUser}}
+                    md-input-container.md-block(flex="100")
+                      label Password
+                      input( data-ng-model='loginCtrl.password', required='', type='password', name='password')
+                      span(data-ng-show='loginCtrl.form.$submitted || loginCtrl.form.password.$touched')
+                        span.error-msg(data-ng-show='loginCtrl.form.password.$error.required') Please Enter Password.
+                    .input-group.second-text-box(ng-show='loginCtrl.showRecaptchaForCompany')
+                      #recaptcha1.g-recaptcha.recaptca-dimension
+                    div(flex-gt-sm='50')
+                      md-checkbox.md-primary(aria-label='Remember Me', name='remember', data-ng-model='loginCtrl.isRemember')
+                        |  Remember Me
+                    .form-group
+                      md-button.md-raised.savedata-btn.btn-block.submit-button(type='submit',data-ng-click='loginCtrl.doLogin(1)',onkeydown='if(event.keyCode==13){this.form.submit();return false;}')
+                        |   Login To Your Account
+                      label.error-lbl {{loginCtrl.errorLblTxt}}
+                    .form-group.bottom-link
+                      a(data-ui-sref='signup.company-signup')
+                        | Register
+                      span.pipe-char |
+                      a(data-ui-sref="app.forget-password({userType:1})") Forgot Password?
+              #candidatelogin.tab-pane.fade
+                .loginbox.login-panel
+                  form.css-form(role='form', name='loginCtrl.candidateForm' novalidate)
+                    md-input-container.md-block(flex="100")
+                      label Candidate Email
+                      input(type='text', name='email',maxlength='50', value='', data-ng-model='loginCtrl.email', data-ng-blur='loginCtrl.isInvalidEmail(loginCtrl.email)',  data-ng-keyup="loginCtrl.isInvalidEmail(loginCtrl.email)",required)
+                      span.error-msg(data-ng-if='loginCtrl.errormessage !== ""') {{loginCtrl.errormessage}}
+                    md-input-container.md-block(flex="100")
+                      label Password
+                      input( data-ng-model='loginCtrl.password', required='', type='password', name='password')
+                      span(data-ng-show='loginCtrl.candidateForm.$submitted || loginCtrl.candidateForm.password.$touched')
+                        span.error-msg(data-ng-show='loginCtrl.candidateForm.password.$error.required') Please Enter Password
+                    .input-group.second-text-box(ng-show='loginCtrl.showRecaptchaForCandidate')
+                      #recaptcha2.g-recaptcha.recaptca-dimension(data-sitekey='{{loginCtrl.SITEKEY}}')
+                    div(flex-gt-sm='50')
+                      md-checkbox.md-primary(aria-label='Remember Me', name='remember', data-ng-model='loginCtrl.isRemember')
+                        |  Remember Me
+                    .form-group
+                      md-button.md-raised.savedata-btn.btn-block.submit-button(type='submit',value='submit',data-ng-click='loginCtrl.doLogin(2)',onkeydown='if(event.keyCode==13){this.candidateForm.submit();return false;}')
+                        |   Login To Your Account
+                      label.error-lbl {{loginCtrl.errorLblTxt}}
+                    .form-group.bottom-link
+                      a(data-ui-sref='signup.candidate-signup')
+                        | Register
+                      span.pipe-char |
+                      a(ui-sref="app.forget-password({userType:2})") Forgot Password?
+                      //| Not A Candidate?
+                      //a(data-ui-sref='app.user-login')
+                        //|   Login As Company
+
+

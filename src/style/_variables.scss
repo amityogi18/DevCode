@@ -1,0 +1,113 @@
+// @asmdoc scss
+// @area style
+// @module base
+// @name Utility
+// @description
+//
+// Global 'helper' variables. These values are the building block of the site.
+// @styleguide 0.0.1
+
+$grid-space: 10px !default !global;
+$base-line-height: 2 * $grid-space !default !global;
+$base-font-size: 14px !default !global;
+$global-radius: 0 !default !global;
+$global-padding: 2 * $grid-space !default !global;
+
+$disabled-opacity: 0.7 !default !global;
+$modal-backdrop-opacity: 0.8 !default !global;
+
+// Base Font settings
+$font-family: 'Open Sans', Arial, sans-serif !global !default;
+$font-size: $base-font-size !global !default;
+$line-height: $base-line-height !global !default;
+
+$font-size-xsmall: 10px !default !global;
+// _disclaimer text_
+$font-size-small: 12px !default !global;
+// _labels, most components_
+$font-size-normal: 14px !default !global;
+// _paragraph copy_
+$font-size-medium: 16px !default !global;
+$font-size-large: 18px !default !global;
+// _Subheader_
+$font-size-xlarge: 24px !default !global;
+// _Bar h2's_
+$font-size-2xlarge: 36px !default !global;
+$font-size-gigantor: 48px !default !global;
+$font-size-button: 16px !default !global;
+
+
+
+//Primary Brand Color Variations
+$gold:#efbe00 !global !default;
+$saturatedDarkBlue: #404753 !global !default;
+$blue: #337AB7 !global !default;
+$mediumDarkBlue: #3949ab !global !default;
+$darkBlue: #000056 !global !default;
+$desatDarkBlue: #092e4f !global !default;
+$mediumBlue: #7fa9cf !global !default;
+$lightBlue: #dde9f3 !global !default;
+$desatBlue: #aec3d7 !global !default;
+$orange: #f7841b !global !default;
+$redOrange: #f44e0f !global !default;
+$lightOrange: #fbc18d !global !default;
+$darkGrey: #484848 !global !default;
+$mediumDarkGrey: #888 !global !default;
+$mediumGrey: #aaa !global !default;
+$mediumLightGrey: #ccc !global !default;
+$lightGrey: #e9eaee !global !default;
+$lightestGrey: #f4f5f7 !global !default;
+$warmGrey: #f2e9e1 !global !default;
+$white: #fff !global !default;
+$black: #000 !global !default;
+$red: #ed1c24 !global !default;
+$green: #7ac043 !global !default;
+$darkGreen : #55862e !global !default;
+$dodgerBlue: #4db8ff !global !default;//shade of blue
+$curiousBlue: #299ee3 !global !default;//shade of blue
+$lightRed: #ff7169 !global !default;//shade of red
+$headColor: #009fe0 !global !default;
+$lightHeadColor: #007cbc !global !default;
+$lightestHeadColor: #015392 !global !default;
+$navColor: #81dcf8 !global !default;
+$navHeader:  #c0c3ca26 !global !default;
+$textClr: #6970a0 !global !default;
+$HeaderClr: #13445F !global !default; 
+$navDarkColor: #65aeee !global !default;
+$navDarkerColor:#4289c8 !global !default;
+$navWhite:#fefefe !global !default;
+$navLightWhite:#f5f5f5 !global !default;
+$navLightestWhite:#ececec !global !default;
+$footerColor:#2b5464 !global !default;
+$footerBorderColor:#5497ba !global !default;
+$navBorderColor:#384246 !global !default;
+$sideNavColor: #337AB7 !global !default;
+$btnPrimaryColor: #5497ba !global !default;
+$btnPrimaryHoverColor: #1671a0 !global !default;
+$listBorderColor: #0078f0 !global !default;
+$feedbackBtn: rgba(7, 118, 152, 0.88) !global !default;
+$maxDarkBlue: #2e6da4 !global !default;
+$materialBlue: #3f51b5 !global !default;
+$materialDarkBlue: #2b387c !global !default;
+$materialGrey : #767676 !global !default;
+/*$btnSuccessColor: #337AB7 !global !default;
+$btnWarningColor: #337AB7 !global !default;
+$btnDangerColor: #337AB7 !global !default;*/
+
+
+$body-color: $darkGrey !global !default;
+$link-color: $blue !global !default;
+$link-color-hover: $darkBlue !global !default;
+
+//border color variations
+$border-color: $mediumGrey !global !default;
+$border-color-hover: $orange !global !default;
+$border-radius: $global-radius !global !default;
+$border-color-hover: $orange !global !default;
+$border-color-okay: $desatBlue !global !default;
+
+
+$font-family-button: $font-family !global !default;
+$font-weight-button: 700 !global !default;
+$line-height-button: 30px !global !default;
+$border-radius-button: $global-radius !global !default;

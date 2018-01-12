@@ -1,0 +1,21 @@
+.add-position-page
+  .modal-content.multiapply-board
+    .modal-header
+      button.close(type='button', data-dismiss='modal', ng-click='close()')
+        i.fa.fa-times
+    .modal-body.portal-detail
+      .col-sm-12
+        img(ng-src="{{JobPortalDetailsCtrl.selectedPortalDetails.portalImagePath?JobPortalDetailsCtrl.selectedPortalDetails.portalImagePath:'./img/times.jpg'}}", alt='')
+        .plan-section
+          .heading-section
+            span Pricing
+          md-content
+            md-list(flex='')
+              md-list-item.md-2-line(ng-repeat='detail in JobPortalDetailsCtrl.selectedPortal')
+                .md-list-item-text(layout='column')
+                  .col-md-12.col-sm-12 
+                    .col-sm-8 {{detail.description}}
+                    .col-sm-2 ${{detail.planAmount}}
+                    button.col-sm-2.btn.btn-info(ng-click="JobPortalDetailsCtrl.selectedPlan(detail); close()") Add
+    .modal-footer
+      button.btn.pull-right.cancel-btn(ng-click='close()') Cancel 

@@ -1,0 +1,60 @@
+include position-navbar
+#add-position-page.add-position-page.applied-job-container.position-content-wrapper
+  //.col-md-12.col-sm-12.col-xs-12.job-title 
+      h4 Application 
+  .col-md-12.col-sm-12.col-xs-12.help-box(ng-show="!newPositionCtrl.hideHelpBox", ng-class="{'fade': newPositionCtrl.hideHelpBox}")
+        .alert.alert-warning Customize this form in order to get it filled by candidates applying on the position.
+          br
+          .cross-icon 
+              i.fa.fa-times-circle.fa-lg(ng-click='newPositionCtrl.hideHelpBox = true')
+  .col-md-12.col-sm-12.col-xs-12.application-area   
+    form(name='newPositionCtrl.applicationFields')
+      .col-xs-12.col-sm-9.col-md-12
+        .col-sm-2.col-md-2.col-xs-12
+          label.application-label Email
+          span.application-mandatory-field *
+        .col-sm-10.col-md-10.col-xs-12
+          md-radio-group.input-grp(ng-model='newPositionCtrl.email', ng-disabled="true")
+            md-radio-button.md-primary.input-grp-btn(value='1') Required
+            md-radio-button.input-grp-btn(value='2')  Optional 
+            md-radio-button.input-grp-btn(value='3') Off
+      .col-xs-12.col-sm-9.col-md-12
+        .col-sm-2.col-md-2.col-xs-12
+          label.application-label Contact Number
+          span.application-mandatory-field *
+        .col-sm-10.col-md-10.col-xs-12
+          md-radio-group.input-grp(ng-model='newPositionCtrl.phoneNumber' , ng-disabled="true")
+            md-radio-button.md-primary.input-grp-btn(value='1') Required
+            md-radio-button.input-grp-btn(value='2')  Optional 
+            md-radio-button.input-grp-btn(value='3') Off
+      .col-xs-12.col-sm-9.col-md-12
+        .col-sm-2.col-md-2.col-xs-12
+          label.application-label Candidate Logo
+        .col-sm-10.col-md-10.col-xs-12
+          md-radio-group.input-grp(ng-model='newPositionCtrl.photo')
+            md-radio-button.md-primary.input-grp-btn(value='1', ng-disabled="true") Required
+            md-radio-button.input-grp-btn(value='2')  Optional 
+            md-radio-button.input-grp-btn(value='3') Off
+      .col-xs-12.col-sm-9.col-md-12
+        .col-sm-2.col-md-2.col-xs-12
+          label.application-label Cover Letter
+        .col-sm-10.col-md-10.col-xs-12
+          md-radio-group.input-grp(ng-model='newPositionCtrl.coverLetter')
+            md-radio-button.md-primary.input-grp-btn(value='1') Required
+            md-radio-button.input-grp-btn(value='2')  Optional 
+            md-radio-button.input-grp-btn(value='3') Off
+      .col-xs-12.col-sm-9.col-md-12
+        .col-sm-2.col-md-2.col-xs-12
+          label.application-label Cv/Resume
+          span.application-mandatory-field  *
+        .col-sm-10.col-md-10.col-xs-12
+          md-radio-group.input-grp(ng-model='newPositionCtrl.cvResume', ng-disabled="true")
+            md-radio-button.md-primary.input-grp-btn(value='1') Required
+            md-radio-button.input-grp-btn(value='2')  Optional 
+            md-radio-button.input-grp-btn(value='3') Off
+    .row
+      .col-sm-12.col-md-12.col-xs-12
+        span.application-mandatory-field *
+        label Mandatory parameters to be filled by candidate at the time of application submission.
+
+  

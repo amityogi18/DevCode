@@ -1,0 +1,45 @@
+.block-help-container{
+  .link-text {
+      margin-left:5px;
+    }
+  .connection-status{
+    margin-top: 10px;
+    margin-left:0px;
+    width:100%;
+    height:auto;
+    
+  }
+  .warn-message{
+    margin-top: 5px;
+  }
+  .video-style{
+    //height: 330px !important;
+    //width: 330px !important;
+    //margin-left: -15px !important;
+  }
+  .check-microphone{
+    margin-top:-2px
+  }
+  .recrding-style{
+    height: 0px;
+  }
+  .row-style-one{
+    height:20px; 
+    clear:both;
+  }
+  .row-style-two{
+    border: 1px solid #ddd; 
+    clear: both; 
+    width: 105%; 
+    margin: 0 auto; 
+    padding: 16px; 
+    margin-left: -10px; 
+    margin-top: 10px; 
+    font-size: 16px;
+    margin-bottom:10px;
+  }
+  .para-one{
+    font-size:15px;
+    color:#262626;
+  }
+}

@@ -1,0 +1,86 @@
+.block-help-container
+  .col-md-12.col-xs-12
+          .main-body-wrapper
+              .default-form
+                .col-md-12.col-xs-12
+                  .upper-form-wrapper
+                    #sideBarAccordion.panel-group
+                      .panel.panel-default
+                        .panel-heading
+                          h4.panel-title
+                            a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarConection')
+                              | Connection Test Check
+                        #collapseSidebarConection.panel-collapse.collapse.in
+                          .panel-body
+                            .col-md-12.loading-gif(ng-if="HelpCtrl.speed === ''", style='text-align:center')
+                              img(src='../../../public/img/loader.gif')
+                              p(style='text-align:center') please wait we are checking internet connection..
+                            .col-md-12(ng-if='HelpCtrl.speed !== ""')
+                              .col-md-12.col-xs-12
+                                button.btn.btn-circle(type='button', ng-class='{"btn-warning": HelpCtrl.connectionStatus == "Bad", "btn-success": HelpCtrl.connectionStatus == "Fine" }')
+                                  span(ng-if='HelpCtrl.connectionStatus == "Fine"', class='fa fa-check')
+                                span.link-text Your Upload Link is {{HelpCtrl.connectionStatus}}
+                              .col-md-12.col-xs-12.connection-status
+                                button.btn.btn-circle(type='button', ng-class='{"btn-warning": HelpCtrl.connectionStatus == "Bad", "btn-success": HelpCtrl.connectionStatus == "Fine" }')
+                                  span(ng-if='HelpCtrl.connectionStatus == "Fine"', class='fa fa-check')
+                                span.link-text Your Download Speed is {{HelpCtrl.connectionStatus}}
+                              .col-md-12.warn-message(ng-if='HelpCtrl.speed < HelpCtrl.acceptedSpeed')
+                                div(align='center') Warning
+                              .col-md-12(ng-if='HelpCtrl.speed < HelpCtrl.acceptedSpeed')
+                               | Your Connection is below our recommended speed you may experience chappy video
+                      .panel.panel-default
+                        .panel-heading
+                          h4.panel-title.hidden-xs
+                            a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarWebcam', ng-click='HelpCtrl.startRecording()')
+                              | Webcam
+                          h4.panel-title.visible-xs
+                            a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarWebcam', ng-click='HelpCtrl.startRecording()')
+                              | Mobile Camera
+                        #collapseSidebarWebcam.panel-collapse.collapse
+                          .panel-body.row
+                            .col-md-12.col-xs-12
+                              .col-md-5.col-sm-5.col-xs-12
+                                select#videoSource.form-control(ng-model='HelpCtrl.videosourceselect' ng-change='HelpCtrl.changeVideoFeed()' ng-options="device.text for device in HelpCtrl.deviceList track by device.deviceId")
+                                p.video-widget-para When your video appears on the screen and you can see  yourself. click next to proceed to the microphone text
+                              .col-md-7.col-sm-7.col-xs-12
+                                video.video-style(id='videoTestElementCertIns' ng-show="HelpCtrl.recordingMode" style='width:100%')
+
+
+                      .panel.panel-default.check-microphone
+                        .panel-heading
+                          h4.panel-title
+                            a.accordion-toggle(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseSidebarMicrophone', ng-click='HelpCtrl.startRecordingAudio()')
+                              | Microphone Check
+                        #collapseSidebarMicrophone.panel-collapse.collapse
+                          .panel-body
+                            .col-md-12.col-xs-12
+                              .col-md-2
+                              .col-md-8
+                                select#audioSource.form-control(ng-model='HelpCtrl.audiosourceselect' ng-change='HelpCtrl.changeAudioFeed()' ng-options="device.text for device in HelpCtrl.deviceListAudio track by device.id")
+                            .col-md-12 
+                              .col-md-2
+                              .col-md-8    
+                                .volume-meter
+                                  canvas(id='volume-meter-block' height='6')
+                                  input(type='range', min='0', max='1', step='0.1', ng-model='selectedVolume', class='volume-slider')
+
+                      .panel.panel-default.check-microphone(data-ng-hide='HelpCtrl.interviewTypeId == 3')
+                        .panel-heading
+                          h4.panel-title
+                            a.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#sideBarAccordion', href='#collapseRecordingExtension', ng-click='HelpCtrl.checkRecordingExtension()', aria-expanded='false') Recording And Screen Sharing Extension Check
+                        #collapseRecordingExtension.panel-collapse.collapse.recrding-style(aria-expanded='false')
+                          .panel-body
+                            .col-md-12.col-xs-12(ng-hide="HelpCtrl.isExtensionAdded")
+                              .row.row-style-one
+                              .row.row-style-two
+                                 p.para-one It seems that you don't have the extension to record the meeting. To download and install the extension click on the button below
+                                 p
+                                    //a.btn.btn-success.pull-left(href='https://chrome.google.com/webstore/detail/real-time-communications/jcjbcmfljclmfgkmgajdpkobbbmalacn', target='_blank') Click here to Install Chrome Extension
+                                    button.btn.btn-success.pull-left(data-ng-click='HelpCtrl.installExtension()') Click here to Install Chrome Extension
+                              .row.row-style-one
+                            .col-md-12(ng-show="HelpCtrl.isExtensionAdded")
+                               p
+                                 div.btn.btn-circle.btn-success(type='button')
+                                   span.fa.fa-check.ng-scope
+                                 span   You already have recording extension added to you browser.
+

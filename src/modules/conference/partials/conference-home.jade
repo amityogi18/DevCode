@@ -1,0 +1,188 @@
+.conference-overlay-popup(ng-show='ConferenceCtrl.showConferenceMeetNowPopup || ConferenceCtrl.showJoinByNumberPopup')
+.content-wrapper.conference-home.pad-mobile
+  .row.conference-header-div
+    .col-md-2.col-sm-2.col-xs-12.conference-header
+      h2(data-translate="CONFERENCE")
+  .row
+    .col-md-7.col-sm-12.col-xs-12
+      md-content.md-padding(layout-xs='column', layout='row')
+        md-card.conference-meet-now-section
+          md-card-actions
+              md-tabs(md-dynamic-height='', md-border-bottom='') 
+                md-tab(label='Meet Now') 
+                  md-content.md-padding
+                    form.meetNowField(role='form',name="ConferenceCtrl.meetNowForm")
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          md-input-container.md-block(flex="100")          
+                            label(data-translate='TOPIC-OF-MEETING-BOX')
+                            input(type='text',name='meetingname', tabindex="1", maxlength = "25", data-ng-model='ConferenceCtrl.meetingname' required)
+                            span.error-msg(data-ng-show='ConferenceCtrl.meetNowForm.$submitted || ConferenceCtrl.meetNowForm.meetingname.$touched')
+                              span(data-ng-show='ConferenceCtrl.meetNowForm.meetingname.$dirty && ConferenceCtrl.meetNowForm.meetingname.$invalid')
+                              span.error-msg(data-ng-show='ConferenceCtrl.meetNowForm.meetingname.$error.required') Please Enter Meeting Name
+                      .form-group.row.conference-user-position
+                        .col-md-12.col-sm-12.col-xs-12
+                          div.conference-user-field(ng-class="{'user-label': ConferenceCtrl.userFieldLabel}") 
+                            span.conference-user-name Who *
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          ui-select#meetInvite.meet-now-user-field(multiple="", tagging="ConferenceCtrl.tagTransform",tagging-tokens="SPACE|,|/|;", tabindex="2", ng-model='ConferenceCtrl.participantlist', theme='bootstrap', ng-change='ConferenceCtrl.checkMail()', sortable='false',name='participantlist', ng-click="ConferenceCtrl.setUserField()", ng-blur="ConferenceCtrl.setUserField()" required)
+                            ui-select-match(placeholder='Enter User Name') {{$item.email}}
+                            ui-select-choices(repeat='contact in ConferenceCtrl.allContact | propsFilter: {email: $select.search}')
+                              div(ng-bind-html="(contact.name | highlight: $select.search)", ng-if="contact.isTag")
+                              div(ng-bind-html="contact.name + contact.isTag| highlight: $select.search", ng-if="!contact.isTag")
+                          span.error-msg(data-ng-show='ConferenceCtrl.invalidEmailError') Please enter valid Email
+                          span.error-msg(data-ng-show='ConferenceCtrl.meetNowForm.$submitted || ConferenceCtrl.scheduleForm.participantlist.$touched')
+                            span.error-msg(data-ng-show='ConferenceCtrl.meetNowForm.participantlist.$dirty && ConferenceCtrl.meetNowForm.participantlist.$invalid')
+                            span.error-msg(data-ng-show='ConferenceCtrl.meetNowForm.participantlist.$error.required') Please Enter Email Address
+                            span.error-msg {{ConferenceCtrl.errMsgEmail}}
+                      .form-group.row
+                        .col-md-8.col-sm-8.col-xs-12
+                        .col-md-2.col-sm-2.col-xs-4.start-cancel-btn
+                          md-button.md-raised.md-primary.btn-block(type='button',data-translate='START-MEETING',tabindex="3", data-ng-click='ConferenceCtrl.meetnowInvite()', ng-disabled='ConferenceCtrl.isMeetInvited')
+                        .col-md-2.col-sm-2.col-xs-4.start-cancel-btn
+                          md-button.md-raised.canceldata-btn.btn-cancel.btn-block(type='button',tabindex="4", data-translate='CANCEL-MEETING', ng-click='ConferenceCtrl.clearForm()')
+                md-tab(label='SCHEDULE')  
+                  md-content.md-padding.schedule-form-section
+                    .row
+                      .col-md-12.col-sm-12.col-xs-12
+                        h4.schedule-conference(data-translate='SCHEDULE-A-CONFERENCE')
+                    form(role='form',name="ConferenceCtrl.scheduleForm")
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          md-input-container.md-block(flex="100")          
+                            label(data-translate='TITLE-OF-MEETING')
+                            input(type='text',name='schmeetingname', ng-maxlength = "25",data-ng-model='ConferenceCtrl.schmeetingname' required)
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schmeetingname.$touched')
+                              span(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingname.$dirty && ConferenceCtrl.scheduleForm.schmeetingname.$invalid')
+                              span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingname.$error.required') Please Enter Meeting Title
+                      .form-group.row
+                        .col-md-6.col-sm-6.col-xs-12.schedule-date
+                          md-input-container.md-block(flex="100")
+                            label(data-translate='DATE-OF-MEETING')
+                            md-datepicker(type='text', onkeydown="return false", ng-model='ConferenceCtrl.schmeetingdate', is-open='ConferenceCtrl.popup.opened', datepicker-options='ConferenceCtrl.dateOptions', md-hide-icons = 'triangle', ng-required='true', name='schmeetingdate')
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schmeetingdate.$touched')
+                              span(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdate.$dirty && ConferenceCtrl.scheduleForm.schmeetingdate.$invalid')
+                              span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdate.$error.required') Please Select Date
+                        label.col-md-1.col-sm-1.col-xs-12.left-timer Time
+                        .col-md-3.col-sm-3.col-xs-12.time-picker-div
+                         div(uib-timepicker='', ng-model='ConferenceCtrl.schmeetingtime', onkeydown='return false', min='(ConferenceCtrl.schmeetingdate && (ConferenceCtrl.schmeetingdate.toLocaleDateString()==ConferenceCtrl.currentDate.toLocaleDateString()))?ConferenceCtrl.currentDate:null', name='schmeetingtime', required='required')
+                          span.error-msg(data-ng-show='ConferenceCtrl.pastTimePickError') Time cannot be past time
+                          span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schmeetingtime.$touched')
+                            span(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingtime.$dirty && ConferenceCtrl.scheduleForm.schmeetingtime.$invalid')
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingtime.$error.required') Please Select Time
+                      .form-group.row.invite-position-more
+                        .col-md-6.col-sm-6.col-xs-12
+                          md-input-container.md-block(flex="100")
+                            label Length (Hour)
+                            md-select(data-ng-model='ConferenceCtrl.schmeetingdurationh',name='schmeetingdurationh', required)
+                              md-option(value='0') 0 Hour
+                              md-option(value='1') 1 Hour
+                              md-option(value='2') 2 Hour
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schmeetingdurationh.$touched')
+                              span(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdurationh.$dirty && ConferenceCtrl.scheduleForm.schmeetingdurationh.$invalid')
+                              span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdurationh.$error.required') Please Enter Meeting Duration(in hour)
+                        .col-md-6.col-sm-6.col-xs-12
+                          md-input-container.md-block(flex="100")
+                            label Length (Minute)
+                            md-select(data-ng-model='ConferenceCtrl.schmeetingdurationm',name='schmeetingdurationm', required)
+                              md-option(value='00') 00 Min
+                              md-option(value='05') 05 Min
+                              md-option(value='10') 10 Min
+                              md-option(value='15') 15 Min
+                              md-option(value='20') 20 Min
+                              md-option(value='25') 25 Min
+                              md-option(value='30') 30 Min
+                              md-option(value='35') 35 Min
+                              md-option(value='40') 40 Min
+                              md-option(value='45') 45 Min
+                              md-option(value='50') 50 Min
+                              md-option(value='55') 55 Min
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schmeetingdurationm.$touched')
+                              span(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdurationm.$dirty && ConferenceCtrl.scheduleForm.schmeetingdurationm.$invalid')
+                              span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schmeetingdurationm.$error.required') Please Enter Meeting Duration(in minute)
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          label.conference-user-field(ng-class="{'invite-label': ConferenceCtrl.userInviteFieldLabel}") Invite More *
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          ui-select#schInvite.meet-now-user-field(multiple="", tagging-tokens="SPACE|,|;|/", tagging="ConferenceCtrl.tagTransform", ng-model='ConferenceCtrl.schinviteparticipant', theme='bootstrap', ng-change='ConferenceCtrl.checkMailSch()',sortable='false',name='schinviteparticipant', ng-click="ConferenceCtrl.setInviteUserField()", ng-blur="ConferenceCtrl.setInviteUserField()", required)
+                            ui-select-match(placeholder='Enter User Name') {{$item.email}}
+                            ui-select-choices(repeat='contact in ConferenceCtrl.allContact | propsFilter: {email: $select.search}')
+                              div(ng-bind-html="(contact.name | highlight: $select.search)", ng-if="contact.isTag")
+                              div(ng-bind-html="contact.name + contact.isTag| highlight: $select.search", ng-if="!contact.isTag")
+                          span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.$submitted || ConferenceCtrl.scheduleForm.schinviteparticipant.$touched')
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schinviteparticipant.$dirty && ConferenceCtrl.scheduleForm.schinviteparticipant.$invalid')
+                            span.error-msg(data-ng-show='ConferenceCtrl.scheduleForm.schinviteparticipant.$error.required') Please Enter Email Address
+                            span.error-msg {{ConferenceCtrl.errMsg}}
+                      .form-group.row
+                        .col-md-12.col-sm-12.col-xs-12
+                          md-input-container.md-block(flex="100")  
+                            label(data-translate='AGENDA-OF-MEETING')
+                            textarea(data-ng-model='ConferenceCtrl.schmeetingagenda')
+                      .row
+                        .col-md-8.col-sm-8.col-xs-12
+                        .col-md-2.col-sm-2.col-xs-12
+                          md-button.md-raised.md-primary(type='button', data-dismiss='modal', data-translate='SCHEDULE-BUTTON', data-ng-click='ConferenceCtrl.schedulemeeting()', ng-disabled='ConferenceCtrl.isMeetingSceduled')
+                        .col-md-2.col-sm-2.col-xs-12
+                          md-button.md-raised.canceldata-btn.btn-can(type='button', data-dismiss='modal', data-translate='CANCEL-MEETING', ng-click='ConferenceCtrl.clearSchduleForm()')
+        //- #joinByNumber.tab-pane.fade 
+            .meetNow
+              .meetNowForm
+                form.meetNowField
+                  .form-group.row.meeting-number-box
+                    .col-md-9.col-sm-9.col-xs-11
+                      label(data-translate='MEETING-NUMBER-BOX')
+                      input.form-control(type='text', placeholder='Enter meeting name')
+                    .col-md-3.col-sm-3.col-xs-12.meeting-number-btn
+                      .row
+                        .col-md-10.col-sm-10.col-xs-12
+                          button.btn.start-btn.btn-dimension(type='button',data-translate='JOIN-MEETING-BY-NUMBER')
+                        .col-md-10.col-sm-10.col-xs-12.cancelMeeting
+                          button.btn.btn-cancel.btn-dimension(type='button',data-translate='CANCEL-MEETING')
+    .col-md-5.col-sm-12.col-xs-12
+      md-content.md-padding(layout-xs='column', layout='row')
+        md-card.conference-meet-now-section
+          md-card-actions
+            .row
+              .col-md-5.col-sm-5.col-xs-12
+                h4.upcoming-meetings(data-translate='UPCOMING-MEETINGS-HEADER')
+              .col-md-offset-4.col-md-3.col-sm-offset-4.col-sm-3.col-xs-12.view-all-link(data-ng-show="!ConferenceCtrl.noMeetingToShow")
+                md-button.md-raised.savedata-btn(href='javascript:void(0)', ng-click='ConferenceCtrl.showmoreUpcoming()') {{ConferenceCtrl.Istoggle && 'View All' || 'View Less'}}
+            .panel.panel-default
+              .panel-heading.upcoming-meetings-heading
+                .row
+                  .col-md-4.col-sm-4.col-xs-6
+                   span(data-translate='DATE-OF-MEETING')
+                  .col-md-2.col-sm-2.col-xs-3
+                   span(data-translate='TOPIC-OF-MEETING')
+              .panel-body
+                .row.meeting-inform-row(ng-show="!ConferenceCtrl.noMeetingToShow", ng-repeat="upmeeting in ConferenceCtrl.upcomingmeeting | orderBy:upmeeting.meetingScheduledOn:false | limitTo:ConferenceCtrl.uplimit")
+                  .col-md-3.col-sm-3.col-xs-12
+                    b {{upmeeting.meetingScheduledOn}}
+                    br
+                    b {{upmeeting.meetingScheduledAt}}
+                    br
+                    |  Local Time
+                  .col-md-1.col-sm-1.col-xs-2(style="width:12%")
+                     img(ng-src='{{upmeeting.profilePic.thumbnailUrl}}')
+                  .col-md-4.col-sm-5.col-xs-12
+                    span.meeting-text {{upmeeting.name}}
+                    br
+                    b Host :
+                    |  {{upmeeting.hostName}}
+                    br
+                    | {{upmeeting.meetingDurationHr || 0}} Hour: {{upmeeting.meetingDurationMin || 0}} min 
+                  .col-md-3.col-sm-3.col-xs-12.margin-top-15
+                    md-button.md-raised.md-primary.btn-block(type='button', ng-click="ConferenceCtrl.enterMeeting(upmeeting.meetingJoiningId)") {{ConferenceCtrl.userId==upmeeting.hostId ? 'Start' : 'Join'}}
+                .row(ng-show="ConferenceCtrl.noMeetingToShow") 
+                  .col-md-12.col-sm-12.col-xs-12
+                     span No Upcoming meetings to Show
+      
+div(ng-show ="ConferenceCtrl.showIntroConferenceOverlay && ConferenceCtrl.user.products[0]==2")
+  include introduction1.jade
+ 
+
+
+
+

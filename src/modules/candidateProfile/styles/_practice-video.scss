@@ -1,0 +1,33 @@
+.content-wrapper {
+  /*Remove or Change Min-height By Shubham*/
+  //min-height: 600px;
+    min-height: 537px;
+  .practice-video-contanier {
+    margin-bottom: 25px;
+  }
+  .btn {
+    border-radius: $global-radius;
+  }
+  .panel-default {
+    border-radius: $global-radius;
+  }
+  @media only screen and (max-width: 780px) {
+    .practice-video-panel{
+        margin-top:40px;
+    }
+   }
+  .video-intro-heading{
+    font-size:$font-size-large;
+    width:100%;
+    border-bottom:1px solid $lightGrey;
+    margin-bottom: 15px;
+    margin-left: -1px;
+    padding: 0px 10px 10px 10px;
+    .video-intro-1{
+      margin-left:5px;
+      text-transform: uppercase;
+      color:#333;
+
+    }
+  }
+}

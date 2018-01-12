@@ -1,0 +1,134 @@
+.company-information.payment-plan.super-admin
+    .modal-header.dashboard-profile-heading
+        button.close(type='button', data-ng-click='close()') ×
+        h4.modal-title(data-ng-if='!PaymentPlansSaCtrl.isEdit') Add Custom Plan
+        h4.modal-title(data-ng-if='PaymentPlansSaCtrl.isEdit') Update Custom Plan
+    .modal-body
+        form(role='form', name='PaymentPlansSaCtrl.clientForm', novalidate='novalidate')
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")   
+                    label Plan Name
+                    input(type='text', name='planName',data-ng-model='PaymentPlansSaCtrl.planName', maxlength='30', required)
+                    span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.planName.$touched')
+                        span(data-ng-show='PaymentPlansSaCtrl.clientForm.planName.$dirty && PaymentPlansSaCtrl.clientForm.planName.$invalid')
+                        span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.planName.$error.required')  Please Enter Plan Name
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")  
+                  label Description
+                  textarea.description-area(md-no-resize, type='text', name='description',  data-ng-model='PaymentPlansSaCtrl.description', maxlength='200',required)
+                  span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.description.$touched')
+                     span(data-ng-show='PaymentPlansSaCtrl.clientForm.description.$dirty && PaymentPlansSaCtrl.clientForm.description.$invalid')
+                     span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.description.$error.required') Please Enter Description
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideConferenceFiled')
+                md-input-container.md-block(flex="100")   
+                    label No Of User
+                    input(type='text', name='noOfUsers',data-ng-model='PaymentPlansSaCtrl.noOfUsers', maxlength='3', onkeypress='return event.charCode <= 57', required)
+                    span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.noOfUsers.$touched')
+                        span(data-ng-show='PaymentPlansSaCtrl.clientForm.noOfUsers.$dirty && PaymentPlansSaCtrl.clientForm.noOfUsers.$invalid')
+                        span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.noOfUsers.$error.required') Please Enter Number Of User.
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideConferenceFiled')
+                md-input-container.md-block(flex="100")   
+                    label No of Position
+                    input(type='text', name='noOfPosition',data-ng-model='PaymentPlansSaCtrl.noOfPosition', maxlength='3', onkeypress='return event.charCode <= 57', required)
+                    span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.noOfPosition.$touched')
+                        span(data-ng-show='PaymentPlansSaCtrl.clientForm.noOfPosition.$dirty && PaymentPlansSaCtrl.clientForm.noOfPosition.$invalid')
+                        span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.noOfPosition.$error.required') Please Enter Number Of Position.
+            .form-group.row
+              .col-xs-12.col-sm-2.col-md-2
+                label.position-label(data-translate='PRODUCT')
+                span.mandatory-filed *
+              .col-xs-12.col-sm-4.col-md-4.product-recording-field
+                .radio
+                    label
+                        input(type='radio', id='rbInterview',  value='1', name='optYes', data-ng-model='PaymentPlansSaCtrl.productId', ng-disabled='PaymentPlansSaCtrl.isEdit', ng-checked='PaymentPlansSaCtrl.productId === 1', ng-click='PaymentPlansSaCtrl.fieldCheck()')
+                        span.label-text Interview 
+                    label
+                        input(type='radio',id='rbConference', value='2', name='optYes', data-ng-model='PaymentPlansSaCtrl.productId', ng-disabled='PaymentPlansSaCtrl.isEdit', ng-checked='PaymentPlansSaCtrl.productId === 2', ng-click='PaymentPlansSaCtrl.fieldCheck()')
+                        span.label-text Conference
+              .col-xs-12.col-sm-2.col-md-2
+                label.position-label Recording
+              .col-xs-12.col-sm-4.col-md-4.product-recording-field
+                  .radio
+                      label
+                          input(type='radio',value='yes', name='optRecordingYes',data-ng-model='PaymentPlansSaCtrl.recording')
+                          span.label-text Yes
+                      label
+                          input(type='radio',value='no', name='optRecordingYes',checked='checked',data-ng-model='PaymentPlansSaCtrl.recording')
+                          span.label-text No
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideConferenceFiled')
+                md-input-container.md-block(flex="100")   
+                    label No Of Live Now Interview Per Position              
+                    input(type='text', name='noOfLivenowInterviewInEachPosition',data-ng-model='PaymentPlansSaCtrl.noOfLivenowInterviewInEachPosition', maxlength='3',onkeypress='return event.charCode <= 57')
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideInterviewFiled')
+                md-input-container.md-block(flex="100")   
+                    label No of Meetings
+                    input(type='text', name='noOfMeetings', data-ng-model='PaymentPlansSaCtrl.noOfMeetings', maxlength='3',onkeypress='return event.charCode <= 57')
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")   
+                    label Total Storage (in GB)
+                    input(type='text', name='totalStorage',data-ng-model='PaymentPlansSaCtrl.totalStorage',maxlength='3',onkeypress='return event.charCode <= 57')
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideConferenceFiled')
+                md-input-container.md-block(flex-gt-sm='')
+                  label Analytics
+                  md-select(name='analytics', data-ng-model='PaymentPlansSaCtrl.analytics')
+                    md-option(value='Yes') Yes
+                    md-option(value='No') No
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideInterviewFiled')
+                md-input-container.md-block(flex="100")   
+                    label No of participants
+                    input(type='text', name='noOfParticipantsInConfrence', data-ng-model='PaymentPlansSaCtrl.noOfParticipantsInConfrence', maxlength='3',onkeypress='return event.charCode <= 57')
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex-gt-sm='')
+                  label Call Using Number
+                  md-select(name='callUsingNumber', data-ng-model='PaymentPlansSaCtrl.callUsingNumber')
+                    md-option(value='Yes') Yes
+                    md-option(value='No') No
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")   
+                  label Validity (in Days)
+                  input(type='text', name='validity',data-ng-model='PaymentPlansSaCtrl.validity',maxlength='3',onkeypress='return event.charCode <= 57', required)
+                  span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.validity.$touched')
+                    span(data-ng-show='PaymentPlansSaCtrl.clientForm.validity.$dirty && PaymentPlansSaCtrl.clientForm.validity.$invalid')
+                    span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.validity.$error.required') Please Enter Validity
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")   
+                  label Price (in Dollars)
+                  input(type='text', name='price', data-ng-model='PaymentPlansSaCtrl.price',maxlength='8',onkeypress='return event.charCode <= 57',required)
+                  span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.price.$touched')
+                      span(data-ng-show='PaymentPlansSaCtrl.clientForm.price.$dirty && PaymentPlansSaCtrl.clientForm.price.$invalid')
+                      span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.price.$error.required') Please Enter Price
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")   
+                  label Registration Fee (in Dollars)
+                  input(type='text', name='registrationAndFee', data-ng-model='PaymentPlansSaCtrl.registrationAndFee',maxlength='6',onkeypress='return event.charCode <= 57')
+              .col-xs-12.col-sm-6.col-md-6(ng-hide='PaymentPlansSaCtrl.hideConferenceFiled')
+                md-input-container.md-block(flex="100")   
+                  label No Of Interview Per Position
+                  input(type='number', min='1', max='5', uib-tooltip="Maximum Interview Per Position is 5", name='noOfInterviewInEachPosition',data-ng-model='PaymentPlansSaCtrl.noOfInterviewInEachPosition', maxlength='3',onkeypress='return event.charCode <= 57')
+            .form-group.row
+              .col-xs-12.col-sm-6.col-md-6
+                md-input-container.md-block(flex="100")
+                  label Company
+                  md-select(data-ng-model='PaymentPlansSaCtrl.id', data-ng-disabled = 'PaymentPlansSaCtrl.isEdit',  name='companyName', md-on-close="PaymentPlansSaCtrl.clearSearchCompany()", data-md-container-class='selectdemoSelectHeader',required)
+                    md-select-header.demo-select-header
+                      input.demo-header-searchbox.md-text(ng-model='PaymentPlansSaCtrl.searchCompany', type='search', placeholder='Search Company', ng-keydown="$event.stopPropagation()")
+                    md-optgroup(label='Company')
+                    md-option(ng-value='company.id', data-ng-repeat='company in PaymentPlansSaCtrl.companyList | filter: PaymentPlansSaCtrl.searchCompany') {{company.name}}
+                  span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.$submitted || PaymentPlansSaCtrl.clientForm.companyName.$touched')
+                    span(data-ng-show='PaymentPlansSaCtrl.clientForm.companyName.$dirty && PaymentPlansSaCtrl.clientForm.companyName.$invalid')
+                    span.error-msg(data-ng-show='PaymentPlansSaCtrl.clientForm.companyName.$error.required') Please Select Company
+    .modal-footer
+        .form-group.row
+          .col-xs-12.col-sm-6.col-md-6
+            label
+          .col-xs-12.col-sm-6.col-md-6
+              md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='PaymentPlansSaCtrl.addCustomPlan()', data-ng-if='!PaymentPlansSaCtrl.isEdit') Add
+              md-button.md-raised.md-primary(aria-label="save", type='button', data-ng-click='PaymentPlansSaCtrl.updateCustomPlan()', data-ng-if='PaymentPlansSaCtrl.isEdit') Update
+              md-button.md-raised.canceldata-btn(aria-label="save", type='button', data-ng-click='close()') Cancel

@@ -1,0 +1,69 @@
+.payment    
+    form#payment-form(name='payment-elements')
+        h4 Credit/Debit Card
+        .group          
+          label(for='card-element')
+            span Card
+            #card-element.field
+        .outcome
+          #card-errors.error
+        h4 Billing Information
+        .group
+          label
+            span Name
+            input.field(type="text", placeholder='Cardholder Name', name="cardholderName", maxlength="25", required)
+          label
+            span Phone
+            input.field(placeholder='(123) 456-7890', type='tel', name="cardholderPhone", maxlength="14", required)
+          label
+            span Email
+            input.field(placeholder='john@gmail.com', type='email', name="cardholderEmail", maxlength="50", required)
+          label
+            span Address Line 1
+            input.field(type="text", placeholder='Address Line 1', name="cardholderAddress1", maxlength="40", required)
+          label
+            span Address Line 2
+            input.field(type="text", placeholder='Address Line 2', name="cardholderAddress2", maxlength="40")
+          label
+            span Country
+            input.field(type="text", placeholder='USA', name="cardholderCountry", maxlength="20")
+          label
+            span State
+            input.field(type="text", placeholder='Virginia', name="cardholderState", maxlength="20")
+          label
+            span City
+            input.field(type="text", placeholder='Fairfax', name="cardholderCity", maxlength="20")
+          label
+            span Postal Code
+            input.field.address_zip(type="text", placeholder='41170', name="cardholderZip", maxlength="6")
+        .form-group.row
+          span.col-sm-offset-1.col-sm-10.col-xs-12
+            input(type='checkbox', name='agree', required='required')
+            label.agree-box
+                div
+                  | I Have Read And Agree To The
+                a.privacy-policy-link(data-toggle='modal', data-target='#termsCondition') Terms & Conditions
+        button(type='submit') Pay        
+  #termsCondition.modal.fade(role='dialog')
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header.header-modal-tc
+          button.close(type='button', data-dismiss='modal') ×
+          h3.modal-title Terms & Conditions
+        .modal-body.content-justify
+          div
+            | Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]’s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+          div
+            | The term ‘[business name]’ or ‘us’ or ‘we’ refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term ‘you’ refers to the user or viewer of our website.
+          p The use of this website is sub  ject to the following terms of use:
+          p The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+          p This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+          p Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+          p Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+          p This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+          p All trademarks reproduced in this website, which are not the property of, or licensed to the operator, are acknowledged on the website.
+          p Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+          p From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+          p Your use of this website and any dispute arising out of such use of the website is subject to the laws of India, USA, England, Northern Ireland, Scotland and Wales.
+        md-button.md-raised.md-primary.pull-right(type='button',data-dismiss='modal') OK
+  #payment-iframe
